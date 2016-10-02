@@ -1,0 +1,81 @@
+.ui-bar-g{
+	color: white;
+	background-color: #3B7454;
+	font-size: 1.2em;
+	letter-spacing: 5px;
+	text-shadow: none;
+}
+.ui-bar-t{
+	color: #3B7454;
+	background-color: transparent;
+}
+.ui-header,.ui-footer{
+	border-width: 0 0;
+}
+.ui-listview .ui-li-has-thumb>.ui-btn>img:first-child{
+	position: absolute;
+	top: 10%;
+	left: 5%;
+}
+.ui-content .ui-listview{
+	margin-top: 8%;
+}
+.ui-content .ui-listview:first-child{
+	margin-top: 0;
+}
+.ui-content .ui-listview:last-child p{
+	text-align: center;
+}
+.ui-content .ui-listview:last-child{
+	margin-top: 55%;
+}
+
+.ui-listview-func .ui-li-has-icon>.ui-btn>img:first-child{
+	position: absolute;
+	top: 35%;
+	left: 5%;
+}
+.ui-listview>.ui-li-has-icon>.ui-btn{
+	padding-left: 3em;
+}
+.ui-navbar li .ui-btn{
+	border-left-width: 0;
+}
+.ui-page-theme-a .ui-btn.ui-btn-active{
+	background-color: transparent;
+	color: #3B7454;
+	text-shadow: none;
+	border-color: transparent;
+}
+.ui-listview>li.ui-li-has-icon>a.ui-btn{
+	border-bottom-width: 0;
+	border-top-width: 0;    
+}
+.ui-listview>li.ui-first-child>a.ui-btn{
+	border-bottom-width: 0;
+	border-top-width: 0;    
+}
+.ui-listview .ui-li-has-thumb>.ui-btn>p{
+	font-size: 0.8em;
+
+}
+.ui-listview>li p{
+	font-size: 1.0em;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.set-info img{
+	display: inline-block;
+	margin-left: 5%;
+	width: 7%;
+	height: 7%;
+}
+.ui-link{
+	padding-bottom: 0;
+	border-color: transparent;
+}
+.ui-link p{
+	margin-bottom: 0; 
+	margin-top: 0;
+
+}
