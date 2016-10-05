@@ -33,7 +33,7 @@ router.get('/login', function (req, res) {
             req.session.isVisit = 1;
             req.session.userId = ret.userId;
             console.log("userId:"+req.session.userId);
-            res.redirect("http://localhost:8081/users/getMineInfo")
+            res.redirect(utils.getServer()+"users/getMineInfo")
         }else{
             res.write('<head><meta charset="utf-8"/></head>');
             res.end(ret.desc);

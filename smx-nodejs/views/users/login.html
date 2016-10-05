@@ -6,35 +6,25 @@
     </title>
     <script>
         function showHint() {
+            var utils = require("../../utils/utils");
             var xmlhttp = new XMLHttpRequest();
 
             var phoneNumber = document.getElementById("phoneNumber").value;
             var password = document.getElementById("password").value;
-            xmlhttp.open("GET", "http://localhost:8081/users/login?phoneNumber=" + phoneNumber + "&password=" + password, true);
+            xmlhttp.open("GET", utils.getServer()+"users/login?phoneNumber=" + phoneNumber + "&password=" + password, true);
             xmlhttp.send();
             xmlhttp.onreadystatechange = function () {
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                     document.getElementById("hint").innerHTML = xmlhttp.responseText;
-                    var str = xmlhttp.responseText;
-                    alert("status:"+str);
-                    var str1 = "登录成功";
-//                    alert("equal?"+(str == str1))
-                    alert(JSON.parse(str));
-//                    alert("status:"+xmlhttp.responseText.status);
-//                    if(JSON.parse(xmlhttp.responseText).status){
-                    if(xmlhttp.responseText.equal("登录成功")){
-                        window.location.href="http://localhost:8081/users/register.html"
-                    }else{
-                        document.getElementById("hint").innerHTML = xmlhttp.responseText;
-                    }
                 }
             }
         }
+
     </script>
 </head>
 <body>
 
-<form action="http://localhost:8081/users/login" method="GET">
+<form action="http://123.207.150.222:8081/users/login" method="GET">
     手机号: <input type="text" name="phoneNumber" id="phoneNumber" value=""><br><br>
     密码: <input type="text" name="password" id="password" value=""><br><br>
     <input type="submit" value="登录">
