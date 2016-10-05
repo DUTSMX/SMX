@@ -1,0 +1,24 @@
+<head>
+    <title>
+        我的
+    </title>
+    <script>
+        function showHint(){
+            var http= require('http');
+            var options = {
+                hostname:'localhost',
+                port:8081,
+                path:'getMineInfo',
+                method:'GET'
+            };
+            http.request(options,function(res){
+                console.log("get")
+            }).on('error',function (e) {
+                console.log("error:"+e.message);
+            })
+        }
+    </script>
+</head>
+<body onload="showHint()">
+    <div id="hint">123</div>
+</body>

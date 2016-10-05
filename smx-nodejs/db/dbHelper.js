@@ -22,12 +22,19 @@ function findAccount(phoneNumber, password, callback){
 	callback(rows)
 })	
 }
-exports.login = function(phoneNumber,password,callback)	{
+exports.login = function(phoneNumber,password,callback){
 	findAccount(phoneNumber,password,function(rows){
 		if(rows[0] == null){
-			callback("用户名或密码错误");	
+			callback({
+				status:false,
+				desc:"用户名或密码错误"
+			});
 		}else{
-			callback("登录成功");
+			callback({
+				status:true,
+				userId:rows[0].id,
+				desc:"登录成功"
+			});
 		}
 	})
 }
@@ -45,7 +52,7 @@ exports.getMineInfo = function(userId,callback){
 	var sql = 'SELECT phoneNumber,teacher,name FROM account where id = '+userId;
 	conn.query(sql,function(err,rows,fileds){
 		if(err){
-			console.err(err);
+			console.error(err);
 			callback(unknownError);
 		}
 		if(rows[0] == null){
