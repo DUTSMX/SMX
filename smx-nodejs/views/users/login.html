@@ -1,0 +1,34 @@
+<html>
+<head>
+	<title>
+		登录
+	</title>
+
+</head>
+<body>
+
+<form action="http://localhost:8081/users/login" method="GET">
+手机号: <input type="text" name="phoneNumber" id="phoneNumber" value=""><br><br>
+密码: <input type="text" name="password" id="password" value=""><br><br>
+<button type="button" onclick="showHint()">登录</button>
+<a href="http://localhost:8081/users/register.html">注册</a>
+<div id="hint">123</div>
+</form>
+<script>
+	function showHint(){
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function(){
+			document.getElementById("hint").innerHTML=xmlhttp.readyState +"   "+xmlhttp.status;
+			if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+				document.getElementById("hint").innerHTML = xmlhttp.responseText;
+			}
+		}
+		var phoneNumber = document.getElementById("phoneNumber").value;
+		var password = document.getElementById("password").value;
+		alert(phoneNumber+"  "+password)
+		xmlhttp.open("GET","http://localhost:8081/users/login?phoneNumber="+phoneNumber+"&password="+password,true);
+		xmlhttp.send();
+	}
+</script>
+</body>
+</html>
