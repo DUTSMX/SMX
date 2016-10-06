@@ -13,3 +13,11 @@ exports.register = function(){
 exports.mine = function(){
     return dir+"mine.html";
 }
+
+exports.finishInfo = function(){
+    return dir+"finishInfo.html";
+}
+
+exports.addCourse = function(){
+    return dir+"addCourse.html";
+}

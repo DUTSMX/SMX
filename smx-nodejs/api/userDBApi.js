@@ -41,3 +41,9 @@ exports.getMineInfo = function(userId,callback){
         callback(rows);
     })
 }
+
+exports.finishInfo = function(userId,name,gender,age,callback){
+    db.finishInfo(userId,name,gender,age,function (rows) {
+        callback(rows);
+    })
+}

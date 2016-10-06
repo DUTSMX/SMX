@@ -4,66 +4,10 @@
     <title>
         登录
     </title>
-    <script>
-        loadXML = function (xmlString) {
-            var xmlDoc = null;
-//判断浏览器的类型
-//支持IE浏览器
-            if (!window.DOMParser && window.ActiveXObject) { //window.DOMParser 判断是否是非ie浏览器
-                var xmlDomVersions = ['MSXML.2.DOMDocument.6.0', 'MSXML.2.DOMDocument.3.0', 'Microsoft.XMLDOM'];
-                for (var i = 0; i < xmlDomVersions.length; i++) {
-                    try {
-                        xmlDoc = new ActiveXObject(xmlDomVersions[i]);
-                        xmlDoc.async = false;
-                        xmlDoc.loadXML(xmlString); //loadXML方法载入xml字符串
-                        break;
-                    } catch (e) {
-                    }
-                }
-            }
-//支持Mozilla浏览器
-            else if (window.DOMParser && document.implementation && document.implementation.createDocument) {
-                try {
-                    /* DOMParser 对象解析 XML 文本并返回一个 XML Document 对象。
-                     * 要使用 DOMParser，使用不带参数的构造函数来实例化它，然后调用其 parseFromString() 方法
-                     * parseFromString(text, contentType) 参数text:要解析的 XML 标记 参数contentType文本的内容类型
-                     * 可能是 "text/xml" 、"application/xml" 或 "application/xhtml+xml" 中的一个。注意，不支持 "text/html"。
-                     */
-                    domParser = new DOMParser();
-                    xmlDoc = domParser.parseFromString(xmlString, 'text/xml');
-                } catch (e) {
-                }
-            }
-            else {
-                return null;
-            }
-            return xmlDoc;
-        }
-
-        function showHint() {
-            document.getElementById("hint").innerHTML = "start";
-//            var utils = require("../../utils/utils");
-            document.getElementById("hint").innerHTML = "center";
-            var xmlhttp = new XMLHttpRequest();
-            var phoneNumber = document.getElementById("phoneNumber").value;
-            var password = document.getElementById("password").value;
-            xmlhttp.open("GET", "http://localhost:8081/users/login?phoneNumber=" + phoneNumber + "&password=" + password, true);
-            document.getElementById("hint").innerHTML = "end";
-            xmlhttp.send();
-            xmlhttp.onreadystatechange = function () {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    var xmldoc = loadXML(xmlhttp.responseText);
-                    document.getElementById("hint").innerHTML = xmlhttp.responseText;
-                    alert(xmldoc)
-                }
-            }
-        }
-
-    </script>
 </head>
 <body>
 
-<form action="http://localhost:8081/users/login" method="GET">
+<form action="http://123.207.105.222:8081/users/login" method="GET">
     手机号: <input type="text" name="phoneNumber" id="phoneNumber" value=""><br><br>
     密码: <input type="text" name="password" id="password" value=""><br><br>
     <input type="submit" value="登录">
