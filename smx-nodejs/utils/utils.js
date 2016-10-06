@@ -5,8 +5,8 @@ exports.getRandom128 = function(){
 };
 
 exports.getServer = function(){
-    return "http://localhost:8081/";
-    // return "http://123.207.150.222:8081/";
+    // return "http://localhost:8081/";
+    return "http://123.207.150.222:8081/";
 }
 
 exports.getUUid = function(){
