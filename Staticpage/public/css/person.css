@@ -1,3 +1,4 @@
+/*添加绿色主题，应用于所有页面顶部*/
 .ui-bar-g{
 	color: white;
 	background-color: #3B7454;
@@ -5,48 +6,59 @@
 	letter-spacing: 5px;
 	text-shadow: none;
 }
+/*添加底部导航栏主题，应用于所有页面底部导航*/
 .ui-bar-t{
 	color: #3B7454;
 	background-color: transparent;
 }
+/*清理掉底部导航和头部标题的边框，应用于所有页面*/
 .ui-header,.ui-footer{
 	border-width: 0 0;
 }
+/*设置个人头像*/
 .ui-listview .ui-li-has-thumb>.ui-btn>img:first-child{
 	position: absolute;
-	top: 10%;
-	left: 5%;
+	top: 20%;
+	left: 8%;
 }
+/*设置每个功能模块之间的距离*/
 .ui-content .ui-listview{
 	margin-top: 8%;
 }
+/*设置第一个功能模块与顶部的距离*/
 .ui-content .ui-listview:first-child{
 	margin-top: 0;
 }
+/*设置退出登录按钮的文字居中*/
 .ui-content .ui-listview:last-child p{
 	text-align: center;
 }
+/*设置退出登录按钮与顶部功能模块之间的距离*/
 .ui-content .ui-listview:last-child{
 	margin-top: 55%;
 }
-
+/*设置各个功能模块前图片的位置*/
 .ui-listview-func .ui-li-has-icon>.ui-btn>img:first-child{
 	position: absolute;
 	top: 35%;
 	left: 5%;
 }
+/*是指各个功能模块文字的左侧内边距*/
 .ui-listview>.ui-li-has-icon>.ui-btn{
 	padding-left: 3em;
 }
+/*设置底部导航栏按钮的边框*/
 .ui-navbar li .ui-btn{
 	border-left-width: 0;
 }
+/*设置底部导航栏按钮被激活时的样式*/
 .ui-page-theme-a .ui-btn.ui-btn-active{
 	background-color: transparent;
 	color: #3B7454;
 	text-shadow: none;
 	border-color: transparent;
 }
+/*设置各个功能模块的顶部和底部边框宽度*/
 .ui-listview>li.ui-li-has-icon>a.ui-btn{
 	border-bottom-width: 0;
 	border-top-width: 0;    
@@ -55,27 +67,37 @@
 	border-bottom-width: 0;
 	border-top-width: 0;    
 }
+/*设置手机号码字体*/
 .ui-listview .ui-li-has-thumb>.ui-btn>p{
 	font-size: 0.8em;
 
 }
+/*设置各个功能模块字体大小*/
 .ui-listview>li p{
 	font-size: 1.0em;
 	margin-top: 0;
 	margin-bottom: 0;
 }
+/*设置性别图标位置及大小*/
 .set-info img{
 	display: inline-block;
 	margin-left: 5%;
 	width: 7%;
 	height: 7%;
 }
+/*设置底部导航栏边框透明*/
 .ui-link{
 	padding-bottom: 0;
 	border-color: transparent;
 }
+/*设置底部导航栏文字位置*/
 .ui-link p{
 	margin-bottom: 0; 
 	margin-top: 0;
 
+}
+/*设置底部导航栏图片大小*/
+.ui-link img{
+	width: 30%;
+	height: 30%;
 }
