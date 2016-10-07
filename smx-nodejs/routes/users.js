@@ -19,11 +19,18 @@ router.get('/finishInfo.html',function (req,res) {
 router.get('/login', function (req, res) {
     var phoneNumber = req.query.phoneNumber;
     var password = req.query.password;
-    console.log("login");
+    console.log("login start");
     api.login(phoneNumber, password, function (ret) {
         if(ret.status){
             req.session.userId = ret.userId;
-            res.redirect(301,utils.getServer()+req.session.source);
+            console.log("put userId:"+ret.userId);
+            console.log("target:"+utils.getServer()+req.session.source);
+            if(req.session.source == null){
+                res.write('<head><meta charset="utf-8"/></head>');
+                res.write(JSON.stringify(ret));
+            }else{
+                res.redirect(301,utils.getServer()+req.session.source);
+            }
         }else{
             res.write('<head><meta charset="utf-8"/></head>');
             res.write(JSON.stringify(ret));

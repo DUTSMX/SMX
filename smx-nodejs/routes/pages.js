@@ -21,3 +21,7 @@ exports.finishInfo = function(){
 exports.addCourse = function(){
     return dir+"addCourse.html";
 }
+
+exports.search = function(){
+    return dir+"search.html"
+}

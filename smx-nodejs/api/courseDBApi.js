@@ -11,3 +11,9 @@ exports.getCourse = function(userId,callback){
         callback(rows);
     })
 }
+
+exports.search = function(word,callback){
+    db.search(word,function(rows){
+        callback(rows);
+    })
+}
