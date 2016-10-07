@@ -1,0 +1,53 @@
+/*添加绿色主题，应用于所有页面顶部*/
+.ui-bar-g{
+	color: white;
+	background-color: #3B7454;
+	font-size: 1.2em;
+	letter-spacing: 5px;
+	text-shadow: none;
+}
+/*添加底部导航栏主题，应用于所有页面底部导航*/
+.ui-bar-t{
+	color: #3B7454;
+	background-color: transparent;
+}
+/*清理掉底部导航和头部标题的边框，应用于所有页面*/
+.ui-header,.ui-footer{
+	border-width: 0 0;
+}
+/*设置底部导航栏按钮的边框*/
+.ui-navbar li .ui-btn{
+	border-left-width: 0;
+}
+/*设置底部导航栏按钮被激活时的样式*/
+.ui-page-theme-a .ui-btn.ui-btn-active{
+	background-color: transparent;
+	color: #3B7454;
+	text-shadow: none;
+	border-color: transparent;
+}
+/*设置各个功能模块的顶部和底部边框宽度*/
+.ui-listview>li.ui-li-has-icon>a.ui-btn{
+	border-bottom-width: 0;
+	border-top-width: 0;    
+}
+.ui-listview>li.ui-first-child>a.ui-btn{
+	border-bottom-width: 0;
+	border-top-width: 0;    
+}
+/*设置底部导航栏边框透明*/
+.ui-link{
+	padding-bottom: 0;
+	border-color: transparent;
+}
+/*设置底部导航栏文字位置*/
+.ui-link p{
+	margin-bottom: 0; 
+	margin-top: 0;
+
+}
+/*设置底部导航栏图片大小*/
+.ui-link img{
+	width: 30%;
+	height: 30%;
+}
