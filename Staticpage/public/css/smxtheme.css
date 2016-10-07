@@ -20,7 +20,7 @@
 /*设置底部导航的上边框*/
 .ui-footer{
 	box-sizing: border-box;
-	border-bottom-width: 0;
+	border-bottom:none;
 }
 /*设置底部导航栏按钮的边框*/
 .ui-navbar li .ui-btn{
@@ -36,11 +36,12 @@
 /*设置各个功能模块的顶部和底部边框宽度*/
 .ui-listview>li.ui-li-has-icon>a.ui-btn{
 	border-bottom-width: 0;
-	/*border-top-width: 0;    */
+	box-sizing: border-box;
+	border-top-width: 0;    
 }
 .ui-listview>li.ui-first-child>a.ui-btn{
 	border-bottom-width: 0;
-	/*border-top-width: 0;    */
+	border-top-width: 0;    
 }
 /*设置底部导航栏边框透明*/
 .ui-link{
