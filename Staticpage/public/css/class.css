@@ -29,11 +29,13 @@
 	margin-bottom: 1%;
 	margin-top: 0;
 }
+/*设置大连理工大学本科生格式*/
 .ui-listview>li .class_info_school h6{
 	display: inline-block;
 	font-size: 0.7em;
 	margin-left: 3%;
 }
+/*设置张三所在行行高*/
 .class_info_school{
 	line-height: 1.0;
 }
@@ -42,15 +44,18 @@
 	margin-top: 0;
 	margin-bottom: 1%;
 }
+/*设置科目名称*/
 .class_info_name h3{
 	color: #3B7454;
 }
 .class_info_time{
 	position: relative;
 }
+/*设置闹钟所在位置*/
 .myclass .class_info_time img{
 	vertical-align: text-bottom;
 }
+/*设置时间格式*/
 .ui-listview>li .class_info_time h6{
 	font-size: 0.7em;
 }
@@ -66,6 +71,7 @@
 .hotclass h4 img{
 	height: 100%;
 }
+/*设置更多所在位置*/
 .hotclass h4 span{
 	display: inline-block;
 	margin-left: 60%;
@@ -77,6 +83,7 @@
 .hotclass .class_info_name h3{
 	color: #EAB136;
 }
+/*设置开始学习*/
 .hotclass  .start_learn{
 	position: absolute;
 	background-color: #EAB136;
@@ -88,4 +95,8 @@
 }
 .hotclass  .start_learn p{
 	text-shadow: none;
+}
+/*设置热门课程闹钟所在位置*/
+.hotclass .class_info_time img{
+	vertical-align: text-bottom;
 }

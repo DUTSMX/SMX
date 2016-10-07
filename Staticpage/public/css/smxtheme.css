@@ -11,9 +11,16 @@
 	color: #3B7454;
 	background-color: transparent;
 }
-/*清理掉底部导航和头部标题的边框，应用于所有页面*/
-.ui-header,.ui-footer{
-	border-width: 0 0;
+/*设置头部导航的上边框*/
+.ui-header{
+	border-bottom-width: 0;
+	border-top-width: 0;
+	box-sizing: border-box;
+}
+/*设置底部导航的上边框*/
+.ui-footer{
+	box-sizing: border-box;
+	border-bottom-width: 0;
 }
 /*设置底部导航栏按钮的边框*/
 .ui-navbar li .ui-btn{
@@ -21,19 +28,19 @@
 }
 /*设置底部导航栏按钮被激活时的样式*/
 .ui-page-theme-a .ui-btn.ui-btn-active{
-	background-color: transparent;
+	background-color: white;
 	color: #3B7454;
 	text-shadow: none;
-	border-color: transparent;
+	/*border-color: transparent;*/
 }
 /*设置各个功能模块的顶部和底部边框宽度*/
 .ui-listview>li.ui-li-has-icon>a.ui-btn{
 	border-bottom-width: 0;
-	border-top-width: 0;    
+	/*border-top-width: 0;    */
 }
 .ui-listview>li.ui-first-child>a.ui-btn{
 	border-bottom-width: 0;
-	border-top-width: 0;    
+	/*border-top-width: 0;    */
 }
 /*设置底部导航栏边框透明*/
 .ui-link{
