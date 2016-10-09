@@ -67,14 +67,19 @@
 	color: #EAB136;
 	margin-bottom: 0;
 	margin-top: 15%;
+	position: relative;
 }
 .hotclass h4 img{
 	height: 100%;
+	display: inline-block;
 }
 /*设置更多所在位置*/
 .hotclass h4 span{
-	display: inline-block;
-	margin-left: 60%;
+	/*display: inline-block;
+	margin-left: 60%;*/
+	position: absolute;;
+	right: 5%;
+	top: 0%;
 }
 .hotclass h4 span a{
 	text-decoration: none;

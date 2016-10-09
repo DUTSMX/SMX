@@ -3,6 +3,7 @@
 	color: #3B7454;
 	margin-bottom: 0;
 	margin-top: 0;
+	position: relative;
 }
 .online_teacher h4 img{
 	height: 100%;
@@ -11,8 +12,9 @@
 	margin-bottom: 2%;
 }
 .online_teacher h4 span{
-	display: inline-block;
-	margin-left: 60%;
+	position: absolute;;
+	right: 5%;
+	top: 0%;
 }
 .online_teacher h4 span a{
 	text-decoration: none;
@@ -35,12 +37,45 @@
 	height: 80%;
 	width: 80%;
 }
-/*设置浏览量*/
-.answer_area .ui-listview li a span{
+/*设置老师姓名*/
+.teacher_tab .ui-grid-d div p{
+	margin-bottom: 1%;
+	margin-top: 1%;
+	font-size: 0.7em;
+	color: #3B7454;
+}
+/*设置 来自老师回答*/
+.answer_area .ui-listview li a span.ans_teacher{
 	font-weight: 100;
 	font-size: 0.7em;
 }
-.answer_area .ui-listview>li>a.ui-btn span:nth-child(2){
+/*设置赞同数*/
+.answer_area .ui-listview>li>a.ui-btn .zan{
+	display: inline-block;
+	float: right;
+	text-align: center;
+	background-color:#3B7454;
+	padding-left: 0.7em;
+	padding-right: 0.7em;
+	padding-bottom: 0.2em;
+	padding-top: 0.2em;
+}
+.answer_area .ui-listview>li>a.ui-btn .zan p{
+	font-weight: 400; 
+	color: white;
+	text-shadow: none;
+	font-size: 1.0em;
+	margin-bottom: 1%;
+	margin-top: 5%; 
+}
+.answer_area .ui-listview>li>a.ui-btn div.zan span{
+	display: block;
+	font-size: 0.5em;
+	font-weight: 100; 
+	color: white;
+	text-shadow: none;
+}
+/*.answer_area .ui-listview>li>a.ui-btn span:nth-child(2){
 	float: right;
 	background-color:#3B7454;
 	font-size: 1.0em;
@@ -48,4 +83,4 @@
 	padding: 0.6em;
 	color: white;
 	vertical-align: bottom;
-}
+}*/
