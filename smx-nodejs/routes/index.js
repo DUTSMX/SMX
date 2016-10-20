@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  return res.end("Hello World");
+  return res.render("../../Staticpage/views/Class");
   // var s = Math.random().toString();
   // res.write('<head><meta charset="utf-8"/></head>');
   // res.end(s+"  长度"+s.length);
