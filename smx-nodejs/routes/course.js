@@ -7,16 +7,16 @@ var utils = require('../utils/utils');
 
 router.get('/',function (req,res) {
     res.end("Hello World");
-})
+});
 
 
 router.get('/addCourse.html',function(req,res){
     res.sendFile(pages.addCourse());
-})
+});
 
 router.get('/search.html',function(req,res){
     res.sendFile(pages.search())
-})
+});
 
 router.get('/addCourse',function(req,res){
     console.log("userId:"+req.session.userId);
@@ -34,7 +34,7 @@ router.get('/addCourse',function(req,res){
             res.write("提交成功");
         })
     }
-})
+});
 
 router.get('/getCourse',function(req,res){
     var userId = 1;
@@ -43,8 +43,9 @@ router.get('/getCourse',function(req,res){
         res.redirect(301,utils.getServer()+"users/login.html");
     }else{
         api.getCourse(userId,function(rows){
-            res.write('<head><meta charset="utf-8"/></head>');
-            res.write(JSON.stringify(rows));
+            //res.write('<head><meta charset="utf-8"/></head>');
+            //res.write(JSON.stringify(rows));
+            res.render();
         })
     }
 })
@@ -55,6 +56,6 @@ router.get('/search',function(req,res){
         res.write('<head><meta charset="utf-8"/></head>');
         res.write(JSON.stringify(rows));
     })
-})
+});
 
 module.exports = router;

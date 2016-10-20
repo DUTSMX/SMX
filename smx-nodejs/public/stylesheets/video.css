@@ -1,0 +1,75 @@
+.tab_search .ui-block-a,.tab_search .ui-block-b,.tab_search .ui-block-c{
+	text-align: center;
+	padding: 0.5em;
+}
+.tab_search .ui-block-a img,.tab_search .ui-block-b img,.tab_search .ui-block-c img{
+	height: 80%;
+	width: 80%;
+}
+
+.hotvideos h4{
+	color: #3B7454;
+	margin-bottom: 0;
+	margin-top: 0;
+	position: relative;
+}
+.hotvideos h4 img{
+	height: 100%;
+}
+/*设置分割线*/
+.div_line{
+	width: 100%;
+	margin-bottom: 5%;
+}
+/*设置视频缩略图位置*/
+.ui-listview .ui-li-has-thumb>.ui-btn>img:first-child{
+	width: 100%;
+	/*height: 100%;*/
+	left: 5%;
+	top: 22%;
+	margin-right: 20%;
+}
+.ui-listview>.ui-li-has-thumb>.ui-btn{
+	padding-left: 7em;
+}
+.ui-listview>li .videos_name h3{
+	font-weight: 500;
+}
+.ui-listview>li .videos_time h5{
+	font-size: 0.8em;
+	padding-left: 3%;
+	font-weight: 400;
+}
+.videos_classify ul{
+	padding-left: 0;
+}
+.videos_classify ul li{
+	font-weight: 100;
+	width: 15%;
+	list-style: none;
+	float: left;
+	margin-left: 3%;
+	border: 1px solid #3B7454;
+	font-size: 0.5em;
+	text-align: center;
+	padding-left: 1%;
+	padding-right: 1%;
+	padding-bottom: 0;
+	box-sizing: border-box;
+	border-radius: 10%;
+}
+.hotvideos{
+	margin-bottom: 10%;
+}
+.hotvideos h4 span{
+	position: absolute;;
+	right: 5%;
+	top: 0%;
+}
+.hotvideos h4 span a{
+	text-decoration: none;
+	color: #3B7454;
+}
+.hotvideos .class_info_name h3{
+	color: #EAB136;
+}
