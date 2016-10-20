@@ -10,10 +10,12 @@ router.get('/',function (req,res) {
 })
 
 
+/*添加课程页面，返回html*/
 router.get('/addCourse.html',function(req,res){
     res.sendFile(pages.addCourse());
 })
 
+/*搜索课程页面，返回html*/
 router.get('/search.html',function(req,res){
     res.sendFile(pages.search())
 })

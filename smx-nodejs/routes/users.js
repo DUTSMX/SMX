@@ -3,19 +3,23 @@ var api = require('../api/userDBApi');
 var utils = require('../utils/utils');
 var router = express.Router();
 var pages = require('./pages');
-
+/*登录页面，返回html*/
 router.get('/login.html', function (req, res) {
     res.sendFile(pages.login());
 })
 
+/*注册页面，返回html*/
 router.get('/register.html', function (req, res) {
     res.sendFile(pages.register());
 })
 
+/*完善信息页面，返回html*/
 router.get('/finishInfo.html',function (req,res) {
     res.sendFile(pages.finishInfo())
 })
-
+/*登录
+* GET phoneNumber,password
+*/
 router.get('/login', function (req, res) {
     var phoneNumber = req.query.phoneNumber;
     var password = req.query.password;
@@ -37,7 +41,9 @@ router.get('/login', function (req, res) {
         }
     });
 })
-
+/*注册
+ * GET phoneNumber,password
+ */
 router.get('/register', function (req, res) {
     var phoneNumber = req.query.phoneNumber;
     var password = req.query.password;
@@ -53,7 +59,9 @@ router.get('/register', function (req, res) {
     });
 
 })
-
+/*获得个人信息
+ * GET
+ */
 router.get('/getMineInfo', function (req, res) {
     var userId = req.session.userId;
     console.log("userId:"+userId)
@@ -75,7 +83,9 @@ router.get('/getMineInfo', function (req, res) {
         })
     }
 })
-
+/*完善个人信息
+ * GET name,gender,age
+ */
 router.get('/finishInfo',function(req,res){
     var userId = req.session.userId;
     console.log("get userId:"+req.session.userId);
