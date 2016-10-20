@@ -40,9 +40,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/course',course);
-app.question('/question',question);
-app.answer('/answer',answer);
-app.video('/video',video);
+app.use('/question',question);
+app.use('/answer',answer);
+app.use('/video',video);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
