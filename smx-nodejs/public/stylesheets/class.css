@@ -1,0 +1,107 @@
+/*设置轮播图大小*/
+.ad_Image_style img{
+	height: 25vh;
+	width: 100vw;
+}
+/*设置我的课程*/
+.myclass h4{
+	color: #3B7454;
+	margin-bottom: 0;
+	margin-top: 0;
+}
+.myclass h4 img{
+	height: 100%;
+}
+/*设置分割线*/
+.div_line{
+	width: 100%;
+	margin-bottom: 5%;
+}
+/*设置个人头像*/
+.ui-listview .ui-li-has-thumb>.ui-btn>img:first-child{
+	position: absolute;
+	top: 23%;
+	left: 8%;
+}
+/*设置我的课程详细信息*/
+.ui-listview>li h5{
+	display: inline-block;
+	margin-bottom: 1%;
+	margin-top: 0;
+}
+/*设置大连理工大学本科生格式*/
+.ui-listview>li .class_info_school h6{
+	display: inline-block;
+	font-size: 0.7em;
+	margin-left: 3%;
+}
+/*设置张三所在行行高*/
+.class_info_school{
+	line-height: 1.0;
+}
+/*设置我的课程里面学科信息*/
+.ui-listview>li h3{
+	margin-top: 0;
+	margin-bottom: 1%;
+}
+/*设置科目名称*/
+.class_info_name h3{
+	color: #3B7454;
+}
+.class_info_time{
+	position: relative;
+}
+/*设置闹钟所在位置*/
+.myclass .class_info_time img{
+	vertical-align: text-bottom;
+}
+/*设置时间格式*/
+.ui-listview>li .class_info_time h6{
+	font-size: 0.7em;
+}
+/*设置热门课程*/
+.hotclass li{
+	position: relative;
+}
+.hotclass h4{
+	color: #EAB136;
+	margin-bottom: 0;
+	margin-top: 15%;
+	position: relative;
+}
+.hotclass h4 img{
+	height: 100%;
+	display: inline-block;
+}
+/*设置更多所在位置*/
+.hotclass h4 span{
+	/*display: inline-block;
+	margin-left: 60%;*/
+	position: absolute;;
+	right: 5%;
+	top: 0%;
+}
+.hotclass h4 span a{
+	text-decoration: none;
+	color: #EAB136;
+}
+.hotclass .class_info_name h3{
+	color: #EAB136;
+}
+/*设置开始学习*/
+.hotclass  .start_learn{
+	position: absolute;
+	background-color: #EAB136;
+	color: white;
+	border-radius: 8%;
+	right: 10%;
+	top: 25%;
+	padding: 0.2em 0.4em;
+}
+.hotclass  .start_learn p{
+	text-shadow: none;
+}
+/*设置热门课程闹钟所在位置*/
+.hotclass .class_info_time img{
+	vertical-align: text-bottom;
+}

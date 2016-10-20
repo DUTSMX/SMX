@@ -9,7 +9,13 @@ var utils = require('./utils/utils');
 var session = require('express-session')
 var routes = require('./routes/index');
 var users = require('./routes/users');
+
 var course = require('./routes/course');
+
+var question = require('./routes/question');
+var answer = require('./routes/answer');
+var video = require('./routes/video');
+
 
 var app = express();
 
@@ -21,7 +27,7 @@ app.use(session({
 }))
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -34,6 +40,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/course',course);
+app.question('/question',question);
+app.answer('/answer',answer);
+app.video('/video',video);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
