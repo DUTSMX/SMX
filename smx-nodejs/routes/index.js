@@ -22,6 +22,9 @@ router.get('/video',function(req,res){
 router.get('/question',function(req,res){
   res.render('Question',{});
 });
+router.get('/login',function(req,res){
+  res.render('login',{});
+});
 
 /*GEt Class*/
 router.get('/class',function(req,res){
