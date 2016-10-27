@@ -65,7 +65,8 @@ router.get('/register', function (req, res) {
  * GET
  */
 router.get('/getMineInfo', function (req, res) {
-    var userId = req.session.userId;
+    //var userId = req.session.userId;
+    var userId = 1;
     console.log("userId:"+userId)
     if (userId == null) {
         console.log("route login")
@@ -79,8 +80,12 @@ router.get('/getMineInfo', function (req, res) {
                 req.session.source = "users/getMineInfo";
                 res.sendFile(pages.finishInfo());
             }else{
-                res.write('<head><meta charset="utf-8"/></head>');
-                res.write(JSON.stringify(ret));
+                console.log("adfdsfsadfdsafdsfa")
+                //res.write('<head><meta charset="utf-8"/></head>');
+                //res.write(JSON.stringify(ret[0]));
+                res.render("Person",ret[0]);
+                console.log("0000000")
+
             }
         })
     }

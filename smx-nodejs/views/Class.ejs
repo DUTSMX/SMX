@@ -34,42 +34,28 @@
 				<img src="/images/课程分割线.png" class="div_line">
 				<div class="details_class">
 					<ul data-role="listview">
+						<%
+							rows.forEach(function(item){%>
 						<li data-icon="false">
 							<a href="#">
 								<img src="/images/头像.png">
 								<div class="class_info">
 									<div class="class_info_school">
-										<h5>张三</h5>
-										<h6>大连理工大学|本科生</h6>
+										<h5><%= item.teacher%></h5>
+										<h6><%= item.content%></h6>
 									</div>
 									<div class="class_info_name">
-										<h3>#高三  数学#</h3>
+										<h3><%= item.name%></h3>
 									</div>
 									<div class="class_info_time">
-										
-										<h6><img src="/images/课程时间.png">周六早上 | 9:00-12:00</h6>
+
+										<h6><img src="/images/课程时间.png"><%= item.time%></h6>
 									</div>
 								</div>
 							</a>
 						</li>
-						<li data-icon="false">
-							<a href="#">
-								<img src="/images/头像.png">
-								<div class="class_info">
-									<div class="class_info_school">
-										<h5>张三</h5>
-										<h6>大连理工大学|本科生</h6>
-									</div>
-									<div class="class_info_name">
-										<h3>#高三  数学#</h3>
-									</div>
-									<div class="class_info_time">
-										
-										<h6><img src="/images/课程时间.png">周六早上|9:00-12:00</h6>
-									</div>
-								</div>
-							</a>
-						</li>
+							<%})
+						 %>
 					</ul>
 				</div>
 			</div>

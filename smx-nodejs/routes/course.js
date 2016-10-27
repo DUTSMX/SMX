@@ -47,7 +47,7 @@ router.get('/getCourse',function(req,res){
         api.getCourse(userId,function(rows){
             //res.write('<head><meta charset="utf-8"/></head>');
             //res.write(JSON.stringify(rows));
-            res.render();
+            res.render("Class",{rows:rows});
         })
     }
 })
