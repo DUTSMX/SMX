@@ -4,7 +4,7 @@ var utils = require('../utils/utils');
 var router = express.Router();
 var pages = require('./pages');
 /*登录页面，返回html*/
-router.get('/login.html', function (req, res) {
+router.get('/login.ejs', function (req, res) {
     res.sendFile(pages.login());
 })
 
@@ -20,9 +20,10 @@ router.get('/finishInfo.html',function (req,res) {
 /*登录
 * GET phoneNumber,password
 */
-router.get('/login', function (req, res) {
-    var phoneNumber = req.query.phoneNumber;
-    var password = req.query.password;
+
+router.post('/login', function (req, res) {
+    var phoneNumber = req.body.phoneNumber;
+    var password = req.body.password;
     console.log("login start");
     api.login(phoneNumber, password, function (ret) {
         if(ret.status){
@@ -30,8 +31,9 @@ router.get('/login', function (req, res) {
             console.log("put userId:"+ret.userId);
             console.log("target:"+utils.getServer()+req.session.source);
             if(req.session.source == null){
-                res.write('<head><meta charset="utf-8"/></head>');
-                res.write(JSON.stringify(ret));
+                res.render("question");
+                //res.write('<head><meta charset="utf-8"/></head>');
+                //res.write(JSON.stringify(ret));
             }else{
                 res.redirect(301,utils.getServer()+req.session.source);
             }

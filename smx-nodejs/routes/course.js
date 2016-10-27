@@ -25,7 +25,7 @@ router.get('/addCourse',function(req,res){
     var userId = req.session.userId;
     if(userId == null){
         req.session.source = "course/addCourse.html";
-        res.redirect(301,utils.getServer()+"users/login.html");
+        res.redirect(301,utils.getServer()+"users/login.ejs");
     }else{
         var name = req.query.name;
         var time = req.query.time;
@@ -42,7 +42,7 @@ router.get('/getCourse',function(req,res){
     var userId = 1;
     if(userId == null){
         req.session.source="course/getCourse";
-        res.redirect(301,utils.getServer()+"users/login.html");
+        res.redirect(301,utils.getServer()+"users/login.ejs");
     }else{
         api.getCourse(userId,function(rows){
             //res.write('<head><meta charset="utf-8"/></head>');
