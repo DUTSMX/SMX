@@ -38,16 +38,24 @@ router.get('/addCourse',function(req,res){
     }
 });
 
-router.get('/getCourse',function(req,res){
+router.get('/course',function(req,res){
     var userId = 1;
     if(userId == null){
         req.session.source="course/getCourse";
         res.redirect(301,utils.getServer()+"users/login.ejs");
     }else{
         api.getCourse(userId,function(rows){
-            //res.write('<head><meta charset="utf-8"/></head>');
-            //res.write(JSON.stringify(rows));
-            res.render("Class",{rows:rows});
+            // res.write('<head><meta charset="utf-8"/></head>');
+            // res.write(JSON.stringify(rows));
+            console.log("rows:"+rows);
+            res.render("course",{
+                courseList:
+                {
+                    rotation:[],
+                    myCourse:[],
+                    allCourse:rows
+                }
+            });
         })
     }
 })
