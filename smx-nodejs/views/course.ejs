@@ -35,7 +35,7 @@
 				<div class="details_class">
 					<ul data-role="listview">
 						<%
-							rows.forEach(function(item){%>
+							courseList.myCourse.forEach(function(item){%>
 						<li data-icon="false">
 							<a href="#">
 								<img src="/images/头像.png">
@@ -60,49 +60,32 @@
 				</div>
 			</div>
 			<div class="hotclass">
-				<h4><img src="/images/hotclass.png">&nbsp热门课程<span><a href="#">更多></a></span></h4>
+				<h4><img src="/images/hotclass.png">&nbsp热门课程<span><!--<a href="#">更多></a>--></span></h4>
 				<img src="/images/热门课程分割线.png" class="div_line">
 				<div class="details_class">
 					<ul data-role="listview">
+						<%
+						courseList.allCourse.forEach(function(item){%>
 						<li data-icon="false">
 							<a href="#">
-								<img src="/images/热门课程头像.png">
+								<img src="/images/头像.png">  <!-- TODOteacherHeadUrl -->
 								<div class="class_info">
 									<div class="class_info_school">
-										<h5>张三</h5>
-										<h6>大连理工大学|本科生</h6>
+										<h5><%= item.teacherName%></h5>
+										<h6><%= item.teacherSchool%></h6>
 									</div>
 									<div class="class_info_name">
-										<h3>#高三  数学#</h3>
+										<h3><%= item.courseName%></h3>
 									</div>
 									<div class="class_info_time">
-										
-										<h6><img src="/images/课程时间.png">周六早上 | 9:00-12:00</h6>
-									</div>
-								</div>
-								<!-- <div class="start_learn">
-									<p>开始学习</p>
-								</div> -->
-							</a>
-						</li>
-						<li data-icon="false">
-							<a href="#">
-								<img src="/images/热门课程头像.png">
-								<div class="class_info">
-									<div class="class_info_school">
-										<h5>张三</h5>
-										<h6>大连理工大学|本科生</h6>
-									</div>
-									<div class="class_info_name">
-										<h3>#高三  数学#</h3>
-									</div>
-									<div class="class_info_time">
-										
-										<h6><img src="/images/课程时间.png">周六早上|9:00-12:00</h6>
+
+										<h6><img src="/images/课程时间.png"><%= item.courseTime%></h6>
 									</div>
 								</div>
 							</a>
 						</li>
+						<%})
+						%>
 					</ul>
 				</div>
 			</div>
