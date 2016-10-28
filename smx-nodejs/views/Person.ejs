@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>person</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta http-equiv="cache-control" content="no-cache" />
+	<link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/person.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
+</head>
+<body>
+	<div data-role="page">
+		<div data-role="header" data-theme="g" data-position="fixed">
+			<h3>我的</h3>
+		</div>
+		<div data-role="content">
+			<ul data-role="listview">
+				<li data-icon="false">
+						<img src="/images/头像.png" class="set-people">
+						<h1><%= name%></h1>
+						<p class="set-info"><%= phoneNumber%><img src="/images/man.png"></p>
+					</a>
+				</li>
+			</ul>
+			<ul data-role="listview" class="ui-listview-func">
+				<li data-icon="false">
+					<a href="#">
+						<img src="/images/我的课程.png" class="ui-li-icon">
+						<p>我的课程</p>
+					</a>
+				</li>
+				<li data-icon="false">
+					<a href="#">
+						<img src="/images/我的提问.png" class="ui-li-icon">
+						<p>我的提问</p>
+					</a>
+				</li>
+				
+			</ul>
+			<ul data-role="listview" class="ui-listview-func">
+				<li data-icon="false">
+					<a href="#">
+						<img src="/images/设置中心.png" class="ui-li-icon">
+						<p>设置中心</p>
+					</a>
+				</li>
+			</ul>
+			<ul data-role="listview" class="ui-listview-func ui-btn-exit">
+				<li data-icon="false">
+					<a href="#">
+						<p>退出登录</p>
+					</a>
+				</li>
+			</ul>
+		</div>
+		
+		<div data-role="footer" data-position="fixed" data-theme="t">
+			 <div data-role="navbar">
+			 	<ul>
+					<li><a href="/course/getCourse" data-ajax="false"><img src="/images/01.png"><p>课程</p></a></li>
+					<li><a href="/video" data-ajax="false"><img src="/images/02.png"><p>视频</p></a></li>
+					<li><a href="/question" data-ajax="false"><img src="/images/03.png"><p>答疑</p></a></li>
+					<li><a href="/users/getMineInfo" data-ajax="false"><img src="/images/04.png"><p>我的</p></a></li>
+			 	</ul>
+			 </div>
+		</div>
+	</div>
+	<script src="/javascripts/jquery.js"></script>
+	<script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
+</body>
+</html>

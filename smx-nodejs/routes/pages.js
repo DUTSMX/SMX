@@ -25,3 +25,27 @@ exports.addCourse = function(){
 exports.search = function(){
     return dir+"search.html"
 }
+
+exports.addQuestion = function() {
+    return dir + "addQuestion.html";
+}
+
+exports.searchQuestion = function() {
+    return dir + "searchQuestion.html";
+}
+
+exports.addAnswer = function() {
+    return dir + "addAnswer.html";
+}
+
+exports.searchAnswer = function() {
+    return dir + "searchAnswer.html";
+}
+
+exports.addVideo = function() {
+    return dir + "addVideo.html";
+}
+
+exports.searchVideo = function() {
+    return dir + "searchVideo.html";
+}

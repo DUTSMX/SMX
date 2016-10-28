@@ -3,7 +3,8 @@
 var conn = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'root',
+    // password: 'root',
+    password:'root',
     database: 'smx',
     port: 3306
 })

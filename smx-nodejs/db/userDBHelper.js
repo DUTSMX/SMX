@@ -2,8 +2,10 @@ var dbHelper = require('./dbHelper');
 var conn = dbHelper.getConn();
 
 exports.findAccount = function (phoneNumber, password, callback) {
-    var sql = 'SELECT * FROM account WHERE phoneNumber = ' + phoneNumber + ' and  password =' + password;
+    console.log(phoneNumber+password);
+    var sql = "SELECT * FROM account WHERE phoneNumber = '"+ phoneNumber + "' and  password = '"+ password+"'";
     conn.query(sql, function (err, rows, fields) {
+        console.log(rows);
         if (err) {
             console.log(err);
         }

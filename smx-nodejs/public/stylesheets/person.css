@@ -1,0 +1,52 @@
+/*设置个人头像*/
+.ui-listview .ui-li-has-thumb>img:first-child{
+	position: absolute;
+	top: 20%;
+	left: 8%;
+}
+
+/*设置每个功能模块之间的距离*/
+.ui-content .ui-listview{
+	margin-top: 8%;
+}
+/*设置第一个功能模块与顶部的距离*/
+.ui-content .ui-listview:first-child{
+	margin-top: 0;
+}
+/*设置退出登录按钮的文字居中*/
+.ui-content .ui-listview:last-child p{
+	text-align: center;
+}
+/*设置退出登录按钮与顶部功能模块之间的距离*/
+.ui-content .ui-listview:last-child{
+	margin-top: 55%;
+}
+/*设置各个功能模块前图片的位置*/
+.ui-listview-func .ui-li-has-icon>.ui-btn>img:first-child{
+	position: absolute;
+	top: 35%;
+	left: 5%;
+}
+/*是指各个功能模块文字的左侧内边距*/
+.ui-listview>.ui-li-has-icon>.ui-btn{
+	padding-left: 3em;
+}
+
+/*设置手机号码字体*/
+.ui-listview .ui-li-has-thumb>.ui-btn>p{
+	font-size: 0.8em;
+
+}
+/*设置各个功能模块字体大小*/
+.ui-listview>li p{
+	font-size: 1.0em;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+/*设置性别图标位置及大小*/
+.set-info img{
+	display: inline-block;
+	margin-left: 5%;
+	width: 7%;
+	height: 7%;
+}

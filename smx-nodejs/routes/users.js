@@ -3,22 +3,27 @@ var api = require('../api/userDBApi');
 var utils = require('../utils/utils');
 var router = express.Router();
 var pages = require('./pages');
-
-router.get('/login.html', function (req, res) {
+/*登录页面，返回html*/
+router.get('/login.ejs', function (req, res) {
     res.sendFile(pages.login());
 })
 
+/*注册页面，返回html*/
 router.get('/register.html', function (req, res) {
     res.sendFile(pages.register());
 })
 
+/*完善信息页面，返回html*/
 router.get('/finishInfo.html',function (req,res) {
     res.sendFile(pages.finishInfo())
 })
+/*登录
+* GET phoneNumber,password
+*/
 
-router.get('/login', function (req, res) {
-    var phoneNumber = req.query.phoneNumber;
-    var password = req.query.password;
+router.post('/login', function (req, res) {
+    var phoneNumber = req.body.phoneNumber;
+    var password = req.body.password;
     console.log("login start");
     api.login(phoneNumber, password, function (ret) {
         if(ret.status){
@@ -26,8 +31,9 @@ router.get('/login', function (req, res) {
             console.log("put userId:"+ret.userId);
             console.log("target:"+utils.getServer()+req.session.source);
             if(req.session.source == null){
-                res.write('<head><meta charset="utf-8"/></head>');
-                res.write(JSON.stringify(ret));
+                res.render("question");
+                //res.write('<head><meta charset="utf-8"/></head>');
+                //res.write(JSON.stringify(ret));
             }else{
                 res.redirect(301,utils.getServer()+req.session.source);
             }
@@ -37,7 +43,9 @@ router.get('/login', function (req, res) {
         }
     });
 })
-
+/*注册
+ * GET phoneNumber,password
+ */
 router.get('/register', function (req, res) {
     var phoneNumber = req.query.phoneNumber;
     var password = req.query.password;
@@ -53,9 +61,12 @@ router.get('/register', function (req, res) {
     });
 
 })
-
+/*获得个人信息
+ * GET
+ */
 router.get('/getMineInfo', function (req, res) {
-    var userId = req.session.userId;
+    //var userId = req.session.userId;
+    var userId = 1;
     console.log("userId:"+userId)
     if (userId == null) {
         console.log("route login")
@@ -69,13 +80,19 @@ router.get('/getMineInfo', function (req, res) {
                 req.session.source = "users/getMineInfo";
                 res.sendFile(pages.finishInfo());
             }else{
-                res.write('<head><meta charset="utf-8"/></head>');
-                res.write(JSON.stringify(ret));
+                console.log("adfdsfsadfdsafdsfa")
+                //res.write('<head><meta charset="utf-8"/></head>');
+                //res.write(JSON.stringify(ret[0]));
+                res.render("Person",ret[0]);
+                console.log("0000000")
+
             }
         })
     }
 })
-
+/*完善个人信息
+ * GET name,gender,age
+ */
 router.get('/finishInfo',function(req,res){
     var userId = req.session.userId;
     console.log("get userId:"+req.session.userId);

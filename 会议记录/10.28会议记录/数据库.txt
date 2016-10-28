@@ -1,0 +1,63 @@
+***********************************************************
+**************************我的模块*************************
+***********************************************************
+【Account】用户信息
+userId		int
+phoneNumber	varchar(11)
+password	varchar(255)
+role		int	0:学生 1：申请中 2：老师
+userHeadUrl	varchar(255)
+userName	varchar(255)
+userSchool	varchar(255)
+userGrade	varchar(255)
+userAge		varchar(255)
+userAddress	varchar(255)
+【Teacher】教师信息
+teacherId	int
+goodCourse	varchar(255)
+***********************************************************
+**************************课程模块*************************
+***********************************************************
+【Course】课程信息
+courseId	int
+userId		int
+courseName	varchar(255)
+courseTime	datetime
+objectOriented	varchar(255)
+courseContent	text
+【JoinCourse】报名课程列表
+userId		int
+courseId	int
+selfIntroductiontext
+***********************************************************
+**************************视频模块*************************
+***********************************************************
+【Video】视频
+videoId		int
+videoCoverUrl	varchar(255)
+videoUrl	varchar(255)
+videoName	varchar(255)	
+videoTime	datetime
+videoWatchCount	int
+videoAbstract	varchar(255)
+videoContent	text
+【VideoTag】视频标签列表
+videoId		int
+tagName		varchar(255)
+***********************************************************
+**************************问答模块*************************
+***********************************************************
+【Question】问题
+questionId	int
+userId		int
+questionTitle	varchar(255)
+questionContent	text
+questionTime	dateTime
+【Answer】答案
+questionId	int
+answerId	int
+userId		int
+answerContent	text
+answerTime	datetime
+【OnlineTeacher】在线教师
+userId		int
