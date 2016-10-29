@@ -13,6 +13,7 @@ courseList{
 courseId用法 <a href="course/courseDetail?courseId=<%=courseId%>" >
 ===========================================================courseDetail.ejs
 ====================课程详情页面 courseId==================
+====================报名课程 userId,courseId ============== 
 ===========================================================courseDetail
 courseDetail{
 	 teacherId
@@ -38,6 +39,10 @@ teacherInfo{
 	 goodCourse,
 	 selfIntroduction
 }
+
+
+
+
 
 ***********************************************************
 **************************视频模块*************************

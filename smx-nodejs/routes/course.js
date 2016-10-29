@@ -29,8 +29,9 @@ router.get('/addCourse',function(req,res){
     }else{
         var name = req.query.name;
         var time = req.query.time;
+        var objectOriented = req.query.objectOriented;
         var content = req.query.content;
-        api.addCourse(userId,name,time,content,function (rows) {
+        api.addCourse(userId,name,time,objectOriented,content,function (rows) {
             console.log(rows);
             res.write('<head><meta charset="utf-8"/></head>');
             res.write("提交成功");
@@ -51,7 +52,7 @@ router.get('/course',function(req,res){
             res.render("course",{
                 courseList:
                 {
-                    rotation:[],
+                    // rotation:[],
                     myCourse:[],
                     allCourse:rows
                 }

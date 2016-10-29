@@ -26,6 +26,11 @@ exports.search = function(){
     return dir+"search.html"
 }
 
+exports.getCourse = function(){
+    return dir+"courseDetail.html"
+}
+
+
 exports.addQuestion = function() {
     return dir + "addQuestion.html";
 }

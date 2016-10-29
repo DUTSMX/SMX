@@ -27,8 +27,8 @@ router.get('/login',function(req,res){
 });
 
 /*GEt Class*/
-router.get('/class',function(req,res){
-  res.render('Class',{});
+router.get('/course',function(req,res){
+  res.render('course',{});
 });
 
 /*GEt Person*/
