@@ -56,14 +56,13 @@ exports.finishInfo = function(userId,name,gender,age,callback){
         callback(rows);
     })
 }
-
 exports.judgeRole = function (userId,callback) {
     var sql ="SELECT role FROM account WHERE userId = '"+ userId +"'";
     conn.query(sql,function(err,rows,fields){
         if(err){
             console.error(err);
         }
+        console.log("rows:"+rows[0].role);
         callback(rows);
     })
-
 }
