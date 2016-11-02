@@ -14,6 +14,10 @@ router.get('/',function (req,res) {
 router.get('/addCourse.html',function(req,res){
     res.sendFile(pages.addCourse());
 });
+//
+// router.get('/Course.html',function(req,res){
+//     res.sendFile(pages.getCourse());
+// });
 
 /*搜索课程页面，返回html*/
 router.get('/search.html',function(req,res){
@@ -39,7 +43,7 @@ router.get('/addCourse',function(req,res){
     }
 });
 
-router.get('/course',function(req,res){
+router.get('/getCourse',function(req,res){
     var userId = 1;
     if(userId == null){
         req.session.source="course/getCourse";

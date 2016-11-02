@@ -4,7 +4,7 @@ var utils = require('../utils/utils');
 var router = express.Router();
 var pages = require('./pages');
 /*登录页面，返回html*/
-router.get('/login.ejs', function (req, res) {
+router.post('/login.ejs', function (req, res) {
     res.sendFile(pages.login());
 })
 
@@ -74,7 +74,7 @@ router.get('/getMineInfo', function (req, res) {
         res.sendFile(pages.login());
     } else {
         api.getMineInfo(userId, function (ret) {
-            var name = ret[0].name;
+            var name = ret[0].userName;
             console.log("name:"+name);
             if(name == null){
                 req.session.source = "users/getMineInfo";
@@ -96,9 +96,9 @@ router.get('/getMineInfo', function (req, res) {
 router.get('/finishInfo',function(req,res){
     var userId = req.session.userId;
     console.log("get userId:"+req.session.userId);
-    var name = req.query.name;
-    var gender = req.query.gender;
-    var age = req.query.age;
+    var name = req.query.userName;
+    var gender = req.query.userGrade;
+    var age = req.query.userAge;
     api.finishInfo(userId,name,gender,age,function(){
         res.redirect(301,utils.getServer()+req.session.source);
     })

@@ -24,7 +24,7 @@ exports.findAccountByNum = function(phoneNumber,callback){
 }
 
 exports.findAccountById = function(userId,callback){
-    var sql = 'SELECT phoneNumber,teacher,name FROM account WHERE id = '+userId;
+    var sql = 'SELECT * FROM account WHERE userId = '+userId;
     conn.query(sql,function(err,rows,fileds){
         if(err){
             console.log(err);
@@ -46,7 +46,7 @@ exports.addAccount = function(phoneNumber,password,callback){
 }
 
 exports.finishInfo = function(userId,name,gender,age,callback){
-    var sql = "UPDATE account SET name='"+name+"',gender='"+gender+"',age="+age+",teacher = 0 WHERE id="+userId;
+    var sql = "UPDATE account SET userName='"+name+"',userGrade='"+gender+"',userAge="+age+",role = 0 WHERE userId="+userId;
     console.log(sql);
     conn.query(sql,function(err,rows,fileds){
         console.log(rows)
@@ -57,7 +57,7 @@ exports.finishInfo = function(userId,name,gender,age,callback){
     })
 }
 exports.judgeRole = function (userId,callback) {
-    var sql ="SELECT role FROM account WHERE userId = '"+ userId +"'";
+    var sql ="SELECT role FROM account WHERE userId = "+ userId ;
     conn.query(sql,function(err,rows,fields){
         if(err){
             console.error(err);

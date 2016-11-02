@@ -14,13 +14,13 @@ exports.addCourse = function (userId, name, time, objectOriented, content, callb
 
 exports.getCourse = function (userId, callback) {
     var sql1 = "SELECT c.courseId as courseId,c.courseName as courseName,c.courseTime as courseTime," +
-        // "a.userHeadUrl as teacherHeadUrl," +     //这个字段数据库里没有
+        "a.userHeadUrl as teacherHeadUrl," +     //这个字段数据库里没有
         "a.userSchool as teacherSchool,a.userGrade as teacherGrade " +
         "FROM ((joinCourse j INNER JOIN course c ON j.courseId = c.courseId) INNER JOIN account a ON c.userId = a.userId)" +
         "WHERE j.userId = " + userId;
     var sql2 = "SELECT a.courseId as courseId,a.courseName as courseName,a.courseTime " +
         "as courseTime," +
-        // "b.userHeadUrl as teacherHeadUrl," + //这个字段数据库里没有
+        "b.userHeadUrl as teacherHeadUrl," + //这个字段数据库里没有
         "b.userSchool as teacherSchool,b.userGrade " +
         "as teacherGrade,b.userName as teacherName " +
         "FROM course a JOIN account b on a.userId = b.userId " +
