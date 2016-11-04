@@ -23,13 +23,10 @@
       <file leaf-file-name="users.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/smx-nodejs/routes/users.js">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-            <state vertical-scroll-proportion="0.430605">
+			<state vertical-scroll-proportion="0.430605">
               <caret line="75" column="48" selection-start-line="75" selection-start-column="48" selection-end-line="75" selection-end-column="48" />
-=======
             <state relative-caret-position="324">
               <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
->>>>>>> 7ce0ecb288be247acb3d03e07727aa524ecba307
               <folding />
             </state>
           </provider>

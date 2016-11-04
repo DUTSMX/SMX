@@ -29,7 +29,7 @@ router.get('/videoDetail',function(req,res){
 router.get('/question',function(req,res){
   res.render('Question',{});
 });
-router.post('/login',function(req,res){
+router.get('/login',function(req,res){
   res.render('login',{});
 });
 

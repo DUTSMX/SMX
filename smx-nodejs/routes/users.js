@@ -66,7 +66,7 @@ router.get('/register', function (req, res) {
  */
 router.get('/getMineInfo', function (req, res) {
     //var userId = req.session.userId;
-    var userId = 1;
+    var userId = 10;
     console.log("userId:"+userId)
     if (userId == null) {
         console.log("route login")
