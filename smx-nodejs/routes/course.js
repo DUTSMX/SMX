@@ -14,6 +14,10 @@ router.get('/',function (req,res) {
 router.get('/addCourse.html',function(req,res){
     res.sendFile(pages.addCourse());
 });
+//
+// router.get('/Course.html',function(req,res){
+//     res.sendFile(pages.getCourse());
+// });
 
 /*搜索课程页面，返回html*/
 router.get('/search.html',function(req,res){
@@ -29,8 +33,9 @@ router.get('/addCourse',function(req,res){
     }else{
         var name = req.query.name;
         var time = req.query.time;
+        var objectOriented = req.query.objectOriented;
         var content = req.query.content;
-        api.addCourse(userId,name,time,content,function (rows) {
+        api.addCourse(userId,name,time,objectOriented,content,function (rows) {
             console.log(rows);
             res.write('<head><meta charset="utf-8"/></head>');
             res.write("提交成功");
@@ -38,7 +43,7 @@ router.get('/addCourse',function(req,res){
     }
 });
 
-router.get('/course',function(req,res){
+router.get('/getCourse',function(req,res){
     var userId = 1;
     if(userId == null){
         req.session.source="course/getCourse";
@@ -51,7 +56,7 @@ router.get('/course',function(req,res){
             res.render("course",{
                 courseList:
                 {
-                    rotation:[],
+                    // rotation:[],
                     myCourse:[],
                     allCourse:rows
                 }

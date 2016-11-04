@@ -26,6 +26,11 @@ exports.search = function(){
     return dir+"search.html"
 }
 
+exports.getCourse = function(){
+    return dir+"course.html"
+}
+
+
 exports.addQuestion = function() {
     return dir + "addQuestion.html";
 }
@@ -49,3 +54,8 @@ exports.addVideo = function() {
 exports.searchVideo = function() {
     return dir + "searchVideo.html";
 }
+
+exports.getMineInfo = function () {
+    return dir + "person.html";
+}
+
