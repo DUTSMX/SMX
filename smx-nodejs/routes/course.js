@@ -24,9 +24,15 @@ router.get('/search.html',function(req,res){
     res.sendFile(pages.search())
 });
 
+
+router.get('/courseDetail',function(req,res){
+    res.render('courseDetails',{});
+});
+
 router.get('/addCourse',function(req,res){
     console.log("userId:"+req.session.userId);
-    var userId = req.session.userId;
+    var userId = re
+    q.session.userId;
     if(userId == null){
         req.session.source = "course/addCourse.html";
         res.redirect(301,utils.getServer()+"users/login.ejs");

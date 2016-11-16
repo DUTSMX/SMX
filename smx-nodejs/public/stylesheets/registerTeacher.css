@@ -1,0 +1,13 @@
+.hr{
+	float: left;
+}
+.goodCourse{
+	display: inline-block;
+	margin-top: 2.5%;
+	padding-left: 5%;
+}
+.selfIntroduction{
+	display: inline-block;
+	margin-top: 2.5%;
+	padding-left: 5%;
+}
