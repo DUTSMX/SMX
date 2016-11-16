@@ -57,4 +57,17 @@ router.get('/searchQuestion',function(req,res){
     })
 })
 
+router.get('/question',function (req,res) {
+    res.render('question',{});
+})
+router.get('/questionDetail',function (req,res) {
+    res.render('questionDetail',{});
+})
+router.get('/answerDetail',function (req,res) {
+    res.render('answerDetail',{});
+})
+router.get('/askQuestion',function (req,res) {
+    res.render('askQuestion',{});
+})
+
 module.exports = router;
