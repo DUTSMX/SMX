@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
 
   res.render('index', { title: 'Express' });
 
-  return res.render("../../Staticpage/views/Class");
+  // return res.render("../Staticpage/views/Class");
   // var s = Math.random().toString();
   // res.write('<head><meta charset="utf-8"/></head>');
   // res.end(s+"  长度"+s.length);
@@ -17,6 +17,13 @@ router.get('/', function(req, res, next) {
 router.get('/video',function(req,res){
   res.render('Video',{});
 });
+
+/* GEt VideoDetail*/
+router.get('/videoDetail',function(req,res){
+  res.render('../../Staticpage/views/VideoDetail',{});
+});
+
+
 
 /*GEt Question*/
 router.get('/question',function(req,res){
@@ -30,6 +37,7 @@ router.get('/login',function(req,res){
 router.get('/course',function(req,res){
   res.render('course',{});
 });
+
 
 /*GEt Person*/
 router.get('/person',function(req,res){

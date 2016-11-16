@@ -27,7 +27,7 @@ exports.search = function(){
 }
 
 exports.getCourse = function(){
-    return dir+"courseDetail.html"
+    return dir+"course.html"
 }
 
 
@@ -54,3 +54,8 @@ exports.addVideo = function() {
 exports.searchVideo = function() {
     return dir + "searchVideo.html";
 }
+
+exports.getMineInfo = function () {
+    return dir + "person.html";
+}
+
