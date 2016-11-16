@@ -24,11 +24,11 @@ exports.findAccountByNum = function(phoneNumber,callback){
 }
 
 exports.findAccountById = function(userId,callback){
-    var sql = 'SELECT phoneNumber,teacher,name FROM account WHERE id = '+userId;
+    var sql = 'SELECT phoneNumber,role,userName FROM account WHERE id = '+userId;
     conn.query(sql,function(err,rows,fileds){
         if(err){
             console.log(err);
-            callback(unknownError);
+            // callback(unknownError);
         }
         callback(rows);
     })
