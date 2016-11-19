@@ -1,0 +1,29 @@
+.hr{
+    float: left;
+}
+.ui-listview li .ui-btn .teacherIntro .name,
+.ui-listview li .ui-btn .teacherIntro .school{
+    display: inline-block;
+    padding-left: 2%;
+}
+.ui-listview li .ui-btn .videoInfo{
+    padding-left: 2%;
+}
+.ui-listview li .ui-btn .videoInfo .videos_classify_detail{
+    display: inline-block;
+    border: 1px solid #3B7454;
+    border-radius: 4px;
+}
+.ui-listview li .ui-btn .courseIntro_title,
+.ui-listview li .ui-btn .courseIntro_specific{
+    display: inline-block;
+}
+.ui-listview li .ui-btn .courseIntro_title{
+    padding-left:2%;
+}
+.ui-listview li .ui-btn .courseIntro_specific{
+    padding-left: 4%;
+}
+.ui-listview li .ui-btn .courseContent{
+    padding-left: 2%;
+}

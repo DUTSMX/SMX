@@ -8,9 +8,9 @@ router.get('/', function(req, res, next) {
 
 /*
 * unuse
-* */
+*
 router.get('/login',function(req,res){
   res.render('login',{});
 });
-
+ */
 module.exports = router;

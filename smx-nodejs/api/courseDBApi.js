@@ -1,8 +1,17 @@
 var db = require('../db/courseDBHelper')
 
 exports.getCourse = function(userId,callback){
-    db.getCourse(userId,function(rows){
-        callback(rows);
+    db.getCourseById(userId,function(rows){
+        var myCourse = rows;
+        db.getCourse(function (rows) {
+            callback({
+                courseList:{
+                rotation:null,
+                myCourse:myCourse,
+                allCourse:rows
+                }
+            })
+        })
     })
 }
 

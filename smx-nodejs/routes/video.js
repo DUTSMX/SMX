@@ -21,7 +21,7 @@ router.get('/videoDetail',function (req,res) {
 
 /*
 * unuse
-* */
+*
 router.get('/addVideo',function(req,res){
     console.log("videoname:"+req.session.videoname);
     var videoname = req.session.videoname;
@@ -61,5 +61,5 @@ router.get('/searchVideo',function(req,res){
         res.write(JSON.stringify(rows));
     })
 })
-
+ */
 module.exports = router;

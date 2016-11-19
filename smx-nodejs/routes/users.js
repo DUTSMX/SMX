@@ -3,24 +3,42 @@ var api = require('../api/userDBApi');
 var utils = require('../utils/utils');
 var router = express.Router();
 var pages = require('./pages');
-/*登录页面，返回html*/
-router.post('/login.ejs', function (req, res) {
-    res.sendFile(pages.login());
+
+router.get('/mine',function (req,res) {
+    res.render('mine',{});
+})
+router.get('/personDetail',function (req,res) {
+    res.render('personDetail',{});
+})
+router.get('/registerTeacher',function (req,res) {
+    res.render('registerTeacher',{});
+})
+router.get('/createCourse',function (req,res) {
+    res.render('createCourse',{});
+})
+router.get('/myCourse',function (req,res) {
+    userId = 1
+    api.getMyCourse(userId,function (rows) {
+        console.log("rows:"+JSON.stringify(rows))
+        res.render('myCourse',{myCourse:rows});
+    })
+})
+router.get('/myQuestion',function (req,res) {
+    res.render('myQuestion',{});
+})
+router.get('/setCenter',function (req,res) {
+    res.render('setCenter',{})
+})
+router.get('/login',function (req,res) {
+    res.render('login',{})
 })
 
-/*注册页面，返回html*/
-router.get('/register.html', function (req, res) {
-    res.sendFile(pages.register());
-})
+/*
+* unuse
 
-/*完善信息页面，返回html*/
-router.get('/finishInfo.html',function (req,res) {
-    res.sendFile(pages.finishInfo())
-})
-/*登录
-* GET phoneNumber,password
-*/
 
+//登录
+//GET phoneNumber,password
 router.post('/login', function (req, res) {
     var phoneNumber = req.body.phoneNumber;
     var password = req.body.password;
@@ -43,9 +61,9 @@ router.post('/login', function (req, res) {
         }
     });
 })
-/*注册
- * GET phoneNumber,password
- */
+
+//注册
+// GET phoneNumber,password
 router.get('/register', function (req, res) {
     var phoneNumber = req.query.phoneNumber;
     var password = req.query.password;
@@ -61,9 +79,7 @@ router.get('/register', function (req, res) {
     });
 
 })
-/*获得个人信息
- * GET
- */
+//获得个人信息
 router.get('/getMineInfo', function (req, res) {
     //var userId = req.session.userId;
     var userId = 10;
@@ -90,9 +106,8 @@ router.get('/getMineInfo', function (req, res) {
         })
     }
 })
-/*完善个人信息
- * GET name,gender,age
- */
+
+//完善个人信息
 router.get('/finishInfo',function(req,res){
     var userId = req.session.userId;
     console.log("get userId:"+req.session.userId);
@@ -104,25 +119,5 @@ router.get('/finishInfo',function(req,res){
     })
 
 })
-router.get('/mine',function (req,res) {
-    res.render('mine',{});
-})
-router.get('/personDetail',function (req,res) {
-    res.render('personDetail',{});
-})
-router.get('/registerTeacher',function (req,res) {
-    res.render('registerTeacher',{});
-})
-router.get('/createCourse',function (req,res) {
-    res.render('createCourse',{});
-})
-router.get('/myCourse',function (req,res) {
-    res.render('myCourse',{});
-})
-router.get('/myQuestion',function (req,res) {
-    res.render('myQuestion',{});
-})
-router.get('/setCenter',function (req,res) {
-    res.render('setCenter',{})
-})
+*/
 module.exports = router;
