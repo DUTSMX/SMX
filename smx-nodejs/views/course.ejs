@@ -37,22 +37,22 @@
 						<%
 							courseList.myCourse.forEach(function(item){%>
 						<li data-icon="false">
-							<a href="courseDetails">
-								<img src="/images/头像.png">
-								<div class="class_info">
-									<div class="class_info_school">
-										<h5><%= item.teacher%></h5>
-										<h6><%= item.content%></h6>
-									</div>
-									<div class="class_info_name">
-										<h3><%= item.name%></h3>
-									</div>
-									<div class="class_info_time">
+                            <a href="courseDetail?courseId=<%=item.courseId%>">
+                                <img src=<%=item.teacherHeadUrl%>>  <!-- TODOteacherHeadUrl -->
+                                <div class="class_info">
+                                    <div class="class_info_school">
+                                        <h5><%= item.teacherName%></h5>
+                                        <h6><%= item.teacherSchool%></h6>
+                                    </div>
+                                    <div class="class_info_name">
+                                        <h3><%= item.courseName%></h3>
+                                    </div>
+                                    <div class="class_info_time">
 
-										<h6><img src="/images/课程时间.png"><%= item.time%></h6>
-									</div>
-								</div>
-							</a>
+                                        <h6><img src="/images/课程时间.png"><%= item.courseTime%></h6>
+                                    </div>
+                                </div>
+                            </a>
 						</li>
 							<%})
 						 %>
@@ -67,8 +67,8 @@
 						<%
 						courseList.allCourse.forEach(function(item){%>
 						<li data-icon="false">
-							<a href="courseDetail">
-								<img src="/images/头像.png">  <!-- TODOteacherHeadUrl -->
+							<a href="courseDetail?courseId=<%=item.courseId%>">
+								<img src=<%=item.teacherHeadUrl%>>  <!-- TODOteacherHeadUrl -->
 								<div class="class_info">
 									<div class="class_info_school">
 										<h5><%= item.teacherName%></h5>
