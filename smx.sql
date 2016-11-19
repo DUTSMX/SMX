@@ -209,10 +209,11 @@ DROP TABLE IF EXISTS `video`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `video` (
   `videoId` int(30) unsigned NOT NULL AUTO_INCREMENT,
+  `authorId` int(11) DEFAULT NULL,
   `videoCoverUrl` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `videoUrl` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `videoUrl` varchar(1000) CHARACTER SET utf8 NOT NULL DEFAULT '',
   `videoName` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
-  `videoTime` datetime DEFAULT NULL,
+  `videoTime` varchar(255) DEFAULT NULL,
   `videoWatchCount` int(30) NOT NULL DEFAULT '0',
   `videoAbstract` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `videoContent` text CHARACTER SET utf8,
@@ -226,7 +227,7 @@ CREATE TABLE `video` (
 
 LOCK TABLES `video` WRITE;
 /*!40000 ALTER TABLE `video` DISABLE KEYS */;
-INSERT INTO `video` VALUES (1,'\"http://pagead2.googlesyndication.com/pagead/js/r20161025/r20160727/show_ads_impl.js\"','0','开箱实拍',NULL,0,NULL,NULL);
+INSERT INTO `video` VALUES (1,1,'http://smxbucket-10068625.cos.myqcloud.com/%E8%A7%86%E9%A2%91%E5%9B%BE%E7%89%87.png','http://smxbucket-10068625.cos.myqcloud.com/%E5%B0%8FCC%EF%BC%88%E3%80%8A%E5%B0%8F%E8%8B%B9%E6%9E%9C%E3%80%8BC%E8%AF%AD%E8%A8%80%E7%89%88-for%E5%A4%A7%E8%BF%9E%E7%90%86%E5%B7%A5%E5%A4%A7%E5%AD%A6%E8%BD%AF%E4%BB%B6%E5%AD%A6%E9%99%A2%EF%BC%89_%E9%AB%98%E6%B8%85.mp4','开箱实拍','00:15:15',13,'高中数学','三角函数和数列，统计概率，立体几何，圆锥曲线');
 /*!40000 ALTER TABLE `video` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -262,4 +263,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-19 12:07:50
+-- Dump completed on 2016-11-19 14:14:24
