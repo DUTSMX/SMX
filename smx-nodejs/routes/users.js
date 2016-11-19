@@ -122,4 +122,7 @@ router.get('/myCourse',function (req,res) {
 router.get('/myQuestion',function (req,res) {
     res.render('myQuestion',{});
 })
+router.get('/setCenter',function (req,res) {
+    res.render('setCenter',{})
+})
 module.exports = router;
