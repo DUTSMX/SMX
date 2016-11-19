@@ -10,45 +10,18 @@ router.get('/',function (req,res) {
 })
 
 
-router.get('/addQuestion.html',function(req,res){
-    res.sendFile(pages.addQuestion());
-})
+router.get('/question',function(req,res) {
 
-router.get('/searchQuestion.html',function(req,res){
-    res.sendFile(pages.searchQuestion())
+    api.getQuestion(function (rows) {
+        console.log("rows:" + rows);
+        res.render("question", {
+            courseList: {
+                // teacherList:rows,
+                answerList:rows
+            }
+        });
+    })
 })
-
-router.get('/addQuestion',function(req,res){
-    console.log("username:"+req.session.name);
-    var username = req.session.username;
-    if(username == null){
-        req.session.source = "course/addQuestion.html";
-        res.redirect(301,utils.getServer()+"users/addQuestion.html");
-    }else{
-        var name = req.query.name;
-        var picurl = req.query.picurl;
-        var voiceurl = req.query.voiceurl;
-        var content = req.query.content;
-        api.addQuestion(userId,name,content,picurl,voiceurl,function (rows) {
-            console.log(rows);
-            res.write('<head><meta charset="utf-8"/></head>');
-            res.write("提问成功");
-        })
-    }
-})
-
-router.get('/getQuestion',function(req,res){
-    var username = req.session.username;
-    if(username == null){
-        res.redirect(301,utils.getServer()+"users/error.html");
-    }else{
-        api.getQuestion(username,function(rows){
-            res.write('<head><meta charset="utf-8"/></head>');
-            res.write(JSON.stringify(rows));
-        })
-    }
-})
-
 router.get('/searchQuestion',function(req,res){
     var word = req.query.word;
     api.searchQuestion(word,function(rows){
@@ -56,18 +29,34 @@ router.get('/searchQuestion',function(req,res){
         res.write(JSON.stringify(rows));
     })
 })
-
-router.get('/question',function (req,res) {
-    res.render('question',{});
-})
 router.get('/questionDetail',function (req,res) {
-    res.render('questionDetail',{});
+    var questionId = req.query.questionId;
+    api.getQuestionDetail(questionId,function (questionDetail) {
+        res.render('teacherDetail',teacherDetail);
+    })
 })
 router.get('/answerDetail',function (req,res) {
-    res.render('answerDetail',{});
+    var answerId = req.query.answerId;
+    api.getAnswerDetail(answerId,function (answerDetail) {
+        res.render('answerDetail',answerDetail);
+    })
 })
 router.get('/askQuestion',function (req,res) {
-    res.render('askQuestion',{});
+    console.log("userId:"+req.session.userId);
+    var userId = req.session.userId;
+    if(userId == null){
+        req.session.source = "question/askQuestion.ejs";
+        res.redirect(301,utils.getServer()+"users/login.ejs");
+    }else{
+        var questionTitle = req.query.questionTitle;
+        var questionContent = req.query.questionContent;
+        api.addquestion(userId,questionTitle,questionContent,function (rows) {
+            console.log(rows);
+            res.write('<head><meta charset="utf-8"/></head>');
+            res.write("提问成功");
+        })
+    }
+
 })
 
 module.exports = router;

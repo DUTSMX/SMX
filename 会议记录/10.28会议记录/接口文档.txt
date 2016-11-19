@@ -101,7 +101,7 @@ questionList{
 ===========================================================questionDetail
 answerList{
 	questionTitle,
-	questionDesc,
+	questionContent,
 	answerList:[answerId,authorHeadUrl,authorName,answerAbstract]
 }
 

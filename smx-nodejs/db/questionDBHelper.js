@@ -1,21 +1,17 @@
 var dbHelper = require('./dbHelper');
 var conn = dbHelper.getConn();
 
-exports.addQuestion = function(userId,title,content,time,callback){
-    // var picurl = arguments[2]?arguments[2]:null;
-    // var voiceurl = arguments[3]?arguments[3]:null;
-    var sql = "INSERT INTO question(userId,questionTitle,questionContent,questionTime) VALUES ('"+userId+"','"+title+"','"+content+"','"+time+"')";
-    conn.query(sql,function(err,rows,fields){
-        if(err){
-            console.error(err);
-        }
-        callback(rows);
-    })
-}
 
-exports.getQuestion = function(Id,callback){
-    var sql = "SELECT questionId,userId,questionTitle,questionContent,questionTitle as questionId,'提问者','提问内容',picurl,voiceurl " +
-        "from question WHERE questionId = "+Id+"";
+exports.getQuestionDetail = function(questionId,callback){
+    var aContent = 15;
+    var sql = "SELECT a.questionTitle as questionTitle," +
+        "a.questionContent as questionContent," +
+        "b.answerId as answerId," +
+        "c.userHeadUrl as authorHeadUrl," +
+        "c.userName as authorName," +
+        "left(b.answerContent,"+ aContent +") as answerAbstract," +
+        "FROM (question a INNER JOIN answer b on a.questionId = b.questionId) INNER JOIN account c on b.userId = c.userId" +
+        "WHERE a.questionId = "+questionId;
     conn.query(sql,function(err,rows,fields){
         if(err){
             console.error(err);
@@ -28,6 +24,53 @@ exports.searchQuestion = function(word,callback){
     var sql = "SELECT questionId,userName,userHeadUrl,questionTtile,questionContent,questionTime as questionId,'提" +
         "问者','提问内容',picurl,voiceurl from question " +
         "WHERE CONCAT(username,content) LIKE '%"+word+"%' )";
+    conn.query(sql,function(err,rows,fields){
+        if(err){
+            console.error(err);
+        }
+        callback(rows);
+    })
+}
+
+exports.getQuestion = function (callback) {
+    var aContent = 15;
+    var sql = "SELECT a.questionId as questionId," +
+        "b.answerId as answerId," +
+        "c.userHeadUrl as authorHeadUrl," +
+        "c.userName as authorName," +
+        "a.questionTitle as questionTitle,"+
+        "left(b.answerContent,"+ aContent +") as answerAbstract," +
+        "count(b.answerId) as answerCount"+
+        "FROM (question a INNER JOIN answer b on a.questionId = b.questionId) INNER JOIN account c on b.userId = c.userId" ;
+    conn.query(sql,function(err,rows,fields){
+        if(err){
+            console.error(err);
+        }
+        callback(rows);
+    })
+}
+
+exports.getAnswerDetail = function (answerId,callback) {
+    var sql = "SELECT a.questionId as questionId," +
+        "a.questionTitle as questionTitle,"+
+        "c.userHeadUrl as authorHeadUrl," +
+        "c.userName as authorName," +
+        "b.answerContent as answerContent," +
+        "b.answerTime as answerTime"+
+        "FROM (question a INNER JOIN answer b on a.questionId = b.questionId) INNER JOIN account c on b.userId = c.userId" +
+        "WHERE b.answerId = "+answerId;
+    conn.query(sql,function(err,rows,fields){
+        if(err){
+            console.error(err);
+        }
+        callback(rows);
+    })
+}
+
+exports.askQuestion = function (userId,questionTitle,questionContent,callback) {
+    var time = sd.format(new Date().toLocaleString(), 'YYYY-MM-DD HH:mm:ss');
+    var sql = "INSERT INTO question (userId,questionTitle,questionContent,questionTime)" +
+        "VALUES ("+userId+",'"+questionTitle+"','"+questionContent+"','"+time+"')";
     conn.query(sql,function(err,rows,fields){
         if(err){
             console.error(err);

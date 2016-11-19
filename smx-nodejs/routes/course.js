@@ -57,8 +57,7 @@ router.get('/search',function(req,res){
 
 router.get('/addCourse',function(req,res){
     console.log("userId:"+req.session.userId);
-    var userId = re
-    q.session.userId;
+    var userId = req.session.userId;
     if(userId == null){
         req.session.source = "course/createCourse.ejs";
         res.redirect(301,utils.getServer()+"users/login.ejs");
