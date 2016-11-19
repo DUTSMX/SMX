@@ -34,7 +34,7 @@ router.get('/addCourse',function(req,res){
     var userId = re
     q.session.userId;
     if(userId == null){
-        req.session.source = "course/addCourse.html";
+        req.session.source = "course/createCourse.ejs";
         res.redirect(301,utils.getServer()+"users/login.ejs");
     }else{
         var name = req.query.name;
@@ -81,5 +81,4 @@ router.get('/teacherDetail',function (req,res) {
     res.render('teacherDetail',{});
 })
 
-router.get('/')
 module.exports = router;
