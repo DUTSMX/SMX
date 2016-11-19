@@ -37,7 +37,7 @@
 						<%
 							courseList.myCourse.forEach(function(item){%>
 						<li data-icon="false">
-                            <a href="courseDetail?courseId=<%=item.courseId%>">
+                            <a href="courseDetail?courseId=<%=item.courseId%>" data-ajax="false">
                                 <img src=<%=item.teacherHeadUrl%>>  <!-- TODOteacherHeadUrl -->
                                 <div class="class_info">
                                     <div class="class_info_school">
@@ -67,7 +67,7 @@
 						<%
 						courseList.allCourse.forEach(function(item){%>
 						<li data-icon="false">
-							<a href="courseDetail?courseId=<%=item.courseId%>">
+							<a href="courseDetail?courseId=<%=item.courseId%>"  data-ajax="false">
 								<img src=<%=item.teacherHeadUrl%>>  <!-- TODOteacherHeadUrl -->
 								<div class="class_info">
 									<div class="class_info_school">

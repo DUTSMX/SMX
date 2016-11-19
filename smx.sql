@@ -185,6 +185,7 @@ DROP TABLE IF EXISTS `teacher`;
 CREATE TABLE `teacher` (
   `teacherId` int(10) NOT NULL,
   `goodCourse` varchar(255) DEFAULT NULL,
+  `selfIntroduction` text,
   PRIMARY KEY (`teacherId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -195,6 +196,7 @@ CREATE TABLE `teacher` (
 
 LOCK TABLES `teacher` WRITE;
 /*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
+INSERT INTO `teacher` VALUES (1,'数学，英语','个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介'),(9,'物理，化学','个人简介个人简介');
 /*!40000 ALTER TABLE `teacher` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -260,4 +262,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-19 10:37:45
+-- Dump completed on 2016-11-19 12:07:50

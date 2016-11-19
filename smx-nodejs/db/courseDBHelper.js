@@ -29,7 +29,7 @@ exports.getCourse = function (userId, callback) {
                     console.log(sql1);
                     conn.query(sql1, function (err, rows, fields) {
                         if (err) {
-                            console.error(err);
+                            console.log(err);
                         }
                         console.log("get course: "+JSON.stringify(rows));
                         callback(rows);
@@ -38,7 +38,7 @@ exports.getCourse = function (userId, callback) {
                     console.log(sql2);
                     conn.query(sql2, function (err, rows, fields) {
                         if (err) {
-                            console.error(err);
+                            console.log(err);
                         }
                         console.log("get course 2: "+JSON.stringify(rows));
                         callback(rows);
@@ -53,7 +53,47 @@ exports.getCourse = function (userId, callback) {
 }
 
 exports.getCourseDetail = function(courseId,callback){
+    var sql = "SELECT a.userId as teacherId, " +
+        "a.userHeadUrl as teacherHeadUrl, " +
+        "a.userName as teacherName, " +
+        "a.userSchool as teacherSchool," +
+        "a.userGrade as teacherGrade, " +
+        "c.courseName, " +
+        "c.courseTime, " +
+        "c.objectOriented, " +
+        "c.courseContent " +
+        "FROM account a join course c " +
+        "ON a.userId = c.userId " +
+        "WHERE c.courseId = "+courseId;
+    conn.query(sql,function (err,rows) {
+        if(err){
+            console.log(err);
+        }else if(rows == null || rows[0] == null){
 
+        }else{
+            callback(rows[0]);
+        }
+    })
+}
+
+exports.getTeacherDetail = function(teacherId, callback){
+    var sql = "SELECT a.userName as teacherName, " +
+        "a.userSchool as teacherSchool, " +
+        "a.userGrade as teacherGrade, " +
+        "t.goodCourse, " +
+        "t.selfIntroduction " +
+        "FROM account a join teacher t " +
+        "ON a.userId = t.teacherId " +
+        "WHERE a.userId = "+teacherId;
+    conn.query(sql,function (err,rows) {
+        if(err){
+            console.log(err);
+        }else if(rows == null || rows[0] == null){
+
+        }else{
+            callback(rows[0]);
+        }
+    })
 }
 
 /**

@@ -28,11 +28,19 @@ router.get('/course',function(req,res){
 })
 
 router.get('/courseDetail',function(req,res){
-    res.render('courseDetail',{});
+    var courseId = req.query.courseId;
+    console.log("courseId:"+courseId);
+    api.getCourseDetail(courseId,function (courseDetail) {
+        console.log("courseDetial:"+JSON.stringify(courseDetail));
+        res.render('courseDetail',courseDetail);
+    })
 });
 
 router.get('/teacherDetail',function (req,res) {
-    res.render('teacherDetail',{});
+    var teacherId = req.query.teacherId;
+    api.getTeacherDetail(teacherId, function (teacherDetail) {
+        res.render('teacherDetail',teacherDetail);
+    })
 })
 
 
