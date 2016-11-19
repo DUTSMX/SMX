@@ -13,9 +13,9 @@ exports.addQuestion = function(userId,title,content,time,callback){
     })
 }
 
-exports.getQuestion = function(name,callback){
-    var sql = "SELECT questionId,userId,questionTitle,questionContent,picurl,voiceurl as questionid,'提问者','提问内容',picurl,voiceurl " +
-        "from question WHERE username = '"+name+"'";
+exports.getQuestion = function(Id,callback){
+    var sql = "SELECT questionId,userId,questionTitle,questionContent,questionTitle as questionId,'提问者','提问内容',picurl,voiceurl " +
+        "from question WHERE questionId = "+Id+"";
     conn.query(sql,function(err,rows,fields){
         if(err){
             console.error(err);
@@ -25,7 +25,7 @@ exports.getQuestion = function(name,callback){
 }
 
 exports.searchQuestion = function(word,callback){
-    var sql = "SELECT qid,username,content,picurl,voiceurl as questionid,'提" +
+    var sql = "SELECT questionId,userName,userHeadUrl,questionTtile,questionContent,questionTime as questionId,'提" +
         "问者','提问内容',picurl,voiceurl from question " +
         "WHERE CONCAT(username,content) LIKE '%"+word+"%' )";
     conn.query(sql,function(err,rows,fields){
