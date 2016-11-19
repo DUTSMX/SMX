@@ -5,28 +5,54 @@ var api = require('../api/courseDBApi')
 var pages = require('./pages');
 var utils = require('../utils/utils');
 
-router.get('/',function (req,res) {
-    res.end("Hello World");
-});
 
 
-/*添加课程页面，返回html*/
-router.get('/addCourse.html',function(req,res){
-    res.sendFile(pages.addCourse());
-});
-//
-// router.get('/Course.html',function(req,res){
-//     res.sendFile(pages.getCourse());
-// });
-
-/*搜索课程页面，返回html*/
-router.get('/search.html',function(req,res){
-    res.sendFile(pages.search())
-});
-
+router.get('/course',function(req,res){
+    var userId = 1;
+    if(userId == null){
+        req.session.source="course/course";
+        res.redirect(301,utils.getServer()+"users/login.ejs");
+    }else{
+        api.getCourse(userId,function(rows){
+            console.log("rows:"+rows);
+            res.render("course",{
+                courseList:
+                {
+                    // rotation:[],
+                    myCourse:rows,
+                    allCourse:rows
+                }
+            });
+        })
+    }
+})
 
 router.get('/courseDetail',function(req,res){
-    res.render('courseDetail',{});
+    var courseId = req.query.courseId;
+    console.log("courseId:"+courseId);
+    api.getCourseDetail(courseId,function (courseDetail) {
+        console.log("courseDetial:"+JSON.stringify(courseDetail));
+        res.render('courseDetail',courseDetail);
+    })
+});
+
+router.get('/teacherDetail',function (req,res) {
+    var teacherId = req.query.teacherId;
+    api.getTeacherDetail(teacherId, function (teacherDetail) {
+        res.render('teacherDetail',teacherDetail);
+    })
+})
+
+
+/*
+ * unuse
+ */
+router.get('/search',function(req,res){
+    var word = req.query.word;
+    api.search(word,function(rows){
+        res.write('<head><meta charset="utf-8"/></head>');
+        res.write(JSON.stringify(rows));
+    })
 });
 
 router.get('/addCourse',function(req,res){
@@ -48,37 +74,5 @@ router.get('/addCourse',function(req,res){
         })
     }
 });
-
-router.get('/course',function(req,res){
-    var userId = 1;
-    if(userId == null){
-        req.session.source="course/getCourse";
-        res.redirect(301,utils.getServer()+"users/login.ejs");
-    }else{
-        api.getCourse(userId,function(rows){
-            // res.write('<head><meta charset="utf-8"/></head>');
-            // res.write(JSON.stringify(rows));
-            console.log("rows:"+rows);
-            res.render("course",{
-                courseList:
-                {
-                    // rotation:[],
-                    myCourse:[],
-                    allCourse:rows
-                }
-            });
-        })
-    }
-})
-router.get('/search',function(req,res){
-    var word = req.query.word;
-    api.search(word,function(rows){
-        res.write('<head><meta charset="utf-8"/></head>');
-        res.write(JSON.stringify(rows));
-    })
-});
-router.get('/teacherDetail',function (req,res) {
-    res.render('teacherDetail',{});
-})
 
 module.exports = router;

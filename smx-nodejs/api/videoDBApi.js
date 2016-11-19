@@ -1,13 +1,22 @@
 var db = require('../db/videoDBHelper')
 
-exports.addVideo = function(videoname,username,url,degree,picurl,describe,callback){
-    db.addVideo(videoname,username,url,degree,picurl,describe,function (rows) {
+exports.getVideo = function(callback){
+    db.getVideo(function(rows){
         callback(rows);
     })
 }
 
-exports.getVideo = function(name,callback){
-    db.getVideo(name,function(rows){
+exports.getVideoDetail = function(videoId, callback){
+    db.getVideoDetail(videoId, function (rows) {
+        callback(rows);
+    })
+}
+
+/*
+* unuse
+* */
+exports.addVideo = function(videoname,username,url,degree,picurl,describe,callback){
+    db.addVideo(videoname,username,url,degree,picurl,describe,function (rows) {
         callback(rows);
     })
 }

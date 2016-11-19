@@ -28,7 +28,7 @@ exports.findAccountById = function(userId,callback){
     conn.query(sql,function(err,rows,fileds){
         if(err){
             console.log(err);
-            callback(unknownError);
+            // callback(unknownError);
         }
         callback(rows);
     })

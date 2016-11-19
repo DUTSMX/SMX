@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>class</title>
+	<title>视频</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,6 +15,7 @@
 		<div data-role="header" data-theme="g" data-position="fixed">
 			<h3>视频</h3>
 		</div>
+		<!--
 		<div class="tab_search">
 			<div class="ui-grid-b">
 				<div class="ui-block-a"><a href=""><img src="/images/初中.png"></a></div>
@@ -25,21 +26,23 @@
 				<div class="ui-block-c"><a href="#"><img src="/images/语文.png"></a></div>
 			</div>
 		</div>
+		-->
 		<div data-role="content">
 			<div class="hotvideos">
-				<h4><img src="/images/myclass.png">&nbsp热门视频<span><a href="#">更多></a></span></h4>
+				<h4><img src="/images/myclass.png">&nbsp热门视频<!--<span><a href="#">更多></a></span>--></h4>
 				<img src="/images/课程分割线.png" class="div_line">
 				<div class="details_videos">
 					<ul data-role="listview">
+						<%videoList.forEach(function(item){%>
 						<li data-icon="false">
-							<a href="videoDetail">
-								<img src="/images/热门视频图片.png" class="video_show">
+							<a href="videoDetail?videoId=<%=item.videoId%>"  data-ajax="false">
+								<img src="<%=item.videoCoverUrl%>" class="video_show">
 								<div class="videos_info">
 									<div class="videos_name">
-										<h3>【高中】 高三数学</h3>
+										<h3><%=item.videoName%></h3>
 									</div>
 									<div class="videos_time">
-										<h5>00:15:15 | <span>15</span>人观看</h5>
+										<h5><%=item.videoTime%> | <span><%=item.videoWatchCount%></span>人观看</h5>
 									</div>
 									<div class="videos_classify">
 										<ul>
@@ -51,75 +54,8 @@
 								</div>
 							</a>
 						</li>
-						<li data-icon="false">
-							<a href="#">
-								<img src="/images/热门视频图片.png" class="video_show">
-								<div class="videos_info">
-									<div class="videos_name">
-										<h3>【高中】 高三数学</h3>
-									</div>
-									<div class="videos_time">
-										<h5>00:15:15 | <span>15</span>人观看</h5>
-									</div>
-									<div class="videos_classify">
-										<ul>
-											<li>高中</li>
-											<li>数学</li>
-											<li>理科</li>
-										</ul>
-									</div>
-								</div>
-							</a>
-						</li>
+						<%})%>
 					</ul>
-				</div>
-			</div>
-			<div class="hotvideos">
-				<h4><img src="/images/myclass.png">&nbsp热门视频<span><a href="#">更多></a></span></h4>
-				<img src="/images/课程分割线.png" class="div_line">
-				<div class="details_videos">
-					<!-- <ul data-role="listview">
-						<li data-icon="false">
-							<a href="#">
-								<img src="../public/images/热门视频图片.png" class="video_show">
-								<div class="videos_info">
-									<div class="videos_name">
-										<h3>【高中】 高三数学</h3>
-									</div>
-									<div class="videos_time">
-										<h5>00:15:15 | <span>15</span>人观看</h5>
-									</div>
-									<div class="videos_classify">
-										<ul>
-											<li>高中</li>
-											<li>数学</li>
-											<li>理科</li>
-										</ul>
-									</div>
-								</div>
-							</a>
-						</li>
-						<li data-icon="false">
-							<a href="#">
-								<img src="../public/images/热门视频图片.png" class="video_show">
-								<div class="videos_info">
-									<div class="videos_name">
-										<h3>【高中】 高三数学</h3>
-									</div>
-									<div class="videos_time">
-										<h5>00:15:15 | <span>15</span>人观看</h5>
-									</div>
-									<div class="videos_classify">
-										<ul>
-											<li>高中</li>
-											<li>数学</li>
-											<li>理科</li>
-										</ul>
-									</div>
-								</div>
-							</a>
-						</li>
-					</ul> -->
 				</div>
 			</div>
 		</div>
