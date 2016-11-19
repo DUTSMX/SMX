@@ -1,10 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>回答详情</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/question.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
 </head>
 <body>
+<div data-role="page">
+    <div data-role="header" data-theme="g" data-position="fixed">
+        <h3>回答详情</h3>
+    </div>
+    <div data-role="answer_area">
+        <ul data-role="listview">
+            <li data-icon="false">
+                <a herf="javascript void(0)" data-ajax="false">
+                    <h5><%= questionTitle %></h5>
+                </a>
 
+            </li>
+            <li>
+                <a>
+                    <span><img width="32" height="32" src="<%= authorHeadUrl %>"/> <%= authorName %></span>
+                    <p><%= answerContent %></p>
+                </a>
+            </li>
+
+            </li>
+        </ul>
+    </div>
+</div>
+<script src="/javascripts/jquery.js"></script>
+<script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
 </body>
 </html>

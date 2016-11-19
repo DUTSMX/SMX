@@ -13,9 +13,14 @@ exports.getQuestion = function(callback){
 }
 
 exports.getQuestionDetail = function(questionId,callback){
-    db.getQuestion(questionId,function(rows){
-        callback(rows);
+    db.getQuestionContent(questionId,function (rows) {
+        var question = rows;
+        db.getQuestionDetail(questionId,function(rows){
+            callback({question:question,
+            answerList:rows});
+        })
     })
+
 }
 
 exports.searchQuestion = function(word,callback){
@@ -24,14 +29,8 @@ exports.searchQuestion = function(word,callback){
     })
 }
 
-exports.getQuestionDetail= function(questionId,callback){
-    db.searchQuestion(questionId,function(rows){
-        callback(rows);
-    })
-}
-
 exports.getAnswerDetail= function(answerId,callback){
-    db.searchQuestion(answerId,function(rows){
+    db.getAnswerDetail(answerId,function(rows){
         callback(rows);
     })
 }
