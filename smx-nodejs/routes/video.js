@@ -59,5 +59,12 @@ router.get('/searchVideo',function(req,res){
     })
 })
 
+router.get('/video',function (req,res) {
+    res.render('video',{});
+})
+router.get('/videoDetail',function (req,res) {
+    res.render('videoDetail',{});
+})
+
 module.exports = router;
 

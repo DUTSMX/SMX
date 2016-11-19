@@ -48,6 +48,11 @@ router.get('/getAnswer',function(req,res){
             res.write(JSON.stringify(rows));
         })
     }
+
+})
+
+router.get('/answerDetail',function (req,res) {
+    res.render('answerDetail',{});
 })
 
 router.get('/searchAnswer',function(req,res){

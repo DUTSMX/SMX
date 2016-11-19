@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>class</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <link rel="stylesheet" type="text/css" href="../public/stylesheets/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" type="text/css" href="../public/stylesheets/smxtheme.css">
+    <!--<link rel="stylesheet" type="text/css" href="../public/css/slick.css"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="../public/css/slick-theme.css"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="../public/css/class.css"> -->
+    <link rel="stylesheet" type="text/css" href="../public/stylesheets/classDetails.css">
+</head>
+<body>
+<div data-role="page">
+    <div data-role="header" data-theme="g" data-position="fixed">
+        <h3>课程详情</h3>
+    </div>
+    <div class="teacher-intro">
+        <ul data-role="listview">
+            <li data-icon="false">
+                <a href="#">
+                    <img src=<%= item.teacherHeadUrl %>>
+                    <div class="teacher_info">
+                        <div class="teacher_school_intro">
+                            <h5><%= item.teacherName %></h5>
+                            <h6><%= item.teacherSchool %>|<%= item.teacherGrade %></h6>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+        <ul data-role="listview">
+            <li data-icon="false">
+                <a href="#">
+                    <hr width="1" size="20" color="#3B7454" class="hr">
+                    <h5 class="className-text">课程名称</h5>
+                    <h5 class="className-details"><%= item.studentGrade %>&nbsp<%= item.courseName %></h5>
+                </a>
+            </li>
+            <li data-icon="false">
+                <a href="#">
+                    <hr width="1" size="20" color="#3B7454" class="hr">
+                    <h5 class="className-text">课程时间</h5>
+                    <h5 class="className-details"><%= item.courseDate %>|<%= item.courseStartTime %>
+                        —<%= item.courseEndTime %></h5>
+                </a>
+            </li>
+            <li data-icon="false">
+                <a href="#">
+                    <hr width="1" size="20" color="#3B7454" class="hr">
+                    <h5 class="className-text">课程时长</h5>
+                    <h5 class="className-details">共计<%= item.courseTime %>小时</h5>
+                </a>
+            </li>
+            <li data-icon="false">
+                <a href="#">
+                    <hr width="1" size="20" color="#3B7454" class="hr">
+                    <h5 class="className-text">面向对象</h5>
+                    <h5 class="className-details"><%= item.studentGrade %>学生</h5>
+                </a>
+            </li>
+            <li data-icon="false">
+                <a href="#">
+                    <hr width="1" size="20" color="#3B7454" class="hr">
+                    <h5 class="attend-student">参与学生</h5>
+                    <h5 class="className-details">
+                        <img src="../public/images/头像.png" class="attendStudent">
+                        <img src="../public/images/头像.png" class="attendStudent">
+                        <img src="../public/images/头像.png" class="attendStudent">
+                        <img src="../public/images/头像.png" class="attendStudent">
+                        <img src="../public/images/头像.png" class="attendStudent">
+                    </h5>
+                </a>
+            </li>
+            <li data-icon="false">
+                <a href="#">
+                    <hr width="1" size="20" color="#3B7454" class="hr">
+                    <h5 class="className-text">课程内容</h5>
+                    <h5>一、三角函数和数列</h5>
+                    <h5>二、概率统计</h5>
+                    <h5>三、立体几何</h5>
+                    <h5>四、圆锥曲线</h5>
+                    <h5>五、导数类的题</h5>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <script src="../public/javascripts/jquery.js"></script>
+    <script src="../public/javascripts/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../public/javascripts/slick.min.js"></script>
+</div>
+</body>
+</html>

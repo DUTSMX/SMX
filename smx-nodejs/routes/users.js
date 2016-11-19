@@ -104,4 +104,22 @@ router.get('/finishInfo',function(req,res){
     })
 
 })
+router.get('/mine',function (req,res) {
+    res.render('mine',{});
+})
+router.get('/personDetail',function (req,res) {
+    res.render('personDetail',{});
+})
+router.get('/registerTeacher',function (req,res) {
+    res.render('registerTeacher',{});
+})
+router.get('/createCourse',function (req,res) {
+    res.render('createCourse',{});
+})
+router.get('/myCourse',function (req,res) {
+    res.render('myCourse',{});
+})
+router.get('/myQuestion',function (req,res) {
+    res.render('myQuestion',{});
+})
 module.exports = router;

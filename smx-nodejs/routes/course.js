@@ -26,7 +26,7 @@ router.get('/search.html',function(req,res){
 
 
 router.get('/courseDetail',function(req,res){
-    res.render('courseDetails',{});
+    res.render('courseDetail',{});
 });
 
 router.get('/addCourse',function(req,res){
@@ -49,8 +49,8 @@ router.get('/addCourse',function(req,res){
     }
 });
 
-router.get('/getCourse',function(req,res){
-    var userId = 10;
+router.get('/course',function(req,res){
+    var userId = 1;
     if(userId == null){
         req.session.source="course/getCourse";
         res.redirect(301,utils.getServer()+"users/login.ejs");
@@ -70,7 +70,6 @@ router.get('/getCourse',function(req,res){
         })
     }
 })
-
 router.get('/search',function(req,res){
     var word = req.query.word;
     api.search(word,function(rows){
@@ -78,5 +77,9 @@ router.get('/search',function(req,res){
         res.write(JSON.stringify(rows));
     })
 });
+router.get('/teacherDetail',function (req,res) {
+    res.render('teacherDetail',{});
+})
 
+router.get('/')
 module.exports = router;
