@@ -1,4 +1,5 @@
 var db = require('../db/userDBHelper')
+var course = require('../db/courseDBHelper')
 
 exports.login = function(phoneNumber, password, callback){
     db.findAccount(phoneNumber, password, function(rows){
@@ -44,6 +45,12 @@ exports.getMineInfo = function(userId,callback){
 
 exports.finishInfo = function(userId,name,gender,age,callback){
     db.finishInfo(userId,name,gender,age,function (rows) {
+        callback(rows);
+    })
+}
+
+exports.getMyCourse = function(userId, callback){
+    course.getCourseById(userId,function (rows) {
         callback(rows);
     })
 }

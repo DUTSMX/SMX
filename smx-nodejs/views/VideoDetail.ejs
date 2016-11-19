@@ -1,99 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>视频详情</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta http-equiv="cache-control" content="no-cache" />
-	<link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
-	<link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
-	<link rel="stylesheet" type="text/css" href="/stylesheets/video.css">
-	<style type="text/css">
-		.videos_time{
-			vertical-align: middle;
-		}
-		.videos_classify_time{
-			width: 40%;
-			float: left;
-		}
-		.videos_classify_detail{
-			width: 60%;
-			/*display: inline-block;*/
-			float: left;
-		}
-		.videos_classify_detail ul{
-			padding-left: 0;
-			
-		}
-		.videos_classify_detail ul li{
-			display: block;
-			font-weight: 100;
-			width: 15%;
-			list-style: none;
-			float: left;
-			margin-left: 3%;
-			border: 1px solid #3B7454;
-			font-size: 0.5em;
-			text-align: center;
-			padding-left: 1%;
-			padding-right: 1%;
-			padding-bottom: 0;
-			box-sizing: border-box;
-			border-radius: 10%;
-		}
-	</style>
+    <title>视频详情</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
+    <!--<link rel="stylesheet" type="text/css" href="../public/css/slick.css"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="../public/css/slick-theme.css"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="../public/css/class.css"> -->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/videoDetail.css">
 </head>
 <body>
-	<div data-role="page">
-		<div data-role="header" data-theme="g" data-position="fixed">
-			<h3>视频详情</h3>
-		</div>
-		<div class="videos_name">
-			<video width="100%" controls>
-				<source src="<%=videoUrl%>">
-					您的浏览器不支持Video标签。
-			</video>
-		</div>
-		<div data-role="content">
-			<div class="videos_name">
-				<h3><%=videoName%></h3>
-			</div>
-			<div class="videos_author">
-				<h4><%=authorName%> <%=authorSchool%>|<%=authorGrade%></h4>
-			</div>
-			<div class="videos_time">
-				<div class="videos_classify_time">
-					<h5><%=videoTime%> | <span><%=videoWatchCount%></span>人观看</h5>
-				</div>
-				<div class="videos_classify_detail">
-					<ul>
-						<li>高中</li>
-						<li>数学</li>
-						<li>理科</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-
-		<div>
-			<ul data-role="listview">
-				<li data-icon="false">
-					<a href="#">
-						<h5><hr width="1" size="20" color="#3B7454" class="hr">课程简介     <%=videoAbstract%></h5>
-					</a>
-				</li>
-				<li data-icon="false">
-					<a href="#">
-						<hr width="1" size="20" color="#3B7454" class="hr">课程内容 <br>     <h5><%=videoContent%></h5>
-					</a>
-				</li>
-			</ul>
-		</div>
-
-	</div>
-	<script src="/javascripts/jquery.js"></script>
-	<script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
-	<script src="/javascripts/slick.min.js"></script>
-	</body>
-	</html>
+<div data-role="page">
+    <div data-role="header" data-theme="g" data-position="fixed">
+        <h3>视频详情</h3>
+    </div>
+    <div class="teacherInfo">
+        <ul data-role="listview">
+            <li data-icon="false">
+                <video width="100%" class="video" controls>
+                    <source src="<%= videoUrl %>"
+                            type="video/mp4">
+                </video>
+            </li>
+            <li data-icon="false">
+                <h5 class="grade"><%= videoName %></h5>
+                <div class="teacherIntro">
+                    <h5 class="name"><%= authorName %></h5>
+                    <h6 class="school"><%= authorSchool %>|<%= authorGrade %></h6>
+                </div>
+                <div class="videoInfo">
+                    <%= videoTime %> | <span class="number"><%= videoWatchCount %></span>人观看
+                    <span class="videos_classify_detail">高中</span>
+                    <span class="videos_classify_detail">数学</span>
+                    <span class="videos_classify_detail">理科</span>
+                </div>
+            </li>
+            <li data-icon="false">
+                <hr width="1" size="20" color="#3B7454" class="hr">
+                <h5 class="courseIntro_title">课程简介</h5>
+                <h5 class="courseIntro_specific"><%= videoAbstract %></h5>
+            </li>
+            <li data-icon="false">
+                <hr width="1" size="20" color="#3B7454" class="hr">
+                <h5 class="courseContent">课程内容</h5>
+                <h5><%= videoContent %></h5>
+            </li>
+        </ul>
+    </div>
+    <script src="/javascripts/jquery.js"></script>
+    <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
+    <script src="/javascripts/slick.min.js"></script>
+</div>
+</body>
+</html>

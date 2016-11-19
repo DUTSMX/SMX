@@ -2,57 +2,76 @@ var dbHelper = require('./dbHelper');
 var conn = dbHelper.getConn();
 var users = require('./userDBHelper');
 
-exports.getCourse = function (userId, callback) {
-    var sql1 = "SELECT c.courseId as courseId, " +
-        "c.courseName as courseName, " +
-        "c.courseTime as courseTime, " +
+exports.getCourse = function(callback){
+    var sql = "SELECT c.courseId, " +
+        "c.courseName, " +
+        "c.courseTime, " +
         "a.userHeadUrl as teacherHeadUrl, " +
-        "a.userName as teacherName, "+
+        "a.userName as teacherName, " +
+        "a.userSchool as teacherSchool, " +
+        "a.userGrade as teacherGrade " +
+        "FROM course c JOIN account a ON a.userId = c.userId";
+    conn.query(sql,function (err,rows) {
+        if(err){
+            console.log(err);
+        }else{
+            callback(rows);
+        }
+
+    })
+}
+
+exports.getCourseById = function (userId, callback) {
+    var sql1 = "SELECT c.courseId, " +
+        "c.courseName, " +
+        "c.courseTime, " +
+        "a.userHeadUrl as teacherHeadUrl, " +
+        "a.userName as teacherName, " +
         "a.userSchool as teacherSchool, " +
         "a.userGrade as teacherGrade " +
         "FROM ((joinCourse j INNER JOIN course c ON j.courseId = c.courseId) INNER JOIN account a ON c.userId = a.userId)" +
         "WHERE j.userId = " + userId;
-    var sql2 = "SELECT a.courseId as courseId, " +
-        "a.courseName as courseName, " +
-        "a.courseTime as courseTime, " +
-        "b.userHeadUrl as teacherHeadUrl, " +
-        "b.userSchool as teacherSchool, " +
-        "b.userGrade as teacherGrade, " +
-        "b.userName as teacherName " +
-        "FROM course a JOIN account b on a.userId = b.userId " +
-        "WHERE a.userId = " + userId;
+    var sql2 = "SELECT c.courseId, " +
+        "c.courseName, " +
+        "c.courseTime, " +
+        "a.userHeadUrl as teacherHeadUrl, " +
+        "a.userSchool as teacherSchool, " +
+        "a.userGrade as teacherGrade, " +
+        "a.userName as teacherName " +
+        "FROM course c JOIN account a ON c.userId = a.userId " +
+        "WHERE c.userId = " + userId;
     if (users.judgeRole(userId, function (rows) {
-        console.log("length:"+rows.length);
-            if (rows && rows.length > 0) {
-                var role = rows[0].role;
-                if (role == 0 || role == 1) {
-                    console.log(sql1);
-                    conn.query(sql1, function (err, rows, fields) {
-                        if (err) {
-                            console.log(err);
-                        }
-                        console.log("get course: "+JSON.stringify(rows));
-                        callback(rows);
-                    })
-                } else if (role == 2) {
-                    console.log(sql2);
-                    conn.query(sql2, function (err, rows, fields) {
-                        if (err) {
-                            console.log(err);
-                        }
-                        console.log("get course 2: "+JSON.stringify(rows));
-                        callback(rows);
-                    })
-                } else {
-                    console.log("role = " + role)
-                }
+        console.log("length:" + rows.length);
+        if (rows && rows.length > 0) {
+            var role = rows[0].role;
+            if (role == 0 || role == 1) {//学生
+                console.log(sql1);
+                conn.query(sql1, function (err, rows, fields) {
+                    if (err) {
+                        console.log(err);
+                    }
+                    console.log("get course: " + JSON.stringify(rows));
+                    callback(rows);
+                })
+            } else if (role == 2) {//老师
+                console.log(sql2);
+                conn.query(sql2, function (err, rows, fields) {
+                    if (err) {
+                        console.log(err);
+                    }
+                    console.log("get course 2: " + JSON.stringify(rows));
+                    callback(rows);
+                })
             } else {
-                console.log("role is null")
+                console.log("role = " + role)
             }
-        }));
+        } else {
+            console.log("role is null")
+        }
+    }));
 }
 
-exports.getCourseDetail = function(courseId,callback){
+exports.getCourseDetail = function (courseId, callback) {
     var sql = "SELECT a.userId as teacherId, " +
         "a.userHeadUrl as teacherHeadUrl, " +
         "a.userName as teacherName, " +
@@ -64,19 +83,19 @@ exports.getCourseDetail = function(courseId,callback){
         "c.courseContent " +
         "FROM account a join course c " +
         "ON a.userId = c.userId " +
-        "WHERE c.courseId = "+courseId;
-    conn.query(sql,function (err,rows) {
-        if(err){
+        "WHERE c.courseId = " + courseId;
+    conn.query(sql, function (err, rows) {
+        if (err) {
             console.log(err);
-        }else if(rows == null || rows[0] == null){
+        } else if (rows == null || rows[0] == null) {
 
-        }else{
+        } else {
             callback(rows[0]);
         }
     })
 }
 
-exports.getTeacherDetail = function(teacherId, callback){
+exports.getTeacherDetail = function (teacherId, callback) {
     var sql = "SELECT a.userName as teacherName, " +
         "a.userSchool as teacherSchool, " +
         "a.userGrade as teacherGrade, " +
@@ -84,13 +103,13 @@ exports.getTeacherDetail = function(teacherId, callback){
         "t.selfIntroduction " +
         "FROM account a join teacher t " +
         "ON a.userId = t.teacherId " +
-        "WHERE a.userId = "+teacherId;
-    conn.query(sql,function (err,rows) {
-        if(err){
+        "WHERE a.userId = " + teacherId;
+    conn.query(sql, function (err, rows) {
+        if (err) {
             console.log(err);
-        }else if(rows == null || rows[0] == null){
+        } else if (rows == null || rows[0] == null) {
 
-        }else{
+        } else {
             callback(rows[0]);
         }
     })

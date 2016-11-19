@@ -14,15 +14,8 @@ router.get('/course',function(req,res){
         res.redirect(301,utils.getServer()+"users/login.ejs");
     }else{
         api.getCourse(userId,function(rows){
-            console.log("rows:"+rows);
-            res.render("course",{
-                courseList:
-                {
-                    // rotation:[],
-                    myCourse:rows,
-                    allCourse:rows
-                }
-            });
+            console.log("rows:"+JSON.stringify(rows));
+            res.render("course",rows);
         })
     }
 })
@@ -46,7 +39,7 @@ router.get('/teacherDetail',function (req,res) {
 
 /*
  * unuse
- */
+
 router.get('/search',function(req,res){
     var word = req.query.word;
     api.search(word,function(rows){
@@ -73,5 +66,5 @@ router.get('/addCourse',function(req,res){
         })
     }
 });
-
+ */
 module.exports = router;

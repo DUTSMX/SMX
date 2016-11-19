@@ -1,69 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>class</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta http-equiv="cache-control" content="no-cache" />
-	<link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
-	<link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
-	<!--<link rel="stylesheet" type="text/css" href="../public/css/slick.css"> -->
-	<!-- <link rel="stylesheet" type="text/css" href="../public/css/slick-theme.css"> -->
-	<!-- <link rel="stylesheet" type="text/css" href="../public/css/class.css"> -->
-	<link rel="stylesheet" type="text/css" href="/stylesheets/teacherDetail.css">
+    <title>老师信息</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
+    <!--<link rel="stylesheet" type="text/css" href="../public/css/slick.css"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="../public/css/slick-theme.css"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="../public/css/class.css"> -->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/teacherDetail.css">
 </head>
 <body>
-	<div data-role="page">
-		<div data-role="header" data-theme="g" data-position="fixed">
-			<h3>老师信息</h3>
-		</div>
-		<div class="teacherInfo">
-			<ul data-role="listview">
-				<li data-icon="false">
-					<a href="#">
-					    <hr width="1" size="20" color="#3B7454" class="hr">
-						<h5 class="teacherName">姓名</h5>
-						<h5 class="iteacherName"><%=teacherName%></h5>
-					</a>
-				</li>
-				<li data-icon="false">
-					<a href="#">
-						<hr width="1" size="20" color="#3B7454" class="hr">
-						<h5 class="teacherSchool">所在学校</h5>
-						<h5 class="iteacherSchool"><%=teacherSchool%></h5>
-					</a>
-				</li>
-				<li data-icon="false">
-					<a href="#">
-						<hr width="1" size="20" color="#3B7454" class="hr">
-						<h5 class="teacherGrade">年级</h5>
-						<h5 class="iteacherGrade"><%=teacherGrade%></h5>
-					</a>
-				</li>
-				<li data-icon="false">
-					<a href="#">
-						<hr width="1" size="20" color="#3B7454" class="hr">
-						<h5 class="courseList">课程列表</h5>
-						<h5 class="icourseList">2014-2016，高三数学</h5>
-					</a>
-				</li>
-				<li data-icon="false">
-					<a href="#">
-						<hr width="1" size="20" color="#3B7454" class="hr">
-						<h5 class="goodCourse">擅长课程</h5>
-						<h5 class="igoodCourse"><%=goodCourse%></h5>
-					</a>
-				</li>
-				<li data-icon="false">
-					<a href="#">
-						<hr width="1" size="20" color="#3B7454" class="hr">
-						<h5 class="selfIntroduction">自我介绍</h5>
-						<h5><%=selfIntroduction%></h5>
-					</a>
-				</li>
-			</ul>
-		</div>
-		<script src="/javascripts/jquery.js"></script>
-		<script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
-		<script src="/javascripts/slick.min.js"></script>
+<div data-role="page">
+    <div data-role="header" data-theme="g" data-position="fixed">
+        <h3>老师信息</h3>
+    </div>
+    <div class="teacherInfo">
+        <ul data-role="listview">
+            <li data-icon="false">
+                <hr width="1" size="20" color="#3B7454" class="hr">
+                <h5 class="teacherName">姓名</h5>
+                <h5 class="iteacherName"><%= teacherName %></h5>
+            </li>
+            <li data-icon="false">
+                <hr width="1" size="20" color="#3B7454" class="hr">
+                <h5 class="teacherSchool">所在学校</h5>
+                <h5 class="iteacherSchool"><%= teacherSchool %></h5>
+            </li>
+            <li data-icon="false">
+                <hr width="1" size="20" color="#3B7454" class="hr">
+                <h5 class="teacherGrade">年级</h5>
+                <h5 class="iteacherGrade"><%= teacherGrade %></h5>
+            </li>
+            <li data-icon="false">
+                <hr width="1" size="20" color="#3B7454" class="hr">
+                <h5 class="courseList">课程列表</h5>
+                <h5 class="icourseList">2014-2016，高三数学</h5>
+            </li>
+            <li data-icon="false">
+                <hr width="1" size="20" color="#3B7454" class="hr">
+                <h5 class="goodCourse">擅长课程</h5>
+                <h5 class="igoodCourse"><%= goodCourse %></h5>
+            </li>
+            <li data-icon="false">
+                <hr width="1" size="20" color="#3B7454" class="hr">
+                <h5 class="selfIntroduction">自我介绍</h5>
+                <h5><%= selfIntroduction %></h5>
+            </li>
+        </ul>
+    </div>
+    <script src="/javascripts/jquery.js"></script>
+    <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
+    <script src="/javascripts/slick.min.js"></script>
+</div>
+</body>
+</html>
