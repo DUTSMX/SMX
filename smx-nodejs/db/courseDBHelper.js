@@ -2,16 +2,6 @@ var dbHelper = require('./dbHelper');
 var conn = dbHelper.getConn();
 var users = require('./userDBHelper');
 
-exports.addCourse = function (userId, name, time, objectOriented, content, callback) {
-    var sql = "INSERT INTO course(userId,courseName,courseTime,objectOriented,courseContent) VALUES ('" + userId + "'," + name + ",'" + time + "','" + objectOriented + "','" + content + "')";
-    conn.query(sql, function (err, rows, fields) {
-        if (err) {
-            console.error(err);
-        }
-        callback(rows);
-    })
-}
-
 exports.getCourse = function (userId, callback) {
     var sql1 = "SELECT c.courseId as courseId, " +
         "c.courseName as courseName, " +
@@ -60,6 +50,23 @@ exports.getCourse = function (userId, callback) {
                 console.log("role is null")
             }
         }));
+}
+
+exports.getCourseDetail = function(courseId,callback){
+
+}
+
+/**
+ * unuse
+ */
+exports.addCourse = function (userId, name, time, objectOriented, content, callback) {
+    var sql = "INSERT INTO course(userId,courseName,courseTime,objectOriented,courseContent) VALUES ('" + userId + "'," + name + ",'" + time + "','" + objectOriented + "','" + content + "')";
+    conn.query(sql, function (err, rows, fields) {
+        if (err) {
+            console.error(err);
+        }
+        callback(rows);
+    })
 }
 
 exports.search = function (word, callback) {
