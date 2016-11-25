@@ -1,0 +1,88 @@
+<swiper 
+indicator-dots="{{indicatorDots}}"
+autoplay="{{autoplay}}"
+interval="{{interval}}"
+duration="{{duration}}">
+    <block wx:for="{{imgUrls}}">
+        <swiper-item>
+            <image mode="scaleToFill" src="{{item}}" class="slide-image"/>
+        </swiper-item>
+    </block>
+</swiper>
+<view style="flex-direction:column;margin-left:20px;margin-right:20px">
+    <view class="course_item" style="flex-direction:row;margin-top: 8px">
+    <image src="../../images/icon_class.png" style="width:15px;height:15px;"/> 
+    <text style="color:#3B7454;font-size:15pt"> 我的课程</text> 
+    </view>
+    <image src="../../images/course_divide.png" style="width:100%;height:6px;"/>
+    <view style="flex-direction:row;margin-top:10px;margin-bottom:10px">
+        <image src="../../images/course_my_head.png" style="width:64px;height:64px"/>
+        <view style="display:inline-block;margin-left:20px">
+            <view>    
+                <text style="font-size:14pt">张三</text> <text style="font-size:10pt">      大连理工大学|本科生\n</text>
+            </view>
+            <view style="margin-top:4px">
+            <text style="font-size:14pt;color:#3B7454;">高三数学\n</text>
+            </view>
+            <view style="margin-top:4px">
+            <image src="../../images/course_time.png" style="width:10px;height:10px"/>
+            <text style="font-size:10pt">  周六早上|9:00-12:00</text>
+            </view>
+        </view>
+    </view>
+    <view style="width:100%;height:1px;background:#F0F1F3"/>
+    <view style="flex-direction:row;margin-top:10px">
+        <image src="../../images/course_my_head.png" style="width:64px;height:64px"/>
+        <view style="display:inline-block;margin-left:20px">
+            <view>    
+                <text style="font-size:14pt">李四</text> <text style="font-size:10pt">      大连理工大学|本科生\n</text>
+            </view>
+            <view style="margin-top:4px">
+            <text style="font-size:14pt;color:#3B7454;">高三物理\n</text>
+            </view>
+            <view style="margin-top:4px">
+            <image src="../../images/course_time.png" style="width:10px;height:10px"/>
+            <text style="font-size:10pt">  周六下午|14:00-17:00</text>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view style="flex-direction:column;margin-left:20px;margin-right:20px;margin-top:20px">
+    <view class="course_item" style="flex-direction:row;margin-top: 8px">
+    <image src="../../images/icon_class_hot.png" style="width:15px;height:15px;"/> 
+    <text style="color:#EAB136;font-size:15pt">  热门课程</text> 
+    </view>
+    <image src="../../images/course_divide_hot.png" style="width:100%;height:6px;"/>
+    <view style="flex-direction:row;margin-top:10px;margin-bottom:10px">
+        <image src="../../images/course_all_head.png" style="width:64px;height:64px"/>
+        <view style="display:inline-block;margin-left:20px">
+            <view>    
+                <text style="font-size:14pt">张三</text> <text style="font-size:10pt">      大连理工大学|本科生\n</text>
+            </view>
+            <view style="margin-top:4px">
+            <text style="font-size:14pt;color:#EAB136;">高三数学\n</text>
+            </view>
+            <view style="margin-top:4px">
+            <image src="../../images/course_time.png" style="width:10px;height:10px"/>
+            <text style="font-size:10pt">  周六早上|9:00-12:00</text>
+            </view>
+        </view>
+    </view>
+    <view style="width:100%;height:1px;background:#F0F1F3"/>
+    <view style="flex-direction:row;margin-top:10px;margin-bottom:10px">
+        <image src="../../images/course_all_head.png" style="width:64px;height:64px"/>
+        <view style="display:inline-block;margin-left:20px">
+            <view>    
+                <text style="font-size:14pt">李四</text> <text style="font-size:10pt">      大连理工大学|本科生\n</text>
+            </view>
+            <view style="margin-top:4px">
+            <text style="font-size:14pt;color:#EAB136;">高三物理\n</text>
+            </view>
+            <view style="margin-top:4px">
+            <image src="../../images/course_time.png" style="width:10px;height:10px"/>
+            <text style="font-size:10pt">  周六下午|14:00-17:00</text>
+            </view>
+        </view>
+    </view>
+</view>

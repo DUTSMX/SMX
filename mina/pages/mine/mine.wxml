@@ -1,0 +1,29 @@
+<view style="background:#EEEEF4">
+    <view style="height:16px"/>
+    <view style="background:#FFFFFF;">
+        <image src="../../images/course_my_head.png" style="width:64px;height:64px;margin-top:10px;margin-bottom:10px;margin-left:20px;"/>
+        <text>18840824301</text>
+        <image src="../../images/man.png" style="width:16px;height:16px;margin-top:20px;margin-left:20px;"/>
+    </view>
+    <view style="height:16px"/>
+    <view style="padding-left:20px;padding-top:10px;padding-bottom:10px;background:#FFFFFF">
+        <image src="../../images/icon_create_course.png" style="width:18px;height:18px"/>
+        <text stylee="font-size:17px">    添加课程</text>
+    </view>
+    <view style="height:16px"/>
+    <view style="padding-left:20px;padding-top:10px;padding-bottom:10px;background:#FFFFFF">
+        <image src="../../images/icon_my_course.png" style="width:18px;height:18px"/>
+        <text >    我的课程</text>
+    </view>
+    <view style="height:1px"/>
+    <view style="padding-left:20px;padding-top:10px;padding-bottom:10px;background:#FFFFFF">
+        <image src="../../images/icon_my_question.png" style="width:18px;height:18px"/>
+        <text >    我的问答</text>
+    </view>
+    <view style="height:16px"/>
+    <view style="padding-left:20px;padding-top:10px;padding-bottom:10px;background:#FFFFFF">
+        <image src="../../images/icon_set.png" style="width:18px;height:18px"/>
+        <text >    设置中心</text>
+    </view>
+    <view style="height:100vh"/>
+</view>

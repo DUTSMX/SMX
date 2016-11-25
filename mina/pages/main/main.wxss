@@ -1,0 +1,4 @@
+.slide-image{
+    height: 25vh;
+	width: 100vw;
+}
