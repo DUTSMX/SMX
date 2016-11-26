@@ -1,0 +1,13 @@
+Page({
+    data:{
+        imgUrls:[
+            '../../images/swiper_1.png',
+            '../../images/swiper_2.png',
+            '../../images/swiper_3.png'
+        ],
+        indicatorDots:true,
+        autoplay:true,
+        interval:8000,
+        duration:8000  
+    }
+})

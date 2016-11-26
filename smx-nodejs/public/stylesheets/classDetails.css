@@ -1,15 +1,15 @@
 .ui-listview .ui-li-has-thumb>.ui-btn>img:first-child{
-	padding-top: 10px;
+	padding-top: 12px;
 	padding-left: 10px;
 	height: 55px;
 	width: 55px;
 }
 .ui-listview li a .teacher_info .teacher_school_intro h5{
 	display: inline-block;
-	margin-top: 5%;
-	padding-left: 8%;
+	margin-top: 10%;
+	font-weight:normal;
 }
-.ui-listview li a .teacher_info .teacher_school_intro h6{
+.ui-listview li a .teacher_info .teacher_school_intro p{
 	display: inline-block;
 	font-size: 0.7em;
 	margin-left: 3%;
@@ -18,22 +18,33 @@
 .hr{
 	float: left;
 }
-.ui-listview li a .className-text{
+.ui-listview li .className-text{
 	display: inline-block;
 	margin-top: 2.5%;
-	padding-left: 5%;
+	padding-left: 3%;
+	font-weight:bold;
 }
-.ui-listview li a .className-details{
+.ui-listview li .className-details{
 	display: inline-block;
-	margin-top: 2.5%;
-	padding-left: 5%;
+	margin-top: 2.6%;
+	position: absolute;
+	left: 40%;
+	font-weight:normal;
 }
-.ui-listview li a .attend-student{
+.ui-listview li .attend-student{
 	display: inline-block;
 	margin-bottom: 4.5%;
-	padding-left: 5%;
+	padding-left: 3%;
+	font-weight:bold;
 }
-.ui-listview li a .className-details .attendStudent{
+.ui-listview li .className-details .attendStudent{
 	height: 25px;
 	width: 25px;
+}
+.divide{
+	border:0;
+	background-color:#dddddd;
+	height:1px;
+	-webkit-margin-before:0;
+	-webkit-margin-after: 0;
 }

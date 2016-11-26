@@ -1,0 +1,89 @@
+<view style="flex-direction:column;margin-left:20px;margin-right:20px;margin-top:10px">
+    <view class="course_item" style="flex-direction:row;margin-top: 8px">
+    <image src="../../images/icon_class.png" style="width:15px;height:15px;"/> 
+    <text style="color:#3B7454;font-size:15pt"> 在线老师</text> 
+    </view>
+    <image src="../../images/course_divide.png" style="width:100%;height:6px;"/>
+    <view style="flex-direction:row;margin-left:20px">
+        <view style="flex-direction:column;margin-right:20px;display:inline-block">
+            <image src="../../images/course_my_head.png" style="width:32px;height:32px;display:block"/>
+            <text style="font-size:12px">张三</text>
+        </view>
+        <view style="flex-direction:column;margin-right:20px;display:inline-block">
+            <image src="../../images/course_my_head.png" style="width:32px;height:32px;display:block"/>
+            <text style="font-size:12px">张三</text>
+        </view>
+        <view style="flex-direction:column;margin-right:20px;display:inline-block">
+            <image src="../../images/course_my_head.png" style="width:32px;height:32px;display:block"/>
+            <text style="font-size:12px">张三</text>
+        </view>
+        <view style="flex-direction:column;margin-right:20px;display:inline-block">
+            <image src="../../images/course_my_head.png" style="width:32px;height:32px;display:block"/>
+            <text style="font-size:12px">张三</text>
+        </view>
+        <view style="flex-direction:column;margin-right:20px;display:inline-block">
+            <image src="../../images/course_my_head.png" style="width:32px;height:32px;display:block"/>
+            <text style="font-size:12px">张三</text>
+        </view>
+        <view style="flex-direction:column;margin-right:20px;display:inline-block">
+            <image src="../../images/course_my_head.png" style="width:32px;height:32px;display:block"/>
+            <text style="font-size:12px">张三</text>
+        </view>
+    </view>
+    <view class="course_item" style="flex-direction:row;margin-top: 8px">
+    <image src="../../images/icon_class.png" style="width:15px;height:15px;"/> 
+    <text style="color:#3B7454;font-size:15pt"> 热门问答</text> 
+    </view>
+    <image src="../../images/course_divide.png" style="width:100%;height:6px;"/>
+    <view style="margin-bottom:10px;margin-top:10px">
+        <view>
+            <image src="../../images/course_my_head.png" style="width:12px;height:12px"></image>
+            <text style="font-size:12px">姚晗回答了该问题</text>
+        </view>
+        <view style="margin-top:4px">
+            <text style="font-size:16px;font-weight:bold;">高三，怎么才能下定决心努力学习？</text>
+        </view>
+        <view>
+            <text style="font-size:12px;">大部分回答都是抖机灵或者单纯讽刺加嘲讽，这里给点干货...（高中生要是想看我的学习方法的，自己看我之前的答题，有答过很多）以下是2001到2016年中国大学生增长速度在增长...</text>
+        </view>
+    </view>
+    <view style="width:100%;height:1px;background:#F0F1F3"/>
+    <view style="margin-bottom:10px;margin-top:10px">
+        <view>
+            <image src="../../images/course_my_head.png" style="width:12px;height:12px"></image>
+            <text style="font-size:12px">姚晗回答了该问题</text>
+        </view>
+        <view style="margin-top:4px">
+            <text style="font-size:16px;font-weight:bold;">高三，怎么才能下定决心努力学习？</text>
+        </view>
+        <view>
+            <text style="font-size:12px;">按照《读者》的逻辑，那必然是断胳膊断腿，死爹死娘。   按照《知音》的逻辑，那必须是有个隔壁少妇跟你产生了情感，鼓励你千万要考上好大学哦。   按照《故事会》的逻辑，那得...</text>
+        </view>
+    </view>
+    <view style="width:100%;height:1px;background:#F0F1F3"/>
+    <view style="margin-bottom:10px;margin-top:10px">
+        <view>
+            <image src="../../images/course_my_head.png" style="width:12px;height:12px"></image>
+            <text style="font-size:12px">姚晗回答了该问题</text>
+        </view>
+        <view style="margin-top:4px">
+            <text style="font-size:16px;font-weight:bold;">高三，怎么才能下定决心努力学习？</text>
+        </view>
+        <view>
+            <text style="font-size:12px;">和你一样。高三狗，写数学卷子快写完了但是有一半的题目不会做，在图书馆自习室快要情绪崩溃地哭出来，为了转移情绪刷起了知乎。开学一个月来立志了无数次卸了QQ删了知乎但...</text>
+        </view>
+    </view>
+    <view style="width:100%;height:1px;background:#F0F1F3"/>
+    <view style="margin-bottom:10px;margin-top:10px">
+        <view>
+            <image src="../../images/course_my_head.png" style="width:12px;height:12px"></image>
+            <text style="font-size:12px">姚晗回答了该问题</text>
+        </view>
+        <view style="margin-top:4px">
+            <text style="font-size:16px;font-weight:bold;">高三，怎么才能下定决心努力学习？</text>
+        </view>
+        <view>
+            <text style="font-size:12px;">渴望是一种力量看到这个问题的时候，突然想到了我的高三生活。作为河北一个普通小县城的高三生，我们的生活并不比衡水中学的轻松多少。每天早上5:30到晚10:00一直都在学习...</text>
+        </view>
+    </view>
+</view>     

@@ -1,0 +1,15 @@
+.videos_classify{
+	font-weight: 100;
+	width: 30%;
+	list-style: none;
+	float: left;
+	margin-left: 3%;
+	border: 1px solid #3B7454;
+	font-size: 0.5em;
+	text-align: center;
+	padding-left: 1%;
+	padding-right: 1%;
+	padding-bottom: 0;
+	box-sizing: border-box;
+	border-radius: 10%;
+}

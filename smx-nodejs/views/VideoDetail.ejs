@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>视频详情</title>
+    <title>尚名校</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,21 +34,20 @@
                 </div>
                 <div class="videoInfo">
                     <%= videoTime %> | <span class="number"><%= videoWatchCount %></span>人观看
-                    <!-- <span class="videos_classify_detail">高中</span>
+                    <span class="videos_classify_detail">高中</span>
                     <span class="videos_classify_detail">数学</span>
-                    <span class="videos_classify_detail">理科</span>-->
+                    <span class="videos_classify_detail">理科</span>
                 </div>
             </li>
             <li data-icon="false">
-                <a href="#">
                 <hr width="1" size="20" color="#3B7454" class="hr">
                 <h5 class="courseIntro_title">课程简介</h5>
                 <h5 class="courseIntro_specific"><%= videoAbstract %></h5></a>
             </li>
             <li data-icon="false">
                 <hr width="1" size="20" color="#3B7454" class="hr">
-                <h5 class="courseContent">课程内容</h5>
-                <h5><%= videoContent %></h5>
+                <h5 class="course_content">课程内容</h5>
+                <h5 class="course_content_detail"><%= videoContent %></h5>
             </li>
         </ul>
     </div>

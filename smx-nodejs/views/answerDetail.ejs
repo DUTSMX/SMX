@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>回答详情</title>
+    <title>尚名校</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -18,18 +18,15 @@
     <div data-role="answer_area">
         <ul data-role="listview">
             <li data-icon="false">
-                <a herf="javascript void(0)" data-ajax="false">
+                <a herf="#" data-ajax="false">
                     <h5><%= questionTitle %></h5>
                 </a>
-
             </li>
             <li>
-                <a>
-                    <span><img width="32" height="32" src="<%= authorHeadUrl %>"/> <%= authorName %></span>
-                    <p><%= answerContent %></p>
-                </a>
-            </li>
-
+                <div>
+                    <img style="vertical-align:middle;" width="32" height="32" src="<%= authorHeadUrl %>"/> <%= authorName %>
+                </div>
+                <p style="white-space: normal" class="answer_content"><%= answerContent %></p>
             </li>
         </ul>
     </div>

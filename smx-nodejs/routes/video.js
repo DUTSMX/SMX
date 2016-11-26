@@ -11,6 +11,7 @@ router.get('/video',function (req,res) {
         res.render('video',{videoList:videoList});
     })
 })
+
 router.get('/videoDetail',function (req,res) {
     var videoId = req.query.videoId;
     api.getVideoDetail(videoId,function (videoDetail) {

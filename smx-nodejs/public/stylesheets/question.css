@@ -23,6 +23,7 @@
 /*设置分割线*/
 .div_line{
 	width: 100%;
+	z-index: 2;
 	/*margin-bottom: 5%;*/
 }
 /*设置在线教师列表*/
@@ -45,10 +46,17 @@
 	color: #3B7454;
 }
 /*设置 来自老师回答*/
+.answer_area{
+	margin-top:1em;
+}
 .answer_area .ui-listview li a span.ans_teacher{
 	font-weight: 100;
 	font-size: 0.7em;
 }
+
+.question_content{
+}
+
 /*设置赞同数*/
 .answer_area .ui-listview>li>a.ui-btn .zan{
 	display: inline-block;
@@ -75,12 +83,16 @@
 	color: white;
 	text-shadow: none;
 }
-/*.answer_area .ui-listview>li>a.ui-btn span:nth-child(2){
-	float: right;
-	background-color:#3B7454;
-	font-size: 1.0em;
-	font-weight: 400; 
-	padding: 0.6em;
-	color: white;
-	vertical-align: bottom;
-}*/
+.answer_detail{
+	white-space: normal;
+}
+.ask_question{
+	width:50px;
+	height:50px;
+	position:fixed;
+	bottom:80px;
+	right:20px;
+}
+.answer_content{
+	margin-top:100px;
+}

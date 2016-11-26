@@ -1,58 +1,18 @@
 .hr{
 	float: left;
 }
-.ui-listview li a .teacherName{
+.ui-listview li .type{
 	display: inline-block;
 	margin-top: 2.5%;
-	padding-left: 5%;
+	padding-left: 3%;
 }
-.ui-listview li a .iteacherName{
+.ui-listview li .detail{
 	display: inline-block;
-	margin-top: 2.5%;
-	padding-left: 5%;
+	position: absolute;
+	left: 40%;
+	font-weight: normal;
 }
-.ui-listview li a .teacherSchool{
-	display: inline-block;
-	margin-top: 2.5%;
-	padding-left: 5%;
-}
-.ui-listview li a .iteacherSchool{
-	display: inline-block;
-	margin-top: 2.5%;
-	padding-left: 5%;
-}
-.ui-listview li a .teacherGrade{
-	display: inline-block;
-	margin-top: 2.5%;
-	padding-left: 5%;
-}
-.ui-listview li a .iteacherGrade{
-	display: inline-block;
-	margin-top: 2.5%;
-	padding-left: 5%;
-}
-.ui-listview li a .courseList{
-	display: inline-block;
-	margin-top: 2.5%;
-	padding-left: 5%;
-}
-.ui-listview li a .icourseList{
-	display: inline-block;
-	margin-top: 2.5%;
-	padding-left: 5%;
-}
-.ui-listview li a .goodCourse{
-	display: inline-block;
-	margin-top: 2.5%;
-	padding-left: 5%;
-}
-.ui-listview li a .igoodCourse{
-	display: inline-block;
-	margin-top: 2.5%;
-	padding-left: 5%;
-}
-.ui-listview li a .selfIntroduction{
-	display: inline-block;
-	margin-top: 2.5%;
-	padding-left: 5%;
+.ui-listview li .self_intro{
+	font-weight:normal;
+	white-space: normal;
 }

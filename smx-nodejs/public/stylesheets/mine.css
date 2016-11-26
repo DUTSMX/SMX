@@ -6,7 +6,7 @@
 }
 /*设置每个功能模块之间的距离*/
 .ui-content .ui-listview{
-	margin-top: 8%;
+	margin-top: 10%;
 }
 /*设置第一个功能模块与顶部的距离*/
 .ui-content .ui-listview:first-child{
@@ -33,8 +33,8 @@
 
 /*设置手机号码字体*/
 .ui-listview .ui-li-has-thumb>.ui-btn>h1{
-	padding-top: 4%;
-
+	padding-top: 6%;
+	font-weight: normal;
 }
 /*设置各个功能模块字体大小*/
 .ui-listview>li p{
@@ -48,4 +48,10 @@
 	margin-left: 5%;
 	width: 7%;
 	height: 7%;
+}
+.content{
+	background-color: #EEEEF4;
+}
+.ui-listview .my_course{
+	margin-bottom: 2px;
 }
