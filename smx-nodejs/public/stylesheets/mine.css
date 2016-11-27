@@ -35,6 +35,10 @@
 .ui-listview .ui-li-has-thumb>.ui-btn>h1{
 	padding-top: 6%;
 	font-weight: normal;
+	float:left;
+}
+.ui-listview .ui-btn>.gender{
+	margin-left:12px;margin-top: 10%;
 }
 /*设置各个功能模块字体大小*/
 .ui-listview>li p{
@@ -54,4 +58,20 @@
 }
 .ui-listview .my_course{
 	margin-bottom: 2px;
+}
+.ui-listview .ui-btn>.question_status{
+	float: left;
+}
+.ui-listview .ui-btn>.switch_status{
+	float:right;
+}
+
+.ui-listview .ui-btn:hover{
+	background-color: #f6f6f6;
+}
+.ui-listview .ui-btn:visited{
+	background-color: #f6f6f6;
+}
+.ui-listview .ui-btn:link{
+	background-color: #f6f6f6;
 }

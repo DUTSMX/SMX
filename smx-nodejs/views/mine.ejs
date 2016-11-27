@@ -20,7 +20,18 @@
 				<li data-icon="false">
 					<a href="login" data-ajax="false">
 						<img src="/images/头像.png" class="set-people">
-						<h1>未登录</h1>
+						<h1>姚晗</h1>
+						<img class="gender"src="/images/man.png">
+					</a>
+				</li>
+			</ul>
+
+			<ul data-role="listview" class="ui-listview-func">
+				<li data-icon="false">
+					<a onclick="statusSwitch()"  data-ajax="false">
+						<img src="/images/03.png" class="ui-li-icon">
+						<p class="question_status">问答状态</p>
+						<p class="switch_status"id="question_status">状态：关</p>
 					</a>
 				</li>
 			</ul>
@@ -76,5 +87,17 @@
 	</div>
 	<script src="/javascripts/jquery.js"></script>
 	<script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
+	<script>
+		var status = 0;
+		function statusSwitch() {
+			if(status == 1){
+				status = 0;
+				document.getElementById("question_status").innerHTML = "状态：关";
+			}else{
+				status = 1;
+				document.getElementById("question_status").innerHTML = "状态：开";
+			}
+		}
+	</script>
 </body>
 </html>

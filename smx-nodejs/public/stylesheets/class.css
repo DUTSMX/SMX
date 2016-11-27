@@ -22,20 +22,19 @@
 	float:left;
 	width: 50px;
 	height: 50px;
-	border: 3px #a72525 solid;
+	border: 2px #3B7454 solid;
 	-webkit-border-radius: 100px;
 }
 
-/*设置个人头像*/
-.ui-listview li .ui-btn .my_course_head{width:46px;height:46px;position: absolute;top: 20px;left:25px;
-	display: inline-block;
-	width:46px;
-	height:46px;
-	position: absolute;
+/*设置所有课程个人头像外面的圈*/
+.ui-listview li .ui-btn .all_course_head_div{display: inline-block;position: absolute;top: 15px;left:20px;
 	float:left;
-	top: 5px;
-	left:5px;
+	width: 50px;
+	height: 50px;
+	border: 2px #EAB136 solid;
+	-webkit-border-radius: 100px;
 }
+
 
 .ui-listview li .ui-btn .class_info{
 	margin-left:0;
