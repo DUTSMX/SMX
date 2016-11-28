@@ -17,12 +17,29 @@
 	width: 100%;
 	margin-bottom: 5%;
 }
-/*设置个人头像*/
-.ui-listview .ui-li-has-thumb>.ui-btn>img:first-child{
-	position: absolute;
-	top: 23%;
-	left: 8%;
+/*设置个人头像外面的圈*/
+.ui-listview li .ui-btn .my_course_head_div{display: inline-block;position: absolute;top: 15px;left:20px;
+	float:left;
+	width: 50px;
+	height: 50px;
+	border: 2px #3B7454 solid;
+	-webkit-border-radius: 100px;
 }
+
+/*设置所有课程个人头像外面的圈*/
+.ui-listview li .ui-btn .all_course_head_div{display: inline-block;position: absolute;top: 15px;left:20px;
+	float:left;
+	width: 50px;
+	height: 50px;
+	border: 2px #EAB136 solid;
+	-webkit-border-radius: 100px;
+}
+
+
+.ui-listview li .ui-btn .class_info{
+	margin-left:0;
+}
+
 /*设置我的课程详细信息*/
 .ui-listview>li h5{
 	display: inline-block;

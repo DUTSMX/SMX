@@ -48,3 +48,17 @@
 	-webkit-margin-before:0;
 	-webkit-margin-after: 0;
 }
+.ui-footer .ui-btn{
+	background-color: #3B7454;border: none;border-radius:0px;width: 100%;padding: 0;margin: 0;text-shadow: none
+}
+
+.ui-footer .ui-btn:hover{text-shadow: none;
+	background-color: #3B7454;
+}
+
+.ui-footer .ui-btn:visited{text-shadow: none;
+	background-color: #3B7454;
+}
+.ui-footer .ui-btn:link{text-shadow: none;
+	background-color: #3B7454;
+}
