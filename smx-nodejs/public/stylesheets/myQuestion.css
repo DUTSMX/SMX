@@ -1,0 +1,52 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.question{
+    display: inline-block;
+
+}
+.courseLine{
+    position: absolute;
+    top: 13.5%;
+    left: 4%;
+    margin-bottom:10%;
+}
+.courseLine1{
+    position: absolute;
+    top: 33.5%;
+    left: 4%;
+    margin-bottom:10%;
+}
+.ui-input-text {
+    border: none !important;
+    box-shadow: none!important;
+    line-height: 30px!important;
+    font-size: 16px !important;
+    margin-top: 8% !important;
+}
+.input{
+    font-size: 18px;
+}
+textarea{
+    clear: both;
+    height:80px!important
+}
+.textarea{
+    clear: both;
+    height:160px!important
+}
+.publish{
+    height: auto;
+    float: left;
+    margin-left:36%;
+    margin-top: 25%;
+}
+.publishButton{
+
+}
+.ui-btn{
+    background-color:#347557!important;
+    color: #fff!important;
+    border-color: #fff;
+}
