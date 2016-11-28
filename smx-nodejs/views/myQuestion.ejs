@@ -8,14 +8,43 @@
     <meta http-equiv="cache-control" content="no-cache"/>
     <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/myCourse.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/myQuestion.css">
 </head>
 <body>
 <div data-role="page">
     <div data-role="header" data-theme="g" data-position="fixed">
         <h3>我的提问</h3>
     </div>
+    <div data-role="content">
+        <div class="myclass">
+            <h4><img src="/images/myclass.png">&nbsp我的课程</h4>
+            <img src="/images/课程分割线.png" class="div_line">
+            <div class="details_class">
+                <ul data-role="listview">
+                    <% courseList.myCourse.forEach(function(item){ %>
+                    <li data-icon="false">
+                        <a href="courseDetail?courseId=<%= item.courseId %>" data-ajax="false">
+                            <img src=<%= item.teacherHeadUrl %>>  <!-- TODOteacherHeadUrl -->
+                            <div class="class_info">
+                                <div class="class_info_school">
+                                    <h5><%= item.teacherName %></h5>
+                                    <h6><%= item.teacherSchool %></h6>
+                                </div>
+                                <div class="class_info_name">
+                                    <h3><%= item.courseName %></h3>
+                                </div>
+                                <div class="class_info_time">
 
+                                    <h6><img src="/images/课程时间.png"><%= item.courseTime %></h6>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <% }) %>
+                </ul>
+            </div>
+        </div>
+ </div>
 </div>
 <script src="/javascripts/jquery.js"></script>
 <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
