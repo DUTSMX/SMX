@@ -8,7 +8,7 @@
     <meta http-equiv="cache-control" content="no-cache"/>
     <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/myQuestion.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/question.css">
 </head>
 <body>
 <div data-role="page" data-title="尚名校">
@@ -16,21 +16,18 @@
         <h3>我的提问</h3>
     </div>
     <div data-role="content">
-        <div class="myquestion">
-            <img src="../public/images/myclass.png">
-            <h4 class="question">问题</h4>
-            <img src="../public/images/课程分割线.png" class="courseLine">
-            <textarea type="text" placeholder="请写下你的问题（必填）"></textarea>
+        <div class="answer_area">
+            <ul data-role="listview">
+                <%questionList.forEach(function(item){%>
+                <li data-icon="false">
+                    <a href="../question/<%=item.aHref%>"  data-ajax="false">
+                        <span class="ans_teacher"><img width="12" height="12" src="<%=item.headUrl%>"><%=item.authorDetail%></span>
+                        <h5><%=item.questionDetail%></h5>
+                    </a>
+                </li>
+                <%})%>
+            </ul>
         </div>
-        <div class="myquestion">
-            <img src="../public/images/myclass.png">
-            <h4 class="question">详情</h4>
-            <img src="../public/images/课程分割线.png" class="courseLine1">
-            <textarea type="text" placeholder="请填写问题相关描述信息" class="textarea"></textarea>
-        </div>
-    </div>
-    <div class="publish">
-        <button type="submit" value="Submit Button" class="publishButton">发布提问</button>
     </div>
 </div>
 <script src="/javascripts/jquery.js"></script>

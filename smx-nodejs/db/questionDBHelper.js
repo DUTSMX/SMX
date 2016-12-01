@@ -94,3 +94,38 @@ exports.askQuestion = function (userId,questionTitle,questionContent,callback) {
         callback(rows);
     })
 }
+
+exports.getMyQuestion = function (userId, callback) {
+    var str = "提出了问题";
+    var sql = "SELECT a.userHeadUrl as headUrl, " +
+        "CONCAT(a.userName,"+"'提出了问题'"+") as authorDetail, " +
+        "CONCAT("+"'questionDetail?questionId='"+",q.questionId ) as aHref, " +
+        "q.questionTitle as questionDetail " +
+        "FROM account a join question q ON a.userId = q.userId " +
+        "WHERE q.userId = "+userId;
+    console.log("sql:"+sql);
+    conn.query(sql, function (err,rows){
+        if(err){
+            console.log(err);
+        }else{
+            callback(rows);
+        }
+    })
+}
+
+exports.getMyAnswer = function (userId,callback) {
+    var aContent = 15;
+    var sql = "SELECT a.userHeadUrl as headUrl, " +
+        "concat(a.userName,"+"'回答了问题'"+") as authorDetail, " +
+        "CONCAT("+"'answerDetail?answerId='"+",b.answerId) as aHref, " +
+        "q.questionTitle as questionDetail " +
+        "FROM answer b JOIN question q ON b.questionId = q.questionId JOIN account a ON b.userId = a.userId " +
+        "WHERE q.userId = "+ userId;
+    conn.query(sql, function (err,rows) {
+        if(err){
+            console.log(err);
+        }else{
+            callback(rows);
+        }
+    })
+}

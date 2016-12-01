@@ -24,7 +24,12 @@ router.get('/myCourse',function (req,res) {
     })
 })
 router.get('/myQuestion',function (req,res) {
-    res.render('myQuestion',{});
+    var userId = req.query.userId;
+    console.log("userId:"+userId);
+    api.getMyQuestion(userId,function (questionList) {
+        console.log("question:"+JSON.stringify(questionList))
+        res.render('myQuestion',questionList);
+    })
 })
 router.get('/setCenter',function (req,res) {
     res.render('setCenter',{})
@@ -32,7 +37,6 @@ router.get('/setCenter',function (req,res) {
 router.get('/login',function (req,res) {
     res.render('login',{})
 })
-
 /*
 * unuse
 

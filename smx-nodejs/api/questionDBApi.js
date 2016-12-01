@@ -40,3 +40,15 @@ exports.askQuestion= function(userId,questionTitle,questionContent,callback){
         callback(rows);
     })
 }
+
+exports.getMyQuestion = function(userId, callback){
+    db.getMyQuestion(userId, function (rows) {
+        var question = rows;
+        db.getMyAnswer(userId, function (rows) {
+            rows.forEach(function (item) {
+                question.add(item);
+            })
+            callback(question);
+        })
+    })
+}
