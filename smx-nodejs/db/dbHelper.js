@@ -7,7 +7,6 @@ var conn = mysql.createConnection({
     password:'smxsjk123456',
     database: 'smx',
     port: 12409
-
 })
 conn.connect();
 
