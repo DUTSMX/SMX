@@ -12,9 +12,9 @@
 </head>
 <body>
 	<div data-role="page" data-title="尚名校">
-		<div data-role="header" data-theme="g" data-position="fixed">
+		<!--<div data-role="header" data-theme="g" data-position="fixed">
 			<h3>视频</h3>
-		</div>
+		</div>-->
 		<!--
 		<div class="tab_search">
 			<div class="ui-grid-b">
@@ -35,7 +35,7 @@
 					<ul data-role="listview">
 						<%videoList.forEach(function(item){%>
 						<li data-icon="false">
-							<a href="videoDetail?videoId=<%=item.videoId%>"  data-ajax="false">
+							<a href="videoDetail?videoId=<%=item.videoId%>"  data-ajax="false" target="_parent">
 								<img src="<%=item.videoCoverUrl%>" class="video_show">
 								<div class="videos_info">
 									<div class="videos_name">
@@ -60,7 +60,7 @@
 			</div>
 		</div>
 		
-		<div data-role="footer" data-position="fixed" data-theme="t">
+		<!--<div data-role="footer" data-position="fixed" data-theme="t">
 			 <div data-role="navbar">
 			 	<ul>
 					<li><a href="/course/course" data-ajax="false"><img src="/images/01.png"><p>课程</p></a></li>
@@ -69,7 +69,7 @@
 					<li><a href="/users/mine" data-ajax="false"><img src="/images/04.png"><p>我的</p></a></li>
 			 	</ul>
 			 </div>
-		</div>
+		</div>-->
 	</div>
 	<script src="/javascripts/jquery.js"></script>
 	<script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>

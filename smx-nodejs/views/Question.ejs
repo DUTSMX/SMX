@@ -12,9 +12,9 @@
 </head>
 <body>
 	<div data-role="page" data-title="尚名校">
-		<div data-role="header" data-theme="g" data-position="fixed">
+		<!--<div data-role="header" data-theme="g" data-position="fixed">
 			<h3>问答</h3>
-		</div>
+		</div>-->
 		<div data-role="content">
 			<div class="online_teacher">
 				<h4><img src="/images/myclass.png">&nbsp在线老师<span><a href="#">更多></a></span></h4>
@@ -23,31 +23,31 @@
 			<div class="teacher_tab">
 				<div class="ui-grid-d">
 					<div class="ui-block-a">
-						<a href="askQuestion">
+						<a href="askQuestion" target="_parent">
 						<img src="/images/头像.png">
 						</a>
 						<p>马老师</p>
 					</div>
 					<div class="ui-block-b">
-						<a href="askQuestion">
+						<a href="askQuestion" target="_parent">
 						<img src="/images/头像.png">
 						</a>
 						<p>马老师</p>
 					</div>
 					<div class="ui-block-c">
-						<a href="askQuestion">
+						<a href="askQuestion"  target="_parent">
 						<img src="/images/头像.png">
 						</a>
 						<p>马老师</p>
 					</div>
 					<div class="ui-block-d">
-						<a href="askQuestion">
+						<a href="askQuestion"  target="_parent">
 						<img src="/images/头像.png">
 						</a>
 						<p>马老师</p>
 					</div>
 					<div class="ui-block-e">
-						<a href="askQuestion">
+						<a href="askQuestion"  target="_parent">
 						<img src="/images/头像.png">
 						</a>
 						<p>马老师</p>
@@ -62,7 +62,7 @@
 				<ul data-role="listview">
 					<%questionList.answerList.forEach(function(item){%>
 					<li data-icon="false">
-						<a href="questionDetail?questionId=<%=item.questionId%>"  data-ajax="false">
+						<a href="questionDetail?questionId=<%=item.questionId%>"  data-ajax="false"  target="_parent">
 							<span class="ans_teacher"><img width="12" height="12" src="<%=item.authorHeadUrl%>"><%=item.authorName%>回答了该问题</span>
 							<!--<div class="zan">
 								<p>12</p>
@@ -76,7 +76,7 @@
 				</ul>
 			</div>
 		</div>
-		<div data-role="footer" data-position="fixed" data-theme="t">
+		<!--<div data-role="footer" data-position="fixed" data-theme="t">
 			<div data-role="navbar">
 				<ul>
 					<li><a href="/course/course" data-ajax="false"><img src="/images/01.png"><p>课程</p></a></li>
@@ -85,8 +85,8 @@
 					<li><a href="/users/mine" data-ajax="false"><img src="/images/04.png"><p>我的</p></a></li>
 				</ul>
 			</div>
-		</div>
-		<a href="askQuestion"data-ajax="false"><img class="ask_question" src="/images/ask_question.png" style="width:50px;height:50px"/></a>
+		</div>-->
+		<a href="askQuestion"data-ajax="false"  target="_parent"><img class="ask_question" src="/images/ask_question.png" style="width:50px;height:50px"/></a>
 	</div>
 	<script src="/javascripts/jquery.js"></script>
 	<script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>

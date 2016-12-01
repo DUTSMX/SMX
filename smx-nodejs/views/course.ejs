@@ -14,9 +14,9 @@
 </head>
 <body>
 <div data-role="page" data-title="尚名校">
-        <div data-role="header" data-theme="g" data-position="fixed">
+        <!--<div data-role="header" data-theme="g" data-position="fixed">
             <h3>课程</h3>
-        </div>
+        </div>-->
     <div class="ad_Images">
         <div class="ad_Image_style">
             <img src="/images/轮播图.png">
@@ -36,7 +36,7 @@
                 <ul data-role="listview">
                     <% courseList.myCourse.forEach(function(item){ %>
                     <li data-icon="false">
-                        <a href="courseDetail?courseId=<%= item.courseId %>" data-ajax="false">
+                        <a href="courseDetail?courseId=<%= item.courseId %>" data-ajax="false" target="_parent">
                             <!-- 放在css就失效-->
                             <div style="display: inline-block;position: absolute;top: 15px;left:20px" class="my_course_head_div"></div>
                             <img style="width:47px;height:47px;position: absolute;top: 19px;left:24px" src=<%= item.teacherHeadUrl %>>  <!-- TODOteacherHeadUrl -->
@@ -66,7 +66,7 @@
                 <ul data-role="listview">
                     <% courseList.allCourse.forEach(function(item){ %>
                     <li data-icon="false">
-                        <a href="courseDetail?courseId=<%= item.courseId %>" data-ajax="false">
+                        <a href="courseDetail?courseId=<%= item.courseId %>" data-ajax="false" target="_parent">
                             <!-- 放在css就失效-->
                             <div style="display: inline-block;position: absolute;top: 15px;left:20px" class="all_course_head_div"></div>
                             <img style="width:47px;height:47px;position: absolute;top: 19px;left:24px" src=<%= item.teacherHeadUrl %>>  <!-- TODOteacherHeadUrl -->
@@ -90,7 +90,7 @@
             </div>
         </div>
     </div>
-    <div data-role="footer" data-position="fixed" data-theme="t">
+    <!--<div data-role="footer" data-position="fixed" data-theme="t">
         <div data-role="navbar">
             <ul>
                 <li><a href="/course/course" data-ajax="false"><img src="/images/01.png">
@@ -103,7 +103,7 @@
                         <p>我的</p></a></li>
             </ul>
         </div>
-    </div>
+    </div>-->
 </div>
 <script src="/javascripts/jquery.js"></script>
 <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
