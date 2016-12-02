@@ -18,7 +18,7 @@
         <h3>尚名校</h3>
     </div>
 
-    <iframe src="/course/course" width="100%" height="100%" name="iframe" frameborder="0" scrolling="no" id="test"></iframe>
+    <iframe src="/course/course" name="iframe" width="100%" height="100%" frameborder="0" scrolling="no" id="test" onload="this.height=100"></iframe>
 
 <div data-role="footer" data-position="fixed" data-theme="t">
         <div height=30px data-role="navbar">
@@ -45,12 +45,10 @@
                 var bHeight = iframe.contentWindow.document.body.scrollHeight;
                 var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
                 var height = Math.max(bHeight, dHeight);
-                console.log("bHeight:"+bHeight+" dHeight:"+dHeight  );
-                iframe.height = height;
                 var bWidth = iframe.contentWindow.document.body.scrollWidth;
                 var dWidth = iframe.contentWindow.document.documentElement.scrollWidth;
-                console.log("bWidth:"+bWidth+" dWidth:"+dWidth);
                 var width = Math.max(bWidth,dWidth);
+                iframe.height = height;
                 iframe.width = width;
                 console.log("height:"+height+" width:"+width);
             }catch (ex){}

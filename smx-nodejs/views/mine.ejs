@@ -11,101 +11,101 @@
 	<link rel="stylesheet" type="text/css" href="/stylesheets/mine.css">
 </head>
 <body>
-	<div data-role="page" data-title="尚名校">
-		<!--<div data-role="header" data-theme="g" data-position="fixed">
-			<h3>我的</h3>
-		</div>-->
-		<div data-role="content" class="content">
-			<ul data-role="listview">
-				<li data-icon="false">
-					<a href="login" data-ajax="false"  target="_parent">
-						<img src="/images/头像.png" class="set-people">
-						<h1>姚晗</h1>
-						<img class="gender"src="/images/man.png">
-					</a>
-				</li>
-			</ul>
+<div data-role="page" data-title="尚名校">
+	<div data-role="header" data-theme="g" data-position="fixed">
+        <h3>我的</h3>
+    </div>
+	<div data-role="content" class="content">
+		<ul data-role="listview">
+			<li data-icon="false">
+				<a href="login" data-ajax="false"  target="_parent">
+					<img src="/images/头像.png" class="set-people">
+					<h1>姚晗</h1>
+					<img class="gender"src="/images/man.png">
+				</a>
+			</li>
+		</ul>
 
-			<ul data-role="listview" class="ui-listview-func">
-				<li data-icon="false">
-					<a onclick="statusSwitch()"  data-ajax="false">
-						<img src="/images/03.png" class="ui-li-icon">
-						<p class="question_status">问答状态</p>
-						<p class="switch_status"id="question_status">状态：关</p>
-					</a>
-				</li>
-			</ul>
-			<ul data-role="listview" class="ui-listview-func">
-				<li data-icon="false">
-					<a href="registerTeacher"  data-ajax="false" target="_parent">
-						<img src="/images/新建课程.png" class="ui-li-icon">
-						<p>申请家教</p>
-					</a>
-				</li>
-			</ul>
-			<ul data-role="listview" class="ui-listview-func">
-				<li data-icon="false">
-					<a href="createCourse"  data-ajax="false" target="_parent">
-						<img src="/images/新建课程.png" class="ui-li-icon">
-						<p>新建课程</p>
-					</a>
-				</li>
-			</ul>
-			<ul data-role="listview" class="ui-listview-func">
-				<li data-icon="false" class="my_course">
-					<a href="myCourse"  data-ajax="false" target="_parent">
-						<img src="/images/我的课程.png" class="ui-li-icon">
-						<p>我的课程</p>
-					</a>
-				</li>
-				<li data-icon="false">
-					<a href="myQuestion"  data-ajax="false" target="_parent">
-						<img src="/images/我的提问.png" class="ui-li-icon">
-						<p>我的提问</p>
-					</a>
-				</li>
-				
-			</ul>
-			<ul data-role="listview" class="ui-listview-func">
-				<li data-icon="false">
-					<a href="setCenter"  data-ajax="false" target="_parent">
-						<img src="/images/设置中心.png" class="ui-li-icon">
-						<p>设置中心</p>
-					</a>
-				</li>
-			</ul>
-			<ul data-role="listview" class="ui-listview-func ui-btn-exit">
-				<li data-icon="false">
-					<a href="login"  data-ajax="false" target="_parent">
-						<p>注册/登录</p>
-					</a>
-				</li>
-			</ul>
-		</div>
-		<!--<div data-role="footer" data-position="fixed" data-theme="t">
-			 <div data-role="navbar">
-			 	<ul>
-					<li><a href="/course/course" data-ajax="false"><img src="/images/01.png"><p>课程</p></a></li>
-					<li><a href="/video/video" data-ajax="false"><img src="/images/02.png"><p>视频</p></a></li>
-					<li><a href="/question/question" data-ajax="false"><img src="/images/03.png"><p>答疑</p></a></li>
-					<li><a href="/users/mine" data-ajax="false"><img src="/images/04.png"><p>我的</p></a></li>
-			 	</ul>
-			 </div>
-		</div>-->
+		<ul data-role="listview" class="ui-listview-func">
+			<li data-icon="false">
+				<a onclick="statusSwitch()"  data-ajax="false">
+					<img src="/images/03.png" class="ui-li-icon">
+					<p class="question_status">问答状态</p>
+					<p class="switch_status"id="question_status">状态：关</p>
+				</a>
+			</li>
+		</ul>
+		<ul data-role="listview" class="ui-listview-func">
+			<li data-icon="false">
+				<a href="registerTeacher"  data-ajax="false" target="_parent">
+					<img src="/images/新建课程.png" class="ui-li-icon">
+					<p>申请家教</p>
+				</a>
+			</li>
+		</ul>
+		<ul data-role="listview" class="ui-listview-func">
+			<li data-icon="false">
+				<a href="createCourse"  data-ajax="false" target="_parent">
+					<img src="/images/新建课程.png" class="ui-li-icon">
+					<p>新建课程</p>
+				</a>
+			</li>
+		</ul>
+		<ul data-role="listview" class="ui-listview-func">
+			<li data-icon="false" class="my_course">
+				<a href="myCourse"  data-ajax="false" target="_parent">
+					<img src="/images/我的课程.png" class="ui-li-icon">
+					<p>我的课程</p>
+				</a>
+			</li>
+			<li data-icon="false">
+				<a href="myQuestion"  data-ajax="false" target="_parent">
+					<img src="/images/我的提问.png" class="ui-li-icon">
+					<p>我的提问</p>
+				</a>
+			</li>
+
+		</ul>
+		<ul data-role="listview" class="ui-listview-func">
+			<li data-icon="false">
+				<a href="setCenter"  data-ajax="false" target="_parent">
+					<img src="/images/设置中心.png" class="ui-li-icon">
+					<p>设置中心</p>
+				</a>
+			</li>
+		</ul>
+		<ul data-role="listview" class="ui-listview-func ui-btn-exit">
+			<li data-icon="false">
+				<a href="login"  data-ajax="false" target="_parent">
+					<p>注册/登录</p>
+				</a>
+			</li>
+		</ul>
 	</div>
-	<script src="/javascripts/jquery.js"></script>
-	<script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
-	<script>
-		var status = 0;
-		function statusSwitch() {
-			if(status == 1){
-				status = 0;
-				document.getElementById("question_status").innerHTML = "状态：关";
-			}else{
-				status = 1;
-				document.getElementById("question_status").innerHTML = "状态：开";
-			}
+	<div data-role="footer" data-position="fixed" data-theme="t">
+         <div data-role="navbar">
+             <ul>
+                <li><a href="/course/course" data-ajax="false"><img src="/images/01.png"><p>课程</p></a></li>
+                <li><a href="/video/video" data-ajax="false"><img src="/images/02.png"><p>视频</p></a></li>
+                <li><a href="/question/question" data-ajax="false"><img src="/images/03.png"><p>答疑</p></a></li>
+                <li><a href="/users/mine" data-ajax="false"><img src="/images/04.png"><p>我的</p></a></li>
+             </ul>
+         </div>
+    </div>
+</div>
+<script src="/javascripts/jquery.js"></script>
+<script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
+<script>
+	var status = 0;
+	function statusSwitch() {
+		if(status == 1){
+			status = 0;
+			document.getElementById("question_status").innerHTML = "状态：关";
+		}else{
+			status = 1;
+			document.getElementById("question_status").innerHTML = "状态：开";
 		}
-	</script>
+	}
+</script>
 </body>
 </html>
