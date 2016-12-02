@@ -1,45 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>尚名校</title>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<meta http-equiv="cache-control" content="no-cache" />
-	<link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
-	<link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
-	<link rel="stylesheet" type="text/css" href="/stylesheets/myCourse.css">
+    <title>尚名校</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/myCourse.css">
 </head>
 <body>
-	<div data-role="page" data-title="尚名校">
-		<div data-role="header" data-theme="g" data-position="fixed">
-			<h3>我的课程</h3>
-		</div>
-		<div class="details_class">
-					<ul data-role="listview">
-						<% myCourse.forEach(function(item){ %>
-						<li data-icon="false">
-							<a href="courseDetail?courseId=<%= item.courseId %>" data-ajax="false">
-								<img src=<%= item.teacherHeadUrl %>>  <!-- TODOteacherHeadUrl -->
-								<div class="class_info">
-									<div class="class_info_school">
-										<h5><%= item.teacherName %></h5>
-										<h6><%= item.teacherSchool %></h6>
-									</div>
-									<div class="class_info_name">
-										<h3><%= item.courseName %></h3>
-									</div>
-									<div class="class_info_time">
+<div data-role="page" data-title="尚名校">
+    <div data-role="header" data-theme="g" data-position="fixed">
+        <img src="/images/ic_arrow_back.png" onclick="goBack()" class="left_icon"/>
+        <h3 class="page_title">我的课程</h3>
+        <!--<img src="/images/ic_share.png" href="#" class="right_icon"/>-->
+    </div>
+    <div class="details_class">
+        <ul data-role="listview">
+            <% myCourse.forEach(function(item){ %>
+            <li data-icon="false">
+                <a href="courseDetail?courseId=<%= item.courseId %>" data-ajax="false">
+                    <img src=<%= item.teacherHeadUrl %>>  <!-- TODOteacherHeadUrl -->
+                    <div class="class_info">
+                        <div class="class_info_school">
+                            <h5><%= item.teacherName %></h5>
+                            <h6><%= item.teacherSchool %></h6>
+                        </div>
+                        <div class="class_info_name">
+                            <h3><%= item.courseName %></h3>
+                        </div>
+                        <div class="class_info_time">
 
-										<h6><img src="/images/课程时间.png"><%= item.courseTime %></h6>
-									</div>
-								</div>
-							</a>
-						</li>
-						<% }) %>
-					</ul>
-				</div>
-	<script src="/javascripts/jquery.js"></script>
-	<script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
+                            <h6><img src="/images/课程时间.png"><%= item.courseTime %></h6>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <% }) %>
+        </ul>
+    </div>
+</div>
+<script src="/javascripts/jquery.js"></script>
+<script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
+<script src="/javascripts/smx.js"></script>
 </body>
 </html>

@@ -87,3 +87,8 @@
 .ui-header .right_icon{
 	float: right;
 }
+.ui-header .page_title{
+	display: inline-block;
+	margin:0;
+	margin-left:22%;
+}
