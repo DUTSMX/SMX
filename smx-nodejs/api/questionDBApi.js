@@ -7,8 +7,19 @@ exports.addQuestion = function(name,content,picurl,voiceurl,callback){
 }
 
 exports.getQuestion = function(callback){
-    db.getQuestion(function(rows){
-        callback(rows);
+    db.getAnswer(function (rows) {
+        var questionList = rows;
+        db.getQuestion(function (rows) {
+            rows.forEach(function (item) {
+                questionList.push(item);
+            })
+            console.log(JSON.stringify(questionList));
+            // questionList.sort(function (a,b) {
+            //     return a.time<b.time?1:-1;
+            // });
+            // console.log(JSON.stringify(questionList));
+            callback(questionList);
+        })
     })
 }
 

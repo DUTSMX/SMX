@@ -45,15 +45,33 @@ exports.searchQuestion = function(word,callback){
     })
 }
 
+exports.getAnswer = function (callback) {
+    var aContent = 15;
+    var sql = "SELECT CONCAT("+"'answerDetail?answerId='"+",b.answerId) as aHref, " +
+        "c.userHeadUrl as authorHeadUrl, " +
+        "CONCAT(c.userName,"+"'回答了问题'"+") as authorName, " +
+        "a.questionTitle as questionTitle, "+
+        "left(b.answerContent,"+ aContent +") as answerAbstract, " +
+        "b.answerTime as time "+
+        "FROM (question a INNER JOIN answer b on a.questionId = b.questionId) JOIN account c on b.userId = c.userId" ;
+    console.log("sql:"+sql);
+    conn.query(sql,function(err,rows,fields){
+        if(err){
+            console.error(err);
+        }
+        callback(rows);
+    })
+}
+
 exports.getQuestion = function (callback) {
     var aContent = 15;
-    var sql = "SELECT a.questionId as questionId, " +
-        "b.answerId as answerId, " +
+    var sql = "SELECT CONCAT("+"'questionDetail?questionId='"+",a.questionId) as aHref, " +
         "c.userHeadUrl as authorHeadUrl, " +
-        "c.userName as authorName, " +
+        "CONCAT(c.userName,"+"'提出了问题'"+") as authorName, " +
         "a.questionTitle as questionTitle, "+
-        "left(b.answerContent,"+ aContent +") as answerAbstract "+
-        "FROM (question a INNER JOIN answer b on a.questionId = b.questionId) INNER JOIN account c on b.userId = c.userId" ;
+        "left(a.questionContent,"+ aContent +") as answerAbstract, "+
+        "a.questionTime as time "+
+        "FROM question a JOIN account c on a.userId = c.userId" ;
     console.log("sql:"+sql);
     conn.query(sql,function(err,rows,fields){
         if(err){

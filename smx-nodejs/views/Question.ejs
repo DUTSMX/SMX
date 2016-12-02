@@ -62,8 +62,8 @@
 				<ul data-role="listview">
 					<%questionList.answerList.forEach(function(item){%>
 					<li data-icon="false">
-						<a href="questionDetail?questionId=<%=item.questionId%>"  data-ajax="false"  target="_parent">
-							<span class="ans_teacher"><img width="12" height="12" src="<%=item.authorHeadUrl%>"><%=item.authorName%>回答了该问题</span>
+						<a href="<%=item.aHref%>"  data-ajax="false"  target="_parent">
+							<span class="ans_teacher"><img width="12" height="12" src="<%=item.authorHeadUrl%>"><%=item.authorName%></span>
 							<!--<div class="zan">
 								<p>12</p>
 								<span>赞同</span>
