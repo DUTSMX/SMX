@@ -24,8 +24,8 @@ router.get('/myCourse',function (req,res) {
     })
 })
 router.get('/myQuestion',function (req,res) {
-    //var userId = req.query.userId;
-	var userId = 1;
+    // var userId = req.query.userId;
+    var userId = 1;
     console.log("userId:"+userId);
     api.getMyQuestion(userId,function (questionList) {
         console.log("question:"+JSON.stringify(questionList))
