@@ -51,15 +51,11 @@
                 <p class="className-details"><%= objectOriented %></p>
             </li>
             <li data-icon="false">
-                <hr width="1" size="20" color="#3B7454" class="hr">
-                <h5 class="attend-student">参与学生</h5>
-                <p class="className-details">
-                    <img src="/images/头像.png" class="attendStudent">
-                    <img src="/images/头像.png" class="attendStudent">
-                    <img src="/images/头像.png" class="attendStudent">
-                    <img src="/images/头像.png" class="attendStudent">
-                    <img src="/images/头像.png" class="attendStudent">
-                </p>
+                <a href="/course/studentList?courseId=<%=courseId%>"   data-ajax="false">
+                    <hr width="1" size="20" color="#3B7454" class="hr">
+                    <h5 class="className-text">参与学生</h5>
+                    <p class="className-details"><%=studentCount%></p>
+                </a>
             </li>
             <li data-icon="false">
                 <hr width="1" size="20" color="#3B7454" class="hr">
@@ -68,8 +64,8 @@
             </li>
         </ul>
         <div style="border-style: none" data-role="footer" data-position="fixed" data-theme="t">
-            <a href="joinCourse?courseId=1&userId=1"class="add_course">
-                <h4 style="color:#ffffff;text-align: center;">加入课程</h4>
+            <a onclick="loadXMLDoc()"class="add_course">
+                <h4 id="join_course" style="color:#ffffff;text-align: center;">加入课程</h4>
             </a>
         </div>
     </div>
@@ -77,6 +73,23 @@
     <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
     <script src="/javascripts/slick.min.js"></script>
     <script src="/javascripts/smx.js"></script>
+    <script>
+        function loadXMLDoc()
+        {
+            var xmlhttp;
+            var str;
+            if (window.XMLHttpRequest)
+            {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp=new XMLHttpRequest();
+            }
+            else
+            {// code for IE6, IE5
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.open("GET","/course/joinCourse?courseId=<%=courseId%>",true);
+            xmlhttp.send();
+        }
+    </script>
 </div>
 </body>
 </html>

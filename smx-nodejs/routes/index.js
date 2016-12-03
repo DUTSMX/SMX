@@ -13,11 +13,7 @@ router.get('/main',function (req,res) {
   })
 })
 
-/*
-* unuse
-*
 router.get('/login',function(req,res){
   res.render('login',{});
 });
- */
 module.exports = router;

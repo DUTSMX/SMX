@@ -13,7 +13,7 @@ router.get('/', function (req, res) {
 router.get('/question', function (req, res) {
 
     api.getQuestion(function (rows) {
-        console.log("rows:" + JSON.stringify(rows));
+        // console.log("rows:" + JSON.stringify(rows));
         res.render("question", {
             questionList: {
                 teacherList:null,
@@ -25,14 +25,14 @@ router.get('/question', function (req, res) {
 router.get('/questionDetail', function (req, res) {
     var questionId = req.query.questionId;
     api.getQuestionDetail(questionId, function (questionDetail) {
-        console.log("questionDetail:" + JSON.stringify(questionDetail))
+        // console.log("questionDetail:" + JSON.stringify(questionDetail))
         res.render('questionDetail', questionDetail);
     })
 })
 router.get('/answerDetail', function (req, res) {
     var answerId = req.query.answerId;
     api.getAnswerDetail(answerId, function (answerDetail) {
-        console.log("answerDetail:" + JSON.stringify(answerDetail))
+        // console.log("answerDetail:" + JSON.stringify(answerDetail))
         res.render('answerDetail', answerDetail);
     })
 })

@@ -2,22 +2,24 @@ var dbHelper = require('./dbHelper');
 var conn = dbHelper.getConn();
 
 exports.findAccount = function (phoneNumber, password, callback) {
-    console.log(phoneNumber+password);
+    // console.log(phoneNumber+password);
     var sql = "SELECT * FROM account WHERE phoneNumber = '"+ phoneNumber + "' and  password = '"+ password+"'";
     conn.query(sql, function (err, rows, fields) {
-        console.log(rows);
+        // console.log(rows);
         if (err) {
             console.log(err);
+            return;
         }
         callback(rows)
     })
 }
-
+/*
 exports.findAccountByNum = function(phoneNumber,callback){
     var sql = 'SELECT * FROM account WHERE phoneNumber = ' + phoneNumber;
     conn.query(sql, function (err, rows, fields) {
         if (err) {
             console.log(err);
+            return;
         }
         callback(rows)
     })
@@ -28,6 +30,7 @@ exports.findAccountById = function(userId,callback){
     conn.query(sql,function(err,rows,fileds){
         if(err){
             console.log(err);
+            return;
             // callback(unknownError);
         }
         callback(rows);
@@ -39,30 +42,33 @@ exports.addAccount = function(phoneNumber,password,callback){
     conn.query(sql,function(err,rows,fileds){
         if(err){
             console.log(err);
+            return;
         }
-        console.log(rows);
+        // console.log(rows);
         callback(rows);
     })
 }
 
 exports.finishInfo = function(userId,name,gender,age,callback){
     var sql = "UPDATE account SET userName='"+name+"',userGrade='"+gender+"',userAge="+age+",role = 0 WHERE userId="+userId;
-    console.log(sql);
+    // console.log(sql);
     conn.query(sql,function(err,rows,fileds){
-        console.log(rows)
+        // console.log(rows)
         if(err){
             console.log(err);
+            return;
         }
         callback(rows);
     })
-}
+}*/
 exports.judgeRole = function (userId,callback) {
     var sql ="SELECT role FROM account WHERE userId = '"+ userId +"' ";
     conn.query(sql,function(err,rows,fields){
         if(err){
-            console.error(err);
+            console.log(err);
+            return;
         }
-        console.log(rows);
+        // console.log(rows);
         //console.log("rows:"+rows[0].role);
         callback(rows);
     })

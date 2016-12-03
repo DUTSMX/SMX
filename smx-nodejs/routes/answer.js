@@ -9,7 +9,7 @@ router.get('/',function (req,res) {
     res.end("Hello World");
 })
 
-
+/*
 router.get('/addAnswer.html',function(req,res){
     res.sendFile(pages.addAnswer());
 })
@@ -62,5 +62,5 @@ router.get('/searchAnswer',function(req,res){
         res.write(JSON.stringify(rows));
     })
 })
-
+*/
 module.exports = router;
