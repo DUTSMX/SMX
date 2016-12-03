@@ -23,15 +23,16 @@
                 <li data-icon="false">
                     <hr width="1" size="20" color="#3B7454" class="hr">
                     <h5 class="className-text">手机号</h5>
-                    <input type="number" name="" placeholder="请填写手机号">
+                    <input id="phoneNumber" type="number" name="" placeholder="请填写手机号">
                 </li>
                 <li data-icon="false">
                     <hr width="1" size="20" color="#3B7454" class="hr">
                     <h5 class="className-text">密码</h5>
-                    <input type="password" name="" placeholder="请填写密码">
+                    <input id="password" type="password" name="" placeholder="请填写密码">
                 </li>
             </ul>
         </form>
+        <p id="hint"></p>
         <p style="display:block;float:right;margin-right: 5%">忘记密码</p>
         <p style="margin-left:40%;margin-top: 10%">创建新账号</p>
     </div>
@@ -57,13 +58,22 @@
         }
         xmlhttp.onreadystatechange=function()
         {
-            if (xmlhttp.readyState==4 && xmlhttp.status==200)
-            {
-                str = xmlhttp.responseText;//得到服务器响应
-                document.getElementById("join_course").innerHTML=str;
-            }
+//            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+//            {
+//                str = xmlhttp.responseText;//得到服务器响应
+//                console.log("str:"+str);
+//                if(str.length != 0){
+//                    document.getElementById("hint").innerHTML=str;
+//                }else{
+////                    window.location.href="/course/course"
+////                    xmlhttp.open("GET","/course/course",true);
+////                    xmlhttp.send();
+//                }
+//            }
         }
-        xmlhttp.open("GET","/users/login?phoneNumber=18840824301&password=123456",true);
+        var phoneNumber = document.getElementById("phoneNumber").value;
+        var password = document.getElementById("password").value;
+        xmlhttp.open("GET","/users/login?phoneNumber="+phoneNumber+"&password="+password,true);
         xmlhttp.send();
     }
 </script>

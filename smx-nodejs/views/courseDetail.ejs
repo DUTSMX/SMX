@@ -86,15 +86,6 @@
             {// code for IE6, IE5
                 xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
             }
-            xmlhttp.onreadystatechange=function()
-            {
-                if (xmlhttp.readyState==4 && xmlhttp.status==200)
-                {
-                    str = xmlhttp.responseText;//得到服务器响应
-                    document.getElementById("join_course").innerHTML=str;
-                }
-            }
-
             xmlhttp.open("GET","/course/joinCourse?courseId=<%=courseId%>",true);
             xmlhttp.send();
         }

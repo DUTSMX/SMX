@@ -37,13 +37,28 @@ router.get('/myQuestion',function (req,res) {
 router.get('/setCenter',function (req,res) {
     res.render('setCenter',{})
 })
-router.get('/login.ejs',function (req,res) {
-    // res.render('login',{})
-    res.sendFile(path.resolve(__dirname,'..')+"/views/login.ejs")
+router.get('/loginPage',function (req,res) {
+    res.render('login',{})
+    // res.sendFile(path.resolve(__dirname,'..')+"/views/login.ejs")
 })
 router.get('/login',function(req,res){
-    course
-    res.render('course',{})
+    var phoneNumber = req.query.phoneNumber;
+    var password = req.query.password;
+    api.login(phoneNumber,password,function (ret) {
+        if(ret.status){
+            var userId = ret.userId;
+            console.log("userId:"+userId)
+            req.session.userId = userId;
+            course.getCourse(userId,function (ret) {
+                res.render('course',ret)
+            })
+        }else{
+            res.send(ret.desc);
+        }
+        // console.log(JSON.stringify(ret))
+        // res.send(ret);
+
+    })
 })
 /*
 * unuse

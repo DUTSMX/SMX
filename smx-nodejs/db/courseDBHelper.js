@@ -45,6 +45,7 @@ exports.getCourseById = function (userId, callback) {
         // console.log("length:" + rows.length);
         if (rows && rows.length > 0) {
             var role = rows[0].role;
+            console.log("role:"+role)
             if (role == 0 || role == 1) {//学生
                 // console.log(sql1);
                 conn.query(sql1, function (err, rows, fields) {

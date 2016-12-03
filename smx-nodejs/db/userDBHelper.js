@@ -1,6 +1,6 @@
 var dbHelper = require('./dbHelper');
 var conn = dbHelper.getConn();
-/*
+
 exports.findAccount = function (phoneNumber, password, callback) {
     // console.log(phoneNumber+password);
     var sql = "SELECT * FROM account WHERE phoneNumber = '"+ phoneNumber + "' and  password = '"+ password+"'";
@@ -13,7 +13,7 @@ exports.findAccount = function (phoneNumber, password, callback) {
         callback(rows)
     })
 }
-
+/*
 exports.findAccountByNum = function(phoneNumber,callback){
     var sql = 'SELECT * FROM account WHERE phoneNumber = ' + phoneNumber;
     conn.query(sql, function (err, rows, fields) {

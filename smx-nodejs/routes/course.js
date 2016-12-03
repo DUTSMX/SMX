@@ -8,9 +8,9 @@ var utils = require('../utils/utils');
 
 
 router.get('/course',function(req,res){
-    // userId = req.session.userId;
-    var userId = 1;
-    console("userId:"+userId);
+    userId = req.session.userId;
+    // var userId = 1;
+    console.log("userId:"+userId);
     if(userId == null){
         // req.session.source="course/course";
         // res.redirect(301,utils.getServer()+"users/login.ejs");

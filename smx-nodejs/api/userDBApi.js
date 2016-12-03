@@ -12,7 +12,7 @@ exports.login = function(phoneNumber, password, callback){
         }else{
             callback({
                 status:true,
-                userId:rows[0].id,
+                userId:rows[0].userId,
                 desc:"登录成功"
             })
         }
