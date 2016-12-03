@@ -8,16 +8,13 @@ var utils = require('../utils/utils');
 
 
 router.get('/course',function(req,res){
-    userId = req.session.userId;
-    // var userId = 1;
-    console.log("userId:"+userId);
+    var userId = req.session.userId;
+    console.log("userId:"+userId)
     if(userId == null){
-        // req.session.source="course/course";
-        // res.redirect(301,utils.getServer()+"users/login.ejs");
-        res.render('login',{});
+        res.redirect('../users/loginPage');
     }else{
         api.getCourse(userId,function(rows){
-            // console.log("rows:"+JSON.stringify(rows));
+            console.log("rows:"+JSON.stringify(rows));
             res.render("course",rows);
         })
     }
@@ -40,12 +37,15 @@ router.get('/teacherDetail',function (req,res) {
 })
 
 router.get('/joinCourse',function (req,res) {
-    // var userId = req.query.teacherId;
-    var userId = 1;
-    var courseId = req.query.courseId;
-    api.joinCourse(userId,courseId,function (ret) {
-        res.send(ret);
-    })
+    var userId = req.session.userId;
+    if(userId == null){
+        res.redirect('../users/loginPage');
+    }else{
+        var courseId = req.query.courseId;
+        api.joinCourse(userId,courseId,function (ret) {
+            res.send(ret);
+        })
+    }
 })
 
 router.get('/studentList',function (req,res) {

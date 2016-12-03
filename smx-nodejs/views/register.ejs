@@ -14,7 +14,7 @@
 <div data-role="page" data-title="尚名校">
     <div data-role="header" data-theme="g" data-position="fixed">
         <img src="/images/ic_arrow_back.png" onclick="goBack()" class="left_icon"/>
-        <h3 class="page_title">&nbsp登录</h3>
+        <h3 class="page_title">&nbsp注册</h3>
         <img src="/images/icon_save.png" onclick="login()" class="right_icon"/>
     </div>
     <div>
@@ -27,15 +27,22 @@
                 </li>
                 <li data-icon="false">
                     <hr width="1" size="20" color="#3B7454" class="hr">
+                    <h5 class="className-text">验证码</h5>
+                    <input id="password" type="password" name="" placeholder="请填写验证码">
+                </li>
+                <li data-icon="false">
+                    <hr width="1" size="20" color="#3B7454" class="hr">
                     <h5 class="className-text">密码</h5>
                     <input id="password" type="password" name="" placeholder="请填写密码">
+                </li>
+                <li data-icon="false">
+                    <hr width="1" size="20" color="#3B7454" class="hr">
+                    <h5 class="className-text">确认密码</h5>
+                    <input id="password" type="password" name="" placeholder="请再次填写密码">
                 </li>
             </ul>
         </form>
         <p id="hint"></p>
-        <a href="forgetPassword"><p style="display:block;float:right;margin-right: 5%">忘记密码</p></a>
-        <a href="register"><p style="margin-left:40%;margin-top: 10%">创建新账号</p></a>
-
     </div>
 </div>
 </body>
@@ -49,19 +56,23 @@
     function login() {
         var xmlhttp;
         var str;
-        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
+        if (window.XMLHttpRequest)
+        {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
         }
-        else {// code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        else
+        {// code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
         }
         var flag = true;
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        xmlhttp.onreadystatechange=function()
+        {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
 //                if(flag){
                 str = xmlhttp.responseText;//得到服务器响应
-                document.getElementById("hint").innerHTML = str;
-                window.location.href = "/course/course";
+                document.getElementById("hint").innerHTML=str;
+                window.location.href="/course/course";
 //                    flag = false;
 //                }else{
 ////                    window.location.href="/course/course"
@@ -73,7 +84,7 @@
         }
         var phoneNumber = document.getElementById("phoneNumber").value;
         var password = document.getElementById("password").value;
-        xmlhttp.open("GET", "/users/login?phoneNumber=" + phoneNumber + "&password=" + password, true);
+//        xmlhttp.open("GET","/users/login?phoneNumber="+phoneNumber+"&password="+password,true);
         xmlhttp.send();
     }
 </script>

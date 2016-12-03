@@ -7,7 +7,15 @@ var path = require('path');
 var course = require('../api/courseDBApi');
 
 router.get('/mine',function (req,res) {
-    res.render('mine',{});
+    var userId = req.session.userId;
+    if(userId == null){
+        res.redirect('../users/loginPage');
+    }else{
+        api.getMineInfo(userId,function (ret) {
+            console.log("ret:"+JSON.stringify(ret))
+            res.render('mine',ret);
+        })
+    }
 })
 router.get('/personDetail',function (req,res) {
     res.render('personDetail',{});
@@ -44,21 +52,37 @@ router.get('/loginPage',function (req,res) {
 router.get('/login',function(req,res){
     var phoneNumber = req.query.phoneNumber;
     var password = req.query.password;
+    console.log("phoneNumber:"+phoneNumber+" password:"+password);
     api.login(phoneNumber,password,function (ret) {
+        var userId = ret.userId;
         if(ret.status){
-            var userId = ret.userId;
-            console.log("userId:"+userId)
             req.session.userId = userId;
-            course.getCourse(userId,function (ret) {
-                res.render('course',ret)
-            })
-        }else{
-            res.send(ret.desc);
         }
-        // console.log(JSON.stringify(ret))
-        // res.send(ret);
-
+        res.send(ret.desc);
     })
+})
+
+//注册
+// GET phoneNumber,password
+router.get('/register', function (req, res) {
+    var phoneNumber = req.query.phoneNumber;
+    var password = req.query.password;
+    res.render('register',{})
+    // api.register(phoneNumber, password, function (ret) {
+    //     if(ret.status){
+    //         req.session.userId = ret.userId;
+    //         console.log("put userId:"+req.session.userId);
+    //         res.sendFile(pages.finishInfo())
+    //     }else{
+    //         res.write('<head><meta charset="utf-8"/></head>');
+    //         res.write(JSON.stringify(ret));
+    //     }
+    // });
+
+})
+
+router.get('/forgetPassword',function (req,res) {
+    res.render('forgetPassword',{})
 })
 /*
 * unuse
@@ -89,23 +113,7 @@ router.post('/login', function (req, res) {
     });
 })
 
-//注册
-// GET phoneNumber,password
-router.get('/register', function (req, res) {
-    var phoneNumber = req.query.phoneNumber;
-    var password = req.query.password;
-    api.register(phoneNumber, password, function (ret) {
-        if(ret.status){
-            req.session.userId = ret.userId;
-            console.log("put userId:"+req.session.userId);
-            res.sendFile(pages.finishInfo())
-        }else{
-            res.write('<head><meta charset="utf-8"/></head>');
-            res.write(JSON.stringify(ret));
-        }
-    });
 
-})
 //获得个人信息
 router.get('/getMineInfo', function (req, res) {
     //var userId = req.session.userId;

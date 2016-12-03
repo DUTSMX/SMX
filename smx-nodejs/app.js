@@ -23,7 +23,7 @@ app.use(session({
   resave:true,
   saveUninitialized:false,
   secret: utils.getRandom128(),
-  cookie: {maxAge: 1 * 1000}
+  cookie: {maxAge: 1 * 60 * 1000}
 }))
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

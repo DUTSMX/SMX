@@ -13,6 +13,22 @@ exports.findAccount = function (phoneNumber, password, callback) {
         callback(rows)
     })
 }
+
+exports.findAccountById = function(userId,callback){
+    var sql = 'SELECT userHeadUrl,userName,gender,role FROM account WHERE userId = '+userId;
+    console.log("sql:"+sql);
+    conn.query(sql,function(err,rows,fileds){
+        if(err){
+            console.log(err);
+            return;
+            // callback(unknownError);
+        }else if(rows == null || rows[0] == null){
+            console("error account empty userId = "+userId);
+        }else{
+            callback(rows[0]);
+        }
+    })
+}
 /*
 exports.findAccountByNum = function(phoneNumber,callback){
     var sql = 'SELECT * FROM account WHERE phoneNumber = ' + phoneNumber;
@@ -25,17 +41,6 @@ exports.findAccountByNum = function(phoneNumber,callback){
     })
 }
 
-exports.findAccountById = function(userId,callback){
-    var sql = 'SELECT * FROM account WHERE userId = '+userId;
-    conn.query(sql,function(err,rows,fileds){
-        if(err){
-            console.log(err);
-            return;
-            // callback(unknownError);
-        }
-        callback(rows);
-    })
-}
 
 exports.addAccount = function(phoneNumber,password,callback){
     var sql = "INSERT INTO account(phoneNumber,password) VALUES ("+phoneNumber+","+password+")";
