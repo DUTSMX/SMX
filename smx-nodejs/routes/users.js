@@ -3,6 +3,8 @@ var api = require('../api/userDBApi');
 var utils = require('../utils/utils');
 var router = express.Router();
 var pages = require('./pages');
+var path = require('path');
+var course = require('../api/courseDBApi');
 
 router.get('/mine',function (req,res) {
     res.render('mine',{});
@@ -19,24 +21,29 @@ router.get('/createCourse',function (req,res) {
 router.get('/myCourse',function (req,res) {
     userId = 1
     api.getMyCourse(userId,function (rows) {
-        console.log("rows:"+JSON.stringify(rows))
+        // console.log("rows:"+JSON.stringify(rows))
         res.render('myCourse',{myCourse:rows});
     })
 })
 router.get('/myQuestion',function (req,res) {
     // var userId = req.query.userId;
     var userId = 1;
-    console.log("userId:"+userId);
+    // console.log("userId:"+userId);
     api.getMyQuestion(userId,function (questionList) {
-        console.log("question:"+JSON.stringify(questionList))
+        // console.log("question:"+JSON.stringify(questionList))
         res.render('myQuestion',questionList);
     })
 })
 router.get('/setCenter',function (req,res) {
     res.render('setCenter',{})
 })
-router.get('/login',function (req,res) {
-    res.render('login',{})
+router.get('/login.ejs',function (req,res) {
+    // res.render('login',{})
+    res.sendFile(path.resolve(__dirname,'..')+"/views/login.ejs")
+})
+router.get('/login',function(req,res){
+    course
+    res.render('course',{})
 })
 /*
 * unuse

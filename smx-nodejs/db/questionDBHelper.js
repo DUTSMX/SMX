@@ -8,8 +8,10 @@ exports.getQuestionContent = function (questionId,callback) {
     conn.query(sql, function (err,rows) {
         if(err){
             console.log(err);
+            return;
         }else if(rows == null || rows[0] == null){
-            console.log("empty")
+            console.log("questionContent empty questionId = "+questionId)
+            return
         }else{
             callback(rows[0]);
         }
@@ -27,19 +29,8 @@ exports.getQuestionDetail = function(questionId,callback){
         "WHERE b.questionId = "+questionId;
     conn.query(sql,function(err,rows,fields){
         if(err){
-            console.error(err);
-        }
-        callback(rows);
-    })
-}
-
-exports.searchQuestion = function(word,callback){
-    var sql = "SELECT questionId,userName,userHeadUrl,questionTtile,questionContent,questionTime as questionId,'提" +
-        "问者','提问内容',picurl,voiceurl from question " +
-        "WHERE CONCAT(username,content) LIKE '%"+word+"%' )";
-    conn.query(sql,function(err,rows,fields){
-        if(err){
-            console.error(err);
+            console.log(err);
+            return
         }
         callback(rows);
     })
@@ -54,10 +45,11 @@ exports.getAnswer = function (callback) {
         "left(b.answerContent,"+ aContent +") as answerAbstract, " +
         "b.answerTime as time "+
         "FROM (question a INNER JOIN answer b on a.questionId = b.questionId) JOIN account c on b.userId = c.userId" ;
-    console.log("sql:"+sql);
+    // console.log("sql:"+sql);
     conn.query(sql,function(err,rows,fields){
         if(err){
-            console.error(err);
+            console.log(err);
+            return;
         }
         callback(rows);
     })
@@ -72,14 +64,16 @@ exports.getQuestion = function (callback) {
         "left(a.questionContent,"+ aContent +") as answerAbstract, "+
         "a.questionTime as time "+
         "FROM question a JOIN account c on a.userId = c.userId" ;
-    console.log("sql:"+sql);
+    // console.log("sql:"+sql);
     conn.query(sql,function(err,rows,fields){
         if(err){
-            console.error(err);
+            console.log(err);
+            return;
         }
         callback(rows);
     })
 }
+
 
 exports.getAnswerDetail = function (answerId,callback) {
     var sql = "SELECT a.questionId as questionId," +
@@ -93,38 +87,28 @@ exports.getAnswerDetail = function (answerId,callback) {
     conn.query(sql,function(err,rows,fields){
         if(err){
             console.log(err);
+            return
         }else if(rows == null || rows[0] == null){
-            console.log("empty")
+            console.log("error answerDetail empty answerId = "+answerId);
+            return;
         }else{
             callback(rows[0]);
         }
     })
 }
 
-exports.askQuestion = function (userId,questionTitle,questionContent,callback) {
-    var time = sd.format(new Date().toLocaleString(), 'YYYY-MM-DD HH:mm:ss');
-    var sql = "INSERT INTO question (userId,questionTitle,questionContent,questionTime)" +
-        "VALUES ("+userId+",'"+questionTitle+"','"+questionContent+"','"+time+"')";
-    conn.query(sql,function(err,rows,fields){
-        if(err){
-            console.error(err);
-        }
-        callback(rows);
-    })
-}
-
 exports.getMyQuestion = function (userId, callback) {
-    var str = "提出了问题";
     var sql = "SELECT a.userHeadUrl as headUrl, " +
         "CONCAT(a.userName,"+"'提出了问题'"+") as authorDetail, " +
         "CONCAT("+"'questionDetail?questionId='"+",q.questionId ) as aHref, " +
         "q.questionTitle as questionDetail " +
         "FROM account a join question q ON a.userId = q.userId " +
         "WHERE q.userId = "+userId;
-    console.log("sql:"+sql);
+    // console.log("sql:"+sql);
     conn.query(sql, function (err,rows){
         if(err){
             console.log(err);
+            return;
         }else{
             callback(rows);
         }
@@ -142,8 +126,35 @@ exports.getMyAnswer = function (userId,callback) {
     conn.query(sql, function (err,rows) {
         if(err){
             console.log(err);
+            return;
         }else{
             callback(rows);
         }
     })
 }
+
+/*
+exports.searchQuestion = function(word,callback){
+    var sql = "SELECT questionId,userName,userHeadUrl,questionTtile,questionContent,questionTime as questionId,'提" +
+        "问者','提问内容',picurl,voiceurl from question " +
+        "WHERE CONCAT(username,content) LIKE '%"+word+"%' )";
+    conn.query(sql,function(err,rows,fields){
+        if(err){
+            console.log(err);
+            return;
+        }
+        callback(rows);
+    })
+}
+exports.askQuestion = function (userId,questionTitle,questionContent,callback) {
+    var time = sd.format(new Date().toLocaleString(), 'YYYY-MM-DD HH:mm:ss');
+    var sql = "INSERT INTO question (userId,questionTitle,questionContent,questionTime)" +
+        "VALUES ("+userId+",'"+questionTitle+"','"+questionContent+"','"+time+"')";
+    conn.query(sql,function(err,rows,fields){
+        if(err){
+            console.error(err);
+        }
+        callback(rows);
+    })
+}*/
+

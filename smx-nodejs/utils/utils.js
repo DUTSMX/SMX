@@ -5,7 +5,7 @@ exports.getRandom128 = function(){
 };
 
 exports.getServer = function(){
-    return "http://localhost:8081/";
+    return "http://localhost:8080/";
     // return "http://123.207.150.222:8081/";
 }
 

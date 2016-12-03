@@ -7,7 +7,7 @@ var utils = require('../utils/utils');
 
 router.get('/video',function (req,res) {
     api.getVideo(function (videoList) {
-        console.log("video:"+JSON.stringify(videoList))
+        // console.log("video:"+JSON.stringify(videoList))
         res.render('video',{videoList:videoList});
     })
 })
@@ -15,7 +15,7 @@ router.get('/video',function (req,res) {
 router.get('/videoDetail',function (req,res) {
     var videoId = req.query.videoId;
     api.getVideoDetail(videoId,function (videoDetail) {
-        console.log(videoDetail);
+        // console.log(videoDetail);
         res.render('videoDetail',videoDetail);
     })
 })
