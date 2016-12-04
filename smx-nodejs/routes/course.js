@@ -8,10 +8,10 @@ var utils = require('../utils/utils');
 
 
 router.get('/course',function(req,res){
-    var userId = 1;
+    var userId = req.session.userId;
+    console.log("userId:"+userId)
     if(userId == null){
-        req.session.source="course/course";
-        res.redirect(301,utils.getServer()+"users/login.ejs");
+        res.redirect('../users/loginPage');
     }else{
         api.getCourse(userId,function(rows){
             console.log("rows:"+JSON.stringify(rows));
@@ -22,7 +22,7 @@ router.get('/course',function(req,res){
 
 router.get('/courseDetail',function(req,res){
     var courseId = req.query.courseId;
-    console.log("courseId:"+courseId);
+    // console.log("courseId:"+courseId);
     api.getCourseDetail(courseId,function (courseDetail) {
         console.log("courseDetial:"+JSON.stringify(courseDetail));
         res.render('courseDetail',courseDetail);
@@ -36,6 +36,31 @@ router.get('/teacherDetail',function (req,res) {
     })
 })
 
+router.get('/joinCourse',function (req,res) {
+    var userId = req.session.userId;
+    if(userId == null){
+        res.redirect('../users/loginPage');
+    }else{
+        var courseId = req.query.courseId;
+        api.joinCourse(userId,courseId,function (ret) {
+            res.send(ret);
+        })
+    }
+})
+
+router.get('/studentList',function (req,res) {
+    var courseId = req.query.courseId;
+    api.getStudentList(courseId,function (ret) {
+        res.render('studentList',ret);
+    })
+})
+
+router.get('/courseList',function (req,res) {
+    var teacherId = req.query.teacherId;
+    api.getCourseList(teacherId,function (ret) {
+        res.render('courseList',ret);
+    })
+})
 
 /*
  * unuse
@@ -48,23 +73,23 @@ router.get('/search',function(req,res){
     })
 });
 
-router.get('/addCourse',function(req,res){
-    console.log("userId:"+req.session.userId);
-    var userId = req.session.userId;
-    if(userId == null){
-        req.session.source = "course/createCourse.ejs";
-        res.redirect(301,utils.getServer()+"users/login.ejs");
-    }else{
-        var name = req.query.name;
-        var time = req.query.time;
-        var objectOriented = req.query.objectOriented;
-        var content = req.query.content;
-        api.addCourse(userId,name,time,objectOriented,content,function (rows) {
-            console.log(rows);
-            res.write('<head><meta charset="utf-8"/></head>');
-            res.write("提交成功");
-        })
-    }
-});
- */
+ router.get('/addCourse',function(req,res){
+ console.log("userId:"+req.session.userId);
+ var userId = req.session.userId;
+ if(userId == null){
+ req.session.source = "course/createCourse.ejs";
+ res.redirect(301,utils.getServer()+"users/login.ejs");
+ }else{
+ var name = req.query.name;
+ var time = req.query.time;
+ var objectOriented = req.query.objectOriented;
+ var content = req.query.content;
+ api.addCourse(userId,name,time,objectOriented,content,function (rows) {
+ console.log(rows);
+ res.write('<head><meta charset="utf-8"/></head>');
+ res.write("提交成功");
+ })
+ }
+ });
+*/
 module.exports = router;

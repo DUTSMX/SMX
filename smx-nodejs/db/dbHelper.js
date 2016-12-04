@@ -13,3 +13,6 @@ conn.connect();
 exports.getConn = function(){
     return conn;
 }
+setInterval(function () {
+    conn.query('SELECT 1');
+}, 5000);

@@ -8,7 +8,7 @@
     <meta http-equiv="cache-control" content="no-cache"/>
     <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/myCourse.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/course.css">
 </head>
 <body>
 <div data-role="page" data-title="尚名校">
@@ -21,8 +21,10 @@
         <ul data-role="listview">
             <% myCourse.forEach(function(item){ %>
             <li data-icon="false">
-                <a href="courseDetail?courseId=<%= item.courseId %>" data-ajax="false">
-                    <img src=<%= item.teacherHeadUrl %>>  <!-- TODOteacherHeadUrl -->
+                <a href="../course/courseDetail?courseId=<%= item.courseId %>" data-ajax="false" target="_parent">
+                    <!-- 放在css就失效-->
+                    <div style="display: inline-block;position: absolute;top: 20px;left:20px" class="my_course_head_div"></div>
+                    <img style="width:47px;height:47px;position: absolute;top: 24px;left:24px" src=<%= item.teacherHeadUrl %>>  <!-- TODOteacherHeadUrl -->
                     <div class="class_info">
                         <div class="class_info_school">
                             <h5><%= item.teacherName %></h5>

@@ -19,27 +19,24 @@
 		<ul data-role="listview">
 			<li data-icon="false">
 				<a href="login" data-ajax="false"  target="_parent">
-					<img src="/images/头像.png" class="set-people">
-					<h1>姚晗</h1>
+					<img src="<%=userHeadUrl%>" class="set-people" style="width:50px;height:50px">
+					<h1><%=userName%></h1>
+					<%if(gender == 1){%>
 					<img class="gender"src="/images/man.png">
+					<%}else{%>
+					<img class="gender"src="/images/women.png">
+					<%}%>
 				</a>
 			</li>
 		</ul>
-
+		<%if(role == 2){%>
 		<ul data-role="listview" class="ui-listview-func">
 			<li data-icon="false">
 				<a onclick="statusSwitch()"  data-ajax="false">
 					<img src="/images/03.png" class="ui-li-icon">
 					<p class="question_status">问答状态</p>
-					<p class="switch_status"id="question_status">状态：关</p>
-				</a>
-			</li>
-		</ul>
-		<ul data-role="listview" class="ui-listview-func">
-			<li data-icon="false">
-				<a href="registerTeacher"  data-ajax="false" target="_parent">
-					<img src="/images/新建课程.png" class="ui-li-icon">
-					<p>申请家教</p>
+
+					<p class="switch_status"id="question_status"><% if(status){%>状态：开<%}else{%>状态：关<%}%></p>
 				</a>
 			</li>
 		</ul>
@@ -51,6 +48,16 @@
 				</a>
 			</li>
 		</ul>
+		<%}else{%>
+		<ul data-role="listview" class="ui-listview-func">
+			<li data-icon="false">
+				<a href="registerTeacher"  data-ajax="false" target="_parent">
+					<img src="/images/新建课程.png" class="ui-li-icon">
+					<p>申请家教</p>
+				</a>
+			</li>
+		</ul>
+		<%}%>
 		<ul data-role="listview" class="ui-listview-func">
 			<li data-icon="false" class="my_course">
 				<a href="myCourse"  data-ajax="false" target="_parent">
@@ -76,8 +83,8 @@
 		</ul>
 		<ul data-role="listview" class="ui-listview-func ui-btn-exit">
 			<li data-icon="false">
-				<a href="login"  data-ajax="false" target="_parent">
-					<p>注册/登录</p>
+				<a href="logout"  data-ajax="false" target="_parent">
+					<p>退出登录</p>
 				</a>
 			</li>
 		</ul>
@@ -96,15 +103,26 @@
 <script src="/javascripts/jquery.js"></script>
 <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
 <script>
-	var status = 0;
+	var xmlhttp;
+	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp = new XMLHttpRequest();
+	}else {// code for IE6, IE5
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
 	function statusSwitch() {
+		var status = '<%=status%>'
+		console.log("status:"+status);
 		if(status == 1){
 			status = 0;
 			document.getElementById("question_status").innerHTML = "状态：关";
+			xmlhttp.open('GET',"/users/questionStatus?userId=<%=userId%>&status=0");
+
 		}else{
 			status = 1;
 			document.getElementById("question_status").innerHTML = "状态：开";
+			xmlhttp.open('GET',"/users/questionStatus?userId=<%=userId%>&status=1");
 		}
+		xmlhttp.send();
 	}
 </script>
 </body>

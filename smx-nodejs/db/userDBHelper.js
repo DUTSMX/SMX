@@ -2,67 +2,123 @@ var dbHelper = require('./dbHelper');
 var conn = dbHelper.getConn();
 
 exports.findAccount = function (phoneNumber, password, callback) {
-    console.log(phoneNumber+password);
+    // console.log(phoneNumber+password);
     var sql = "SELECT * FROM account WHERE phoneNumber = '"+ phoneNumber + "' and  password = '"+ password+"'";
     conn.query(sql, function (err, rows, fields) {
-        console.log(rows);
+        // console.log(rows);
         if (err) {
             console.log(err);
-        }
-        callback(rows)
-    })
-}
-
-exports.findAccountByNum = function(phoneNumber,callback){
-    var sql = 'SELECT * FROM account WHERE phoneNumber = ' + phoneNumber;
-    conn.query(sql, function (err, rows, fields) {
-        if (err) {
-            console.log(err);
+            return;
         }
         callback(rows)
     })
 }
 
 exports.findAccountById = function(userId,callback){
-    var sql = 'SELECT * FROM account WHERE userId = '+userId;
+    var sql = 'SELECT userId,userHeadUrl,userName,gender,role FROM account WHERE userId = '+userId;
+    console.log("sql:"+sql);
     conn.query(sql,function(err,rows,fileds){
         if(err){
             console.log(err);
+            return;
             // callback(unknownError);
+        }else if(rows == null || rows[0] == null){
+            console("error account empty userId = "+userId);
+        }else{
+            callback(rows[0]);
         }
-        callback(rows);
     })
 }
+
+exports.getQuestionStatus = function(userId,callback){
+    var sql = "SELECT * FROM onlineTeacher WHERE userId = "+userId;
+    conn.query(sql,function (err,rows) {
+        if (err) {
+            console.log(err);
+            return;
+        } else if (rows == null) {
+            console.log("error getQuestionStatus is empty userId = " + userId);
+        }else if(rows[0] != null) {
+            callback(1);
+        }else {
+            callback(0);
+        }
+    })
+}
+
+exports.setQuestionStatus = function(userId,status,callback){
+    console.log("userId:"+userId+" status:"+status)
+    this.getQuestionStatus(userId,function (ret) {
+        if(ret && status == 0){//删除
+            var sql = "DELETE FROM onlineTeacher WHERE userId = "+userId;
+            conn.query(sql,function (err,rows) {
+                if(err){
+                    console.log(err);
+                    return;
+                }else{
+                    callback(rows);
+                }
+            })
+        }else if(!ret && status == 1){//添加
+            var sql = "INSERT INTO onlineTeacher(userId) VALUES("+userId+")";
+            conn.query(sql,function (err,rows) {
+                if(err){
+                    console.log(err);
+                }else{
+                    callback(rows);
+                }
+            })
+        }else{
+            console.log("error rows:"+JSON.stringify(ret)+" userId:"+userId);
+            return;
+        }
+    })
+}
+/*
+exports.findAccountByNum = function(phoneNumber,callback){
+    var sql = 'SELECT * FROM account WHERE phoneNumber = ' + phoneNumber;
+    conn.query(sql, function (err, rows, fields) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        callback(rows)
+    })
+}
+
 
 exports.addAccount = function(phoneNumber,password,callback){
     var sql = "INSERT INTO account(phoneNumber,password) VALUES ("+phoneNumber+","+password+")";
     conn.query(sql,function(err,rows,fileds){
         if(err){
             console.log(err);
+            return;
         }
-        console.log(rows);
+        // console.log(rows);
         callback(rows);
     })
 }
 
 exports.finishInfo = function(userId,name,gender,age,callback){
     var sql = "UPDATE account SET userName='"+name+"',userGrade='"+gender+"',userAge="+age+",role = 0 WHERE userId="+userId;
-    console.log(sql);
+    // console.log(sql);
     conn.query(sql,function(err,rows,fileds){
-        console.log(rows)
+        // console.log(rows)
         if(err){
             console.log(err);
+            return;
         }
         callback(rows);
     })
-}
+}*/
 exports.judgeRole = function (userId,callback) {
     var sql ="SELECT role FROM account WHERE userId = '"+ userId +"' ";
     conn.query(sql,function(err,rows,fields){
         if(err){
-            console.error(err);
+            console.log(err);
+            return;
         }
-        console.log(rows);
+        // console.log(rows);
         //console.log("rows:"+rows[0].role);
         callback(rows);
     })

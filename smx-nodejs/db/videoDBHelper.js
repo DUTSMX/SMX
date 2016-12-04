@@ -12,6 +12,7 @@ exports.getVideo = function(callback){
     conn.query(sql,function(err,rows){
         if(err){
             console.log(err);
+            return;
         }
         callback(rows);
     })
@@ -30,12 +31,14 @@ exports.getVideoDetail = function (videoId,callback) {
         "FROM account a JOIN video v " +
         "ON a.userId = v.authorId " +
         "WHERE v.videoId = "+videoId;
-    console.log("videoId:"+videoId)
+    // console.log("videoId:"+videoId)
     conn.query(sql, function (err,rows) {
         if(err){
             console.log(err)
+            return;
         }else if(rows == null || rows[0] == null){
-            console.log("rows:"+(rows[0] == null))
+            console.log("error:getVideoDetail empty videoId = "+videoId)
+            return;
         }else{
             callback(rows[0]);
         }
@@ -44,7 +47,7 @@ exports.getVideoDetail = function (videoId,callback) {
 /*
 * unuse
 * */
-
+/*
 exports.addVideo = function(videoname,username,url,degree,picurl,describe,callback){
     var degree = arguments[3]?arguments[3]:0;
     var picurl = arguments[4]?arguments[4]:null;
@@ -52,12 +55,12 @@ exports.addVideo = function(videoname,username,url,degree,picurl,describe,callba
         ""+url+","+degree+","+picurl+","+descrirbe+")";
     conn.query(sql,function(err,rows,fields){
         if(err){
-            console.error(err);
+            console.log(err);
+            return
         }
         callback(rows);
     })
 }
-
 exports.searchVideo = function(word,callback){
     var sql = "SELECT id,videoname,username,url,degree,picurl,describe as videoid,'发布者',videourl,'视频播放次数' ,picurl,'视频描述'from video " +
         "WHERE CONCAT(videoname,username,describe) LIKE '%"+word+"%' )";
@@ -68,3 +71,4 @@ exports.searchVideo = function(word,callback){
         callback(rows);
     })
 }
+*/
