@@ -21,13 +21,25 @@ exports.getCourseList = function (teacherId,callback) {
     })
 }
 
-exports.getCourseDetail = function(courseId,callback){
+exports.getCourseDetail = function(userId,courseId,callback){
     db.getCourseDetail(courseId,function(rows){
         var courseDetail = rows;
         db.getJoinStudent(courseId, function (rows) {
             courseDetail.studentCount = rows.length+"人";
-            console.log(JSON.stringify(courseDetail))
-            callback(courseDetail);
+            // console.log(JSON.stringify(courseDetail))
+            if(userId == null){
+                courseDetail.join = 0;
+                callback(courseDetail)
+            }else{
+                db.hasJoin(userId,courseId,function (rows) {
+                    if(rows == null || rows[0] == null){
+                        courseDetail.join = 0
+                    }else{
+                        courseDetail.join = 1;
+                    }
+                    callback(courseDetail)
+                })
+            }
         })
     })
 }

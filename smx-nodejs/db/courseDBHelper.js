@@ -165,6 +165,17 @@ exports.getJoinStudent = function (courseId,callback) {
         }
     })
 }
+exports.hasJoin = function(userId,courseId,callback){
+    var sql = "SELECT * FROM joinCourse WHERE userId = "+userId +" and courseId = "+courseId;
+    conn.query(sql,function (err,rows) {
+        if(err){
+            console.log(err);
+        }else{
+            callback(rows);
+        }
+    })
+}
+
 /**
  * unuse
  */
