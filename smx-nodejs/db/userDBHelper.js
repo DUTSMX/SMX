@@ -74,7 +74,6 @@ exports.setQuestionStatus = function(userId,status,callback){
         }
     })
 }
-/*
 exports.findAccountByNum = function(phoneNumber,callback){
     var sql = 'SELECT * FROM account WHERE phoneNumber = ' + phoneNumber;
     conn.query(sql, function (err, rows, fields) {
@@ -99,6 +98,18 @@ exports.addAccount = function(phoneNumber,password,callback){
     })
 }
 
+exports.updateAccount = function(phoneNumber,password,callback){
+    var sql = "UPDATE account set password = '"+password+"' WHERE phoneNumber = "+phoneNumber;
+    conn.query(sql,function (err,rows) {
+        if(err){
+            console.log(err);
+            return
+        }else{
+            callback(rows);
+        }
+    })
+}
+/*
 exports.finishInfo = function(userId,name,gender,age,callback){
     var sql = "UPDATE account SET userName='"+name+"',userGrade='"+gender+"',userAge="+age+",role = 0 WHERE userId="+userId;
     // console.log(sql);

@@ -62,27 +62,48 @@ router.get('/login',function(req,res){
     })
 })
 
-//注册
-// GET phoneNumber,password
-router.get('/register', function (req, res) {
+router.get('/getCheckCode',function (req,res) {
+    console.log("获取验证码")
     var phoneNumber = req.query.phoneNumber;
-    var password = req.query.password;
-    res.render('register',{})
-    // api.register(phoneNumber, password, function (ret) {
-    //     if(ret.status){
-    //         req.session.userId = ret.userId;
-    //         console.log("put userId:"+req.session.userId);
-    //         res.sendFile(pages.finishInfo())
-    //     }else{
-    //         res.write('<head><meta charset="utf-8"/></head>');
-    //         res.write(JSON.stringify(ret));
-    //     }
-    // });
+    console.log("phoneNumber:"+phoneNumber)
+    api.sendCheckCode(phoneNumber,function () {
 
+    })
 })
 
-router.get('/forgetPassword',function (req,res) {
+//注册
+// GET phoneNumber,password
+router.get('/registerPage', function (req, res) {
+    res.render('register',{})
+})
+router.get('/register',function (req,res) {
+    var phoneNumber = req.query.phoneNumber;
+    var password = req.query.password;
+    api.register(phoneNumber, password, function (ret) {
+        if(ret.status){
+            req.session.userId = ret.userId;
+            // console.log("put userId:"+req.session.userId);
+            // res.sendFile(pages.finishInfo())
+        }else{
+            // res.write('<head><meta charset="utf-8"/></head>');
+            // res.write(JSON.stringify(ret));
+        }
+        res.send(ret.desc);
+    });
+})
+
+router.get('/forgetPasswordPage',function (req,res) {
     res.render('forgetPassword',{})
+})
+router.get('/forgetPassword',function (req,res) {
+    var phoneNumber = req.query.phoneNumber;
+    var password = req.query.password;
+    api.forgetPassword(phoneNumber,password,function (ret) {
+        res.send(ret.desc);
+    })
+})
+router.get('/changePasswordPage',function (req,res) {
+    res.render('changePassword',{})
 })
 
 router.get('/logout',function (req,res) {
