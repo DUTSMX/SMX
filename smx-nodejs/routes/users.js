@@ -84,6 +84,19 @@ router.get('/register', function (req, res) {
 router.get('/forgetPassword',function (req,res) {
     res.render('forgetPassword',{})
 })
+
+router.get('/logout',function (req,res) {
+    delete req.session.userId;
+    res.render('login',{});
+})
+
+router.get('/questionStatus',function (req,res) {
+    var userId = req.session.userId;
+    var status = req.query.status;
+    api.setQuestionStatus(userId,status,function (ret) {
+        res.send("设置成功");
+    })
+})
 /*
 * unuse
 

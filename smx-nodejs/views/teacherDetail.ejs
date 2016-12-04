@@ -8,9 +8,6 @@
     <meta http-equiv="cache-control" content="no-cache"/>
     <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
-    <!--<link rel="stylesheet" type="text/css" href="../public/css/slick.css"> -->
-    <!-- <link rel="stylesheet" type="text/css" href="../public/css/slick-theme.css"> -->
-    <!-- <link rel="stylesheet" type="text/css" href="../public/css/class.css"> -->
     <link rel="stylesheet" type="text/css" href="/stylesheets/teacherDetail.css">
 </head>
 <body>
@@ -38,9 +35,12 @@
                 <h5 class="detail"><%= teacherGrade %></h5>
             </li>
             <li data-icon="false">
-                <hr width="1" size="20" color="#3B7454" class="hr">
-                <h5 class="type">课程列表</h5>
-                <h5 class="detail">2014-2016，高三数学</h5>
+                <a href="courseList?teacherId=<%=teacherId%>">
+                    <hr width="1" size="20" color="#3B7454" class="hr">
+                    <h5 class="type">课程列表</h5>
+                    <h5 class="detail">查看详情</h5>
+                </a>
+
             </li>
             <li data-icon="false">
                 <hr width="1" size="20" color="#3B7454" class="hr">

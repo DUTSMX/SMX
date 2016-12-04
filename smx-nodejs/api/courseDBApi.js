@@ -15,6 +15,12 @@ exports.getCourse = function(userId,callback){
     })
 }
 
+exports.getCourseList = function (teacherId,callback) {
+    db.getCourseById(teacherId,function (rows) {
+        callback({myCourse:rows});
+    })
+}
+
 exports.getCourseDetail = function(courseId,callback){
     db.getCourseDetail(courseId,function(rows){
         var courseDetail = rows;

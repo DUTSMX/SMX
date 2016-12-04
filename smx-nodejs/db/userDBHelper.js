@@ -15,7 +15,7 @@ exports.findAccount = function (phoneNumber, password, callback) {
 }
 
 exports.findAccountById = function(userId,callback){
-    var sql = 'SELECT userHeadUrl,userName,gender,role FROM account WHERE userId = '+userId;
+    var sql = 'SELECT userId,userHeadUrl,userName,gender,role FROM account WHERE userId = '+userId;
     console.log("sql:"+sql);
     conn.query(sql,function(err,rows,fileds){
         if(err){
@@ -26,6 +26,51 @@ exports.findAccountById = function(userId,callback){
             console("error account empty userId = "+userId);
         }else{
             callback(rows[0]);
+        }
+    })
+}
+
+exports.getQuestionStatus = function(userId,callback){
+    var sql = "SELECT * FROM onlineTeacher WHERE userId = "+userId;
+    conn.query(sql,function (err,rows) {
+        if (err) {
+            console.log(err);
+            return;
+        } else if (rows == null) {
+            console.log("error getQuestionStatus is empty userId = " + userId);
+        }else if(rows[0] != null) {
+            callback(1);
+        }else {
+            callback(0);
+        }
+    })
+}
+
+exports.setQuestionStatus = function(userId,status,callback){
+    console.log("userId:"+userId+" status:"+status)
+    this.getQuestionStatus(userId,function (ret) {
+        if(ret && status == 0){//删除
+            var sql = "DELETE FROM onlineTeacher WHERE userId = "+userId;
+            conn.query(sql,function (err,rows) {
+                if(err){
+                    console.log(err);
+                    return;
+                }else{
+                    callback(rows);
+                }
+            })
+        }else if(!ret && status == 1){//添加
+            var sql = "INSERT INTO onlineTeacher(userId) VALUES("+userId+")";
+            conn.query(sql,function (err,rows) {
+                if(err){
+                    console.log(err);
+                }else{
+                    callback(rows);
+                }
+            })
+        }else{
+            console.log("error rows:"+JSON.stringify(ret)+" userId:"+userId);
+            return;
         }
     })
 }

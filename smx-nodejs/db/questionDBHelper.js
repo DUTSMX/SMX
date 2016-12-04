@@ -133,6 +133,23 @@ exports.getMyAnswer = function (userId,callback) {
     })
 }
 
+exports.getOnlineTeacher = function (callback) {
+    var sql = "SELECT a.userId, " +
+        "a.userHeadUrl as headUrl, " +
+        "a.userName " +
+        "FROM account a JOIN onlineTeacher o ON a.userId = o.userId ";
+    conn.query(sql, function (err,rows) {
+        if(err){
+            console.log(err)
+            return;
+        }else if(rows == null){
+            console.log("onlineTeacher is empty");
+            return;
+        }else{
+            callback(rows);
+        }
+    })
+}
 /*
 exports.searchQuestion = function(word,callback){
     var sql = "SELECT questionId,userName,userHeadUrl,questionTtile,questionContent,questionTime as questionId,'提" +

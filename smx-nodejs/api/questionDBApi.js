@@ -13,12 +13,18 @@ exports.getQuestion = function(callback){
             rows.forEach(function (item) {
                 questionList.push(item);
             })
-            console.log(JSON.stringify(questionList));
+            // console.log(JSON.stringify(questionList));
             // questionList.sort(function (a,b) {
             //     return a.time<b.time?1:-1;
             // });
             // console.log(JSON.stringify(questionList));
-            callback(questionList);
+            db.getOnlineTeacher(function (teacherList) {
+                console.log("teacherList:"+JSON.stringify(teacherList));
+                callback({
+                    teacherList:teacherList,
+                    questionList:questionList
+                });
+            })
         })
     })
 }

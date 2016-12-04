@@ -13,13 +13,8 @@ router.get('/', function (req, res) {
 router.get('/question', function (req, res) {
 
     api.getQuestion(function (rows) {
-        // console.log("rows:" + JSON.stringify(rows));
-        res.render("question", {
-            questionList: {
-                teacherList:null,
-                answerList: rows
-            }
-        });
+        console.log("rows:" + JSON.stringify(rows));
+        res.render("question", rows);
     })
 })
 router.get('/questionDetail', function (req, res) {

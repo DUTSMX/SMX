@@ -105,7 +105,8 @@ exports.getCourseDetail = function (courseId, callback) {
 }
 
 exports.getTeacherDetail = function (teacherId, callback) {
-    var sql = "SELECT a.userName as teacherName, " +
+    var sql = "SELECT t.teacherId, " +
+        "a.userName as teacherName, " +
         "a.userSchool as teacherSchool, " +
         "a.userGrade as teacherGrade, " +
         "t.goodCourse, " +

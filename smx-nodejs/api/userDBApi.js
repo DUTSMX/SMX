@@ -40,7 +40,11 @@ exports.register = function(phoneNumber,password,callback){
 
 exports.getMineInfo = function(userId,callback){
     db.findAccountById(userId,function(rows){
-        callback(rows);
+        var mineInfo = rows;
+        db.getQuestionStatus(userId,function (ret) {
+            mineInfo.status=ret;
+            callback(rows);
+        })
     })
 }
 
@@ -64,5 +68,10 @@ exports.getMyQuestion = function(userId, callback){
             })
             callback({questionList:questionList});
         })
+    })
+}
+exports.setQuestionStatus = function(userId,status,callback){
+    db.setQuestionStatus(userId,status,function (ret) {
+        callback(ret);
     })
 }
