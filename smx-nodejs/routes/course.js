@@ -22,8 +22,9 @@ router.get('/course',function(req,res){
 
 router.get('/courseDetail',function(req,res){
     var courseId = req.query.courseId;
+    var userId = req.session.userId;
     // console.log("courseId:"+courseId);
-    api.getCourseDetail(courseId,function (courseDetail) {
+    api.getCourseDetail(userId,courseId,function (courseDetail) {
         console.log("courseDetial:"+JSON.stringify(courseDetail));
         res.render('courseDetail',courseDetail);
     })

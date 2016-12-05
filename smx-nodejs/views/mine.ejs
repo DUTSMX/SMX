@@ -18,7 +18,7 @@
 	<div data-role="content" class="content">
 		<ul data-role="listview">
 			<li data-icon="false">
-				<a href="login" data-ajax="false"  target="_parent">
+				<a href="login" data-ajax="false">
 					<img src="<%=userHeadUrl%>" class="set-people" style="width:50px;height:50px">
 					<h1><%=userName%></h1>
 					<%if(gender == 1){%>
@@ -42,7 +42,7 @@
 		</ul>
 		<ul data-role="listview" class="ui-listview-func">
 			<li data-icon="false">
-				<a href="createCourse"  data-ajax="false" target="_parent">
+				<a href="createCourse"  data-ajax="false">
 					<img src="/images/新建课程.png" class="ui-li-icon">
 					<p>新建课程</p>
 				</a>
@@ -51,7 +51,7 @@
 		<%}else{%>
 		<ul data-role="listview" class="ui-listview-func">
 			<li data-icon="false">
-				<a href="registerTeacher"  data-ajax="false" target="_parent">
+				<a href="registerTeacher"  data-ajax="false">
 					<img src="/images/新建课程.png" class="ui-li-icon">
 					<p>申请家教</p>
 				</a>
@@ -60,13 +60,13 @@
 		<%}%>
 		<ul data-role="listview" class="ui-listview-func">
 			<li data-icon="false" class="my_course">
-				<a href="myCourse"  data-ajax="false" target="_parent">
+				<a href="myCourse"  data-ajax="false">
 					<img src="/images/我的课程.png" class="ui-li-icon">
 					<p>我的课程</p>
 				</a>
 			</li>
 			<li data-icon="false">
-				<a href="myQuestion"  data-ajax="false" target="_parent">
+				<a href="myQuestion"  data-ajax="false">
 					<img src="/images/我的提问.png" class="ui-li-icon">
 					<p>我的提问</p>
 				</a>
@@ -75,7 +75,7 @@
 		</ul>
 		<ul data-role="listview" class="ui-listview-func">
 			<li data-icon="false">
-				<a href="setCenter"  data-ajax="false" target="_parent">
+				<a href="setCenter"  data-ajax="false">
 					<img src="/images/设置中心.png" class="ui-li-icon">
 					<p>设置中心</p>
 				</a>
@@ -83,7 +83,7 @@
 		</ul>
 		<ul data-role="listview" class="ui-listview-func ui-btn-exit">
 			<li data-icon="false">
-				<a href="logout"  data-ajax="false" target="_parent">
+				<a href="logout"  data-ajax="false">
 					<p>退出登录</p>
 				</a>
 			</li>
@@ -95,7 +95,7 @@
                 <li><a href="/course/course" data-ajax="false"><img src="/images/01.png"><p>课程</p></a></li>
                 <li><a href="/video/video" data-ajax="false"><img src="/images/02.png"><p>视频</p></a></li>
                 <li><a href="/question/question" data-ajax="false"><img src="/images/03.png"><p>答疑</p></a></li>
-                <li><a href="/users/mine" data-ajax="false"><img src="/images/04.png"><p>我的</p></a></li>
+                <li><a href="#" data-ajax="false"><img src="/images/04.png"><p>我的</p></a></li>
              </ul>
          </div>
     </div>

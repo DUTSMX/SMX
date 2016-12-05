@@ -21,7 +21,7 @@
         <ul data-role="listview">
             <% myCourse.forEach(function(item){ %>
             <li data-icon="false">
-                <a href="../course/courseDetail?courseId=<%= item.courseId %>" data-ajax="false" target="_parent">
+                <a href="../course/courseDetail?courseId=<%= item.courseId %>" data-ajax="false">
                     <!-- 放在css就失效-->
                     <div style="display: inline-block;position: absolute;top: 20px;left:20px" class="my_course_head_div"></div>
                     <img style="width:47px;height:47px;position: absolute;top: 24px;left:24px" src=<%= item.teacherHeadUrl %>>  <!-- TODOteacherHeadUrl -->

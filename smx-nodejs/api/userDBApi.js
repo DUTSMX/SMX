@@ -1,6 +1,9 @@
 var db = require('../db/userDBHelper')
 var course = require('../db/courseDBHelper')
 var question = require('../db/questionDBHelper')
+var utils = require('../utils/utils')
+var https = require('https');
+var qs = require('querystring')
 
 exports.login = function(phoneNumber, password, callback){
     db.findAccount(phoneNumber, password, function(rows){
@@ -38,6 +41,30 @@ exports.register = function(phoneNumber,password,callback){
     })
 }
 
+exports.forgetPassword = function (phoneNumber,password,callback) {
+    db.findAccountByNum(phoneNumber,function(rows){
+        if(rows[0] == null){
+            callback({
+                status:false,
+                desc:"该手机号尚未注册"
+            })
+        }else{
+            db.updateAccount(phoneNumber,password,function(rows){
+                console.log("rows:"+JSON.stringify(rows));
+                callback({
+                    status:true,
+                    desc:"修改成功"
+                })
+            })
+        }
+    })
+}
+
+exports.changePassword = function(userId,oldPassword,password,callback){
+    db.changePassword(userId,oldPassword,password,function (ret) {
+        callback(ret)
+    })
+}
 exports.getMineInfo = function(userId,callback){
     db.findAccountById(userId,function(rows){
         var mineInfo = rows;
@@ -74,4 +101,53 @@ exports.setQuestionStatus = function(userId,status,callback){
     db.setQuestionStatus(userId,status,function (ret) {
         callback(ret);
     })
+}
+exports.registerTeacher = function(userId,goodCourse,selfIntro,callback){
+    db.registerTeacher(userId,goodCourse,selfIntro,function (ret) {
+        callback(ret);
+    })
+}
+exports.sendCheckCode = function(phoneNumber,callback){
+    var phone = phoneNumber;
+    var appkey = "5f3d448a372cfaa71eeeb9fda2e323fa";
+    console.log("sendCheckCode")
+    // var sig = utils.md5(appkey+phone);
+    // console.log("sig:"+sig);
+    var data = {
+        "tel":{
+            "nationcode":"86",
+            "phone":"18840824301"
+        },
+        "type":"0",
+        "msg":"您的验证码为1234，如非本人操作，请忽略本短信",
+        "sig":"9665fa863f8abc5d71ceb0cf3c9cdfd3",
+        "extend":"",
+        "ext":""
+    }
+    var content= qs.stringify(data);
+    var opt = {
+        method: "POST",
+        host: "yun.tim.qq.com",
+        port:443,
+        path:"/v3/tlssmssvr/sendsms?sdkappid=1400019919&random=1261823",
+        headers: {
+            "Content-Type": 'application/json;charset=UTF-8'
+            // "Content-Length": data.length
+        }
+    }
+    console.log(opt);
+    var req = https.request(opt,function(serverFeedback){
+        console.log("status Code :"+serverFeedback.statusCode);
+        console.log("headers:"+serverFeedback.headers);
+        serverFeedback.setEncoding("utf8");
+        serverFeedback.on('data',function (body) {
+            console.log("body:"+body);
+        })
+        // callback(serverFeedback);
+    })
+    req.on('error',function (e) {
+        console.log("problem with request "+e.message);
+    })
+    req.write(JSON.stringify(data));
+    req.end();
 }

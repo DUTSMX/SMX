@@ -74,7 +74,6 @@ exports.setQuestionStatus = function(userId,status,callback){
         }
     })
 }
-/*
 exports.findAccountByNum = function(phoneNumber,callback){
     var sql = 'SELECT * FROM account WHERE phoneNumber = ' + phoneNumber;
     conn.query(sql, function (err, rows, fields) {
@@ -99,6 +98,41 @@ exports.addAccount = function(phoneNumber,password,callback){
     })
 }
 
+exports.updateAccount = function(phoneNumber,password,callback){
+    var sql = "UPDATE account set password = '"+password+"' WHERE phoneNumber = "+phoneNumber;
+    conn.query(sql,function (err,rows) {
+        if(err){
+            console.log(err);
+            return
+        }else{
+            callback(rows);
+        }
+    })
+}
+
+exports.changePassword = function (userId,oldPassword,password,callback) {
+    var sql = "SELECT * FROM account WHERE userId = "+userId +" and password = '"+oldPassword+"'";
+    conn.query(sql,function (err,rows) {
+        if(err){
+            console.log(err);
+            return;
+        }else if(rows == null || rows[0] == null){
+            callback("密码错误")
+        }else{
+            console.log("password:"+password)
+            var sql = "UPDATE account set password = '"+password+"' WHERE userId = "+userId;
+            conn.query(sql,function (err,rows) {
+                if(err){
+                    console.log(err);
+                    return;
+                }else{
+                    callback("修改成功")
+                }
+            })
+        }
+    })
+}
+/*
 exports.finishInfo = function(userId,name,gender,age,callback){
     var sql = "UPDATE account SET userName='"+name+"',userGrade='"+gender+"',userAge="+age+",role = 0 WHERE userId="+userId;
     // console.log(sql);
@@ -122,5 +156,25 @@ exports.judgeRole = function (userId,callback) {
         //console.log("rows:"+rows[0].role);
         callback(rows);
     })
+}
 
+exports.registerTeacher = function(userId,goodCourse,selfIntro,callback){
+    var sql = "INSERT INTO account(teacherId,goodCourse,selfIntroduction,createTime) VALUES("+userId+"'"+goodCourse+"','"+selfIntro+"',"+new Date()+")";
+    conn.query(sql,function (err,rows) {
+        if(err){
+            console.log(err)
+            return
+        }else{
+            var teacherId = rows.insertId;
+            var sql = "UPDATE account SET role = 2 WHERE userId = "+userId;
+            conn.query(sql,function (err,rows) {
+                if(err){
+                    console.log(err);
+                    return
+                }else{
+                    callback("申请成功")
+                }
+            })
+        }
+    })
 }
