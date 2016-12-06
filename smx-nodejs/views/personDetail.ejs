@@ -8,20 +8,56 @@
     <meta http-equiv="cache-control" content="no-cache"/>
     <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/slick.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/slick-theme.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/class.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/teacherDetail.css">
 </head>
 <body>
 <div data-role="page" data-title="尚名校">
     <div data-role="header" data-theme="g" data-position="fixed">
-        <h3>个人信息</h3>
+        <img src="/images/ic_arrow_back.png" onclick="goBack()" class="left_icon"/>
+        <h3 class="page_title">老师信息</h3>
+        <!--<img src="/images/ic_share.png" href="#" class="right_icon"/>-->
     </div>
-    <div data-role="content">
+    <div class="teacherInfo">
+        <ul data-role="listview">
+            <li data-icon="false">
+                <hr width="1" size="20" color="#3B7454" class="hr">
+                <h5 class="type">姓名</h5>
+                <h5 class="detail"><%= teacherName %></h5>
+            </li>
+            <li data-icon="false">
+                <hr width="1" size="20" color="#3B7454" class="hr">
+                <h5 class="type">所在学校</h5>
+                <h5 class="detail"><%= teacherSchool %></h5>
+            </li>
+            <li data-icon="false">
+                <hr width="1" size="20" color="#3B7454" class="hr">
+                <h5 class="type">年级</h5>
+                <h5 class="detail"><%= teacherGrade %></h5>
+            </li>
+            <li data-icon="false">
+                <a href="courseList?teacherId=<%=teacherId%>" data-ajax="false">
+                    <hr width="1" size="20" color="#3B7454" class="hr">
+                    <h5 class="type">课程列表</h5>
+                    <h5 class="detail">查看详情</h5>
+                </a>
+
+            </li>
+            <li data-icon="false">
+                <hr width="1" size="20" color="#3B7454" class="hr">
+                <h5 class="type">擅长课程</h5>
+                <h5 class="detail"><%= goodCourse %></h5>
+            </li>
+            <li data-icon="false">
+                <hr width="1" size="20" color="#3B7454" class="hr">
+                <h5 class="type">自我介绍</h5>
+                <h5 class="self_intro"><%= selfIntroduction %></h5>
+            </li>
+        </ul>
     </div>
-</div>
     <script src="/javascripts/jquery.js"></script>
     <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
     <script src="/javascripts/slick.min.js"></script>
+    <script src="/javascripts/smx.js"></script>
+</div>
 </body>
 </html>
