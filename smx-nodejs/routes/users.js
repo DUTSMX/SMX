@@ -118,6 +118,32 @@ router.get('/questionStatus',function (req,res) {
         res.send("设置成功");
     })
 })
+
+router.get('/changePassword',function (req,res) {
+    var userId = req.session.userId;
+    if(userId == null){
+        res.redirect('../users/loginPage');
+    }else {
+        var oldPassword = req.query.oldPassword;
+        var password = req.query.newPassword;
+        api.changePassword(userId, oldPassword, password, function (ret) {
+            res.send(ret);
+        })
+    }
+})
+
+router.get('/registerTeacher',function (req,res) {
+    var userId = req.session.userId;
+    if(userId == null){
+        res.redirect('../users/loginPage');
+    }else{
+        var goodCourse = req.query.goodCourse;
+        var selfIntro = req.query.selfIntro;
+        api.registerTeacher(userId,goodCourse,selfIntro,function (ret) {
+            res.send(ret);
+        })
+    }
+})
 /*
 * unuse
 

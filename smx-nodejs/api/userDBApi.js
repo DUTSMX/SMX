@@ -59,6 +59,12 @@ exports.forgetPassword = function (phoneNumber,password,callback) {
         }
     })
 }
+
+exports.changePassword = function(userId,oldPassword,password,callback){
+    db.changePassword(userId,oldPassword,password,function (ret) {
+        callback(ret)
+    })
+}
 exports.getMineInfo = function(userId,callback){
     db.findAccountById(userId,function(rows){
         var mineInfo = rows;
@@ -96,20 +102,25 @@ exports.setQuestionStatus = function(userId,status,callback){
         callback(ret);
     })
 }
-
+exports.registerTeacher = function(userId,goodCourse,selfIntro,callback){
+    db.registerTeacher(userId,goodCourse,selfIntro,function (ret) {
+        callback(ret);
+    })
+}
 exports.sendCheckCode = function(phoneNumber,callback){
     var phone = phoneNumber;
     var appkey = "5f3d448a372cfaa71eeeb9fda2e323fa";
     console.log("sendCheckCode")
     // var sig = utils.md5(appkey+phone);
     // console.log("sig:"+sig);
+    var number = (Math.random()*10000)%10000;
     var data = {
         "tel":{
             "nationcode":"86",
             "phone":"18840824301"
         },
         "type":"0",
-        "msg":"您的验证码为1234，如非本人操作，请忽略本短信",
+        "msg":"您的验证码为"+number+"，如非本人操作，请忽略本短信",
         "sig":"9665fa863f8abc5d71ceb0cf3c9cdfd3",
         "extend":"",
         "ext":""

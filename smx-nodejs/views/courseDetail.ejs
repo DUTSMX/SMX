@@ -63,11 +63,13 @@
                 <p><%=courseContent%></p>
             </li>
         </ul>
+        <%if(join == 0){%>
         <div style="border-style: none" data-role="footer" data-position="fixed" data-theme="t">
             <a onclick="loadXMLDoc()"class="add_course">
                 <h4 id="join_course" style="color:#ffffff;text-align: center;">加入课程</h4>
             </a>
         </div>
+        <%}%>
     </div>
     <script src="/javascripts/jquery.js"></script>
     <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
