@@ -178,3 +178,24 @@ exports.registerTeacher = function(userId,goodCourse,selfIntro,callback){
         }
     })
 }
+exports.getUserInfo=function (userId,callback) {
+    var sql="SELECT userName, " +
+        "gender, " +
+        "userAge," +
+        "userSchool," +
+        "userGrade," +
+        "userAddress " +
+        "FROM " +
+        "account where userId="
+    +userId
+    console.log(sql);
+    conn.query(sql,function (err,rows) {
+        if(err){
+            console.log(err);
+        }
+        else {
+            console.log(JSON.stringify(rows));
+            callback(rows);
+        }
+    })
+}

@@ -152,3 +152,9 @@ exports.sendCheckCode = function(phoneNumber,callback){
     req.write(JSON.stringify(data));
     req.end();
 }
+exports.getUserInfo =function(userId,callback){
+    db.getUserInfo(userId,function (rows) {
+        callback(rows[0]);
+    })
+
+}

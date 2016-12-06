@@ -17,9 +17,6 @@ router.get('/mine',function (req,res) {
         })
     }
 })
-router.get('/personDetail',function (req,res) {
-    res.render('personDetail',{});
-})
 router.get('/registerTeacher',function (req,res) {
     res.render('registerTeacher',{});
 })
@@ -141,6 +138,18 @@ router.get('/registerTeacher',function (req,res) {
         var selfIntro = req.query.selfIntro;
         api.registerTeacher(userId,goodCourse,selfIntro,function (ret) {
             res.send(ret);
+        })
+    }
+})
+router.get("/personDetail",function (req,res) {
+    var userId=req.session.userId;
+    console.log("userId:"+userId)
+    if(userId == null){
+        res.redirect('../users/loginPage');
+    }else{
+        api.getUserInfo(userId,function (rows) {
+            console.log(JSON.stringify(rows));
+            res.render("personDetail",rows);
         })
     }
 })
