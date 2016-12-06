@@ -113,13 +113,14 @@ exports.sendCheckCode = function(phoneNumber,callback){
     console.log("sendCheckCode")
     // var sig = utils.md5(appkey+phone);
     // console.log("sig:"+sig);
+    var number = (Math.random()*10000)%10000;
     var data = {
         "tel":{
             "nationcode":"86",
             "phone":"18840824301"
         },
         "type":"0",
-        "msg":"您的验证码为1234，如非本人操作，请忽略本短信",
+        "msg":"您的验证码为"+number+"，如非本人操作，请忽略本短信",
         "sig":"9665fa863f8abc5d71ceb0cf3c9cdfd3",
         "extend":"",
         "ext":""
