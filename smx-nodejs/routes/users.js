@@ -153,6 +153,9 @@ router.get("/personDetail",function (req,res) {
         })
     }
 })
+router.get("/personDetailEdit",function (req,res) {
+    res.render("personDetailEdit");
+})
 /*
 * unuse
 

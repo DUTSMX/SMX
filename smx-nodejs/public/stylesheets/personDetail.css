@@ -23,3 +23,22 @@
     font-weight: normal;
     float: right;
 }
+.hr-1{
+    float: left;
+    margin-top: 6%;
+}
+.ui-listview li .type-1{
+    display: inline-block;
+    margin-top: 6%;
+    padding-left: 3%;
+}
+.edit{
+    float: right;
+    margin-top: 4%;
+    margin-right: 2%;
+
+}
+.edit a{
+    text-decoration: none;
+    color: white;
+}

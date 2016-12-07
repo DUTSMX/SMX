@@ -187,7 +187,7 @@ exports.getUserInfo=function (userId,callback) {
         "userAddress " +
         "FROM " +
         "account where userId="
-    +userId
+    +userId;
     console.log(sql);
     conn.query(sql,function (err,rows) {
         if(err){
