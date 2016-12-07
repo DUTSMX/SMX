@@ -103,8 +103,33 @@ exports.setQuestionStatus = function(userId,status,callback){
     })
 }
 exports.registerTeacher = function(userId,goodCourse,selfIntro,callback){
-    db.registerTeacher(userId,goodCourse,selfIntro,function (ret) {
-        callback(ret);
+    db.judgeRole(userId,function (rows) {
+        console.log(rows[0]);
+    if(rows[0].role == 2){
+        callback({
+            status:false,
+            desc:"已经是家教了还申请啥"
+        })
+    }else if (rows[0].role == 1){
+        callback({
+            status:false,
+            desc:"已申请当家教，请耐心等待审核"
+        })
+    }
+    else if (rows[0].role == 0){
+        db.registerTeacher(userId,goodCourse,selfIntro,function(rows){
+            console.log("rows:"+JSON.stringify(rows));
+            callback({
+                status:true,
+                desc:"申请成功"
+            })
+        })
+    }else{
+        callback({
+            status:false,
+            desc:"未知错误"
+        })
+    }
     })
 }
 exports.sendCheckCode = function(phoneNumber,callback){

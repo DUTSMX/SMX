@@ -17,7 +17,10 @@ router.get('/mine',function (req,res) {
         })
     }
 })
-router.get('/registerTeacher',function (req,res) {
+router.get('/personDetail',function (req,res) {
+    res.render('personDetail',{});
+})
+router.get('/registerTeacherPage',function (req,res) {
     res.render('registerTeacher',{});
 })
 router.get('/createCourse',function (req,res) {
@@ -131,13 +134,15 @@ router.get('/changePassword',function (req,res) {
 
 router.get('/registerTeacher',function (req,res) {
     var userId = req.session.userId;
+    console.log("userId:"+userId);
     if(userId == null){
-        res.redirect('../users/loginPage');
+        res.redirect('loginPage');
     }else{
         var goodCourse = req.query.goodCourse;
         var selfIntro = req.query.selfIntro;
         api.registerTeacher(userId,goodCourse,selfIntro,function (ret) {
-            res.send(ret);
+            console.log("ret:"+ret.desc)
+            res.send(ret.desc);
         })
     }
 })

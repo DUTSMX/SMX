@@ -23,20 +23,47 @@
 				<li data-icon="false">
 					<hr width="1" size="20" color="#3B7454" class="hr">
 					<h5 class="className-text">擅长课程</h5>
-					<input type="text" name="" placeholder="请填写擅长的课程">
+					<input id="goodCourse" type="text" name="" placeholder="请填写擅长的课程">
 				</li>
 				<li data-icon="false">
 					<hr width="1" size="20" color="#3B7454" class="hr">
 					<h5 class="className-text">个人介绍</h5>
-					<textarea type="text" name="" placeholder="请填写个人介绍"></textarea>
+					<textarea id="selfIntro" type="text" name="" placeholder="请填写个人介绍"></textarea>
 				</li>
 			</ul>
 		</form>
+			<p id = "hint"></p>
 		</div>
 		<script src="/javascripts/jquery.js"></script>
 		<script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
 		<script src="/javascripts/slick.min.js"></script>
 		<script src="/javascripts/smx.js"></script>
+		<script >
+			var xmlhttp;
+			if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+				xmlhttp = new XMLHttpRequest();
+			}
+			else {// code for IE6, IE5
+				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			function registerTeacher() {
+				console.log("请求发送成功");
+				var goodCourse = document.getElementById("goodCourse").value;
+				var selfIntro = document.getElementById("selfIntro").value;
+				var url = "registerTeacher?goodCourse=" +goodCourse+ "&selfIntro="+ selfIntro;
+				xmlhttp.open("GET",url,true)
+				xmlhttp.send();
+				xmlhttp.onreadystatechange = function () {
+					if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+						str = xmlhttp.responseText;//得到服务器响应
+						document.getElementById("hint").innerHTML = str;//显示提示信息
+						if (str == "申请成功") {
+							window.location.href = "/course/course";//跳转到主页
+						}
+					}
+				}
+			}
+		</script>
 		</div>
 </body>
 </html>
