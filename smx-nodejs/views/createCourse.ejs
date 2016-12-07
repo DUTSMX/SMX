@@ -15,7 +15,7 @@
     <div data-role="header" data-theme="g" data-position="fixed">
         <img src="/images/ic_arrow_back.png" onclick="goBack()" class="left_icon"/>
         <h3 class="page_title">新建课程</h3>
-        <!--<img src="/images/ic_share.png" href="#" class="right_icon"/>-->
+        <img src="/images/icon_save.png" onclick="createCourse()" class="right_icon"/>
     </div>
     <div class="teacher-intro">
         <form method="" action="">
@@ -24,53 +24,54 @@
 
                     <hr width="1" size="20" color="#3B7454" class="hr">
                     <h5 class="className-text">课程名称</h5>
-                    <input type="text" name="" placeholder="请填写课程名称">
+                    <input id = "courseName"type="text" name="" placeholder="请填写课程名称">
 
                 </li>
                 <li data-icon="false">
 
                     <hr width="1" size="20" color="#3B7454" class="hr">
                     <h5 class="className-text">课程时间</h5>
-                    <input type="date" name="" placeholder="请选择课程时间">
+                    <input id = "courseDate"type="date" name="" placeholder="请选择课程时间">
 
                 </li>
                 <li data-icon="false">
 
                     <hr width="1" size="20" color="#3B7454" class="hr">
                     <h5 class="className-text">开始时间</h5>
-                    <input type="time" name="" id="start" placeholder="">
+                    <input id= "beginTime"type="time" name="" id="start" placeholder="">
 
                 </li>
                 <li data-icon="false">
 
                     <hr width="1" size="20" color="#3B7454" class="hr">
                     <h5 class="className-text">结束时间</h5>
-                    <input type="time" name="" placeholder="" id="end">
+                    <input id = "finshTime"type="time" name="" placeholder="" id="end">
 
                 </li>
                 <li data-icon="false">
 
                     <hr width="1" size="20" color="#3B7454" class="hr">
                     <h5 class="className-text">课程时长</h5>
-                    <input type="text" name="" placeholder="">
+                    <input id="courseTime"type="text" name="" placeholder="">
 
                 </li>
                 <li data-icon="false">
 
                     <hr width="1" size="20" color="#3B7454" class="hr">
                     <h5 class="className-text">面向对象</h5>
-                    <input type="text" name="" placeholder="请选择面向课程对象">
+                    <input id = "objectOriented"type="text" name="" placeholder="请选择面向课程对象">
 
                 </li>
                 <li data-icon="false">
 
                     <hr width="1" size="20" color="#3B7454" class="hr">
                     <h5 class="className-text">课程内容</h5>
-                    <input type="text" name="" placeholder="请填写课程内容">
+                    <input id = "courseContent"type="text" name="" placeholder="请填写课程内容">
 
                 </li>
             </ul>
         </form>
+        <p id="hint"></p>
     </div>
     <script type="text/javascript">
     </script>
@@ -78,6 +79,38 @@
     <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
     <script src="/javascripts/slick.min.js"></script>
     <script src="/javascripts/smx.js"></script>
-</div>
+    <script >
+        var xmlhttp;
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        }
+        else {// code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        function createCourse () {
+            console.log("请求发送成功");
+            var courseName = document.getElementById("courseName").value;
+            var courseDate = document.getElementById("courseDate").value;
+            var beginTime = document.getElementById("beginTime").value;
+            var finshTime = document.getElementById("finshTime").value;
+            var courseTime = document.getElementById("courseTime").value;
+            var objectOriented = document.getElementById("objectOriented").value;
+            var courseContent = document.getElementById("courseContent").value;
+            var url = "/course/createCourse?courseName=" + courseName + "&courseDate=" + courseDate + "&beginTime=" + beginTime + "" +
+                    "&finshTime=" + finshTime + "&courseTime=" + courseTime + "&objectOriented=" + objectOriented + "&courseContent=" + courseContent;
+            xmlhttp.open("GET",url,true)
+            xmlhttp.send();
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    str = xmlhttp.responseText;//得到服务器响应
+                    document.getElementById("hint").innerHTML = str;//显示提示信息
+                    if (str == "创建成功") {
+                        window.location.href = "/course/course";//跳转到主页
+                    }
+                }
+            }
+        }
+    </script>
+    </div>
 </body>
 </html>
