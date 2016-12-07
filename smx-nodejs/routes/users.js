@@ -153,8 +153,16 @@ router.get("/personDetail",function (req,res) {
         })
     }
 })
-router.get("/personDetailEdit",function (req,res) {
-    res.render("personDetailEdit");
+router.get("/personDetailEdit",function (req,res) { var userId=req.session.userId;
+    console.log("userId:"+userId)
+    if(userId == null){
+        res.redirect('../users/loginPage');
+    }else{
+        api.getUserInfo(userId,function (rows) {
+            console.log(JSON.stringify(rows));
+            res.render("personDetailEdit",rows);
+        })
+    }
 })
 /*
 * unuse
