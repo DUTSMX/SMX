@@ -65,7 +65,7 @@
         </ul>
         <%if(join == 0){%>
         <div style="border-style: none" data-role="footer" data-position="fixed" data-theme="t">
-            <a onclick="loadXMLDoc()"class="add_course">
+            <a onclick="joinCourse()"class="add_course">
                 <h4 id="join_course" style="color:#ffffff;text-align: center;">加入课程</h4>
             </a>
         </div>
@@ -76,21 +76,6 @@
     <script src="/javascripts/slick.min.js"></script>
     <script src="/javascripts/smx.js"></script>
     <script>
-        function loadXMLDoc()
-        {
-            var xmlhttp;
-            var str;
-            if (window.XMLHttpRequest)
-            {// code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp=new XMLHttpRequest();
-            }
-            else
-            {// code for IE6, IE5
-                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.open("GET","/course/joinCourse?courseId=<%=courseId%>",true);
-            xmlhttp.send();
-        }
     </script>
 </div>
 </body>
