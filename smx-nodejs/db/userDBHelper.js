@@ -159,20 +159,24 @@ exports.judgeRole = function (userId,callback) {
 }
 
 exports.registerTeacher = function(userId,goodCourse,selfIntro,callback){
-    var sql = "INSERT INTO account(teacherId,goodCourse,selfIntroduction,createTime) VALUES("+userId+"'"+goodCourse+"','"+selfIntro+"',"+new Date()+")";
+    var createTime = String(new Date());
+    console.log("createTime");
+    var sql = "INSERT INTO teacher(teacherId,goodCourse,selfIntroduction,createTime) VALUES("+userId+",'"+goodCourse+"','"+selfIntro+"','"+createTime+"')";
+    console.log(sql);
     conn.query(sql,function (err,rows) {
+
         if(err){
             console.log(err)
             return
         }else{
-            var teacherId = rows.insertId;
+            var userId = rows.insertId;
             var sql = "UPDATE account SET role = 2 WHERE userId = "+userId;
             conn.query(sql,function (err,rows) {
                 if(err){
                     console.log(err);
                     return
                 }else{
-                    callback("申请成功")
+                    callback(rows)
                 }
             })
         }

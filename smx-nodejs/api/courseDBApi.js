@@ -63,13 +63,16 @@ exports.getStudentList = function(courseId,callback){
 }
 /*
 * unuse
-*
-exports.addCourse = function(userId,name,time,objectOriented,content,callback){
-    db.addCourse(userId,name,time,objectOriented,content,function (rows) {
-        callback(rows);
-    })
-}
+*/
 
+exports.addCourse = function(userId,courseName,courseDate,beginTime,finshTime,courseTime,objectOriented,courseContent,callback){
+    db.addCourse(userId,courseName,courseDate,beginTime,finshTime,courseTime,objectOriented,courseContent,function (rows) {
+            console.log("rows:"+JSON.stringify(rows));
+            callback("创建成功")
+        })
+    }
+
+/*
 exports.search = function(word,callback){
     db.search(word,function(rows){
         callback(rows);

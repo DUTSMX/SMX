@@ -179,18 +179,20 @@ exports.hasJoin = function(userId,courseId,callback){
 /**
  * unuse
  */
-/*
-exports.addCourse = function (userId, name, time, objectOriented, content, callback) {
-    var sql = "INSERT INTO course(userId,courseName,courseTime,objectOriented,courseContent) VALUES ('" + userId + "'," + name + ",'" + time + "','" + objectOriented + "','" + content + "')";
-    conn.query(sql, function (err, rows, fields) {
+
+exports.addCourse = function (userId,courseName,courseDate,beginTime,finshTime,courseTime,objectOriented,courseContent, callback) {
+    var sql = "INSERT INTO course(userId,courseName,courseDate,beginTime,finshTime,courseTime,objectOriented,courseContent) VALUES ('" + userId + "','" + courseName + "','" + courseDate + "','" + beginTime + "','" + finshTime + "','" + courseTime + "','" + objectOriented + "','" + courseContent + "')";
+    conn.query(sql, function (err,rows) {
+        console.log(sql);
         if (err) {
             console.log(err);
             return;
+        }else {
+            callback(rows);
         }
-        callback(rows);
     })
 }
-
+ /*
 exports.search = function (word, callback) {
     var sql = "SELECT c.courseId as courseId,c.courseName as courseName,c.courseTime as courseTime," +
         "a.userHeadUrl as teacherHeadUrl,a.userSchool as teacherSchool,a.userGrade as teacherGrade  FROM course c JOIN account a on c.userId = a.userId" +
