@@ -42,7 +42,43 @@ function changePassword() {
         }
     }
 }
+<<<<<<< HEAD
 /*忘记密码*/
+=======
+/* 加入课程 */
+function joinCourse() {
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            $("#join_course").text(xmlhttp.responseText);
+        }
+    }
+    xmlhttp.open("GET","/course/joinCourse?courseId=<%=courseId%>",true);
+    xmlhttp.send();
+}
+function createCourse () {
+    console.log("请求发送成功");
+    var courseName = document.getElementById("courseName").value;
+    var courseDate = document.getElementById("courseDate").value;
+    var beginTime = document.getElementById("beginTime").value;
+    var finshTime = document.getElementById("finshTime").value;
+    var courseTime = document.getElementById("courseTime").value;
+    var objectOriented = document.getElementById("objectOriented").value;
+    var courseContent = document.getElementById("courseContent").value;
+    var url = "/course/createCourse?courseName=" + courseName + "&courseDate=" + courseDate + "&beginTime=" + beginTime + "" +
+        "&finshTime=" + finshTime + "&courseTime=" + courseTime + "&objectOriented=" + objectOriented + "&courseContent=" + courseContent;
+    xmlhttp.open("GET",url,true)
+    xmlhttp.send();
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            str = xmlhttp.responseText;//得到服务器响应
+            document.getElementById("hint").innerHTML = str;//显示提示信息
+            if (str == "创建成功") {
+                window.location.href = "/course/course";//跳转到主页
+            }
+        }
+    }
+}
+>>>>>>> 64fc85efd3af73151c847e043d40891b9c81c65d
 function forgetPassword() {
     var phoneNumber = document.getElementById("phoneNumber").value;
     var checkCode = document.getElementById("checkCode").value;
@@ -72,6 +108,7 @@ function forgetPassword() {
         }
     }
 }
+<<<<<<< HEAD
 /*获取验证码*/
 function check() {
     $("#checkCodeBtn").css({'background':"#CCCCCC"})
@@ -90,6 +127,9 @@ function check() {
 
 }
 /*登录*/
+=======
+
+>>>>>>> 64fc85efd3af73151c847e043d40891b9c81c65d
 function login() {
     var phoneNumber = document.getElementById("phoneNumber").value;
     var password = document.getElementById("password").value;
@@ -113,7 +153,10 @@ function login() {
         }
     }
 }
+<<<<<<< HEAD
 /*切换问答状态*/
+=======
+>>>>>>> 64fc85efd3af73151c847e043d40891b9c81c65d
 function statusSwitch() {
     var status = '<%=status%>'
     console.log("status:"+status);
@@ -129,7 +172,11 @@ function statusSwitch() {
     }
     xmlhttp.send();
 }
+<<<<<<< HEAD
 /*注册成功*/
+=======
+
+>>>>>>> 64fc85efd3af73151c847e043d40891b9c81c65d
 function register() {
     var phoneNumber = document.getElementById("phoneNumber").value;
     var checkCode = document.getElementById("checkCode").value;
@@ -158,4 +205,25 @@ function register() {
             }
         }
     }
+<<<<<<< HEAD
+=======
+}
+
+function registerTeacher() {
+    console.log("请求发送成功");
+    var goodCourse = document.getElementById("goodCourse").value;
+    var selfIntro = document.getElementById("selfIntro").value;
+    var url = "registerTeacher?goodCourse=" +goodCourse+ "&selfIntro="+ selfIntro;
+    xmlhttp.open("GET",url,true)
+    xmlhttp.send();
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            str = xmlhttp.responseText;//得到服务器响应
+            document.getElementById("hint").innerHTML = str;//显示提示信息
+            if (str == "申请成功") {
+                window.location.href = "/course/course";//跳转到主页
+            }
+        }
+    }
+>>>>>>> 64fc85efd3af73151c847e043d40891b9c81c65d
 }
