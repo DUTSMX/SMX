@@ -42,9 +42,6 @@ function changePassword() {
         }
     }
 }
-<<<<<<< HEAD
-/*忘记密码*/
-=======
 /* 加入课程 */
 function joinCourse() {
     xmlhttp.onreadystatechange = function() {
@@ -78,7 +75,7 @@ function createCourse () {
         }
     }
 }
->>>>>>> 64fc85efd3af73151c847e043d40891b9c81c65d
+/*忘记密码*/
 function forgetPassword() {
     var phoneNumber = document.getElementById("phoneNumber").value;
     var checkCode = document.getElementById("checkCode").value;
@@ -108,7 +105,7 @@ function forgetPassword() {
         }
     }
 }
-<<<<<<< HEAD
+
 /*获取验证码*/
 function check() {
     $("#checkCodeBtn").css({'background':"#CCCCCC"})
@@ -127,9 +124,6 @@ function check() {
 
 }
 /*登录*/
-=======
-
->>>>>>> 64fc85efd3af73151c847e043d40891b9c81c65d
 function login() {
     var phoneNumber = document.getElementById("phoneNumber").value;
     var password = document.getElementById("password").value;
@@ -153,10 +147,7 @@ function login() {
         }
     }
 }
-<<<<<<< HEAD
 /*切换问答状态*/
-=======
->>>>>>> 64fc85efd3af73151c847e043d40891b9c81c65d
 function statusSwitch() {
     var status = '<%=status%>'
     console.log("status:"+status);
@@ -172,11 +163,7 @@ function statusSwitch() {
     }
     xmlhttp.send();
 }
-<<<<<<< HEAD
 /*注册成功*/
-=======
-
->>>>>>> 64fc85efd3af73151c847e043d40891b9c81c65d
 function register() {
     var phoneNumber = document.getElementById("phoneNumber").value;
     var checkCode = document.getElementById("checkCode").value;
@@ -205,8 +192,6 @@ function register() {
             }
         }
     }
-<<<<<<< HEAD
-=======
 }
 
 function registerTeacher() {
@@ -225,5 +210,4 @@ function registerTeacher() {
             }
         }
     }
->>>>>>> 64fc85efd3af73151c847e043d40891b9c81c65d
 }
