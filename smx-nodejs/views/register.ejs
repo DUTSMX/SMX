@@ -63,35 +63,7 @@
         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
     }
 
-    function register() {
-        var phoneNumber = document.getElementById("phoneNumber").value;
-        var checkCode = document.getElementById("checkCode").value;
-        var password = document.getElementById("password").value;
-        var passwordAgain = document.getElementById("passwordAgain").value;
-        if(phoneNumber.length == 0){
-            document.getElementById("hint").innerHTML = "手机号不能为空";
-        }else if(!(/^1[34578]\d{9}$/.test(phoneNumber))){
-            document.getElementById("hint").innerHTML = "手机号格式不正确";
-        }else if(password.length == 0){
-            document.getElementById("hint").innerHTML = "密码不能为空";
-        }else if(password !=passwordAgain){//发送登录请求;
-            document.getElementById("hint").innerHTML = "密码不一致";
-        }else{
-            xmlhttp.open("GET", "/users/register?phoneNumber=" + phoneNumber + "&password=" + password, true);
-            xmlhttp.send();
-        }
-        xmlhttp.onreadystatechange=function()
-        {
-            if (xmlhttp.readyState==4 && xmlhttp.status==200)
-            {
-                var str = xmlhttp.responseText;//得到服务器响应
-                document.getElementById("hint").innerHTML=str;
-                if(str == "注册成功"){
-                    window.location.href="/course/course";
-                }
-            }
-        }
-    }
+
 </script>
 </div>
 </body>
