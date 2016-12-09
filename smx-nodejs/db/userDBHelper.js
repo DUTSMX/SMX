@@ -23,7 +23,7 @@ exports.findAccountById = function(userId,callback){
             return;
             // callback(unknownError);
         }else if(rows == null || rows[0] == null){
-            console("error account empty userId = "+userId);
+            console.log("error account empty userId = "+userId);
         }else{
             callback(rows[0]);
         }
@@ -205,9 +205,12 @@ exports.getUserInfo=function (userId,callback) {
 }
 
 exports.saveCheckCode = function(phoneNumber,checkCode,callback){
+    console.log("saveCheckCode: phoneNumber="+phoneNumber+" checkCode:"+checkCode)
     this.getCheckCode(phoneNumber,function (ret) {
-        if(ret == null){
-            sql = "INSERT INTO checkCode(phoneNumber,checkCode) VALUES("+phoneNumber+","+checkCode+")";
+        console.log("ret:"+ret)
+        if(ret == -1){
+            var sql = "INSERT INTO checkCode(phoneNumber,code) VALUES('"+phoneNumber+"','"+checkCode+"')";
+            console.log("sql:"+sql);
             conn.query(sql,function (err,rows) {
                 if(err){
                     console.log(err)
@@ -216,7 +219,7 @@ exports.saveCheckCode = function(phoneNumber,checkCode,callback){
                 }
             })
         }else{
-            sql = "UPDATE checkCode set phoneNumber = "+phoneNumber+",checkCode = "+checkCode;
+            var sql = "UPDATE checkCode set code = '"+checkCode +"' WHERE phoneNumber = '"+phoneNumber+"'";
             conn.query(sql,function (err,rows) {
                 if(err){
                     console.log(err)
@@ -229,16 +232,19 @@ exports.saveCheckCode = function(phoneNumber,checkCode,callback){
 }
 
 exports.getCheckCode = function(phoneNumber,callback){
-    var sql = "SELECT * FROM checkCode WHERE phoneNumber = "+phoneNumber;
-    if(err){
-        console.log(err);
-        callback(null)
-    }else if(rows == null){
-        console.log("saveCheckCode rows is null")
-        callback(null)
-    }else if(rows[0] != null){
-        callback(null)
-    }else{
-        callback(rows[0].checkCode);
-    }
+    var sql = "SELECT * FROM checkCode WHERE phoneNumber = '"+phoneNumber+"'";
+    conn.query(sql,function (err,rows) {
+        if(err){
+            console.log(err);
+            callback(-1)
+        }else if(rows == null){
+            console.log("saveCheckCode rows is null")
+            callback(-1)
+        }else if(rows[0] == null){
+            callback(-1)
+        }else{
+            console.log("rows:"+JSON.stringify(rows));
+            callback(rows[0].code);
+        }
+    })
 }

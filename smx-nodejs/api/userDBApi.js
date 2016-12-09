@@ -22,39 +22,50 @@ exports.login = function(phoneNumber, password, callback){
     });
 }
 
-exports.register = function(phoneNumber,password,callback){
-    db.findAccountByNum(phoneNumber,function(rows){
-        if(rows[0] == null){
-            db.addAccount(phoneNumber,password,function(rows){
-              callback({
-                  status:true,
-                  userId:rows.insertId,
-                  desc:"注册成功"
-              })
-            })
+exports.register = function(phoneNumber,checkCode, password,callback){
+    db.getCheckCode(phoneNumber,function (rows) {
+        if(rows != checkCode){
+            callback({desc:"验证码错误"})
         }else{
-            callback({
-                status:false,
-                desc:"该手机号已经注册过了"
+            db.findAccountByNum(phoneNumber,function(rows){
+                if(rows[0] == null){
+                    db.addAccount(phoneNumber,password,function(rows){
+                      callback({
+                          status:true,
+                          userId:rows.insertId,
+                          desc:"注册成功"
+                      })
+                    })
+                }else{
+                    callback({
+                        status:false,
+                        desc:"该手机号已经注册过了"
+                    })
+                }
             })
         }
     })
 }
 
-exports.forgetPassword = function (phoneNumber,password,callback) {
-    db.findAccountByNum(phoneNumber,function(rows){
-        if(rows[0] == null){
-            callback({
-                status:false,
-                desc:"该手机号尚未注册"
-            })
+exports.forgetPassword = function (phoneNumber,checkCode,password,callback) {
+    db.getCheckCode(phoneNumber,function (rows) {
+        if(rows != checkCode){
+            callback({desc:"验证码错误"})
         }else{
-            db.updateAccount(phoneNumber,password,function(rows){
-                console.log("rows:"+JSON.stringify(rows));
-                callback({
-                    status:true,
-                    desc:"修改成功"
-                })
+            db.findAccountByNum(phoneNumber,function(rows){
+                if(rows[0] == null){
+                    callback({
+                        status:false,
+                        desc:"该手机号尚未注册"
+                    })
+                }else{
+                    db.updateAccount(phoneNumber,password,function(rows){
+                        callback({
+                            status:true,
+                            desc:"修改成功"
+                        })
+                    })
+                }
             })
         }
     })
@@ -104,7 +115,6 @@ exports.setQuestionStatus = function(userId,status,callback){
 }
 exports.registerTeacher = function(userId,goodCourse,selfIntro,callback){
     db.judgeRole(userId,function (rows) {
-        console.log(rows[0]);
     if(rows[0].role == 2){
         callback({
             status:false,
@@ -118,7 +128,6 @@ exports.registerTeacher = function(userId,goodCourse,selfIntro,callback){
     }
     else if (rows[0].role == 0){
         db.registerTeacher(userId,goodCourse,selfIntro,function(rows){
-            console.log("rows:"+JSON.stringify(rows));
             callback({
                 status:true,
                 desc:"申请成功"
@@ -136,8 +145,8 @@ exports.sendCheckCode = function(phoneNumber,callback){
     var phone = phoneNumber;
     var appkey = "5f3d448a372cfaa71eeeb9fda2e323fa";
     var sig = utils.getMD5(appkey+phone);
-    // console.log("sig:"+sig);
-    var number = Math.floor(Math.random()*10000);
+    var number = Math.floor(Math.random()*9000+1000);
+    console.log("number:"+number)
     var data = {
         "tel":{
             "nationcode":"86",
@@ -158,30 +167,25 @@ exports.sendCheckCode = function(phoneNumber,callback){
         path:"/v3/tlssmssvr/sendsms?sdkappid=1400019919&random="+random,
         headers: {
             "Content-Type": 'application/json;charset=UTF-8'
-            // "Content-Length": data.length
         }
     }
-    console.log(opt);
     var req = https.request(opt,function(serverFeedback){
-        console.log("status Code :"+serverFeedback.statusCode);
-        console.log("headers:"+serverFeedback.headers);
         serverFeedback.setEncoding("utf8");
         serverFeedback.on('data',function (body) {
-            callback("获取验证码成功")
+            console.log("data:"+body)
+            db.saveCheckCode(phoneNumber,number,function (rows) {
+                callback("验证码发送成功")
+            })
         })
     })
     req.on('error',function (e) {
         console.log("problem with request "+e.message);
     })
-    // req.write(JSON.stringify(data));
+    req.write(JSON.stringify(data));
     req.end();
-    db.saveCheckCode(phoneNumber,number,function (rows) {
-        callback("获取验证码成功")
-    })
 }
 exports.getUserInfo =function(userId,callback){
     db.getUserInfo(userId,function (rows) {
         callback(rows[0]);
     })
-
 }

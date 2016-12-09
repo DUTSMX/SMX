@@ -90,7 +90,7 @@ function forgetPassword() {
     }else if(password !=passwordAgain){//发送登录请求;
         document.getElementById("hint").innerHTML = "密码不一致";
     }else{
-        xmlhttp.open("GET", "/users/forgetPassword?phoneNumber=" + phoneNumber + "&password=" + password, true);
+        xmlhttp.open("GET", "/users/forgetPassword?phoneNumber=" + phoneNumber +"&checkCode="+checkCode+"&password=" + password, true);
         xmlhttp.send();
     }
     xmlhttp.onreadystatechange=function()
@@ -192,7 +192,7 @@ function register() {
     }else if(password !=passwordAgain){//发送登录请求;
         document.getElementById("hint").innerHTML = "密码不一致";
     }else{
-        xmlhttp.open("GET", "/users/register?phoneNumber=" + phoneNumber + "&password=" + password, true);
+        xmlhttp.open("GET", "/users/register?phoneNumber=" + phoneNumber + "&checkCode="+checkCode+"&password=" + password, true);
         xmlhttp.send();
     }
     xmlhttp.onreadystatechange=function()
