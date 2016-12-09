@@ -135,27 +135,27 @@ exports.registerTeacher = function(userId,goodCourse,selfIntro,callback){
 exports.sendCheckCode = function(phoneNumber,callback){
     var phone = phoneNumber;
     var appkey = "5f3d448a372cfaa71eeeb9fda2e323fa";
-    console.log("sendCheckCode")
-    // var sig = utils.md5(appkey+phone);
+    var sig = utils.getMD5(appkey+phone);
     // console.log("sig:"+sig);
-    var number = (Math.random()*10000)%10000;
+    var number = Math.floor(Math.random()*10000);
     var data = {
         "tel":{
             "nationcode":"86",
-            "phone":"18840824301"
+            "phone":phone
         },
         "type":"0",
         "msg":"您的验证码为"+number+"，如非本人操作，请忽略本短信",
-        "sig":"9665fa863f8abc5d71ceb0cf3c9cdfd3",
+        "sig":sig,
         "extend":"",
         "ext":""
     }
     var content= qs.stringify(data);
+    var random = Math.floor(Math.random()*10000000);
     var opt = {
         method: "POST",
         host: "yun.tim.qq.com",
         port:443,
-        path:"/v3/tlssmssvr/sendsms?sdkappid=1400019919&random=1261823",
+        path:"/v3/tlssmssvr/sendsms?sdkappid=1400019919&random="+random,
         headers: {
             "Content-Type": 'application/json;charset=UTF-8'
             // "Content-Length": data.length
@@ -167,15 +167,17 @@ exports.sendCheckCode = function(phoneNumber,callback){
         console.log("headers:"+serverFeedback.headers);
         serverFeedback.setEncoding("utf8");
         serverFeedback.on('data',function (body) {
-            console.log("body:"+body);
+            callback("获取验证码成功")
         })
-        // callback(serverFeedback);
     })
     req.on('error',function (e) {
         console.log("problem with request "+e.message);
     })
-    req.write(JSON.stringify(data));
+    // req.write(JSON.stringify(data));
     req.end();
+    db.saveCheckCode(phoneNumber,number,function (rows) {
+        callback("获取验证码成功")
+    })
 }
 exports.getUserInfo =function(userId,callback){
     db.getUserInfo(userId,function (rows) {

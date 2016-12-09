@@ -39,11 +39,11 @@
 	width: 25px;
 }
 div.ui-input-text { 
-	width: 250px !important;
+	width: 125px !important;
 	height: 30px !important;
     outline:none!important;
-    float: right !important;
-
+	position: absolute;
+	margin-left:30%
  }
  .ui-input-text {
    border: none !important;
@@ -53,4 +53,17 @@ div.ui-input-text {
 }
 .input{
 	font-size: 18px;
+}
+.ui-listview li  .className-text{
+	float:left;
+}
+.ui-listview li  .check_code{
+	margin-top:3%;;
+	float:right;
+	color:white;
+	background: #3B7454;
+	padding:4px;
+	border-radius: 5px;
+	font-weight: normal;
+	text-shadow:none;
 }

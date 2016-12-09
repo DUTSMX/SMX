@@ -203,3 +203,42 @@ exports.getUserInfo=function (userId,callback) {
         }
     })
 }
+
+exports.saveCheckCode = function(phoneNumber,checkCode,callback){
+    this.getCheckCode(phoneNumber,function (ret) {
+        if(ret == null){
+            sql = "INSERT INTO checkCode(phoneNumber,checkCode) VALUES("+phoneNumber+","+checkCode+")";
+            conn.query(sql,function (err,rows) {
+                if(err){
+                    console.log(err)
+                }else{
+                    callback(rows);
+                }
+            })
+        }else{
+            sql = "UPDATE checkCode set phoneNumber = "+phoneNumber+",checkCode = "+checkCode;
+            conn.query(sql,function (err,rows) {
+                if(err){
+                    console.log(err)
+                }else{
+                    callback(rows);
+                }
+            })
+        }
+    })
+}
+
+exports.getCheckCode = function(phoneNumber,callback){
+    var sql = "SELECT * FROM checkCode WHERE phoneNumber = "+phoneNumber;
+    if(err){
+        console.log(err);
+        callback(null)
+    }else if(rows == null){
+        console.log("saveCheckCode rows is null")
+        callback(null)
+    }else if(rows[0] != null){
+        callback(null)
+    }else{
+        callback(rows[0].checkCode);
+    }
+}

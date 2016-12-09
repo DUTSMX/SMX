@@ -63,8 +63,8 @@ router.get('/getCheckCode',function (req,res) {
     console.log("获取验证码")
     var phoneNumber = req.query.phoneNumber;
     console.log("phoneNumber:"+phoneNumber)
-    api.sendCheckCode(phoneNumber,function () {
-
+    api.sendCheckCode(phoneNumber,function (rows) {
+        res.send(rows);
     })
 })
 

@@ -11,6 +11,7 @@ $(document).ready(function () {
         autoplaySpeed: "4000"
     });
 });
+/*返回上一级*/
 function goBack(){
     window.history.back()
 }
@@ -74,6 +75,7 @@ function createCourse () {
         }
     }
 }
+/*忘记密码*/
 function forgetPassword() {
     var phoneNumber = document.getElementById("phoneNumber").value;
     var checkCode = document.getElementById("checkCode").value;
@@ -104,6 +106,38 @@ function forgetPassword() {
     }
 }
 
+/*获取验证码*/
+function check() {
+    var phoneNumber = document.getElementById("phoneNumber").value;
+    console.log("phoneNumber:"+phoneNumber)
+    if(!(/^1[34578]\d{9}$/.test(phoneNumber))){
+        document.getElementById("hint").innerHTML = "手机号格式不正确";
+    }else{
+        xmlhttp.open('GET','/users/getCheckCode?phoneNumber=' + phoneNumber)
+        xmlhttp.send();
+        $("#checkCodeBtn").css({'background':"#CCCCCC"})
+        $("#checkCodeBtn").text("59秒后重试")
+        var time=58;
+        var interval = window.setInterval(function () {
+            $("#checkCodeBtn").attr({"onclick":"#"})
+            $("#checkCodeBtn").text(time--+"秒后重试")
+            if(time == -1){
+                $("#checkCodeBtn").attr({"onclick":"check()"})
+                $("#checkCodeBtn").css({'background':"#3B7454"})
+                $("#checkCodeBtn").text("发送验证码")
+                window.clearInterval(interval);
+            }
+        },1000,0);
+    }
+    xmlhttp.onreadystatechange = function () {
+        if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+            document.getElementById("hint").innerHTML=xmlhttp.responseText;
+        }
+    }
+
+
+}
+/*登录*/
 function login() {
     var phoneNumber = document.getElementById("phoneNumber").value;
     var password = document.getElementById("password").value;
@@ -127,6 +161,7 @@ function login() {
         }
     }
 }
+/*切换问答状态*/
 function statusSwitch() {
     var status = '<%=status%>'
     console.log("status:"+status);
@@ -142,7 +177,7 @@ function statusSwitch() {
     }
     xmlhttp.send();
 }
-
+/*注册成功*/
 function register() {
     var phoneNumber = document.getElementById("phoneNumber").value;
     var checkCode = document.getElementById("checkCode").value;
