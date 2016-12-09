@@ -103,5 +103,22 @@
 <script src="/javascripts/jquery.js"></script>
 <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
 <script src="/javascripts/smx.js"></script>
+<script>
+	function statusSwitch() {
+		var status = '<%=status%>'
+		console.log("status:"+status);
+		if(status == 1){
+			status = 0;
+			document.getElementById("question_status").innerHTML = "状态：关";
+			xmlhttp.open('GET',"/users/questionStatus?userId=<%=userId%>&status=0");
+
+		}else{
+			status = 1;
+			document.getElementById("question_status").innerHTML = "状态：开";
+			xmlhttp.open('GET',"/users/questionStatus?userId=<%=userId%>&status=1");
+		}
+		xmlhttp.send();
+	}
+</script>
 </body>
 </html>
