@@ -14,7 +14,9 @@ exports.getUUid = function(){
     uuid.v1();
 }
 
-exports.md5 = function(str){
-    console.log("md5:"+md5);
-    return crypto.createHash('md5').update(str),digest('hex');
+exports.getMD5 = function(str){
+    var md5sum = crypto.createHash('md5');
+    md5sum.update(str);
+    str = md5sum.digest('hex');
+    return str;
 }

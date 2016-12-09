@@ -108,19 +108,33 @@ function forgetPassword() {
 
 /*获取验证码*/
 function check() {
-    $("#checkCodeBtn").css({'background':"#CCCCCC"})
-    $("#checkCodeBtn").text("59秒后重试")
-    var time=5;
-    var interval = window.setInterval(function () {
-        $("#checkCodeBtn").attr({"onclick":"#"})
-        $("#checkCodeBtn").text(time--+"秒后重试")
-        if(time == -1){
-            $("#checkCodeBtn").attr({"onclick":"check()"})
-            $("#checkCodeBtn").css({'background':"#3B7454"})
-            $("#checkCodeBtn").text("发送验证码")
-            window.clearInterval(interval);
+    var phoneNumber = document.getElementById("phoneNumber").value;
+    console.log("phoneNumber:"+phoneNumber)
+    if(!(/^1[34578]\d{9}$/.test(phoneNumber))){
+        document.getElementById("hint").innerHTML = "手机号格式不正确";
+    }else{
+        xmlhttp.open('GET','/users/getCheckCode?phoneNumber=' + phoneNumber)
+        xmlhttp.send();
+        $("#checkCodeBtn").css({'background':"#CCCCCC"})
+        $("#checkCodeBtn").text("59秒后重试")
+        var time=58;
+        var interval = window.setInterval(function () {
+            $("#checkCodeBtn").attr({"onclick":"#"})
+            $("#checkCodeBtn").text(time--+"秒后重试")
+            if(time == -1){
+                $("#checkCodeBtn").attr({"onclick":"check()"})
+                $("#checkCodeBtn").css({'background':"#3B7454"})
+                $("#checkCodeBtn").text("发送验证码")
+                window.clearInterval(interval);
+            }
+        },1000,0);
+    }
+    xmlhttp.onreadystatechange = function () {
+        if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+            document.getElementById("hint").innerHTML=xmlhttp.responseText;
         }
-    },1000,0);
+    }
+
 
 }
 /*登录*/
