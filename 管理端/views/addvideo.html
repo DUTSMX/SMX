@@ -136,6 +136,7 @@
                   <div class="col-md-6" id="name">
                     <input type="file" name="video" value="" class="form-control">
                   </div>
+                    <p onclick="uploadVideo()">上传</button>
                 </div>
               </form>
             </div>
@@ -146,6 +147,42 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../js/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>\
+    <script src="../js/crypto-js.js"></script>
+    <script type="text/javascript">
+    console.log("script");
+      var xmlhttp;
+      if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+      }else{// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      function uploadVideo(){
+        console.log("upload")
+        var url="http://web.file.myqcloud.com/files/v1/10068625/smxbucket/testfolder/"
+        var appId="10068625";
+        var bucket = "smxbucket";
+        var secretId =  "AKIDGPM8i9uTM4a0FJlqMgoljZ8a0IPLLlGi";
+        var secretKey = "TowscBYpzznPq5B6pLfnjTIwOGUfdbP2";
+        var expiredTime = 0;
+        var timestamp = Math.floor(Date.parse(new Date())/1000);
+        var random = Math.floor(Math.random()*10000);
+        var Original = "a="+appId+"&b="+bucket+"&k="+secretId+"&e="+expiredTime+"&t="+timestamp+"&r="+random+"&f=";
+        var SignTmp = CryptoJS.HmacSHA1(secretKey,Original);
+        var Sign = window.btoa(SignTmp+Original);
+        console.log("Sign:"+Sign);
+        xmlhttp.open("POST",url,true);
+        xmlhttp.setRequestHeader("Content-Type","application/json")
+        xmlhttp.setRequestHeader("Authorization",Sign);
+        xmlhttp.send("{'op':'create'}");
+        xmlhttp.onreadystatechange = function(){
+          if (xmlhttp.readyState==4 && xmlhttp.status==200){
+            console.log(xmlhttp.responseText);
+          }else{
+            console.log(xmlhttp);
+          }
+        }
+      }
+    </script>
   </body>
 </html>

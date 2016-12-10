@@ -72,45 +72,12 @@
             </ul>
         </form>
         <p id="hint"></p>
-    </div>
+    </div></div>
     <script type="text/javascript">
     </script>
     <script src="/javascripts/jquery.js"></script>
     <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
     <script src="/javascripts/slick.min.js"></script>
     <script src="/javascripts/smx.js"></script>
-    <script >
-        var xmlhttp;
-        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        }
-        else {// code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        function createCourse () {
-            console.log("请求发送成功");
-            var courseName = document.getElementById("courseName").value;
-            var courseDate = document.getElementById("courseDate").value;
-            var beginTime = document.getElementById("beginTime").value;
-            var finshTime = document.getElementById("finshTime").value;
-            var courseTime = document.getElementById("courseTime").value;
-            var objectOriented = document.getElementById("objectOriented").value;
-            var courseContent = document.getElementById("courseContent").value;
-            var url = "/course/createCourse?courseName=" + courseName + "&courseDate=" + courseDate + "&beginTime=" + beginTime + "" +
-                    "&finshTime=" + finshTime + "&courseTime=" + courseTime + "&objectOriented=" + objectOriented + "&courseContent=" + courseContent;
-            xmlhttp.open("GET",url,true)
-            xmlhttp.send();
-            xmlhttp.onreadystatechange = function () {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    str = xmlhttp.responseText;//得到服务器响应
-                    document.getElementById("hint").innerHTML = str;//显示提示信息
-                    if (str == "创建成功") {
-                        window.location.href = "/course/course";//跳转到主页
-                    }
-                }
-            }
-        }
-    </script>
-    </div>
 </body>
 </html>

@@ -65,8 +65,14 @@
         </ul>
         <%if(join == 0){%>
         <div style="border-style: none" data-role="footer" data-position="fixed" data-theme="t">
-            <a onclick="loadXMLDoc()"class="add_course">
+            <a onclick="joinCourse()"class="add_course">
                 <h4 id="join_course" style="color:#ffffff;text-align: center;">加入课程</h4>
+            </a>
+        </div>
+        <%}else{%>
+        <div style="border-style: none" data-role="footer" data-position="fixed" data-theme="t">
+            <a onclick="loadXMLDoc()"class="add_course">
+                <h4 id="join_course" style="color:#ffffff;text-align: center;">已加入课程</h4>
             </a>
         </div>
         <%}%>
@@ -76,6 +82,7 @@
     <script src="/javascripts/slick.min.js"></script>
     <script src="/javascripts/smx.js"></script>
     <script>
+<<<<<<< HEAD
         function loadXMLDoc()
         {
             var xmlhttp;
@@ -88,9 +95,17 @@
             {// code for IE6, IE5
                 xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
             }
+            xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                str = xmlhttp.responseText;//得到服务器响应
+                document.getElementById("join_course").innerHTML = str;//显示提示信息
+            }
+        }
             xmlhttp.open("GET","/course/joinCourse?courseId=<%=courseId%>",true);
             xmlhttp.send();
         }
+=======
+>>>>>>> 64fc85efd3af73151c847e043d40891b9c81c65d
     </script>
 </div>
 </body>

@@ -63,8 +63,8 @@ router.get('/getCheckCode',function (req,res) {
     console.log("获取验证码")
     var phoneNumber = req.query.phoneNumber;
     console.log("phoneNumber:"+phoneNumber)
-    api.sendCheckCode(phoneNumber,function () {
-
+    api.sendCheckCode(phoneNumber,function (rows) {
+        res.send(rows);
     })
 })
 
@@ -75,8 +75,9 @@ router.get('/registerPage', function (req, res) {
 })
 router.get('/register',function (req,res) {
     var phoneNumber = req.query.phoneNumber;
+    var checkCode = req.query.checkCode;
     var password = req.query.password;
-    api.register(phoneNumber, password, function (ret) {
+    api.register(phoneNumber, checkCode, password, function (ret) {
         if(ret.status){
             req.session.userId = ret.userId;
             // console.log("put userId:"+req.session.userId);
@@ -95,7 +96,8 @@ router.get('/forgetPasswordPage',function (req,res) {
 router.get('/forgetPassword',function (req,res) {
     var phoneNumber = req.query.phoneNumber;
     var password = req.query.password;
-    api.forgetPassword(phoneNumber,password,function (ret) {
+    var checkCode = req.query.checkCode;
+    api.forgetPassword(phoneNumber,checkCode,password,function (ret) {
         res.send(ret.desc);
     })
 })
