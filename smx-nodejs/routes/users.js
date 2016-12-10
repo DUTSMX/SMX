@@ -17,9 +17,6 @@ router.get('/mine',function (req,res) {
         })
     }
 })
-router.get('/personDetail',function (req,res) {
-    res.render('personDetail',{});
-})
 router.get('/registerTeacherPage',function (req,res) {
     res.render('registerTeacher',{});
 })
