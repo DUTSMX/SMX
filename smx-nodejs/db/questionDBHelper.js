@@ -150,6 +150,20 @@ exports.getOnlineTeacher = function (callback) {
         }
     })
 }
+exports.addQuestion = function (userId,questionTitle,questionContent,callback) {
+    // var time = sd.format(new Date().toLocaleString(), 'YYYY-MM-DD HH:mm:ss');
+    var time = Date.now();
+    console.log(time);
+    var sql = "INSERT INTO question (userId,questionTitle,questionContent,questionTime)" +
+        "VALUES ("+userId+",'"+questionTitle+"','"+questionContent+"',"+time+")";
+    conn.query(sql,function(err,rows,fields){
+        console.log(sql);
+        if(err){
+            console.error(err);
+        }
+        callback(rows);
+    })
+}
 /*
 exports.searchQuestion = function(word,callback){
     var sql = "SELECT questionId,userName,userHeadUrl,questionTtile,questionContent,questionTime as questionId,'提" +
@@ -163,15 +177,5 @@ exports.searchQuestion = function(word,callback){
         callback(rows);
     })
 }
-exports.askQuestion = function (userId,questionTitle,questionContent,callback) {
-    var time = sd.format(new Date().toLocaleString(), 'YYYY-MM-DD HH:mm:ss');
-    var sql = "INSERT INTO question (userId,questionTitle,questionContent,questionTime)" +
-        "VALUES ("+userId+",'"+questionTitle+"','"+questionContent+"','"+time+"')";
-    conn.query(sql,function(err,rows,fields){
-        if(err){
-            console.error(err);
-        }
-        callback(rows);
-    })
-}*/
+*/
 
