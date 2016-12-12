@@ -14,7 +14,16 @@ exports.getUUid = function(){
     uuid.v1();
 }
 
-exports.md5 = function(str){
-    console.log("md5:"+md5);
-    return crypto.createHash('md5').update(str),digest('hex');
+exports.getMD5 = function(str){
+    var md5sum = crypto.createHash('md5');
+    md5sum.update(str);
+    str = md5sum.digest('hex');
+    return str;
+}
+exports.getHMacSHA1 = function (secretKey,str) {
+    var str =new Buffer((crypto.createHmac('sha1',secretKey).update(str).digest())+str).toString("base64");
+    return str;
+}
+exports.BASE64 = function (str) {
+    return new Buffer(str).toString('base64')
 }

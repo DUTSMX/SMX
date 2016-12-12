@@ -128,6 +128,7 @@ exports.getTeacherDetail = function (teacherId, callback) {
 }
 exports.joinCourse = function (userId, courseId, callback) {
     var sql = "SELECT * FROM joinCourse WHERE userId = "+userId+" and courseId = "+courseId;
+    console.log("sql:"+sql);
     conn.query(sql,function (err,rows) {
         if(err){
             console.log(err);
@@ -152,7 +153,8 @@ exports.joinCourse = function (userId, courseId, callback) {
     })
 }
 exports.getJoinStudent = function (courseId,callback) {
-    var sql = "SELECT a.userHeadUrl as headUrl, " +
+    var sql = "SELECT a.userId, " +
+        "a.userHeadUrl as headUrl, " +
         "a.userName as userName " +
         "FROM account a JOIN joinCourse j on a.userId = j.userId " +
         "WHERE j.courseId = "+courseId;
@@ -179,18 +181,20 @@ exports.hasJoin = function(userId,courseId,callback){
 /**
  * unuse
  */
-/*
-exports.addCourse = function (userId, name, time, objectOriented, content, callback) {
-    var sql = "INSERT INTO course(userId,courseName,courseTime,objectOriented,courseContent) VALUES ('" + userId + "'," + name + ",'" + time + "','" + objectOriented + "','" + content + "')";
-    conn.query(sql, function (err, rows, fields) {
+
+exports.addCourse = function (userId,courseName,courseDate,beginTime,finshTime,courseTime,objectOriented,courseContent, callback) {
+    var sql = "INSERT INTO course(userId,courseName,courseDate,beginTime,finshTime,courseTime,objectOriented,courseContent) VALUES ('" + userId + "','" + courseName + "','" + courseDate + "','" + beginTime + "','" + finshTime + "','" + courseTime + "','" + objectOriented + "','" + courseContent + "')";
+    conn.query(sql, function (err,rows) {
+        console.log(sql);
         if (err) {
             console.log(err);
             return;
+        }else {
+            callback(rows);
         }
-        callback(rows);
     })
 }
-
+ /*
 exports.search = function (word, callback) {
     var sql = "SELECT c.courseId as courseId,c.courseName as courseName,c.courseTime as courseTime," +
         "a.userHeadUrl as teacherHeadUrl,a.userSchool as teacherSchool,a.userGrade as teacherGrade  FROM course c JOIN account a on c.userId = a.userId" +

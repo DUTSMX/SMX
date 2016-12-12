@@ -1,8 +1,9 @@
 var db = require('../db/questionDBHelper')
 
-exports.addQuestion = function(name,content,picurl,voiceurl,callback){
-    db.addQuestion(name,content,picurl,voiceurl,function (rows) {
-        callback(rows);
+exports.addQuestion = function(userId,questionTitle,questionContent,callback){
+    console.log("p")
+    db.addQuestion(userId,questionTitle,questionContent,function (rows) {
+        callback("提问成功");
     })
 }
 

@@ -34,19 +34,19 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">课程编辑 <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="#">添加课程</a></li>
-                <li><a href="#">已有课程</a></li>
+                <li><a href="addCourse.html">添加课程</a></li>
+                <li><a href="course.html">已有课程</a></li>
               </ul>
             </li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">视频编辑 <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="#">添加视频</a></li>
-                <li><a href="#">已有视频</a></li>
+                <li><a href="addvideo.html">添加视频</a></li>
+                <li><a href="video.html">已有视频</a></li>
               </ul>
             </li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">问答编辑<!--  <span class="caret"></span> --></a>
+              <a href="question.html">问答编辑<!--  <span class="caret"></span> --></a>
               <!-- <ul class="dropdown-menu" role="menu">
                 <li><a href="#">Action</a></li>
                 <li><a href="#">Another action</a></li>
@@ -58,16 +58,16 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">审核管理 <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="#">待审核</a></li>
-                <li><a href="#">已审核</a></li>
-                <li><a href="#">意见反馈</a></li>
+                <li><a href="waitChecking.html">待审核</a></li>
+                <li><a href="checked.html">已审核</a></li>
+                <li><a href="suggestion.html">意见反馈</a></li>
               </ul>
             </li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">用户管理<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="#">老师列表</a></li>
-                <li><a href="#">学生列表</a></li>
+                <li><a href="teacherList.html">老师列表</a></li>
+                <li><a href="studentList.html">学生列表</a></li>
               </ul>
             </li>
             <li class="dropdown">
@@ -136,6 +136,7 @@
                   <div class="col-md-6" id="name">
                     <input type="file" name="video" value="" class="form-control">
                   </div>
+                    <p onclick="uploadVideo()">上传</button>
                 </div>
               </form>
             </div>
@@ -146,6 +147,49 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../js/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>\
+    <script src="../js/crypto-js.js"></script>
+    <script type="text/javascript">
+    console.log("script");
+      var xmlhttp;
+      if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+      }else{// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      function uploadVideo(){
+        console.log("upload")
+        var url="http://tj.file.myqcloud.com/files/v2/10068625/smxbucket/testfolder/"
+        var appId="10068625";
+        var bucket = "smxbucket";
+        var secretId =  "AKIDGPM8i9uTM4a0FJlqMgoljZ8a0IPLLlGi";
+        var secretKey = "TowscBYpzznPq5B6pLfnjTIwOGUfdbP2";
+        var expiredTime = 0;
+        // var timestamp = Math.floor(Date.parse(new Date())/1000);
+    var timestamp = 1481348503;
+        console.log("timestamp:"+timestamp)
+        // var random = Math.floor(Math.random()*10000);
+    var random = 4967;
+        var Original = "a="+appId+"&b="+bucket+"&k="+secretId+"&e="+expiredTime+"&t="+timestamp+"&r="+random;
+        console.log("Original:"+Original)
+        var SignTmp = CryptoJS.HmacSHA1(Original,secretKey);
+        console.log("SignTmp:"+SignTmp)
+        var Sign = window.btoa(SignTmp+Original);
+        console.log("Sign:"+Sign);
+        xmlhttp.open("POST",url,true);
+        xmlhttp.setRequestHeader("Access-Control-Allow-Origin","http://sh.file.myqcloud.com")
+        xmlhttp.setRequestHeader("Content-Type","application/json")
+        xmlhttp.setRequestHeader("Authorization",Sign);
+        var json = {"op":"create"}
+        xmlhttp.send(JSON.stringify(json));
+        xmlhttp.onreadystatechange = function(){
+          if (xmlhttp.readyState==4 && xmlhttp.status==200){
+            console.log(xmlhttp.responseText);
+          }else{
+            console.log(xmlhttp);
+          }
+        }
+      }
+    </script>
   </body>
 </html>

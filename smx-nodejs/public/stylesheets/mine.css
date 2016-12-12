@@ -18,7 +18,7 @@
 }
 /*设置退出登录按钮与顶部功能模块之间的距离*/
 .ui-content .ui-listview:last-child{
-	margin-top: 55%;
+
 }
 /*设置各个功能模块前图片的位置*/
 .ui-listview-func .ui-li-has-icon>.ui-btn>img:first-child{

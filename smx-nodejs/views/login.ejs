@@ -15,7 +15,7 @@
     <div data-role="header" data-theme="g" data-position="fixed">
         <img src="/images/ic_arrow_back.png" onclick="goBack()" class="left_icon"/>
         <h3 class="page_title">&nbsp登录</h3>
-        <img src="/images/icon_save.png" onclick="login()" class="right_icon"/>
+        <!--<img src="/images/icon_save.png" class="right_icon"  onclick="login()"/>-->
     </div>
     <div>
         <form method="" action="">
@@ -32,6 +32,7 @@
                 </li>
             </ul>
         </form>
+        <button class="btn" onclick="login()">登 录</button>
         <p id="hint"></p>
         <a href="forgetPasswordPage" data-ajax="false"><p style="display:block;float:right;margin-right: 5%">忘记密码</p></a>
         <a href="registerPage" data-ajax="false"><p style="margin-left:40%;margin-top: 10%">创建新账号</p></a>
@@ -45,38 +46,6 @@
 <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
 <script src="/javascripts/slick.min.js"></script>
 <script src="/javascripts/smx.js"></script>
-<script>
-    var xmlhttp;
-    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp = new XMLHttpRequest();
-    }
-    else {// code for IE6, IE5
-        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    function login() {
-        var phoneNumber = document.getElementById("phoneNumber").value;
-        var password = document.getElementById("password").value;
-        if(phoneNumber.length == 0){
-            document.getElementById("hint").innerHTML = "手机号不能为空";
-        }else if(!(/^1[34578]\d{9}$/.test(phoneNumber))){
-            document.getElementById("hint").innerHTML = "手机号格式不正确";
-        }else if(password.length == 0){
-            document.getElementById("hint").innerHTML = "密码不能为空";
-        }else{//发送登录请求
-            xmlhttp.open("GET", "/users/login?phoneNumber=" + phoneNumber + "&password=" + password, true);
-            xmlhttp.send();
-        }
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                str = xmlhttp.responseText;//得到服务器响应
-                document.getElementById("hint").innerHTML = str;//显示提示信息
-                if(str == "登录成功"){
-                    window.location.href = "/course/course";//跳转到主页
-                }
-            }
-        }
-    }
-</script>
 </div>
 </body>
 </html>

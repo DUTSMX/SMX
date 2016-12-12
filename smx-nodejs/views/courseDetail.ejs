@@ -15,7 +15,7 @@
     <div data-role="header" data-theme="g" data-position="fixed">
         <img src="/images/ic_arrow_back.png" onclick="goBack()" class="left_icon"/>
         <h3 class="page_title">课程详情</h3>
-        <img src="/images/ic_share.png" href="#" class="right_icon"/>
+        <!--<img src="/images/ic_share.png" href="#" class="right_icon"/>-->
     </div>
     <div class="teacher-intro">
         <ul data-role="listview">
@@ -65,8 +65,14 @@
         </ul>
         <%if(join == 0){%>
         <div style="border-style: none" data-role="footer" data-position="fixed" data-theme="t">
-            <a onclick="loadXMLDoc()"class="add_course">
+            <a onclick="joinCourse()"class="add_course">
                 <h4 id="join_course" style="color:#ffffff;text-align: center;">加入课程</h4>
+            </a>
+        </div>
+        <%}else{%>
+        <div style="border-style: none" data-role="footer" data-position="fixed" data-theme="t">
+            <a onclick="loadXMLDoc()"class="add_course">
+                <h4 id="join_course" style="color:#ffffff;text-align: center;">已加入课程</h4>
             </a>
         </div>
         <%}%>
@@ -76,17 +82,19 @@
     <script src="/javascripts/slick.min.js"></script>
     <script src="/javascripts/smx.js"></script>
     <script>
-        function loadXMLDoc()
-        {
-            var xmlhttp;
-            var str;
-            if (window.XMLHttpRequest)
-            {// code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp=new XMLHttpRequest();
-            }
-            else
-            {// code for IE6, IE5
-                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        var xmlhttp;
+        if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+        }else{// code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        /* 加入课程 */
+        function joinCourse() {
+            xmlhttp.onreadystatechange = function() {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    console.log("res:"+xmlhttp.responseText)
+                    $("#join_course").text(xmlhttp.responseText);
+                }
             }
             xmlhttp.open("GET","/course/joinCourse?courseId=<%=courseId%>",true);
             xmlhttp.send();

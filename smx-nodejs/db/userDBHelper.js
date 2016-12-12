@@ -23,7 +23,7 @@ exports.findAccountById = function(userId,callback){
             return;
             // callback(unknownError);
         }else if(rows == null || rows[0] == null){
-            console("error account empty userId = "+userId);
+            console.log("error account empty userId = "+userId);
         }else{
             callback(rows[0]);
         }
@@ -87,7 +87,7 @@ exports.findAccountByNum = function(phoneNumber,callback){
 
 
 exports.addAccount = function(phoneNumber,password,callback){
-    var sql = "INSERT INTO account(phoneNumber,password) VALUES ("+phoneNumber+","+password+")";
+    var sql = "INSERT INTO account(phoneNumber,password,userHeadUrl) VALUES ('"+phoneNumber+"','"+password+"','http://smxbucket-10068625.cos.myqcloud.com/%E6%9C%AA%E6%A0%87%E9%A2%98-3.png')";
     conn.query(sql,function(err,rows,fileds){
         if(err){
             console.log(err);
@@ -159,22 +159,92 @@ exports.judgeRole = function (userId,callback) {
 }
 
 exports.registerTeacher = function(userId,goodCourse,selfIntro,callback){
-    var sql = "INSERT INTO account(teacherId,goodCourse,selfIntroduction,createTime) VALUES("+userId+"'"+goodCourse+"','"+selfIntro+"',"+new Date()+")";
+    var createTime = String(new Date());
+    console.log("createTime");
+    var sql = "INSERT INTO teacher(teacherId,goodCourse,selfIntroduction,createTime) VALUES("+userId+",'"+goodCourse+"','"+selfIntro+"','"+createTime+"')";
+    console.log(sql);
     conn.query(sql,function (err,rows) {
+
         if(err){
             console.log(err)
             return
         }else{
-            var teacherId = rows.insertId;
+            var userId = rows.insertId;
             var sql = "UPDATE account SET role = 2 WHERE userId = "+userId;
             conn.query(sql,function (err,rows) {
                 if(err){
                     console.log(err);
                     return
                 }else{
-                    callback("申请成功")
+                    callback(rows)
                 }
             })
+        }
+    })
+}
+exports.getUserInfo=function (userId,callback) {
+    var sql="SELECT userName, " +
+        "gender, " +
+        "userAge," +
+        "userSchool," +
+        "userGrade," +
+        "userAddress " +
+        "FROM " +
+        "account where userId="
+    +userId
+    console.log(sql);
+    conn.query(sql,function (err,rows) {
+        if(err){
+            console.log(err);
+        }
+        else {
+            console.log(JSON.stringify(rows));
+            callback(rows);
+        }
+    })
+}
+
+exports.saveCheckCode = function(phoneNumber,checkCode,callback){
+    console.log("saveCheckCode: phoneNumber="+phoneNumber+" checkCode:"+checkCode)
+    this.getCheckCode(phoneNumber,function (ret) {
+        console.log("ret:"+ret)
+        if(ret == -1){
+            var sql = "INSERT INTO checkCode(phoneNumber,code) VALUES('"+phoneNumber+"','"+checkCode+"')";
+            console.log("sql:"+sql);
+            conn.query(sql,function (err,rows) {
+                if(err){
+                    console.log(err)
+                }else{
+                    callback(rows);
+                }
+            })
+        }else{
+            var sql = "UPDATE checkCode set code = '"+checkCode +"' WHERE phoneNumber = '"+phoneNumber+"'";
+            conn.query(sql,function (err,rows) {
+                if(err){
+                    console.log(err)
+                }else{
+                    callback(rows);
+                }
+            })
+        }
+    })
+}
+
+exports.getCheckCode = function(phoneNumber,callback){
+    var sql = "SELECT * FROM checkCode WHERE phoneNumber = '"+phoneNumber+"'";
+    conn.query(sql,function (err,rows) {
+        if(err){
+            console.log(err);
+            callback(-1)
+        }else if(rows == null){
+            console.log("saveCheckCode rows is null")
+            callback(-1)
+        }else if(rows[0] == null){
+            callback(-1)
+        }else{
+            console.log("rows:"+JSON.stringify(rows));
+            callback(rows[0].code);
         }
     })
 }
