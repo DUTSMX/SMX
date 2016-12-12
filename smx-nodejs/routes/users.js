@@ -23,21 +23,25 @@ router.get('/registerTeacherPage',function (req,res) {
 router.get('/createCourse',function (req,res) {
     res.render('createCourse',{});
 })
-router.get('/myCourse',function (req,res) {
-    userId = 1
-    api.getMyCourse(userId,function (rows) {
-        // console.log("rows:"+JSON.stringify(rows))
-        res.render('myCourse',{myCourse:rows});
-    })
+router.get('/myCourse',function (req,res) {var userId = req.session.userId;
+    if(userId == null){
+        res.redirect('../users/loginPage');
+    }else{
+        api.getMyCourse(userId,function (rows) {
+            // console.log("rows:"+JSON.stringify(rows))
+            res.render('myCourse',{myCourse:rows});
+        })
+    }
 })
-router.get('/myQuestion',function (req,res) {
-    // var userId = req.query.userId;
-    var userId = 1;
-    // console.log("userId:"+userId);
-    api.getMyQuestion(userId,function (questionList) {
-        // console.log("question:"+JSON.stringify(questionList))
-        res.render('myQuestion',questionList);
-    })
+router.get('/myQuestion',function (req,res) {var userId = req.session.userId;
+    if(userId == null){
+        res.redirect('../users/loginPage');
+    }else {
+        api.getMyQuestion(userId, function (questionList) {
+            // console.log("question:"+JSON.stringify(questionList))
+            res.render('myQuestion', questionList);
+        })
+    }
 })
 router.get('/setCenter',function (req,res) {
     res.render('setCenter',{})
@@ -241,37 +245,16 @@ router.post('/login', function (req, res) {
             res.write(JSON.stringify(ret));
         }
     });
+=======
+router.get('/uploadImg',function (req,res) {
+    api.uploadImg(function (ret) {
+        res.send(ret);
+    })
+>>>>>>> b87291edd7ab5150d9cba35af5eac4c7c88c81c7
 })
 
 
-//获得个人信息
-router.get('/getMineInfo', function (req, res) {
-    //var userId = req.session.userId;
-    var userId = 10;
-    console.log("userId:"+userId)
-    if (userId == null) {
-        console.log("route login")
-        req.session.source = "users/getMineInfo";
-        res.sendFile(pages.login());
-    } else {
-        api.getMineInfo(userId, function (ret) {
-            var name = ret[0].userName;
-            console.log("name:"+name);
-            if(name == null){
-                req.session.source = "users/getMineInfo";
-                res.sendFile(pages.finishInfo());
-            }else{
-                console.log("adfdsfsadfdsafdsfa")
-                //res.write('<head><meta charset="utf-8"/></head>');
-                //res.write(JSON.stringify(ret[0]));
-                res.render("Person",ret[0]);
-                console.log("0000000")
-
-            }
-        })
-    }
-})
-
+/*
 //完善个人信息
 router.get('/finishInfo',function(req,res){
     var userId = req.session.userId;

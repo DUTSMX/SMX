@@ -4,7 +4,7 @@ var router = express.Router();
 var api = require('../api/courseDBApi')
 var pages = require('./pages');
 var utils = require('../utils/utils');
-
+var user = require('../api/userDBApi')
 
 
 router.get('/course',function(req,res){
@@ -43,6 +43,7 @@ router.get('/joinCourse',function (req,res) {
         res.redirect('../users/loginPage');
     }else{
         var courseId = req.query.courseId;
+        console.log("courseId:"+courseId)
         api.joinCourse(userId,courseId,function (ret) {
             res.send(ret);
         })
@@ -52,6 +53,7 @@ router.get('/joinCourse',function (req,res) {
 router.get('/studentList',function (req,res) {
     var courseId = req.query.courseId;
     api.getStudentList(courseId,function (ret) {
+        console.log("ret:"+JSON.stringify(ret))
         res.render('studentList',ret);
     })
 })
@@ -84,6 +86,12 @@ router.get('/createCourse',function(req,res){
         }
     }
 )
+router.get('/getUserInfoById',function (req,res) {
+    var userId = req.query.userId;
+    user.getUserInfo(userId,function (rows) {
+        res.render("personDetail",rows);
+    })
+})
 
 
 /*

@@ -3,6 +3,7 @@ var course = require('../db/courseDBHelper')
 var question = require('../db/questionDBHelper')
 var utils = require('../utils/utils')
 var https = require('https');
+var http = require('http');
 var qs = require('querystring')
 
 exports.login = function(phoneNumber, password, callback){
@@ -189,9 +190,54 @@ exports.getUserInfo =function(userId,callback){
         callback(rows[0]);
     })
 }
+
 exports.editInfo=function (userId,name,sex,age,school,grade,address,callback) {
     console.log("123");
     db.editInfo(userId,name,sex,age,school,grade,address,function (rows) {
         callback("修改成功");
     })
+
+exports.uploadImg = function (callback) {
+    var appId="10068625";
+    var bucket = "smxbucket";
+    var secretId =  "AKIDGPM8i9uTM4a0FJlqMgoljZ8a0IPLLlGi";
+    var secretKey = "TowscBYpzznPq5B6pLfnjTIwOGUfdbP2";
+    var expiredTime = 0;
+    var timestamp = Math.floor(Date.parse(new Date())/1000);
+    console.log("timestamp:"+timestamp)
+    var random = Math.floor(Math.random()*10000);
+    var Original = "a="+appId+"&b="+bucket+"&k="+secretId+"&e="+expiredTime+"&t="+timestamp+"&r="+random+"&f=";
+    console.log("Original:"+Original)
+    var SignTmp = utils.getHMacSHA1(secretKey,Original);
+    console.log("SignTmp:"+SignTmp)
+    var Sign = utils.BASE64(SignTmp+Original);
+    console.log("Sign:"+Sign);
+    var data = {
+        "op":"create"
+    }
+    console.log("data,length:"+JSON.stringify(data).length)
+    var opt={
+        method:"POST",
+        host:"tj.file.myqcloud.com",
+        port:80,
+        path:"/files/v2/"+appId+"/"+bucket+"/testfolder/",
+        headers:{
+            "Content-Type":"application/json",
+            "Content-Length":JSON.stringify(data).length,
+            "Authorization":SignTmp
+        }
+    }
+    console.log("opt:"+JSON.stringify(opt))
+    var req = http.request(opt,function (serverFeedback) {
+        serverFeedback.setEncoding("utf8");
+        serverFeedback.on('data',function (body) {
+            console.log("data:"+body)
+            callback("上传成功")
+        })
+    })
+    req.on('error',function (e) {
+        console.log("problem with request "+e.message);
+    })
+    req.write(JSON.stringify(data));
+    req.end();
 }

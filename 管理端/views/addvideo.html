@@ -159,22 +159,29 @@
       }
       function uploadVideo(){
         console.log("upload")
-        var url="http://web.file.myqcloud.com/files/v1/10068625/smxbucket/testfolder/"
+        var url="http://tj.file.myqcloud.com/files/v2/10068625/smxbucket/testfolder/"
         var appId="10068625";
         var bucket = "smxbucket";
         var secretId =  "AKIDGPM8i9uTM4a0FJlqMgoljZ8a0IPLLlGi";
         var secretKey = "TowscBYpzznPq5B6pLfnjTIwOGUfdbP2";
         var expiredTime = 0;
-        var timestamp = Math.floor(Date.parse(new Date())/1000);
-        var random = Math.floor(Math.random()*10000);
-        var Original = "a="+appId+"&b="+bucket+"&k="+secretId+"&e="+expiredTime+"&t="+timestamp+"&r="+random+"&f=";
-        var SignTmp = CryptoJS.HmacSHA1(secretKey,Original);
+        // var timestamp = Math.floor(Date.parse(new Date())/1000);
+    var timestamp = 1481348503;
+        console.log("timestamp:"+timestamp)
+        // var random = Math.floor(Math.random()*10000);
+    var random = 4967;
+        var Original = "a="+appId+"&b="+bucket+"&k="+secretId+"&e="+expiredTime+"&t="+timestamp+"&r="+random;
+        console.log("Original:"+Original)
+        var SignTmp = CryptoJS.HmacSHA1(Original,secretKey);
+        console.log("SignTmp:"+SignTmp)
         var Sign = window.btoa(SignTmp+Original);
         console.log("Sign:"+Sign);
         xmlhttp.open("POST",url,true);
+        xmlhttp.setRequestHeader("Access-Control-Allow-Origin","http://sh.file.myqcloud.com")
         xmlhttp.setRequestHeader("Content-Type","application/json")
         xmlhttp.setRequestHeader("Authorization",Sign);
-        xmlhttp.send("{'op':'create'}");
+        var json = {"op":"create"}
+        xmlhttp.send(JSON.stringify(json));
         xmlhttp.onreadystatechange = function(){
           if (xmlhttp.readyState==4 && xmlhttp.status==200){
             console.log(xmlhttp.responseText);

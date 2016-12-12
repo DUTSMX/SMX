@@ -1,3 +1,8 @@
+.btn{
+	background: #3B7454 !important;
+	color:white !important;
+	text-shadow: none !important;
+}
 .ui-listview .ui-li-has-thumb>.ui-btn>img:first-child{
 	padding-top: 10px;
 	padding-left: 10px;
@@ -45,6 +50,7 @@ div.ui-input-text {
 	position: absolute;
 	margin-left:30%
  }
+
  .ui-input-text {
    border: none !important;
    box-shadow: none!important;

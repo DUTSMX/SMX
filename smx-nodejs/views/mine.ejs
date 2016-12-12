@@ -23,7 +23,7 @@
 					<h1><%=userName%></h1>
 					<%if(gender == 1){%>
 					<img class="gender"src="/images/man.png">
-					<%}else{%>
+					<%}else if(gender == 2){%>
 					<img class="gender"src="/images/women.png">
 					<%}%>
 				</a>
@@ -35,7 +35,6 @@
 				<a onclick="statusSwitch()"  data-ajax="false">
 					<img src="/images/03.png" class="ui-li-icon">
 					<p class="question_status">问答状态</p>
-
 					<p class="switch_status"id="question_status"><% if(status){%>状态：开<%}else{%>状态：关<%}%></p>
 				</a>
 			</li>
@@ -81,14 +80,17 @@
 				</a>
 			</li>
 		</ul>
-		<ul data-role="listview" class="ui-listview-func ui-btn-exit">
-			<li data-icon="false">
-				<a href="logout"  data-ajax="false">
-					<p>退出登录</p>
-				</a>
-			</li>
+		<ul data-role="listview" class="ui-listview-func" style="margin:50%">
 		</ul>
+		<!--<ul data-role="listview" class="ui-listview-func ui-btn-exit">-->
+			<!--<li data-icon="false">-->
+				<!--<a href="logout"  data-ajax="false">-->
+					<!--<p>退出登录</p>-->
+				<!--</a>-->
+			<!--</li>-->
+		<!--</ul>-->
 	</div>
+	<a href="logout" data-ajax="false"><button style="position:fixed;bottom:50px;font-weight:normal">退出登录</button></a>
 	<div data-role="footer" data-position="fixed" data-theme="t">
          <div data-role="navbar">
              <ul>
@@ -103,6 +105,13 @@
 <script src="/javascripts/jquery.js"></script>
 <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
 <script>
+	var xmlhttp;
+	if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}else{// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	}
 	function statusSwitch() {
 		var status = '<%=status%>'
 		console.log("status:"+status);

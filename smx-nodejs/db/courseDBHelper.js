@@ -128,6 +128,7 @@ exports.getTeacherDetail = function (teacherId, callback) {
 }
 exports.joinCourse = function (userId, courseId, callback) {
     var sql = "SELECT * FROM joinCourse WHERE userId = "+userId+" and courseId = "+courseId;
+    console.log("sql:"+sql);
     conn.query(sql,function (err,rows) {
         if(err){
             console.log(err);
@@ -152,7 +153,8 @@ exports.joinCourse = function (userId, courseId, callback) {
     })
 }
 exports.getJoinStudent = function (courseId,callback) {
-    var sql = "SELECT a.userHeadUrl as headUrl, " +
+    var sql = "SELECT a.userId, " +
+        "a.userHeadUrl as headUrl, " +
         "a.userName as userName " +
         "FROM account a JOIN joinCourse j on a.userId = j.userId " +
         "WHERE j.courseId = "+courseId;
