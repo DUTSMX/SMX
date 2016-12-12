@@ -23,21 +23,25 @@ router.get('/registerTeacherPage',function (req,res) {
 router.get('/createCourse',function (req,res) {
     res.render('createCourse',{});
 })
-router.get('/myCourse',function (req,res) {
-    userId = 1
-    api.getMyCourse(userId,function (rows) {
-        // console.log("rows:"+JSON.stringify(rows))
-        res.render('myCourse',{myCourse:rows});
-    })
+router.get('/myCourse',function (req,res) {var userId = req.session.userId;
+    if(userId == null){
+        res.redirect('../users/loginPage');
+    }else{
+        api.getMyCourse(userId,function (rows) {
+            // console.log("rows:"+JSON.stringify(rows))
+            res.render('myCourse',{myCourse:rows});
+        })
+    }
 })
-router.get('/myQuestion',function (req,res) {
-    // var userId = req.query.userId;
-    var userId = 1;
-    // console.log("userId:"+userId);
-    api.getMyQuestion(userId,function (questionList) {
-        // console.log("question:"+JSON.stringify(questionList))
-        res.render('myQuestion',questionList);
-    })
+router.get('/myQuestion',function (req,res) {var userId = req.session.userId;
+    if(userId == null){
+        res.redirect('../users/loginPage');
+    }else {
+        api.getMyQuestion(userId, function (questionList) {
+            // console.log("question:"+JSON.stringify(questionList))
+            res.render('myQuestion', questionList);
+        })
+    }
 })
 router.get('/setCenter',function (req,res) {
     res.render('setCenter',{})
@@ -162,6 +166,7 @@ router.get('/uploadImg',function (req,res) {
         res.send(ret);
     })
 })
+
 
 /*
 //完善个人信息

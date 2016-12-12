@@ -15,7 +15,7 @@
     <div data-role="header" data-theme="g" data-position="fixed">
         <img src="/images/ic_arrow_back.png" onclick="goBack()" class="left_icon"/>
         <h3 class="page_title">&nbsp登录</h3>
-        <img src="/images/icon_save.png" onclick="login()" class="right_icon"/>
+        <!--<img src="/images/icon_save.png" class="right_icon"  onclick="login()"/>-->
     </div>
     <div>
         <form method="" action="">
@@ -32,6 +32,7 @@
                 </li>
             </ul>
         </form>
+        <button class="btn" onclick="login()">登 录</button>
         <p id="hint"></p>
         <a href="forgetPasswordPage" data-ajax="false"><p style="display:block;float:right;margin-right: 5%">忘记密码</p></a>
         <a href="registerPage" data-ajax="false"><p style="margin-left:40%;margin-top: 10%">创建新账号</p></a>

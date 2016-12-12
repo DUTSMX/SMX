@@ -8,7 +8,7 @@
     <meta http-equiv="cache-control" content="no-cache"/>
     <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/classDetails.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/studentList.css">
 </head>
 <body>
 <div data-role="page" data-title="尚名校">
@@ -21,8 +21,8 @@
         <ul data-role="listview">
             <%studentList.forEach(function (item) {%>
             <li data-icon="false">
-                <a href="#"  data-ajax="false">
-                    <img src=<%= item.headUrl %>>
+                <a href="getUserInfoById?userId=<%=item.userId%>"  data-ajax="false">
+                    <img style="width:50px;height:50px;vertical-align: middle" src=<%= item.headUrl %>>
                     <div class="teacher_info">
                         <div class="teacher_school_intro">
                             <h5><%= item.userName %></h5>

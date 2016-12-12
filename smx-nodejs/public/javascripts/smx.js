@@ -1,4 +1,4 @@
-var xmlhttp;
+﻿var xmlhttp;
 if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
     xmlhttp=new XMLHttpRequest();
 }else{// code for IE6, IE5
@@ -37,21 +37,15 @@ function changePassword() {
             var str = xmlhttp.responseText;//得到服务器响应
             document.getElementById("hint").innerHTML=str;
             if(str == "修改成功"){
-                window.location.href="/users/loginPage";
+                document.getElementById("hint").innerHTML="修改成功，请重新登录";
+                setTimeout(function () {
+                    window.location.href="/users/loginPage";
+                },1000)
             }
         }
     }
 }
-/* 加入课程 */
-function joinCourse() {
-    xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            $("#join_course").text(xmlhttp.responseText);
-        }
-    }
-    xmlhttp.open("GET","/course/joinCourse?courseId=<%=courseId%>",true);
-    xmlhttp.send();
-}
+
 function createCourse () {
     console.log("请求发送成功");
     var courseName = document.getElementById("courseName").value;
@@ -85,6 +79,8 @@ function forgetPassword() {
         document.getElementById("hint").innerHTML = "手机号不能为空";
     }else if(!(/^1[34578]\d{9}$/.test(phoneNumber))){
         document.getElementById("hint").innerHTML = "手机号格式不正确";
+    }else if(checkCode.length == 0){
+        document.getElementById("hint").innerHTML = "验证码不能为空";
     }else if(password.length == 0){
         document.getElementById("hint").innerHTML = "密码不能为空";
     }else if(password !=passwordAgain){//发送登录请求;
@@ -139,6 +135,7 @@ function check() {
 }
 /*登录*/
 function login() {
+    console.log("login")
     var phoneNumber = document.getElementById("phoneNumber").value;
     var password = document.getElementById("password").value;
     if(phoneNumber.length == 0){
@@ -187,6 +184,8 @@ function register() {
         document.getElementById("hint").innerHTML = "手机号不能为空";
     }else if(!(/^1[34578]\d{9}$/.test(phoneNumber))){
         document.getElementById("hint").innerHTML = "手机号格式不正确";
+    }else if(checkCode.length == 0){
+        document.getElementById("hint").innerHTML = "验证码不能为空";
     }else if(password.length == 0){
         document.getElementById("hint").innerHTML = "密码不能为空";
     }else if(password !=passwordAgain){//发送登录请求;
