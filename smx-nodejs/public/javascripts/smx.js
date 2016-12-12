@@ -225,3 +225,24 @@ function registerTeacher() {
         }
     }
 }
+
+/*
+提问
+ */
+function askQuestion() {
+    console.log("请求发送成功");
+    var questionTitle = document.getElementById("questionTitle").value;
+    var questionContent = document.getElementById("questionContent").value;
+    var url = "askQuestion?questionTitle=" +questionTitle+ "&questionContent="+ questionContent;
+    xmlhttp.open("GET",url,true)
+    xmlhttp.send();
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            str = xmlhttp.responseText;//得到服务器响应
+            document.getElementById("hint").innerHTML = str;//显示提示信息
+            if (str == "提问成功") {
+                window.location.href = "/course/course";//跳转到主页
+            }
+        }
+    }
+}
