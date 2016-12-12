@@ -20,3 +20,10 @@ exports.getMD5 = function(str){
     str = md5sum.digest('hex');
     return str;
 }
+exports.getHMacSHA1 = function (secretKey,str) {
+    var str =new Buffer((crypto.createHmac('sha1',secretKey).update(str).digest())+str).toString("base64");
+    return str;
+}
+exports.BASE64 = function (str) {
+    return new Buffer(str).toString('base64')
+}

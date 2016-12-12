@@ -157,64 +157,13 @@ router.get("/personDetail",function (req,res) {
         })
     }
 })
+router.get('/uploadImg',function (req,res) {
+    api.uploadImg(function (ret) {
+        res.send(ret);
+    })
+})
+
 /*
-* unuse
-
-
-//登录
-//GET phoneNumber,password
-router.post('/login', function (req, res) {
-    var phoneNumber = req.body.phoneNumber;
-    var password = req.body.password;
-    console.log("login start");
-    api.login(phoneNumber, password, function (ret) {
-        if(ret.status){
-            req.session.userId = ret.userId;
-            console.log("put userId:"+ret.userId);
-            console.log("target:"+utils.getServer()+req.session.source);
-            if(req.session.source == null){
-                res.render("question");
-                //res.write('<head><meta charset="utf-8"/></head>');
-                //res.write(JSON.stringify(ret));
-            }else{
-                res.redirect(301,utils.getServer()+req.session.source);
-            }
-        }else{
-            res.write('<head><meta charset="utf-8"/></head>');
-            res.write(JSON.stringify(ret));
-        }
-    });
-})
-
-
-//获得个人信息
-router.get('/getMineInfo', function (req, res) {
-    //var userId = req.session.userId;
-    var userId = 10;
-    console.log("userId:"+userId)
-    if (userId == null) {
-        console.log("route login")
-        req.session.source = "users/getMineInfo";
-        res.sendFile(pages.login());
-    } else {
-        api.getMineInfo(userId, function (ret) {
-            var name = ret[0].userName;
-            console.log("name:"+name);
-            if(name == null){
-                req.session.source = "users/getMineInfo";
-                res.sendFile(pages.finishInfo());
-            }else{
-                console.log("adfdsfsadfdsafdsfa")
-                //res.write('<head><meta charset="utf-8"/></head>');
-                //res.write(JSON.stringify(ret[0]));
-                res.render("Person",ret[0]);
-                console.log("0000000")
-
-            }
-        })
-    }
-})
-
 //完善个人信息
 router.get('/finishInfo',function(req,res){
     var userId = req.session.userId;

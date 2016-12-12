@@ -22,7 +22,10 @@
             <li data-icon="false">
                 <hr width="1" size="20" color="#3B7454" class="hr">
                 <h5 class="type">头像</h5>
-                <h5 class="specialDetail"><img src="/images/头像.png"style="width:50px;height:50px"></h5>
+                <h5 class="specialDetail"><img id="head"src="/images/头像.png"style="width:50px;height:50px"></h5>
+                <div style="position: absolute;width:100%;height:100%;left:0px;top:0px;opacity:0">
+                    <input onclick="uploadImg(this,'head')"type="file" name="file" id="file" accept="image/" style="height:200px;"/>
+                </div>
             </li>
             <li data-icon="false">
                 <hr width="1" size="20" color="#3B7454" class="hr">
@@ -57,11 +60,46 @@
                 <h5 class="detail"><%=userAddress%></h5>
             </li>
         </ul>
+        <p id="hint"></p>
     </div>
     <script src="/javascripts/jquery.js"></script>
     <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
     <script src="/javascripts/slick.min.js"></script>
     <script src="/javascripts/smx.js"></script>
+    <script>
+        var xmlhttp;
+        if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+        }else{// code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        function uploadImg(fileObj, divPreviewId) {
+            console.log("uploadImg")
+//            var fileName = document.getElementById("file").value;
+//            var reader = new FileReader();
+//            reader.onload = function (e) {
+//                var data =e.target.result;
+//                console.log("data:"+data);
+//                document.getElementById("hint").innerHTML=data;
+//                console.log("value:"+fileName.substr(fileName.lastIndexOf("\\")+1))
+//                xmlhttp.open("PUT","http://smxbucket-10068625.tj.myqcloud.com/"+fileName)
+//                xmlhttp.send(data)
+//                xmlhttp.onreadystatechange = function () {
+//                console.log("status:"+xmlhttp.status)
+//                if (xmlhttp.readyState==4 && xmlhttp.status==200)
+//                {
+//                    var str = xmlhttp.responseText;//得到服务器响应
+//                    document.getElementById("hint").innerHTML=str;
+//                }
+//            }
+//            }
+
+
+            xmlhttp.open("GET","uploadImg",true);
+            xmlhttp.send();
+
+        }
+    </script>
 </div>
 </body>
 </html>
