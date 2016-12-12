@@ -189,3 +189,9 @@ exports.getUserInfo =function(userId,callback){
         callback(rows[0]);
     })
 }
+exports.editInfo=function (userId,name,sex,age,school,grade,address,callback) {
+    console.log("123");
+    db.editInfo(userId,name,sex,age,school,grade,address,function (rows) {
+        callback("修改成功");
+    })
+}
