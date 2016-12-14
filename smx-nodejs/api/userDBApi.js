@@ -193,9 +193,10 @@ exports.getUserInfo =function(userId,callback){
 
 exports.editInfo=function (userId,name,sex,age,school,grade,address,callback) {
     console.log("123");
-    db.editInfo(userId,name,sex,age,school,grade,address,function (rows) {
+    db.editInfo(userId, name, sex, age, school, grade, address, function (rows) {
         callback("修改成功");
     })
+}
 
 exports.uploadImg = function (callback) {
     var appId="10068625";
