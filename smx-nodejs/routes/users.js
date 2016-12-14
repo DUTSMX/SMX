@@ -161,10 +161,96 @@ router.get("/personDetail",function (req,res) {
         })
     }
 })
+router.get("/personDetailEdit",function (req,res) { var userId=req.session.userId;
+    console.log("userId:"+userId)
+    if(userId == null){
+        res.redirect('../users/loginPage');
+    }else{
+        api.getUserInfo(userId,function (rows) {
+            console.log(JSON.stringify(rows));
+            res.render("personDetailEdit",rows);
+        })
+    }
+})
+
+router.get("/editInfo",function (req,res) {
+    var userId = req.session.userId
+    console.log("userId1:"+req.session.userId);
+    if( userId == null){
+        console.log("ashdf");
+        res.send("userId is null");
+    }
+    else{
+        console.log("zxc");
+        var name=req.query.name;
+        var sex=req.query.sex;
+        var age=req.query.age;
+        var school=req.query.school;
+        var grade=req.query.grade;
+        var address=req.query.address;
+        console.log("123456");
+        api.editInfo(userId,name,sex,age,school,grade,address,function (rows) {
+            console.log(rows);
+            res.send(rows);
+        })
+    }
+});
+
+router.get("/editInfo",function (req,res) {
+    console.log("userId1:"+req.session.userId);
+    if(userId==null){
+        console.log("ashdf");
+        res.send("userId is null");
+    }
+    else{
+        console.log("zxc");
+        var name=req.query.name;
+        var sex=req.query.sex;
+        var age=req.query.age;
+        var school=req.query.school;
+        var grade=req.query.grade;
+        var address=req.query.address;
+        console.log("123456");
+        api.editInfo(userId,name,sex,age,school,grade,address,function (rows) {
+            console.log(rows);
+            res.send(rows);
+        })
+    }
+});
+
+/*
+* unuse
+
+
+//登录
+//GET phoneNumber,password
+router.post('/login', function (req, res) {
+    var phoneNumber = req.body.phoneNumber;
+    var password = req.body.password;
+    console.log("login start");
+    api.login(phoneNumber, password, function (ret) {
+        if(ret.status){
+            req.session.userId = ret.userId;
+            console.log("put userId:"+ret.userId);
+            console.log("target:"+utils.getServer()+req.session.source);
+            if(req.session.source == null){
+                res.render("question");
+                //res.write('<head><meta charset="utf-8"/></head>');
+                //res.write(JSON.stringify(ret));
+            }else{
+                res.redirect(301,utils.getServer()+req.session.source);
+            }
+        }else{
+            res.write('<head><meta charset="utf-8"/></head>');
+            res.write(JSON.stringify(ret));
+        }
+    });
+=======
 router.get('/uploadImg',function (req,res) {
     api.uploadImg(function (ret) {
         res.send(ret);
     })
+>>>>>>> b87291edd7ab5150d9cba35af5eac4c7c88c81c7
 })
 
 
