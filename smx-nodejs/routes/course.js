@@ -73,7 +73,7 @@ router.get('/createCourse',function(req,res){
         }else{
             console.log("路由");
             var courseName = req.query.courseName;
-            var courseDate = req.query.courseDate;
+            var courseDate = (new Date(req.query.courseDate)).getTime();//将日期转化为时间戳
             var beginTime = req.query.beginTime;
             var finshTime = req.query.finshTime;
             var courseTime = req.query.courseTime;

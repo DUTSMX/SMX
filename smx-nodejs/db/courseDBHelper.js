@@ -3,6 +3,7 @@ var conn = dbHelper.getConn();
 var users = require('./userDBHelper');
 
 exports.getCourse = function(callback){
+    var nowTime = new Date().getTime();
     var sql = "SELECT c.courseId, " +
         "c.courseName, " +
         "c.courseTime, " +
@@ -10,7 +11,8 @@ exports.getCourse = function(callback){
         "a.userName as teacherName, " +
         "a.userSchool as teacherSchool, " +
         "a.userGrade as teacherGrade " +
-        "FROM course c JOIN account a ON a.userId = c.userId";
+        "FROM course c JOIN account a ON a.userId = c.userId AND c.courseDate >= curdate()";
+
     conn.query(sql,function (err,rows) {
         if(err){
             console.log(err);
@@ -23,6 +25,7 @@ exports.getCourse = function(callback){
 }
 
 exports.getCourseById = function (userId, callback) {
+    var nowTime = new Date().getTime();
     var sql1 = "SELECT c.courseId, " +
         "c.courseName, " +
         "c.courseTime, " +
@@ -30,8 +33,7 @@ exports.getCourseById = function (userId, callback) {
         "a.userName as teacherName, " +
         "a.userSchool as teacherSchool, " +
         "a.userGrade as teacherGrade " +
-        "FROM ((joinCourse j INNER JOIN course c ON j.courseId = c.courseId) INNER JOIN account a ON c.userId = a.userId)" +
-        "WHERE j.userId = " + userId;
+        "FROM ((joinCourse j INNER JOIN course c ON j.courseId = c.courseId) INNER JOIN account a ON c.userId = a.userId) on c.courseDate >= curdate()" ;
     var sql2 = "SELECT c.courseId, " +
         "c.courseName, " +
         "c.courseTime, " +
@@ -39,8 +41,8 @@ exports.getCourseById = function (userId, callback) {
         "a.userSchool as teacherSchool, " +
         "a.userGrade as teacherGrade, " +
         "a.userName as teacherName " +
-        "FROM course c JOIN account a ON c.userId = a.userId " +
-        "WHERE c.userId = " + userId;
+        "FROM course c JOIN account a ON c.userId = a.userId and c.courseDate>= curdate()" +
+        "WHERE c.userId = " + userId ;
     if (users.judgeRole(userId, function (rows) {
         // console.log("length:" + rows.length);
         if (rows && rows.length > 0) {
