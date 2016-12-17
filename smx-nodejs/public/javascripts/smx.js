@@ -7,8 +7,9 @@ if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
 /*轮播图*/
 $(document).ready(function () {
     $(".ad_Images").slick({
-        autoplay: "true",
-        autoplaySpeed: "4000"
+        autoplay: true,
+        autoplaySpeed: "4000",
+        dots: true
     });
 });
 /*返回上一级*/
