@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>尚名校</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/question.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
+</head>
+<body>
+<div data-role="page" data-title="尚名校">
+    <div data-role="header" data-theme="g" data-position="fixed">
+        <img src="/images/ic_arrow_back.png" onclick="goBack()" class="left_icon"/>
+        <h3 class="page_title">问题详情</h3>
+        <img src="/images/ic_share.png" href="#" class="right_icon"/>
+    </div>
+    <div data-role="content">
+        <h4><%=question.questionTitle%></h4>
+        <p class="question_content"><%=question.questionContent%></p>
+        <div class="answer_area">
+            <ul data-role="listview">
+                <%answerList.forEach(function (item) {%>
+                <li data-icon="false">
+                    <a href="answerDetail?answerId=<%=item.answerId%>" data-ajax="false">
+                        <span class="ans_teacher"><img width="16" height="16" src="<%=item.authorHeadUrl%>"><%=item.authorName%></span>
+                        <p><%=item.answerAbstract%></p>
+                    </a>
+                </li>
+                <%})%>
+            </ul>
+        </div>
+    </div>
+</div>
+<script src="/javascripts/jquery.js"></script>
+<script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
+<script src="/javascripts/smx.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+.ui-listview>.ui-li-has-thumb>.ui-btn, .ui-listview>.ui-li-static.ui-li-has-thumb{
+    padding-top:4%;
+    min-height:40px;
+}
+.ui-listview >li img{
+    padding-left:0.5em;
+    padding-top:2%;
+}

@@ -1,0 +1,29 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+.ui-listview .ui-li-has-thumb>.ui-btn>img:first-child{
+	padding-top: 10%;
+	padding-left: 5%;
+}
+.ui-listview .ui-li-has-thumb>.ui-btn .class_info .class_info_school h5{
+	display: inline-block ;
+	margin-top: 0;
+	font-size: 0.9em;
+}
+.ui-listview .ui-li-has-thumb>.ui-btn .class_info .class_info_school h6{
+	display: inline-block ;
+	font-size: 0.8em;
+}
+.ui-listview .ui-li-has-thumb>.ui-btn .class_info .class_info_name h3 {
+	padding-top: 0;
+	padding-bottom: 2%;
+	
+}
+.ui-listview .ui-li-has-thumb>.ui-btn .class_info .class_info_name h3 span{
+	color: #3B7454;
+}
+.ui-listview .ui-li-has-thumb>.ui-btn .class_info .class_info_time h6 img{
+	vertical-align: middle;
+	padding-bottom: 1%;
+}

@@ -1,13 +1,13 @@
 var dbHelper = require('./dbHelper');
 var conn = dbHelper.getConn();
-
+/*
 exports.addAnswer = function(name,qid,content,picurl,voiceurl,callback){
     var picurl = arguments[3]?arguments[3]:null;
     var voiceurl = arguments[4]?arguments[4]:null;
     var sql = "INSERT INTO answer(username,qid,content,picurl,voiceurl) VALUES ('"+name+"',"+qid+","+content+","+picurl+","+voiceurl+")";
     conn.query(sql,function(err,rows,fields){
         if(err){
-            console.error(err);
+            console.log(err);
         }
         callback(rows);
     })
@@ -34,4 +34,4 @@ exports.searchAnswer = function(word,callback){
         }
         callback(rows);
     })
-}
+}*/

@@ -1,6 +1,7 @@
 var path = require('path');
 
 var dir = path.resolve(__dirname,'..')+"/views/users/";
+var now = path.resolve(__dirname,'..')+"/";
 
 exports.login = function(){
     return dir+"login.html";
@@ -26,6 +27,11 @@ exports.search = function(){
     return dir+"search.html"
 }
 
+exports.getCourse = function(){
+    return dir+"course.html"
+}
+
+
 exports.addQuestion = function() {
     return dir + "addQuestion.html";
 }
@@ -48,4 +54,12 @@ exports.addVideo = function() {
 
 exports.searchVideo = function() {
     return dir + "searchVideo.html";
+}
+
+exports.getMineInfo = function () {
+    return dir + "person.html";
+}
+
+exports.getWXverify = function(){
+	return now+ "MP_verify_sEUETJmOEogP71d6.txt";
 }

@@ -4,53 +4,98 @@ var router = express.Router();
 var api = require('../api/courseDBApi')
 var pages = require('./pages');
 var utils = require('../utils/utils');
-
-router.get('/',function (req,res) {
-    res.end("Hello World");
-});
+var user = require('../api/userDBApi')
 
 
-/*添加课程页面，返回html*/
-router.get('/addCourse.html',function(req,res){
-    res.sendFile(pages.addCourse());
-});
-
-/*搜索课程页面，返回html*/
-router.get('/search.html',function(req,res){
-    res.sendFile(pages.search())
-});
-
-router.get('/addCourse',function(req,res){
-    console.log("userId:"+req.session.userId);
+router.get('/course',function(req,res){
     var userId = req.session.userId;
+    console.log("userId:"+userId)
     if(userId == null){
-        req.session.source = "course/addCourse.html";
-        res.redirect(301,utils.getServer()+"users/login.ejs");
-    }else{
-        var name = req.query.name;
-        var time = req.query.time;
-        var content = req.query.content;
-        api.addCourse(userId,name,time,content,function (rows) {
-            console.log(rows);
-            res.write('<head><meta charset="utf-8"/></head>');
-            res.write("提交成功");
-        })
-    }
-});
-
-router.get('/getCourse',function(req,res){
-    var userId = 1;
-    if(userId == null){
-        req.session.source="course/getCourse";
-        res.redirect(301,utils.getServer()+"users/login.ejs");
+        res.redirect('../users/loginPage');
     }else{
         api.getCourse(userId,function(rows){
-            //res.write('<head><meta charset="utf-8"/></head>');
-            //res.write(JSON.stringify(rows));
-            res.render();
+            console.log("rows:"+JSON.stringify(rows));
+            res.render("course",rows);
         })
     }
 })
+
+router.get('/courseDetail',function(req,res){
+    var courseId = req.query.courseId;
+    var userId = req.session.userId;
+    // console.log("courseId:"+courseId);
+    api.getCourseDetail(userId,courseId,function (courseDetail) {
+        console.log("courseDetial:"+JSON.stringify(courseDetail));
+        res.render('courseDetail',courseDetail);
+    })
+});
+
+router.get('/teacherDetail',function (req,res) {
+    var teacherId = req.query.teacherId;
+    api.getTeacherDetail(teacherId, function (teacherDetail) {
+        res.render('teacherDetail',teacherDetail);
+    })
+})
+
+router.get('/joinCourse',function (req,res) {
+    var userId = req.session.userId;
+    if(userId == null){
+        res.redirect('../users/loginPage');
+    }else{
+        var courseId = req.query.courseId;
+        console.log("courseId:"+courseId)
+        api.joinCourse(userId,courseId,function (ret) {
+            res.send(ret);
+        })
+    }
+})
+
+router.get('/studentList',function (req,res) {
+    var courseId = req.query.courseId;
+    api.getStudentList(courseId,function (ret) {
+        console.log("ret:"+JSON.stringify(ret))
+        res.render('studentList',ret);
+    })
+})
+
+router.get('/courseList',function (req,res) {
+    var teacherId = req.query.teacherId;
+    api.getCourseList(teacherId,function (ret) {
+        res.render('courseList',ret);
+    })
+})
+router.get('/createCourse',function(req,res){
+        console.log("userId:"+req.session.userId);
+
+        var userId = req.session.userId;
+        if(userId == null){
+            res.redirect('../users/loginPage');
+        }else{
+            console.log("路由");
+            var courseName = req.query.courseName;
+            var courseDate = (new Date(req.query.courseDate)).getTime();//将日期转化为时间戳
+            var beginTime = req.query.beginTime;
+            var finshTime = req.query.finshTime;
+            var courseTime = req.query.courseTime;
+            var objectOriented = req.query.objectOriented;
+            var courseContent = req.query.courseContent;
+            api.addCourse(userId,courseName,courseDate,beginTime,finshTime,courseTime,objectOriented,courseContent,function (rows) {
+                res.send(rows);
+
+            })
+        }
+    }
+)
+router.get('/getUserInfoById',function (req,res) {
+    var userId = req.query.userId;
+    user.getUserInfo(userId,function (rows) {
+        res.render("personDetail",rows);
+    })
+})
+
+
+/*
+ * unuse
 
 router.get('/search',function(req,res){
     var word = req.query.word;
@@ -60,4 +105,6 @@ router.get('/search',function(req,res){
     })
 });
 
+
+*/
 module.exports = router;

@@ -5,20 +5,28 @@ var api = require('../api/videoDBApi')
 var pages = require('./pages');
 var utils = require('../utils/utils');
 
-router.get('/',function (req,res) {
-    res.end("Hello World");
+router.get('/video',function (req,res) {
+    api.getVideo(function (videoList) {
+        // console.log("video:"+JSON.stringify(videoList))
+        res.render('video',{videoList:videoList});
+    })
 })
 
-
-router.get('/addVideo.html',function(req,res){
-    res.sendFile(pages.addAnswer());
+router.get('/videoDetail',function (req,res) {
+    var videoId = req.query.videoId;
+    api.videoWatchCountIncrease(videoId,function (rows) {
+        console.log(rows);
+        console.log("视频观看人次数增加成功");
+    })
+    api.getVideoDetail(videoId,function (videoDetail) {
+        // console.log(videoDetail);
+        res.render('videoDetail',videoDetail);
+    })
 })
 
-router.get('/searchVideo.html',function(req,res){
-    res.sendFile(pages.searchAnswer())
-})
-// videoname,username,url,degree,picurl,describe
-
+/*
+* unuse
+*
 router.get('/addVideo',function(req,res){
     console.log("videoname:"+req.session.videoname);
     var videoname = req.session.videoname;
@@ -58,6 +66,5 @@ router.get('/searchVideo',function(req,res){
         res.write(JSON.stringify(rows));
     })
 })
-
+ */
 module.exports = router;
-

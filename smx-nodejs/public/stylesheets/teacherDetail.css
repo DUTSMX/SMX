@@ -1,0 +1,18 @@
+.hr{
+	float: left;
+}
+.ui-listview li .type{
+	display: inline-block;
+	margin-top: 2.5%;
+	padding-left: 3%;
+}
+.ui-listview li .detail{
+	display: inline-block;
+	position: absolute;
+	left: 40%;
+	font-weight: normal;
+}
+.ui-listview li .self_intro{
+	font-weight:normal;
+	white-space: normal;
+}

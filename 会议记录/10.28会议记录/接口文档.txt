@@ -1,0 +1,187 @@
+***********************************************************
+**************************课程模块*************************
+***********************************************************
+
+===========================================================course.ejs
+======================课程页面 userId====================== 
+===========================================================course
+courseList{
+	 rotation:[{imageUrl,jumpUrl}],（轮播图可以先不做）
+	 myCourse:[{courseId,teacherHeadUrl,teacherName,teacherSchool,teacherGrade,courseName,courseTime}],
+	 allCourse:[{courseId,teacherHeadUrl,teacherName,teacherSchool,teacherGrade,courseName,courseTime}]
+}
+courseId用法 <a href="course/courseDetail?courseId=<%=courseId%>" >
+===========================================================courseDetail.ejs
+====================课程详情页面 courseId==================
+====================报名课程 userId,courseId ============== 
+===========================================================courseDetail
+courseDetail{
+	 teacherId
+	 teacherHeadUrl,
+	 teacherName,
+	 teacherSchool,
+	 teacherGrade,
+	 courseName,
+	 courseTime,
+	 objectOriented,(这个可以改成课程类别,比如高三数学，高二英语啥的)
+	 studentList:[{studentHeadUrl,studentName}],
+	 courseContent
+}
+
+===========================================================teacherDetail.ejs
+====================老师信息页面 teacherId=================
+===========================================================teacherDetail
+teacherInfo{
+	 teacherName,
+	 teacherSchool,
+	 teacherGrade,
+	 courseList,[](这个可能得改,跳转到这个老师的课程列表)
+	 goodCourse,
+	 selfIntroduction
+}
+
+
+
+
+
+***********************************************************
+**************************视频模块*************************
+***********************************************************
+
+===========================================================video.ejs
+=========================视频页面==========================
+===========================================================video
+videoList{
+	 videoId,
+	 videoCoverUrl,
+	 videoName,
+	 videoTime,
+	 videoWatchCount,
+	 tagList:[tagName]
+}
+<%=videoWatchCount%>人观看
+===========================================================videoDetail.ejs
+===================视频详情页面 videoId====================
+===========================================================videoDetail
+videoInfo{
+	 videoUrl,
+	 videoName,
+	 authorName,
+	 authorSchool,
+	 authorGrade,
+	 videoTime,
+	 videoWatchCount,
+	 tagList:[tagName],
+	 videoAbstract,
+	 videoContent
+}
+
+***********************************************************
+**************************问答模块*************************
+***********************************************************
+
+===========================================================question.ejs
+=========================问答页面==========================
+===========================================================question
+questionList{
+	teacherList:[{teacherId,teacherHeadUrl,teacherName}],
+	answerList:[{
+	 questionId,
+	 answerId
+	 answerHeadUrl,
+	 answerUserName
+	 questionTitle,
+	 answerAbstract,
+	 answerCount,
+	}]
+}
+
+===========================================================questionDetail.ejs
+===================问题详情页面,questionId=================
+===========================================================questionDetail
+answerList{
+	questionTitle,
+	questionContent,
+	answerList:[answerId,authorHeadUrl,authorName,answerAbstract]
+}
+
+===========================================================answerDetail.ejs
+===================答案详情页面,answerId===================
+===========================================================answerDetail
+answerInfo{
+	questionId
+	questionTitle,
+	answerHeadUrl,
+	answerName,
+	answerTime,
+	answerContent
+	(点赞这块先别写)
+}
+
+===========================================================askQuestion.ejs
+============提问页面 questionTitle,questionContent=========
+===========================================================askQuestion
+跳转到问题列表页面
+
+***********************************************************
+**************************我的模块*************************
+***********************************************************
+===========================================================mine.ejs
+==========================我的页面=========================
+===========================================================mine
+mine{
+	userHeadUrl,
+	userName,
+	userPhoneNumber,
+	roleDesc(决定显示申请家教还是新建课程):申请家教，家教申请中，新建课程
+	roleUrl
+}
+
+===========================================================personDetail.ejs
+=====================个人信息页面userId====================
+===========================================================personDetail
+mineInfo{
+	userHeadUrl,
+	userName,
+	userGender,
+	userAge,
+	userSchool,
+	userGrade,
+	userAddress
+}
+
+
+===========================================================personDetailEdit.ejs
+个人信息编辑页面userId,userHeadUrl,userName,userGender,userAge,userSchool,userGrade,userAddress
+===========================================================personDetailEdit
+mineInfo{
+	userId
+	userHeadUrl,
+	userName,
+	userGender,
+	userAge,
+	userSchool,
+	userGrade,
+	userAddress
+}
+
+===========================================================registerTeacher.ejs
+===========申请家教页面goodGrade,selfIntroduction==========
+===========================================================registerTeacher
+跳转到个人页面
+
+===========================================================createCourse.ejs
+新建课程页面 courseName,courseTime,objectOriented,courseContent
+===========================================================createCourse
+跳转到课程首页
+
+===========================================================myCourse.ejs
+========================我的课程页面=======================
+===========================================================myCourse
+myCourseList:[courseId,teacherHeadUrl,teacherName,teacherSchool,teacherGrade,courseName,courseTime]
+
+
+===========================================================myQuestion.ejs
+========================我的提问页面=======================
+===========================================================myQuestion
+myQuestion:[questionId,headUrl,name,time,questionTitle,answerCount]

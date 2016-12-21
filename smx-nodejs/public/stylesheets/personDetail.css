@@ -1,0 +1,44 @@
+.hr{
+    float: left;
+}
+.ui-listview li .type{
+    display: inline-block;
+    margin-top: 2.5%;
+    padding-left: 3%;
+}
+.ui-listview li .detail{
+    display: inline-block;
+    position: absolute;
+    left: 40%;
+    font-weight: normal;
+}
+.ui-listview li .self_intro{
+    font-weight:normal;
+    white-space: normal;
+}
+.specialDetail{
+    display: inline-block !important;
+    /*position: absolute;*/
+    /*left: 40%;*/
+    font-weight: normal;
+    float: right;
+}
+.hr-1{
+    float: left;
+    margin-top: 6%;
+}
+.ui-listview li .type-1{
+    display: inline-block;
+    margin-top: 6%;
+    padding-left: 3%;
+}
+.edit{
+    float: right;
+    margin-top: 1%;
+    margin-right: 2%;
+
+}
+.edit a{
+    text-decoration: none;
+    color: white;
+}

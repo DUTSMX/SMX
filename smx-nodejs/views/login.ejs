@@ -1,18 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>class</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/createClass.css">
 </head>
 <body>
-    <div>
-        <form action="/users/login" method="post">
-            <label for="phoneNumber">phoneNumber</label>
-            <input id="phoneNumber" value="" type="text" name="phoneNumber">
-            <label for="password">password</label>
-            <input id="password" value="" type="password" name="password">
-            <input type="submit" value="submit">
-        </form>
+<div data-role="page" data-title="尚名校">
+    <div data-role="header" data-theme="g" data-position="fixed">
+        <img src="/images/ic_arrow_back.png" onclick="goBack()" class="left_icon"/>
+        <h3 class="page_title">&nbsp登录</h3>
+        <!--<img src="/images/icon_save.png" class="right_icon"  onclick="login()"/>-->
     </div>
+    <div>
+        <form method="" action="">
+            <ul data-role="listview">
+                <li data-icon="false">
+                    <hr width="1" size="20" color="#3B7454" class="hr">
+                    <h5 class="className-text">手机号</h5>
+                    <input id="phoneNumber" type="number" name="" placeholder="请填写手机号">
+                </li>
+                <li data-icon="false">
+                    <hr width="1" size="20" color="#3B7454" class="hr">
+                    <h5 class="className-text">密码</h5>
+                    <input id="password" type="password" name="" placeholder="请填写密码">
+                </li>
+            </ul>
+        </form>
+        <button class="btn" onclick="login()">登 录</button>
+        <p id="hint"></p>
+        <a href="forgetPasswordPage" data-ajax="false"><p style="display:block;float:right;margin-right: 5%">忘记密码</p></a>
+        <a href="registerPage" data-ajax="false"><p style="margin-left:40%;margin-top: 10%">创建新账号</p></a>
+
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+</script>
+<script src="/javascripts/jquery.js"></script>
+<script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
+<script src="/javascripts/slick.min.js"></script>
+<script src="/javascripts/smx.js"></script>
+</div>
 </body>
 </html>

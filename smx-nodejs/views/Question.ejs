@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>question</title>
+	<title>尚名校</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
@@ -11,7 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
 </head>
 <body>
-	<div data-role="page">
+	<div data-role="page" data-title="尚名校">
 		<div data-role="header" data-theme="g" data-position="fixed">
 			<h3>问答</h3>
 		</div>
@@ -22,101 +22,54 @@
 			</div>
 			<div class="teacher_tab">
 				<div class="ui-grid-d">
-					<div class="ui-block-a">
-						<a href="#">
-						<img src="/images/头像.png">
-						</a>
-						<p>马老师</p>
-					</div>
-					<div class="ui-block-b">
-						<a href="#">
-						<img src="/images/头像.png">
-						</a>
-						<p>马老师</p>
-					</div>
-					<div class="ui-block-c">
-						<a href="#">
-						<img src="/images/头像.png">
-						</a>
-						<p>马老师</p>
-					</div>
-					<div class="ui-block-d">
-						<a href="#">
-						<img src="/images/头像.png">
-						</a>
-						<p>马老师</p>
-					</div>
-					<div class="ui-block-e">
-						<a href="#">
-						<img src="/images/头像.png">
-						</a>
-						<p>马老师</p>
-					</div>
+					<!--<ul>-->
+						<%teacherList.forEach(function (item) {%>
+						<!--<li>-->
+							<div style="float:left" class="ui-block-b">
+								<a href="askQuestion" data-ajax="false">
+									<img src="<%=item.headUrl%>">
+								</a>
+								<p><%=item.userName%></p>
+							</div>
+						<!--</li>-->
+						<%})%>
+					<!--</ul>-->
+
 				</div>
+			</div>
+			<div class="online_teacher">
+				<h4><img src="/images/myclass.png">&nbsp热门问答<!--<span><a href="#">更多></a></span>--></h4>
+				<img src="/images/课程分割线.png" class="div_line">
 			</div>
 			<div class="answer_area">
 				<ul data-role="listview">
+					<%questionList.forEach(function(item){%>
 					<li data-icon="false">
-						<a href="#">
-							<span class="ans_teacher">来自***老师</span>
-							<div class="zan">
+						<a href="<%=item.aHref%>"  data-ajax="false">
+							<span class="ans_teacher"><img width="12" height="12" src="<%=item.authorHeadUrl%>"><%=item.authorName%></span>
+							<!--<div class="zan">
 								<p>12</p>
 								<span>赞同</span>
-							</div>
-							
-							<h5>2018年考研该怎么规划？</h5>
-							<p>哇咔咔，半个月时间登上问题榜首位，被赞1K+，收藏2K+，follower从0到666人，这是我知乎第一次发文，真的是激动地不要不要的，哈哈哈</p>
+							</div>-->
+							<h5><%=item.questionTitle%></h5>
+							<p><%=item.answerAbstract%></p>
 						</a>
 					</li>
-					<li data-icon="false">
-						<a href="#">
-							<span class="ans_teacher">来自***老师</span>
-							<div class="zan">
-								<p>12</p>
-								<span>赞同</span>
-							</div>
-
-							<h5>2018年考研该怎么规划？</h5>
-							<p>哇咔咔，半个月时间登上问题榜首位，被赞1K+，收藏2K+，follower从0到666人，这是我知乎第一次发文，真的是激动地不要不要的，哈哈哈</p>
-						</a>
-					</li>
-					<li data-icon="false">
-						<a href="#">
-							<span class="ans_teacher">来自***老师</span>
-							<div class="zan">
-								<p>12</p>
-								<span>赞同</span>
-							</div>
-
-							<h5>2018年考研该怎么规划？</h5>
-							<p>哇咔咔，半个月时间登上问题榜首位，被赞1K+，收藏2K+，follower从0到666人，这是我知乎第一次发文，真的是激动地不要不要的，哈哈哈</p>
-						</a>
-					</li>
-					<li data-icon="false">
-						<a href="#">
-							<span class="ans_teacher">来自***老师</span>
-							<div class="zan">
-								<p>12</p>
-								<span>赞同</span>
-							</div>
-
-							<h5>2018年考研该怎么规划？</h5>
-							<p>哇咔咔，半个月时间登上问题榜首位，被赞1K+，收藏2K+，follower从0到666人，这是我知乎第一次发文，真的是激动地不要不要的，哈哈哈</p>
-						</a>
-					</li>
+					<%})%>
 				</ul>
 			</div>
 		</div>
 		<div data-role="footer" data-position="fixed" data-theme="t">
 			<div data-role="navbar">
 				<ul>
-					<li><a href="/class" data-ajax="false"><img src="/images/01.png"><p>课程</p></a></li>
-					<li><a href="/video" data-ajax="false"><img src="/images/02.png"><p>视频</p></a></li>
-					<li><a href="/question" data-ajax="false"><img src="/images/03.png"><p>答疑</p></a></li>
-					<li><a href="/person" data-ajax="false"><img src="/images/04.png"><p>我的</p></a></li>
+					<li><a href="/course/course" data-ajax="false"><img src="/images/01.png"><p>课程</p></a></li>
+					<li><a href="/video/video" data-ajax="false"><img src="/images/02.png"><p>视频</p></a></li>
+					<li><a href="#" data-ajax="false"><img src="/images/03.png"><p>答疑</p></a></li>
+					<li><a href="/users/mine" data-ajax="false"><img src="/images/04.png"><p>我的</p></a></li>
 				</ul>
 			</div>
 		</div>
+		<a href="askQuestionPage"data-ajax="false"><img class="ask_question" src="/images/ask_question.png" style="width:50px;height:50px"/></a>
 	</div>
 	<script src="/javascripts/jquery.js"></script>
 	<script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>

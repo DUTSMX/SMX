@@ -1,0 +1,18 @@
+.hr{
+	float: left;
+}
+.ui-listview li a .resetPassword{
+	display: inline-block;
+	margin-top: 2.5%;
+	padding-left: 5%;
+}
+.ui-listview li a .businessCooperation{
+	display: inline-block;
+	margin-top: 2.5%;
+	padding-left: 5%;
+}
+.ui-listview li a .questionFeedback{
+	display: inline-block;
+	margin-top: 2.5%;
+	padding-left: 5%;
+}

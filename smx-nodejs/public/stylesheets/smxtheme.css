@@ -59,3 +59,36 @@
 	width: 30%;
 	height: 30%;
 }
+.ui-navbar {
+	max-width:none;
+}
+
+.ui-footer-fixed{
+	padding-bottom: 0;
+}
+.ui-header-fixed, .ui-footer-fixed{
+	width:inherit;
+}
+
+.ui-header img{
+	width:30px;
+	height:30px;
+	margin:0px 16px;
+	margin-top:12px;
+}
+.ui-header h3{
+	display: inline-block;
+	margin:0;
+	margin-left:14%
+}
+.ui-header .left_icon{
+	float:left;
+}
+.ui-header .right_icon{
+	float: right;
+}
+.ui-header .page_title{
+	display: inline-block;
+	margin:0;
+	margin-left:22%;
+}
