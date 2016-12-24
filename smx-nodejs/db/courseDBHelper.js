@@ -42,15 +42,15 @@ exports.getCourseById = function (userId, callback) {
         "a.userSchool as teacherSchool, " +
         "a.userGrade as teacherGrade, " +
         "a.userName as teacherName " +
-        "FROM course c JOIN account a ON c.userId = a.userId and c.courseDate>= curdate()" +
-        "WHERE c.userId = " + userId ;
+        "FROM course c JOIN account a ON c.userId = a.userId " +
+        "WHERE c.courseDate >= curdate() and c.userId = " + userId ;
     if (users.judgeRole(userId, function (rows) {
         // console.log("length:" + rows.length);
         if (rows && rows.length > 0) {
             var role = rows[0].role;
             console.log("role:"+role)
             if (role == 0 || role == 1) {//学生
-                // console.log(sql1);
+                console.log("sql:"+sql1);
                 conn.query(sql1, function (err, rows, fields) {
                     if (err) {
                         console.log(err);
