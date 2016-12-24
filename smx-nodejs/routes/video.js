@@ -14,6 +14,10 @@ router.get('/video',function (req,res) {
 
 router.get('/videoDetail',function (req,res) {
     var videoId = req.query.videoId;
+    api.videoWatchCountIncrease(videoId,function (rows) {
+        console.log(rows);
+        console.log("视频观看人次数增加成功");
+    })
     api.getVideoDetail(videoId,function (videoDetail) {
         // console.log(videoDetail);
         res.render('videoDetail',videoDetail);

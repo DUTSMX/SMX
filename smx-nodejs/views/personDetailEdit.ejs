@@ -1,24 +1,85 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>尚名校</title>
+    <title>class</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="cache-control" content="no-cache"/>
     <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/slick.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/slick-theme.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/class.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/personDetailEdit.css">
 </head>
 <body>
 <div data-role="page" data-title="尚名校">
     <div data-role="header" data-theme="g" data-position="fixed">
-        <h3>个人信息</h3>
+        <img src="/images/ic_arrow_back.png" onclick="goBack()" class="left_icon"/>
+        <img src="/images/icon_save.png" onclick="editInfo()" class="right_icon"/>
+        <h3 class="page_title">修改信息</h3>
+        <!--<img src="/images/ic_share.png" href="#" class="right_icon"/>-->
     </div>
-    <div data-role="content">
+    <div class="teacher-intro">
+        <form method="" action="">
+            <ul data-role="listview">
+                <li data-icon="false">
+
+                    <hr width="1" size="20" color="#3B7454" class="hr">
+                    <h5 class="className-text">头像</h5>
+                    <input type="text" name="" placeholder="请填写课程名称" value="789">
+
+                </li>
+                <li data-icon="false">
+
+                    <hr width="1" size="20" color="#3B7454" class="hr">
+                    <h5 class="className-text">姓名</h5>
+                    <input type="text" name=""id="name" value="姚晗">
+
+                </li>
+                <li data-icon="false">
+
+                    <hr width="1" size="20" color="#3B7454" class="hr">
+                    <h5 class="className-text">性别</h5>
+                    <input type="text" name="" id="sex" value="男">
+
+                </li>
+                <li data-icon="false">
+
+                    <hr width="1" size="20" color="#3B7454" class="hr">
+                    <h5 class="className-text">年龄</h5>
+                    <input type="text" name=""value="18" id="age">
+
+                </li>
+                <li data-icon="false">
+
+                    <hr width="1" size="20" color="#3B7454" class="hr">
+                    <h5 class="className-text">所在学校</h5>
+                    <input type="text" name="" id="school" value="大连理工大学">
+
+                </li>
+                <li data-icon="false">
+
+                    <hr width="1" size="20" color="#3B7454" class="hr">
+                    <h5 class="className-text">年级</h5>
+                    <input type="text" name="" id="grade" value="研一">
+
+                </li>
+                <li data-icon="false">
+
+                    <hr width="1" size="20" color="#3B7454" class="hr">
+                    <h5 class="className-text">家庭住址</h5>
+                    <input type="text" name="" id="address" value="大黑山">
+
+                </li>
+            </ul>
+        </form>
     </div>
+    <p id="hint"></p>
+    <script type="text/javascript">
+    </script>
+    <script src="/javascripts/jquery.js"></script>
+    <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
+    <script src="/javascripts/slick.min.js"></script>
+    <script src="/javascripts/smx.js"></script>
 </div>
 <script src="/javascripts/jquery.js"></script>
 <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>

@@ -44,7 +44,7 @@ exports.getAnswer = function (callback) {
         "a.questionTitle as questionTitle, "+
         "left(b.answerContent,"+ aContent +") as answerAbstract, " +
         "b.answerTime as time "+
-        "FROM (question a INNER JOIN answer b on a.questionId = b.questionId) JOIN account c on b.userId = c.userId" ;
+        "FROM (question a INNER JOIN answer b on a.questionId = b.questionId) JOIN account c on b.userId = c.userId ORDER BY answerTime DESC" ;
     // console.log("sql:"+sql);
     conn.query(sql,function(err,rows,fields){
         if(err){
@@ -63,13 +63,14 @@ exports.getQuestion = function (callback) {
         "a.questionTitle as questionTitle, "+
         "left(a.questionContent,"+ aContent +") as answerAbstract, "+
         "a.questionTime as time "+
-        "FROM question a JOIN account c on a.userId = c.userId" ;
+        "FROM question a JOIN account c on a.userId = c.userId order by questionTime DESC" ;
     // console.log("sql:"+sql);
     conn.query(sql,function(err,rows,fields){
         if(err){
             console.log(err);
             return;
         }
+        console.log(rows);
         callback(rows);
     })
 }
@@ -103,7 +104,7 @@ exports.getMyQuestion = function (userId, callback) {
         "CONCAT("+"'questionDetail?questionId='"+",q.questionId ) as aHref, " +
         "q.questionTitle as questionDetail " +
         "FROM account a join question q ON a.userId = q.userId " +
-        "WHERE q.userId = "+userId;
+        "WHERE q.userId = "+userId+"order by questionTime DESC";
     // console.log("sql:"+sql);
     conn.query(sql, function (err,rows){
         if(err){
@@ -122,7 +123,7 @@ exports.getMyAnswer = function (userId,callback) {
         "CONCAT("+"'answerDetail?answerId='"+",b.answerId) as aHref, " +
         "q.questionTitle as questionDetail " +
         "FROM answer b JOIN question q ON b.questionId = q.questionId JOIN account a ON b.userId = a.userId " +
-        "WHERE q.userId = "+ userId;
+        "WHERE q.userId = "+ userId+"order by answerTime DESC";
     conn.query(sql, function (err,rows) {
         if(err){
             console.log(err);

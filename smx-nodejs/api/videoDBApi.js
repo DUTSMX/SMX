@@ -11,6 +11,11 @@ exports.getVideoDetail = function(videoId, callback){
         callback(rows);
     })
 }
+exports.videoWatchCountIncrease = function(videoId, callback){
+    db.videoWatchCountIncrease(videoId, function (rows) {
+        callback(rows);
+    })
+}
 
 /*
 * unuse

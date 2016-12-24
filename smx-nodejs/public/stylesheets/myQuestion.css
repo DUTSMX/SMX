@@ -11,12 +11,14 @@
     top: 13.5%;
     left: 4%;
     margin-bottom:10%;*/
+    width:100%;
 }
 .courseLine1{
     /*position: absolute;
     top: 33.5%;
     left: 4%;
     margin-bottom:10%;*/
+    width:100%;
 }
 .ui-input-text {
     border: none !important;

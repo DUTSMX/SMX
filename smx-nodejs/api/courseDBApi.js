@@ -33,7 +33,7 @@ exports.getCourseDetail = function(userId,courseId,callback){
             }else{
                 db.hasJoin(userId,courseId,function (rows) {
                     if(rows == null || rows[0] == null){
-                        courseDetail.join = 0
+                        courseDetail.join = 0;
                     }else{
                         courseDetail.join = 1;
                     }

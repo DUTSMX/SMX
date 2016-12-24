@@ -44,6 +44,17 @@ exports.getVideoDetail = function (videoId,callback) {
         }
     })
 }
+
+exports.videoWatchCountIncrease = function (videoId,callback) {
+    var sql = "UPDATE video SET videoWatchCount = videoWatchCount + 1  WHERE videoId = "+videoId;
+    conn.query(sql,function(err,rows){
+        if(err){
+            console.log(err);
+            return;
+        }
+        callback(rows);
+    })
+}
 /*
 * unuse
 * */
