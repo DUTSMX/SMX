@@ -41,8 +41,8 @@ exports.getCourseById = function (userId, callback) {
         "a.userSchool as teacherSchool, " +
         "a.userGrade as teacherGrade, " +
         "a.userName as teacherName " +
-        "FROM course c JOIN account a ON c.userId = a.userId " +    ``
-        "WHERE  and c.courseDate >= curdate() and c.userId = " + userId ;
+        "FROM course c JOIN account a ON c.userId = a.userId " +
+        "WHERE c.courseDate >= curdate() and c.userId = " + userId ;
     if (users.judgeRole(userId, function (rows) {
         // console.log("length:" + rows.length);
         if (rows && rows.length > 0) {
