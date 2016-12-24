@@ -158,28 +158,26 @@
         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
       }
       function uploadVideo(){
-        console.log("upload")
         var url="http://tj.file.myqcloud.com/files/v2/10068625/smxbucket/testfolder/"
         var appId="10068625";
         var bucket = "smxbucket";
         var secretId =  "AKIDGPM8i9uTM4a0FJlqMgoljZ8a0IPLLlGi";
         var secretKey = "TowscBYpzznPq5B6pLfnjTIwOGUfdbP2";
         var expiredTime = 0;
-        // var timestamp = Math.floor(Date.parse(new Date())/1000);
-    var timestamp = 1481348503;
+        var timestamp = Math.floor(Date.parse(new Date())/1000);
         console.log("timestamp:"+timestamp)
-        // var random = Math.floor(Math.random()*10000);
-    var random = 4967;
-        var Original = "a="+appId+"&b="+bucket+"&k="+secretId+"&e="+expiredTime+"&t="+timestamp+"&r="+random;
+        var random = Math.floor(Math.random()*10000);
+        var Original = "a="+appId+"&b="+bucket+"&k="+secretId+"&e="+expiredTime+"&t="+timestamp+"&r="+random+"&f=";
         console.log("Original:"+Original)
         var SignTmp = CryptoJS.HmacSHA1(Original,secretKey);
         console.log("SignTmp:"+SignTmp)
-        var Sign = window.btoa(SignTmp+Original);
+        var Sign = window.btoa(hexCharCodeToStr(SignTmp)+Original);
         console.log("Sign:"+Sign);
         xmlhttp.open("POST",url,true);
         xmlhttp.setRequestHeader("Access-Control-Allow-Origin","http://sh.file.myqcloud.com")
         xmlhttp.setRequestHeader("Content-Type","application/json")
         xmlhttp.setRequestHeader("Authorization",Sign);
+        xmlhttp.setRequestHeader("HOST","http://sh.file.myqcloud.com")
         var json = {"op":"create"}
         xmlhttp.send(JSON.stringify(json));
         xmlhttp.onreadystatechange = function(){
@@ -190,6 +188,36 @@
           }
         }
       }
+    //   var Original = "a=200001&b=newbucket&k=AKIDUfLUEUigQiXqm7CVSspKJnuaiIKtxqAv&e=0&t=1437995645&r=1166710792&f=/200001/newbucket/tencent_test.jpg"
+    //   var secretKey = "bLcPnl88WU30VY57ipRhSePfPdOfSruK";
+    //   var SignTmp = CryptoJS.HmacSHA1(Original,secretKey);//十六进制数
+    //   console.log("SignTmp:"+typeof(SignTmp))
+    //   var str = hexCharCodeToStr(SignTmp);
+    //   console.log("SignTmp:"+str)
+    //   var Sign = window.btoa(str+Original);
+    //   console.log("Sign:"+Sign)
+    // }
+    function hexCharCodeToStr(hexCharCodeStr) {
+    var trimedStr = hexCharCodeStr.toString().trim();
+    var rawStr = 
+      trimedStr.substr(0,2).toLowerCase() === "0x"
+      ? 
+      trimedStr.substr(2) 
+      : 
+      trimedStr;
+    var len = rawStr.length;
+    if(len % 2 !== 0) {
+     alert("Illegal Format ASCII Code!");
+        return "";
+    }
+    var curCharCode;
+    var resultStr = [];
+    for(var i = 0; i < len;i = i + 2) {
+     curCharCode = parseInt(rawStr.substr(i, 2), 16); // ASCII Code Value
+     resultStr.push(String.fromCharCode(curCharCode));
+    }
+    return resultStr.join("");
+   }
     </script>
   </body>
 </html>
