@@ -110,6 +110,8 @@ exports.updateAccount = function(phoneNumber,password,callback){
     })
 }
 
+
+
 exports.changePassword = function (userId,oldPassword,password,callback) {
     var sql = "SELECT * FROM account WHERE userId = "+userId +" and password = '"+oldPassword+"'";
     conn.query(sql,function (err,rows) {

@@ -55,10 +55,26 @@ function createCourse () {
     var courseTime = document.getElementById("courseTime").value;
     var objectOriented = document.getElementById("objectOriented").value;
     var courseContent = document.getElementById("courseContent").value;
-    var url = "/course/createCourse?courseName=" + courseName + "&courseDate=" + courseDate + "&beginTime=" + beginTime + "" +
-        "&finshTime=" + finshTime + "&courseTime=" + courseTime + "&objectOriented=" + objectOriented + "&courseContent=" + courseContent;
-    xmlhttp.open("GET",url,true)
-    xmlhttp.send();
+    if(courseName.length == 0){
+        document.getElementById("hint").innerHTML = "课程名不能为空";
+    }else if(courseDate.length == 0){
+        document.getElementById("hint").innerHTML = "课程日期不能为空";
+    }else if(beginTime.length == 0){
+        document.getElementById("hint").innerHTML = "开始时间不能为空";
+    }else if(finshTime.length == 0){
+        document.getElementById("hint").innerHTML = "结束时间不能为空";
+    }else if(courseTime.length == 0){
+        document.getElementById("hint").innerHTML = "课程时长不能为空";
+    }else if(objectOriented.length == 0){
+        document.getElementById("hint").innerHTML = "课程对象不能为空";
+    }else if(courseContent.length == 0){
+        document.getElementById("hint").innerHTML = "课程内容不能为空";
+    }else {
+        var url = "/course/createCourse?courseName=" + courseName + "&courseDate=" + courseDate + "&beginTime=" + beginTime + "" +
+            "&finshTime=" + finshTime + "&courseTime=" + courseTime + "&objectOriented=" + objectOriented + "&courseContent=" + courseContent;
+        xmlhttp.open("GET",url,true)
+        xmlhttp.send();
+    }
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             str = xmlhttp.responseText;//得到服务器响应
@@ -152,8 +168,12 @@ function login() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             str = xmlhttp.responseText;//得到服务器响应
             document.getElementById("hint").innerHTML = str;//显示提示信息
-            if(str == "登录成功"){
+            if(str == "登录成功"  ){
                 window.location.href = "/course/course";//跳转到主页
+            }else if(str == "登录成功(null)"){
+                window.location.href = "/users/personDetailEdit";//跳转至完善信息
+            }else{
+                console.log("登陆失败");
             }
         }
     }
@@ -211,9 +231,13 @@ function registerTeacher() {
     console.log("请求发送成功");
     var goodCourse = document.getElementById("goodCourse").value;
     var selfIntro = document.getElementById("selfIntro").value;
-    var url = "registerTeacher?goodCourse=" +goodCourse+ "&selfIntro="+ selfIntro;
-    xmlhttp.open("GET",url,true)
-    xmlhttp.send();
+    if(goodCourse.length == 0){
+        document.getElementById("hint").innerHTML = "擅长课程不能为空";
+    }else{
+        var url = "registerTeacher?goodCourse=" +goodCourse+ "&selfIntro="+ selfIntro;
+        xmlhttp.open("GET",url,true)
+        xmlhttp.send();
+    }
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             str = xmlhttp.responseText;//得到服务器响应
@@ -232,9 +256,15 @@ function askQuestion() {
     console.log("请求发送成功");
     var questionTitle = document.getElementById("questionTitle").value;
     var questionContent = document.getElementById("questionContent").value;
-    var url = "askQuestion?questionTitle=" +questionTitle+ "&questionContent="+ questionContent;
-    xmlhttp.open("GET",url,true)
-    xmlhttp.send();
+    if(questionTitle.length == 0){
+        document.getElementById("hint").innerHTML = "问题标题不能为空";
+    }else if(questionContent.length == 0){
+        document.getElementById("hint").innerHTML = "问题内容不能为空";
+    }else{
+        var url = "askQuestion?questionTitle=" +questionTitle+ "&questionContent="+ questionContent;
+        xmlhttp.open("GET",url,true)
+        xmlhttp.send();
+    }
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             str = xmlhttp.responseText;//得到服务器响应

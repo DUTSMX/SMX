@@ -13,6 +13,12 @@ exports.login = function(phoneNumber, password, callback){
                 status:false,
                 desc:"手机号或密码错误"
             })
+        }else if(rows[0].userName == null || rows[0].userName.length == 0){
+            callback({
+                status:true,
+                userId:rows[0].userId,
+                desc:"登录成功(null)"
+            })
         }else{
             callback({
                 status:true,
@@ -20,6 +26,7 @@ exports.login = function(phoneNumber, password, callback){
                 desc:"登录成功"
             })
         }
+
     });
 }
 
