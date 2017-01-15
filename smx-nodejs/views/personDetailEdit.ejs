@@ -32,42 +32,42 @@
 
                     <hr width="1" size="20" color="#3B7454" class="hr">
                     <h5 class="className-text">姓名</h5>
-                    <input type="text" name=""id="name" value="姚晗">
+                    <input type="text" name=""id="name" value="<%=userName%>">
 
                 </li>
                 <li data-icon="false">
 
                     <hr width="1" size="20" color="#3B7454" class="hr">
                     <h5 class="className-text">性别</h5>
-                    <input type="text" name="" id="sex" value="男">
+                    <input type="text" name="" id="sex" value="<%if(gender==1){%>男<%} else if(gender == 2){%>女<%}%>">
 
                 </li>
                 <li data-icon="false">
 
                     <hr width="1" size="20" color="#3B7454" class="hr">
                     <h5 class="className-text">年龄</h5>
-                    <input type="text" name=""value="18" id="age">
+                    <input type="text" name=""value="<%=userAge%>" id="age">
 
                 </li>
                 <li data-icon="false">
 
                     <hr width="1" size="20" color="#3B7454" class="hr">
                     <h5 class="className-text">所在学校</h5>
-                    <input type="text" name="" id="school" value="大连理工大学">
+                    <input type="text" name="" id="school" value="<%=userSchool%>">
 
                 </li>
                 <li data-icon="false">
 
                     <hr width="1" size="20" color="#3B7454" class="hr">
                     <h5 class="className-text">年级</h5>
-                    <input type="text" name="" id="grade" value="研一">
+                    <input type="text" name="" id="grade" value="<%=userGrade%>">
 
                 </li>
                 <li data-icon="false">
 
                     <hr width="1" size="20" color="#3B7454" class="hr">
                     <h5 class="className-text">家庭住址</h5>
-                    <input type="text" name="" id="address" value="大黑山">
+                    <input type="text" name="" id="address" value="<%=userAddress%>">
 
                 </li>
             </ul>

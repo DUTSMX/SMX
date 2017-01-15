@@ -20,6 +20,12 @@
     <div data-role="content">
         <h4><%=question.questionTitle%></h4>
         <p class="question_content"><%=question.questionContent%></p>
+        <div class="addAnswer">
+            <a class="addAnswer_a">
+                <img src="/images/01.png" class="addAnswer_img">
+                添加回答
+            </a>
+        </div>
         <div class="answer_area">
             <ul data-role="listview">
                 <%answerList.forEach(function (item) {%>

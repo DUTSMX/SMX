@@ -268,5 +268,23 @@ function editInfo() {
             }
         }
     }
+}
+function sendRetroaction() {
+    console.log("请求发送成功");
+    //获取各项值
+    var content=document.getElementById("retroContent").value;
+    var url="sendRetroaction?content="+content;
+    xmlhttp.open("GET",url,true);
+    xmlhttp.send();
+    xmlhttp.onreadystatechange=function () {
+        console.log("back"+xmlhttp.readyState +"   "+xmlhttp.status)
+        if(xmlhttp.readyState==4&&xmlhttp.status==200){
+            var str=xmlhttp.responseText;
+            document.getElementById("hint").innerHTML=str;
+            if(str=="修改成功"){
+                window.history.back();//修改成功之后回到上一个页面
+            }
+        }
+    }
 
 }

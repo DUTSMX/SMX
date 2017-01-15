@@ -20,7 +20,7 @@ router.get('/question', function (req, res) {
 router.get('/questionDetail', function (req, res) {
     var questionId = req.query.questionId;
     api.getQuestionDetail(questionId, function (questionDetail) {
-        // console.log("questionDetail:" + JSON.stringify(questionDetail))
+        console.log("questionDetail:" + JSON.stringify(questionDetail))
         res.render('questionDetail', questionDetail);
     })
 })

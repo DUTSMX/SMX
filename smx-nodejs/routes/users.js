@@ -196,26 +196,9 @@ router.get("/editInfo",function (req,res) {
     }
 });
 
-router.get("/editInfo",function (req,res) {
-    console.log("userId1:"+req.session.userId);
-    if(userId==null){
-        console.log("ashdf");
-        res.send("userId is null");
-    }
-    else{
-        console.log("zxc");
-        var name=req.query.name;
-        var sex=req.query.sex;
-        var age=req.query.age;
-        var school=req.query.school;
-        var grade=req.query.grade;
-        var address=req.query.address;
-        console.log("123456");
-        api.editInfo(userId,name,sex,age,school,grade,address,function (rows) {
-            console.log(rows);
-            res.send(rows);
-        })
-    }
+
+router.get("/retroaction",function (req,res) {
+res.render("retroaction",{});
 });
 
 /*

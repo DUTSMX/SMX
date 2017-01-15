@@ -96,3 +96,25 @@
 .answer_content{
 	margin-top:100px;
 }
+.answer_img{
+	height: 40px;
+	width: 40px;
+	margin-left: 25%;
+	margin-top: 5%;
+}
+.addAnswer{
+	height: 60px;
+	width: 100%;
+}
+.addAnswer_img{
+	height: 40px !important;
+	width:40px !important;
+	margin-left: 25%;
+	margin-top: 2%;
+}
+.addAnswer_a{
+	display: inline-block;
+	height: 100%;
+	width:100%;
+	line-height: 100%;
+}

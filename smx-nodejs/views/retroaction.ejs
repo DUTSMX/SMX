@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>尚名校</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/retroaction.css">
+</head>
+<body>
+<div data-role="page" data-title="尚名校">
+    <div data-role="header" data-theme="g" data-position="fixed">
+        <img src="/images/ic_arrow_back.png" onclick="goBack()" class="left_icon"/>
+        <h3 class="page_title">问题反馈</h3>
+        <!--<img src="/images/ic_share.png" href="#" class="right_icon"/>-->
+    </div>
+    <div data-role="content">
+        <div class="myquestion">
+            <!--<img src="/images/myclass.png">-->
+            <!--<h4 class="question">详情</h4>-->
+            <!--<img src="/images/课程分割线.png" class="courseLine1">-->
+            <textarea id="retroContent" type="text" placeholder="请填写相关反馈信息" class="textarea"></textarea>
+        </div>
+    </div>
+    <div class="publish">
+        <button type="submit" value="Submit Button" onclick="sendRetroaction()" class="publishButton" >提交反馈</button>
+    </div>
+    <p id="hint"></p>
+</div>
+<script src="/javascripts/jquery.js"></script>
+<script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
+<script src="/javascripts/smx.js"></script>
+</body>
+</html>
