@@ -14,6 +14,7 @@ exports.getCourse = function(callback){
         "FROM course c JOIN account a ON a.userId = c.userId AND c.courseDate >= curdate()";
 
     conn.query(sql,function (err,rows) {
+        console.log(sql);
         if(err){
             console.log(err);
             return;
@@ -33,7 +34,7 @@ exports.getCourseById = function (userId, callback) {
         "a.userName as teacherName, " +
         "a.userSchool as teacherSchool, " +
         "a.userGrade as teacherGrade " +
-        "FROM ((joinCourse j INNER JOIN course c ON j.courseId = c.courseId) INNER JOIN account a ON c.userId = a.userId) on c.courseDate >= curdate()" ;
+        "FROM ((joinCourse j INNER JOIN course c ON j.courseId = c.courseId) INNER JOIN account a ON c.userId = a.userId) WHERE c.courseDate >= curdate()" ;
     var sql2 = "SELECT c.courseId, " +
         "c.courseName, " +
         "c.courseTime, " +
@@ -41,8 +42,8 @@ exports.getCourseById = function (userId, callback) {
         "a.userSchool as teacherSchool, " +
         "a.userGrade as teacherGrade, " +
         "a.userName as teacherName " +
-        "FROM course c JOIN account a ON c.userId = a.userId and c.courseDate>= curdate()" +
-        "WHERE c.userId = " + userId ;
+        "FROM course c JOIN account a ON c.userId = a.userId " +
+        "WHERE c.courseDate >= curdate() and c.userId = " + userId ;
     if (users.judgeRole(userId, function (rows) {
         // console.log("length:" + rows.length);
         if (rows && rows.length > 0) {

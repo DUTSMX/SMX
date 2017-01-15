@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>课程详情</title>
+    <!-- Bootstrap -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../css/video.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">尚名校管理系统</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-left">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">课程编辑 <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="addCourse.html">添加课程</a></li>
+                <li><a href="course.html">已有课程</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">视频编辑 <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="addVideo.html">添加视频</a></li>
+                <li><a href="video.html">已有视频</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="question.html" >问答编辑<!--  <span class="caret"></span> --></a>
+              <!-- <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul> -->
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">审核管理 <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="waitChecking.html">待审核</a></li>
+                <li><a href="checked.html">已审核</a></li>
+                <li><a href="suggestion.html">意见反馈</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">用户管理<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="teacherList.html">老师列表</a></li>
+                <li><a href="studentList.html">学生列表</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="version.html" >版本管理</a>
+            </li>
+            <li><a href="#">数据统计</a></li>
+            <li><a href="recycleBin.html">回收站</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">登录/注销<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="login.html">登录</a></li>
+                <li><a href="logout.html">注销</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+           <a href="search.html"  class="btn btn-default" ><span class="glyphicon glyphicon-search" ></span></a>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <div class="main">
+      <div class="container">
+        <div class="bs-example">
+          <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <h3 class="panel-title">课程详情页面</h3>
+            </div>
+            <!-- Table -->
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                    <tr>
+                  <th>名称</th>
+                  <td>高三数学</td>
+                   </tr>
+
+                  <tr>
+                   <th>教师编号</th>
+                   <td>liuyu</td>
+                    </tr>
+
+                    <tr>
+                  <th>开始时间</th>
+                  <td>16.10.24. 9:00</td>
+                   </tr>
+
+                   <tr>
+                  <th>结束时间</th>
+                  <td>16.10.24. 12:00</td>
+                   </tr>
+
+                    <tr>
+                  <th>时长</th>
+                  <td>120分钟</td>
+                   </tr>
+
+                    <tr>
+                  <th>面向对象</th>
+                  <td>高三学生</td>
+                   </tr>
+
+                   <tr>
+                  <th>课程内容</th>
+                  <td>高三函数部分</td>
+                   </tr>
+
+                    <tr>
+                  <th>参与学生</th>
+                  <td>20人</td>
+           
+                  </tr>
+                </thead>
+        
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="../js/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../js/bootstrap.min.js"></script>
+  </body>
+</html>

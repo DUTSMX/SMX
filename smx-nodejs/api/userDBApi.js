@@ -13,6 +13,12 @@ exports.login = function(phoneNumber, password, callback){
                 status:false,
                 desc:"手机号或密码错误"
             })
+        }else if(rows[0].userName == null || rows[0].userName.length == 0){
+            callback({
+                status:true,
+                userId:rows[0].userId,
+                desc:"登录成功(null)"
+            })
         }else{
             callback({
                 status:true,
@@ -20,6 +26,7 @@ exports.login = function(phoneNumber, password, callback){
                 desc:"登录成功"
             })
         }
+
     });
 }
 
@@ -210,7 +217,6 @@ exports.uploadImg = function (callback) {
     var Original = "a="+appId+"&b="+bucket+"&k="+secretId+"&e="+expiredTime+"&t="+timestamp+"&r="+random+"&f=";
     console.log("Original:"+Original)
     var SignTmp = utils.getHMacSHA1(secretKey,Original);
-    console.log("SignTmp:"+SignTmp)
     var Sign = utils.BASE64(SignTmp+Original);
     console.log("Sign:"+Sign);
     var data = {
@@ -225,7 +231,7 @@ exports.uploadImg = function (callback) {
         headers:{
             "Content-Type":"application/json",
             "Content-Length":JSON.stringify(data).length,
-            "Authorization":SignTmp
+            "Authorization":Sign
         }
     }
     console.log("opt:"+JSON.stringify(opt))
