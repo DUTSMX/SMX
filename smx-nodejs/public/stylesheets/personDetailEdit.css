@@ -8,6 +8,7 @@
     display: inline-block;
     margin-top: 5%;
     padding-left: 8%;
+    z-index: 4;
 }
 .ui-listview li.teacher_info .teacher_school_intro h6{
     display: inline-block;
@@ -20,14 +21,15 @@
     margin-top: 5%;
 }
 .ui-listview li  .className-text{
+    position: absolute; 
     display: inline-block;
     margin-top: 4.5%;
     padding-left: 5%;
+    z-index: 5;
 }
 .ui-listview li  .className-details{
     display: inline-block;
     margin-top: 2.5%;
-    padding-left: 5%;
 }
 .ui-listview li  .attend-student{
     display: inline-block;
@@ -39,11 +41,14 @@
     width: 25px;
 }
 div.ui-input-text {
+    position:absolute;
+    left:23%;
+    top:1%;
     width: 250px !important;
     height: 30px !important;
     outline:none!important;
     float: right !important;
-
+    z-index: 1;
 }
 .ui-input-text {
     border: none !important;

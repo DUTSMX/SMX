@@ -11,7 +11,8 @@ exports.getCourse = function(callback){
         "a.userName as teacherName, " +
         "a.userSchool as teacherSchool, " +
         "a.userGrade as teacherGrade " +
-        "FROM course c JOIN account a ON a.userId = c.userId AND c.courseDate >= curdate()";
+        "FROM course c JOIN account a ON a.userId = c.userId"
+        // + " AND c.courseDate >= curdate()";
 
     conn.query(sql,function (err,rows) {
         console.log(sql);
@@ -19,6 +20,7 @@ exports.getCourse = function(callback){
             console.log(err);
             return;
         }else{
+            console.log("rows:"+rows);
             callback(rows);
         }
 
