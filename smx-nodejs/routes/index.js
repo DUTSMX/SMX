@@ -3,10 +3,10 @@ var course = require('../api/courseDBApi');
 var router = express.Router();
 var pages = require('./pages')
 var crypto = require('crypto');
-
+var https = require('https');
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/', function(req, res, next) {var userId = req.session.userId;
+		res.redirect('../course/course');
 });
 router.get('/MP_verify_sEUETJmOEogP71d6.txt',function(req,res){
 	var fs = require('fs');
@@ -59,6 +59,46 @@ function appSign(bucket, fileid, expired) {
 	var sign = bin.toString('base64');
 
 	return sign;
+}
+var grant_type = "client_credential";
+var app_id = "wxdc031022f3870a62";
+var secret = "001eea9743a19d960e7af081646682c2";
+
+router.get("/getJSTicket",function (req,res,next) {
+	// console.log("saveDate:"+global.saveDate)
+	if(!global.saveDate ||new Date().getTime()-global.saveDate>7000){
+	// if(true){
+		console.log("发送get请求")
+		https.get("https://api.weixin.qq.com/cgi-bin/token?grant_type="+grant_type+"&appid="+app_id+"&secret="+secret,function (req,res1) {
+			var html = '';
+			req.on('data',function (data) {
+				html+=data;
+			})
+			req.on('end',function () {
+				global.saveDate = new Date().getTime();
+				global.token = JSON.parse(html).access_token;
+				getJsTicket(res)
+			})
+		});
+	}else{
+		// res.send(global.token);
+		console.log("发送保存的")
+		getJsTicket(res)
+	}
+})
+
+function getJsTicket(res){
+	var url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token="+global.token+"&type=jsapi";
+	https.get(url,function (req,res1) {
+		var html = "";
+		req.on('data',function (data) {
+			html+=data;
+		})
+		req.on('end',function () {
+			console.log(JSON.parse(html).ticket)
+			res.send(JSON.parse(html).ticket)
+		})
+	})
 }
 
 module.exports = router;
