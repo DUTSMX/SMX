@@ -4,10 +4,15 @@ var router = express.Router();
 var pages = require('./pages')
 var crypto = require('crypto');
 var https = require('https');
+var path = require('path');
 /* GET home page. */
 router.get('/', function(req, res, next) {var userId = req.session.userId;
 		res.redirect('../course/course');
 });
+router.get('/favicon.ico',function (req,res) {
+	var now = path.resolve(__dirname,'..')+"/";
+	res.sendFile(now+"favicon.ico")
+})
 router.get('/MP_verify_sEUETJmOEogP71d6.txt',function(req,res){
 	var fs = require('fs');
 	fs.readFile(pages.getWXverify(),'utf-8',function(err,data){
