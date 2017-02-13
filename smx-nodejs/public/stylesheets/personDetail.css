@@ -9,7 +9,7 @@
 .ui-listview li .detail{
     display: inline-block;
     position: absolute;
-    left: 40%;
+    right:5%;
     font-weight: normal;
 }
 .ui-listview li .self_intro{

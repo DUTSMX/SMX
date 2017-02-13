@@ -186,7 +186,8 @@ exports.registerTeacher = function(userId,goodCourse,selfIntro,callback){
     })
 }
 exports.getUserInfo=function (userId,callback) {
-    var sql="SELECT userName, " +
+    var sql="SELECT userHeadUrl," +
+        "userName, " +
         "gender, " +
         "userAge," +
         "userSchool," +
@@ -252,16 +253,17 @@ exports.getCheckCode = function(phoneNumber,callback){
     })
 
 }
-exports.editInfo=function (userId,name,sex,age,school,grade,address,callback) {
+exports.editInfo=function (userId,head,name,sex,age,school,grade,address,callback) {
     console.log("sql db")
-    var gender
-    if(sex == "男"){
-        gender = 1;
-    }else{
-        gender = 2;
-    }
-    var sql="UPDATE account set userName= '"+name+"' ,gender="+gender+",userAge='"+age+"',userSchool='"+school+"',userGrade='"+grade+"',userAddress='"+address+
-    "' WHERE userId = "+userId
+    var sql="UPDATE account " +
+        "SET userHeadUrl='"+head+"'," +
+        "userName= '"+name+"' ," +
+        "gender="+sex+"," +
+        "userAge='"+age+"'," +
+        "userSchool='"+school+"'," +
+        "userGrade='"+grade+"'," +
+        "userAddress='"+address+
+        "' WHERE userId = "+userId
     console.log("sql:"+sql)
     conn.query(sql,function (err,rows) {
         if(err){

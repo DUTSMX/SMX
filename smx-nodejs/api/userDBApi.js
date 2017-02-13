@@ -198,9 +198,9 @@ exports.getUserInfo =function(userId,callback){
     })
 }
 
-exports.editInfo=function (userId,name,sex,age,school,grade,address,callback) {
+exports.editInfo=function (userId,head,name,sex,age,school,grade,address,callback) {
     console.log("123");
-    db.editInfo(userId, name, sex, age, school, grade, address, function (rows) {
+    db.editInfo(userId, head,name, sex, age, school, grade, address, function (rows) {
         callback("修改成功");
     })
 }

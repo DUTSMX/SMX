@@ -173,7 +173,7 @@ router.get("/personDetailEdit",function (req,res) { var userId=req.session.userI
     }
 })
 
-router.get("/editInfo",function (req,res) {
+router.post("/editInfo",function (req,res) {
     var userId = req.session.userId
     console.log("userId1:"+req.session.userId);
     if( userId == null){
@@ -182,14 +182,15 @@ router.get("/editInfo",function (req,res) {
     }
     else{
         console.log("zxc");
-        var name=req.query.name;
-        var sex=req.query.sex;
-        var age=req.query.age;
-        var school=req.query.school;
-        var grade=req.query.grade;
-        var address=req.query.address;
+        var head = req.body.head;
+        var name=req.body.name;
+        var gender=req.body.gender;
+        var age=req.body.age;
+        var school=req.body.school;
+        var grade=req.body.grade;
+        var address=req.body.address;
         console.log("123456");
-        api.editInfo(userId,name,sex,age,school,grade,address,function (rows) {
+        api.editInfo(userId,head,name,gender,age,school,grade,address,function (rows) {
             console.log(rows);
             res.send(rows);
         })
