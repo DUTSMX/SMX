@@ -17,7 +17,7 @@
 		</div>
 		<div data-role="content">
 			<div class="online_teacher">
-				<h4><img src="/images/myclass.png">&nbsp在线老师<span><a href="#">更多></a></span></h4>
+				<h4><img src="/images/myclass.png">&nbsp在线老师<span><a href="#"></a></span></h4>
 				<img src="/images/课程分割线.png" class="div_line">
 			</div>
 			<div class="teacher_tab">
@@ -27,7 +27,7 @@
 						<!--<li>-->
 							<div style="float:left" class="ui-block-b">
 								<a href="askQuestion" data-ajax="false">
-									<img src="<%=item.headUrl%>">
+									<img style="height:50px;width:50px;border-radius: 50px" src="<%=item.headUrl%>">
 								</a>
 								<p><%=item.userName%></p>
 							</div>
@@ -46,7 +46,7 @@
 					<%questionList.forEach(function(item){%>
 					<li data-icon="false">
 						<a href="<%=item.aHref%>"  data-ajax="false">
-							<span class="ans_teacher"><img width="12" height="12" src="<%=item.authorHeadUrl%>"><%=item.authorName%></span>
+							<span class="ans_teacher"><img  style="width:12px;height:12px;border-radius:12px;margin-right:3px" src="<%=item.authorHeadUrl%>"><%=item.authorName%></span>
 							<!--<div class="zan">
 								<p>12</p>
 								<span>赞同</span>

@@ -21,7 +21,7 @@
         <h4><%=question.questionTitle%></h4>
         <p class="question_content"><%=question.questionContent%></p>
         <div class="addAnswer">
-            <a class="addAnswer_a">
+            <a href="./askQuestionPage" class="addAnswer_a" data-ajax="false">
                 <img src="/images/01.png" class="addAnswer_img">
                 添加回答
             </a>
@@ -31,7 +31,7 @@
                 <%answerList.forEach(function (item) {%>
                 <li data-icon="false">
                     <a href="answerDetail?answerId=<%=item.answerId%>" data-ajax="false">
-                        <span class="ans_teacher"><img width="16" height="16" src="<%=item.authorHeadUrl%>"><%=item.authorName%></span>
+                        <span class="ans_teacher"><img style="height:16px;width:16px;border-radius: 16px" src="<%=item.authorHeadUrl%>"><%=item.authorName%></span>
                         <p><%=item.answerAbstract%></p>
                     </a>
                 </li>

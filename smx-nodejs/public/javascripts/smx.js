@@ -4,14 +4,7 @@ if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
 }else{// code for IE6, IE5
     xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 }
-/*轮播图*/
-$(document).ready(function () {
-    $(".ad_Images").slick({
-        autoplay: true,
-        autoplaySpeed: "4000",
-        dots: true
-    });
-});
+
 /*返回上一级*/
 function goBack(){
     window.history.back()

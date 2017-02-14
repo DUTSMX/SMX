@@ -21,7 +21,7 @@
         <ul data-role="listview">
             <li data-icon="false">
                 <a href="teacherDetail?teacherId=<%=teacherId%>"  data-ajax="false">
-                    <img src=<%= teacherHeadUrl %>>
+                    <img style="width:60px;height:60px;border-radius:60px" src=<%= teacherHeadUrl %>>
                     <div class="teacher_info">
                         <div class="teacher_school_intro">
                             <h5><%= teacherName %></h5>
@@ -54,7 +54,8 @@
                 <a href="/course/studentList?courseId=<%=courseId%>"   data-ajax="false">
                     <hr width="1" size="20" color="#3B7454" class="hr">
                     <h5 class="className-text">参与学生</h5>
-                    <p class="className-details"><%=studentCount%><img src="/images/next.png"></p>
+                    <p style="width:60%" class="className-details"><%=studentCount%>
+                        <img style="position:absolute;right:3%"src="/images/next.png"></p>
                 </a>
             </li>
             <li data-icon="false">

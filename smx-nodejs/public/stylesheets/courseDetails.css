@@ -1,12 +1,12 @@
 .ui-listview .ui-li-has-thumb>.ui-btn>img:first-child{
-	padding-top: 12px;
-	padding-left: 10px;
+	margin-left: 3%;
+	margin-top:3%;
 	height: 55px;
 	width: 55px;
 }
 .ui-listview li a .teacher_info .teacher_school_intro h5{
 	display: inline-block;
-	margin-top: 10%;
+	margin-top: 7%;
 	font-weight:normal;
 }
 .ui-listview li a .teacher_info .teacher_school_intro p{

@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="cache-control" content="no-cache"/>
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/slick.css">
@@ -41,7 +39,7 @@
                         <a href="courseDetail?courseId=<%= item.courseId %>" data-ajax="false" target="_parent">
                             <!-- 放在css就失效-->
                             <div style="display: inline-block;position: absolute;top: 20px;left:20px" class="my_course_head_div"></div>
-                            <img style="width:47px;height:47px;position: absolute;top: 24px;left:24px" src=<%= item.teacherHeadUrl %>>  <!-- TODOteacherHeadUrl -->
+                            <img class="head_big" src=<%= item.teacherHeadUrl %>>
                             <div class="class_info">
                                 <div class="class_info_school">
                                     <h5><%= item.teacherName %></h5>
@@ -71,7 +69,7 @@
                         <a href="courseDetail?courseId=<%= item.courseId %>" data-ajax="false">
                             <!-- 放在css就失效-->
                             <div style="display: inline-block;position: absolute;top: 20px;left:20px" class="all_course_head_div"></div>
-                            <img style="width:47px;height:47px;position: absolute;top: 24px;left:24px" src=<%= item.teacherHeadUrl %>>  <!-- TODOteacherHeadUrl -->
+                            <img style="width:48px;height:48px;border-radius:48px;position: absolute;top: 22.5px;left:23px" src=<%= item.teacherHeadUrl %>>  <!-- TODOteacherHeadUrl -->
                             <div class="class_info">
                                 <div class="class_info_school">
                                     <h5><%= item.teacherName %></h5>
@@ -111,5 +109,15 @@
 <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
 <script src="/javascripts/slick.min.js"></script>
 <script src="/javascripts/smx.js"></script>
+<script>
+    /*轮播图*/
+    $(document).ready(function () {
+        $(".ad_Images").slick({
+            autoplay: true,
+            autoplaySpeed: "4000",
+            dots: true
+        });
+    });
+</script>
 </body>
 </html>

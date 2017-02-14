@@ -2,7 +2,7 @@
 .ui-listview .ui-li-has-thumb>.ui-btn>img:first-child{
 	position: absolute;
 	top: 20%;
-	left: 8%;
+	left: 5%;
 }
 /*设置每个功能模块之间的距离*/
 .ui-content .ui-listview{

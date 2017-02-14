@@ -36,7 +36,8 @@ exports.getCourseById = function (userId, callback) {
         "a.userName as teacherName, " +
         "a.userSchool as teacherSchool, " +
         "a.userGrade as teacherGrade " +
-        "FROM ((joinCourse j INNER JOIN course c ON j.courseId = c.courseId) INNER JOIN account a ON c.userId = a.userId) WHERE c.courseDate >= curdate()" ;
+        "FROM ((joinCourse j INNER JOIN course c ON j.courseId = c.courseId) INNER JOIN account a ON c.userId = a.userId) "
+        //  +"WHERE c.courseDate >= curdate()" ;
     var sql2 = "SELECT c.courseId, " +
         "c.courseName, " +
         "c.courseTime, " +
@@ -45,7 +46,8 @@ exports.getCourseById = function (userId, callback) {
         "a.userGrade as teacherGrade, " +
         "a.userName as teacherName " +
         "FROM course c JOIN account a ON c.userId = a.userId " +
-        "WHERE c.courseDate >= curdate() and c.userId = " + userId ;
+        "WHERE c.userId = " + userId
+        // +" and c.courseDate >= curdate()";
     if (users.judgeRole(userId, function (rows) {
         // console.log("length:" + rows.length);
         if (rows && rows.length > 0) {

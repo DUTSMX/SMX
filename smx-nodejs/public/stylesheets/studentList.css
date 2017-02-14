@@ -3,6 +3,6 @@
     min-height:40px;
 }
 .ui-listview >li img{
-    padding-left:0.5em;
-    padding-top:2%;
+    margin-left:3%;
+    margin-top:2%;
 }

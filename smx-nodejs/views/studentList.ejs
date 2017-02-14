@@ -22,7 +22,7 @@
             <%studentList.forEach(function (item) {%>
             <li data-icon="false">
                 <a href="getUserInfoById?userId=<%=item.userId%>"  data-ajax="false">
-                    <img style="width:50px;height:50px;vertical-align: middle" src=<%= item.headUrl %>>
+                    <img style="width:50px;height:50px;border-radius:50px;" src=<%= item.headUrl %>>
                     <div class="teacher_info">
                         <div class="teacher_school_intro">
                             <h5><%= item.userName %></h5>
