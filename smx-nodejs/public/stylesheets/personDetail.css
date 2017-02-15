@@ -1,44 +1,26 @@
-.hr{
+.specialHr{
+    display:inline-block;
+    margin-top: 6%;
     float: left;
+    margin-left: 3%;
 }
-.ui-listview li .type{
+.ui-listview li .specialType{
     display: inline-block;
-    margin-top: 2.5%;
+    position:absolute;
+    top:12%;
+    padding-top: 2%;
     padding-left: 3%;
-}
-.ui-listview li .detail{
-    display: inline-block;
-    position: absolute;
-    right:5%;
-    font-weight: normal;
-}
-.ui-listview li .self_intro{
-    font-weight:normal;
-    white-space: normal;
+    font-weight:bold;
 }
 .specialDetail{
     display: inline-block !important;
     /*position: absolute;*/
     /*left: 40%;*/
     font-weight: normal;
-    float: right;
+    padding-left:31%
 }
-.hr-1{
-    float: left;
-    margin-top: 6%;
-}
-.ui-listview li .type-1{
-    display: inline-block;
-    margin-top: 6%;
-    padding-left: 3%;
-}
-.edit{
-    float: right;
-    margin-top: 1%;
-    margin-right: 2%;
-
-}
-.edit a{
-    text-decoration: none;
-    color: white;
+.ui-header .right_icon{
+    margin-top:4%;
+    height:22px;
+    width:22px;
 }

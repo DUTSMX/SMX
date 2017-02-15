@@ -8,20 +8,21 @@
     <meta http-equiv="cache-control" content="no-cache"/>
     <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/common_line.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/courseDetails.css">
 </head>
 <body>
 <div data-role="page" data-title="尚名校">
     <div data-role="header" data-theme="g" data-position="fixed">
-        <img src="/images/ic_arrow_back.png" onclick="goBack()" class="left_icon"/>
+        <img src="/images/ic_arrow_back.png" onclick="window.history.back()" class="left_icon"/>
         <h3 class="page_title">课程详情</h3>
         <!--<img src="/images/ic_share.png" href="#" class="right_icon"/>-->
     </div>
     <div class="teacher-intro">
         <ul data-role="listview">
-            <li data-icon="false">
-                <a href="teacherDetail?teacherId=<%=teacherId%>"  data-ajax="false">
-                    <img style="width:60px;height:60px;border-radius:60px" src=<%= teacherHeadUrl %>>
+            <li data-icon="arrow-r">
+                <a class="line_click" href="teacherDetail?teacherId=<%=teacherId%>"  data-ajax="false">
+                    <img class="head_60" src=<%= teacherHeadUrl %>>
                     <div class="teacher_info">
                         <div class="teacher_school_intro">
                             <h5><%= teacherName %></h5>
@@ -50,55 +51,59 @@
                 <h5 class="className-text">面向对象</h5>
                 <p class="className-details"><%= objectOriented %></p>
             </li>
-            <li data-icon="true">
-                <a href="/course/studentList?courseId=<%=courseId%>"   data-ajax="false">
+            <li data-icon="arrow-r">
+                <a class="line_click" href="/course/studentList?courseId=<%=courseId%>"   data-ajax="false">
                     <hr width="1" size="20" color="#3B7454" class="hr">
                     <h5 class="className-text">参与学生</h5>
-                    <p style="width:60%" class="className-details"><%=studentCount%>
-                        <img style="position:absolute;right:3%"src="/images/next.png"></p>
+                    <p class="className-details"><%=studentCount%></p>
                 </a>
             </li>
             <li data-icon="false">
                 <hr width="1" size="20" color="#3B7454" class="hr">
                 <h5 class="className-text">课程内容</h5>
-                <p><%=courseContent%></p>
+                <p class="content"><%=courseContent%></p>
             </li>
         </ul>
         <%if(join == 0){%>
-        <div style="border-style: none" data-role="footer" data-position="fixed" data-theme="t">
+        <div data-role="footer" data-position="fixed" data-theme="t">
             <a onclick="joinCourse()"class="add_course">
-                <h4 id="join_course" style="color:#ffffff;text-align: center;">加入课程</h4>
+                <h4 id="join_course" class="footer_button_text">加入课程</h4>
             </a>
         </div>
         <%}else{%>
-        <div style="border-style: none" data-role="footer" data-position="fixed" data-theme="t">
-            <a onclick="loadXMLDoc()"class="add_course">
-                <h4 id="join_course" style="color:#ffffff;text-align: center;">已加入课程</h4>
+        <div data-role="footer" data-position="fixed" data-theme="t">
+            <a onclick="joinCourse()"class="add_course">
+                <h4 id="join_course">退出课程</h4>
             </a>
         </div>
         <%}%>
     </div>
     <script src="/javascripts/jquery.js"></script>
     <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
-    <script src="/javascripts/slick.min.js"></script>
-    <script src="/javascripts/smx.js"></script>
     <script>
-        var xmlhttp;
-        if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp=new XMLHttpRequest();
-        }else{// code for IE6, IE5
-            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-        }
         /* 加入课程 */
         function joinCourse() {
-            xmlhttp.onreadystatechange = function() {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    console.log("res:"+xmlhttp.responseText)
-                    $("#join_course").text(xmlhttp.responseText);
-                }
+            var text = $("#join_course").text();
+            console.log("text:"+text)
+            if(text == "加入课程"){
+                console.log("加入")
+                $.get("/course/joinCourse?courseId=<%=courseId%>",null,function (data) {
+                    if(data.status){
+                        location.reload();
+                    }else{
+                        console.log(data.desc)
+                    }
+                },"json")
+            }else{
+                console.log("退出")
+                $.get("/course/unJoinCourse?courseId=<%=courseId%>",null,function (data) {
+                    if(data.status){
+                        location.reload();
+                    }else{
+                        console.log(data.desc)
+                    }
+                },"json")
             }
-            xmlhttp.open("GET","/course/joinCourse?courseId=<%=courseId%>",true);
-            xmlhttp.send();
         }
     </script>
 </div>

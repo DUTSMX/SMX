@@ -14,9 +14,9 @@
 </head>
 <body>
 <div data-role="page" data-title="尚名校">
-        <div data-role="header" data-theme="g" data-position="fixed">
-            <h3>课程</h3>
-        </div>
+    <div data-role="header" data-theme="g" data-position="fixed">
+        <h3>课程</h3>
+    </div>
     <div class="ad_Images">
         <div class="ad_Image_style">
             <img src="/images/轮播图.png">
@@ -36,9 +36,9 @@
                 <ul data-role="listview">
                     <% courseList.myCourse.forEach(function(item){ %>
                     <li data-icon="false">
-                        <a href="courseDetail?courseId=<%= item.courseId %>" data-ajax="false" target="_parent">
+                        <a href="courseDetail?courseId=<%= item.courseId %>" data-ajax="false">
                             <!-- 放在css就失效-->
-                            <div style="display: inline-block;position: absolute;top: 20px;left:20px" class="my_course_head_div"></div>
+                            <div class="my_course_head_div"></div>
                             <img class="head_big" src=<%= item.teacherHeadUrl %>>
                             <div class="class_info">
                                 <div class="class_info_school">
@@ -49,8 +49,7 @@
                                     <h3><%= item.courseName %></h3>
                                 </div>
                                 <div class="class_info_time">
-
-                                    <h6><img src="/images/课程时间.png"><%= item.courseTime %></h6>
+                                    <h6><img class="clock" src="/images/课程时间.png"><%= item.courseTime %></h6>
                                 </div>
                             </div>
                         </a>
@@ -68,8 +67,8 @@
                     <li data-icon="false">
                         <a href="courseDetail?courseId=<%= item.courseId %>" data-ajax="false">
                             <!-- 放在css就失效-->
-                            <div style="display: inline-block;position: absolute;top: 20px;left:20px" class="all_course_head_div"></div>
-                            <img style="width:48px;height:48px;border-radius:48px;position: absolute;top: 22.5px;left:23px" src=<%= item.teacherHeadUrl %>>  <!-- TODOteacherHeadUrl -->
+                            <div class="all_course_head_div"></div>
+                            <img class="head_big" src=<%= item.teacherHeadUrl %>>  <!-- TODOteacherHeadUrl -->
                             <div class="class_info">
                                 <div class="class_info_school">
                                     <h5><%= item.teacherName %></h5>
@@ -108,7 +107,6 @@
 <script src="/javascripts/jquery.js"></script>
 <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
 <script src="/javascripts/slick.min.js"></script>
-<script src="/javascripts/smx.js"></script>
 <script>
     /*轮播图*/
     $(document).ready(function () {

@@ -8,6 +8,7 @@ var qs = require('querystring')
 
 exports.login = function(phoneNumber, password, callback){
     db.findAccount(phoneNumber, password, function(rows){
+        console.log("row:"+JSON.stringify(rows))
         if(rows[0] == null){
             callback({
                 status:false,
@@ -33,7 +34,10 @@ exports.login = function(phoneNumber, password, callback){
 exports.register = function(phoneNumber,checkCode, password,callback){
     db.getCheckCode(phoneNumber,function (rows) {
         if(rows != checkCode){
-            callback({desc:"验证码错误"})
+            callback({
+                status:false,
+                desc:"验证码错误"
+            })
         }else{
             db.findAccountByNum(phoneNumber,function(rows){
                 if(rows[0] == null){

@@ -8,23 +8,23 @@
     <meta http-equiv="cache-control" content="no-cache"/>
     <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/createClass.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/common_line.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/personDetail.css">
 </head>
 <body>
-<div data-role="page" data-title="尚名校">
-    <div data-role="header" data-theme="g" data-position="fixed">
-        <img src="/images/ic_arrow_back.png" onclick="goBack()" class="left_icon"/>
-        <h3 class="page_title">新建课程</h3>
-        <img src="/images/icon_save.png" onclick="createCourse()" class="right_icon"/>
-    </div>
-    <div class="teacher-intro">
-        <form method="" action="">
+    <div data-role="page" data-title="尚名校">
+        <div data-role="header" data-theme="g" data-position="fixed">
+            <img src="/images/ic_arrow_back.png" onclick="window.history.back()" class="left_icon"/>
+            <span><a onclick="createCourse()" data-ajax="false"><img class="right_icon"src="/images/编辑.png"></a></span>
+            <h3 class="page_title">新建课程</h3>
+        </div>
+        <div class="teacher-intro">
             <ul data-role="listview">
                 <li data-icon="false">
 
                     <hr width="1" size="20" color="#3B7454" class="hr">
                     <h5 class="className-text">课程名称</h5>
-                    <input id = "courseName"type="text" name="" placeholder="请填写课程名称" value="789">
+                    <input id = "courseName"type="text" name="" placeholder="请填写课程名称">
 
                 </li>
                 <li data-icon="false">
@@ -45,7 +45,7 @@
 
                     <hr width="1" size="20" color="#3B7454" class="hr">
                     <h5 class="className-text">结束时间</h5>
-                    <input id = "finshTime"type="time" name="" placeholder="" id="end">
+                    <input id = "finishTime"type="time" name="" placeholder="" id="end">
 
                 </li>
                 <li data-icon="false">
@@ -70,14 +70,65 @@
 
                 </li>
             </ul>
-        </form>
-        <p id="hint"></p>
-    </div></div>
-    <script type="text/javascript">
-    </script>
-    <script src="/javascripts/jquery.js"></script>
-    <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
-    <script src="/javascripts/slick.min.js"></script>
-    <script src="/javascripts/smx.js"></script>
+            <p id="hint"></p>
+        </div>
+    </div>
 </body>
+<script src="/javascripts/jquery.js"></script>
+<script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
+<script>
+    function createCourse () {
+        var courseName = $("#courseName").val();
+        var courseDate = $("#courseDate").val();
+        var beginTime = $("#beginTime").val();
+        var finishTime = $("#finishTime").val();
+        var courseTime = $("#courseTime").val();
+        var objectOriented = $("#objectOriented").val();
+        var courseContent = $("#courseContent").val();
+        console.log("beginTime:"+beginTime+" finishTime:"+finishTime)
+        var data = {
+            courseName:courseName,
+            courseDate:courseDate,
+            beginTime:beginTime,
+            finishTime:finishTime,
+            courseTime:courseTime,
+            objectOriented:objectOriented,
+            courseContent:courseContent
+        }
+        console.log("data:"+JSON.stringify(data))
+        if(courseName.length == 0){
+            $("#hint").text("课程名不能为空");
+        }else if(courseDate.length == 0){
+            $("#hint").text("课程日期不能为空");
+        }else if(beginTime.length == 0){
+            $("#hint").text("开始时间不能为空");
+        }else if(finishTime.length == 0){
+            $("#hint").text("结束时间不能为空");
+        }else if(courseTime.length == 0){
+            $("#hint").text("课程时长不能为空");
+        }else if(objectOriented.length == 0){
+            $("#hint").text("课程对象不能为空");
+        }else if(courseContent.length == 0){
+            $("#hint").text("课程内容不能为空");
+        }else {
+            var data = {
+                courseName:courseName,
+                courseDate:courseDate,
+                beginTime:beginTime,
+                finishTime:finishTime,
+                courseTime:courseTime,
+                objectOriented:objectOriented,
+                courseContent:courseContent
+            }
+            console.log("data:"+data)
+            $.post("/course/createCourse",data,function (data) {
+                if(data.status){
+                    $("#hint").text(data.desc)
+                    window.history.back()
+                }else{
+                    console.log(data.desc)
+                }
+            },"json")
+    }
+</script>
 </html>

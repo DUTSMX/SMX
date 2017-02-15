@@ -13,16 +13,15 @@
 <body>
 <div data-role="page" data-title="尚名校">
     <div data-role="header" data-theme="g" data-position="fixed">
-        <img src="/images/ic_arrow_back.png" onclick="goBack()" class="left_icon"/>
+        <img src="/images/ic_arrow_back.png" onclick="window.history.back()" class="left_icon"/>
         <h3 class="page_title">参与学生</h3>
-        <!--<img src="/images/ic_share.png" href="#" class="right_icon"/>-->
     </div>
     <div class="teacher-intro">
         <ul data-role="listview">
             <%studentList.forEach(function (item) {%>
             <li data-icon="false">
                 <a href="getUserInfoById?userId=<%=item.userId%>"  data-ajax="false">
-                    <img style="width:50px;height:50px;border-radius:50px;" src=<%= item.headUrl %>>
+                    <img class="head_big" src=<%= item.headUrl %>>
                     <div class="teacher_info">
                         <div class="teacher_school_intro">
                             <h5><%= item.userName %></h5>

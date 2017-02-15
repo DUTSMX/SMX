@@ -87,11 +87,17 @@ exports.findAccountByNum = function(phoneNumber,callback){
 
 
 exports.addAccount = function(phoneNumber,password,callback){
-    var sql = "INSERT INTO account(phoneNumber,password,userHeadUrl) VALUES ('"+phoneNumber+"','"+password+"','http://smxbucket-10068625.cos.myqcloud.com/%E6%9C%AA%E6%A0%87%E9%A2%98-3.png')";
+    var date = new Date();
+    console.log("date:"+date)
+    var sql = "INSERT INTO account(phoneNumber,password,userHeadUrl,registerDate) VALUES ('"+phoneNumber+"','"+password+"','http://smxbucket-10068625.cos.myqcloud.com/%E6%9C%AA%E6%A0%87%E9%A2%98-3.png',"+conn.escape(date)+")";
+    console.log("sql:"+sql)
     conn.query(sql,function(err,rows,fileds){
         if(err){
             console.log(err);
-            return;
+            callback({
+                status:false,
+                // desc:err
+            })
         }
         // console.log(rows);
         callback(rows);

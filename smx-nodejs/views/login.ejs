@@ -8,44 +8,66 @@
     <meta http-equiv="cache-control" content="no-cache"/>
     <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/createClass.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/common_line.css">
 </head>
 <body>
 <div data-role="page" data-title="尚名校">
     <div data-role="header" data-theme="g" data-position="fixed">
-        <img src="/images/ic_arrow_back.png" onclick="goBack()" class="left_icon"/>
-        <h3 class="page_title">&nbsp登录</h3>
-        <!--<img src="/images/icon_save.png" class="right_icon"  onclick="login()"/>-->
+        <img src="/images/ic_arrow_back.png" onclick="window.history.back()" class="left_icon"/>
+        <h3 class="page_title">登录</h3>
     </div>
     <div>
-        <form method="" action="">
-            <ul data-role="listview">
-                <li data-icon="false">
-                    <hr width="1" size="20" color="#3B7454" class="hr">
-                    <h5 class="className-text">手机号</h5>
-                    <input id="phoneNumber" type="number" name="" placeholder="请填写手机号">
-                </li>
-                <li data-icon="false">
-                    <hr width="1" size="20" color="#3B7454" class="hr">
-                    <h5 class="className-text">密码</h5>
-                    <input id="password" type="password" name="" placeholder="请填写密码">
-                </li>
-            </ul>
-        </form>
-        <button class="btn" onclick="login()">登 录</button>
+        <ul data-role="listview">
+            <li data-icon="false">
+                <hr width="1" size="20" color="#3B7454" class="hr">
+                <h5 class="className-text">手机号</h5>
+                <input id="phoneNumber" type="number" name="" placeholder="请填写手机号">
+            </li>
+            <li data-icon="false">
+                <hr width="1" size="20" color="#3B7454" class="hr">
+                <h5 class="className-text">密码</h5>
+                <input id="password" type="password" name="" placeholder="请填写密码">
+            </li>
+        </ul>
+        <button class="btn" onclick="login()">登&nbsp录</button>
         <p id="hint"></p>
-        <a href="forgetPasswordPage" data-ajax="false"><p style="display:block;float:right;margin-right: 5%">忘记密码</p></a>
-        <a href="registerPage" data-ajax="false"><p style="margin-left:40%;margin-top: 10%">创建新账号</p></a>
-
+        <a href="forgetPassword" data-ajax="false"><p style="display:block;float:right;margin-right: 5%">忘记密码</p></a>
+        <a href="register" data-ajax="false"><p style="margin-left:40%;margin-top: 10%">创建新账号</p></a>
     </div>
 </div>
 </body>
-<script type="text/javascript">
-</script>
 <script src="/javascripts/jquery.js"></script>
 <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
-<script src="/javascripts/slick.min.js"></script>
-<script src="/javascripts/smx.js"></script>
+<script>
+    /*登录*/
+    function login() {
+        var phoneNumber = $("#phoneNumber").val();
+        var password = $("#password").val();
+        if(phoneNumber.length == 0){
+            $("#hint").html("手机号不能为空");
+        }else if(!(/^1[34578]\d{9}$/.test(phoneNumber))){
+            $("#hint").html("手机号格式不正确");
+        }else if(password.length == 0){
+            $("#hint").html("密码不能为空");
+        }else{//发送登录请求
+            var data={
+                phoneNumber:phoneNumber,
+                password:password
+            }
+            $.post("./login",data,function (data) {
+                if(data.status){
+                    if(!data.sourceUrl||data.sourceUrl == "/users/login"){
+                        window.location.href = "/course/course";
+                    }else{
+                        window.location.href = data.sourceUrl;
+                    }
+                }else{
+                    $("#hint").html(data.desc);
+                }
+            },"json")
+        }
+    }
+</script>
 </div>
 </body>
 </html>

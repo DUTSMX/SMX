@@ -17,22 +17,30 @@ router.get('/mine',function (req,res) {
         })
     }
 })
+
 router.get('/registerTeacherPage',function (req,res) {
     res.render('registerTeacher',{});
 })
+/*
+* 创建课程
+* req:
+* res:
+* */
 router.get('/createCourse',function (req,res) {
     res.render('createCourse',{});
 })
-router.get('/myCourse',function (req,res) {var userId = req.session.userId;
-    if(userId == null){
-        res.redirect('../users/loginPage');
-    }else{
-        api.getMyCourse(userId,function (rows) {
-            // console.log("rows:"+JSON.stringify(rows))
-            res.render('myCourse',{myCourse:rows});
-        })
-    }
+/*
+* 获得个人的课程列表
+ * req:courseId
+ * res:{[courseId,courseName,courseTime,teacherHeadUrl,teacherSchool,teacherGrade,teacherName]}
+* */
+router.get('/myCourse',function (req,res) {
+    var userId = req.session.userId;
+    api.getMyCourse(userId,function (rows) {
+        res.render('myCourse',{myCourse:rows});
+    })
 })
+
 router.get('/myQuestion',function (req,res) {var userId = req.session.userId;
     if(userId == null){
         res.redirect('../users/loginPage');
@@ -43,29 +51,37 @@ router.get('/myQuestion',function (req,res) {var userId = req.session.userId;
         })
     }
 })
+
 router.get('/setCenter',function (req,res) {
     res.render('setCenter',{})
 })
-router.get('/loginPage',function (req,res) {
+
+router.get('/login',function (req,res) {
     res.render('login',{})
-    // res.sendFile(path.resolve(__dirname,'..')+"/views/login.ejs")
 })
-router.get('/login',function(req,res){
-    var phoneNumber = req.query.phoneNumber;
-    var password = req.query.password;
+
+router.post('/login',function(req,res){
+    var phoneNumber = req.body.phoneNumber;
+    var password = req.body.password;
     console.log("phoneNumber:"+phoneNumber+" password:"+password);
     api.login(phoneNumber,password,function (ret) {
         var userId = ret.userId;
         if(ret.status){
             req.session.userId = userId;
+            ret.sourceUrl = req.session.sourceUrl;
+            console.log("url:"+req.session.sourceUrl)
+            console.log("ret:"+JSON.stringify(ret))
+            res.send(ret);
+        }else{
+            console.log(ret)
+            res.send(ret);
         }
-        res.send(ret.desc);
     })
 })
 
-router.get('/getCheckCode',function (req,res) {
+router.post('/getCheckCode',function (req,res) {
     console.log("获取验证码")
-    var phoneNumber = req.query.phoneNumber;
+    var phoneNumber = req.body.phoneNumber;
     console.log("phoneNumber:"+phoneNumber)
     api.sendCheckCode(phoneNumber,function (rows) {
         res.send(rows);
@@ -74,30 +90,26 @@ router.get('/getCheckCode',function (req,res) {
 
 //注册
 // GET phoneNumber,password
-router.get('/registerPage', function (req, res) {
+router.get('/register', function (req, res) {
     res.render('register',{})
 })
-router.get('/register',function (req,res) {
-    var phoneNumber = req.query.phoneNumber;
-    var checkCode = req.query.checkCode;
-    var password = req.query.password;
+router.post('/register',function (req,res) {
+    var phoneNumber = req.body.phoneNumber;
+    var checkCode = req.body.checkCode;
+    var password = req.body.password;
     api.register(phoneNumber, checkCode, password, function (ret) {
+        console.log("status:"+ret.status)
         if(ret.status){
             req.session.userId = ret.userId;
-            // console.log("put userId:"+req.session.userId);
-            // res.sendFile(pages.finishInfo())
-        }else{
-            // res.write('<head><meta charset="utf-8"/></head>');
-            // res.write(JSON.stringify(ret));
         }
-        res.send(ret.desc);
+        res.send(ret);
     });
 })
 
-router.get('/forgetPasswordPage',function (req,res) {
+router.get('/forgetPassword',function (req,res) {
     res.render('forgetPassword',{})
 })
-router.get('/forgetPassword',function (req,res) {
+router.post('/forgetPassword',function (req,res) {
     var phoneNumber = req.query.phoneNumber;
     var password = req.query.password;
     var checkCode = req.query.checkCode;
@@ -122,7 +134,7 @@ router.get('/questionStatus',function (req,res) {
     })
 })
 
-router.get('/changePassword',function (req,res) {
+router.post('/changePassword',function (req,res) {
     var userId = req.session.userId;
     if(userId == null){
         res.redirect('../users/loginPage');
@@ -156,6 +168,7 @@ router.get("/personDetail",function (req,res) {
         res.redirect('../users/loginPage');
     }else{
         api.getUserInfo(userId,function (rows) {
+            rows.self=false;
             console.log(JSON.stringify(rows));
             res.render("personDetail",rows);
         })

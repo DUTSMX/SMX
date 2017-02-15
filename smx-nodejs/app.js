@@ -29,8 +29,36 @@ app.use(session({
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+var unInterceptionList = ["/users/forgetPassword","/users/register","/users/getCheckCode"]
+//登录过滤器，如果session中的userId为空，则跳转到登录页面，登陆成功后跳转回来。
+app.use(function (req,res,next) {
+  var url = req.originalUrl;
+  var regex = "(.css|.js|.png|.gif|.ico|.map\s*)$";
+  var ret = url.match(regex);
+
+  if(ret == null) {
+    if (url != "/users/login" && !req.session.userId) {
+      var flag = true;
+      unInterceptionList.forEach(function (item) {
+        if(item == url){
+          flag = false;
+          return;
+        }
+      })
+      if(flag){
+        console.log(url + "  redirect  login")
+        req.session.sourceUrl = url;
+        return res.redirect("/users/login")
+      }
+    }else{
+
+    }
+  }
+  next();
+})
+
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

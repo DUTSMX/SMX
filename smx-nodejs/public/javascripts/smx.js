@@ -1,11 +1,4 @@
-﻿var xmlhttp;
-if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlhttp=new XMLHttpRequest();
-}else{// code for IE6, IE5
-    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-}
-
-/*返回上一级*/
+﻿/*返回上一级*/
 function goBack(){
     window.history.back()
 }
@@ -40,45 +33,6 @@ function changePassword() {
     }
 }
 
-function createCourse () {
-    console.log("请求发送成功");
-    var courseName = document.getElementById("courseName").value;
-    var courseDate = document.getElementById("courseDate").value;
-    var beginTime = document.getElementById("beginTime").value;
-    var finshTime = document.getElementById("finshTime").value;
-    var courseTime = document.getElementById("courseTime").value;
-    var objectOriented = document.getElementById("objectOriented").value;
-    var courseContent = document.getElementById("courseContent").value;
-    if(courseName.length == 0){
-        document.getElementById("hint").innerHTML = "课程名不能为空";
-    }else if(courseDate.length == 0){
-        document.getElementById("hint").innerHTML = "课程日期不能为空";
-    }else if(beginTime.length == 0){
-        document.getElementById("hint").innerHTML = "开始时间不能为空";
-    }else if(finshTime.length == 0){
-        document.getElementById("hint").innerHTML = "结束时间不能为空";
-    }else if(courseTime.length == 0){
-        document.getElementById("hint").innerHTML = "课程时长不能为空";
-    }else if(objectOriented.length == 0){
-        document.getElementById("hint").innerHTML = "课程对象不能为空";
-    }else if(courseContent.length == 0){
-        document.getElementById("hint").innerHTML = "课程内容不能为空";
-    }else {
-        var url = "/course/createCourse?courseName=" + courseName + "&courseDate=" + courseDate + "&beginTime=" + beginTime + "" +
-            "&finshTime=" + finshTime + "&courseTime=" + courseTime + "&objectOriented=" + objectOriented + "&courseContent=" + courseContent;
-        xmlhttp.open("GET",url,true)
-        xmlhttp.send();
-    }
-    xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            str = xmlhttp.responseText;//得到服务器响应
-            document.getElementById("hint").innerHTML = str;//显示提示信息
-            if (str == "创建成功") {
-                window.location.href = "/course/course";//跳转到主页
-            }
-        }
-    }
-}
 /*忘记密码*/
 function forgetPassword() {
     var phoneNumber = document.getElementById("phoneNumber").value;
@@ -119,8 +73,12 @@ function check() {
     if(!(/^1[34578]\d{9}$/.test(phoneNumber))){
         document.getElementById("hint").innerHTML = "手机号格式不正确";
     }else{
-        xmlhttp.open('GET','/users/getCheckCode?phoneNumber=' + phoneNumber)
-        xmlhttp.send();
+        var data = {phoneNumber:phoneNumber};
+        $.post("/users/getCheckCode",data,function (data) {
+            $("#hint").val(JSON.stringify(data));
+            // document.getElementById("hint").innerHTML=xmlhttp.responseText;
+        },"json");
+
         $("#checkCodeBtn").css({'background':"#CCCCCC"})
         $("#checkCodeBtn").text("59秒后重试")
         var time=58;
@@ -135,43 +93,8 @@ function check() {
             }
         },1000,0);
     }
-    xmlhttp.onreadystatechange = function () {
-        if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
-            document.getElementById("hint").innerHTML=xmlhttp.responseText;
-        }
-    }
-
-
 }
-/*登录*/
-function login() {
-    console.log("login")
-    var phoneNumber = document.getElementById("phoneNumber").value;
-    var password = document.getElementById("password").value;
-    if(phoneNumber.length == 0){
-        document.getElementById("hint").innerHTML = "手机号不能为空";
-    }else if(!(/^1[34578]\d{9}$/.test(phoneNumber))){
-        document.getElementById("hint").innerHTML = "手机号格式不正确";
-    }else if(password.length == 0){
-        document.getElementById("hint").innerHTML = "密码不能为空";
-    }else{//发送登录请求
-        xmlhttp.open("GET", "/users/login?phoneNumber=" + phoneNumber + "&password=" + password, true);
-        xmlhttp.send();
-    }
-    xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            str = xmlhttp.responseText;//得到服务器响应
-            document.getElementById("hint").innerHTML = str;//显示提示信息
-            if(str == "登录成功"  ){
-                window.location.href = "/course/course";//跳转到主页
-            }else if(str == "登录成功(null)"){
-                window.location.href = "/users/personDetailEdit";//跳转至完善信息
-            }else{
-                console.log("登陆失败");
-            }
-        }
-    }
-}
+
 /*切换问答状态*/
 function statusSwitch() {
     var status = '<%=status%>'
@@ -189,37 +112,7 @@ function statusSwitch() {
     xmlhttp.send();
 }
 /*注册成功*/
-function register() {
-    var phoneNumber = document.getElementById("phoneNumber").value;
-    var checkCode = document.getElementById("checkCode").value;
-    var password = document.getElementById("password").value;
-    var passwordAgain = document.getElementById("passwordAgain").value;
-    if(phoneNumber.length == 0){
-        document.getElementById("hint").innerHTML = "手机号不能为空";
-    }else if(!(/^1[34578]\d{9}$/.test(phoneNumber))){
-        document.getElementById("hint").innerHTML = "手机号格式不正确";
-    }else if(checkCode.length == 0){
-        document.getElementById("hint").innerHTML = "验证码不能为空";
-    }else if(password.length == 0){
-        document.getElementById("hint").innerHTML = "密码不能为空";
-    }else if(password !=passwordAgain){//发送登录请求;
-        document.getElementById("hint").innerHTML = "密码不一致";
-    }else{
-        xmlhttp.open("GET", "/users/register?phoneNumber=" + phoneNumber + "&checkCode="+checkCode+"&password=" + password, true);
-        xmlhttp.send();
-    }
-    xmlhttp.onreadystatechange=function()
-    {
-        if (xmlhttp.readyState==4 && xmlhttp.status==200)
-        {
-            var str = xmlhttp.responseText;//得到服务器响应
-            document.getElementById("hint").innerHTML=str;
-            if(str == "注册成功"){
-                window.location.href="/course/course";
-            }
-        }
-    }
-}
+
 
 function registerTeacher() {
     console.log("请求发送成功");

@@ -8,13 +8,16 @@
     <meta http-equiv="cache-control" content="no-cache"/>
     <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/common_line.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/personDetail.css">
 </head>
 <body>
 <div data-role="page" data-title="尚名校">
     <div data-role="header" data-theme="g" data-position="fixed">
         <img src="/images/ic_arrow_back.png" onclick="goBack()" class="left_icon"/>
-        <span class="edit"><a href="personDetailEdit"data-ajax="false"><img src="/images/编辑.png"></a></span>
+        <%if(!self){%>
+            <span><a href="personDetailEdit"data-ajax="false"><img class="right_icon"src="/images/编辑.png"></a></span>
+        <%}%>
         <h3 class="page_title">个人信息</h3>
         <!--<img src="/images/ic_share.png" href="#" class="right_icon"/>-->
     </div>
@@ -22,8 +25,8 @@
         <ul data-role="listview">
             <li data-icon="false">
 
-                <hr width="1" size="20" color="#3B7454" class="hr">
-                <h5 class="type">头像</h5>
+                <hr width="1" size="20" color="#3B7454" class="specialHr">
+                <h5 class="specialType">头像</h5>
                 <h5 class="specialDetail"><img id="head"src="<%=userHeadUrl%>"style="width:50px;height:50px;border-radius: 50px"></h5>
                 <!--<div style="position: absolute;width:100%;height:100%;left:0px;top:0px;opacity:0">-->
                     <!--<input type="file" accept="image/" style="height:200px;"/>-->
@@ -31,35 +34,33 @@
             </li>
             <li data-icon="false">
                 <hr width="1" size="20" color="#3B7454" class="hr">
-                <h5 class="type">姓名</h5>
-                <h5 class="detail"><%=userName%></h5>
+                <h5 class="className-text">姓名</h5>
+                <h5 class="className-details"><%=userName%></h5>
             </li>
             <li data-icon="false">
                 <hr width="1" size="20" color="#3B7454" class="hr">
-                <h5 class="type">性别</h5>
-                <h5 class="detail"><%if(gender==1){%>男<%} else if(gender == 2){%>女<%}else{%>保密<%}%></h5>
-            </li>
-            <li data-icon="false">
-
-                    <hr width="1" size="20" color="#3B7454" class="hr">
-                    <h5 class="type">年龄</h5>
-                    <h5 id="age" class="detail"><%=userAge%></h5>
-
+                <h5 class="className-text">性别</h5>
+                <h5 class="className-details"><%if(gender==1){%>男<%} else if(gender == 2){%>女<%}else{%>保密<%}%></h5>
             </li>
             <li data-icon="false">
                 <hr width="1" size="20" color="#3B7454" class="hr">
-                <h5 class="type">所在学校</h5>
-                <h5 class="detail"><%=userSchool%></h5>
+                <h5 class="className-text">年龄</h5>
+                <h5 id="age" class="className-details"><%=userAge%></h5>
             </li>
             <li data-icon="false">
                 <hr width="1" size="20" color="#3B7454" class="hr">
-                <h5 class="type">年级</h5>
-                <h5 class="detail"><%=userGrade%></h5>
+                <h5 class="className-text">所在学校</h5>
+                <h5 class="className-details"><%=userSchool%></h5>
             </li>
             <li data-icon="false">
                 <hr width="1" size="20" color="#3B7454" class="hr">
-                <h5 class="type">家庭住址</h5>
-                <h5 class="detail"><%=userAddress%></h5>
+                <h5 class="className-text">年级</h5>
+                <h5 class="className-details"><%=userGrade%></h5>
+            </li>
+            <li data-icon="false">
+                <hr width="1" size="20" color="#3B7454" class="hr">
+                <h5 class="className-text">家庭住址</h5>
+                <h5 class="className-details"><%=userAddress%></h5>
             </li>
         </ul>
         <p id="hint"></p>
