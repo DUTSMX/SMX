@@ -1,43 +1,36 @@
-.hr{
-    float: left;
+/*.hr{*/
+    /*float: left;*/
+/*}*/
+.video{
+    max-height: 196px
 }
+.video_info{
+    padding:3%
+}
+/*上传者姓名*/
 .ui-listview li .teacherIntro .name{
     display: inline-block;
     font-weight:normal;
 }
+/*上传者信息*/
 .ui-listview li .teacherIntro .school{
     display: inline-block;
     font-weight:normal;
     font-size:0.875em;
 }
+/*视频信息*/
 .ui-listview li .videoInfo{
     padding-left: 2%;
     font-size:0.875em;
 }
-.ui-listview li .videoInfo .videos_classify_detail{
-    display: inline-block;
-    border: 1px solid #3B7454;
-    border-radius: 4px;
-    padding-left:2px;
-    padding-right:2px
-}
-.ui-listview li .courseIntro_title{
-    display: inline-block;
-    font-weight: bold;
-    padding-left:2%;
-}
-.ui-listview li .courseIntro_specific{
-    display: inline-block;
-    font-weight: normal;
-    padding-left: 4%;
-}
-.ui-listview li .course_content{
-    display: block;
-    font-weight:bold;
-    padding-left:2%;
-}
-.ui-listview li .course_content_detail{
-    display: block;
-    font-weight:normal;
-    white-space: normal;
+/*标签*/
+/*.ui-listview li .videoInfo .videos_classify_detail{*/
+    /*display: inline-block;*/
+    /*border: 1px solid #3B7454;*/
+    /*border-radius: 4px;*/
+    /*padding-left:2px;*/
+    /*padding-right:2px*/
+/*}*/
+.ui-listview li .className-details{
+    left: 25%;
 }
