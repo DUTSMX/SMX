@@ -22,11 +22,7 @@
             <li data-icon="false">
                 <a href="getUserInfoById?userId=<%=item.userId%>"  data-ajax="false">
                     <img class="head_big" src=<%= item.headUrl %>>
-                    <div class="teacher_info">
-                        <div class="teacher_school_intro">
-                            <h5><%= item.userName %></h5>
-                        </div>
-                    </div>
+                    <p style="font-size: 17px"><%= item.userName %></p>
                 </a>
             </li>
             <%})%>

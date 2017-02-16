@@ -7,32 +7,36 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta http-equiv="cache-control" content="no-cache"/>
     <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/question.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/question_detail.css">
 </head>
 <body>
 <div data-role="page" data-title="尚名校">
     <div data-role="header" data-theme="g" data-position="fixed">
         <img src="/images/ic_arrow_back.png" onclick="window.history.back()" class="left_icon"/>
+        <!--<img src="/images/ic_share.png" href="#" class="right_icon"/>-->
         <h3 class="page_title">问题详情</h3>
-        <img src="/images/ic_share.png" href="#" class="right_icon"/>
     </div>
     <div data-role="content">
-        <h4><%=question.questionTitle%></h4>
-        <p class="question_content"><%=question.questionContent%></p>
-        <div class="addAnswer">
-            <a href="./askQuestionPage" class="addAnswer_a" data-ajax="false">
-                <img src="/images/01.png" class="addAnswer_img">
-                添加回答
-            </a>
-        </div>
         <div class="answer_area">
             <ul data-role="listview">
+                <li>
+                    <h4><%=question.questionTitle%></h4>
+                    <p class="question_content"><%=question.questionContent%></p>
+                    </li>
+                <li data-icon="false">
+                    <a href="./answerQuestion?questionId=<%=question.questionId%>" data-ajax="false">
+                        <div class="addAnswer_div">
+                            <img src="/images/01.png" class="addAnswer_img">
+                            <p class="addAnswer_p">添加回答</p>
+                        </div>
+                    </a>
+                </li>
                 <%answerList.forEach(function (item) {%>
                 <li data-icon="false">
                     <a href="answerDetail?answerId=<%=item.answerId%>" data-ajax="false">
-                        <span class="ans_teacher"><img style="height:16px;width:16px;border-radius: 16px" src="<%=item.authorHeadUrl%>"><%=item.authorName%></span>
-                        <p><%=item.answerAbstract%></p>
+                        <span class="ans_teacher"><img class="head_24" src="<%=item.authorHeadUrl%>"><%=item.authorName%></span>
+                        <p class="answer_content"><%=item.answerAbstract%></p>
                     </a>
                 </li>
                 <%})%>

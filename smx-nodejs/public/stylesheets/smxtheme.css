@@ -115,8 +115,21 @@
 .head_60{
 	width:36px;
 	height:36px;
-	border-radius:36px !important;
+	border-radius:36px;
 }
+/*设置问答页头像*/
+.head_24{
+	width:16px;
+	height:16px;
+	border-radius:16px;
+}
+
+/*设置问答页头像*/
+/*.head_16{*/
+	/*width:16px;*/
+	/*height:16px;*/
+	/*border-radius:16px;*/
+/*}*/
 /*a标签的颜色*/
 .ui-page-theme-a .ui-btn, html .ui-bar-a .ui-btn, html .ui-body-a .ui-btn, html body .ui-group-theme-a .ui-btn, html head+body .ui-btn.ui-btn-a, .ui-page-theme-a .ui-btn:visited, html .ui-bar-a .ui-btn:visited, html .ui-body-a .ui-btn:visited, html body .ui-group-theme-a .ui-btn:visited, html head+body .ui-btn.ui-btn-a:visited{
 	background-color: #f9f9f9;

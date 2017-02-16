@@ -56,10 +56,19 @@
             }
             $.post("./login",data,function (data) {
                 if(data.status){
+                    console.log("course:"+data.sourceUrl)
                     if(!data.sourceUrl||data.sourceUrl == "/users/login"){
+                        console.log("跳转course")
                         window.location.href = "/course/course";
                     }else{
-                        window.location.href = data.sourceUrl;
+                        console.log("返回:"+ window.history.length)
+                        if(window.history.length<3){
+                            console.log("跳转"+data.sourceUrl)
+                            window.location.href = data.sourceUrl;
+                        }else{
+                            console.log("返回")
+                            window.history.back();
+                        }
                     }
                 }else{
                     $("#hint").html(data.desc);

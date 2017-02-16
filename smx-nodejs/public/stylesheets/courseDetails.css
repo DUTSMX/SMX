@@ -3,6 +3,9 @@
 	margin-left:3%;
 	margin-top:3%
 }
+.ui-listview>li.ui-first-child img:first-child:not(.ui-li-icon){
+	-webkit-border-top-left-radius:36px;
+}
 /*第一行 姓名*/
 .ui-listview li a .teacher_info .teacher_school_intro h5{
 	display: inline-block;

@@ -1,21 +1,24 @@
-/*设置 在线老师 */
+/*设置"在线老师"四个字*/
 .online_teacher h4{
 	color: #3B7454;
 	margin-bottom: 0;
 	margin-top: 0;
 	position: relative;
 }
-.online_teacher h4 img{
-	height: 100%;
-}
+/*.online_teacher h4 img{*/
+	/*height: 100%;*/
+/*}*/
+/*设置"在线老师"模块距下面的距离*/
 .online_teacher{
 	margin-bottom: 2%;
 }
+/*最右边"更多"的位置*/
 .online_teacher h4 span{
 	position: absolute;;
 	right: 5%;
 	top: 0%;
 }
+/*最右边"更多"的字体*/
 .online_teacher h4 span a{
 	text-decoration: none;
 	color: #3B7454;
@@ -30,15 +33,25 @@
 .teacher_tab{
 	margin-bottom: 3%;
 }
+/*设置老师头像的位置*/
 .teacher_tab .ui-grid-d div{
 	text-align: center;
 	padding: 0.5em;
 }
+/*设置在线老师头像的大小*/
 .teacher_tab .ui-grid-d div img{
-	height: 80%;
-	width: 80%;
+	height: 48px;
+	width: 48px;
+	border-radius: 48px;
 }
-/*设置老师姓名*/
+/*设置列表中老师的头像*/
+.head_small{
+	width:12px;
+	height:12px;
+	border-radius:12px;
+	margin-right:3px
+}
+/*设置列表中老师的姓名*/
 .teacher_tab .ui-grid-d div p{
 	margin-bottom: 1%;
 	margin-top: 1%;
@@ -49,72 +62,43 @@
 .answer_area{
 	margin-top:1em;
 }
+/*设置 来自老师姓名*/
 .answer_area .ui-listview li a span.ans_teacher{
 	font-weight: 100;
 	font-size: 0.7em;
 }
 
-.question_content{
-}
-
-/*设置赞同数*/
-.answer_area .ui-listview>li>a.ui-btn .zan{
-	display: inline-block;
-	float: right;
-	text-align: center;
-	background-color:#3B7454;
-	padding-left: 0.7em;
-	padding-right: 0.7em;
-	padding-bottom: 0.2em;
-	padding-top: 0.2em;
-}
-.answer_area .ui-listview>li>a.ui-btn .zan p{
-	font-weight: 400; 
-	color: white;
-	text-shadow: none;
-	font-size: 1.0em;
-	margin-bottom: 1%;
-	margin-top: 5%; 
-}
-.answer_area .ui-listview>li>a.ui-btn div.zan span{
-	display: block;
-	font-size: 0.5em;
-	font-weight: 100; 
-	color: white;
-	text-shadow: none;
-}
-.answer_detail{
-	white-space: normal;
-}
-.ask_question{
-	width:50px;
-	height:50px;
-	position:fixed;
-	bottom:80px;
-	right:20px;
-}
-.answer_content{
-	margin-top:100px;
-}
-.answer_img{
-	height: 40px;
-	width: 40px;
-	margin-left: 25%;
-	margin-top: 5%;
-}
-.addAnswer{
-	height: 60px;
-	width: 100%;
-}
-.addAnswer_img{
-	height: 16px !important;
-	width:16px !important;
-	margin-left: 32%;
-	margin-top: 2%;
-}
-.addAnswer_a{
-	display: inline-block;
-	height: 100%;
-	width:100%;
-	line-height: 100%;
+/*!*设置赞同数*!*/
+/*.answer_area .ui-listview>li>a.ui-btn .zan{*/
+	/*display: inline-block;*/
+	/*float: right;*/
+	/*text-align: center;*/
+	/*background-color:#3B7454;*/
+	/*padding-left: 0.7em;*/
+	/*padding-right: 0.7em;*/
+	/*padding-bottom: 0.2em;*/
+	/*padding-top: 0.2em;*/
+/*}*/
+/*.answer_area .ui-listview>li>a.ui-btn .zan p{*/
+	/*font-weight: 400; */
+	/*color: white;*/
+	/*text-shadow: none;*/
+	/*font-size: 1.0em;*/
+	/*margin-bottom: 1%;*/
+	/*margin-top: 5%; */
+/*}*/
+/*.answer_area .ui-listview>li>a.ui-btn div.zan span{*/
+	/*display: block;*/
+	/*font-size: 0.5em;*/
+	/*font-weight: 100; */
+	/*color: white;*/
+	/*text-shadow: none;*/
+/*}*/
+/*提问按钮*/
+.ask_question {
+	width: 50px;
+	height: 50px;
+	position: fixed;
+	bottom: 80px;
+	right: 20px;
 }

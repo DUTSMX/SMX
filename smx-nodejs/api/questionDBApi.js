@@ -3,7 +3,7 @@ var db = require('../db/questionDBHelper')
 exports.addQuestion = function(userId,questionTitle,questionContent,callback){
     console.log("p")
     db.addQuestion(userId,questionTitle,questionContent,function (rows) {
-        callback("提问成功");
+        callback(rows);
     })
 }
 
@@ -58,7 +58,11 @@ exports.askQuestion= function(userId,questionTitle,questionContent,callback){
         callback(rows);
     })
 }
-
+exports.answerQuestion = function (userId,questionId,answerContent,callback) {
+    db.addAnswer(userId,questionId,answerContent,function (rows) {
+        callback(rows);
+    })
+}
 exports.getMyQuestion = function(userId, callback){
     db.getMyQuestion(userId, function (rows) {
         var question = rows;

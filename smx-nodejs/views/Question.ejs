@@ -7,8 +7,8 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<meta http-equiv="cache-control" content="no-cache" />
 	<link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
-	<link rel="stylesheet" type="text/css" href="/stylesheets/question.css">
 	<link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/question.css">
 </head>
 <body>
 	<div data-role="page" data-title="尚名校">
@@ -22,19 +22,14 @@
 			</div>
 			<div class="teacher_tab">
 				<div class="ui-grid-d">
-					<!--<ul>-->
-						<%teacherList.forEach(function (item) {%>
-						<!--<li>-->
-							<div style="float:left" class="ui-block-b">
-								<a href="askQuestion" data-ajax="false">
-									<img style="height:50px;width:50px;border-radius: 50px" src="<%=item.headUrl%>">
-								</a>
-								<p><%=item.userName%></p>
-							</div>
-						<!--</li>-->
-						<%})%>
-					<!--</ul>-->
-
+					<%teacherList.forEach(function (item) {%>
+						<div class="ui-block-b">
+							<a href="askQuestion" data-ajax="false">
+								<img src="<%=item.headUrl%>">
+							</a>
+							<p><%=item.userName%></p>
+						</div>
+					<%})%>
 				</div>
 			</div>
 			<div class="online_teacher">
@@ -46,7 +41,7 @@
 					<%questionList.forEach(function(item){%>
 					<li data-icon="false">
 						<a href="<%=item.aHref%>"  data-ajax="false">
-							<span class="ans_teacher"><img  style="width:12px;height:12px;border-radius:12px;margin-right:3px" src="<%=item.authorHeadUrl%>"><%=item.authorName%></span>
+							<span class="ans_teacher"><img class="head_small" src="<%=item.authorHeadUrl%>"><%=item.authorName%></span>
 							<!--<div class="zan">
 								<p>12</p>
 								<span>赞同</span>
@@ -69,7 +64,7 @@
 				</ul>
 			</div>
 		</div>
-		<a href="askQuestionPage"data-ajax="false"><img class="ask_question" src="/images/ask_question.png" style="width:50px;height:50px"/></a>
+		<a href="askQuestion"data-ajax="false"><img class="ask_question" src="/images/ask_question.png" style="width:50px;height:50px"/></a>
 	</div>
 	<script src="/javascripts/jquery.js"></script>
 	<script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>

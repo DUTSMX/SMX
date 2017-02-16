@@ -8,36 +8,59 @@
 	<meta http-equiv="cache-control" content="no-cache"/>
 	<link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
 	<link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
-	<link rel="stylesheet" type="text/css" href="/stylesheets/myQuestion.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/askQuestion.css">
+	<!--<link rel="stylesheet" type="text/css" href="/stylesheets/myQuestion.css">-->
 </head>
 <body>
 <div data-role="page" data-title="尚名校">
 	<div data-role="header" data-theme="g" data-position="fixed">
 		<img src="/images/ic_arrow_back.png" onclick="window.history.back()" class="left_icon"/>
-		<h3 class="page_title">我的提问</h3>
+		<h3 class="page_title">提出问题</h3>
 		<!--<img src="/images/ic_share.png" href="#" class="right_icon"/>-->
 	</div>
 	<div data-role="content">
-		<div class="myquestion">
+		<div>
 			<img src="/images/myclass.png">
 			<h4 class="question">问题</h4>
 			<img src="/images/课程分割线.png" class="courseLine">
 			<textarea id="questionTitle" type="text" placeholder="请写下你的问题（必填）"></textarea>
 		</div>
-		<div class="myquestion">
+		<div>
 			<img src="/images/myclass.png">
 			<h4 class="question">详情</h4>
-			<img src="/images/课程分割线.png" class="courseLine1">
+			<img src="/images/课程分割线.png" class="courseLine">
 			<textarea id="questionContent" type="text" placeholder="请填写问题相关描述信息" class="textarea"></textarea>
 		</div>
 	</div>
+	<p class="hint" id="hint"></p>
 	<div class="publish">
 		<button type="submit" value="Submit Button" onclick="askQuestion()" class="publishButton" >发布提问</button>
 	</div>
-	<p id="hint"></p>
 </div>
 <script src="/javascripts/jquery.js"></script>
 <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
-<script src="/javascripts/smx.js"></script>
+<script>
+	function askQuestion() {
+		var questionTitle = $("#questionTitle").val();
+		var questionContent = $("#questionContent").val();
+		if(questionTitle.length == 0){
+			$("#hint").text("问题标题不能为空");
+		}else if(questionContent.length == 0){
+			$("#hint").text("问题内容不能为空");
+		}else{
+			data = {
+				questionTitle:questionTitle,
+				questionContent:questionContent
+			}
+			$.post("askQuestion",data,function (data) {
+				if(data.status){
+					$("#hint").text(data.desc)
+					window.history.back();
+				}else{
+					console.log(data.desc)
+				}
+			},"json")
+	}
+</script>
 </body>
 </html>

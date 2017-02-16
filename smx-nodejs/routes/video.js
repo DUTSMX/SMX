@@ -15,7 +15,11 @@ router.get('/video',function (req,res) {
         res.render('video',{videoList:videoList});
     })
 })
-
+/*
+* 获取视频详情
+* req:videoId
+* res:{videoUrl,videoName,authorName,authorSchool,authorGrade,videoTime,videoWatchCount,videoAbstract,videoContent}
+* */
 router.get('/videoDetail',function (req,res) {
     var videoId = req.query.videoId;
     api.videoWatchCountIncrease(videoId,function (rows) {
@@ -23,7 +27,7 @@ router.get('/videoDetail',function (req,res) {
         console.log("视频观看人次数增加成功");
     })
     api.getVideoDetail(videoId,function (videoDetail) {
-        // console.log(videoDetail);
+        console.log(videoDetail);
         res.render('videoDetail',videoDetail);
     })
 })
