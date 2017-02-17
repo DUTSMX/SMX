@@ -1,4 +1,5 @@
 .ui-listview>li.ui-first-child img:first-child:not(.ui-li-icon){
+    -webkit-border-bottom-left-radius:48px;
     border-top-left-radius:48px;
 }
 .ui-listview>.ui-li-has-thumb>.ui-btn, .ui-listview>.ui-li-static.ui-li-has-thumb{

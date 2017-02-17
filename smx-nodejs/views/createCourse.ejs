@@ -15,7 +15,7 @@
     <div data-role="page" data-title="尚名校">
         <div data-role="header" data-theme="g" data-position="fixed">
             <img src="/images/ic_arrow_back.png" onclick="window.history.back()" class="left_icon"/>
-            <span><a onclick="createCourse()" data-ajax="false"><img class="right_icon"src="/images/编辑.png"></a></span>
+            <img onclick="createCourse()"class="right_icon"src="/images/编辑.png"/>
             <h3 class="page_title">新建课程</h3>
         </div>
         <div class="teacher-intro">
@@ -38,21 +38,21 @@
 
                     <hr width="1" size="20" color="#3B7454" class="hr">
                     <h5 class="className-text">开始时间</h5>
-                    <input id= "beginTime"type="time" name="" id="start" placeholder="">
+                    <input id= "beginTime"type="time" name="" id="start" placeholder="请选择开始时间">
 
                 </li>
                 <li data-icon="false">
 
                     <hr width="1" size="20" color="#3B7454" class="hr">
                     <h5 class="className-text">结束时间</h5>
-                    <input id = "finishTime"type="time" name="" placeholder="" id="end">
+                    <input id = "finishTime"type="time" name="" placeholder="请选择结束时间" id="end">
 
                 </li>
                 <li data-icon="false">
 
                     <hr width="1" size="20" color="#3B7454" class="hr">
                     <h5 class="className-text">课程时长</h5>
-                    <input id="courseTime"type="text" name="" placeholder="">
+                    <input id="courseTime"type="text" name="" placeholder="请选择课程时长">
 
                 </li>
                 <li data-icon="false">
@@ -85,50 +85,51 @@
         var courseTime = $("#courseTime").val();
         var objectOriented = $("#objectOriented").val();
         var courseContent = $("#courseContent").val();
-        console.log("beginTime:"+beginTime+" finishTime:"+finishTime)
+        console.log("beginTime:" + beginTime + " finishTime:" + finishTime)
         var data = {
-            courseName:courseName,
-            courseDate:courseDate,
-            beginTime:beginTime,
-            finishTime:finishTime,
-            courseTime:courseTime,
-            objectOriented:objectOriented,
-            courseContent:courseContent
+            courseName: courseName,
+            courseDate: courseDate,
+            beginTime: beginTime,
+            finishTime: finishTime,
+            courseTime: courseTime,
+            objectOriented: objectOriented,
+            courseContent: courseContent
         }
-        console.log("data:"+JSON.stringify(data))
-        if(courseName.length == 0){
+        console.log("data:" + JSON.stringify(data))
+        if (courseName.length == 0) {
             $("#hint").text("课程名不能为空");
-        }else if(courseDate.length == 0){
+        } else if (courseDate.length == 0) {
             $("#hint").text("课程日期不能为空");
-        }else if(beginTime.length == 0){
+        } else if (beginTime.length == 0) {
             $("#hint").text("开始时间不能为空");
-        }else if(finishTime.length == 0){
+        } else if (finishTime.length == 0) {
             $("#hint").text("结束时间不能为空");
-        }else if(courseTime.length == 0){
+        } else if (courseTime.length == 0) {
             $("#hint").text("课程时长不能为空");
-        }else if(objectOriented.length == 0){
+        } else if (objectOriented.length == 0) {
             $("#hint").text("课程对象不能为空");
-        }else if(courseContent.length == 0){
+        } else if (courseContent.length == 0) {
             $("#hint").text("课程内容不能为空");
-        }else {
+        } else {
             var data = {
-                courseName:courseName,
-                courseDate:courseDate,
-                beginTime:beginTime,
-                finishTime:finishTime,
-                courseTime:courseTime,
-                objectOriented:objectOriented,
-                courseContent:courseContent
+                courseName: courseName,
+                courseDate: courseDate,
+                beginTime: beginTime,
+                finishTime: finishTime,
+                courseTime: courseTime,
+                objectOriented: objectOriented,
+                courseContent: courseContent
             }
-            console.log("data:"+data)
-            $.post("/course/createCourse",data,function (data) {
-                if(data.status){
+            console.log("data:" + data)
+            $.post("/course/createCourse", data, function (data) {
+                if (data.status) {
                     $("#hint").text(data.desc)
                     window.history.back()
-                }else{
+                } else {
                     console.log(data.desc)
                 }
-            },"json")
+            }, "json")
+        }
     }
 </script>
 </html>
