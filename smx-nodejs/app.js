@@ -8,14 +8,11 @@ var bodyParser = require('body-parser');
 var utils = require('./utils/utils');
 var session = require('express-session')
 var routes = require('./routes/index');
+
 var users = require('./routes/users');
-
 var course = require('./routes/course');
-
 var question = require('./routes/question');
-var answer = require('./routes/answer');
 var video = require('./routes/video');
-
 
 var app = express();
 
@@ -25,6 +22,7 @@ app.use(session({
   secret: utils.getRandom128(),
   cookie: {maxAge: 30 * 24 * 60 * 60 * 1000}
 }))
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

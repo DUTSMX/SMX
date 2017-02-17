@@ -40,6 +40,7 @@ router.get('/registerTeacher',function (req,res) {
 /*
 * 申请家教操作
 * req:
+* res:status,desc
 * */
 router.post('/registerTeacher',function (req,res) {
     var userId = req.session.userId;
@@ -52,7 +53,7 @@ router.post('/registerTeacher',function (req,res) {
 })
 
 /*
-* 创建课程
+* 创建课程页面
 * req:
 * res:
 * */
