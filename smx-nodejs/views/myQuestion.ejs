@@ -17,13 +17,13 @@
         <h3 class="page_title">我的提问</h3>
         <!--<img src="/images/ic_share.png" href="#" class="right_icon"/>-->
     </div>
-    <div data-role="content">
+    <div data-role="content" style="padding-top:0em">
         <div class="answer_area">
             <ul data-role="listview">
                 <%questionList.forEach(function(item){%>
                 <li data-icon="false">
                     <a href="../question/<%=item.aHref%>"  data-ajax="false">
-                        <span class="ans_teacher"><img width="12" height="12" src="<%=item.headUrl%>"><%=item.authorDetail%></span>
+                        <span class="ans_teacher"><img class="head_small" src="<%=item.headUrl%>"><%=item.authorDetail%></span>
                         <h5><%=item.questionDetail%></h5>
                     </a>
                 </li>
@@ -34,6 +34,5 @@
 </div>
 <script src="/javascripts/jquery.js"></script>
 <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
-<script src="/javascripts/smx.js"></script>
 </body>
 </html>

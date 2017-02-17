@@ -51,6 +51,10 @@
 	border-radius:12px;
 	margin-right:3px
 }
+.ui-listview>li.ui-first-child img:first-child:not(.ui-li-icon){
+	-webkit-border-top-left-radius:12px;
+	border-top-left-radius:12px;
+}
 /*设置列表中老师的姓名*/
 .teacher_tab .ui-grid-d div p{
 	margin-bottom: 1%;
@@ -102,3 +106,4 @@
 	bottom: 80px;
 	right: 20px;
 }
+

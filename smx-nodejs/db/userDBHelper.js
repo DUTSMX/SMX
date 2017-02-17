@@ -38,6 +38,7 @@ exports.getQuestionStatus = function(userId,callback){
             return;
         } else if (rows == null) {
             console.log("error getQuestionStatus is empty userId = " + userId);
+            return;
         }else if(rows[0] != null) {
             callback(1);
         }else {
@@ -54,9 +55,15 @@ exports.setQuestionStatus = function(userId,status,callback){
             conn.query(sql,function (err,rows) {
                 if(err){
                     console.log(err);
-                    return;
+                    callback({
+                        status:false,
+                        desc:err
+                    });
                 }else{
-                    callback(rows);
+                    callback({
+                        status:true,
+                        desc:"状态：关"
+                    });
                 }
             })
         }else if(!ret && status == 1){//添加
@@ -64,16 +71,26 @@ exports.setQuestionStatus = function(userId,status,callback){
             conn.query(sql,function (err,rows) {
                 if(err){
                     console.log(err);
+                    callback({
+                        status:false,
+                        desc:err
+                    });
                 }else{
-                    callback(rows);
+                    callback({
+                        status:true,
+                        desc:"状态：开"
+                    });
                 }
             })
         }else{
-            console.log("error rows:"+JSON.stringify(ret)+" userId:"+userId);
-            return;
+            callback({
+                status:false,
+                desc:"error rows:"+JSON.stringify(ret)+" userId:"+userId
+            });
         }
     })
 }
+
 exports.findAccountByNum = function(phoneNumber,callback){
     var sql = 'SELECT * FROM account WHERE phoneNumber = ' + phoneNumber;
     conn.query(sql, function (err, rows, fields) {
@@ -120,12 +137,16 @@ exports.updateAccount = function(phoneNumber,password,callback){
 
 exports.changePassword = function (userId,oldPassword,password,callback) {
     var sql = "SELECT * FROM account WHERE userId = "+userId +" and password = '"+oldPassword+"'";
+    console.log("sql:"+sql)
     conn.query(sql,function (err,rows) {
         if(err){
             console.log(err);
             return;
         }else if(rows == null || rows[0] == null){
-            callback("密码错误")
+            callback({
+                status:false,
+                desc:"密码错误"
+            })
         }else{
             console.log("password:"+password)
             var sql = "UPDATE account set password = '"+password+"' WHERE userId = "+userId;
@@ -134,7 +155,10 @@ exports.changePassword = function (userId,oldPassword,password,callback) {
                     console.log(err);
                     return;
                 }else{
-                    callback("修改成功")
+                    callback({
+                        status:true,
+                        desc:"修改成功"
+                    })
                 }
             })
         }
@@ -168,18 +192,17 @@ exports.judgeRole = function (userId,callback) {
 }
 
 exports.registerTeacher = function(userId,goodCourse,selfIntro,callback){
-    var createTime = String(new Date());
+    var createTime = new Date();
     console.log("createTime");
-    var sql = "INSERT INTO teacher(teacherId,goodCourse,selfIntroduction,createTime) VALUES("+userId+",'"+goodCourse+"','"+selfIntro+"','"+createTime+"')";
+    var sql = "INSERT INTO teacher(teacherId,goodCourse,selfIntroduction,createTime) VALUES("+userId+",'"+goodCourse+"','"+selfIntro+"',"+conn.escape(createTime)+")";
     console.log(sql);
     conn.query(sql,function (err,rows) {
-
         if(err){
             console.log(err)
             return
         }else{
-            var userId = rows.insertId;
-            var sql = "UPDATE account SET role = 2 WHERE userId = "+userId;
+            var sql = "UPDATE account SET role = 1 WHERE userId = "+userId;
+            console.log("sql:"+sql)
             conn.query(sql,function (err,rows) {
                 if(err){
                     console.log(err);
@@ -215,17 +238,21 @@ exports.getUserInfo=function (userId,callback) {
 }
 
 exports.saveCheckCode = function(phoneNumber,checkCode,callback){
-    console.log("saveCheckCode: phoneNumber="+phoneNumber+" checkCode:"+checkCode)
     this.getCheckCode(phoneNumber,function (ret) {
-        console.log("ret:"+ret)
         if(ret == -1){
             var sql = "INSERT INTO checkCode(phoneNumber,code) VALUES('"+phoneNumber+"','"+checkCode+"')";
-            console.log("sql:"+sql);
             conn.query(sql,function (err,rows) {
                 if(err){
                     console.log(err)
+                    callback({
+                        status:false,
+                        desc:err
+                    })
                 }else{
-                    callback(rows);
+                    callback({
+                        status:true,
+                        desc:"验证码发送成功"
+                    })
                 }
             })
         }else{
@@ -233,8 +260,15 @@ exports.saveCheckCode = function(phoneNumber,checkCode,callback){
             conn.query(sql,function (err,rows) {
                 if(err){
                     console.log(err)
+                    callback({
+                        status:false,
+                        desc:err
+                    })
                 }else{
-                    callback(rows);
+                    callback({
+                        status:true,
+                        desc:"验证码发送成功"
+                    })
                 }
             })
         }
@@ -274,9 +308,35 @@ exports.editInfo=function (userId,head,name,sex,age,school,grade,address,callbac
     conn.query(sql,function (err,rows) {
         if(err){
             console.log(err);
+            callback({
+                status:false,
+                desc:err
+            })
         }
         else{
-            callback(rows);
+            callback({
+                status:true,
+                desc:"修改成功"
+            })
+        }
+    })
+}
+exports.saveFeedback = function (userId,feedback,callback) {
+    var time = new Date();
+    var sql = "INSERT INTO feedback(userId,feedback,createTime) VALUES("+userId+",'"+feedback+"',"+conn.escape(time)+")";
+    console.log("sql:"+sql)
+    conn.query(sql,function (err,rows) {
+        if(err){
+            console.log(err)
+            callback({
+                status:false,
+                desc:err,
+            })
+        }else{
+            callback({
+                status:true,
+                desc:"提交成功"
+            })
         }
     })
 }

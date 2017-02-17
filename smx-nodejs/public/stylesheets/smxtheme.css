@@ -138,6 +138,12 @@
 .ui-body-a, .ui-page-theme-a .ui-body-inherit, html .ui-bar-a .ui-body-inherit, html .ui-body-a .ui-body-inherit, html body .ui-group-theme-a .ui-body-inherit, html .ui-panel-page-container-a{
 	background-color: #f9f9f9;
 }
+/*输入框 背景颜色*/
+.ui-input-text input, .ui-input-search input{
+	background-color: white;
+	width:90%;
+	margin-right: 1em;
+}
 
 /*登录注册的按钮*/
 .btn{

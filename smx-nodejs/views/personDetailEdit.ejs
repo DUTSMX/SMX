@@ -8,104 +8,101 @@
     <meta http-equiv="cache-control" content="no-cache"/>
     <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/common_line.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/personDetailEdit.css">
 </head>
 <body  onload="uploadImg()">
-<div data-role="page" data-title="尚名校">
-    <div data-role="header" data-theme="g" data-position="fixed">
-        <img src="/images/ic_arrow_back.png" onclick="window.history.back()" class="left_icon"/>
-        <img src="/images/icon_save.png" onclick="editInfo()" class="right_icon"/>
-        <h3 class="page_title">修改信息</h3>
-        <!--<img src="/images/ic_share.png" href="#" class="right_icon"/>-->
+    <div data-role="page" data-title="尚名校">
+        <div data-role="header" data-theme="g" data-position="fixed">
+            <img src="/images/ic_arrow_back.png" onclick="window.history.back()" class="left_icon"/>
+            <img src="/images/icon_save.png" onclick="editInfo()" class="right_icon"/>
+            <h3 class="page_title">修改信息</h3>
+            <!--<img src="/images/ic_share.png" href="#" class="right_icon"/>-->
+        </div>
+        <div class="teacher-intro">
+                <ul data-role="listview">
+                    <li data-icon="false">
+
+                        <hr width="1" size="20" color="#3B7454" class="specialHr">
+                        <h5 class="specialType">头像</h5>
+                        <h5 class="specialDetail"><img id="head"src="<%=userHeadUrl%>"class="head_50"></h5>
+                        <div class="input_image_div">
+                            <input type="file" id="file" accept="image/"/>
+                        </div>
+                    </li>
+                    <li data-icon="false">
+
+                        <hr width="1" size="20" color="#3B7454" class="hr">
+                        <h5 class="className-text">姓名</h5>
+                        <input type="text" id="name" value="<%=userName%>">
+
+                    </li>
+                    <li data-icon="false">
+
+                        <hr width="1" size="20" color="#3B7454" class="hr">
+                        <h5 class="className-text">性别</h5>
+                        <%if(gender==1){%>
+                        <fieldset data-role="controlgroup" data-type="horizontal" class="select_gender">
+                            <input type="radio" name="radio-view" id="radio-view-a" value="1" checked="checked"/>
+                            <label for="radio-view-a">男</label>
+                            <input type="radio" name="radio-view" id="radio-view-b" value="2"  />
+                            <label for="radio-view-b">女</label>
+                            <input type="radio" name="radio-view" id="radio-view-c" value="0" />
+                            <label for="radio-view-c">保密</label>
+                        </fieldset>
+                        <%} else if(gender == 2){%>
+                        <fieldset data-role="controlgroup" data-type="horizontal" class="select_gender">
+                            <input type="radio" name="radio-view" id="radio-view-a" value="1" />
+                            <label for="radio-view-a">男</label>
+                            <input type="radio" name="radio-view" id="radio-view-b" value="2" checked="checked" />
+                            <label for="radio-view-b">女</label>
+                            <input type="radio" name="radio-view" id="radio-view-c" value="0" />
+                            <label for="radio-view-c">保密</label>
+                        </fieldset>
+                        <%} else{%>"
+                        <fieldset data-role="controlgroup" data-type="horizontal" class="select_gender">
+                            <input type="radio" name="radio-view" id="radio-view-a" value="1" />
+                            <label for="radio-view-a">男</label>
+                            <input type="radio" name="radio-view" id="radio-view-b" value="2"  />
+                            <label for="radio-view-b">女</label>
+                            <input type="radio" name="radio-view" id="radio-view-c" value="0"   checked="checked" />
+                            <label for="radio-view-c">保密</label>
+                        </fieldset>
+                        <%}%>
+                    </li>
+                    <li data-icon="false">
+
+                        <hr width="1" size="20" color="#3B7454" class="hr">
+                        <h5 class="className-text">年龄</h5>
+                        <input type="number" value="<%=userAge%>" id="age">
+
+                    </li>
+                    <li data-icon="false">
+
+                        <hr width="1" size="20" color="#3B7454" class="hr">
+                        <h5 class="className-text">所在学校</h5>
+                        <input type="text" id="school" value="<%=userSchool%>">
+
+                    </li>
+                    <li data-icon="false">
+
+                        <hr width="1" size="20" color="#3B7454" class="hr">
+                        <h5 class="className-text">年级</h5>
+                        <input type="text" id="grade" value="<%=userGrade%>">
+
+                    </li>
+                    <li data-icon="false">
+
+                        <hr width="1" size="20" color="#3B7454" class="hr">
+                        <h5 class="className-text">家庭住址</h5>
+                        <input type="text" id="address" value="<%=userAddress%>">
+
+                    </li>
+                </ul>
+        </div>
+        <p id="hint"></p>
     </div>
-    <div class="teacher-intro">
-        <form method="" action="">
-            <ul data-role="listview">
-                <li data-icon="false">
-
-                    <hr width="1" size="20" color="#3B7454" class="hr">
-                    <h5 class="className-text">头像</h5>
-                    <h5 class="specialDetail"><img id="head"src="<%=userHeadUrl%>"style="width:50px;height:50px;border-radius: 50px"></h5>
-                    <div style="position: absolute;width:100%;height:100%;left:0px;top:0px;opacity:0">
-                        <input type="file" id="file" accept="image/" style="height:200px;"/>
-                    </div>
-                </li>
-                <li data-icon="false">
-
-                    <hr width="1" size="20" color="#3B7454" class="hr">
-                    <h5 class="className-text">姓名</h5>
-                    <input type="text" id="name" value="<%=userName%>">
-
-                </li>
-                <li data-icon="false">
-
-                    <hr width="1" size="20" color="#3B7454" class="hr">
-                    <h5 class="className-text">性别</h5>
-
-                    <%if(gender==1){%>
-                    <fieldset data-role="controlgroup" data-type="horizontal" style="position: absolute;left: 37%;top: 1%;">
-                        <input type="radio" name="radio-view" id="radio-view-a" value="1" checked="checked"/>
-                        <label for="radio-view-a">男</label>
-                        <input type="radio" name="radio-view" id="radio-view-b" value="2"  />
-                        <label for="radio-view-b">女</label>
-                        <input type="radio" name="radio-view" id="radio-view-c" value="0" />
-                        <label for="radio-view-c">保密</label>
-                    </fieldset>
-                    <%} else if(gender == 2){%>
-                    <fieldset data-role="controlgroup" data-type="horizontal" style="position: absolute;left: 37%;top: 1%;">
-                        <input type="radio" name="radio-view" id="radio-view-a" value="1" />
-                        <label for="radio-view-a">男</label>
-                        <input type="radio" name="radio-view" id="radio-view-b" value="2" checked="checked" />
-                        <label for="radio-view-b">女</label>
-                        <input type="radio" name="radio-view" id="radio-view-c" value="0" />
-                        <label for="radio-view-c">保密</label>
-                    </fieldset>
-                    <%} else{%>"
-                    <fieldset data-role="controlgroup" data-type="horizontal" style="position: absolute;left: 37%;top: 1%;">
-                        <input type="radio" name="radio-view" id="radio-view-a" value="1" />
-                        <label for="radio-view-a">男</label>
-                        <input type="radio" name="radio-view" id="radio-view-b" value="2"  />
-                        <label for="radio-view-b">女</label>
-                        <input type="radio" name="radio-view" id="radio-view-c" value="0"   checked="checked" />
-                        <label for="radio-view-c">保密</label>
-                    </fieldset>
-                    <%}%>
-                </li>
-                <li data-icon="false">
-
-                    <hr width="1" size="20" color="#3B7454" class="hr">
-                    <h5 class="className-text">年龄</h5>
-                    <input type="number" value="<%=userAge%>" id="age">
-
-                </li>
-                <li data-icon="false">
-
-                    <hr width="1" size="20" color="#3B7454" class="hr">
-                    <h5 class="className-text">所在学校</h5>
-                    <input type="text" id="school" value="<%=userSchool%>">
-
-                </li>
-                <li data-icon="false">
-
-                    <hr width="1" size="20" color="#3B7454" class="hr">
-                    <h5 class="className-text">年级</h5>
-                    <input type="text" id="grade" value="<%=userGrade%>">
-
-                </li>
-                <li data-icon="false">
-
-                    <hr width="1" size="20" color="#3B7454" class="hr">
-                    <h5 class="className-text">家庭住址</h5>
-                    <input type="text" id="address" value="<%=userAddress%>">
-
-                </li>
-            </ul>
-        </form>
-    </div>
-    <p id="hint"></p>
-    <script type="text/javascript">
-    </script>
-</div>
+</body>
 <script src="/javascripts/jquery.js"></script>
 <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
 <script src="/javascripts/slick.min.js"></script>
@@ -145,7 +142,7 @@
         var grade = $("#grade").val();
         var address = $("#address").val();
         console.log("head:"+head+"  name:"+name+"  gender:"+gender+" age:"+age+" school:"+school+" grade:"+grade+" address:"+address);
-        data = {
+        var data = {
             head:head,
             name:name,
             gender:gender,
@@ -155,9 +152,13 @@
             address:address
         }
         jQuery.post("./editInfo",data,function (data,textStatus,jqXHR) {
-            console.log("data:"+data)
+            if(data.status){
+                $("#hint").text(data.desc)
+                window.history.back()
+            }else{
+                console.log(data.desc)
+            }
         },"json")
     }
 </script>
-</body>
 </html>

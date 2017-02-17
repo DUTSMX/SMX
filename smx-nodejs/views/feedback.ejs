@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>尚名校</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/askQuestion.css">
+</head>
+<body>
+    <div data-role="page" data-title="尚名校">
+        <div data-role="header" data-theme="g" data-position="fixed">
+            <img src="/images/ic_arrow_back.png" onclick="window.history.back()" class="left_icon"/>
+            <h3 class="page_title">问题反馈</h3>
+            <!--<img src="/images/ic_share.png" href="#" class="right_icon"/>-->
+        </div>
+        <div data-role="content">
+            <div class="myquestion">
+                <textarea id="feedback" type="text" placeholder="请填写相关反馈信息" class="textarea"></textarea>
+            </div>
+        </div>
+        <p id="hint"></p>
+        <div class="publish">
+            <button type="submit" value="Submit Button" onclick="sendFeedback()" class="publishButton" >提交反馈</button>
+        </div>
+    </div>
+</body>
+<script src="/javascripts/jquery.js"></script>
+<script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
+<script>
+    function sendFeedback() {
+        var content = $("#feedback").val();
+        if(content.length == 0){
+            $("#hint").text("反馈信息不能为空")
+        }else{
+            var data = {content:content}
+            $.post("feedback",data,function (data) {
+                if(data.status){
+                    window.history.back();
+                    $("hint").text(data.desc)
+                }else{
+                    console.log(data.desc)
+                }
+            },"json")
+        }
+    }
+</script>
+</html>

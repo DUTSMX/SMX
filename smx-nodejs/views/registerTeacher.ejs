@@ -8,36 +8,59 @@
     <meta http-equiv="cache-control" content="no-cache"/>
     <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/registerTeacher.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/common_line.css">
 </head>
 <body>
-<div data-role="page" data-title="尚名校">
-    <div data-role="header" data-theme="g" data-position="fixed">
-        <img src="/images/ic_arrow_back.png" onclick="window.history.back()" class="left_icon"/>
-        <h3 class="page_title">申请家教</h3>
-        <img src="/images/icon_save.png" onclick="registerTeacher()" class="right_icon"/>
+    <div data-role="page" data-title="尚名校">
+        <div data-role="header" data-theme="g" data-position="fixed">
+            <img src="/images/ic_arrow_back.png" onclick="window.history.back()" class="left_icon"/>
+            <!--<img src="/images/icon_save.png" onclick="registerTeacher()" class="right_icon"/>-->
+            <h3 class="page_title">申请家教</h3>
+        </div>
+        <div class="setCenter">
+            <form>
+                <ul data-role="listview">
+                    <li data-icon="false">
+                        <hr width="1" size="20" color="#3B7454" class="hr">
+                        <h5 class="className-text">擅长课程</h5>
+                        <input id="goodCourse" type="text" name="" placeholder="请填写擅长的课程">
+                    </li>
+                    <li data-icon="false">
+                        <hr width="1" size="20" color="#3B7454" class="hr">
+                        <h5 class="className-text">个人介绍</h5>
+                        <textarea id="selfIntro" type="text" name="" placeholder="请填写个人介绍"></textarea>
+                    </li>
+                </ul>
+            </form>
+            <button class="btn" onclick="registerTeacher()">提交申请</button>
+            <p id="hint"></p>
+        </div>
     </div>
-    <div class="setCenter">
-        <form>
-            <ul data-role="listview">
-                <li data-icon="false">
-                    <hr width="1" size="20" color="#3B7454" class="hr">
-                    <h5 class="className-text">擅长课程</h5>
-                    <input id="goodCourse" type="text" name="" placeholder="请填写擅长的课程">
-                </li>
-                <li data-icon="false">
-                    <hr width="1" size="20" color="#3B7454" class="hr">
-                    <h5 class="className-text">个人介绍</h5>
-                    <textarea id="selfIntro" type="text" name="" placeholder="请填写个人介绍"></textarea>
-                </li>
-            </ul>
-        </form>
-        <p id="hint"></p>
-    </div>
-</div>
+</body>
 <script src="/javascripts/jquery.js"></script>
 <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
-<script src="/javascripts/slick.min.js"></script>
-<script src="/javascripts/smx.js"></script>
-</body>
+<script>
+    function registerTeacher() {
+        var goodCourse = $("#goodCourse").val();
+        var selfIntro = $("#selfIntro").val();
+        if(goodCourse.length == 0){
+            $("#hint").text("擅长课程不能为空");
+        }else if(selfIntro.length == 0) {
+            $("#hint").text("个人介绍不能为空");
+        }else{
+            var data = {
+                goodCourse:goodCourse,
+                selfIntro:selfIntro
+            }
+            $.post("registerTeacher",data,function (data) {
+                if(data.status){
+                    $("#hint").text(data.desc)
+                    window.history.back()
+                }else{
+                    console.log(data.desc)
+                }
+            },"json")
+        }
+    }
+</script>
 </html>

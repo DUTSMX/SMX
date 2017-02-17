@@ -55,3 +55,15 @@
 .ui-listview>.ui-li-static{
     padding:0px;
 }
+
+.ui-listview li  .check_code{
+    margin-top:3%;;
+    margin-right:1em;
+    float:right;
+    color:white;
+    background: #3B7454;
+    padding:4px;
+    border-radius: 5px;
+    font-weight: normal;
+    text-shadow:none;
+}

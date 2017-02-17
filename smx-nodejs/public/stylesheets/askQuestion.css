@@ -16,13 +16,16 @@
     box-shadow: none!important;
     line-height: 30px!important;
     font-size: 16px !important;
-    margin-top: 8% !important;
+    /*margin-top: 8% !important;*/
 }
 /*详情输入框高度*/
-.textarea{
+textarea{
      clear: both;
-     height:160px!important
+     height:160px!important;
  }
+textarea.ui-input-text.ui-textinput-autogrow{
+    background-color: white;!important;
+}
 /*"发布问题"位置*/
 .publish{
     height: auto;

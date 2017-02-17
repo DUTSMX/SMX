@@ -19,7 +19,7 @@
 		<ul data-role="listview">
 			<li data-icon="false">
 				<a href="personDetail" data-ajax="false">
-					<img src="<%=userHeadUrl%>" class="set-people" style="width:50px;height:50px;border-radius: 50px;">
+					<img src="<%=userHeadUrl%>" class="set-people">
 					<h1><%=userName%></h1>
 					<%if(gender == 1){%>
 					<img class="gender"src="/images/man.png">
@@ -50,16 +50,16 @@
 		<%}else if(role == 1){%>
 		<ul data-role="listview" class="ui-listview-func">
 			<li data-icon="false">
-				<a href="registerTeacherPage"  data-ajax="false">
+				<a href="registerTeacher"  data-ajax="false">
 					<img src="/images/新建课程.png" class="ui-li-icon">
-					<p>申请中.....</p>
+					<p>申请中...</p>
 				</a>
 			</li>
 		</ul>
 		<%}else{%>
 		<ul data-role="listview" class="ui-listview-func">
 			<li data-icon="false">
-				<a href="registerTeacherPage"  data-ajax="false">
+				<a href="registerTeacher"  data-ajax="false">
 					<img src="/images/新建课程.png" class="ui-li-icon">
 					<p>申请家教</p>
 				</a>
@@ -79,7 +79,6 @@
 					<p>我的提问</p>
 				</a>
 			</li>
-
 		</ul>
 		<ul data-role="listview" class="ui-listview-func">
 			<li data-icon="false">
@@ -89,17 +88,8 @@
 				</a>
 			</li>
 		</ul>
-		<ul data-role="listview" class="ui-listview-func" style="margin:50%">
-		</ul>
-		<!--<ul data-role="listview" class="ui-listview-func ui-btn-exit">-->
-			<!--<li data-icon="false">-->
-				<!--<a href="logout"  data-ajax="false">-->
-					<!--<p>退出登录</p>-->
-				<!--</a>-->
-			<!--</li>-->
-		<!--</ul>-->
 	</div>
-	<a href="logout" data-ajax="false"><button style="position:fixed;bottom:50px;font-weight:normal">退出登录</button></a>
+	<a href="logout" data-ajax="false"><button class="logout">退出登录</button></a>
 	<div data-role="footer" data-position="fixed" data-theme="t">
          <div data-role="navbar">
              <ul>
@@ -114,27 +104,32 @@
 <script src="/javascripts/jquery.js"></script>
 <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
 <script>
-	var xmlhttp;
-	if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
-		xmlhttp=new XMLHttpRequest();
-	}else{// code for IE6, IE5
-		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	}
 	function statusSwitch() {
-		var status = '<%=status%>'
-		console.log("status:"+status);
-		if(status == 1){
+		var status = "<%= status %>"
+		console.log("status:"+status+" status"+typeof status)
+		if (status == 1) {
 			status = 0;
-			document.getElementById("question_status").innerHTML = "状态：关";
-			xmlhttp.open('GET',"/users/questionStatus?userId=<%=userId%>&status=0");
-
-		}else{
+			$("#question_status").text("状态：关");
+			var data = {status:status};
+			$.post("/users/questionStatus", data, function (data) {
+				if(data.status){
+					$("#question_status").text(data.desc)
+				}else{
+					console.log(data.desc)
+				}
+			}, "json")
+		} else {
 			status = 1;
-			document.getElementById("question_status").innerHTML = "状态：开";
-			xmlhttp.open('GET',"/users/questionStatus?userId=<%=userId%>&status=1");
+			$("#question_status").text("状态：开");
+			var data = {status:status};
+			$.post("/users/questionStatus", data, function (data) {
+				if(data.status){
+					$("#question_status").text(data.desc)
+				}else{
+					console.log(data.desc)
+				}
+			}, "json")
 		}
-		xmlhttp.send();
 	}
 </script>
 </body>

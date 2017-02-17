@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/common_line.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/login.css">
 </head>
 <body>
 <div data-role="page" data-title="尚名校">
@@ -31,8 +32,8 @@
         </ul>
         <button class="btn" onclick="login()">登&nbsp录</button>
         <p id="hint"></p>
-        <a href="forgetPassword" data-ajax="false"><p style="display:block;float:right;margin-right: 5%">忘记密码</p></a>
-        <a href="register" data-ajax="false"><p style="margin-left:40%;margin-top: 10%">创建新账号</p></a>
+        <a href="forgetPassword" data-ajax="false" class="click"><p class="button_forget">忘记密码</p></a>
+        <a href="register" data-ajax="false" class="click"><p class="button_register">创建新账号</p></a>
     </div>
 </div>
 </body>
@@ -56,18 +57,18 @@
             }
             $.post("./login",data,function (data) {
                 if(data.status){
-                    console.log("course:"+data.sourceUrl)
-                    if(!data.sourceUrl||data.sourceUrl == "/users/login"){
-                        console.log("跳转course")
-                        window.location.href = "/course/course";
+                    if(data.name){
+                        $("#hint").text(data.desc);
+                        window.location.href = "/users/personDetailEdit";
                     }else{
-                        console.log("返回:"+ window.history.length)
-                        if(window.history.length<3){
-                            console.log("跳转"+data.sourceUrl)
-                            window.location.href = data.sourceUrl;
+                        if(!data.sourceUrl||data.sourceUrl == "/users/login"){
+                            window.location.href = "/course/course";
                         }else{
-                            console.log("返回")
-                            window.history.back();
+                            if(window.history.length<3){
+                                window.location.href = data.sourceUrl;
+                            }else{
+                                window.history.back();
+                            }
                         }
                     }
                 }else{

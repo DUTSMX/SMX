@@ -105,8 +105,8 @@ exports.getMyQuestion = function (userId, callback) {
         "CONCAT("+"'questionDetail?questionId='"+",q.questionId ) as aHref, " +
         "q.questionTitle as questionDetail " +
         "FROM account a join question q ON a.userId = q.userId " +
-        "WHERE q.userId = "+userId+"order by questionTime DESC";
-    // console.log("sql:"+sql);
+        "WHERE q.userId = "+userId+" order by questionTime DESC";
+    console.log("sql:"+sql);
     conn.query(sql, function (err,rows){
         if(err){
             console.log(err);
@@ -124,7 +124,7 @@ exports.getMyAnswer = function (userId,callback) {
         "CONCAT("+"'answerDetail?answerId='"+",b.answerId) as aHref, " +
         "q.questionTitle as questionDetail " +
         "FROM answer b JOIN question q ON b.questionId = q.questionId JOIN account a ON b.userId = a.userId " +
-        "WHERE q.userId = "+ userId+"order by answerTime DESC";
+        "WHERE q.userId = "+ userId+" order by answerTime DESC";
     conn.query(sql, function (err,rows) {
         if(err){
             console.log(err);
