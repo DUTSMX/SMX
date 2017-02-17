@@ -67,7 +67,6 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/course',course);
 app.use('/question',question);
-app.use('/answer',answer);
 app.use('/video',video);
 
 // catch 404 and forward to error handler
