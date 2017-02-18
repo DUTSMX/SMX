@@ -1,0 +1,32 @@
+<view class="container">
+    <view class="type">
+        <text class="account-type">类型</text>
+        <radio-group class="radio-group" bindchange="radioChange">
+            <label class="radio">
+                <radio value="收入" checked=""/>收入
+                <radio value="支出" checked="true"/> 支出
+            </label>
+        </radio-group>
+    </view>
+    <view class="type">
+        <text class="account-type">日期</text>
+        <picker mode="date" bindchange="bindDateChange">
+        <view>{{date}}</view>
+        </picker>
+    </view>
+    <view class="type">
+        <text class="account-type">经手人</text>
+        <picker bindchange="bindHandlerChange" range="{{array}}" value="{{index}}">
+        <view>{{array[index]}}</view>
+        </picker>
+    </view>
+    <view class="type">
+        <text class="account-type">金额</text>
+        <input></input>
+    </view>
+    <view class="type">
+        <text class="account-type">备注</text>
+        <input></input>
+    </view>
+    <button class="button">提交</button>
+</view>

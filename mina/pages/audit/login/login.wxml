@@ -1,0 +1,11 @@
+<view class="container">
+    <view class="type">
+        <text class="account-type">手机号</text>
+        <input placeholder="你的手机号码" type="number"/>
+    </view>
+    <view class="type">
+        <text class="account-type">密码</text>
+        <input placeholder="填写密码" password="true"/>
+    </view>
+    <button bindtap="login" class="button" hover-class="button-press" loading="{{loading}}">登录</button>
+</view>

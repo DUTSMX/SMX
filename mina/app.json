@@ -1,43 +1,16 @@
 {
   "pages":[
-    "pages/main/main",
+    "pages/audit/login/login",
+    "pages/audit/main/main",
+    "pages/audit/account/account",
     "pages/index/index",
-    "pages/logs/logs",
-    "pages/mine/mine",
-    "pages/question/question",
-    "pages/video/video"
-  ],
+    "pages/logs/logs"
+  ]
+  ,
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#3B7454",
     "navigationBarTitleText": "尚名校",
     "navigationBarTextStyle":"white"
-  },
-  "tabBar": {
-    "color":"#000000",
-    "selectedColor": "#3B7454",
-    "backgroundColor": "#ffffff",
-    "borderStyle": "black",
-    "list": [{
-      "pagePath": "pages/main/main",
-      "text": "课程",
-      "iconPath": "images/course_unselect.png",
-      "selectedIconPath": "images/course_selected.png"
-    },{
-      "pagePath": "pages/video/video",
-      "text": "视频",
-      "iconPath": "images/video_unselect.png",
-      "selectedIconPath": "images/video_selected.png"
-    },{
-      "pagePath": "pages/question/question",
-      "text": "问答",
-      "iconPath": "images/question_unselect.png",
-      "selectedIconPath": "images/question_selected.png"
-    },{
-      "pagePath": "pages/mine/mine",
-      "text": "我的",
-      "iconPath": "images/mine_unselect.png",
-      "selectedIconPath": "images/mine_selected.png"
-    }]
   }
 }

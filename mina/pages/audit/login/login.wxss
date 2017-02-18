@@ -1,0 +1,26 @@
+.container{
+    padding:40rpx;
+}
+.type{
+    display:flex;
+    width:100%;
+    flex-direction: row;
+    margin-top:50rpx;
+}
+.account-type{
+    width:170rpx;
+    font-size:34rpx;
+    margin-right: 2.5rpx;
+}
+.button{
+    margin-top:50rpx;
+    width:100%;
+    background-color: #1aad1b;
+    color:#ffffff;
+}
+.button-press{
+    margin-top:50rpx;
+    width:100%;
+    background-color: #179b16;
+    color:#ffffff;
+}
