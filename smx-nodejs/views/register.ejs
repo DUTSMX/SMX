@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>class</title>
+        <title>尚名校</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -78,7 +78,7 @@
                 console.log("register post")
                 $.post("./register",data,function (data) {
                     if(data.status){
-                        window.location.href="/users/personDetailEdit";
+                        window.location.href="/users/personDetailEdit?from=register";
                     }else{
                         $("#hint").html(data.desc);
                     }

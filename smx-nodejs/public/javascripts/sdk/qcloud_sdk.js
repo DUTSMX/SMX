@@ -275,6 +275,7 @@ CosCloud.prototype.uploadFile = function(success, error, bucketName, remotePath,
 	this.getAppSign(function(json){
 		var jsonResult = $.parseJSON(json);
 		var sign = jsonResult.data.sign;
+		console.log("sign:"+sign)
 		var url = that.cosapi_cgi_url + that.appid + "/" + bucketName + encodeURI(remotePath) + "?sign=" + encodeURIComponent(sign);
 		var formData = new FormData();
 		formData.append('op', 'upload');

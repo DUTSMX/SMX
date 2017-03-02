@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>class</title>
+    <title>尚名校</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/common_line.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/login.css">
 </head>
-<body>
+<body onload="closeHistory()">
 <div data-role="page" data-title="尚名校">
     <div data-role="header" data-theme="g" data-position="fixed">
         <img src="/images/ic_arrow_back.png" onclick="window.history.back()" class="left_icon"/>
@@ -59,7 +59,7 @@
                 if(data.status){
                     if(data.name){
                         $("#hint").text(data.desc);
-                        window.location.href = "/users/personDetailEdit";
+                        window.location.href = "/users/personDetailEdit?from=register";
                     }else{
                         if(!data.sourceUrl||data.sourceUrl == "/users/login"){
                             window.location.href = "/course/course";
@@ -76,6 +76,14 @@
                 }
             },"json")
         }
+    }
+    function closeHistory() {
+        //TODO 重定向到登录页面时，关闭所有历史纪录 防止用户通过返回的方式跳回前页
+
+//        console.log("length:"+window.history.length)
+//        if(window.history.length>2){
+//            window.history.go(-(window.history.length-2));
+//        }
     }
 </script>
 </div>

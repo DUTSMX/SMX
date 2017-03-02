@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>class</title>
+    <title>尚名校</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -111,6 +111,7 @@
 <script>
     function uploadImg() {
         var cos = new CosCloud("10068625","/")
+        var userId = "<%=userId%>"
         var successCallBack = function (result) {
             console.log("success")
             console.log("result:"+JSON.stringify(result))
@@ -129,7 +130,10 @@
             var fileList = this.files;
             if(fileList.length>0){
                 selectedFile = fileList[0];
-                cos.uploadFile(successCallBack,errorCallBack,"smxbucket","/"+selectedFile.name,selectedFile,0)
+                var name = selectedFile.name;
+                var postfix = name.substr(name.lastIndexOf("."))
+                console.log("postfix:"+postfix)
+                cos.uploadFile(successCallBack,errorCallBack,"smxbucket","/head/"+userId+postfix,selectedFile,0)
             }
         }
     }
@@ -141,24 +145,40 @@
         var school = $("#school").val();
         var grade = $("#grade").val();
         var address = $("#address").val();
-        console.log("head:"+head+"  name:"+name+"  gender:"+gender+" age:"+age+" school:"+school+" grade:"+grade+" address:"+address);
-        var data = {
-            head:head,
-            name:name,
-            gender:gender,
-            age:age,
-            school:school,
-            grade:grade,
-            address:address
-        }
-        jQuery.post("./editInfo",data,function (data,textStatus,jqXHR) {
-            if(data.status){
-                $("#hint").text(data.desc)
-                window.history.back()
-            }else{
-                console.log(data.desc)
+        var from = "<%=from%>";
+        if(name.length == 0){
+            $("#hint").text("姓名不能为空")
+        }else{
+            var data = {
+                head:head,
+                name:name,
+                gender:gender,
+                age:age,
+                school:school,
+                grade:grade,
+                address:address
             }
-        },"json")
+            jQuery.post("./editInfo",data,function (data,textStatus,jqXHR) {
+                if(data.status){
+                    console.log("from = "+ from);
+                    if(from){
+                        console.log("from = "+ true);
+                    }else{
+                        console.log("from = "+ false);
+                    }
+                    if(from){
+                        location.replace("../course/course")
+                    }else{
+                        $("#hint").text(data.desc)
+                        window.history.back()
+                    }
+                }else{
+                    console.log(data.desc)
+                }
+            },"json")
+        }
+//        console.log("head:"+head+"  name:"+name+"  gender:"+gender+" age:"+age+" school:"+school+" grade:"+grade+" address:"+address);
+
     }
 </script>
 </html>

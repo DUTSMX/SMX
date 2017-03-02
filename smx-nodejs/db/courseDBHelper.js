@@ -36,7 +36,8 @@ exports.getCourseById = function (userId, callback) {
         "a.userName as teacherName, " +
         "a.userSchool as teacherSchool, " +
         "a.userGrade as teacherGrade " +
-        "FROM ((joinCourse j INNER JOIN course c ON j.courseId = c.courseId) INNER JOIN account a ON c.userId = a.userId) "
+        "FROM ((joinCourse j INNER JOIN course c ON j.courseId = c.courseId) INNER JOIN account a ON c.userId = a.userId) " +
+        "WHERE a.userId = " + userId;
         //  +"WHERE c.courseDate >= curdate()" ;
     var sql2 = "SELECT c.courseId, " +
         "c.courseName, " +

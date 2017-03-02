@@ -226,10 +226,13 @@ router.get("/personDetail",function (req,res) {
 * req:
 * res:{userHeadUrl,userName,gender,userAge,userSchool,userGrade,userAddress}
 * */
-router.get("/personDetailEdit",function (req,res) { var userId=req.session.userId;
+router.get("/personDetailEdit",function (req,res) {
     var userId=req.session.userId;
+    var from = req.query.from;
     console.log("userId:"+userId)
     api.getUserInfo(userId,function (rows) {
+        rows.from = from;
+        rows.userId = userId;
         console.log(JSON.stringify(rows));
         res.render("personDetailEdit",rows);
     })
