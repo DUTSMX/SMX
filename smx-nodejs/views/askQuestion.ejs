@@ -43,23 +43,24 @@
 	function askQuestion() {
 		var questionTitle = $("#questionTitle").val();
 		var questionContent = $("#questionContent").val();
-		if(questionTitle.length == 0){
+		if (questionTitle.length == 0) {
 			$("#hint").text("问题标题不能为空");
-		}else if(questionContent.length == 0){
+		} else if (questionContent.length == 0) {
 			$("#hint").text("问题内容不能为空");
-		}else{
+		} else {
 			data = {
-				questionTitle:questionTitle,
-				questionContent:questionContent
+				questionTitle: questionTitle,
+				questionContent: questionContent
 			}
-			$.post("askQuestion",data,function (data) {
-				if(data.status){
+			$.post("askQuestion", data, function (data) {
+				if (data.status) {
 					$("#hint").text(data.desc)
 					window.history.back();
-				}else{
+				} else {
 					console.log(data.desc)
 				}
-			},"json")
+			}, "json")
+		}
 	}
 </script>
 </body>
