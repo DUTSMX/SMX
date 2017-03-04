@@ -52,10 +52,14 @@ exports.getTeacherDetail = function(teacherId,callback){
 
 exports.joinCourse = function(userId,courseId,callback){
     db.joinCourse(userId,courseId,function(rows){
-        callback("已加入课程");
+        callback(rows);
     })
 }
-
+exports.unJoinCourse = function (userId,courseId,callback) {
+    db.unJoinCourse(userId,courseId,function (rows) {
+        callback(rows)
+    })
+}
 exports.getStudentList = function(courseId,callback){
     db.getJoinStudent(courseId,function (rows) {
         callback({studentList:rows});
@@ -65,10 +69,12 @@ exports.getStudentList = function(courseId,callback){
 * unuse
 */
 
-exports.addCourse = function(userId,courseName,courseDate,beginTime,finshTime,courseTime,objectOriented,courseContent,callback){
-    db.addCourse(userId,courseName,courseDate,beginTime,finshTime,courseTime,objectOriented,courseContent,function (rows) {
-            console.log("rows:"+JSON.stringify(rows));
-            callback("创建成功")
+exports.addCourse = function(userId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent,callback){
+    console.log("userId:"+userId+" courseName:"+courseName+" courseDate:"+courseDate+" beginTime:"+beginTime+" finishTime:"+finishTime +
+        " courseTime:"+courseTime+" objectOriented:"+objectOriented+" courseContent:"+courseContent)
+    db.addCourse(userId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent,function (rows) {
+            // console.log("rows:"+JSON.stringify(rows));
+            callback(rows)
         })
     }
 

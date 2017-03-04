@@ -13,28 +13,28 @@
 <body>
 <div data-role="page" data-title="尚名校">
     <div data-role="header" data-theme="g" data-position="fixed">
-        <img src="/images/ic_arrow_back.png" onclick="goBack()" class="left_icon"/>
+        <img src="/images/ic_arrow_back.png" onclick="window.history.back()" class="left_icon"/>
         <h3 class="page_title">设置中心</h3>
         <!--<img src="/images/ic_share.png" href="#" class="right_icon"/>-->
     </div>
     <div class="setCenter">
         <ul data-role="listview">
-            <li data-icon="false">
-                <a href="changePasswordPage" data-ajax="false">
+            <li data-ajax="false" data-icon="arrow-r">
+                <a href="changePassword" data-ajax="false">
                     <hr width="1" size="20" color="#3B7454" class="hr">
-                    <h5 class="resetPassword">修改密码</h5>
+                    <h5>修改密码</h5>
                 </a>
             </li>
-            <li data-icon="false" data-ajax="false">
-                <a href="#">
+            <li data-ajax="false" data-icon="arrow-r">
+                <a href="tel:04124832166">
                     <hr width="1" size="20" color="#3B7454" class="hr">
-                    <h5 class="businessCooperation">商务合作</h5>
+                    <h5>商务合作</h5>
                 </a>
             </li>
-            <li data-icon="false"  data-ajax="false">
-                <a href="retroaction"  data-ajax="false">
+            <li data-ajax="false" data-icon="arrow-r">
+                <a href="feedback"  data-ajax="false">
                     <hr width="1" size="20" color="#3B7454" class="hr">
-                    <h5 class="questionFeedback">问题反馈</h5>
+                    <h5>问题反馈</h5>
                 </a>
             </li>
         </ul>

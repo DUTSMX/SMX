@@ -1,0 +1,15 @@
+.button_forget{
+    display:block;
+    float:right;
+    margin-right: 5%
+}
+.button_register{
+    margin-left:40%;
+    margin-top: 10% !important
+}
+.ui-link p{
+    color:#38c;
+}
+.click{
+    text-decoration:none
+}

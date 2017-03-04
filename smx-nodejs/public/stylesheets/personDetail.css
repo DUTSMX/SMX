@@ -1,44 +1,52 @@
-.hr{
+/*顶部 导航栏 右边 大小 修正 */
+.ui-header .right_icon{
+    margin-top:4%;
+    height:22px;
+    width:22px;
+}
+/*头像 特殊线*/
+.specialHr{
+    display:inline-block;
+    margin-top: 6%;
     float: left;
+    margin-left: 3%;
 }
-.ui-listview li .type{
+/*头像 特殊Type*/
+.ui-listview li .specialType{
     display: inline-block;
-    margin-top: 2.5%;
+    position:absolute;
+    top:12%;
+    padding-top: 2%;
     padding-left: 3%;
+    font-weight:bold;
 }
-.ui-listview li .detail{
-    display: inline-block;
-    position: absolute;
-    left: 40%;
-    font-weight: normal;
-}
-.ui-listview li .self_intro{
-    font-weight:normal;
-    white-space: normal;
-}
+/*.ui-listview>li h1, .ui-listview>li h2, .ui-listview>li h3, .ui-listview>li h4, .ui-listview>li h5, .ui-listview>li h6{*/
+
+/*}*/
+/*头像 特殊Detail*/
 .specialDetail{
     display: inline-block !important;
-    /*position: absolute;*/
-    /*left: 40%;*/
-    font-weight: normal;
-    float: right;
+    float:right;
+    /*padding-:28%*/
 }
-.hr-1{
-    float: left;
-    margin-top: 6%;
+/*头像 大小 圆角*/
+.head_50{
+    width:50px;
+    height:50px;
+    border-radius: 50px;
+    margin-right:1em;
 }
-.ui-listview li .type-1{
-    display: inline-block;
-    margin-top: 6%;
-    padding-left: 3%;
+/*头像 圆角 修改*/
+.ui-listview>li.ui-first-child img:first-child:not(.ui-li-icon){
+    -webkit-border-top-left-radius:50px;
+    border-top-left-radius:50px;
 }
-.edit{
-    float: right;
-    margin-top: 1%;
-    margin-right: 2%;
 
-}
-.edit a{
-    text-decoration: none;
-    color: white;
+/*每一行 内容*/
+.ui-listview li .className-detail{
+    position:relative;
+    float:right;
+    text-align:right;
+    font-weight:normal;
+    margin-right:1em;
 }

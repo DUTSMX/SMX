@@ -1,17 +1,12 @@
+.ui-btn{
+	padding:0px;
+}
 .hr{
 	float: left;
+	margin-left:1em;
+	margin-top:2.5%
 }
-.ui-listview li a .resetPassword{
-	display: inline-block;
-	margin-top: 2.5%;
-	padding-left: 5%;
-}
-.ui-listview li a .businessCooperation{
-	display: inline-block;
-	margin-top: 2.5%;
-	padding-left: 5%;
-}
-.ui-listview li a .questionFeedback{
+.ui-listview li a h5{
 	display: inline-block;
 	margin-top: 2.5%;
 	padding-left: 5%;

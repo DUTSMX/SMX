@@ -7,10 +7,10 @@
 	text-shadow: none;
 }
 /*添加底部导航栏主题，应用于所有页面底部导航*/
-.ui-bar-t{
-	color: #3B7454;
-	background-color: transparent;
-}
+/*.ui-bar-t{*/
+	/*color: #3B7454;*/
+	/*!*background-color: transparent;*!*/
+/*}*/
 /*设置头部导航的上边框*/
 .ui-header{
 	border-bottom-width: 0;
@@ -31,7 +31,12 @@
 	background-color: white;
 	color: #3B7454;
 	text-shadow: none;
-	/*border-color: transparent;*/
+	border-color: transparent;
+}
+/*底部导航下面透明 处理	*/
+.ui-footer-fixed{
+	bottom:-3px;
+	padding:0px;
 }
 /*设置各个功能模块的顶部和底部边框宽度*/
 .ui-listview>li.ui-li-has-icon>a.ui-btn{
@@ -39,56 +44,110 @@
 	box-sizing: border-box;
 	border-top-width: 0;    
 }
-.ui-listview>li.ui-first-child>a.ui-btn{
-	border-bottom-width: 0;
-	border-top-width: 0;    
-}
 /*设置底部导航栏边框透明*/
-.ui-link{
-	padding-bottom: 0;
-	border-color: transparent;
-}
+/*.ui-link{*/
+	/*padding-bottom: 0;*/
+	/*border-color: transparent;*/
+/*}*/
 /*设置底部导航栏文字位置*/
 .ui-link p{
 	margin-bottom: 0; 
 	margin-top: 0;
-
 }
 /*设置底部导航栏图片大小*/
 .ui-link img{
 	width: 30%;
 	height: 30%;
 }
-.ui-navbar {
-	max-width:none;
-}
 
-.ui-footer-fixed{
-	padding-bottom: 0;
-}
-.ui-header-fixed, .ui-footer-fixed{
-	width:inherit;
-}
+/*.ui-navbar {*/
+	/*max-width:none;*/
+/*}*/
 
-.ui-header img{
-	width:30px;
-	height:30px;
-	margin:0px 16px;
-	margin-top:12px;
-}
+/*.ui-footer-fixed{*/
+	/*padding-bottom: 0;*/
+/*}*/
+
+/*.ui-header-fixed, .ui-footer-fixed{*/
+	/*width:inherit;*/
+/*}*/
+
+/*顶部标题栏标题*/
 .ui-header h3{
 	display: inline-block;
 	margin:0;
 	margin-left:14%
 }
+
+/*顶部左侧图标*/
 .ui-header .left_icon{
+	width:30px;
+	height:30px;
 	float:left;
+	margin-left:3%;
+	margin-top:3%
 }
+
+/*顶部右侧图标*/
 .ui-header .right_icon{
+	width:30px;
+	height:30px;
 	float: right;
+	margin-right:3%;
+	margin-top:3%
 }
-.ui-header .page_title{
-	display: inline-block;
-	margin:0;
-	margin-left:22%;
+/*.ui-header .page_title{*/
+	/*display: inline-block;*/
+	/*margin:0;*/
+	/*margin-left:22%;*/
+/*}*/
+
+/*设置列表中头像*/
+.head_big{
+	width:48px;
+	height:48px;
+	border-radius:48px;
+	position: absolute;
+	top: 22.5px;
+	left:22.8px
+}
+/*设置详情页头像*/
+.head_60{
+	width:36px;
+	height:36px;
+	border-radius:36px;
+}
+/*设置问答页头像*/
+.head_24{
+	width:16px;
+	height:16px;
+	border-radius:16px;
+}
+
+/*设置问答页头像*/
+/*.head_16{*/
+	/*width:16px;*/
+	/*height:16px;*/
+	/*border-radius:16px;*/
+/*}*/
+/*a标签的颜色*/
+.ui-page-theme-a .ui-btn, html .ui-bar-a .ui-btn, html .ui-body-a .ui-btn, html body .ui-group-theme-a .ui-btn, html head+body .ui-btn.ui-btn-a, .ui-page-theme-a .ui-btn:visited, html .ui-bar-a .ui-btn:visited, html .ui-body-a .ui-btn:visited, html body .ui-group-theme-a .ui-btn:visited, html head+body .ui-btn.ui-btn-a:visited{
+	background-color: #f9f9f9;
+}
+/*a标签的颜色*/
+.ui-body-a, .ui-page-theme-a .ui-body-inherit, html .ui-bar-a .ui-body-inherit, html .ui-body-a .ui-body-inherit, html body .ui-group-theme-a .ui-body-inherit, html .ui-panel-page-container-a{
+	background-color: #f9f9f9;
+}
+/*输入框 背景颜色*/
+.ui-input-text input, .ui-input-search input{
+	background-color: white;
+	width:90%;
+	margin-right: 1em;
+}
+
+/*登录注册的按钮*/
+.btn{
+	background: #3B7454 !important;
+	color:white !important;
+	text-shadow: none !important;
 }

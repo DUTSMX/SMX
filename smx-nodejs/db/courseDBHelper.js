@@ -36,7 +36,9 @@ exports.getCourseById = function (userId, callback) {
         "a.userName as teacherName, " +
         "a.userSchool as teacherSchool, " +
         "a.userGrade as teacherGrade " +
-        "FROM ((joinCourse j INNER JOIN course c ON j.courseId = c.courseId) INNER JOIN account a ON c.userId = a.userId) WHERE c.courseDate >= curdate()" ;
+        "FROM ((joinCourse j INNER JOIN course c ON j.courseId = c.courseId) INNER JOIN account a ON c.userId = a.userId) " +
+        "WHERE a.userId = " + userId;
+        //  +"WHERE c.courseDate >= curdate()" ;
     var sql2 = "SELECT c.courseId, " +
         "c.courseName, " +
         "c.courseTime, " +
@@ -45,7 +47,8 @@ exports.getCourseById = function (userId, callback) {
         "a.userGrade as teacherGrade, " +
         "a.userName as teacherName " +
         "FROM course c JOIN account a ON c.userId = a.userId " +
-        "WHERE c.courseDate >= curdate() and c.userId = " + userId ;
+        "WHERE c.userId = " + userId
+        // +" and c.courseDate >= curdate()";
     if (users.judgeRole(userId, function (rows) {
         // console.log("length:" + rows.length);
         if (rows && rows.length > 0) {
@@ -133,30 +136,87 @@ exports.getTeacherDetail = function (teacherId, callback) {
 }
 exports.joinCourse = function (userId, courseId, callback) {
     var sql = "SELECT * FROM joinCourse WHERE userId = "+userId+" and courseId = "+courseId;
-    console.log("sql:"+sql);
     conn.query(sql,function (err,rows) {
         if(err){
             console.log(err);
-            return;
+            callback({
+                status:false
+            })
         }else if(rows == null ){
             console.log("rows is null");
-            return;
+            callback({
+                status:false,
+                desc:"not found"
+            })
         }else if(rows[0] != null){
             console.log(userId+"已经加入课程"+courseId);
-            callback("已加入课程")
-            return;
+            callback({
+                status:false,
+                desc:"已加入课程"
+            })
         }else{
-            var sql = "INSERT INTO joinCourse(userId,courseId) VALUES ('" + userId + "','" + courseId + "')";
+            var date = new Date();
+            var sql = "INSERT INTO joinCourse(userId,courseId,joinTime) VALUES ('" + userId + "','" + courseId + "',"+conn.escape(new Date())+")";
             conn.query(sql, function (err, rows) {
                 if (err) {
-                    console.log(err);
-                    return;
+                    console.log(err)
+                    callback({
+                        status:false,
+                        desc:err
+                    })
+                }else{
+                    callback({
+                        status:true,
+                        desc:"已加入课程"
+                    });
                 }
-                callback(rows);
             })
         }
     })
 }
+
+exports.unJoinCourse = function (userId,courseId,callback) {
+    var sql = "SELECT * FROM joinCourse WHERE userId = "+userId+" and courseId = "+courseId;
+    console.log("sql:"+sql);
+    conn.query(sql,function (err,rows) {
+        console.log("rows:"+JSON.stringify(rows))
+        if(err){
+            console.log(err);
+            callback({
+                status:false,
+                desc:err
+            })
+        }else if(rows == null ){
+            console.log("rows is null");
+            callback({
+                status:false,
+                desc:"not found"
+            })
+        }else if(rows[0] == null){
+            console.log(userId+"未加入课程"+courseId);
+            callback({
+                status:false,
+                desc:"未加入课程"
+            })
+        }else{
+            var sql = "DELETE FROM joinCourse WHERE userId = "+userId+" and courseId = "+courseId;
+            conn.query(sql, function (err, rows) {
+                if (err) {
+                    callback({
+                        status:false,
+                        desc:err
+                    })
+                }else{
+                    callback({
+                        status:true,
+                        desc:"已退出课程"
+                    });
+                }
+            })
+        }
+    })
+}
+
 exports.getJoinStudent = function (courseId,callback) {
     var sql = "SELECT a.userId, " +
         "a.userHeadUrl as headUrl, " +
@@ -183,19 +243,21 @@ exports.hasJoin = function(userId,courseId,callback){
     })
 }
 
-/**
- * unuse
- */
-
-exports.addCourse = function (userId,courseName,courseDate,beginTime,finshTime,courseTime,objectOriented,courseContent, callback) {
-    var sql = "INSERT INTO course(userId,courseName,courseDate,beginTime,finshTime,courseTime,objectOriented,courseContent) VALUES ('" + userId + "','" + courseName + "','" + courseDate + "','" + beginTime + "','" + finshTime + "','" + courseTime + "','" + objectOriented + "','" + courseContent + "')";
+exports.addCourse = function (userId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent, callback) {
+    var sql = "INSERT INTO course(userId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent) VALUES ('" + userId + "','" + courseName + "','" + courseDate + "','" + beginTime + "','" + finishTime + "','" + courseTime + "','" + objectOriented + "','" + courseContent + "')";
+    console.log("sql:"+sql)
     conn.query(sql, function (err,rows) {
-        console.log(sql);
         if (err) {
             console.log(err);
-            return;
+            callback({
+                status:false,
+                desc:err
+            })
         }else {
-            callback(rows);
+            callback({
+                status:true,
+                desc:"课程创建成功"
+            });
         }
     })
 }

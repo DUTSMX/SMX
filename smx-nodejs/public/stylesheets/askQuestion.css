@@ -1,0 +1,45 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+/*分割线*/
+.courseLine{
+    width:100%;
+}
+/*“提问”“详情” 文字*/
+.question{
+    display: inline-block;
+}
+/*输入框样式*/
+.ui-input-text {
+    border: none !important;
+    box-shadow: none!important;
+    line-height: 30px!important;
+    font-size: 16px !important;
+    /*margin-top: 8% !important;*/
+}
+/*详情输入框高度*/
+textarea{
+     clear: both;
+     height:160px!important;
+ }
+textarea.ui-input-text.ui-textinput-autogrow{
+    background-color: white;!important;
+}
+/*"发布问题"位置*/
+.publish{
+    height: auto;
+    float: left;
+    margin-left:40%;
+}
+/*"发布问题"按钮样式*/
+.ui-btn{
+    background-color:#347557!important;
+    color: #fff!important;
+    border-color: #fff;
+    text-shadow: none;
+}
+/*"发布问题"字体阴影*/
+.ui-page-theme-a .ui-btn{
+    text-shadow: none;!important;
+}

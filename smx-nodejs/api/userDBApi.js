@@ -8,22 +8,24 @@ var qs = require('querystring')
 
 exports.login = function(phoneNumber, password, callback){
     db.findAccount(phoneNumber, password, function(rows){
+        console.log("row:"+JSON.stringify(rows))
         if(rows[0] == null){
             callback({
                 status:false,
-                desc:"手机号或密码错误"
+                desc:"手机号或密码错误",
             })
         }else if(rows[0].userName == null || rows[0].userName.length == 0){
             callback({
                 status:true,
                 userId:rows[0].userId,
-                desc:"登录成功(null)"
+                desc:"姓名不能为空，请先完善信息",
+                name:true
             })
         }else{
             callback({
                 status:true,
                 userId:rows[0].userId,
-                desc:"登录成功"
+                desc:"登录成功",
             })
         }
 
@@ -33,7 +35,10 @@ exports.login = function(phoneNumber, password, callback){
 exports.register = function(phoneNumber,checkCode, password,callback){
     db.getCheckCode(phoneNumber,function (rows) {
         if(rows != checkCode){
-            callback({desc:"验证码错误"})
+            callback({
+                status:false,
+                desc:"验证码错误"
+            })
         }else{
             db.findAccountByNum(phoneNumber,function(rows){
                 if(rows[0] == null){
@@ -58,7 +63,10 @@ exports.register = function(phoneNumber,checkCode, password,callback){
 exports.forgetPassword = function (phoneNumber,checkCode,password,callback) {
     db.getCheckCode(phoneNumber,function (rows) {
         if(rows != checkCode){
-            callback({desc:"验证码错误"})
+            callback({
+                status:false,
+                desc:"验证码错误"
+            })
         }else{
             db.findAccountByNum(phoneNumber,function(rows){
                 if(rows[0] == null){
@@ -126,19 +134,19 @@ exports.registerTeacher = function(userId,goodCourse,selfIntro,callback){
     if(rows[0].role == 2){
         callback({
             status:false,
-            desc:"已经是家教了还申请啥"
+            desc:"已经是家教了"
         })
     }else if (rows[0].role == 1){
         callback({
             status:false,
-            desc:"已申请当家教，请耐心等待审核"
+            desc:"申请中，请耐心等待审核"
         })
     }
     else if (rows[0].role == 0){
         db.registerTeacher(userId,goodCourse,selfIntro,function(rows){
             callback({
                 status:true,
-                desc:"申请成功"
+                desc:"申请成功，请等待审核"
             })
         })
     }else{
@@ -182,7 +190,7 @@ exports.sendCheckCode = function(phoneNumber,callback){
         serverFeedback.on('data',function (body) {
             console.log("data:"+body)
             db.saveCheckCode(phoneNumber,number,function (rows) {
-                callback("验证码发送成功")
+                callback(rows)
             })
         })
     })
@@ -198,10 +206,10 @@ exports.getUserInfo =function(userId,callback){
     })
 }
 
-exports.editInfo=function (userId,name,sex,age,school,grade,address,callback) {
+exports.editInfo=function (userId,head,name,sex,age,school,grade,address,callback) {
     console.log("123");
-    db.editInfo(userId, name, sex, age, school, grade, address, function (rows) {
-        callback("修改成功");
+    db.editInfo(userId, head,name, sex, age, school, grade, address, function (rows) {
+        callback(rows);
     })
 }
 
@@ -247,4 +255,9 @@ exports.uploadImg = function (callback) {
     })
     req.write(JSON.stringify(data));
     req.end();
+}
+exports.saveFeedback = function(userId,feedback,callback){
+    db.saveFeedback(userId,feedback,function (rows) {
+        callback(rows);
+    })
 }

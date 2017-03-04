@@ -1,0 +1,15 @@
+<!--index.wxml-->
+<view class="container">
+  <view  bindtap="bindViewTap" class="userinfo">
+    <image class="userinfo-avatar" src="../../../images/course_my_head.png" background-size="cover"></image>
+    <text class="userinfo-nickname">姚晗</text>
+  </view>
+  <view class="current">
+    <label>当前余额：100元</label>
+  </view>
+  <view class="button_view">
+  <button bindtap="account" class="button">记账</button>
+  <button class="button">借款</button>
+  <button class="button">账单</button>
+  </view>
+</view>

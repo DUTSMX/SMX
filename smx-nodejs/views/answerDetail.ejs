@@ -7,15 +7,16 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta http-equiv="cache-control" content="no-cache"/>
     <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/question.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/common_line.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/answerDetail.css">
 </head>
 <body>
 <div data-role="page" data-title="尚名校">
     <div data-role="header" data-theme="g" data-position="fixed">
-        <img src="/images/ic_arrow_back.png" onclick="goBack()" class="left_icon"/>
+        <img src="/images/ic_arrow_back.png" onclick="window.history.back()" class="left_icon"/>
+        <!--<img src="/images/ic_share.png" href="#" class="right_icon"/>-->
         <h3 class="page_title">回答详情</h3>
-        <img src="/images/ic_share.png" href="#" class="right_icon"/>
     </div>
     <div data-role="answer_area">
         <ul data-role="listview">
@@ -25,10 +26,10 @@
                 </a>
             </li>
             <li>
-                <div>
-                    <img style="vertical-align:middle;" width="32" height="32" src="<%= authorHeadUrl %>"/> <%= authorName %>
+                <div class="answer_person">
+                    <img class="head_24" src="<%= authorHeadUrl %>"/> <%= authorName %>
                 </div>
-                <p style="white-space: normal" class="answer_content"><%= answerContent %></p>
+                <p class="content"><%= answerContent %></p>
             </li>
         </ul>
     </div>

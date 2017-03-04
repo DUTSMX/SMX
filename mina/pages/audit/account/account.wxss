@@ -1,0 +1,16 @@
+.container{
+    padding:20rpx;
+}
+.type{
+    display:flex;
+    width:100%;
+    flex-direction: row;
+    margin-top:50rpx;
+}
+.account-type{
+    width:160rpx;
+}
+.button{
+    margin-top:50rpx;
+    width:100%;
+}

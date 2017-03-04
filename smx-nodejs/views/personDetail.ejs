@@ -8,91 +8,60 @@
     <meta http-equiv="cache-control" content="no-cache"/>
     <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/common_line.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/personDetail.css">
 </head>
-<body onload="uploadImg()">
+<body>
 <div data-role="page" data-title="尚名校">
     <div data-role="header" data-theme="g" data-position="fixed">
-        <img src="/images/ic_arrow_back.png" onclick="goBack()" class="left_icon"/>
-        <span class="edit"><a href="personDetailEdit"data-ajax="false"><img src="/images/编辑.png"></a></span>
+        <img src="/images/ic_arrow_back.png" onclick="window.history.back()" class="left_icon"/>
+        <%if(!self){%>
+            <span><a href="personDetailEdit"data-ajax="false"><img class="right_icon"src="/images/编辑.png"></a></span>
+        <%}%>
         <h3 class="page_title">个人信息</h3>
-        <!--<img src="/images/ic_share.png" href="#" class="right_icon"/>-->
     </div>
     <div class="teacherInfo">
         <ul data-role="listview">
             <li data-icon="false">
-
-                <hr width="1" size="20" color="#3B7454" class="hr">
-                <h5 class="type">头像</h5>
-                <h5 class="specialDetail"><img id="head"src="/images/头像.png"style="width:50px;height:50px"></h5>
-                <div style="position: absolute;width:100%;height:100%;left:0px;top:0px;opacity:0">
-                    <input type="file" id="file" accept="image/" style="height:200px;"/>
-                </div>
+                <hr width="1" size="20" color="#3B7454" class="specialHr">
+                <h5 class="specialType">头像</h5>
+                <h5 class="specialDetail"><img id="head" src="<%=userHeadUrl%>" class="head_50"></h5>
             </li>
             <li data-icon="false">
                 <hr width="1" size="20" color="#3B7454" class="hr">
-                <h5 class="type">姓名</h5>
-                <h5 class="detail"><%=userName%></h5>
+                <h5 class="className-text">姓名</h5>
+                <h5 class="className-detail"><%=userName%></h5>
             </li>
             <li data-icon="false">
                 <hr width="1" size="20" color="#3B7454" class="hr">
-                <h5 class="type">性别</h5>
-                <h5 class="detail"><%if(gender==1){%>男<%} else if(gender == 2){%>女<%}%></h5>
-            </li>
-            <li data-icon="false">
-
-                    <hr width="1" size="20" color="#3B7454" class="hr">
-                    <h5 class="type">年龄</h5>
-                    <h5 id="age" class="detail"><%=userAge%></h5>
-
+                <h5 class="className-text">性别</h5>
+                <h5 class="className-detail"><%if(gender==1){%>男<%} else if(gender == 2){%>女<%}else{%>保密<%}%></h5>
             </li>
             <li data-icon="false">
                 <hr width="1" size="20" color="#3B7454" class="hr">
-                <h5 class="type">所在学校</h5>
-                <h5 class="detail"><%=userSchool%></h5>
+                <h5 class="className-text">年龄</h5>
+                <h5 class="className-detail"><%=userAge%></h5>
             </li>
             <li data-icon="false">
                 <hr width="1" size="20" color="#3B7454" class="hr">
-                <h5 class="type">年级</h5>
-                <h5 class="detail"><%=userGrade%></h5>
+                <h5 class="className-text">所在学校</h5>
+                <h5 class="className-detail"><%=userSchool%></h5>
             </li>
             <li data-icon="false">
                 <hr width="1" size="20" color="#3B7454" class="hr">
-                <h5 class="type">家庭住址</h5>
-                <h5 class="detail"><%=userAddress%></h5>
+                <h5 class="className-text">年级</h5>
+                <h5 class="className-detail"><%=userGrade%></h5>
+            </li>
+            <li data-icon="false">
+                <hr width="1" size="20" color="#3B7454" class="hr">
+                <h5 class="className-text">家庭住址</h5>
+                <h5 class="className-detail"><%=userAddress%></h5>
             </li>
         </ul>
         <p id="hint"></p>
     </div>
     <script src="/javascripts/jquery.js"></script>
     <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
-    <script src="/javascripts/slick.min.js"></script>
-    <script src="/javascripts/smx.js"></script>
-    <script src="/javascripts/sdk/qcloud_sdk.js"></script>
-    <script src="/javascripts/sdk/swfobject.js"></script>
-    <script>
-        function uploadImg() {
-            var cos = new CosCloud("10068625","/")
-            var successCallBack = function (result) {
-                $("#age").val("success:"+result);
-                console.log("success")
-                console.log("result:"+JSON.stringify(result))
-            }
-            var errorCallBack = function (result) {
-                $("#age").val("error:"+result);
-                console.log("error")
-                console.log("result:"+JSON.stringify(result))
-            }
-            $('input[type="file"]').change(function (e) {
-                console.log(e.files)
-            })
-//            var myFile = document.getElementById("#file");
-//            console.log("file:"+JSON.stringify($("#file")));
-//            console.log("selectedFile:"+JSON.stringify($('#input')))
-//            var selectedFile = $('#file').get(0).files[0];
-//            cos.uploadFile(successCallBack,errorCallBack,"smxbucket","/",selectedFile,1)
-        }
-    </script>
 </div>
 </body>
 </html>

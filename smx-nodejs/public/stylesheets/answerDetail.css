@@ -1,0 +1,8 @@
+.ui-listview>li .answer_person{
+    padding-left:1em;
+    padding-top:1em
+}
+.ui-listview>li.ui-last-child img:first-child:not(.ui-li-icon){
+    -webkit-border-bottom-left-radius:16px;
+    border-bottom-left-radius:16px;
+}

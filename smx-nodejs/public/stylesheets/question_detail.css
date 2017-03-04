@@ -1,0 +1,38 @@
+.ui-listview>li p{
+    white-space: normal;
+}
+.question_content{
+    white-space: normal;
+    text-indent:2em;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+.ui-listview>li .answer_content{
+    text-indent:2em;
+    /*text-overflow: ellipsis;*/
+    display: -webkit-box;!important;
+    -webkit-line-clamp:2;
+    -webkit-box-orient: vertical;
+}
+.ui-listview>li .addAnswer_div{
+    height:20px;
+}
+.addAnswer_img{
+    display: inline-block;
+    width:18px;
+    height:18px;
+    text-align:center;
+    position: absolute;
+    top:25%;
+    left:41%;
+}
+.ui-listview>li .addAnswer_p{
+    display:inline-block;
+    position:absolute;
+    left:46%;
+    top:12%;
+}
+.ui-listview>li.ui-last-child img:first-child:not(.ui-li-icon){
+    -webkit-border-bottom-left-radius:24px;
+    border-bottom-left-radius:24px;
+}

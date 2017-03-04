@@ -1,64 +1,58 @@
-.ui-listview .ui-li-has-thumb>.ui-btn>img:first-child{
-	padding-top: 12px;
-	padding-left: 10px;
-	height: 55px;
-	width: 55px;
+/*顶部头像 边距*/
+.head_60{
+	margin-left:3%;
+	margin-top:3%
 }
+.ui-listview>li.ui-first-child img:first-child:not(.ui-li-icon){
+	-webkit-border-top-left-radius:36px;
+}
+/*第一行 姓名*/
 .ui-listview li a .teacher_info .teacher_school_intro h5{
 	display: inline-block;
-	margin-top: 10%;
+	margin-left:1%;
+	margin-top: 7%;
 	font-weight:normal;
 }
+/*第一行 学校年级*/
 .ui-listview li a .teacher_info .teacher_school_intro p{
 	display: inline-block;
 	font-size: 0.7em;
 	margin-left: 3%;
 	margin-bottom: 3.5%;
 }
-.hr{
-	float: left;
-}
-.ui-listview li .className-text{
-	display: inline-block;
-	margin-top: 2.5%;
-	padding-left: 3%;
-	font-weight:bold;
-}
-.ui-listview li .className-details{
-	display: inline-block;
-	margin-top: 2.6%;
-	position: absolute;
-	left: 40%;
-	font-weight:normal;
-}
-.ui-listview li .attend-student{
-	display: inline-block;
-	margin-bottom: 4.5%;
-	padding-left: 3%;
-	font-weight:bold;
-}
-.ui-listview li .className-details .attendStudent{
-	height: 25px;
-	width: 25px;
-}
-.divide{
-	border:0;
-	background-color:#dddddd;
-	height:1px;
-	-webkit-margin-before:0;
-	-webkit-margin-after: 0;
-}
+/*.ui-listview li .attend-student{*/
+	/*display: inline-block;*/
+	/*margin-bottom: 4.5%;*/
+	/*padding-left: 3%;*/
+	/*font-weight:bold;*/
+/*}*/
+/*.ui-listview li .className-details .attendStudent{*/
+	/*height: 25px;*/
+	/*width: 25px;*/
+/*}*/
+
+/*底部按钮样式*/
 .ui-footer .ui-btn{
-	background-color: #3B7454;border: none;border-radius:0px;width: 100%;padding: 0;margin: 0;text-shadow: none
+	background-color: #3B7454;
+	color:white;
+	border: none;
+	border-radius:0px;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	text-shadow: none
 }
 
 .ui-footer .ui-btn:hover{text-shadow: none;
 	background-color: #3B7454;
+	color:white;
 }
 
 .ui-footer .ui-btn:visited{text-shadow: none;
 	background-color: #3B7454;
+	color:white;
 }
 .ui-footer .ui-btn:link{text-shadow: none;
 	background-color: #3B7454;
+	color:white;
 }

@@ -8,52 +8,53 @@
     <meta http-equiv="cache-control" content="no-cache"/>
     <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/common_line.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/videoDetail.css">
 </head>
 <body>
 <div data-role="page" data-title="尚名校">
     <div data-role="header" data-theme="g" data-position="fixed">
-        <img src="/images/ic_arrow_back.png" onclick="goBack()" class="left_icon"/>
+        <img src="/images/ic_arrow_back.png" onclick="window.history.back()" class="left_icon"/>
+        <!--<img src="/images/ic_share.png" href="#" class="right_icon"/>-->
         <h3 class="page_title">视频详情</h3>
-        <img src="/images/ic_share.png" href="#" class="right_icon"/>
     </div>
     <div class="teacherInfo">
         <ul data-role="listview">
             <li data-icon="false">
-                <video width="100%" class="video" controls>
+                <video width="100%"  class="video" controls>
                     <source src="<%= videoUrl %>"
                             type="video/mp4">
                 </video>
             </li>
             <li data-icon="false">
-                <h5 class="grade"><%= videoName %></h5>
-                <div class="teacherIntro">
-                    <h5 class="name"><%= authorName %></h5>
-                    <h6 class="school"><%= authorSchool %>|<%= authorGrade %></h6>
-                </div>
-                <div class="videoInfo">
-                    <%= videoTime %> | <span class="number"><%= videoWatchCount %></span>人次观看
-                    <span class="videos_classify_detail">高中</span>
-                    <span class="videos_classify_detail">数学</span>
-                    <span class="videos_classify_detail">理科</span>
+                <div class="video_info">
+                    <h5 class="grade"><%= videoName %></h5>
+                    <div class="teacherIntro">
+                        <h5 class="name"><%= authorName %></h5>
+                        <h6 class="school"><%= authorSchool %>|<%= authorGrade %></h6>
+                    </div>
+                    <div class="videoInfo">
+                        <%= videoTime %> | <span class="number"><%= videoWatchCount %></span>次观看
+                        <!--<span class="videos_classify_detail">高中</span>-->
+                        <!--<span class="videos_classify_detail">数学</span>-->
+                        <!--<span class="videos_classify_detail">理科</span>-->
+                    </div>
                 </div>
             </li>
             <li data-icon="false">
                 <hr width="1" size="20" color="#3B7454" class="hr">
-                <h5 class="courseIntro_title">课程简介</h5>
-                <h5 class="courseIntro_specific"><%= videoAbstract %></h5>
+                <h5 class="className-text">课程简介</h5>
+                <p class="className-details"><%= videoAbstract %></p>
             </li>
             <li data-icon="false">
                 <hr width="1" size="20" color="#3B7454" class="hr">
-                <h5 class="course_content">课程内容</h5>
-                <h5 class="course_content_detail"><%= videoContent %></h5>
+                <h5 class="className-text">课程内容</h5>
+                <p class="content"><%= videoContent %></p>
             </li>
         </ul>
     </div>
     <script src="/javascripts/jquery.js"></script>
     <script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
-    <script src="/javascripts/slick.min.js"></script>
-    <script src="/javascripts/smx.js"></script>
 </div>
 </body>
 </html>

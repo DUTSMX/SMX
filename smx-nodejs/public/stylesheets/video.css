@@ -1,12 +1,12 @@
-.tab_search .ui-block-a,.tab_search .ui-block-b,.tab_search .ui-block-c{
-	text-align: center;
-	padding: 0.5em;
-}
-.tab_search .ui-block-a img,.tab_search .ui-block-b img,.tab_search .ui-block-c img{
-	height: 80%;
-	width: 80%;
-}
-
+/*.tab_search .ui-block-a,.tab_search .ui-block-b,.tab_search .ui-block-c{*/
+	/*text-align: center;*/
+	/*padding: 0.5em;*/
+/*}*/
+/*.tab_search .ui-block-a img,.tab_search .ui-block-b img,.tab_search .ui-block-c img{*/
+	/*height: 80%;*/
+	/*width: 80%;*/
+/*}*/
+/*"热门视频"四个字*/
 .hotvideos h4{
 	color: #3B7454;
 	margin-bottom: 0;
@@ -14,6 +14,7 @@
 	position: relative;
 	margin-bottom: 5px;
 }
+/*热门视频前面的icon*/
 .hotvideos h4 img{
 	height: 100%;
 }
@@ -30,46 +31,49 @@
 	top: 22%;
 	margin-right: 20%;
 }
+/*文字 距离左边图片的距离*/
 .ui-listview>.ui-li-has-thumb>.ui-btn{
 	padding-left: 7em;
 }
+/*视频名称*/
 .ui-listview>li .videos_name h3{
 	font-weight: 500;
 }
+/*视频介绍*/
 .ui-listview>li .videos_time h5{
 	font-size: 0.8em;
 	font-weight: 400;
 }
-.videos_classify ul{
-	padding-left: 0;
-}
-.videos_classify ul li{
-	font-weight: 100;
-	width: 15%;
-	list-style: none;
-	float: left;
-	margin-right: 3%;
-	border: 1px solid #3B7454;
-	font-size: 0.5em;
-	text-align: center;
-	padding-left: 2px;
-	padding-right: 2px;
-	padding-bottom: 0;
-	box-sizing: border-box;
-	border-radius: 10%;
-}
-.hotvideos{
-	margin-bottom: 10%;
-}
-.hotvideos h4 span{
-	position: absolute;;
-	right: 5%;
-	top: 0%;
-}
-.hotvideos h4 span a{
-	text-decoration: none;
-	color: #3B7454;
-}
-.hotvideos .class_info_name h3{
-	color: #EAB136;
-}
+/*.videos_classify ul{*/
+	/*padding-left: 0;*/
+/*}*/
+/*.videos_classify ul li{*/
+	/*font-weight: 100;*/
+	/*width: 15%;*/
+	/*list-style: none;*/
+	/*float: left;*/
+	/*margin-right: 3%;*/
+	/*border: 1px solid #3B7454;*/
+	/*font-size: 0.5em;*/
+	/*text-align: center;*/
+	/*padding-left: 2px;*/
+	/*padding-right: 2px;*/
+	/*padding-bottom: 0;*/
+	/*box-sizing: border-box;*/
+	/*border-radius: 10%;*/
+/*}*/
+/*.hotvideos{*/
+	/*margin-bottom: 10%;*/
+/*}*/
+/*.hotvideos h4 span{*/
+	/*position: absolute;;*/
+	/*right: 5%;*/
+	/*top: 0%;*/
+/*}*/
+/*.hotvideos h4 span a{*/
+	/*text-decoration: none;*/
+	/*color: #3B7454;*/
+/*}*/
+/*.hotvideos .class_info_name h3{*/
+	/*color: #EAB136;*/
+/*}*/

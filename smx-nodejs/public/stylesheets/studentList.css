@@ -1,8 +1,12 @@
+.ui-listview>li.ui-first-child img:first-child:not(.ui-li-icon){
+    -webkit-border-bottom-left-radius:48px;
+    border-top-left-radius:48px;
+}
 .ui-listview>.ui-li-has-thumb>.ui-btn, .ui-listview>.ui-li-static.ui-li-has-thumb{
     padding-top:4%;
     min-height:40px;
 }
 .ui-listview >li img{
-    padding-left:0.5em;
-    padding-top:2%;
+    margin-left:3%;
+    margin-top:2.5%;
 }
