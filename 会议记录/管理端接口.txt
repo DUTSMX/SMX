@@ -7,25 +7,25 @@ keyword
 ===========================================================
 ======================添加课程============================= 
 名称，老师ID， 日期，开始时间，结束时间，时长，面向对象，课程内容
-name teacherId data  startTime endTime   duration  object    content
+name teacherId data  beginTime endTime   duration  objectOriented    courseContent
 ===========================================================createCourse
 
 ===========================================================
 ======================课程列表============================= 
 编号，  老师，  名称， 时间，时长，  面向对象，课程内容，参与学生
-number teacher name    time  duration object   content   participator
+number teacher name    time  duration objectOriented   courseContent   participator
 ===========================================================allCourse
 
 ===========================================================
 ======================添加视频============================= 
 名称，老师ID，  时长，   简介，       内容，  视频上传，   标签
-name  teacherId duration introduction  content videoUpload tag
+name  teacherId duration introduction  courseContent videoUpload tag
 ===========================================================createVideo
 
 ===========================================================
 ======================视频列表============================= 
 编号，老师，  名称， 时长，   观看人数，        简介，     内容，  标签，上传时间
-number teacher name  duration watchingNumber introduction  content tag   uploadTime
+number teacher name  duration watchingNumber introduction  courseContent tag   uploadTime
 ===========================================================allVideo
 
 ===========================================================
