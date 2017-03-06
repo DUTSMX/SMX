@@ -8,9 +8,15 @@ router.get('/', function(req, res, next) {
 
 router.get('/course',function (req,res,next) {
   api.getCourse(function (courseList) {
-    console.log("course:"+JSON.stringify(courseList))
+    console.log("course:"+JSON.stringify(courseList));
     res.render('course',{courseList:courseList})
   })
-})
-
+});
+router.get('/question',function (req,res) {
+  api.getQuestion(function(questionList){
+    questionList = {questionList:questionList};
+    console.log('questionList:'+JSON.stringify(questionList));
+    res.render('question',questionList)
+  })
+});
 module.exports = router;

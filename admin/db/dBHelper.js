@@ -41,4 +41,25 @@ exports.getCourse = function(callback){
             callback(rows);
         }
     })
-}
+};
+exports.getQuestion = function(callback){
+    var aContent =  100;
+    var sql = "SELECT d.questionId, " +
+        "d.questionTitle," +
+        "left(d.questionContent,"+ aContent +") as questionContent, " +
+        "a.userName as asker, " +
+        "d.questionTime, " +
+        "COUNT(f.questionId) as answerNumber " +
+        "FROM question d JOIN account a ON a.userId = d.userId JOIN answer f on d.questionId = f.questionId " +
+        "GROUP BY f.questionId";
+
+    conn.query(sql,function (err,rows) {
+        console.log(sql);
+        if(err){
+            console.log(err);
+            return;
+        }else{
+            callback(rows);
+        }
+    })
+};
