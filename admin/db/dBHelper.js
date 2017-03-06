@@ -63,3 +63,46 @@ exports.getQuestion = function(callback){
         }
     })
 };
+
+exports.getStudent = function(callback){
+    var sql = "SELECT a.userId as studentId, " +
+        "a.registerDate as studentRegisterDate, " +
+        "a.userName as studentName, " +
+        "a.userAge as studentAge, " +
+        "a.userGrade as studentGrade, " +
+        "a.userSchool as studentSchool, " +
+        "a.userAddress as studentAddress " +
+        "FROM account a WHERE a.role in(0,1)" +
+        "GROUP BY a.userId";
+
+    conn.query(sql,function (err,rows) {
+        console.log(sql);
+        if(err){
+            console.log(err);
+            return;
+        }else{
+            callback(rows);
+        }
+    })
+};
+
+exports.getTeacher = function(callback){
+    var sql = "SELECT a.userId as teacherId, " +
+        "a.userName as teacherName, " +
+        "x.createTime as teacherCreateTime, " +
+        "a.registerDate as teacherRegisterDate, "+
+        "x.goodCourse as teacherGoodCourse, " +
+        "x.selfIntroduction as teacherSelfIntroduction " +
+        "FROM account a JOIN teacher x ON a.userId = x.teacherId WHERE a.role = 2 " +
+        "GROUP BY a.userId";
+
+    conn.query(sql,function (err,rows) {
+        console.log(sql);
+        if(err){
+            console.log(err);
+            return;
+        }else{
+            callback(rows);
+        }
+    })
+};

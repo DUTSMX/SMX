@@ -19,4 +19,18 @@ router.get('/question',function (req,res) {
     res.render('question',questionList)
   })
 });
+router.get('/studentlist',function (req,res) {
+    api.getStudent(function(studentList){
+        console.log("student:"+JSON.stringify(studentList));
+        res.render('studentlist',{studentList:studentList})
+    })
+});
+router.get('/teacherlist',function (req,res) {
+    api.getTeacher(function(teacherList){
+        console.log("teacher:"+JSON.stringify(teacherList));
+        res.render('teacherlist',{teacherList:teacherList})
+    })
+});
+
+
 module.exports = router;
