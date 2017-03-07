@@ -71,7 +71,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="version.html">版本管理</a>
+                    <a href="version.html" >版本管理</a>
                 </li>
                 <li><a href="#">数据统计</a></li>
                 <li><a href="recycleBin.html">回收站</a></li>
@@ -98,7 +98,50 @@
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">
-                    <h3 class="panel-title">问答</h3>
+                    <h3 class="panel-title">问题详情</h3>
+                </div>
+                <!-- Table -->
+                <div class="table-responsive">
+                    <table class="table table-hover" >
+                        <thead>
+                        <tr>
+                            <th>问题</th>
+                            <td><%=questionTitle%></td>
+                        </tr>
+
+                        <tr>
+                            <th>提问者</th>
+                            <td><%=asker%></td>
+                        </tr>
+
+                        <tr >
+                            <th style="min-width: 8em; padding-bottom:3%" valign="middle">问题描述</th>
+                            <td ><%=questionContent%></td>
+                        </tr>
+
+                        <tr>
+                            <th >提问时间</th>
+                            <td><%=questionTime%></td>
+                        </tr>
+
+                        <tr>
+
+                        </tr>
+                        </thead>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main">
+    <div class="container">
+        <div class="bs-example">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+                    <h3 class="panel-title">已有回答</h3>
                 </div>
                 <!-- Table -->
                 <div class="table-responsive">
@@ -106,38 +149,33 @@
                         <thead>
                         <tr>
                             <th>编号</th>
-                            <th>问题</th>
-                            <th>问题描述</th>
-                            <th>提问人</th>
-                            <th>提问时间</th>
-                            <th>回答数量</th>
-
-                            <th>操作</th>
+                            <th>回答者</th>
+                            <th>回答时间</th>
+                            <th>回答</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <%questionList.forEach(function (item){ %>
+                        <%answerList.forEach(function (item){%>
                         <tr>
-                            <td><%=item.questionId%></td>
-                            <td><%=item.questionTitle%></td>
-                            <td><%=item.questionContent%></td>
-                            <td><%=item.asker%></td>
-                            <td><%=item.questionTime%></td>
-                            <td><%=item.answerNumber%></td>
-
-                            <td>
-                                <a class="btn btn-danger" href="#">删除</a>
-                                <a class="btn btn-primary" href="questionDetails">查看详情</a>
-                            </td>
+                            <td><%=answerId%></td>
+                            <td><%=answerPerson%>></td>
+                            <td><%=answerTime%></td>
+                            <td><%=answerContent%>></td>
                         </tr>
                         <%})%>
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+<center>
+    <a class="btn  btn-default" href="question.html">删除</a>
+</center>
+
+
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/javascripts/jquery.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->

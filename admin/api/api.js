@@ -8,6 +8,11 @@ exports.getCourse = function(callback){
 exports.getQuestion=function (callback) {
   db.getQuestion(function (rows) {
       callback(rows);
-  })
+  });
 };
+exports.getAnswer=function (callback) {
+    db.getAnswer(function (rows) {
+        callback(rows);
+    })
+}
 

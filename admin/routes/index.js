@@ -19,4 +19,11 @@ router.get('/question',function (req,res) {
     res.render('question',questionList)
   })
 });
+router.get('/questionDetails',function (req,res) {
+  api.getAnswer(function (answerList) {
+    answerList={answerList:answerList};
+    console.log("answerList:"+JSON.stringify(answerList));
+    res.render('questionDetails',answerList);
+  })
+ });
 module.exports = router;
