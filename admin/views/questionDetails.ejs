@@ -111,7 +111,7 @@
 
                         <tr>
                             <th>提问者</th>
-                            <td><%=asker%></td>
+                            <td><%=useName%></td>
                         </tr>
 
                         <tr >
@@ -157,10 +157,10 @@
                         <tbody>
                         <%answerList.forEach(function (item){%>
                         <tr>
-                            <td><%=answerId%></td>
-                            <td><%=answerPerson%>></td>
-                            <td><%=answerTime%></td>
-                            <td><%=answerContent%>></td>
+                            <td><%=item.answerId%></td>
+                            <td><%=item.useName%>></td>
+                            <td><%=item.answerTime%></td>
+                            <td><%=item.answerContent%>></td>
                         </tr>
                         <%})%>
                         </tbody>
