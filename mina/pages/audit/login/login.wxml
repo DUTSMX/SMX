@@ -1,11 +1,14 @@
 <view class="container">
+    <view class="{{hide_change}}">
+        <text class="hint-text">{{hint}}</text>
+    </view>
     <view class="type">
         <text class="account-type">手机号</text>
-        <input placeholder="你的手机号码" type="number"/>
+        <input bindinput="bindPhoneNumberInput" placeholder="你的手机号码" type="number" value="{{phoneNumber}}"/>
     </view>
     <view class="type">
         <text class="account-type">密码</text>
-        <input placeholder="填写密码" password="true"/>
+        <input bindinput="bindPasswordInput" placeholder="填写密码" password="true" value="{{password}}"/>
     </view>
     <button bindtap="login" class="button" hover-class="button-press" loading="{{loading}}">登录</button>
 </view>
