@@ -8,7 +8,6 @@ var bodyParser = require('body-parser');
 var utils = require('./utils/utils');
 var session = require('express-session');
 var routes = require('./routes/index');
-<<<<<<< HEAD
 var users = require('./routes/users');
 var admin = require('./routes/admin');
 var course = require('./routes/course');

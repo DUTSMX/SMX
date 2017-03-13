@@ -57,6 +57,70 @@ exports.getQuestion = function(callback){
         console.log(sql);
         if(err){
             console.log(err);
+            return false;
+        }else{
+            callback(rows);
+        }
+    })
+};
+exports.getAnswer = function(callback){
+    var aContent =  100;
+    var sql = "SELECT d.questionId, " +
+        "d.questionTitle," +
+        "left(d.questionContent,"+ aContent +") as questionContent, " +
+        "a.userName as asker, " +
+        "d.questionTime, " +
+        "COUNT(f.questionId) as answerNumber " +
+        "FROM question d JOIN account a ON a.userId = d.userId JOIN answer f on d.questionId = f.questionId " +
+        "GROUP BY f.questionId";
+
+    conn.query(sql,function (err,rows) {
+        console.log(sql);
+        if(err){
+            console.log(err);
+            return false;
+        }else{
+            callback(rows);
+        }
+    })
+};
+
+exports.getStudent = function(callback){
+    var sql = "SELECT a.userId as studentId, " +
+        "a.registerDate as studentRegisterDate, " +
+        "a.userName as studentName, " +
+        "a.userAge as studentAge, " +
+        "a.userGrade as studentGrade, " +
+        "a.userSchool as studentSchool, " +
+        "a.userAddress as studentAddress " +
+        "FROM account a WHERE a.role in(0,1)" +
+        "GROUP BY a.userId";
+
+    conn.query(sql,function (err,rows) {
+        console.log(sql);
+        if(err){
+            console.log(err);
+            return;
+        }else{
+            callback(rows);
+        }
+    })
+};
+
+exports.getTeacher = function(callback){
+    var sql = "SELECT a.userId as teacherId, " +
+        "a.userName as teacherName, " +
+        "x.createTime as teacherCreateTime, " +
+        "a.registerDate as teacherRegisterDate, "+
+        "x.goodCourse as teacherGoodCourse, " +
+        "x.selfIntroduction as teacherSelfIntroduction " +
+        "FROM account a JOIN teacher x ON a.userId = x.teacherId WHERE a.role = 2 " +
+        "GROUP BY a.userId";
+
+    conn.query(sql,function (err,rows) {
+        console.log(sql);
+        if(err){
+            console.log(err);
             return;
         }else{
             callback(rows);

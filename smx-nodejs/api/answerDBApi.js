@@ -4,7 +4,7 @@ exports.addAnswer = function(name,qid,content,picurl,voiceurl,callback){
     db.addAnswer(name,qid,content,picurl,voiceurl,function (rows) {
         callback(rows);
     })
-}
+}   
 
 exports.getAnswer = function(name,callback){
     db.getAnswer(name,function(rows){

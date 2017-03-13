@@ -132,8 +132,9 @@
                 selectedFile = fileList[0];
                 var name = selectedFile.name;
                 var postfix = name.substr(name.lastIndexOf("."))
-                console.log("postfix:"+postfix)
-                cos.uploadFile(successCallBack,errorCallBack,"smxbucket","/head/"+userId+postfix,selectedFile,0)
+                console.log("postfix:/head/"+userId+postfix)
+
+                cos.uploadFile(successCallBack,errorCallBack,"smxbucket","/"+name,selectedFile,0)
             }
         }
     }
