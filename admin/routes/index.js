@@ -20,13 +20,13 @@ router.get('/question',function (req,res) {
   })
 });
 router.get('/questionDetails',function (req,res) {
-  api.getAnswer(function (answerList) {
-    answerList={answerList:answerList};
+  var questionId = req.query.questionId;
+  api.getQuestionDetails(questionId,function (answer) {
     console.log("answerList:"+JSON.stringify(answerList));
-    res.render('questionDetails',answerList);
+      console.log(questionId);
+    res.render('questionDetails',answer);
   })
  })
-=======
 router.get('/studentlist',function (req,res) {
     api.getStudent(function(studentList){
         console.log("student:"+JSON.stringify(studentList));

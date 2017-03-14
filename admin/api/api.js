@@ -9,15 +9,19 @@ exports.getQuestion=function (callback) {
   db.getQuestion(function (rows) {
       callback(rows);
   });
-};
-<<<<<<< HEAD
-exports.getAnswer=function (callback) {
-    db.getAnswer(function (rows) {
-        callback(rows);
-    })
 }
+exports.getQuestionDetails=function (questionId,callback) {
+    db.getQuestionContent(questionId,function (rows) {
+         var question=rows;
+        db.getAnswers(questionId,function (rows) {
+            callback({
+                question:question,
+                answerList:rows
+            });
+        });
+    });
+};
 
-=======
 exports.getStudent=function (callback) {
     db.getStudent(function (rows) {
         callback(rows);
@@ -28,4 +32,3 @@ exports.getTeacher=function (callback) {
         callback(rows);
     })
 };
->>>>>>> afb41e8ac01cf983630e882e1519cba298f8b78f
