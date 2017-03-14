@@ -2,6 +2,19 @@ var dbHelper = require('./dbHelper');
 var conn = dbHelper.getConn();
 var users = require('./userDBHelper');
 
+exports.getAdList = (function (callback) {
+    var sql = "SELECT *" +
+        "FROM ad";
+    conn.query(sql,function (err,rows) {
+        if(err){
+            console.log(err);
+        }else{
+            callback(rows);
+        }
+    })
+
+})
+
 exports.getCourse = function(callback){
     var nowTime = new Date().getTime();
     var sql = "SELECT c.courseId, " +
@@ -37,7 +50,7 @@ exports.getCourseById = function (userId, callback) {
         "a.userSchool as teacherSchool, " +
         "a.userGrade as teacherGrade " +
         "FROM ((joinCourse j INNER JOIN course c ON j.courseId = c.courseId) INNER JOIN account a ON c.userId = a.userId) " +
-        "WHERE a.userId = " + userId;
+        "WHERE j.userId = " + userId;
         //  +"WHERE c.courseDate >= curdate()" ;
     var sql2 = "SELECT c.courseId, " +
         "c.courseName, " +
@@ -61,7 +74,8 @@ exports.getCourseById = function (userId, callback) {
                         console.log(err);
                         return;
                     }
-                    // console.log("get course: " + JSON.stringify(rows));
+                    console.log("get sql1: " + sql1);
+                    console.log("get course: " + JSON.stringify(rows));
                     callback(rows);
                 })
             } else if (role == 2) {//老师

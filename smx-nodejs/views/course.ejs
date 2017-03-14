@@ -18,15 +18,11 @@
         <h3>课程</h3>
     </div>
     <div class="ad_Images">
-        <div class="ad_Image_style">
-            <img src="/images/轮播图.png">
-        </div>
-        <div class="ad_Image_style">
-            <img src="/images/轮播图2.png">
-        </div>
-        <div class="ad_Image_style">
-            <img src="/images/轮播图3.png">
-        </div>
+        <%courseList.rotation.forEach(function(item){%>
+            <div class="ad_Image_style">
+                <img src="<%=item.adImageUrl%>">
+            </div>
+        <%})%>
     </div>
     <div data-role="content">
         <div class="myclass">

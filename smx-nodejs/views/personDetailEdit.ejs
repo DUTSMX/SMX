@@ -134,7 +134,8 @@
                 var postfix = name.substr(name.lastIndexOf("."))
                 console.log("postfix:/head/"+userId+postfix)
 
-                cos.uploadFile(successCallBack,errorCallBack,"smxbucket","/"+name,selectedFile,0)
+                cos.uploadFile(successCallBack,errorCallBack,"smxbucket","/"+selectedFile.name,selectedFile,0)
+//                cos.getFolderStat(successCallBack,errorCallBack,"smxbucket","/");
             }
         }
     }
