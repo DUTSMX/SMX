@@ -13,6 +13,9 @@ exports.getQuestion = function(callback){
         db.getQuestion(function (rows) {
             rows.forEach(function (item) {
                 questionList.push(item);
+                questionList.sort(function (a,b) {
+                    return b.time-a.time;
+                });
             })
             // console.log(JSON.stringify(questionList));
             // questionList.sort(function (a,b) {

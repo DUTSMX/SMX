@@ -63,28 +63,40 @@ exports.getQuestion = function(callback){
         }
     })
 };
-exports.getAnswer = function(callback){
-    var aContent =  100;
-    var sql = "SELECT d.questionId, " +
-        "d.questionTitle," +
-        "left(d.questionContent,"+ aContent +") as questionContent, " +
-        "a.userName as asker, " +
-        "d.questionTime, " +
-        "COUNT(f.questionId) as answerNumber " +
-        "FROM question d JOIN account a ON a.userId = d.userId JOIN answer f on d.questionId = f.questionId " +
-        "GROUP BY f.questionId";
-
+exports.getQuestionContent = function (questionId,callback) {
+    var sql="SELECT d.questionId,"+
+            "d.questionTitle,"+
+            "d.questionContent,"+
+            "FROM question d JOIN account a ON a.userId=d.userId "+"WHERE d.questionId ="+questionId;
     conn.query(sql,function (err,rows) {
-        console.log(sql);
         if(err){
             console.log(err);
             return false;
-        }else{
-            callback(rows);
+        }
+        else if(rows==NULL||rows[0]==NULL){
+            console.log("questionContent empty questionId ="+questionId);
+        }
+        else{
+            callback(rows[0]);
         }
     })
 };
-
+exports.getAnswers=function (questionId,callback) {
+    var aContent = 100;
+    var sql = "SELECT b.answerId as answerId, " +
+        "c.userName as useName, " +
+        "b.answerTime as answerTime, " +
+        "left(b.answerContent,"+ aContent +") as answerContent " +
+        "FROM answer b INNER JOIN account c on b.userId = c.userId " +
+        "WHERE b.questionId = "+questionId;
+    conn.query(sql,function(err,rows,fields){
+        if(err){
+            console.log(err);
+            return
+        }
+        callback(rows);
+    })
+};
 exports.getStudent = function(callback){
     var sql = "SELECT a.userId as studentId, " +
         "a.registerDate as studentRegisterDate, " +

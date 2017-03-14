@@ -6,6 +6,12 @@
 	height: 25vh;
 	width: 100vw;
 }
+.slick-dots li button:before{
+	font-size:30px;
+}
+.slick-dots{
+	bottom:10px;
+}
 
 /*
 模块：我的课程
