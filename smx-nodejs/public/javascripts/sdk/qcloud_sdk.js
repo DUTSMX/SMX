@@ -77,7 +77,7 @@ CosCloud.prototype.hasFlashVersionOrBetter = function (major, minor) {
 }
 
 CosCloud.prototype.getAppSign = function(success, error, bucketName){
-	var expired = this.getExpired();
+	var expired = this.getExpired(6000);
     console.log("expired:"+expired);
 	var url = this.sign_url+"?sign_type=appSign&expired=" + expired + "&bucketName=" + bucketName;
 	$.ajax({
@@ -275,6 +275,7 @@ CosCloud.prototype.uploadFile = function(success, error, bucketName, remotePath,
     console.log("remotePath:"+remotePath)
 	var that = this;
 	this.getAppSign(function(json){
+		console.log("json:"+json);
 		var jsonResult = $.parseJSON(json);
 		var sign = jsonResult.data.sign;
 		console.log("sign:"+sign)

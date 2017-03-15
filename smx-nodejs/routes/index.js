@@ -1,5 +1,4 @@
 var express = require('express');
-var course = require('../api/courseDBApi');
 var router = express.Router();
 var pages = require('./pages')
 var crypto = require('crypto');
@@ -25,22 +24,46 @@ router.get('/MP_verify_sEUETJmOEogP71d6.txt',function(req,res){
 	})
 })
 router.get('/main',function (req,res) {
-  course.getCourse(1,function (ret) {
-    console.log(JSON.stringify(ret))
-    res.render('main',ret);
-  })
+	var userId = req.session.userId;
+	var course = require("../api/courseDBApi");
+	var video = require("../api/videoDBApi");
+	var question = require("../api/questionDBApi");
+	var mine = require("../api/userDBApi");
+	var courseInfo,videoInfo,questionInfo,mineInfo;
+	course.getCourse(userId,function(rows){
+		courseInfo=rows;
+		video.getVideo(function (rows) {
+			videoInfo = rows;
+			question.getQuestion(function (rows) {
+				questionInfo = rows;
+				mine.getMineInfo(userId,function (rows) {
+					mineInfo = rows;
+					var data = {courseInfo:courseInfo,videoInfo:videoInfo,questionInfo:questionInfo,mineInfo:mineInfo};
+					console.log("data:"+JSON.stringify(data))
+					res.render("main",data)
+				})
+			})
+		})
+	})
 })
 
 var APPID = "10068625";
 var SECRET_ID = "AKIDGPM8i9uTM4a0FJlqMgoljZ8a0IPLLlGi";
 var SECRET_KEY = "TowscBYpzznPq5B6pLfnjTIwOGUfdbP2";
 
+var qcloud = require('qcloud_cos');
 exports.AUTH_URL_FORMAT_ERROR = -1;
 exports.AUTH_SECRET_ID_KEY_ERROR = -2;
 router.get('/appSign',function(req,res,next){
 	var bucket = req.query.bucketName;
 	var expired = req.query.expired;
-	var data = {"data":{"sign":appSign(bucket, '', expired)}}
+	var sign = qcloud.auth.signMore(bucket,expired);
+	qcloud.cos.statFolder('smxbucket','/',function (ret) {
+		console.log("ret:"+JSON.stringify(ret));
+	})
+	var data = {"data":{"sign":sign}}
+	console.log("data:"+sign);
+	console.log("sign:"+appSign(bucket,'',expired))
 	res.send(JSON.stringify(data));
 })
 router.get('/appSignOnce',function (req,res,next) {
@@ -51,11 +74,12 @@ router.get('/appSignOnce',function (req,res,next) {
 })
 
 function appSign(bucket, fileid, expired) {
+    console.log(Date.now())
 	var now            = parseInt(Date.now() / 1000);
 	var rdm            = parseInt(Math.random() * Math.pow(2, 32));
 
 	var secretId = SECRET_ID, secretKey = SECRET_KEY;
-	var plainText = 'a='+APPID+'&k='+secretId+'&e='+expired+'&t='+now+'&r='+rdm+'&f='+fileid+'&b='+bucket;
+	var plainText = 'a='+APPID+'&b='+bucket+'&k='+secretId+'&e='+expired+'&t='+now+'&r='+rdm+'&f='+fileid;
 	var data = new Buffer(plainText,'utf8');
 
 	var res = crypto.createHmac('sha1',secretKey).update(data).digest();
