@@ -9,6 +9,12 @@ exports.getQuestion=function (callback) {
   db.getQuestion(function (rows) {
       callback(rows);
   });
+};
+
+exports.getAnswer=function (callback) {
+    db.getAnswer(function (rows) {
+        callback(rows);
+    })
 }
 exports.getQuestionDetails=function (questionId,callback) {
     db.getQuestionContent(questionId,function (rows) {
@@ -30,5 +36,16 @@ exports.getStudent=function (callback) {
 exports.getTeacher=function (callback) {
     db.getTeacher(function (rows) {
         callback(rows);
+    })
+};
+
+exports.getStudentDetails=function (studentId,callback) {
+    db.getStudentDetails(studentId,function (detail) {
+        db.getStudentListDetails(studentId,function (list) {
+            callback({
+                detail:detail[0],
+                list:list
+            })
+        })
     })
 };
