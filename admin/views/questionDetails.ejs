@@ -121,7 +121,7 @@
 
                         <tr>
                             <th >提问时间</th>
-                            <td><%=question.questionTime%></td>
+                            <td><%=moment(question.questionTime).format("MM DD YYYY, HH:mm:ss a")%></td>
                         </tr>
 
                         <tr>
@@ -159,7 +159,7 @@
                         <tr>
                             <td><%=item.answerId%></td>
                             <td><%=item.useName%>></td>
-                            <td><%=item.answerTime%></td>
+                            <td><%=moment(item.answerTime).format("MM DD YYYY, HH:mm:ss a")%></td>
                             <td><%=item.answerContent%>></td>
                         </tr>
                         <%})%>

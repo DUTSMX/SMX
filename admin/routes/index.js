@@ -24,7 +24,6 @@ router.get('/questionDetails',function (req,res) {
   var questionId = req.query.questionId;
   api.getQuestionDetails(questionId,function (answer) {
     console.log("answerList:"+JSON.stringify(answer));
-      console.log(questionId);
     res.render('questionDetails',answer);
   })
  });

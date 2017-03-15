@@ -66,7 +66,8 @@ exports.getQuestion = function(callback){
 exports.getQuestionContent = function (questionId,callback) {
     var sql="SELECT d.questionId,"+
             "d.questionTitle,"+
-            "d.questionContent "+
+            "d.questionContent,"+
+            "d.questionTime "+
             "FROM question d JOIN account a ON a.userId=d.userId "+"WHERE d.questionId ="+questionId;
     conn.query(sql,function (err,rows) {
         if(err){
@@ -83,7 +84,7 @@ exports.getQuestionContent = function (questionId,callback) {
 };
 exports.getAnswers=function (questionId,callback) {
     var aContent = 100;
-    console.log("question:"+questionId);
+    console.log("questionId:"+questionId);
     var sql = "SELECT b.answerId as answerId, " +
         "c.userName as useName, " +
         "b.answerTime as answerTime, " +

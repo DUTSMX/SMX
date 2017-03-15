@@ -13,16 +13,27 @@ th{
 }
 .table thead tr .questionContent{
 	width: 25%;
+
 }
 .table thead tr .userName{
-	width: 10%;
+width: 10%;
 }
 .table thead tr .questionTime{
-	width: 10%;
+width: 10%;
 }
 .table thead tr .answerNumber{
-	width: 7%;
+width: 7%;
 }
 .table thead tr .operate{
-	width: 23%;
+width: 23%;
+}
+.table tbody tr .line-clamp-3{
+	border-collapse: collapse;
+	overflow : hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	padding: 0;
+	height: 60px;
+	padding-top: 15px;
 }

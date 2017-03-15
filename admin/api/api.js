@@ -20,7 +20,9 @@ exports.getQuestionDetails=function (questionId,callback) {
     db.getQuestionContent(questionId,function (rows) {
          var question=rows;
         db.getAnswers(questionId,function (rows) {
+            var moment = require("moment");
             callback({
+                moment:moment,
                 question:question,
                 answerList:rows
             });
