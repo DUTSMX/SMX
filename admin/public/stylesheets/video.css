@@ -5,3 +5,24 @@
 th{
 	text-align: center;
 }
+.table thead tr .ID{
+	width: 5%;
+}
+.table thead tr .questionTitle{
+	width: 20%;
+}
+.table thead tr .questionContent{
+	width: 25%;
+}
+.table thead tr .userName{
+	width: 10%;
+}
+.table thead tr .questionTime{
+	width: 10%;
+}
+.table thead tr .answerNumber{
+	width: 7%;
+}
+.table thead tr .operate{
+	width: 23%;
+}
