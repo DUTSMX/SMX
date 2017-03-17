@@ -98,92 +98,50 @@
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">
-                    <h3 class="panel-title">学生列表详情</h3>
+                    <h3 class="panel-title">课程详情页面</h3>
                 </div>
                 <!-- Table -->
                 <div class="table-responsive">
                     <table class="table table-hover" >
                         <thead>
                         <tr>
-                            <th>用户ID</th>
-                            <td><%=detail.studentId%></td>
-                        </tr>
-                        <tr>
-                            <th>注册时间</th>
-                            <td><%=detail.studentRegisterDate%></td>
-                        </tr>
-                        <tr>
-                            <th>用户名称</th>
-                            <td><%=detail.studentName%></td>
-                        </tr>
-                        <tr>
-                            <th>年龄</th>
-                            <td><%=detail.studentAge%></td>
-                        </tr>
-                        <tr>
-                            <th>年级</th>
-                            <td><%=detail.studentGrade%></td>
-                        </tr>
-                        <tr>
-                            <th>学校</th>
-                            <td><%=detail.studentSchool%></td>
-                        </tr>
-                        <tr>
-                            <th >家庭住址</th>
-                            <td><%=detail.studentAddress%></td>
-                        </tr>
-                        <tr>
-
-                        </tr>
-                        </thead>
-
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="main">
-    <div class="container">
-        <div class="bs-example">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading">
-                    <h3 class="panel-title">已有课程</h3>
-                </div>
-                <!-- Table -->
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>编号</th>
-                            <th>老师</th>
                             <th>名称</th>
+                            <td><%=courseName %></td>
+                        </tr>
+                        <tr>
+                            <th>教师编号</th>
+                            <td><%=teacherId%></td>
+                        </tr>
+                        <tr>
+                            <th>开始时间</th>
+                            <td><%=courseBeginTime%></td>
+                        </tr>
+                        <tr>
+                            <th>结束时间</th>
+                            <td><%=courseFinishTime%></td>
+                        </tr>
+                        <tr>
                             <th>时长</th>
+                            <td><%=courseTime%></td>
+                        </tr>
+                        <tr>
                             <th>面向对象</th>
-                            <th>课程内容</th>
-                            <th>参与学生</th>
-                            <th>操作</th>
+                            <td><%=objectOriented%></td>
+                        </tr>
+                        <tr>
+                            <th >课程内容</th>
+                            <td><%=courseContent%></td>
+                        </tr>
+                        <tr>
+                            <th >参与学生</th>
+                            <td><%=courseCount%></td>
+                        </tr>
+                        <tr>
+
                         </tr>
                         </thead>
-                        <tbody>
-                        <%list.forEach(function (item1){%>
-                        <tr>
-                            <td><%=item1.courseId%></td>
-                            <td><%=item1.teacherName%></td>
-                            <td><%=item1.courseName%></td>
-                            <td><%=item1.courseTime%></td>
-                            <td><%=item1.objectOriented%></td>
-                            <td><%=item1.courseContent%>人</td>
-                            <td><%=item1.courseCount%></td>
-                            <td>
-                                <a class="btn btn-primary" href="courseDetails?courseId=<%=item1.courseId%>">查看详情</a>
-                            </td>
-                        </tr>
-                        <%})%>
-                        </tbody>
-                    </table>
 
+                    </table>
                 </div>
             </div>
         </div>
@@ -192,8 +150,8 @@
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 
-
 <script src="/javascripts/jquery.js"></script>
+
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/javascripts/bootstrap.min.js"></script>
 </body>

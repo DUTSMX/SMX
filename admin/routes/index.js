@@ -28,29 +28,6 @@ router.get('/questionDetails',function (req,res) {
   })
  });
 
-router.get('/studentList',function (req,res) {
- })
-router.get('/studentlist',function (req,res) {
-    api.getStudent(function(studentList){
-        console.log("student:"+JSON.stringify(studentList));
-        res.render('studentList',{studentList:studentList})
-    })
-});
-router.get('/teacherList',function (req,res) {
-    api.getTeacher(function(teacherList){
-        console.log("teacher:"+JSON.stringify(teacherList));
-        res.render('teacherList',{teacherList:teacherList})
-    })
-});
-
-router.get('/studentDetails',function (req,res) {
-    var studentId = req.query.studentId;
-    api.getStudentDetails(studentId,function (studentDetails) {
-        // studentDetails={studentDetails:studentDetails};
-        console.log("studentDetails:"+JSON.stringify(studentDetails));
-        res.render('studentListDetails',studentDetails);
-    })
-});
 
 
 

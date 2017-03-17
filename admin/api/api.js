@@ -28,24 +28,4 @@ exports.getQuestionDetails=function (questionId,callback) {
     });
 };
 
-exports.getStudent=function (callback) {
-    db.getStudent(function (rows) {
-        callback(rows);
-    })
-};
-exports.getTeacher=function (callback) {
-    db.getTeacher(function (rows) {
-        callback(rows);
-    })
-};
 
-exports.getStudentDetails=function (studentId,callback) {
-    db.getStudentDetails(studentId,function (detail) {
-        db.getStudentListDetails(studentId,function (list) {
-            callback({
-                detail:detail[0],
-                list:list
-            })
-        })
-    })
-};
