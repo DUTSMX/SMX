@@ -14,7 +14,8 @@ router.get('/course',function (req,res,next) {
 });
 router.get('/question',function (req,res) {
   api.getQuestion(function(questionList){
-    questionList = {questionList:questionList};
+    var moment = require("moment");
+    questionList = {questionList:questionList,moment:moment};
     console.log('questionList:'+JSON.stringify(questionList));
     res.render('question',questionList)
   })
@@ -22,8 +23,7 @@ router.get('/question',function (req,res) {
 router.get('/questionDetails',function (req,res) {
   var questionId = req.query.questionId;
   api.getQuestionDetails(questionId,function (answer) {
-    console.log("answerList:"+JSON.stringify(answerList));
-      console.log(questionId);
+    console.log("answerList:"+JSON.stringify(answer));
     res.render('questionDetails',answer);
   })
  });

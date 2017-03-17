@@ -1,5 +1,5 @@
 var mysql = require('mysql');
-
+var moment = require('moment');
 var conn = mysql.createConnection({
     host: '5835638b397af.gz.cdb.myqcloud.com',
     // host:'localhost',
@@ -67,13 +67,14 @@ exports.getQuestionContent = function (questionId,callback) {
     var sql="SELECT d.questionId,"+
             "d.questionTitle,"+
             "d.questionContent,"+
+            "d.questionTime "+
             "FROM question d JOIN account a ON a.userId=d.userId "+"WHERE d.questionId ="+questionId;
     conn.query(sql,function (err,rows) {
         if(err){
             console.log(err);
             return false;
         }
-        else if(rows==NULL||rows[0]==NULL){
+        else if(rows== null||rows[0]== null){
             console.log("questionContent empty questionId ="+questionId);
         }
         else{
@@ -83,6 +84,7 @@ exports.getQuestionContent = function (questionId,callback) {
 };
 exports.getAnswers=function (questionId,callback) {
     var aContent = 100;
+    console.log("questionId:"+questionId);
     var sql = "SELECT b.answerId as answerId, " +
         "c.userName as useName, " +
         "b.answerTime as answerTime, " +
