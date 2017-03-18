@@ -96,13 +96,13 @@
     <div data-role="footer" data-position="fixed" data-theme="t">
         <div data-role="navbar">
             <ul>
-                <li><a href="#" data-ajax="false" target="_blank"><img src="/images/01.png">
+                <li><a href="#" data-ajax="false"><img src="/images/01.png">
                         <p>课程</p></a></li>
-                <li><a href="/video/video" data-ajax="false" target="_blank"><img src="/images/02.png">
+                <li><a onclick="video()" data-ajax="false"><img src="/images/02.png">
                         <p>视频</p></a></li>
-                <li><a href="/question/question" data-ajax="false" target="_blank"><img src="/images/03.png">
+                <li><a onclick="question()" data-ajax="false"><img src="/images/03.png">
                         <p>答疑</p></a></li>
-                <li><a href="/users/mine" data-ajax="false" target="_blank"><img src="/images/04.png">
+                <li><a onclick="mine()" data-ajax="false"><img src="/images/04.png">
                         <p>我的</p></a></li>
             </ul>
         </div>
@@ -111,6 +111,15 @@
 
 <script src="http://apps.bdimg.com/libs/jquery.cookie/1.4.1/jquery.cookie.js"></script>
 <script>
+    function video() {
+        location.replace("/video/video")
+    }
+    function question() {
+        location.replace("/question/question")
+    }
+    function mine() {
+        location.replace("/users/mine")
+    }
     if($.cookie("update") == "true"){
         location.reload();
         $.cookie("update",false);

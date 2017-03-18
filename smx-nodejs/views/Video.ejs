@@ -65,19 +65,24 @@
 		<div data-role="footer" data-position="fixed" data-theme="t">
 			 <div data-role="navbar">
 			 	<ul>
-					<li><a href="/course/course" data-ajax="false" target="_blank"><img src="/images/01.png"><p>课程</p></a></li>
-					<li><a href="#" data-ajax="false"><img src="/images/02.png"><p>视频</p></a></li>
-					<li><a href="/question/question" data-ajax="false" target="_blank"><img src="/images/03.png"><p>答疑</p></a></li>
-					<li><a href="/users/mine" data-ajax="false" target="_blank"><img src="/images/04.png"><p>我的</p></a></li>
+					<li><a onclick="course()" data-ajax="false"><img src="/images/01.png"><p>课程</p></a></li>
+					<li><a data-ajax="false"><img src="/images/02.png"><p>视频</p></a></li>
+					<li><a onclick="question()" data-ajax="false"><img src="/images/03.png"><p>答疑</p></a></li>
+					<li><a onclick="mine()"data-ajax="false"><img src="/images/04.png"><p>我的</p></a></li>
 			 	</ul>
 			 </div>
 		</div>
 	</div>
 </body>
 <script>
-	console.log("length:"+history.length);
-	if(history.length >2){
-		history.go(2-history.length);
+	function course() {
+		location.replace("/course/course")
+	}
+	function question() {
+		location.replace("/question/question")
+	}
+	function mine() {
+		location.replace("/users/mine")
 	}
 </script>
 </html>

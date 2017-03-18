@@ -63,16 +63,10 @@
                         window.location.href = "/users/personDetailEdit?from=register";
                     }else{
                         if(!data.sourceUrl||data.sourceUrl == "/users/login"){
-                            if(history.length >2){
-                                history.go(2-history.length);
-                            }
-                            window.location.href = "/course/course";
+                            window.location.replace("/course/course");
                         }else{
-                            if(history.length >2){
-                                history.go(2-history.length);
-                            }
 //                            if(window.history.length<3){
-                                window.location.href = data.sourceUrl;
+                                window.location.replace(data.sourceUrl);
 //                            }else{
 //                                window.history.back();
 //                            }
