@@ -1,0 +1,50 @@
+.ui-input-search .ui-body-inherit .ui-corner-all .ui-shadow-inset .ui-input-has-clear{
+    display: inline-block; !important;
+}
+.type{
+    margin:0px;
+    padding-left:1em;
+}
+.div_line{
+    width:100vw;
+}
+.search-type{
+    display: flex;justify-content: space-around;margin: 10%
+}
+.search-detail{
+    display: inline-block;
+    text-align: center;
+}
+.search-detail h5{
+    color:black;
+}
+.search-image .ui-link img{
+    width: 20px;height:20px;
+}
+.course_click{
+    height:60px;
+    padding:0em 1em;
+}
+.ui-listview .ui-li-has-thumb>img:first-child, .ui-listview .ui-li-has-thumb>.ui-btn>img:first-child, .ui-listview .ui-li-has-thumb .ui-li-thumb{
+    position:absolute;
+    left:1em;
+    width:50px;
+    height:50px;
+    border-radius: 50px;
+    top: 0.2em;
+    bottom:0.2em
+}
+.list{
+}
+.image{
+    position: absolute;
+    left: 1em;
+    width:50px;
+    height:50px;
+    border-radius: 50px;
+    top: 5px;
+    bottom:5px;
+}
+.ui-listview>li p{
+    margin-left:70px;
+ }

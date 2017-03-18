@@ -16,7 +16,7 @@
 <body>
 <div data-role="page" data-title="尚名校">
     <div data-role="header" data-theme="g" data-position="fixed">
-        <img src="/images/ic_arrow_back.png" onclick="window.history.back()" class="left_icon"/>
+        <img src="/images/ic_arrow_back.png" onclick="back()" class="left_icon"/>
         <h3 class="page_title">课程详情</h3>
         <!--<img src="/images/ic_share.png" href="#" class="right_icon"/>-->
     </div>
@@ -80,7 +80,12 @@
         </div>
         <%}%>
     </div>
+    <script src="http://apps.bdimg.com/libs/jquery.cookie/1.4.1/jquery.cookie.js"></script>
     <script>
+        function back() {
+            window.history.go(-1);location.reload()
+//            window.href = document.referrer;
+        }
         /* 加入课程 */
         function joinCourse() {
             var text = $("#join_course").text();
@@ -104,6 +109,7 @@
                     }
                 },"json")
             }
+            $.cookie("update",true);
         }
     </script>
 </div>

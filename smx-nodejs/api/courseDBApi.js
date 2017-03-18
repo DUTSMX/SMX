@@ -17,7 +17,6 @@ exports.getCourse = function(userId,callback){
             })
         })
     })
-
 }
 
 exports.getCourseList = function (teacherId,callback) {
@@ -83,9 +82,8 @@ exports.addCourse = function(userId,courseName,courseDate,beginTime,finishTime,c
         })
     }
 
-/*
 exports.search = function(word,callback){
     db.search(word,function(rows){
         callback(rows);
     })
-}*/
+}

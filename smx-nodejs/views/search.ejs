@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>尚名校</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <link rel="stylesheet" type="text/css"
+          href="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
+    <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/search.css">
+</head>
+<body>
+<div data-role="page" data-title="尚名校">
+    <div data-role="header" data-theme="g" data-position="fixed">
+        <img src="/images/ic_arrow_back.png" onclick="window.history.back()" class="left_icon"/>
+        <h5>搜索</h5>
+    </div>
+    <input id="search" type="search" oninput="search()" onporpertychange="search()" placeholder="搜索<%=type%>"
+           class="search_input"/>
+    <div id="search-type" class="search-type">
+        <a href="searchType?type=课程">
+            <div class="search-detail">
+                <img class="search-image" src="/images/01.png">
+                <h5>课程</h5>
+            </div>
+        </a>
+
+        <a href="searchType?type=视频">
+        <div class="search-detail">
+                <img class="search-image" src="/images/02.png">
+                <h5>视频</h5>
+        </div>
+        </a>
+        <a href="searchType?type=问答">
+        <div class="search-detail">
+                <img class="search-image" src="/images/03.png">
+                <h5>问答</h5>
+        </div>
+        </a>
+    </div>
+    <div id="search-result">
+        <h4 class="type"><img src="/images/myclass.png">&nbsp我的课程</h4>
+        <img src="/images/课程分割线.png" class="div_line">
+        <div class="details_class">
+            <ul id="course-list" data-role="listview">
+            </ul>
+        </div>
+    </div>
+
+</div>
+</body>
+<script>
+    console.log("click"+location.href);
+    var type=getQueryString("type")
+    console.log("type:<%=type%>"+type)
+    if(type != null){
+        $("#search-type").hide();
+    }
+    $("#search-result").hide();
+    function search() {
+        var word = $("#search").val();
+        data = {word: word}
+        console.log("word：" + word)
+        if (word.length == 0) {
+            $("#search-type").show();
+            $("#search-result").hide();
+            $("#course-list").empty();
+        } else if (word.length > 0) {
+            $.post("search", data, function (data) {
+                $("#search-type").hide();
+                $("#search-result").show();
+                var list = '';
+                data.forEach(function (item) {
+                    list += '<li class="list" data-icon="false"> <a  data-ajax="false" href="/course/courseDetail?courseId=' +
+                            item.courseId
+                            + '" class="course_click ui-btn"> <img class="image" src="' + item.teacherHeadUrl + '"> <p>' +
+                            item.courseId
+                            + '</p> <p>' + item.courseName + '</p></a></li>'
+                })
+                console.log("list:" + list);
+                $("#course-list").append(list);
+            }, "json")
+        }
+    }
+    function getQueryString(name)
+    {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  unescape(r[2]); return null;
+    }
+</script>
+</html>

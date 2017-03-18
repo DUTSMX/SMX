@@ -18,6 +18,7 @@
 <body>
 <div data-role="page" data-title="尚名校">
     <div data-role="header" data-theme="g" data-position="fixed">
+        <img src="/images/search-white.png" onclick="location.href='../search'" class="search"/>
         <h3>课程</h3>
     </div>
     <div class="ad_Images">
@@ -33,27 +34,31 @@
             <img src="/images/课程分割线.png" class="div_line">
             <div class="details_class">
                 <ul data-role="listview">
-                    <% courseList.myCourse.forEach(function(item){ %>
-                    <li data-icon="false">
-                        <a href="courseDetail?courseId=<%= item.courseId %>" data-ajax="false">
-                            <!-- 放在css就失效-->
-                            <div class="my_course_head_div"></div>
-                            <img class="head_big" src=<%= item.teacherHeadUrl %>>
-                            <div class="class_info">
-                                <div class="class_info_school">
-                                    <h5><%= item.teacherName %></h5>
-                                    <h6><%= item.teacherSchool %></h6>
+                    <%if(courseList.myCourse.length == 0){%>
+                        <img src="/images/my_course_empty.jpg" class="image_place_holder">
+                    <%}else{%>
+                        <%courseList.myCourse.forEach(function(item){ %>
+                        <li data-icon="false">
+                            <a href="courseDetail?courseId=<%= item.courseId %>" data-ajax="false">
+                                <!-- 放在css就失效-->
+                                <div class="my_course_head_div"></div>
+                                <img class="head_big" src=<%= item.teacherHeadUrl %>>
+                                <div class="class_info">
+                                    <div class="class_info_school">
+                                        <h5><%= item.teacherName %></h5>
+                                        <h6><%= item.teacherSchool %></h6>
+                                    </div>
+                                    <div class="class_info_name">
+                                        <h3><%= item.courseName %></h3>
+                                    </div>
+                                    <div class="class_info_time">
+                                        <h6><img class="clock" src="/images/课程时间.png"><%= item.courseTime %></h6>
+                                    </div>
                                 </div>
-                                <div class="class_info_name">
-                                    <h3><%= item.courseName %></h3>
-                                </div>
-                                <div class="class_info_time">
-                                    <h6><img class="clock" src="/images/课程时间.png"><%= item.courseTime %></h6>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <% }) %>
+                            </a>
+                        </li>
+                        <% }) %>
+                    <%}%>
                 </ul>
             </div>
         </div>
@@ -91,19 +96,30 @@
     <div data-role="footer" data-position="fixed" data-theme="t">
         <div data-role="navbar">
             <ul>
-                <li><a href="#" data-ajax="false"><img src="/images/01.png">
+                <li><a href="#" data-ajax="false" target="_blank"><img src="/images/01.png">
                         <p>课程</p></a></li>
-                <li><a href="/video/video" data-ajax="false"><img src="/images/02.png">
+                <li><a href="/video/video" data-ajax="false" target="_blank"><img src="/images/02.png">
                         <p>视频</p></a></li>
-                <li><a href="/question/question" data-ajax="false"><img src="/images/03.png">
+                <li><a href="/question/question" data-ajax="false" target="_blank"><img src="/images/03.png">
                         <p>答疑</p></a></li>
-                <li><a href="/users/mine" data-ajax="false"><img src="/images/04.png">
+                <li><a href="/users/mine" data-ajax="false" target="_blank"><img src="/images/04.png">
                         <p>我的</p></a></li>
             </ul>
         </div>
     </div>
 </div>
+
+<script src="http://apps.bdimg.com/libs/jquery.cookie/1.4.1/jquery.cookie.js"></script>
 <script>
+    if($.cookie("update") == "true"){
+        location.reload();
+        $.cookie("update",false);
+    }
+//    var flag = true;
+//    if(flag){
+//        location.reload();
+//        flag = false;
+//    }
     /*轮播图*/
     $(document).ready(function () {
         $(".ad_Images").slick({
