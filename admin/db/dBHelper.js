@@ -99,3 +99,39 @@ exports.getAnswers=function (questionId,callback) {
         callback(rows);
     })
 };
+exports.addCourse = function (courseName,courseDate,teacherName,beginTime,finishTime,courseTime,objectOriented,courseContent, callback) {
+   var sql= "SELECT userId FROM account WHERE userName ='"+teacherName+"'";
+    conn.query(sql,function (err,rows) {
+        if(err){
+            callback({
+                status:false,
+                desc:err
+            });
+        }else if(rows.length == 0){
+            callback({
+                status:false,
+                desc:"没有该老师"
+            });
+        }else{
+            console.log("rows[0]:"+JSON.stringify(rows[0]));
+            var sql = "INSERT INTO course(userId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent) VALUES ("+rows[0].userId+",'"+ courseName + "','" + courseDate + "','" + beginTime + "','" + finishTime + "','" + courseTime + "','" + objectOriented + "','" + courseContent + "')";
+            console.log("sql:"+sql)
+            conn.query(sql, function (err,rows) {
+                if (err) {
+                    console.log(err);
+                    callback({
+                        status:false,
+                        desc:err
+                    })
+                }else {
+                    callback({
+                        status:true,
+                        desc:"课程创建成功"
+                    });
+                }
+            })
+        }
+
+    })
+
+}

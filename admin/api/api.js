@@ -29,5 +29,13 @@ exports.getQuestionDetails=function (questionId,callback) {
         });
     });
 };
+exports.addCourse = function(courseName,courseDate,teacherName,beginTime,finishTime,courseTime,objectOriented,courseContent,callback){
+    console.log( "courseName:"+courseName+"courseDate:"+courseDate+"teacherName:"+teacherName+" beginTime:"+beginTime+" finishTime:"+finishTime +
+        " courseTime:"+courseTime+" objectOriented:"+objectOriented+" courseContent:"+courseContent);
+    db.addCourse(courseName,courseDate,teacherName,beginTime,finishTime,courseTime,objectOriented,courseContent,function (rows) {
+        // console.log("rows:"+JSON.stringify(rows));
+        callback(rows)
+    })
+}
 
 
