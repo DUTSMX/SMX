@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>课程</title>
+    <!-- Bootstrap -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/video.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">尚名校管理系统</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-left">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">课程编辑 <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="addCourse.html">添加课程</a></li>
+                        <li><a href="course.html">已有课程</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">视频编辑 <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="addvideo.html">添加视频</a></li>
+                        <li><a href="video.html">已有视频</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="question.html" >问答编辑<!--  <span class="caret"></span> --></a>
+                    <!-- <ul class="dropdown-menu" role="menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul> -->
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">审核管理 <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="waitChecking.html">待审核</a></li>
+                        <li><a href="checked.html">已审核</a></li>
+                        <li><a href="suggestion.html">意见反馈</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">用户管理<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="teacherList.html">老师列表</a></li>
+                        <li><a href="studentList.html">学生列表</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="version.html" >版本管理</a>
+                </li>
+                <li><a href="#">数据统计</a></li>
+                <li><a href="recycleBin.html">回收站</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">登录/注销<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="login.html">登录</a></li>
+                        <li><a href="logout.html">注销</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <a href="search.html"  class="btn btn-default" ><span class="glyphicon glyphicon-search" ></span></a>
+            </form>
+        </div>
+    </div>
+</nav>
+<div class="main">
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">添加课程</h3>
+            </div>
+            <div class="panel-body">
+                <div class="container">
+                    <div class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="name">名称</label>
+                            <div class="col-md-6" id="name">
+                                <input type="text" id="courseName" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="teacherid">教师编号</label>
+                            <div class="col-md-6" id="name">
+                                <input type="number" id="teacherId" value="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="teacherid">教师姓名</label>
+                            <div class="col-md-6" id="name">
+                                <input type="text" id="teacherName" value="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="time">日期</label>
+                            <div class="col-md-6" id="name">
+                                <input type="time" id="courseDate"  class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="time">开始时间</label>
+                            <div class="col-md-6" id="name">
+                                <input type="time" id="beginTime"class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="time">结束时间</label>
+                            <div class="col-md-6" id="name">
+                                <input type="time" id="finishTime" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="name">时长</label>
+                            <div class="col-md-6" id="name">
+                                <input type="text" id="courseTime" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="name">面向对象</label>
+                            <div class="col-md-6" id="name">
+                                <input type="text" id="objectOriented" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="content">课程内容</label>
+                            <div class="col-md-6" id="name">
+                                <textarea id="courseContent" rows="3" name="content" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <center>
+                            <button class="btn btn-default " onclick="addCourse()" >确定</button>
+
+                        </center>
+                    </div>
+                    <p style="margin:0;text-align:center;padding-top:50px;" id="hint"></p>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function addCourse() {
+        var courseName=$("#courseName").val();
+        var teacherName=$("#teacherName").val();
+        var courseDate=$("#courseDate").val();
+        var beginTime=$("#beginTime").val();
+        var finishTime=$("#finishTime").val();
+        var courseTime=$("#courseTime").val();
+        var objectOriented=$("#objectOriented").val();
+        var courseContent=$("#courseContent").val();
+        var data={
+            courseName:courseName,
+            teacherName:teacherName,
+            courseDate:courseDate,
+            beginTime:beginTime,
+            finishTime:finishTime,
+            courseTime:courseTime,
+            objectOriented:objectOriented,
+            courseContent:courseContent
+        }
+        console.log("data:"+JSON.stringify(data));
+if(courseName.length==0){$("#hint").text("课程名不能为空");}
+else if(teacherName.length==0){$("#hint").text("老师姓名不能为空");}
+else if(courseDate.length==0){$("#hint").text("日期不能为空");}
+else if(beginTime.length==0){$("#hint").text("开始时间不能为空");}
+else if(finishTime.length==0){$("#hint").text("结束时间不能为空");}
+else if(courseTime.length==0){$("#hint").text("课程时长不能为空");}
+else if(objectOriented.length==0){$("#hint").text("面向对象不能为空");}
+else if(courseContent.length==0){$("#hint").text("课程内容不能为空");}
+else{
+    $.post("/addCourse",data,function (data) {
+        if(data.status){
+            $("#hint").text(data.desc);
+            window.open("./course");
+        }
+        else{
+            $("#hint").text(data.desc);
+//            console.log(data.desc);
+        }
+    },"json")
+
+}
+    }
+</script>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/javascripts/jquery.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/javascripts/bootstrap.min.js"></script>
+
+</body>
+</html>
