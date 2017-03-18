@@ -23,6 +23,25 @@ router.get('/MP_verify_sEUETJmOEogP71d6.txt',function(req,res){
 		}
 	})
 })
+
+router.get('/search',function (req,res,next) {
+	res.render("search",{type:null});
+})
+
+router.get('/searchType',function (req,res) {
+	var type = req.query.type;
+	res.render("search",{type:type});
+})
+
+router.post('/search',function (req,res) {
+	var course = require("../api/courseDBApi");
+	var word = req.body.word;
+	course.search(word,function (rows) {
+		console.log("rows:"+JSON.stringify(rows));
+		res.send(rows)
+	});
+})
+
 router.get('/main',function (req,res) {
 	var userId = req.session.userId;
 	var course = require("../api/courseDBApi");

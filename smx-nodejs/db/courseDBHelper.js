@@ -275,11 +275,10 @@ exports.addCourse = function (userId,courseName,courseDate,beginTime,finishTime,
         }
     })
 }
- /*
 exports.search = function (word, callback) {
     var sql = "SELECT c.courseId as courseId,c.courseName as courseName,c.courseTime as courseTime," +
         "a.userHeadUrl as teacherHeadUrl,a.userSchool as teacherSchool,a.userGrade as teacherGrade  FROM course c JOIN account a on c.userId = a.userId" +
-        " WHERE CONCAT(a.`courseName`,b.`userName`,a.courseTime,a.courseContent) LIKE '%" + word + "%'"
+        " WHERE CONCAT(c.courseName,a.userName,c.courseTime,c.courseContent) LIKE '%" + word + "%'"
 
     console.log(sql);
     conn.query(sql, function (err, rows, fields) {
@@ -289,6 +288,3 @@ exports.search = function (word, callback) {
         callback(rows);
     })
 }
-
-
- */

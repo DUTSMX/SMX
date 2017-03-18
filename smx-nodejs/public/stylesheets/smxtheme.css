@@ -108,8 +108,8 @@
 	height:48px;
 	border-radius:48px;
 	position: absolute;
-	top: 22.5px;
-	left:22.8px
+	top: 23px;
+	left:23px
 }
 /*设置详情页头像*/
 .head_60{
@@ -150,4 +150,12 @@
 	background: #3B7454 !important;
 	color:white !important;
 	text-shadow: none !important;
+}
+
+.search{
+	width:20px;
+	height:20px;
+	float: right;
+	margin-right:3%;
+	margin-top:4%
 }
