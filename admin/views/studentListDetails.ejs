@@ -147,11 +147,11 @@
     <div class="container">
         <div class="bs-example">
             <div class="panel panel-default">
-                &lt;!&ndash; Default panel contents &ndash;&gt;
+                <!-- Default panel contents -->
                 <div class="panel-heading">
                     <h3 class="panel-title">已有课程</h3>
                 </div>
-                &lt;!&ndash; Table &ndash;&gt;
+                <!-- Table -->
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
@@ -167,17 +167,17 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <%list.forEach(function (item){%>
+                        <%list.forEach(function (item1){%>
                         <tr>
-                            <td><%=item.courseId%></td>
-                            <td><%=item.teacherName%>></td>
-                            <td><%=item.courseName%></td>
-                            <td><%=item.courseTime%>></td>
-                            <td><%=item.objectOriented%></td>
-                            <td><%=item.courseContent%>></td>
-                            <td><%=item.courseCount%></td>
+                            <td><%=item1.courseId%></td>
+                            <td><%=item1.teacherName%></td>
+                            <td><%=item1.courseName%></td>
+                            <td><%=item1.courseTime%></td>
+                            <td><%=item1.objectOriented%></td>
+                            <td><%=item1.courseContent%>人</td>
+                            <td><%=item1.courseCount%></td>
                             <td>
-                                <a class="btn btn-primary" href="courseDetails.html">查看详情</a>
+                                <a class="btn btn-primary" href="courseDetails?courseId=<%=item1.courseId%>">查看详情</a>
                             </td>
                         </tr>
                         <%})%>

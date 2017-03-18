@@ -14,7 +14,8 @@ router.get('/course',function (req,res,next) {
 });
 router.get('/question',function (req,res) {
   api.getQuestion(function(questionList){
-    questionList = {questionList:questionList};
+    var moment = require("moment");
+    questionList = {questionList:questionList,moment:moment};
     console.log('questionList:'+JSON.stringify(questionList));
     res.render('question',questionList)
   })
@@ -22,35 +23,11 @@ router.get('/question',function (req,res) {
 router.get('/questionDetails',function (req,res) {
   var questionId = req.query.questionId;
   api.getQuestionDetails(questionId,function (answer) {
-    console.log("answerList:"+JSON.stringify(answerList));
-      console.log(questionId);
+    console.log("answerList:"+JSON.stringify(answer));
     res.render('questionDetails',answer);
   })
  });
 
-router.get('/studentList',function (req,res) {
- })
-router.get('/studentlist',function (req,res) {
-    api.getStudent(function(studentList){
-        console.log("student:"+JSON.stringify(studentList));
-        res.render('studentList',{studentList:studentList})
-    })
-});
-router.get('/teacherList',function (req,res) {
-    api.getTeacher(function(teacherList){
-        console.log("teacher:"+JSON.stringify(teacherList));
-        res.render('teacherList',{teacherList:teacherList})
-    })
-});
-
-router.get('/studentDetails',function (req,res) {
-    var studentId = req.query.studentId;
-    api.getStudentDetails(studentId,function (studentDetails) {
-        // studentDetails={studentDetails:studentDetails};
-        console.log("studentDetails:"+JSON.stringify(studentDetails));
-        res.render('studentListDetails',studentDetails);
-    })
-});
 
 
 
