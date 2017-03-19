@@ -35,7 +35,7 @@
                             <h3><%= item.courseName %></h3>
                         </div>
                         <div class="class_info_time">
-                            <h6><img class="clock" src="/images/icon_time.png"><%=courseList.moment(item.courseDate).format("YYYY-MM-DD")%>  <%= courseList.moment(item.beginTime,"HH:mm:ss").format("HH:mm") %>-<%=courseList.moment(item.finishTime,"HH:mm:ss").format("HH:mm")%></h6>
+                            <h6><img class="clock" src="/images/icon_time.png"><%=moment(item.courseDate).format("YYYY-MM-DD")%>  <%= moment(item.beginTime,"HH:mm:ss").format("HH:mm") %>-<%=moment(item.finishTime,"HH:mm:ss").format("HH:mm")%></h6>
                         </div>
                     </div>
                 </a>

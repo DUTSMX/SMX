@@ -22,8 +22,10 @@ exports.getCourse = function(userId,callback){
 }
 
 exports.getCourseList = function (teacherId,callback) {
+    var moment = require("moment")
     db.getCourseById(teacherId,function (rows) {
-        callback({myCourse:rows});
+        callback({myCourse:rows,
+        moment:moment});
     })
 }
 

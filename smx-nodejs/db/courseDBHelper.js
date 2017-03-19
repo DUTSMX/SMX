@@ -77,8 +77,6 @@ exports.getCourseById = function (userId, callback) {
                         console.log(err);
                         return;
                     }
-                    console.log("get sql1: " + sql1);
-                    console.log("get course: " + JSON.stringify(rows));
                     callback(rows);
                 })
             } else if (role == 2) {//老师
@@ -139,6 +137,7 @@ exports.getTeacherDetail = function (teacherId, callback) {
         "FROM account a join teacher t " +
         "ON a.userId = t.teacherId " +
         "WHERE a.userId = " + teacherId;
+    console.log("sql:"+sql)
     conn.query(sql, function (err, rows) {
         if (err) {
             console.log(err);
@@ -261,7 +260,7 @@ exports.hasJoin = function(userId,courseId,callback){
 }
 
 exports.addCourse = function (userId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent, callback) {
-    var sql = "INSERT INTO course(userId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent) VALUES ('" + userId + "','" + courseName + "','" + courseDate + "','" + beginTime + "','" + finishTime + "','" + courseTime + "','" + objectOriented + "','" + courseContent + "')";
+    var sql = "INSERT INTO course(userId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent,createDate) VALUES ('" + userId + "','" + courseName + "','" + courseDate + "','" + beginTime + "','" + finishTime + "','" + courseTime + "','" + objectOriented + "','" + courseContent + "',"+conn.escape(new Date())+")";
     console.log("sql:"+sql)
     conn.query(sql, function (err,rows) {
         if (err) {
