@@ -45,6 +45,10 @@
     top: 5px;
     bottom:5px;
 }
+.ui-listview>li .name{
+    font-size:16px;
+    font-weight:bold;
+}
 .ui-listview>li p{
     margin-left:70px;
  }

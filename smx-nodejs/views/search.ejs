@@ -77,11 +77,12 @@
                 data.forEach(function (item) {
                     list += '<li class="list" data-icon="false"> <a  data-ajax="false" href="/course/courseDetail?courseId=' +
                             item.courseId
-                            + '" class="course_click ui-btn"> <img class="image" src="' + item.teacherHeadUrl + '"> <p>' +
-                            item.courseId
-                            + '</p> <p>' + item.courseName + '</p></a></li>'
+                            + '" class="course_click ui-btn"> <img class="image" src="' + item.userHeadUrl + '"> <p class="name">' +
+                            item.courseName
+                            + '</p> <p>' + item.detail + '</p></a></li>'
                 })
                 console.log("list:" + list);
+                $("#course-list").empty();
                 $("#course-list").append(list);
             }, "json")
         }

@@ -278,9 +278,14 @@ exports.addCourse = function (userId,courseName,courseDate,beginTime,finishTime,
     })
 }
 exports.search = function (word, callback) {
-    var sql = "SELECT c.courseId as courseId,c.courseName as courseName,c.courseTime as courseTime," +
-        "a.userHeadUrl as teacherHeadUrl,a.userSchool as teacherSchool,a.userGrade as teacherGrade  FROM course c JOIN account a on c.userId = a.userId" +
-        " WHERE CONCAT(c.courseName,a.userName,c.courseTime,c.courseContent) LIKE '%" + word + "%'"
+    var courseList;
+    var sql = "select userHeadUrl, courseId, courseName,'' as detail from course c Join account a ON a.userId = c.userId where courseName LIKE '%"+word+"%' "+
+        "UNION "+
+        "select a.userHeadUrl,c.courseId, c.courseName,CONCAT('授课教师：',a.userName) as detail from course c Join account a ON a.userId = c.userId where a.userName like '%"+word+"%' "+
+        "UNION "+
+        "select userHeadUrl, courseId, courseName,CONCAT('面向对象：',objectOriented) as detail from course c Join account a ON a.userId = c.userId where objectOriented LIKE '%"+word+"%' "+
+        "UNION "+
+        "select userHeadUrl, courseId, courseName,CONCAT('课程内容：',courseContent) as detail from course c Join account a ON a.userId = c.userId where courseContent LIKE '%"+word+"%' ";
 
     console.log(sql);
     conn.query(sql, function (err, rows, fields) {
