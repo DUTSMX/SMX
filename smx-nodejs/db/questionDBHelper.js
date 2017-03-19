@@ -37,17 +37,25 @@ exports.getQuestionDetail = function(questionId,callback){
     })
 }
 
-exports.getAnswer = function (callback) {
+exports.getQuestionList = function (callback) {
     var aContent = 100;
-    var sql = "SELECT CONCAT("+"'answerDetail?answerId='"+",b.answerId) as aHref, " +
-        "c.userHeadUrl as authorHeadUrl, " +
-        "CONCAT(c.userName,"+"'回答了问题'"+") as authorName, " +
-        "a.questionTitle as questionTitle, "+
-        "left(b.answerContent,"+ aContent +") as answerAbstract, " +
-        "b.answerTime as time "+
-        "FROM (question a INNER JOIN answer b on a.questionId = b.questionId) JOIN account c on b.userId = c.userId ORDER BY answerTime" ;
-    // console.log("sql:"+sql);
-    conn.query(sql,function(err,rows,fields){
+    var sql = "(SELECT CONCAT('questionDetail?questionId=',a.questionId) as aHref,"+
+    "c.userHeadUrl as authorHeadUrl,"+
+    "CONCAT(c.userName,'提出了问题') as authorName,"+
+    "a.questionTitle as questionTitle,"+
+    "left(a.questionContent,100) as answerAbstract,"+
+    "a.questionTime as time "+
+    "FROM question a JOIN account c on a.userId = c.userId)"+
+    "UNION ALL"+
+    "(SELECT CONCAT('answerDetail?answerId=',b.answerId) as aHref,"+
+    "c.userHeadUrl as authorHeadUrl,"+
+        "CONCAT(c.userName,'回答了问题') as authorName,"+
+    "a.questionTitle as questionTitle,"+
+    "left(b.answerContent,100) as answerAbstract,"+
+    "b.answerTime as time "+
+    "FROM (question a INNER JOIN answer b on a.questionId = b.questionId) JOIN account c on b.userId = c.userId)"+
+    "ORDER BY time DESC";
+    conn.query(sql,function(err,rows){
         if(err){
             console.log(err);
             return;
@@ -55,27 +63,6 @@ exports.getAnswer = function (callback) {
         callback(rows);
     })
 }
-
-exports.getQuestion = function (callback) {
-    var aContent = 100;
-    var sql = "SELECT CONCAT("+"'questionDetail?questionId='"+",a.questionId) as aHref, " +
-        "c.userHeadUrl as authorHeadUrl, " +
-        "CONCAT(c.userName,"+"'提出了问题'"+") as authorName, " +
-        "a.questionTitle as questionTitle, "+
-        "left(a.questionContent,"+ aContent +") as answerAbstract, "+
-        "a.questionTime as time "+
-        "FROM question a JOIN account c on a.userId = c.userId order by questionTime" ;
-    // console.log("sql:"+sql);
-    conn.query(sql,function(err,rows,fields){
-        if(err){
-            console.log(err);
-            return;
-        }
-        console.log(rows);
-        callback(rows);
-    })
-}
-
 
 exports.getAnswerDetail = function (answerId,callback) {
     var sql = "SELECT a.questionId as questionId," +
@@ -154,12 +141,12 @@ exports.getOnlineTeacher = function (callback) {
 }
 exports.addQuestion = function (userId,questionTitle,questionContent,callback) {
     // var time = sd.format(new Date().toLocaleString(), 'YYYY-MM-DD HH:mm:ss');
-    var time = Date.now();
+    var time = new Date();
     console.log(time);
     var sql = "INSERT INTO question (userId,questionTitle,questionContent,questionTime)" +
         "VALUES ("+userId+",'"+questionTitle+"','"+questionContent+"',"+conn.escape(time)+")";
-    conn.query(sql,function(err,rows,fields){
-        console.log(sql);
+    console.log(sql);
+    conn.query(sql,function(err,rows){
         if(err){
             callback({
                 status:false,

@@ -46,7 +46,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="question.html" >问答编辑<!--  <span class="caret"></span> --></a>
+                    <a href="question" >问答编辑<!--  <span class="caret"></span> --></a>
                     <!-- <ul class="dropdown-menu" role="menu">
                       <li><a href="#">Action</a></li>
                       <li><a href="#">Another action</a></li>
@@ -106,22 +106,22 @@
                         <thead>
                         <tr>
                             <th>问题</th>
-                            <td><%=questionTitle%></td>
+                            <td><%=question.questionTitle%></td>
                         </tr>
 
                         <tr>
                             <th>提问者</th>
-                            <td><%=asker%></td>
+                            <td><%=question.useName%></td>
                         </tr>
 
                         <tr >
                             <th style="min-width: 8em; padding-bottom:3%" valign="middle">问题描述</th>
-                            <td ><%=questionContent%></td>
+                            <td ><%=question.questionContent%></td>
                         </tr>
 
                         <tr>
                             <th >提问时间</th>
-                            <td><%=questionTime%></td>
+                            <td><%=moment(question.questionTime).format("MM DD YYYY, HH:mm:ss a")%></td>
                         </tr>
 
                         <tr>
@@ -157,10 +157,10 @@
                         <tbody>
                         <%answerList.forEach(function (item){%>
                         <tr>
-                            <td><%=answerId%></td>
-                            <td><%=answerPerson%>></td>
-                            <td><%=answerTime%></td>
-                            <td><%=answerContent%>></td>
+                            <td><%=item.answerId%></td>
+                            <td><%=item.useName%>></td>
+                            <td><%=moment(item.answerTime).format("MM DD YYYY, HH:mm:ss a")%></td>
+                            <td><%=item.answerContent%>></td>
                         </tr>
                         <%})%>
                         </tbody>

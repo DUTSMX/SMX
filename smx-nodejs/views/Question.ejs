@@ -1,72 +1,99 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>尚名校</title>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<meta http-equiv="cache-control" content="no-cache" />
-	<link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
-	<link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
-	<link rel="stylesheet" type="text/css" href="/stylesheets/question.css">
+    <title>尚名校</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <link rel="stylesheet" type="text/css"
+          href="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/question.css">
+    <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 </head>
 <body>
-	<div data-role="page" data-title="尚名校">
-		<div data-role="header" data-theme="g" data-position="fixed">
-			<h3>问答</h3>
-		</div>
-		<div data-role="content">
-			<div class="online_teacher">
-				<h4><img src="/images/myclass.png">&nbsp在线老师<span><a href="#"></a></span></h4>
-				<img src="/images/课程分割线.png" class="div_line">
-			</div>
-			<div class="teacher_tab">
-				<div class="ui-grid-d">
-					<%teacherList.forEach(function (item) {%>
-						<div class="ui-block-b">
-							<a href="askQuestion" data-ajax="false">
-								<img src="<%=item.headUrl%>">
-							</a>
-							<p><%=item.userName%></p>
-						</div>
-					<%})%>
-				</div>
-			</div>
-			<div class="online_teacher">
-				<h4><img src="/images/myclass.png">&nbsp热门问答<!--<span><a href="#">更多></a></span>--></h4>
-				<img src="/images/课程分割线.png" class="div_line">
-			</div>
-			<div class="answer_area">
-				<ul data-role="listview">
-					<%questionList.forEach(function(item){%>
-					<li data-icon="false">
-						<a href="<%=item.aHref%>"  data-ajax="false">
-							<span class="ans_teacher"><img class="head_small" src="<%=item.authorHeadUrl%>"><%=item.authorName%></span>
-							<!--<div class="zan">
-								<p>12</p>
-								<span>赞同</span>
-							</div>-->
-							<h5><%=item.questionTitle%></h5>
-							<p><%=item.answerAbstract%></p>
-						</a>
-					</li>
-					<%})%>
-				</ul>
-			</div>
-		</div>
-		<div data-role="footer" data-position="fixed" data-theme="t">
-			<div data-role="navbar">
-				<ul>
-					<li><a href="/course/course" data-ajax="false"><img src="/images/01.png"><p>课程</p></a></li>
-					<li><a href="/video/video" data-ajax="false"><img src="/images/02.png"><p>视频</p></a></li>
-					<li><a href="#" data-ajax="false"><img src="/images/03.png"><p>答疑</p></a></li>
-					<li><a href="/users/mine" data-ajax="false"><img src="/images/04.png"><p>我的</p></a></li>
-				</ul>
-			</div>
-		</div>
-		<a href="askQuestion"data-ajax="false"><img class="ask_question" src="/images/ask_question.png" style="width:50px;height:50px"/></a>
-	</div>
-	<script src="/javascripts/jquery.js"></script>
-	<script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
+<div data-role="page" data-title="尚名校">
+    <div data-role="header" data-theme="g" data-position="fixed">
+        <h3>问答</h3>
+    </div>
+    <div data-role="content">
+        <div class="online_teacher">
+            <h4><img src="/images/type_icon_green.png">&nbsp在线老师<span><a href="#"></a></span></h4>
+            <img src="/images/line_green.png" class="div_line">
+        </div>
+        <div class="teacher_tab">
+            <div class="ui-grid-d">
+                <%
+                var length = teacherList.length > 5 ? 5 : teacherList.length;
+                for(var i = 0;i < length;i++){
+                    var item = teacherList[i];
+                %>
+                <div class="ui-block-b">
+                    <a href="askQuestion" data-ajax="false">
+                        <img src="<%= item.headUrl %>">
+                    </a>
+                    <p><%= item.userName %></p>
+                </div>
+                <% } %>
+            </div>
+        </div>
+        <div class="online_teacher">
+            <h4><img src="/images/type_icon_green.png">&nbsp热门问答<!--<span><a href="#">更多></a></span>--></h4>
+            <img src="/images/line_green.png" class="div_line">
+        </div>
+        <div class="answer_area">
+            <ul data-role="listview">
+                <% questionList.forEach(function(item){ %>
+                <li data-icon="false">
+                    <a href="<%= item.aHref %>" data-ajax="false">
+                        <span class="ans_teacher"><img class="head_small"
+                                                       src="<%= item.authorHeadUrl %>"><%= item.authorName %></span>
+                        <!--<div class="zan">
+                            <p>12</p>
+                            <span>赞同</span>
+                        </div>-->
+                        <h5><%= item.questionTitle %></h5>
+                        <p><%= item.answerAbstract %></p>
+                    </a>
+                </li>
+                <% }) %>
+            </ul>
+        </div>
+    </div>
+    <div data-role="footer" data-position="fixed" data-theme="t">
+        <div data-role="navbar">
+            <ul>
+                <li><a onclick="course()" data-ajax="false"><img src="/images/tab_course.png">
+                        <p>课程</p></a></li>
+                <li><a onclick="video()" data-ajax="false"><img src="/images/tab_video.png">
+                        <p>视频</p></a></li>
+                <li><a href="#" data-ajax="false"><img src="/images/tab_question.png">
+                        <p>答疑</p></a></li>
+                <li><a onclick="mine()" data-ajax="false"><img src="/images/tab_mine.png">
+                        <p>我的</p></a></li>
+            </ul>
+        </div>
+    </div>
+    <a href="askQuestion" data-ajax="false"><img class="ask_question" src="/images/ask_question.png"
+                                                 style="width:50px;height:50px"/></a>
+</div>
 </body>
+<script src="http://apps.bdimg.com/libs/jquery.cookie/1.4.1/jquery.cookie.js"></script>
+<script>
+    function course() {
+        location.replace("/course/course")
+    }
+    function video() {
+        location.replace("/video/video")
+    }
+    function mine() {
+        location.replace("/users/mine")
+    }
+    if ($.cookie("questionList") == "true") {
+        location.reload();
+        $.cookie("questionList", false);
+    }
+</script>
 </html>

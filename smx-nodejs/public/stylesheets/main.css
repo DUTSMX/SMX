@@ -1,0 +1,326 @@
+/*
+模块：轮播图
+*/
+/*设置轮播图大小*/
+.ad_Image_style img{
+    height: 25vh;
+    width: 100vw;
+}
+
+/*
+模块：我的课程
+*/
+/*设置"我的课程"四个字*/
+.myclass h4{
+    color: #3B7454;
+    margin-bottom: 5px;
+    margin-top: 0;
+}
+/*设置分割线*/
+.div_line{
+    width: 100%;
+    margin-bottom: 5%;
+}
+/*设置个人头像外面的圈*/
+.ui-listview li .ui-btn .my_course_head_div{display: inline-block;position: absolute;top: 20px;left:20px;
+    float:left;
+    width: 50px;
+    height: 50px;
+    border: 2px #3B7454 solid;
+    -webkit-border-radius: 100px;
+    display: inline-block;
+    position: absolute;
+    top: 20px;
+    left:20px
+}
+
+/*设置我的课程中的教师姓名*/
+.ui-listview>li .teacher_name{
+    display: inline-block;
+    margin-bottom: 1%;
+    margin-top: 0;
+    font-weight:normal;
+}
+/*设置我的课程中的学校信息*/
+.ui-listview>li .class_info_school h6{
+    display: inline-block;
+    font-size: 0.7em;
+    margin-left: 3%;
+    font-weight:normal;
+}
+/*设置我的课程中的学科信息*/
+.ui-listview>li h3{
+    margin-top: 0;
+    margin-bottom: 1%;
+    font-weight:normal;
+    color: #3B7454;
+}
+/*!*设置科目名称*!*/
+.class_info_time{
+    position: relative;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+/*设置闹钟所在位置*/
+.clock {
+    width:12px;
+    height:12px;
+    vertical-align: text-bottom;
+}
+
+/*设置时间格式*/
+.ui-listview>li .class_info_time h6{
+    font-size: 0.7em;
+    font-weight:normal;
+}
+
+/*
+模块：热门课程
+*/
+/*设置所有课程个人头像外面的圈*/
+.ui-listview li .ui-btn .all_course_head_div{display: inline-block;position: absolute;top: 15px;left:20px;
+    float:left;
+    width: 50px;
+    height: 50px;
+    border: 2px #EAB136 solid;
+    -webkit-border-radius: 100px;
+    display: inline-block;
+    position: absolute;
+    top: 20px;left:20px
+}
+/*设置"所有课程"四个字*/
+.hotclass h4{
+    color: #EAB136;
+    margin-bottom: 5px;
+    margin-top: 10%;
+    position: relative;
+}
+/*热门课程  课程名称*/
+.hotclass .class_info_name h3{
+    color: #EAB136;
+}
+/*设置热门课程闹钟所在位置*/
+.hotclass .class_info_time img{
+    width:12px;
+    height:12px;
+    vertical-align: text-bottom;
+}
+/*"热门视频"四个字*/
+.hotvideos h4{
+    color: #3B7454;
+    margin-bottom: 0;
+    margin-top: 0;
+    position: relative;
+    margin-bottom: 5px;
+}
+/*热门视频前面的icon*/
+.hotvideos h4 img{
+    height: 100%;
+}
+/*设置分割线*/
+.div_line{
+    width: 100%;
+    margin-bottom: 5%;
+}
+/*设置视频缩略图位置*/
+.ui-listview .ui-li-has-thumb>.ui-btn>img:first-child{
+    width: 100%;
+    /*height: 100%;*/
+    left: 5%;
+    top: 22%;
+    margin-right: 20%;
+}
+/*文字 距离左边图片的距离*/
+.ui-listview>.ui-li-has-thumb>.ui-btn{
+    padding-left: 7em;
+}
+/*视频名称*/
+.ui-listview>li .videos_name h3{
+    font-weight: 500;
+}
+/*视频介绍*/
+.ui-listview>li .videos_time h5{
+    font-size: 0.8em;
+    font-weight: 400;
+}
+
+
+/*设置"在线老师"四个字*/
+.online_teacher h4{
+    color: #3B7454;
+    margin-bottom: 0;
+    margin-top: 0;
+    position: relative;
+}
+/*.online_teacher h4 img{*/
+/*height: 100%;*/
+/*}*/
+/*设置"在线老师"模块距下面的距离*/
+.online_teacher{
+    margin-bottom: 2%;
+}
+/*最右边"更多"的位置*/
+.online_teacher h4 span{
+    position: absolute;;
+    right: 5%;
+    top: 0%;
+}
+/*最右边"更多"的字体*/
+.online_teacher h4 span a{
+    text-decoration: none;
+    color: #3B7454;
+}
+/*设置分割线*/
+.div_line{
+    width: 100%;
+    z-index: 2;
+    /*margin-bottom: 5%;*/
+}
+/*设置在线教师列表*/
+.teacher_tab{
+    margin-bottom: 3%;
+}
+/*设置老师头像的位置*/
+.teacher_tab .ui-grid-d div{
+    text-align: center;
+    padding: 0.5em;
+}
+/*设置在线老师头像的大小*/
+.teacher_tab .ui-grid-d div img{
+    height: 48px;
+    width: 48px;
+    border-radius: 48px;
+}
+/*设置列表中老师的头像*/
+.head_small{
+    width:12px;
+    height:12px;
+    border-radius:12px;
+    margin-right:3px
+}
+.ui-listview>li.ui-first-child img:first-child:not(.ui-li-icon){
+    -webkit-border-top-left-radius:12px;
+    border-top-left-radius:12px;
+}
+/*设置列表中老师的姓名*/
+.teacher_tab .ui-grid-d div p{
+    margin-bottom: 1%;
+    margin-top: 1%;
+    font-size: 0.7em;
+    color: #3B7454;
+}
+/*设置 来自老师回答*/
+.answer_area{
+    margin-top:1em;
+}
+/*设置 来自老师姓名*/
+.answer_area .ui-listview li a span.ans_teacher{
+    font-weight: 100;
+    font-size: 0.7em;
+}
+/*提问按钮*/
+.ask_question {
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+}
+
+
+/*设置每个功能模块之间的距离*/
+.ui-content .ui-listview{
+    margin-top: 10%;
+}
+/*设置各个功能模块前图片的位置*/
+.ui-listview-func .ui-li-has-icon>.ui-btn>img:first-child{
+    position: absolute;
+    top: 35%;
+    left: 1em;
+}
+/*设置各个功能模块文字的左侧内边距*/
+.ui-listview>.ui-li-has-icon>.ui-btn{
+    padding-left: 3em;
+}
+/*设置各个功能模块字体大小*/
+.ui-listview>li p{
+    font-size: 1.0em;
+    margin-top: 0;
+    margin-bottom: 0;
+    float:left
+}
+
+
+/*设置第一个功能模块与顶部的距离*/
+.ui-content .ui-listview:first-child{
+    margin-top: 0;
+}
+/*设置个人头像*/
+.ui-listview .ui-li-has-thumb>.ui-btn>img:first-child{
+    position: absolute;
+    top: 20%;
+    left: 1em;
+    width:50px;
+    height:50px;
+    border-radius: 50px;
+}
+/*设置个人头像 圆形*/
+.ui-listview>li.ui-first-child img:first-child:not(.ui-li-icon){
+    -webkit-border-top-left-radius:50px;
+    -webkit-border-bottom-left-radius:50px;
+}
+/*设置手机号码字体*/
+.ui-listview .ui-li-has-thumb>.ui-btn>h1{
+    margin-top: 6%;
+    font-weight: normal;
+    float:left;
+}
+/*设置性别图标位置*/
+.ui-listview .ui-btn>.gender{
+    margin-left: 12px;
+    margin-top: 7%;
+}
+/*设置性别图标大小*/
+.set-info img{
+    display: inline-block;
+    margin-left: 5%;
+    width: 7%;
+    height: 7%;
+}
+.content{
+    background-color: #EEEEF4;
+    height:80vh;
+}
+.ui-listview .my_course{
+    margin-bottom: 2px;
+}
+.ui-listview .ui-btn>.question_status{
+    float: left;
+}
+.ui-listview .ui-btn>.switch_status{
+    float:right;
+}
+.ui-listview .ui-btn:hover{
+    background-color: #f6f6f6;
+}
+.ui-listview .ui-btn:visited{
+    background-color: #f6f6f6;
+}
+.ui-listview .ui-btn:link{
+    background-color: #f6f6f6;
+}
+/*设置退出登录按钮的文字居中*/
+.ui-content .ui-listview:last-child p{
+    text-align: center;
+}
+/*设置退出登录按钮与顶部功能模块之间的距离*/
+.ui-content .ui-listview:last-child{
+
+}
+.logout{
+    position:fixed;
+    bottom:50px;
+    font-weight:normal
+}
+
+

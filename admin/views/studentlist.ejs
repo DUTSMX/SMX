@@ -46,7 +46,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="question.html" >问答编辑<!--  <span class="caret"></span> --></a>
+                    <a href="question" >问答编辑<!--  <span class="caret"></span> --></a>
                     <!-- <ul class="dropdown-menu" role="menu">
                       <li><a href="#">Action</a></li>
                       <li><a href="#">Another action</a></li>
@@ -125,8 +125,8 @@
                             <td><%=item.studentSchool%></td>
                             <td><%=item.studentAddress%></td>
                             <td>
-                                <a class="btn btn-danger" href="studentListEdit.html">编辑</a>
-                                <a class="btn btn-primary" href="studentListDetails.html">查看详情</a>
+                                <a class="btn btn-danger" href="studentListEdit">编辑</a>
+                                <a class="btn btn-primary" href="studentListDetails?studentId=<%=item.studentId%>">查看详情</a>
                             </td>
                         </tr>
                         <%})%>

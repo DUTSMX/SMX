@@ -1,23 +1,31 @@
 var db = require('../db/courseDBHelper')
 
 exports.getCourse = function(userId,callback){
-    db.getCourseById(userId,function(rows){
-        var myCourse = rows;
-        db.getCourse(function (rows) {
-            callback({
-                courseList:{
-                rotation:null,
-                myCourse:myCourse,
-                allCourse:rows
-                }
+    var moment = require("moment");
+    var adList,myCourse;
+    db.getAdList(function (rows) {
+        adList = rows;
+        db.getCourseById(userId,function(rows){
+            myCourse = rows;
+            db.getCourse(function (rows) {
+                callback({
+                    courseList:{
+                        rotation:adList,
+                        myCourse:myCourse,
+                        allCourse:rows,
+                        moment:moment
+                    }
+                })
             })
         })
     })
 }
 
 exports.getCourseList = function (teacherId,callback) {
+    var moment = require("moment")
     db.getCourseById(teacherId,function (rows) {
-        callback({myCourse:rows});
+        callback({myCourse:rows,
+        moment:moment});
     })
 }
 
@@ -78,9 +86,8 @@ exports.addCourse = function(userId,courseName,courseDate,beginTime,finishTime,c
         })
     }
 
-/*
 exports.search = function(word,callback){
     db.search(word,function(rows){
         callback(rows);
     })
-}*/
+}

@@ -6,9 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta http-equiv="cache-control" content="no-cache"/>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/question_detail.css">
+    <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 </head>
 <body>
 <div data-role="page" data-title="尚名校">
@@ -27,7 +29,7 @@
                 <li data-icon="false">
                     <a href="./answerQuestion?questionId=<%=question.questionId%>" data-ajax="false">
                         <div class="addAnswer_div">
-                            <img src="/images/01.png" class="addAnswer_img">
+                            <img src="/images/tab_course.png" class="addAnswer_img">
                             <p class="addAnswer_p">添加回答</p>
                         </div>
                     </a>
@@ -44,8 +46,13 @@
         </div>
     </div>
 </div>
-<script src="/javascripts/jquery.js"></script>
-<script src="/javascripts/jquery.mobile-1.4.5.min.js"></script>
-<script src="/javascripts/smx.js"></script>
 </body>
+<script src="http://apps.bdimg.com/libs/jquery.cookie/1.4.1/jquery.cookie.js"></script>
+<script>
+    if($.cookie("questionDetail") == "true"){
+        location.reload();
+        $.cookie("questionDetail",false);
+        $.cookie("questionList",true);
+    }
+</script>
 </html>

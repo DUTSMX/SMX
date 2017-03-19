@@ -6,10 +6,25 @@
 	height: 25vh;
 	width: 100vw;
 }
+.slick-dotted.slick-slider{
+	margin-bottom:0px;
+}
+
+.slick-dots li button:before{
+	font-size:30px;
+}
+.slick-dots{
+	bottom:10px;
+}
 
 /*
 模块：我的课程
 */
+/*没有课程时占位符大小*/
+.image_place_holder{
+	width:100vw;
+}
+
 /*设置"我的课程"四个字*/
 .myclass h4{
 	color: #3B7454;

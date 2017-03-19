@@ -1,5 +1,5 @@
 var mysql = require('mysql');
-
+var moment = require('moment');
 var conn = mysql.createConnection({
     host: '5835638b397af.gz.cdb.myqcloud.com',
     // host:'localhost',
@@ -63,67 +63,75 @@ exports.getQuestion = function(callback){
         }
     })
 };
-exports.getAnswer = function(callback){
-    var aContent =  100;
-    var sql = "SELECT d.questionId, " +
-        "d.questionTitle," +
-        "left(d.questionContent,"+ aContent +") as questionContent, " +
-        "a.userName as asker, " +
-        "d.questionTime, " +
-        "COUNT(f.questionId) as answerNumber " +
-        "FROM question d JOIN account a ON a.userId = d.userId JOIN answer f on d.questionId = f.questionId " +
-        "GROUP BY f.questionId";
-
+exports.getQuestionContent = function (questionId,callback) {
+    var sql="SELECT d.questionId,"+
+            "d.questionTitle,"+
+            "d.questionContent,"+
+            "d.questionTime "+
+            "FROM question d JOIN account a ON a.userId=d.userId "+"WHERE d.questionId ="+questionId;
     conn.query(sql,function (err,rows) {
-        console.log(sql);
         if(err){
             console.log(err);
             return false;
-        }else{
-            callback(rows);
+        }
+        else if(rows== null||rows[0]== null){
+            console.log("questionContent empty questionId ="+questionId);
+        }
+        else{
+            callback(rows[0]);
         }
     })
 };
-
-exports.getStudent = function(callback){
-    var sql = "SELECT a.userId as studentId, " +
-        "a.registerDate as studentRegisterDate, " +
-        "a.userName as studentName, " +
-        "a.userAge as studentAge, " +
-        "a.userGrade as studentGrade, " +
-        "a.userSchool as studentSchool, " +
-        "a.userAddress as studentAddress " +
-        "FROM account a WHERE a.role in(0,1)" +
-        "GROUP BY a.userId";
-
-    conn.query(sql,function (err,rows) {
-        console.log(sql);
+exports.getAnswers=function (questionId,callback) {
+    var aContent = 100;
+    console.log("questionId:"+questionId);
+    var sql = "SELECT b.answerId as answerId, " +
+        "c.userName as useName, " +
+        "b.answerTime as answerTime, " +
+        "left(b.answerContent,"+ aContent +") as answerContent " +
+        "FROM answer b INNER JOIN account c on b.userId = c.userId " +
+        "WHERE b.questionId = "+questionId;
+    conn.query(sql,function(err,rows,fields){
         if(err){
             console.log(err);
-            return;
-        }else{
-            callback(rows);
+            return
         }
+        callback(rows);
     })
 };
-
-exports.getTeacher = function(callback){
-    var sql = "SELECT a.userId as teacherId, " +
-        "a.userName as teacherName, " +
-        "x.createTime as teacherCreateTime, " +
-        "a.registerDate as teacherRegisterDate, "+
-        "x.goodCourse as teacherGoodCourse, " +
-        "x.selfIntroduction as teacherSelfIntroduction " +
-        "FROM account a JOIN teacher x ON a.userId = x.teacherId WHERE a.role = 2 " +
-        "GROUP BY a.userId";
-
+exports.addCourse = function (courseName,courseDate,teacherName,beginTime,finishTime,courseTime,objectOriented,courseContent, callback) {
+   var sql= "SELECT userId FROM account WHERE userName ='"+teacherName+"'";
     conn.query(sql,function (err,rows) {
-        console.log(sql);
         if(err){
-            console.log(err);
-            return;
+            callback({
+                status:false,
+                desc:err
+            });
+        }else if(rows.length == 0){
+            callback({
+                status:false,
+                desc:"没有该老师"
+            });
         }else{
-            callback(rows);
+            console.log("rows[0]:"+JSON.stringify(rows[0]));
+            var sql = "INSERT INTO course(userId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent) VALUES ("+rows[0].userId+",'"+ courseName + "','" + courseDate + "','" + beginTime + "','" + finishTime + "','" + courseTime + "','" + objectOriented + "','" + courseContent + "')";
+            console.log("sql:"+sql)
+            conn.query(sql, function (err,rows) {
+                if (err) {
+                    console.log(err);
+                    callback({
+                        status:false,
+                        desc:err
+                    })
+                }else {
+                    callback({
+                        status:true,
+                        desc:"课程创建成功"
+                    });
+                }
+            })
         }
+
     })
-};
+
+}

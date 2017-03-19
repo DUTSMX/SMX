@@ -8,24 +8,12 @@ exports.addQuestion = function(userId,questionTitle,questionContent,callback){
 }
 
 exports.getQuestion = function(callback){
-    db.getAnswer(function (rows) {
-        var questionList = rows;
-        db.getQuestion(function (rows) {
-            rows.forEach(function (item) {
-                questionList.push(item);
-            })
-            // console.log(JSON.stringify(questionList));
-            // questionList.sort(function (a,b) {
-            //     return a.time<b.time?1:-1;
-            // });
-            // console.log(JSON.stringify(questionList));
-            db.getOnlineTeacher(function (teacherList) {
-                console.log("teacherList:"+JSON.stringify(teacherList));
-                callback({
-                    teacherList:teacherList,
-                    questionList:questionList
-                });
-            })
+    db.getQuestionList(function (questionList) {
+        db.getOnlineTeacher(function (teacherList) {
+            callback({
+                teacherList:teacherList,
+                questionList:questionList
+            });
         })
     })
 }

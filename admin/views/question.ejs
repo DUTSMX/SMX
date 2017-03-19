@@ -46,7 +46,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="question.html" >问答编辑<!--  <span class="caret"></span> --></a>
+                    <a href="question" >问答编辑<!--  <span class="caret"></span> --></a>
                     <!-- <ul class="dropdown-menu" role="menu">
                       <li><a href="#">Action</a></li>
                       <li><a href="#">Another action</a></li>
@@ -105,14 +105,14 @@
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th>编号</th>
-                            <th>问题</th>
-                            <th>问题描述</th>
-                            <th>提问人</th>
-                            <th>提问时间</th>
-                            <th>回答数量</th>
+                            <th class="ID">编号</th>
+                            <th class="questionTitle">问题</th>
+                            <th class="questionContent">问题描述</th>
+                            <th class="userName">提问人</th>
+                            <th class="questionTime">提问时间</th>
+                            <th class="answerNumber">回答数量</th>
 
-                            <th>操作</th>
+                            <th class="operate">操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -120,14 +120,14 @@
                         <tr>
                             <td><%=item.questionId%></td>
                             <td><%=item.questionTitle%></td>
-                            <td><%=item.questionContent%></td>
+                            <td class="line-clamp-3"><%=item.questionContent%></td>
                             <td><%=item.asker%></td>
-                            <td><%=item.questionTime%></td>
+                            <td><%=moment(item.questionTime).format("MM DD YYYY, HH:mm:ss a")%></td>
                             <td><%=item.answerNumber%></td>
 
                             <td>
                                 <a class="btn btn-danger" href="#">删除</a>
-                                <a class="btn btn-primary" href="questionDetails">查看详情</a>
+                                <a class="btn btn-primary" href="questionDetails?questionId=<%=item.questionId%>">查看详情</a>
                             </td>
                         </tr>
                         <%})%>
