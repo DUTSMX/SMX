@@ -16,21 +16,21 @@
 <body>
 <div data-role="page" data-title="尚名校">
 	<div data-role="header" data-theme="g" data-position="fixed">
-		<img src="/images/ic_arrow_back.png" onclick="window.history.back()" class="left_icon"/>
+		<img src="http://smxbucket-10068625.cos.myqcloud.com/resource/ic_arrow_back.png" onclick="window.history.back()" class="left_icon"/>
 		<h3 class="page_title">提出问题</h3>
 		<!--<img src="/images/ic_share.png" href="#" class="right_icon"/>-->
 	</div>
 	<div data-role="content">
 		<div>
-			<img src="/images/myclass.png">
+			<img src="http://smxbucket-10068625.cos.myqcloud.com/resource/type_icon_green.png">
 			<h4 class="question">问题</h4>
-			<img src="/images/课程分割线.png" class="courseLine">
+			<img src="http://smxbucket-10068625.cos.myqcloud.com/resource/line_green.png" class="courseLine">
 			<textarea id="questionTitle" type="text" placeholder="请写下你的问题（必填）"></textarea>
 		</div>
 		<div>
-			<img src="/images/myclass.png">
+			<img src="http://smxbucket-10068625.cos.myqcloud.com/resource/type_icon_green.png">
 			<h4 class="question">详情</h4>
-			<img src="/images/课程分割线.png" class="courseLine">
+			<img src="http://smxbucket-10068625.cos.myqcloud.com/resource/line_green.png" class="courseLine">
 			<textarea id="questionContent" type="text" placeholder="请填写问题相关描述信息" class="textarea"></textarea>
 		</div>
 	</div>
@@ -39,6 +39,7 @@
 		<button type="submit" value="Submit Button" onclick="askQuestion()" class="publishButton" >发布提问</button>
 	</div>
 </div>
+<script src="http://apps.bdimg.com/libs/jquery.cookie/1.4.1/jquery.cookie.js"></script>
 <script>
 	function askQuestion() {
 		var questionTitle = $("#questionTitle").val();
@@ -55,6 +56,7 @@
 			$.post("askQuestion", data, function (data) {
 				if (data.status) {
 					$("#hint").text(data.desc)
+					$.cookie("questionList",true);
 					window.history.back();
 				} else {
 					console.log(data.desc)

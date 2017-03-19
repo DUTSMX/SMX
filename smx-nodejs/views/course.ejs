@@ -18,7 +18,7 @@
 <body>
 <div data-role="page" data-title="尚名校">
     <div data-role="header" data-theme="g" data-position="fixed">
-        <img src="/images/search-white.png" onclick="location.href='../search'" class="search"/>
+        <img src="http://smxbucket-10068625.cos.myqcloud.com/resource/ic_search.png" onclick="location.href='../search'" class="search"/>
         <h3>课程</h3>
     </div>
     <div class="ad_Images">
@@ -30,12 +30,12 @@
     </div>
     <div data-role="content">
         <div class="myclass">
-            <h4><img src="/images/myclass.png">&nbsp我的课程</h4>
-            <img src="/images/课程分割线.png" class="div_line">
+            <h4><img src="http://smxbucket-10068625.cos.myqcloud.com/resource/type_icon_green.png">&nbsp我的课程</h4>
+            <img src="http://smxbucket-10068625.cos.myqcloud.com/resource/line_green.png" class="div_line">
             <div class="details_class">
                 <ul data-role="listview">
                     <%if(courseList.myCourse.length == 0){%>
-                        <img src="/images/my_course_empty.jpg" class="image_place_holder">
+                        <img src="http://smxbucket-10068625.cos.myqcloud.com/resource/my_course_empty.jpg" class="image_place_holder">
                     <%}else{%>
                         <%courseList.myCourse.forEach(function(item){ %>
                         <li data-icon="false">
@@ -52,7 +52,7 @@
                                         <h3><%= item.courseName %></h3>
                                     </div>
                                     <div class="class_info_time">
-                                        <h6><img class="clock" src="/images/课程时间.png"><%= item.courseTime %></h6>
+                                        <h6><img class="clock" src="http://smxbucket-10068625.cos.myqcloud.com/resource/icon_time.png"><%= item.courseTime %></h6>
                                     </div>
                                 </div>
                             </a>
@@ -63,8 +63,8 @@
             </div>
         </div>
         <div class="hotclass">
-            <h4><img src="/images/hotclass.png">&nbsp热门课程<span><!--<a href="#">更多></a>--></span></h4>
-            <img src="/images/热门课程分割线.png" class="div_line">
+            <h4><img src="http://smxbucket-10068625.cos.myqcloud.com/resource/type_icon_orange.png">&nbsp热门课程<span><!--<a href="#">更多></a>--></span></h4>
+            <img src="http://smxbucket-10068625.cos.myqcloud.com/resource/line_orange.png" class="div_line">
             <div class="details_class">
                 <ul data-role="listview">
                     <% courseList.allCourse.forEach(function(item){ %>
@@ -83,7 +83,7 @@
                                 </div>
                                 <div class="class_info_time">
 
-                                    <h6><img src="/images/课程时间.png"><%= item.courseTime %></h6>
+                                    <h6><img src="http://smxbucket-10068625.cos.myqcloud.com/resource/icon_time.png"><%= item.courseTime %></h6>
                                 </div>
                             </div>
                         </a>
@@ -96,23 +96,20 @@
     <div data-role="footer" data-position="fixed" data-theme="t">
         <div data-role="navbar">
             <ul>
-                <li><a href="#" data-ajax="false"><img src="/images/01.png">
+                <li><a href="#" data-ajax="false"><img src="http://smxbucket-10068625.cos.myqcloud.com/resource/tab_course.png">
                         <p>课程</p></a></li>
-                <li><a onclick="video()" data-ajax="false"><img src="/images/02.png">
+                <li><a onclick="video()" data-ajax="false"><img src="http://smxbucket-10068625.cos.myqcloud.com/resource/tab_video.png">
                         <p>视频</p></a></li>
-                <li><a onclick="question()" data-ajax="false"><img src="/images/03.png">
+                <li><a onclick="question()" data-ajax="false"><img src="http://smxbucket-10068625.cos.myqcloud.com/resource/tab_question.png">
                         <p>答疑</p></a></li>
-                <li><a onclick="mine()" data-ajax="false"><img src="/images/04.png">
+                <li><a onclick="mine()" data-ajax="false"><img src="http://smxbucket-10068625.cos.myqcloud.com/resource/tab_mine.png">
                         <p>我的</p></a></li>
             </ul>
         </div>
     </div>
 </div>
 
-<<<<<<< HEAD
-=======
 <script src="http://apps.bdimg.com/libs/jquery.cookie/1.4.1/jquery.cookie.js"></script>
->>>>>>> 7dacce264fbcaaaf582127f892aa23127585e990
 <script>
     function video() {
         location.replace("/video/video")
@@ -123,9 +120,9 @@
     function mine() {
         location.replace("/users/mine")
     }
-    if($.cookie("update") == "true"){
+    if($.cookie("courseList") == "true"){
         location.reload();
-        $.cookie("update",false);
+        $.cookie("courseList",false);
     }
 //    var flag = true;
 //    if(flag){

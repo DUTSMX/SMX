@@ -15,7 +15,7 @@
 <body>
 <div data-role="page" data-title="尚名校">
     <div data-role="header" data-theme="g" data-position="fixed">
-        <img src="/images/ic_arrow_back.png" onclick="window.history.back()" class="left_icon"/>
+        <img src="http://smxbucket-10068625.cos.myqcloud.com/resource/ic_arrow_back.png" onclick="window.history.back()" class="left_icon"/>
         <h3 class="page_title">回答问题</h3>
         <!--<img src="/images/ic_share.png" href="#" class="right_icon"/>-->
     </div>
@@ -29,6 +29,7 @@
         <button type="submit" value="Submit Button" onclick="answerQuestion()" class="publishButton" >发布答案</button>
     </div>
 </div>
+<script src="http://apps.bdimg.com/libs/jquery.cookie/1.4.1/jquery.cookie.js"></script>
 <script>
     function answerQuestion() {
         var answerContent = $("#answerContent").val();
@@ -42,6 +43,7 @@
             $.post("answerQuestion",data,function (data) {
                 if(data.status){
                     $("#hint").text(data.desc)
+                    $.cookie("questionDetail",true);
                     window.history.back();
                 }else{
                     console.log(data.desc)
