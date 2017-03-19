@@ -25,9 +25,9 @@
                     <img src="<%= userHeadUrl %>" class="set-people">
                     <h1><%= userName %></h1>
                     <% if(gender == 1){ %>
-                    <img class="gender" src="http://smxbucket-10068625.cos.myqcloud.com/resource/icon_gender_man.png">
+                    <img class="gender" src="/images/icon_gender_man.png">
                     <% }else if(gender == 2){ %>
-                    <img class="gender" src="http://smxbucket-10068625.cos.myqcloud.com/resource/icon_gender_women.png">
+                    <img class="gender" src="/images/icon_gender_women.png">
                     <% } %>
                 </a>
             </li>
@@ -36,7 +36,7 @@
         <ul data-role="listview" class="ui-listview-func">
             <li data-icon="false">
                 <a onclick="statusSwitch()" data-ajax="false">
-                    <img src="http://smxbucket-10068625.cos.myqcloud.com/resource/tab_question.png" class="ui-li-icon">
+                    <img src="/images/tab_question.png" class="ui-li-icon">
                     <p class="question_status">问答状态</p>
                     <p class="switch_status" id="question_status">
                         <% if(status){ %>
@@ -51,7 +51,7 @@
         <ul data-role="listview" class="ui-listview-func">
             <li data-icon="false">
                 <a href="createCourse" data-ajax="false">
-                    <img src="http://smxbucket-10068625.cos.myqcloud.com/resource/icon_new_course.png" class="ui-li-icon">
+                    <img src="/images/icon_new_course.png" class="ui-li-icon">
                     <p>新建课程</p>
                 </a>
             </li>
@@ -60,7 +60,7 @@
         <ul data-role="listview" class="ui-listview-func">
             <li data-icon="false">
                 <a href="registerTeacher" data-ajax="false">
-                    <img src="http://smxbucket-10068625.cos.myqcloud.com/resource/icon_new_course.png" class="ui-li-icon">
+                    <img src="/images/icon_new_course.png" class="ui-li-icon">
                     <p>申请中...</p>
                 </a>
             </li>
@@ -69,7 +69,7 @@
         <ul data-role="listview" class="ui-listview-func">
             <li data-icon="false">
                 <a href="registerTeacher" data-ajax="false">
-                    <img src="http://smxbucket-10068625.cos.myqcloud.com/resource/icon_new_course.png" class="ui-li-icon">
+                    <img src="/images/icon_new_course.png" class="ui-li-icon">
                     <p>申请家教</p>
                 </a>
             </li>
@@ -78,13 +78,13 @@
         <ul data-role="listview" class="ui-listview-func">
             <li data-icon="false" class="my_course">
                 <a href="myCourse" data-ajax="false">
-                    <img src="http://smxbucket-10068625.cos.myqcloud.com/resource/icon_my_course.png" class="ui-li-icon">
+                    <img src="/images/icon_my_course.png" class="ui-li-icon">
                     <p>我的课程</p>
                 </a>
             </li>
             <li data-icon="false">
                 <a href="myQuestion" data-ajax="false">
-                    <img src="http://smxbucket-10068625.cos.myqcloud.com/resource/icon_my_question.png" class="ui-li-icon">
+                    <img src="/images/icon_my_question.png" class="ui-li-icon">
                     <p>我的提问</p>
                 </a>
             </li>
@@ -92,7 +92,7 @@
         <ul data-role="listview" class="ui-listview-func">
             <li data-icon="false">
                 <a href="setCenter" data-ajax="false">
-                    <img src="http://smxbucket-10068625.cos.myqcloud.com/resource/icon_set.png" class="ui-li-icon">
+                    <img src="/images/icon_set.png" class="ui-li-icon">
                     <p>设置中心</p>
                 </a>
             </li>
@@ -104,13 +104,13 @@
     <div data-role="footer" data-position="fixed" data-theme="t">
         <div data-role="navbar">
             <ul>
-                <li><a onclick="course()" data-ajax="false"><img src="http://smxbucket-10068625.cos.myqcloud.com/resource/tab_course.png">
+                <li><a onclick="course()" data-ajax="false"><img src="/images/tab_course.png">
                         <p>课程</p></a></li>
-                <li><a onclick="video()" data-ajax="false"><img src="http://smxbucket-10068625.cos.myqcloud.com/resource/tab_video.png">
+                <li><a onclick="video()" data-ajax="false"><img src="/images/tab_video.png">
                         <p>视频</p></a></li>
-                <li><a onclick="question()" data-ajax="false"><img src="http://smxbucket-10068625.cos.myqcloud.com/resource/tab_question.png">
+                <li><a onclick="question()" data-ajax="false"><img src="/images/tab_question.png">
                         <p>答疑</p></a></li>
-                <li><a href="#" data-ajax="false"><img src="http://smxbucket-10068625.cos.myqcloud.com/resource/tab_mine.png">
+                <li><a href="#" data-ajax="false"><img src="/images/tab_mine.png">
                         <p>我的</p></a></li>
             </ul>
         </div>
