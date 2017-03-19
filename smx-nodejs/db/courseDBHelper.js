@@ -19,11 +19,12 @@ exports.getCourse = function(callback){
     var nowTime = new Date().getTime();
     var sql = "SELECT c.courseId, " +
         "c.courseName, " +
-        "c.courseTime, " +
+        "c.objectOriented, " +
+        "c.courseDate, " +
+        "c.beginTime, " +
+        "c.finishTime, " +
         "a.userHeadUrl as teacherHeadUrl, " +
-        "a.userName as teacherName, " +
-        "a.userSchool as teacherSchool, " +
-        "a.userGrade as teacherGrade " +
+        "a.userName as teacherName "+
         "FROM course c JOIN account a ON a.userId = c.userId"
         // + " AND c.courseDate >= curdate()";
 
@@ -44,21 +45,23 @@ exports.getCourseById = function (userId, callback) {
     var nowTime = new Date().getTime();
     var sql1 = "SELECT c.courseId, " +
         "c.courseName, " +
-        "c.courseTime, " +
+        "c.objectOriented, " +
+        "c.courseDate, " +
+        "c.beginTime, " +
+        "c.finishTime, " +
         "a.userHeadUrl as teacherHeadUrl, " +
-        "a.userName as teacherName, " +
-        "a.userSchool as teacherSchool, " +
-        "a.userGrade as teacherGrade " +
+        "a.userName as teacherName "+
         "FROM ((joinCourse j INNER JOIN course c ON j.courseId = c.courseId) INNER JOIN account a ON c.userId = a.userId) " +
         "WHERE j.userId = " + userId;
         //  +"WHERE c.courseDate >= curdate()" ;
     var sql2 = "SELECT c.courseId, " +
         "c.courseName, " +
-        "c.courseTime, " +
+        "c.objectOriented, " +
+        "c.courseDate, " +
+        "c.beginTime, " +
+        "c.finishTime, " +
         "a.userHeadUrl as teacherHeadUrl, " +
-        "a.userSchool as teacherSchool, " +
-        "a.userGrade as teacherGrade, " +
-        "a.userName as teacherName " +
+        "a.userName as teacherName "+
         "FROM course c JOIN account a ON c.userId = a.userId " +
         "WHERE c.userId = " + userId
         // +" and c.courseDate >= curdate()";

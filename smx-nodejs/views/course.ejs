@@ -40,19 +40,18 @@
                         <%courseList.myCourse.forEach(function(item){ %>
                         <li data-icon="false">
                             <a href="courseDetail?courseId=<%= item.courseId %>" data-ajax="false">
-                                <!-- 放在css就失效-->
                                 <div class="my_course_head_div"></div>
                                 <img class="head_big" src=<%= item.teacherHeadUrl %>>
                                 <div class="class_info">
                                     <div class="class_info_school">
                                         <h5><%= item.teacherName %></h5>
-                                        <h6><%= item.teacherSchool %></h6>
+                                        <h6><%= item.objectOriented %></h6>
                                     </div>
                                     <div class="class_info_name">
                                         <h3><%= item.courseName %></h3>
                                     </div>
                                     <div class="class_info_time">
-                                        <h6><img class="clock" src="/images/icon_time.png"><%= item.courseTime %></h6>
+                                        <h6><img class="clock" src="/images/icon_time.png"><%=courseList.moment(item.courseDate).format("YYYY-MM-DD")%>  <%= courseList.moment(item.beginTime,"HH:mm:ss").format("HH:mm") %>-<%=courseList.moment(item.finishTime,"HH:mm:ss").format("HH:mm")%></h6>
                                     </div>
                                 </div>
                             </a>
@@ -70,20 +69,18 @@
                     <% courseList.allCourse.forEach(function(item){ %>
                     <li data-icon="false">
                         <a href="courseDetail?courseId=<%= item.courseId %>" data-ajax="false">
-                            <!-- 放在css就失效-->
                             <div class="all_course_head_div"></div>
                             <img class="head_big" src=<%= item.teacherHeadUrl %>>  <!-- TODOteacherHeadUrl -->
                             <div class="class_info">
                                 <div class="class_info_school">
                                     <h5><%= item.teacherName %></h5>
-                                    <h6><%= item.teacherSchool %></h6>
+                                    <h6><%= item.objectOriented %></h6>
                                 </div>
                                 <div class="class_info_name">
                                     <h3><%= item.courseName %></h3>
                                 </div>
                                 <div class="class_info_time">
-
-                                    <h6><img src="/images/icon_time.png"><%= item.courseTime %></h6>
+                                    <h6><img class="clock" src="/images/icon_time.png"><%=courseList.moment(item.courseDate).format("YYYY-MM-DD")%>  <%= courseList.moment(item.beginTime,"HH:mm:ss").format("HH:mm") %>-<%=courseList.moment(item.finishTime,"HH:mm:ss").format("HH:mm")%></h6>
                                 </div>
                             </div>
                         </a>
