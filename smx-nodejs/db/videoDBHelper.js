@@ -19,7 +19,8 @@ exports.getVideo = function(callback){
 }
 
 exports.getVideoDetail = function (videoId,callback) {
-    var sql = "SELECT v.videoUrl, " +
+    var sql = "SELECT v.videoId, " +
+        "v.videoUrl, " +
         "v.videoName, " +
         "a.userName as authorName, " +
         "a.userSchool as authorSchool, " +
@@ -88,5 +89,35 @@ exports.searchVideo = function(word,callback){
             return;
         }
         callback(rows);
+    })
+}
+
+exports.comment = function (userId, videoId, comment, callback) {
+    var sql = "INSERT INTO videoComment(userId,videoId,comment) VALUES("+userId+","+videoId+",'"+comment+"')";
+    console.log("sql:"+sql)
+    conn.query(sql,function (err,rows) {
+        if(err){
+            callback({
+                status:false,
+                desc:err
+            })
+        }
+        callback({
+            status:true,
+            desc:"评论成功"
+        })
+    })
+}
+
+exports.getCommentList = function (videoId,callback) {
+    var sql = "SELECT userHeadUrl,userName,comment FROM videoComment v JOIN account a ON v.userId = a.userId where videoId = "+videoId;
+    console.log("sql:"+sql);
+    conn.query(sql,function (err,rows) {
+        if (err) {
+            console.log(err)
+            return;
+        } else {
+            callback(rows);
+        }
     })
 }

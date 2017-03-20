@@ -43,3 +43,6 @@ textarea.ui-input-text.ui-textinput-autogrow{
 .ui-page-theme-a .ui-btn{
     text-shadow: none;!important;
 }
+.ui-btn, label.ui-btn{
+    font-weight:100;
+}

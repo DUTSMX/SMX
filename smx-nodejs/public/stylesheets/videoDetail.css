@@ -31,6 +31,91 @@
     /*padding-left:2px;*/
     /*padding-right:2px*/
 /*}*/
-.ui-listview li .className-details{
-    left: 25%;
+/*每一行 分割线*/
+.hr{
+    display:inline-block;
+    margin-top: 2.8%;
+    float: left;
+    margin-left: 3%;
 }
+/*每一行 边距清除*/
+.ui-listview>.ui-li-static{
+    padding:1% 0px;
+}
+/*每一行 名称*/
+.ui-listview li .className-text{
+    display: inline-block;
+    padding-top: 1%;
+    padding-left: 3%;
+    font-weight:bold;
+}
+/*每一行 内容*/
+.ui-listview li .className-details{
+    display: inline-block;
+    width:60%; /*最右侧>*/
+    padding-top: 2%;
+    position: absolute;
+    left: 35%;
+    font-weight:normal;
+}
+/*课程内容 两侧边距*/
+.ui-listview>li .content{
+    white-space: normal;
+    text-indent:2em;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+.ui-input-text{
+    position: fixed;
+    bottom:0px;
+    width:78%
+}
+button.ui-btn, .ui-controlgroup-controls button.ui-btn-icon-notext{
+    width:20%;
+}
+.comment{
+    position:fixed;
+    right:0px;
+    bottom:0px;
+ }
+.ui-btn{
+    padding:0.5em 0.3em;
+    background-color:#347557!important;
+    color: #fff!important;
+    border-color: #fff;
+    text-shadow: none;
+}
+/*"发布问题"字体阴影*/
+.ui-page-theme-a .ui-btn{
+    text-shadow: none;!important;
+}
+.ui-btn, label.ui-btn{
+    font-weight:100;
+}
+.ui-listview>.ui-li-has-thumb>.ui-btn, .ui-listview>.ui-li-static.ui-li-has-thumb{
+    min-height:10px;
+    height:30px;
+    padding-left:40px;
+ }
+.head_60{
+    height:20px;
+    width:20px;
+    margin-left:1em;
+    margin-top:4px;
+}
+.ui-listview>li.ui-first-child img:first-child:not(.ui-li-icon){
+    -webkit-border-top-left-radius:36px;
+    border-top-left-radius:36px;
+}
+.ui-listview>li.ui-last-child img:first-child:not(.ui-li-icon){
+    -webkit-border-bottom-left-radius:36px;
+    border-bottom-left-radius:36px;
+}
+.name{
+    display: inline-block;
+    float:left;
+}
+.ui-listview>.ui-li-static{
+    padding:0px 0px;
+ }

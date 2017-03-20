@@ -151,11 +151,19 @@
 	color:white !important;
 	text-shadow: none !important;
 }
-
 .search{
 	width:20px;
 	height:20px;
 	float: right;
 	margin-right:3%;
 	margin-top:4%
+}
+.type{
+	margin:0px;
+	margin-top:16px;
+	margin-bottom:-8px;
+	padding-left:1em;
+}
+.div_line{
+	width:100vw;
 }

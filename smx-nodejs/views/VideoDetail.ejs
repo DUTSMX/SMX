@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="cache-control" content="no-cache"/>
-    <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/common_line.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/videoDetail.css">
     <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
@@ -23,20 +23,20 @@
     <div class="teacherInfo">
         <ul data-role="listview">
             <li data-icon="false">
-                <video width="100%"  class="video" controls>
-                    <source src="<%= videoUrl %>"
+                <video width="100%" class="video" controls>
+                    <source src="<%= detail.videoUrl %>"
                             type="video/mp4">
                 </video>
             </li>
             <li data-icon="false">
                 <div class="video_info">
-                    <h5 class="grade"><%= videoName %></h5>
+                    <h5 class="grade"><%= detail.videoName %></h5>
                     <div class="teacherIntro">
-                        <h5 class="name"><%= authorName %></h5>
-                        <h6 class="school"><%= authorSchool %>|<%= authorGrade %></h6>
+                        <h5 class="name"><%= detail.authorName %></h5>
+                        <h6 class="school"><%= detail.authorSchool %>|<%= detail.authorGrade %></h6>
                     </div>
                     <div class="videoInfo">
-                        <%= videoTime %> | <span class="number"><%= videoWatchCount %></span>次观看
+                        <%= detail.videoTime %> | <span class="number"><%= detail.videoWatchCount %></span>次观看
                         <!--<span class="videos_classify_detail">高中</span>-->
                         <!--<span class="videos_classify_detail">数学</span>-->
                         <!--<span class="videos_classify_detail">理科</span>-->
@@ -46,15 +46,51 @@
             <li data-icon="false">
                 <hr width="1" size="20" color="#3B7454" class="hr">
                 <h5 class="className-text">课程简介</h5>
-                <p class="className-details"><%= videoAbstract %></p>
+                <p class="content"><%= detail.videoAbstract %></p>
             </li>
             <li data-icon="false">
                 <hr width="1" size="20" color="#3B7454" class="hr">
                 <h5 class="className-text">课程内容</h5>
-                <p class="content"><%= videoContent %></p>
+                <p class="content"><%= detail.videoContent %></p>
             </li>
         </ul>
     </div>
+    <h4 class="type"><img src="/images/type_icon_green.png">&nbsp评论</h4>
+    <img src="/images/line_green.png" class="div_line">
+    <div style="margin-bottom: 60px">
+        <ul data-role="listview">
+            <% comment.forEach(function(item){ %>
+            <li data-icon="false" class="comment-list">
+                <img class="head_60" src=<%= item.userHeadUrl %>>
+                <p class="name"><%= item.userName %>:<%= item.comment %></p>
+            </li>
+            <% }) %>
+        </ul>
+    </div>
+    <div class="comment-div">
+        <input type="text" placeholder="请输入评论" id="commentStr">
+        <button onclick="comment()" id="comment" class="comment">评论</button>
+    </div>
 </div>
 </body>
+<script>
+    function comment() {
+        console.log("comment")
+        var comment = $("#commentStr").val();
+        var videoId = "<%=detail.videoId%>";
+        if (comment.length != 0) {
+            var data = {
+                videoId: videoId,
+                comment: comment
+            }
+            $.post("comment", data, function (data) {
+                if (data.status) {
+                    comment:$("#commentStr").val("");
+                } else {
+                    console.log(data.desc);
+                }
+            }, "json")
+        }
+    }
+</script>
 </html>
