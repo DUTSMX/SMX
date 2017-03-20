@@ -72,14 +72,21 @@ exports.addVideo = function(videoname,username,url,degree,picurl,describe,callba
         callback(rows);
     })
 }
+*/
 exports.searchVideo = function(word,callback){
-    var sql = "SELECT id,videoname,username,url,degree,picurl,describe as videoid,'发布者',videourl,'视频播放次数' ,picurl,'视频描述'from video " +
-        "WHERE CONCAT(videoname,username,describe) LIKE '%"+word+"%' )";
-    conn.query(sql,function(err,rows,fields){
+    var sql = 'select videoCoverUrl, videoId, videoName, detail, count(distinct videoId) from('+
+        'select videoCoverUrl, videoId, videoName, "" as detail from video where videoName LIKE "%'+word+'%"' +
+        'UNION '+
+        'select videoCoverUrl, videoId, videoName, CONCAT("视频内容：",videoAbstract) as detail from video where videoAbstract LIKE "%'+word+'%"'+
+        'UNION '+
+        'select videoCoverUrl, videoId, videoName, CONCAT("视频内容：",videoContent) as detail from video where videoContent LIKE "%'+word+'%"'+
+        ') course group by videoId order by videoId desc'
+    console.log("sql:"+sql);
+    conn.query(sql,function(err,rows){
         if(err){
-            console.error(err);
+            console.log(err);
+            return;
         }
         callback(rows);
     })
 }
-*/

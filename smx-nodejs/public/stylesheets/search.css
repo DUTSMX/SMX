@@ -1,6 +1,21 @@
 .ui-input-search .ui-body-inherit .ui-corner-all .ui-shadow-inset .ui-input-has-clear{
     display: inline-block; !important;
 }
+.ui-input-text input, .ui-input-search input, textarea.ui-input-text{
+    padding:0px;!important;
+    padding-left:26px;!important;
+}
+.img-search{
+    position:absolute;
+    left:6px;
+    top:70px;
+}
+.img-delete{
+    float:right;
+    position: absolute;
+    top:70px;
+    right:6px;
+}
 .type{
     margin:0px;
     padding-left:1em;
@@ -48,7 +63,30 @@
 .ui-listview>li .name{
     font-size:16px;
     font-weight:bold;
-}
-.ui-listview>li p{
+    float:left;
     margin-left:70px;
- }
+    width:30%;
+}
+.ui-listview>li .teacher{
+    margin-top:14px;
+    width:112px;
+    float:right
+}
+.ui-listview>li .detail{
+    clear:both;
+    margin-left:70px;
+}
+.ui-listview>li .only_name{
+    font-size:16px;
+    font-weight:bold;
+    float:left;
+    padding-right:20px;
+    margin-top:20px;
+    margin-left:70px;
+    width:30%;
+}
+.ui-listview>li .only_teacher{
+    margin-top:24px;
+    width:112px;
+    float:right
+}

@@ -5,9 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="cache-control" content="no-cache"/>
-    <link rel="stylesheet" type="text/css"
-          href="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <!--浏览器不缓存-->
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/smxtheme.css">
     <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
@@ -15,83 +17,231 @@
 </head>
 <body>
 <div data-role="page" data-title="尚名校">
-    <div data-role="header" data-theme="g" data-position="fixed">
+    <div data-role="header" data-theme="g" data-position="fixed" style="position:fixed">
         <img src="/images/ic_arrow_back.png" onclick="window.history.back()" class="left_icon"/>
         <h5>搜索</h5>
     </div>
-    <input id="search" type="search" oninput="search()" onporpertychange="search()" placeholder="搜索<%=type%>"
-           class="search_input"/>
+    <div>
+        <img src="/images/icon_search.png" class="img-search">
+        <img src="/images/icon_delete.png" class="img-delete" id="img-delete" onclick="delete_img()">
+        <input id="search" type="text" placeholder="搜索<%=type%>"class="search-input" oninput="search()" onporpertychange="search()"/>
+    </div>
     <div id="search-type" class="search-type">
-        <a href="searchType?type=课程">
+        <a onclick="course()">
             <div class="search-detail">
                 <img class="search-image" src="/images/tab_course.png">
                 <h5>课程</h5>
             </div>
         </a>
 
-        <a href="searchType?type=视频">
-        <div class="search-detail">
+        <a onclick="video()">
+            <div class="search-detail">
                 <img class="search-image" src="/images/tab_video.png">
                 <h5>视频</h5>
-        </div>
+            </div>
         </a>
-        <a href="searchType?type=问答">
-        <div class="search-detail">
+        <a onclick="question()">
+            <div class="search-detail">
                 <img class="search-image" src="/images/tab_question.png">
                 <h5>问答</h5>
-        </div>
+            </div>
         </a>
     </div>
     <div id="search-result">
-        <h4 class="type"><img src="/images/type_icon_green.png">&nbsp我的课程</h4>
+    <div id="search-course">
+        <h4 class="type"><img src="/images/type_icon_green.png">&nbsp课程</h4>
         <img src="/images/line_green.png" class="div_line">
         <div class="details_class">
             <ul id="course-list" data-role="listview">
+                <!--<li class="list" data-icon="false">-->
+                    <!--<a  data-ajax="false" href="/course/courseDetail?courseId=1" class="course_click ui-btn"> <img class="image" src="/images/tab_course.png">-->
+                        <!--<p class="only_name">课程名称</p>-->
+                        <!--<p class="only_teacher">授课教师：齐书强</p>-->
+                    <!--</a>-->
+                <!--</li>-->
             </ul>
         </div>
     </div>
-
+    <div id="search-video">
+        <h4 class="type"><img src="/images/type_icon_green.png">&nbsp视频</h4>
+        <img src="/images/line_green.png" class="div_line">
+        <div class="details_class">
+            <ul id="video-list" data-role="listview">
+                <!--<li class="list" data-icon="false">-->
+                <!--<a  data-ajax="false" href="/course/courseDetail?courseId=1" class="course_click ui-btn"> <img class="image" src="/images/tab_course.png">-->
+                <!--<p class="only_name">课程名称</p>-->
+                <!--<p class="only_teacher">授课教师：齐书强</p>-->
+                <!--</a>-->
+                <!--</li>-->
+            </ul>
+        </div>
+    </div>
+    <div id="search-question">
+        <h4 class="type"><img src="/images/type_icon_green.png">&nbsp问答</h4>
+        <img src="/images/line_green.png" class="div_line">
+        <div class="details_class">
+            <ul id="question-list" data-role="listview">
+                <!--<li class="list" data-icon="false">-->
+                <!--<a  data-ajax="false" href="/course/courseDetail?courseId=1" class="course_click ui-btn"> <img class="image" src="/images/tab_course.png">-->
+                <!--<p class="only_name">课程名称</p>-->
+                <!--<p class="only_teacher">授课教师：齐书强</p>-->
+                <!--</a>-->
+                <!--</li>-->
+            </ul>
+        </div>
+    </div>
+    </div>
 </div>
 </body>
+<script src="http://apps.bdimg.com/libs/jquery.cookie/1.4.1/jquery.cookie.js"></script>
 <script>
-    console.log("click"+location.href);
-    var type=getQueryString("type")
-    console.log("type:<%=type%>"+type)
-    if(type != null){
-        $("#search-type").hide();
-    }
+
+
+    var flag = $.cookie("search");
     $("#search-result").hide();
+    $("#img-delete").hide();
     function search() {
+        console.log("search:")
+        var search = flag;
+        console.log("search:"+search)
+        showLoader();
         var word = $("#search").val();
-        data = {word: word}
-        console.log("word：" + word)
-        if (word.length == 0) {
+        word = word.replace(/\"/g,"");
+        var data = {
+            type:search,
+            word: word
+        }
+        console.log("data：" + JSON.stringify(data))
+        if (word.length <= 0) {
+            hideLoader();
             $("#search-type").show();
             $("#search-result").hide();
-            $("#course-list").empty();
-        } else if (word.length > 0) {
-            $.post("search", data, function (data) {
-                $("#search-type").hide();
-                $("#search-result").show();
-                var list = '';
-                data.forEach(function (item) {
-                    list += '<li class="list" data-icon="false"> <a  data-ajax="false" href="/course/courseDetail?courseId=' +
-                            item.courseId
-                            + '" class="course_click ui-btn"> <img class="image" src="' + item.userHeadUrl + '"> <p class="name">' +
-                            item.courseName
-                            + '</p> <p>' + item.detail + '</p></a></li>'
-                })
-                console.log("list:" + list);
-                $("#course-list").empty();
-                $("#course-list").append(list);
+        } else{
+            $("#img-delete").show();
+            $.post("search/", data, function (data) {
+                if(data.course.length+data.video.length+data.question.length == 0){
+                    $("#search-type").show();
+                    $("#search-result").hide();
+                    hideLoader();
+                }else{
+                    $("#search-type").hide();
+                    $("#search-result").show();
+                    if (data.course.length == 0) {//课程
+                        $("#search-course").hide();
+                    } else {
+                        $("#search-course").show();
+                        var list = '';
+                        data.course.forEach(function (item) {
+                            if (item.detail.length != 0) {
+                                list += '<li class="list" data-icon="false"> <a  data-ajax="false" href="/course/courseDetail?courseId=' +
+                                        item.courseId
+                                        + '" class="course_click ui-btn"> <img class="image" src="' + item.userHeadUrl + '"> <p class="name">' +
+                                        item.courseName
+                                        + '</p> <p class="teacher">' + item.teacher + '</p><p class="detail">' + item.detail + '</p></a></li>'
+                            } else {
+                                list += '<li class="list" data-icon="false"> <a  data-ajax="false" href="/course/courseDetail?courseId=' +
+                                        item.courseId
+                                        + '" class="course_click ui-btn"> <img class="image" src="' + item.userHeadUrl + '"> <p class="only_name">' +
+                                        item.courseName
+                                        + '</p> <p class="only_teacher">' + item.teacher + '</p></a></li>'
+                            }
+                            hideLoader();
+                        })
+                        $("#course-list").empty();
+                        $("#course-list").append(list);
+                    }
+                    if (data.video.length == 0) {//视频
+                        $("#search-video").hide();
+                    } else {
+                        $("#search-video").show();
+                        var list = '';
+                        data.video.forEach(function (item) {
+                            if(item.detail.length != 0){
+                                list += '<li class="list" data-icon="false"> <a  data-ajax="false" href="/video/videoDetail?videoId=' +
+                                        item.videoId
+                                        + '" class="course_click ui-btn"> <img class="image" src="' + item.videoCoverUrl + '"> <p class="name">' +
+                                        item.videoName
+                                        + '</p> <p class="detail">' + item.detail + '</p></a></li>'
+                            }else{
+                                list += '<li class="list" data-icon="false"> <a  data-ajax="false" href="/video/videoDetail?videoId=' +
+                                        item.videoId
+                                        + '" class="course_click ui-btn"> <img class="image" src="' + item.videoCoverUrl + '"> <p class="only_name">' +
+                                        item.videoName
+                                        + '</p></a></li>'
+                            }
+                            hideLoader();
+                        })
+                        $("#video-list").empty();
+                        $("#video-list").append(list);
+                    }
+                    if (data.question.length == 0) {//问答
+                        $("#search-question").hide();
+                    } else {
+                        $("#search-question").show();
+                        var list = '';
+                        data.question.forEach(function (item) {
+                            if(item.detail.length != 0){
+                                list += '<li class="list" data-icon="false"> <a  data-ajax="false" href="' +
+                                        item.aHref
+                                        + '" class="course_click ui-btn"> <img class="image" src="' + item.userHeadUrl + '"> <p class="name">' +
+                                        item.questionTitle
+                                        + '</p><p class="teacher">' + item.author + '</p> <p class="detail">' + item.detail + '</p></a></li>'
+                            }else{
+                                list += '<li class="list" data-icon="false"> <a  data-ajax="false" href="' +
+                                        item.aHref
+                                        + '" class="course_click ui-btn"> <img class="image" src="' + item.userHeadUrl + '"> <p class="only_name">' +
+                                        item.questionTitle
+                                        + '</p><p class="only_teacher">' + item.author + '</p></a></li>'
+                            }
+                            hideLoader();
+                        })
+                        $("#question-list").empty();
+                        $("#question-list").append(list);
+                    }
+                }
+
             }, "json")
         }
     }
-    function getQueryString(name)
-    {
-        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-        var r = window.location.search.substr(1).match(reg);
-        if(r!=null)return  unescape(r[2]); return null;
+
+    function delete_img(){
+        $("#img-delete").hide();
+        $("#search-type").show();
+        $("#search-result").hide();
+        $("#search").val("");
+    }
+    if(flag.length != 0){
+        $("#search-type").hide();
+        $.cookie("search","");
+    }
+    function course() {
+        location.href="search?type=课程"
+        $.cookie("search","课程");
+    }
+    function video() {
+        location.href="search?type=视频"
+        $.cookie("search","视频");
+    }
+    function question() {
+        location.href="search?type=问答"
+        $.cookie("search","问答");
+    }
+    //显示加载器
+    function showLoader() {
+        //显示加载器.for jQuery Mobile 1.2.0
+        $.mobile.loading('show', {
+            text: '加载中...', //加载器中显示的文字
+            textVisible: true, //是否显示文字
+            theme: 'a',        //加载器主题样式a-e
+            textonly: false,   //是否只显示文字
+            html: ""           //要显示的html内容，如图片等
+        });
+    }
+
+    //隐藏加载器.for jQuery Mobile 1.2.0
+    function hideLoader() {
+        //隐藏加载器
+        $.mobile.loading('hide');
     }
 </script>
 </html>

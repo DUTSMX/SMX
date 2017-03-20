@@ -181,11 +181,29 @@ exports.addAnswer = function (userId,questionId,answerContent,callback) {
     })
 }
 
-/*
+
 exports.searchQuestion = function(word,callback){
-    var sql = "SELECT questionId,userName,userHeadUrl,questionTtile,questionContent,questionTime as questionId,'提" +
-        "问者','提问内容',picurl,voiceurl from question " +
-        "WHERE CONCAT(username,content) LIKE '%"+word+"%' )";
+    var sql = 'SELECT aHref,author,userHeadUrl,questionTitle,detail,count(DISTINCT questionTitle)FROM('+
+        'SELECT CONCAT("question/questionDetail?questionId=",questionId) AS aHref,'+
+    'CONCAT("提问者:",userName) AS author,'+
+    'userHeadUrl, questionTitle, "" AS detail '+
+    'FROM question q JOIN account a ON q.userId = a.userId '+
+    'WHERE questionTitle LIKE "%'+word+'%" OR userName LIKE "%'+word+'%"'+
+    'UNION '+
+    'SELECT CONCAT("question/questionDetail?questionId=",questionId) AS aHref,'+
+    'CONCAT("提问者:",userName) AS author,'+
+    'userHeadUrl, questionTitle, CONCAT("问题详情：",q.questionContent) AS detail '+
+    'FROM question q JOIN account a ON q.userId = a.userId '+
+    'WHERE questionContent LIKE "%'+word+'%" '+
+    'UNION '+
+    'SELECT CONCAT("question/answerDetail?answerId=",answerId) AS aHref, '+
+    'CONCAT("回答者:",userName) AS author, '+
+    'userHeadUrl, questionTitle, CONCAT("回答详情：",a.answerContent) AS detail '+
+    'FROM question q JOIN answer a ON q.questionId = a.questionId '+
+    'JOIN account c ON a.userId = c.userId '+
+    'WHERE answerContent LIKE "%'+word+'%" OR userName LIKE "%'+word+'%"'+
+    ') question GROUP BY questionTitle ';
+    console.log("sql:"+sql)
     conn.query(sql,function(err,rows,fields){
         if(err){
             console.log(err);
@@ -194,5 +212,3 @@ exports.searchQuestion = function(word,callback){
         callback(rows);
     })
 }
-*/
-

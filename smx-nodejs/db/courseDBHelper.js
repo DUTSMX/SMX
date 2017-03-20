@@ -279,13 +279,14 @@ exports.addCourse = function (userId,courseName,courseDate,beginTime,finishTime,
 }
 exports.search = function (word, callback) {
     var courseList;
-    var sql = "select userHeadUrl, courseId, courseName,'' as detail from course c Join account a ON a.userId = c.userId where courseName LIKE '%"+word+"%' "+
-        "UNION "+
-        "select a.userHeadUrl,c.courseId, c.courseName,CONCAT('授课教师：',a.userName) as detail from course c Join account a ON a.userId = c.userId where a.userName like '%"+word+"%' "+
-        "UNION "+
-        "select userHeadUrl, courseId, courseName,CONCAT('面向对象：',objectOriented) as detail from course c Join account a ON a.userId = c.userId where objectOriented LIKE '%"+word+"%' "+
-        "UNION "+
-        "select userHeadUrl, courseId, courseName,CONCAT('课程内容：',courseContent) as detail from course c Join account a ON a.userId = c.userId where courseContent LIKE '%"+word+"%' ";
+    var sql =
+        'select userHeadUrl, courseId, courseName, teacher, detail, count(distinct courseId) from('+
+        'select userHeadUrl, courseId, courseName, CONCAT("授课教师：",a.userName) as teacher,"" as detail from course c Join account a ON a.userId = c.userId where courseName LIKE "%'+word+'%" OR a.userName like "%'+word+'%"' +
+        'UNION '+
+        'select userHeadUrl, courseId, courseName, CONCAT("授课教师：",a.userName) as teacher, CONCAT("面向对象：",objectOriented) as detail from course c Join account a ON a.userId = c.userId where objectOriented LIKE "%'+word+'%" '+
+        'UNION '+
+        'select userHeadUrl, courseId, courseName, CONCAT("授课教师：",a.userName) as teacher, CONCAT("课程内容：",courseContent) as detail from course c Join account a ON a.userId = c.userId where courseContent LIKE "%'+word+'%" '+
+        ') course group by courseId order by courseId desc'
 
     console.log(sql);
     conn.query(sql, function (err, rows, fields) {
