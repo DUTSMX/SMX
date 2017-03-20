@@ -98,7 +98,7 @@
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">
-                    <h3 class="panel-title">学生列表</h3>
+                    <h3 class="panel-title">意见反馈</h3>
                 </div>
                 <!-- Table -->
                 <div class="table-responsive">
@@ -106,27 +106,21 @@
                         <thead>
                         <tr>
                             <th>用户ID</th>
-                            <th>注册时间</th>
                             <th>用户名称</th>
-                            <th>年龄</th>
-                            <th>年级</th>
-                            <th>学校</th>
-                            <th>住址</th>
+                            <th>反馈时间</th>
+                            <th>反馈内容</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <%studentList.forEach(function (item){ %>
+                        <%suggestion.forEach(function (item){ %>
                         <tr>
-                            <td><%=item.studentId%></td>
-                            <td><%=item.studentRegisterDate%></td>
-                            <td><%=item.studentName%></td>
-                            <td><%=item.studentAge%></td>
-                            <td><%=item.studentGrade%></td>
-                            <td><%=item.studentSchool%></td>
-                            <td><%=item.studentAddress%></td>
+                            <td><%=item.userId%></td>
+                            <td><%=item.userName%></td>
+                            <td><%=item.feedbackTime%></td>
+                            <td><%=item.feedback%></td>
                             <td>
-                                <a class="btn btn-success" href="studentListEdit">编辑</a>
-                                <a class="btn btn-primary" href="studentListDetails?studentId=<%=item.studentId%>">查看详情</a>
+                                <a class="btn btn-success" href="suggestionReply?userId=<%=item.userId%>">回复</a>
                             </td>
                         </tr>
                         <%})%>
