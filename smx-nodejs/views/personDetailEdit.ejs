@@ -17,7 +17,7 @@
     <div data-role="page" data-title="尚名校">
         <div data-role="header" data-theme="g" data-position="fixed">
             <img src="/images/ic_arrow_back.png" onclick="window.history.back()" class="left_icon"/>
-            <img src="/images/icon_save.png" onclick="editInfo()" class="right_icon"/>
+            <img src="/images/ic_save.png" onclick="editInfo()" class="right_icon"/>
             <h3 class="page_title">修改信息</h3>
             <!--<img src="/images/ic_share.png" href="#" class="right_icon"/>-->
         </div>
@@ -61,7 +61,7 @@
                             <input type="radio" name="radio-view" id="radio-view-c" value="0" />
                             <label for="radio-view-c">保密</label>
                         </fieldset>
-                        <%} else{%>"
+                        <%} else{%>
                         <fieldset data-role="controlgroup" data-type="horizontal" class="select_gender">
                             <input type="radio" name="radio-view" id="radio-view-a" value="1" />
                             <label for="radio-view-a">男</label>
@@ -107,6 +107,7 @@
 </body>
 <script src="/javascripts/sdk/qcloud_sdk.js"></script>
 <script src="/javascripts/sdk/swfobject.js"></script>
+<script src="http://apps.bdimg.com/libs/jquery.cookie/1.4.1/jquery.cookie.js"></script>
 <script>
     function uploadImg() {
         var cos = new CosCloud("10068625","/")
@@ -133,8 +134,7 @@
                 var postfix = name.substr(name.lastIndexOf("."))
                 console.log("postfix:/head/"+userId+postfix)
 
-                cos.uploadFile(successCallBack,errorCallBack,"smxbucket","/"+selectedFile.name,selectedFile,0)
-//                cos.getFolderStat(successCallBack,errorCallBack,"smxbucket","/");
+                cos.uploadFile(successCallBack,errorCallBack,"smxbucket","/head/"+userId+"head"+Math.floor((Math.random()*9000+1000))+postfix,selectedFile,0)
             }
         }
     }
@@ -171,6 +171,7 @@
                         location.replace("../course/course")
                     }else{
                         $("#hint").text(data.desc)
+                        $.cookie("personDetail",true);
                         window.history.back()
                     }
                 }else{

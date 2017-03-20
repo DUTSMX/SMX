@@ -18,7 +18,7 @@
     <div data-role="header" data-theme="g" data-position="fixed">
         <img src="/images/ic_arrow_back.png" onclick="window.history.back()" class="left_icon"/>
         <%if(!self){%>
-            <span><a href="personDetailEdit"data-ajax="false"><img class="right_icon"src="/images/编辑.png"></a></span>
+            <span><a href="personDetailEdit"data-ajax="false"><img class="right_icon"src="/images/ic_edit.png"></a></span>
         <%}%>
         <h3 class="page_title">个人信息</h3>
     </div>
@@ -64,4 +64,12 @@
     </div>
 </div>
 </body>
+<script src="http://apps.bdimg.com/libs/jquery.cookie/1.4.1/jquery.cookie.js"></script>
+<script>
+    if($.cookie("personDetail") == "true"){
+        location.reload();
+        $.cookie("personDetail",false);
+        $.cookie("mine",true);
+    }
+</script>
 </html>

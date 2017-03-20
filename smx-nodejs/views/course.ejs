@@ -18,6 +18,7 @@
 <body>
 <div data-role="page" data-title="尚名校">
     <div data-role="header" data-theme="g" data-position="fixed">
+        <img src="/images/ic_search.png" onclick="location.href='../search'" class="search"/>
         <h3>课程</h3>
     </div>
     <div class="ad_Images">
@@ -29,56 +30,57 @@
     </div>
     <div data-role="content">
         <div class="myclass">
-            <h4><img src="/images/myclass.png">&nbsp我的课程</h4>
-            <img src="/images/课程分割线.png" class="div_line">
+            <h4><img src="/images/type_icon_green.png">&nbsp我的课程</h4>
+            <img src="/images/line_green.png" class="div_line">
             <div class="details_class">
                 <ul data-role="listview">
-                    <% courseList.myCourse.forEach(function(item){ %>
-                    <li data-icon="false">
-                        <a href="courseDetail?courseId=<%= item.courseId %>" data-ajax="false">
-                            <!-- 放在css就失效-->
-                            <div class="my_course_head_div"></div>
-                            <img class="head_big" src=<%= item.teacherHeadUrl %>>
-                            <div class="class_info">
-                                <div class="class_info_school">
-                                    <h5><%= item.teacherName %></h5>
-                                    <h6><%= item.teacherSchool %></h6>
+                    <%if(courseList.myCourse.length == 0){%>
+                        <img src="http://smxbucket-10068625.cos.myqcloud.com/resource/my_course_empty.jpg" class="image_place_holder">
+                    <%}else{%>
+                        <%courseList.myCourse.forEach(function(item){ %>
+                        <li data-icon="false">
+                            <a href="courseDetail?courseId=<%= item.courseId %>" data-ajax="false">
+                                <div class="my_course_head_div"></div>
+                                <img class="head_big" src=<%= item.teacherHeadUrl %>>
+                                <div class="class_info">
+                                    <div class="class_info_school">
+                                        <h5><%= item.teacherName %></h5>
+                                        <h6><%= item.objectOriented %></h6>
+                                    </div>
+                                    <div class="class_info_name">
+                                        <h3><%= item.courseName %></h3>
+                                    </div>
+                                    <div class="class_info_time">
+                                        <h6><img class="clock" src="/images/icon_time.png"><%=courseList.moment(item.courseDate).format("YYYY-MM-DD")%>  <%= courseList.moment(item.beginTime,"HH:mm:ss").format("HH:mm") %>-<%=courseList.moment(item.finishTime,"HH:mm:ss").format("HH:mm")%></h6>
+                                    </div>
                                 </div>
-                                <div class="class_info_name">
-                                    <h3><%= item.courseName %></h3>
-                                </div>
-                                <div class="class_info_time">
-                                    <h6><img class="clock" src="/images/课程时间.png"><%= item.courseTime %></h6>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <% }) %>
+                            </a>
+                        </li>
+                        <% }) %>
+                    <%}%>
                 </ul>
             </div>
         </div>
         <div class="hotclass">
-            <h4><img src="/images/hotclass.png">&nbsp热门课程<span><!--<a href="#">更多></a>--></span></h4>
-            <img src="/images/热门课程分割线.png" class="div_line">
+            <h4><img src="/images/type_icon_orange.png">&nbsp热门课程<span><!--<a href="#">更多></a>--></span></h4>
+            <img src="/images/line_orange.png" class="div_line">
             <div class="details_class">
                 <ul data-role="listview">
                     <% courseList.allCourse.forEach(function(item){ %>
                     <li data-icon="false">
                         <a href="courseDetail?courseId=<%= item.courseId %>" data-ajax="false">
-                            <!-- 放在css就失效-->
                             <div class="all_course_head_div"></div>
                             <img class="head_big" src=<%= item.teacherHeadUrl %>>  <!-- TODOteacherHeadUrl -->
                             <div class="class_info">
                                 <div class="class_info_school">
                                     <h5><%= item.teacherName %></h5>
-                                    <h6><%= item.teacherSchool %></h6>
+                                    <h6><%= item.objectOriented %></h6>
                                 </div>
                                 <div class="class_info_name">
                                     <h3><%= item.courseName %></h3>
                                 </div>
                                 <div class="class_info_time">
-
-                                    <h6><img src="/images/课程时间.png"><%= item.courseTime %></h6>
+                                    <h6><img class="clock" src="/images/icon_time.png"><%=courseList.moment(item.courseDate).format("YYYY-MM-DD")%>  <%= courseList.moment(item.beginTime,"HH:mm:ss").format("HH:mm") %>-<%=courseList.moment(item.finishTime,"HH:mm:ss").format("HH:mm")%></h6>
                                 </div>
                             </div>
                         </a>
@@ -91,19 +93,39 @@
     <div data-role="footer" data-position="fixed" data-theme="t">
         <div data-role="navbar">
             <ul>
-                <li><a href="#" data-ajax="false"><img src="/images/01.png">
+                <li><a href="#" data-ajax="false"><img src="/images/tab_course.png">
                         <p>课程</p></a></li>
-                <li><a href="/video/video" data-ajax="false"><img src="/images/02.png">
+                <li><a onclick="video()" data-ajax="false"><img src="/images/tab_video.png">
                         <p>视频</p></a></li>
-                <li><a href="/question/question" data-ajax="false"><img src="/images/03.png">
+                <li><a onclick="question()" data-ajax="false"><img src="/images/tab_question.png">
                         <p>答疑</p></a></li>
-                <li><a href="/users/mine" data-ajax="false"><img src="/images/04.png">
+                <li><a onclick="mine()" data-ajax="false"><img src="/images/tab_mine.png">
                         <p>我的</p></a></li>
             </ul>
         </div>
     </div>
 </div>
+
+<script src="http://apps.bdimg.com/libs/jquery.cookie/1.4.1/jquery.cookie.js"></script>
 <script>
+    function video() {
+        location.replace("/video/video")
+    }
+    function question() {
+        location.replace("/question/question")
+    }
+    function mine() {
+        location.replace("/users/mine")
+    }
+    if($.cookie("courseList") == "true"){
+        location.reload();
+        $.cookie("courseList",false);
+    }
+//    var flag = true;
+//    if(flag){
+//        location.reload();
+//        flag = false;
+//    }
     /*轮播图*/
     $(document).ready(function () {
         $(".ad_Images").slick({

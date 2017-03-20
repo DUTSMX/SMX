@@ -23,6 +23,25 @@ router.get('/MP_verify_sEUETJmOEogP71d6.txt',function(req,res){
 		}
 	})
 })
+
+router.get('/search',function (req,res,next) {
+	res.render("search",{type:null});
+})
+
+router.get('/searchType',function (req,res) {
+	var type = req.query.type;
+	res.render("search",{type:type});
+})
+
+router.post('/search',function (req,res) {
+	var course = require("../api/courseDBApi");
+	var word = req.body.word;
+	course.search(word,function (rows) {
+		console.log("rows:"+JSON.stringify(rows));
+		res.send(rows)
+	});
+})
+
 router.get('/main',function (req,res) {
 	var userId = req.session.userId;
 	var course = require("../api/courseDBApi");
@@ -57,14 +76,17 @@ exports.AUTH_SECRET_ID_KEY_ERROR = -2;
 router.get('/appSign',function(req,res,next){
 	var bucket = req.query.bucketName;
 	var expired = req.query.expired;
-	var sign = qcloud.auth.signMore(bucket,expired);
-	qcloud.cos.statFolder('smxbucket','/',function (ret) {
-		console.log("ret:"+JSON.stringify(ret));
-	})
-	var data = {"data":{"sign":sign}}
-	console.log("data:"+sign);
-	console.log("sign:"+appSign(bucket,'',expired))
-	res.send(JSON.stringify(data));
+	var now            = parseInt(Date.now() / 1000);
+	console.log("expired:"+global.expired + "now>global.expired:"+(now>global.expired))
+	if(global.expired ==  null || now>global.expired){
+		console.log("重新计算");
+		var sign = qcloud.auth.signMore(bucket,expired);
+		global.expired = expired;
+		global.sign = {"data":{"sign":sign}}
+	}else{
+		console.log("直接返回");
+	}
+	res.send(global.sign);
 })
 router.get('/appSignOnce',function (req,res,next) {
 	var bucket = req.query.bucketName;

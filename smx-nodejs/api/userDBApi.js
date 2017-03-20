@@ -109,8 +109,10 @@ exports.finishInfo = function(userId,name,gender,age,callback){
 }
 
 exports.getMyCourse = function(userId, callback){
+    var moment = require("moment")
     course.getCourseById(userId,function (rows) {
-        callback(rows);
+        callback({myCourse:rows,
+            moment:moment});
     })
 }
 exports.getMyQuestion = function(userId, callback){

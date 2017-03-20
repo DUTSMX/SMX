@@ -27,8 +27,25 @@ router.get('/questionDetails',function (req,res) {
     res.render('questionDetails',answer);
   })
  });
-
-
+router.get("/addCourse",function (req,res) {
+  res.render("addCourse",{});
+})
+router.post("/addCourse",function (req,res) {
+  var courseName = req.body.courseName;
+  var courseDate =req.body.courseDate;
+  var teacherName=req.body.teacherName;
+  var beginTime = req.body.beginTime;
+  var finishTime = req.body.finishTime;
+  var courseTime = req.body.courseTime;
+  var objectOriented = req.body.objectOriented;
+  var courseContent = req.body.courseContent;
+  console.log(" courseName:"+courseName+" courseDate:"+courseDate+"teacherName:"+teacherName+" beginTime:"+beginTime+" finishTime:"+finishTime +
+      " courseTime:"+courseTime+" objectOriented:"+objectOriented+" courseContent:"+courseContent)
+  api.addCourse(courseName,courseDate,teacherName,beginTime,finishTime,courseTime,objectOriented,courseContent,function (rows) {
+    console.log("rows:"+JSON.stringify(rows))
+    res.send(rows);
+  })
+});
 
 
 module.exports = router;

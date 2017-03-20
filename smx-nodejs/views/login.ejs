@@ -40,6 +40,7 @@
 </div>
 </body>
 <script>
+    console.log("length:"+history.length);
     /*登录*/
     function login() {
         var phoneNumber = $("#phoneNumber").val();
@@ -62,10 +63,10 @@
                         window.location.href = "/users/personDetailEdit?from=register";
                     }else{
                         if(!data.sourceUrl||data.sourceUrl == "/users/login"){
-                            window.location.href = "/course/course";
+                            window.location.replace("/course/course");
                         }else{
 //                            if(window.history.length<3){
-                                window.location.href = data.sourceUrl;
+                                window.location.replace(data.sourceUrl) ;
 //                            }else{
 //                                window.history.back();
 //                            }
