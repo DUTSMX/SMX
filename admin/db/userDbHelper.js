@@ -1,6 +1,25 @@
 var db = require("./dBHelper");
 var conn = db.getConn();
 
+exports.postAddCourse = function (courseId,courseName,teacherId,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent, callback) {
+    var sql = "INSERT INTO course(courseId,courseName,userId as teacherId,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent) VALUES ('" + courseId + "','" + courseName + "','" + teacherId + "','" + courseDate + "','" + beginTime + "','" + finishTime + "','" + courseTime + "','" + objectOriented + "','" + courseContent + "')";
+    console.log("sql:"+sql)
+    conn.query(sql, function (err,rows) {
+        if (err) {
+            console.log(err);
+            callback({
+                status:false,
+                desc:err
+            })
+        }else {
+            callback({
+                status:true,
+                desc:rows
+            });
+        }
+    })
+};
+
 exports.getStudent = function(callback){
     var sql = "SELECT a.userId as studentId, " +
         "a.registerDate as studentRegisterDate, " +
@@ -9,7 +28,7 @@ exports.getStudent = function(callback){
         "a.userGrade as studentGrade, " +
         "a.userSchool as studentSchool, " +
         "a.userAddress as studentAddress " +
-        "FROM account a WHERE a.role in(0,1)" +
+        "FROM account a WHERE a.role= 1 " +
         "GROUP BY a.userId";
 
     conn.query(sql,function (err,rows) {
@@ -33,6 +52,63 @@ exports.getTeacher = function(callback){
         "FROM account a LEFT JOIN teacher x ON a.userId = x.teacherId WHERE a.role = 2 " +
         "GROUP BY a.userId";
 
+    conn.query(sql,function (err,rows) {
+        console.log(sql);
+        if(err){
+            console.log(err);
+            return;
+        }else{
+            callback(rows);
+        }
+    })
+};
+
+exports.getChecked = function(callback){
+    var sql = "SELECT a.userId as teacherId, " +
+        "a.registerDate as teacherRegisterDate, "+
+        "a.userName as teacherName, " +
+        "x.goodCourse as teacherGoodCourse, " +
+        "x.selfIntroduction as teacherSelfIntroduction " +
+        "FROM account a LEFT JOIN teacher x ON a.userId = x.teacherId WHERE a.role = 2 " +
+        "GROUP BY a.userId";
+
+    conn.query(sql,function (err,rows) {
+        console.log(sql);
+        if(err){
+            console.log(err);
+            return;
+        }else{
+            callback(rows);
+        }
+    })
+};
+
+exports.getWaitChecking = function(callback){
+    var sql = "SELECT a.userId as teacherId, " +
+        "a.registerDate as teacherCreateTime, "+
+        "a.userName as teacherName, " +
+        "x.goodCourse as teacherGoodCourse, " +
+        "x.selfIntroduction as teacherSelfIntroduction " +
+        "FROM account a LEFT JOIN teacher x ON a.userId = x.teacherId WHERE a.role = 0 " +
+        "GROUP BY a.userId";
+
+    conn.query(sql,function (err,rows) {
+        console.log(sql);
+        if(err){
+            console.log(err);
+            return;
+        }else{
+            callback(rows);
+        }
+    })
+};
+
+exports.getSuggestion = function(callback){
+    var sql="SELECT f.userId , "+
+        "a.userName , "+
+        "f.createTime as feedbackTime , "+
+        "f.feedback "+
+        "FROM feedback f JOIN account a ON f.userId = a.userId";
     conn.query(sql,function (err,rows) {
         console.log(sql);
         if(err){
@@ -91,7 +167,7 @@ exports.getStudentDetails = function(studentId,callback){
         "a.userGrade as studentGrade, " +
         "a.userSchool as studentSchool, " +
         "a.userAddress as studentAddress " +
-        "FROM account a WHERE userId ="+studentId+"" ;
+        "FROM account a WHERE a.userId ="+studentId+"" ;
     conn.query(sql,function (err,rows) {
         console.log(sql);
         if(err){
@@ -111,10 +187,8 @@ exports.getStudentListDetails = function (studentId,callback) {
         "c.objectOriented,"+
         "c.courseContent,"+
         "COUNT(j.userId)+'人' as courseCount  "+
-        "FROM course c JOIN joinCourse j ON j.courseId = c.courseId  JOIN account a ON j.userId = a.userId "+
-        "WHERE j.courseId ="+
-        "( SELECT j.courseId  "+
-        "FROM joinCourse j JOIN account a ON j.userId = a.userId WHERE a.userId="+studentId+" )";
+        "FROM course c left JOIN joinCourse j ON j.courseId = c.courseId  JOIN account a ON j.userId = a.userId "+
+        "WHERE a.userId = "+studentId+"";
     conn.query(sql,function (err,rows) {
         console.log(sql);
         if(err){

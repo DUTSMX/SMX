@@ -1,4 +1,14 @@
 var db = require("../db/userDbHelper")
+
+exports.postAddCourse = function(courseId,courseName,teacherId,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent,callback){
+    console.log("courseId:"+courseId+" courseName:"+courseName+" teacherId:"+teacherId+" courseDate:"+courseDate+" beginTime:"+beginTime+" finishTime:"+finishTime +
+        " courseTime:"+courseTime+" objectOriented:"+objectOriented+" courseContent:"+courseContent)
+    db.postAddCourse(courseId,courseName,teacherId,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent,function (rows) {
+        // console.log("rows:"+JSON.stringify(rows));
+        callback(rows);
+    })
+};
+
 exports.getStudent=function (callback) {
     db.getStudent(function (rows) {
         callback(rows);
@@ -6,6 +16,21 @@ exports.getStudent=function (callback) {
 };
 exports.getTeacher=function (callback) {
     db.getTeacher(function (rows) {
+        callback(rows);
+    })
+};
+exports.getChecked=function (callback) {
+    db.getChecked(function (rows) {
+        callback(rows);
+    })
+};
+exports.getWaitChecking=function (callback) {
+    db.getWaitChecking(function (rows) {
+        callback(rows);
+    })
+};
+exports.getSuggestion=function (callback) {
+    db.getSuggestion(function (rows) {
         callback(rows);
     })
 };
@@ -24,10 +49,10 @@ exports.getVideoDetails=function (videoId,callback) {
 
 exports.getStudentDetails=function (studentId,callback) {
     db.getStudentDetails(studentId,function (detail) {
-        db.getStudentListDetails(studentId,function (list) {
+        db.getStudentListDetails(studentId,function (rows) {
             callback({
-                detail:detail[0],
-                list:list
+                detail: detail[0],
+                list: rows
             });
         })
     })

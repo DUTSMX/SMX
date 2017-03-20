@@ -46,7 +46,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="question" >问答编辑<!--  <span class="caret"></span> --></a>
+                    <a href="question.html" >问答编辑<!--  <span class="caret"></span> --></a>
                     <!-- <ul class="dropdown-menu" role="menu">
                       <li><a href="#">Action</a></li>
                       <li><a href="#">Another action</a></li>
@@ -71,7 +71,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="version.html" >版本管理</a>
+                    <a href="version.html">版本管理</a>
                 </li>
                 <li><a href="#">数据统计</a></li>
                 <li><a href="recycleBin.html">回收站</a></li>
@@ -98,101 +98,42 @@
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">
-                    <h3 class="panel-title">学生列表详情</h3>
-                </div>
-                <!-- Table -->
-                <div class="table-responsive">
-                    <table class="table table-hover" >
-                        <thead>
-                        <tr>
-                            <th>用户ID</th>
-                            <td><%=detail.studentId%></td>
-                        </tr>
-                        <tr>
-                            <th>注册时间</th>
-                            <td><%=detail.studentRegisterDate%></td>
-                        </tr>
-                        <tr>
-                            <th>用户名称</th>
-                            <td><%=detail.studentName%></td>
-                        </tr>
-                        <tr>
-                            <th>年龄</th>
-                            <td><%=detail.studentAge%></td>
-                        </tr>
-                        <tr>
-                            <th>年级</th>
-                            <td><%=detail.studentGrade%></td>
-                        </tr>
-                        <tr>
-                            <th>学校</th>
-                            <td><%=detail.studentSchool%></td>
-                        </tr>
-                        <tr>
-                            <th >家庭住址</th>
-                            <td><%=detail.studentAddress%></td>
-                        </tr>
-                        <tr>
-
-                        </tr>
-                        </thead>
-
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="main">
-    <div class="container">
-        <div class="bs-example">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading">
-                    <h3 class="panel-title">已有课程</h3>
+                    <h3 class="panel-title">已审核申请</h3>
                 </div>
                 <!-- Table -->
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th>编号</th>
-                            <th>老师</th>
-                            <th>名称</th>
-                            <th>时长</th>
-                            <th>面向对象</th>
-                            <th>课程内容</th>
-                            <th>参与学生</th>
+                            <th>老师ID</th>
+                            <th>申请时间</th>
+                            <th>老师姓名</th>
+                            <th>擅长课程</th>
+                            <th>个人简介</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <%list.forEach(function (item1){%>
+                        <%checked.forEach(function (item){ %>
                         <tr>
-                            <td><%=item1.courseId%></td>
-                            <td><%=item1.teacherName%></td>
-                            <td><%=item1.courseName%></td>
-                            <td><%=item1.courseTime%></td>
-                            <td><%=item1.objectOriented%></td>
-                            <td><%=item1.courseContent%></td>
-                            <td><%=item1.courseCount%>人</td>
+                            <td><%=item.teacherId%></td>
+                            <td><%=item.teacherRegisterDate%></td>
+                            <td><%=item.teacherName%></td>
+                            <td><%=item.teacherGoodCourse%></td>
+                            <td><%=item.teacherSelfIntroduction%></td>
                             <td>
-                                <a class="btn btn-primary" href="courseDetails?courseId=<%=item1.courseId%>">查看详情</a>
+                                <a class="btn btn-danger" href="teacherListDetails?teacherId=<%=item.teacherId%>">驳回</a>
                             </td>
                         </tr>
                         <%})%>
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-
-
 <script src="/javascripts/jquery.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/javascripts/bootstrap.min.js"></script>
