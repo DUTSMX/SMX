@@ -22,9 +22,7 @@
         <h5>搜索</h5>
     </div>
     <div>
-        <img src="/images/icon_search.png" class="img-search">
-        <img src="/images/icon_delete.png" class="img-delete" id="img-delete" onclick="delete_img()">
-        <input id="search" type="text" placeholder="搜索<%=type%>" class="search-input" oninput="search()" onporpertychange="search()"/>
+        <input id="search" type="search" placeholder="搜索<%=type%>" class="search-input" oninput="search()" onporpertychange="search()"/>
     </div>
     <p class="search-empty" id="search-empty">没有更多的搜索结果</p>
     <div id="search-type" class="search-type">
@@ -98,9 +96,21 @@
 <script>
     var flag = $.cookie("search");
     $("#search-result").hide();
-    $("#img-delete").hide();
     $("#search-empty").hide();
+    var click = true;
     function search() {
+        if(click){
+            click=false;
+            $("#search").next().click(function () {
+                $("#search-type").show();
+                $("#search-result").hide();
+                $("#search").val("");
+                $("#search-empty").hide();
+
+            })
+        }
+
+
         console.log("search:")
         var search = flag;
         console.log("search:"+search)
@@ -118,7 +128,6 @@
             $("#search-result").hide();
             $("#search-empty").hide();
         } else{
-            $("#img-delete").show();
             $.post("search/", data, function (data) {
                 if(data.course.length+data.video.length+data.question.length == 0){
                     $("#search-type").hide();
@@ -205,14 +214,6 @@
 
             }, "json")
         }
-    }
-
-    function delete_img(){
-        $("#img-delete").hide();
-        $("#search-type").show();
-        $("#search-result").hide();
-        $("#search").val("");
-        $("#search-empty").hide();
     }
     if(flag.length != 0){
         $("#search-type").hide();
