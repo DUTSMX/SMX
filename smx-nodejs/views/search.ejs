@@ -26,6 +26,7 @@
         <img src="/images/icon_delete.png" class="img-delete" id="img-delete" onclick="delete_img()">
         <input id="search" type="text" placeholder="搜索<%=type%>" class="search-input" oninput="search()" onporpertychange="search()"/>
     </div>
+    <p class="search-empty" id="search-empty">没有更多的搜索结果</p>
     <div id="search-type" class="search-type">
         <a onclick="course()">
             <div class="search-detail">
@@ -54,7 +55,7 @@
         <div class="details_class">
             <ul id="course-list" data-role="listview">
                 <!--<li class="list" data-icon="false">-->
-                    <!--<a  data-ajax="false" href="/course/courseDetail?courseId=1" class="course_click ui-btn"> <img class="image" src="/images/tab_course.png">-->
+                    <!--<a  data-ajax="false" href="/course/courseDetail?courseId=1" class="search-click ui-btn"> <img class="image" src="/images/tab_course.png">-->
                         <!--<p class="only_name">课程名称</p>-->
                         <!--<p class="only_teacher">授课教师：齐书强</p>-->
                     <!--</a>-->
@@ -68,7 +69,7 @@
         <div class="details_class">
             <ul id="video-list" data-role="listview">
                 <!--<li class="list" data-icon="false">-->
-                <!--<a  data-ajax="false" href="/course/courseDetail?courseId=1" class="course_click ui-btn"> <img class="image" src="/images/tab_course.png">-->
+                <!--<a  data-ajax="false" href="/course/courseDetail?courseId=1" class="search-click ui-btn"> <img class="image" src="/images/tab_course.png">-->
                 <!--<p class="only_name">课程名称</p>-->
                 <!--<p class="only_teacher">授课教师：齐书强</p>-->
                 <!--</a>-->
@@ -82,7 +83,7 @@
         <div class="details_class">
             <ul id="question-list" data-role="listview">
                 <!--<li class="list" data-icon="false">-->
-                <!--<a  data-ajax="false" href="/course/courseDetail?courseId=1" class="course_click ui-btn"> <img class="image" src="/images/tab_course.png">-->
+                <!--<a  data-ajax="false" href="/course/courseDetail?courseId=1" class="search-click ui-btn"> <img class="image" src="/images/tab_course.png">-->
                 <!--<p class="only_name">课程名称</p>-->
                 <!--<p class="only_teacher">授课教师：齐书强</p>-->
                 <!--</a>-->
@@ -95,11 +96,10 @@
 </body>
 <script src="http://apps.bdimg.com/libs/jquery.cookie/1.4.1/jquery.cookie.js"></script>
 <script>
-
-
     var flag = $.cookie("search");
     $("#search-result").hide();
     $("#img-delete").hide();
+    $("#search-empty").hide();
     function search() {
         console.log("search:")
         var search = flag;
@@ -116,14 +116,17 @@
             hideLoader();
             $("#search-type").show();
             $("#search-result").hide();
+            $("#search-empty").hide();
         } else{
             $("#img-delete").show();
             $.post("search/", data, function (data) {
                 if(data.course.length+data.video.length+data.question.length == 0){
-                    $("#search-type").show();
+                    $("#search-type").hide();
                     $("#search-result").hide();
+                    $("#search-empty").show();
                     hideLoader();
                 }else{
+                    $("#search-empty").hide();
                     $("#search-type").hide();
                     $("#search-result").show();
                     if (data.course.length == 0) {//课程
@@ -135,13 +138,13 @@
                             if (item.detail.length != 0) {
                                 list += '<li class="list" data-icon="false"> <a  data-ajax="false" href="/course/courseDetail?courseId=' +
                                         item.courseId
-                                        + '" class="course_click ui-btn"> <img class="image" src="' + item.userHeadUrl + '"> <p class="name">' +
+                                        + '" class="search-click ui-btn"> <img class="image" src="' + item.userHeadUrl + '"> <p class="name">' +
                                         item.courseName
                                         + '</p> <p class="teacher">' + item.teacher + '</p><p class="detail">' + item.detail + '</p></a></li>'
                             } else {
                                 list += '<li class="list" data-icon="false"> <a  data-ajax="false" href="/course/courseDetail?courseId=' +
                                         item.courseId
-                                        + '" class="course_click ui-btn"> <img class="image" src="' + item.userHeadUrl + '"> <p class="only_name">' +
+                                        + '" class="search-click ui-btn"> <img class="image" src="' + item.userHeadUrl + '"> <p class="only_name">' +
                                         item.courseName
                                         + '</p> <p class="only_teacher">' + item.teacher + '</p></a></li>'
                             }
@@ -159,13 +162,13 @@
                             if(item.detail.length != 0){
                                 list += '<li class="list" data-icon="false"> <a  data-ajax="false" href="/video/videoDetail?videoId=' +
                                         item.videoId
-                                        + '" class="course_click ui-btn"> <img class="image" src="' + item.videoCoverUrl + '"> <p class="name">' +
+                                        + '" class="search-click ui-btn"> <img class="video_image" src="' + item.videoCoverUrl + '"> <p class="name">' +
                                         item.videoName
                                         + '</p> <p class="detail">' + item.detail + '</p></a></li>'
                             }else{
                                 list += '<li class="list" data-icon="false"> <a  data-ajax="false" href="/video/videoDetail?videoId=' +
                                         item.videoId
-                                        + '" class="course_click ui-btn"> <img class="image" src="' + item.videoCoverUrl + '"> <p class="only_name">' +
+                                        + '" class="search-click ui-btn"> <img class="video_image" src="' + item.videoCoverUrl + '"> <p class="only_name">' +
                                         item.videoName
                                         + '</p></a></li>'
                             }
@@ -183,13 +186,13 @@
                             if(item.detail.length != 0){
                                 list += '<li class="list" data-icon="false"> <a  data-ajax="false" href="' +
                                         item.aHref
-                                        + '" class="course_click ui-btn"> <img class="image" src="' + item.userHeadUrl + '"> <p class="name">' +
+                                        + '" class="search-click ui-btn"> <img class="image" src="' + item.userHeadUrl + '"> <p class="name">' +
                                         item.questionTitle
                                         + '</p><p class="teacher">' + item.author + '</p> <p class="detail">' + item.detail + '</p></a></li>'
                             }else{
                                 list += '<li class="list" data-icon="false"> <a  data-ajax="false" href="' +
                                         item.aHref
-                                        + '" class="course_click ui-btn"> <img class="image" src="' + item.userHeadUrl + '"> <p class="only_name">' +
+                                        + '" class="search-click ui-btn"> <img class="image" src="' + item.userHeadUrl + '"> <p class="only_name">' +
                                         item.questionTitle
                                         + '</p><p class="only_teacher">' + item.author + '</p></a></li>'
                             }
@@ -209,6 +212,7 @@
         $("#search-type").show();
         $("#search-result").hide();
         $("#search").val("");
+        $("#search-empty").hide();
     }
     if(flag.length != 0){
         $("#search-type").hide();

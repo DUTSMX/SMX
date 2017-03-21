@@ -36,7 +36,7 @@
                         <h6 class="school"><%= detail.authorSchool %>|<%= detail.authorGrade %></h6>
                     </div>
                     <div class="videoInfo">
-                        <%= detail.videoTime %> | <span class="number"><%= detail.videoWatchCount %></span>次观看
+                        <p><%= detail.videoTime %> | <span class="number"><%= detail.videoWatchCount %></span>次观看</p>
                         <!--<span class="videos_classify_detail">高中</span>-->
                         <!--<span class="videos_classify_detail">数学</span>-->
                         <!--<span class="videos_classify_detail">理科</span>-->
@@ -59,10 +59,13 @@
     <img src="/images/line_green.png" class="div_line">
     <div style="margin-bottom: 60px">
         <ul data-role="listview">
+            <%if(comment.length == 0){%>
+                <p class="comment-empty">还没有评论，快来添加第一条评论吧</p>
+            <%}%>
             <% comment.forEach(function(item){ %>
             <li data-icon="false" class="comment-list">
                 <img class="head_60" src=<%= item.userHeadUrl %>>
-                <p class="name"><%= item.userName %>:<%= item.comment %></p>
+                <p class="name"><%= item.userName %>: <%= item.comment %></p>
             </li>
             <% }) %>
         </ul>
@@ -86,6 +89,7 @@
             $.post("comment", data, function (data) {
                 if (data.status) {
                     comment:$("#commentStr").val("");
+                    location.reload();
                 } else {
                     console.log(data.desc);
                 }
