@@ -46,7 +46,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="question.html" >问答编辑<!--  <span class="caret"></span> --></a>
+                    <a href="question.html">问答编辑<!--  <span class="caret"></span> --></a>
                     <!-- <ul class="dropdown-menu" role="menu">
                       <li><a href="#">Action</a></li>
                       <li><a href="#">Another action</a></li>
@@ -96,124 +96,138 @@
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">添加课程</h3>
+                <h3 class="panel-title">添加视频</h3>
             </div>
             <div class="panel-body">
                 <div class="container">
-                    <div class="form-horizontal" role="form">
+                    <div  class="form-horizontal">
                         <div class="form-group">
                             <label class="col-md-2 control-label" for="name">名称</label>
                             <div class="col-md-6" id="name">
-                                <input type="text" id="courseName" class="form-control">
+                                <input type="text" name="name" value="" class="form-control">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="name">教师编号</label>
+                            <div class="col-md-6" id="name">
+                                <input type="text" name="name" value="" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-2 control-label" for="teacherid">教师编号</label>
+                            <label class="col-md-2 control-label" for="time">时长</label>
                             <div class="col-md-6" id="name">
-                                <input type="number" id="teacherId" value="" class="form-control">
+                                <input type="time" name="time" value="" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-2 control-label" for="teacherid">教师姓名</label>
+                            <label class="col-md-2 control-label" for="introduce">简介</label>
                             <div class="col-md-6" id="name">
-                                <input type="text" id="teacherName" value="" class="form-control">
+                                <textarea id="introduce" rows="3" name="introduce" class="form-control"></textarea>
                             </div>
                         </div>
+
+
                         <div class="form-group">
-                            <label class="col-md-2 control-label" for="time">日期</label>
+                            <label class="col-md-2 control-label" for="video">视频上传</label>
                             <div class="col-md-6" id="name">
-                                <input type="time" id="courseDate"  class="form-control">
+                                <input type="file" name="video" value="" class="form-control">
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label" for="time">开始时间</label>
-                            <div class="col-md-6" id="name">
-                                <input type="time" id="beginTime"class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label" for="time">结束时间</label>
-                            <div class="col-md-6" id="name">
-                                <input type="time" id="finishTime" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label" for="name">时长</label>
-                            <div class="col-md-6" id="name">
-                                <input type="text" id="courseTime" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label" for="name">面向对象</label>
-                            <div class="col-md-6" id="name">
-                                <input type="text" id="objectOriented" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label" for="content">课程内容</label>
-                            <div class="col-md-6" id="name">
-                                <textarea id="courseContent" rows="3" name="content" class="form-control"></textarea>
-                            </div>
+                            <button class="btn btn-default" onclick="uploadVideo()">上传</button>
                         </div>
                         <center>
-                            <button class="btn btn-default " onclick="addCourse()" >确定</button>
+                            <a class="btn btn-default " href="videoDetails.html" >确定</a>
 
                         </center>
+                        <p id="head"></p>
+                        <p id="age"></p>
                     </div>
-                    <p style="margin:0;text-align:center;padding-top:50px;" id="hint"></p>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="../js/jquery.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../js/bootstrap.min.js"></script>\
+<script src="../js/crypto-js.js"></script>
+<script src="/javascripts/sdk/qcloud_sdk.js"></script>
+<script src="/javascripts/sdk/swfobject.js"></script>
 <script>
-    function addCourse() {
-        var courseName=$("#courseName").val();
-        var teacherName=$("#teacherName").val();
-        var courseDate=$("#courseDate").val();
-        var beginTime=$("#beginTime").val();
-        var finishTime=$("#finishTime").val();
-        var courseTime=$("#courseTime").val();
-        var objectOriented=$("#objectOriented").val();
-        var courseContent=$("#courseContent").val();
-        var data={
-            courseName:courseName,
-            teacherName:teacherName,
-            courseDate:courseDate,
-            beginTime:beginTime,
-            finishTime:finishTime,
-            courseTime:courseTime,
-            objectOriented:objectOriented,
-            courseContent:courseContent
+    function uploadImg() {
+        var cos = new CosCloud("10068625","/");
+        var successCallBack = function (result) {
+            console.log("success")
+            console.log("result:"+JSON.stringify(result))
+            console.log("type"+typeof result)
+            console.log("上传视频"+JSON.parse(result).data.access_url)
+            $("#head").val(JSON.parse(result).data.access_url)
         }
-        console.log("data:"+JSON.stringify(data));
-if(courseName.length==0){$("#hint").text("课程名不能为空");}
-else if(teacherName.length==0){$("#hint").text("老师姓名不能为空");}
-else if(courseDate.length==0){$("#hint").text("日期不能为空");}
-else if(beginTime.length==0){$("#hint").text("开始时间不能为空");}
-else if(finishTime.length==0){$("#hint").text("结束时间不能为空");}
-else if(courseTime.length==0){$("#hint").text("课程时长不能为空");}
-else if(objectOriented.length==0){$("#hint").text("面向对象不能为空");}
-else if(courseContent.length==0){$("#hint").text("课程内容不能为空");}
-else{
-    $.post("addCourse",data,function (data) {
-        if(data.status){
-            $("#hint").text(data.desc);
-            window.open("course");
+        var errorCallBack = function (result) {
+            $("#age").val("error:"+result);
+            console.log("error")
+            console.log("result:"+JSON.stringify(result))
         }
-        else{
-            $("#hint").text(data.desc);
-//            console.log(data.desc);
-        }
-    },"json")
+        var inputElements = document.getElementById("file");
+        inputElements.addEventListener("change",handleFiles,false);
+        function handleFiles(){
+            var fileList = this.files;
+            if(fileList.length>0){
+                selectedFile = fileList[0];
+                var name = selectedFile.name;
+                var postfix = name.substr(name.lastIndexOf("."))
+                console.log("postfix:/head/"+userId+postfix)
 
-}
+                cos.uploadFile(successCallBack,errorCallBack,"smxbucket","/"+selectedFile.name,selectedFile,0)
+//                cos.getFolderStat(successCallBack,errorCallBack,"smxbucket","/");
+            }
+        }
+    }
+    function editInfo(){
+        var head = $("#head").val();
+        var name = $("#name").val()
+        var gender = $('input:radio[name="radio-view"]:checked').val();
+        var age = $("#age").val();
+        var school = $("#school").val();
+        var grade = $("#grade").val();
+        var address = $("#address").val();
+        var from = "<%=from%>";
+        if(name.length == 0){
+            $("#hint").text("姓名不能为空")
+        }else{
+            var data = {
+                head:head,
+                name:name,
+                gender:gender,
+                age:age,
+                school:school,
+                grade:grade,
+                address:address
+            }
+            $.post("./editInfo",data,function (data,textStatus,jqXHR) {
+                if(data.status){
+                    console.log("from = "+ from);
+                    if(from){
+                        console.log("from = "+ true);
+                    }else{
+                        console.log("from = "+ false);
+                    }
+                    if(from){
+                        location.replace("addVideo")
+                    }else{
+                        $("#hint").text(data.desc)
+                    }
+                }else{
+                    console.log(data.desc)
+                }
+            },"json")
+        }
+//        console.log("head:"+head+"  name:"+name+"  gender:"+gender+" age:"+age+" school:"+school+" grade:"+grade+" address:"+address);
+
     }
 </script>
-
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="/javascripts/jquery.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/javascripts/bootstrap.min.js"></script>
-
 </body>
+
 </html>
