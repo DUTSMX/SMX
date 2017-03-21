@@ -223,8 +223,7 @@ exports.getUserInfo=function (userId,callback) {
         "userGrade," +
         "userAddress " +
         "FROM " +
-        "account where userId="
-    +userId;
+        "account where userId="+userId;
     console.log(sql);
     conn.query(sql,function (err,rows) {
         if(err){

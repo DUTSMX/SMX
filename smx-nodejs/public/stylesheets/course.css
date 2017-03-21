@@ -6,6 +6,10 @@
 	height: 25vh;
 	width: 100vw;
 }
+.slick-dotted.slick-slider{
+	margin-bottom:0px;
+}
+
 .slick-dots li button:before{
 	font-size:30px;
 }

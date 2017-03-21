@@ -19,7 +19,8 @@ exports.getVideo = function(callback){
 }
 
 exports.getVideoDetail = function (videoId,callback) {
-    var sql = "SELECT v.videoUrl, " +
+    var sql = "SELECT v.videoId, " +
+        "v.videoUrl, " +
         "v.videoName, " +
         "a.userName as authorName, " +
         "a.userSchool as authorSchool, " +
@@ -72,14 +73,51 @@ exports.addVideo = function(videoname,username,url,degree,picurl,describe,callba
         callback(rows);
     })
 }
+*/
 exports.searchVideo = function(word,callback){
-    var sql = "SELECT id,videoname,username,url,degree,picurl,describe as videoid,'发布者',videourl,'视频播放次数' ,picurl,'视频描述'from video " +
-        "WHERE CONCAT(videoname,username,describe) LIKE '%"+word+"%' )";
-    conn.query(sql,function(err,rows,fields){
+    var sql = 'select videoCoverUrl, videoId, videoName, detail, count(distinct videoId) from('+
+        'select videoCoverUrl, videoId, videoName, "" as detail from video where videoName LIKE "%'+word+'%"' +
+        'UNION '+
+        'select videoCoverUrl, videoId, videoName, CONCAT("视频内容：",videoAbstract) as detail from video where videoAbstract LIKE "%'+word+'%"'+
+        'UNION '+
+        'select videoCoverUrl, videoId, videoName, CONCAT("视频内容：",videoContent) as detail from video where videoContent LIKE "%'+word+'%"'+
+        ') course group by videoId order by videoId desc'
+    console.log("sql:"+sql);
+    conn.query(sql,function(err,rows){
         if(err){
-            console.error(err);
+            console.log(err);
+            return;
         }
         callback(rows);
     })
 }
-*/
+
+exports.comment = function (userId, videoId, comment, callback) {
+    var sql = "INSERT INTO videoComment(userId,videoId,comment) VALUES("+userId+","+videoId+",'"+comment+"')";
+    console.log("sql:"+sql)
+    conn.query(sql,function (err,rows) {
+        if(err){
+            callback({
+                status:false,
+                desc:err
+            })
+        }
+        callback({
+            status:true,
+            desc:"评论成功"
+        })
+    })
+}
+
+exports.getCommentList = function (videoId,callback) {
+    var sql = "SELECT userHeadUrl,userName,comment FROM videoComment v JOIN account a ON v.userId = a.userId where videoId = "+videoId;
+    console.log("sql:"+sql);
+    conn.query(sql,function (err,rows) {
+        if (err) {
+            console.log(err)
+            return;
+        } else {
+            callback(rows);
+        }
+    })
+}

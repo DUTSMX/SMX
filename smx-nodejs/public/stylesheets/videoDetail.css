@@ -14,13 +14,13 @@
 }
 /*上传者信息*/
 .ui-listview li .teacherIntro .school{
+    padding-left:8px;
     display: inline-block;
     font-weight:normal;
     font-size:0.875em;
 }
 /*视频信息*/
 .ui-listview li .videoInfo{
-    padding-left: 2%;
     font-size:0.875em;
 }
 /*标签*/
@@ -31,6 +31,121 @@
     /*padding-left:2px;*/
     /*padding-right:2px*/
 /*}*/
+/*每一行 分割线*/
+.hr{
+    display:inline-block;
+    margin-top: 2.8%;
+    float: left;
+    margin-left: 3%;
+}
+/*每一行 边距清除*/
+.ui-listview>.ui-li-static{
+    padding:1% 0px;
+}
+/*每一行 名称*/
+.ui-listview li .className-text{
+    display: inline-block;
+    padding-top: 1%;
+    padding-left: 3%;
+    font-weight:bold;
+}
+/*每一行 内容*/
 .ui-listview li .className-details{
-    left: 25%;
+    display: inline-block;
+    width:60%; /*最右侧>*/
+    padding-top: 2%;
+    position: absolute;
+    left: 35%;
+    font-weight:normal;
+}
+/*课程内容 两侧边距*/
+.ui-listview>li .content{
+    white-space: normal;
+    text-indent:2em;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+/*评论 高度*/
+.ui-listview>.ui-li-has-thumb>.ui-btn, .ui-listview>.ui-li-static.ui-li-has-thumb{
+    min-height:10px;
+    height:30px;
+    padding-left:40px;
+}
+/*list 上边框*/
+.ui-listview>.ui-li-static, .ui-listview>.ui-li-divider, .ui-listview>li>a.ui-btn{
+    border-width:0px;
+}
+/*list 最后一个下边框*/
+.ui-listview>.ui-li-static.ui-last-child, .ui-listview>.ui-li-divider.ui-last-child, .ui-listview>li.ui-last-child>a.ui-btn{
+    border-bottom-width:0px;
+}
+.comment-empty{
+    font-size:14px;
+    text-align: center;
+}
+/*评论 头像 样式*/
+.head_60{
+    height:20px;
+    width:20px;
+    margin-left:1em;
+    margin-top:4px;
+}
+/*评论 第一个头像 圆角*/
+.ui-listview>li.ui-first-child img:first-child:not(.ui-li-icon){
+    -webkit-border-top-left-radius:36px;
+    border-top-left-radius:36px;
+}
+/*评论 最后一个头像 圆角*/
+.ui-listview>li.ui-last-child img:first-child:not(.ui-li-icon){
+    -webkit-border-bottom-left-radius:36px;
+    border-bottom-left-radius:36px;
+}
+/*评论 内容 */
+.name{
+    display: inline-block;
+    float:left;
+}
+/*评论 padding*/
+.ui-listview>.ui-li-static{
+    padding:0px 0px;
+}
+/*评论背景*/
+.comment-div{
+    border-width:1px 0;
+    border-style:solid;
+    border-top-color: gray;
+    height:50px;
+    width:100%;
+    position:fixed;
+    right:0px;
+    bottom:-1px;
+    background-color: white;
+}
+/*评论输入框 位置 宽度*/
+.ui-input-text{
+    position: fixed;
+    bottom:0px;
+    width:78%
+}
+/*评论按钮宽度*/
+button.ui-btn, .ui-controlgroup-controls button.ui-btn-icon-notext{
+    width:20%;
+}
+/*评论按钮位置*/
+.comment{
+    position:fixed;
+    right:0px;
+    bottom:0px;
+ }
+/*评论按钮样式*/
+.ui-btn{
+    padding:0.5em 0.3em;
+    background-color:#347557!important;
+    color: #fff!important;
+    border-color: #fff;
+    text-shadow: none;
+}
+/*"评论"字体阴影*/
+.ui-btn, label.ui-btn{
+    font-weight:100;
 }

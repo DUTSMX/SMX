@@ -27,8 +27,17 @@ router.get('/videoDetail',function (req,res) {
         console.log("视频观看人次数增加成功");
     })
     api.getVideoDetail(videoId,function (videoDetail) {
-        console.log(videoDetail);
+        console.log("videoDetail"+JSON.stringify(videoDetail));
         res.render('videoDetail',videoDetail);
+    })
+})
+
+router.post('/comment',function (req,res) {
+    var userId = req.session.userId;
+    var videoId = req.body.videoId;
+    var comment = req.body.comment;
+    api.comment(userId,videoId,comment,function (comment) {
+        res.send(comment);
     })
 })
 module.exports = router;

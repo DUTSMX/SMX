@@ -67,8 +67,9 @@ router.get('/createCourse',function (req,res) {
 * */
 router.get('/myCourse',function (req,res) {
     var userId = req.session.userId;
-    api.getMyCourse(userId,function (rows) {
-        res.render('myCourse',{myCourse:rows});
+    api.getMyCourse(userId,function (myCourse) {
+        console.log("myCourse:"+JSON.stringify(myCourse))
+        res.render('myCourse',myCourse);
     })
 })
 /*

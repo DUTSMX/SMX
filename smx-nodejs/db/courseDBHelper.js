@@ -19,11 +19,12 @@ exports.getCourse = function(callback){
     var nowTime = new Date().getTime();
     var sql = "SELECT c.courseId, " +
         "c.courseName, " +
-        "c.courseTime, " +
+        "c.objectOriented, " +
+        "c.courseDate, " +
+        "c.beginTime, " +
+        "c.finishTime, " +
         "a.userHeadUrl as teacherHeadUrl, " +
-        "a.userName as teacherName, " +
-        "a.userSchool as teacherSchool, " +
-        "a.userGrade as teacherGrade " +
+        "a.userName as teacherName "+
         "FROM course c JOIN account a ON a.userId = c.userId"
         // + " AND c.courseDate >= curdate()";
 
@@ -44,21 +45,23 @@ exports.getCourseById = function (userId, callback) {
     var nowTime = new Date().getTime();
     var sql1 = "SELECT c.courseId, " +
         "c.courseName, " +
-        "c.courseTime, " +
+        "c.objectOriented, " +
+        "c.courseDate, " +
+        "c.beginTime, " +
+        "c.finishTime, " +
         "a.userHeadUrl as teacherHeadUrl, " +
-        "a.userName as teacherName, " +
-        "a.userSchool as teacherSchool, " +
-        "a.userGrade as teacherGrade " +
+        "a.userName as teacherName "+
         "FROM ((joinCourse j INNER JOIN course c ON j.courseId = c.courseId) INNER JOIN account a ON c.userId = a.userId) " +
         "WHERE j.userId = " + userId;
         //  +"WHERE c.courseDate >= curdate()" ;
     var sql2 = "SELECT c.courseId, " +
         "c.courseName, " +
-        "c.courseTime, " +
+        "c.objectOriented, " +
+        "c.courseDate, " +
+        "c.beginTime, " +
+        "c.finishTime, " +
         "a.userHeadUrl as teacherHeadUrl, " +
-        "a.userSchool as teacherSchool, " +
-        "a.userGrade as teacherGrade, " +
-        "a.userName as teacherName " +
+        "a.userName as teacherName "+
         "FROM course c JOIN account a ON c.userId = a.userId " +
         "WHERE c.userId = " + userId
         // +" and c.courseDate >= curdate()";
@@ -74,8 +77,6 @@ exports.getCourseById = function (userId, callback) {
                         console.log(err);
                         return;
                     }
-                    console.log("get sql1: " + sql1);
-                    console.log("get course: " + JSON.stringify(rows));
                     callback(rows);
                 })
             } else if (role == 2) {//老师
@@ -136,6 +137,7 @@ exports.getTeacherDetail = function (teacherId, callback) {
         "FROM account a join teacher t " +
         "ON a.userId = t.teacherId " +
         "WHERE a.userId = " + teacherId;
+    console.log("sql:"+sql)
     conn.query(sql, function (err, rows) {
         if (err) {
             console.log(err);
@@ -258,7 +260,7 @@ exports.hasJoin = function(userId,courseId,callback){
 }
 
 exports.addCourse = function (userId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent, callback) {
-    var sql = "INSERT INTO course(userId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent) VALUES ('" + userId + "','" + courseName + "','" + courseDate + "','" + beginTime + "','" + finishTime + "','" + courseTime + "','" + objectOriented + "','" + courseContent + "')";
+    var sql = "INSERT INTO course(userId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent,createDate) VALUES ('" + userId + "','" + courseName + "','" + courseDate + "','" + beginTime + "','" + finishTime + "','" + courseTime + "','" + objectOriented + "','" + courseContent + "',"+conn.escape(new Date())+")";
     console.log("sql:"+sql)
     conn.query(sql, function (err,rows) {
         if (err) {
@@ -276,9 +278,15 @@ exports.addCourse = function (userId,courseName,courseDate,beginTime,finishTime,
     })
 }
 exports.search = function (word, callback) {
-    var sql = "SELECT c.courseId as courseId,c.courseName as courseName,c.courseTime as courseTime," +
-        "a.userHeadUrl as teacherHeadUrl,a.userSchool as teacherSchool,a.userGrade as teacherGrade  FROM course c JOIN account a on c.userId = a.userId" +
-        " WHERE CONCAT(c.courseName,a.userName,c.courseTime,c.courseContent) LIKE '%" + word + "%'"
+    var courseList;
+    var sql =
+        'select userHeadUrl, courseId, courseName, teacher, detail, count(distinct courseId) from('+
+        'select userHeadUrl, courseId, courseName, CONCAT("授课教师：",a.userName) as teacher,"" as detail from course c Join account a ON a.userId = c.userId where courseName LIKE "%'+word+'%" OR a.userName like "%'+word+'%"' +
+        'UNION '+
+        'select userHeadUrl, courseId, courseName, CONCAT("授课教师：",a.userName) as teacher, CONCAT("面向对象：",objectOriented) as detail from course c Join account a ON a.userId = c.userId where objectOriented LIKE "%'+word+'%" '+
+        'UNION '+
+        'select userHeadUrl, courseId, courseName, CONCAT("授课教师：",a.userName) as teacher, CONCAT("课程内容：",courseContent) as detail from course c Join account a ON a.userId = c.userId where courseContent LIKE "%'+word+'%" '+
+        ') course group by courseId order by courseId desc'
 
     console.log(sql);
     conn.query(sql, function (err, rows, fields) {

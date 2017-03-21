@@ -1,30 +1,60 @@
+/*搜索输入*/
 .ui-input-search .ui-body-inherit .ui-corner-all .ui-shadow-inset .ui-input-has-clear{
     display: inline-block; !important;
 }
+/*搜索输入*/
+.ui-input-text input, .ui-input-search input, textarea.ui-input-text{
+    padding:0px;!important;
+    padding-left:26px;!important;
+}
+/*搜索icon*/
+.img-search{
+    position:absolute;
+    left:6px;
+    top:70px;
+}
+/*删除icon*/
+.img-delete{
+    float:right;
+    position: absolute;
+    top:70px;
+    right:6px;
+}
+.search-empty{
+    text-align: center;
+}
+/*类型icon*/
 .type{
     margin:0px;
     padding-left:1em;
 }
+/*类型分割线*/
 .div_line{
     width:100vw;
 }
+/*搜索类型*/
 .search-type{
     display: flex;justify-content: space-around;margin: 10%
 }
+/*搜索类型详情 居中*/
 .search-detail{
     display: inline-block;
     text-align: center;
 }
+/*搜索类型 文字*/
 .search-detail h5{
     color:black;
 }
+/*搜索类型 图标*/
 .search-image .ui-link img{
     width: 20px;height:20px;
 }
-.course_click{
+/*搜索类型 点击*/
+.search-click{
     height:60px;
     padding:0em 1em;
 }
+/*搜索结果 第一个图标*/
 .ui-listview .ui-li-has-thumb>img:first-child, .ui-listview .ui-li-has-thumb>.ui-btn>img:first-child, .ui-listview .ui-li-has-thumb .ui-li-thumb{
     position:absolute;
     left:1em;
@@ -34,8 +64,7 @@
     top: 0.2em;
     bottom:0.2em
 }
-.list{
-}
+/*搜索结果 图标*/
 .image{
     position: absolute;
     left: 1em;
@@ -45,6 +74,47 @@
     top: 5px;
     bottom:5px;
 }
-.ui-listview>li p{
+.video_image{
+    position: absolute;
+    left: 1em;
+    width:50px;
+    height:50px;
+    border-radius: 0px;
+    top: 5px;
+    bottom:5px;
+}
+/*搜索结果 名称*/
+.ui-listview>li .name{
+    font-size:16px;
+    font-weight:bold;
+    float:left;
     margin-left:70px;
- }
+    width:30%;
+}
+/*搜索结果 老师*/
+.ui-listview>li .teacher{
+    margin-top:14px;
+    width:112px;
+    float:right
+}
+/*搜索结果 详情*/
+.ui-listview>li .detail{
+    clear:both;
+    margin-left:70px;
+}
+/*搜索结果 只有名称*/
+.ui-listview>li .only_name{
+    font-size:16px;
+    font-weight:bold;
+    float:left;
+    padding-right:20px;
+    margin-top:20px;
+    margin-left:70px;
+    width:30%;
+}
+/*搜索结果 只有老师*/
+.ui-listview>li .only_teacher{
+    margin-top:24px;
+    width:112px;
+    float:right
+}

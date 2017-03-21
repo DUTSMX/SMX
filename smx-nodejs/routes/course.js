@@ -95,9 +95,8 @@ router.get('/studentList',function (req,res) {
 * */
 router.get('/courseList',function (req,res) {
     var teacherId = req.query.teacherId;
-    api.getCourseList(teacherId,function (ret) {
-        console.log("ret:"+JSON.stringify(ret))
-        res.render('courseList',ret);
+    api.getCourseList(teacherId,function (courseList) {
+        res.render('courseList',courseList);
     })
 })
 /*

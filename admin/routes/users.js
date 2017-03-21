@@ -7,6 +7,24 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
+router.post('/addCourse',function(req,res){
+        var courseId = req.body.courseId;
+        var courseName = req.body.courseName;
+        var teacherId = req.body.teacherId;
+        var courseDate =req.body.courseDate;
+        // (new Date(req.query.courseDate)).getTime();//将日期转化为时间戳
+        var beginTime = req.body.beginTime;
+        var finishTime = req.body.finishTime;
+        var courseTime = req.body.courseTime;
+        var objectOriented = req.body.objectOriented;
+        var courseContent = req.body.courseContent;
+        console.log("courseId:"+courseId+" courseName:"+courseName+" teacherId:"+teacherId+" courseDate:"+courseDate+" beginTime:"+beginTime+" finishTime:"+finishTime +
+            " courseTime:"+courseTime+" objectOriented:"+objectOriented+" courseContent:"+courseContent)
+        api.postAddCourse(courseId,courseName,teacherId,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent,function (rows) {
+            res.send(rows);
+        })
+    });
+
 router.get('/studentList',function (req,res) {
     api.getStudent(function(studentList){
         console.log("student:"+JSON.stringify(studentList));
@@ -17,6 +35,27 @@ router.get('/teacherList',function (req,res) {
     api.getTeacher(function(teacherList){
         console.log("teacher:"+JSON.stringify(teacherList));
         res.render('teacherList',{teacherList:teacherList})
+    })
+});
+
+router.get('/checked',function (req,res) {
+    api.getChecked(function(checked){
+        console.log("checked:"+JSON.stringify(checked));
+        res.render('checked',{checked:checked})
+    })
+});
+
+router.get('/waitChecking',function (req,res) {
+    api.getWaitChecking(function(waitChecking){
+        console.log("waitChecking:"+JSON.stringify(waitChecking));
+        res.render('waitChecking',{waitChecking:waitChecking})
+    })
+});
+
+router.get('/suggestion',function (req,res) {
+    api.getSuggestion(function(suggestion){
+        console.log("suggestion:"+JSON.stringify(suggestion));
+        res.render('suggestion',{suggestion:suggestion})
     })
 });
 
@@ -38,10 +77,10 @@ router.get('/videoDetails',function (req,res) {
 
 router.get('/studentListDetails',function (req,res) {
     var studentId = req.query.studentId;
-    api.getStudentDetails(studentId,function (studentDetails) {
+    api.getStudentDetails(studentId,function (studentListDetails) {
         // studentDetails={studentDetails:studentDetails};
-        console.log("studentDetails:"+JSON.stringify(studentDetails));
-        res.render('studentListDetails',studentDetails)
+        console.log("list:"+JSON.stringify(studentListDetails));
+        res.render('studentListDetails',studentListDetails)
     })
 });
 

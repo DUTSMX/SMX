@@ -29,7 +29,7 @@
                 <li data-icon="false">
                     <a href="./answerQuestion?questionId=<%=question.questionId%>" data-ajax="false">
                         <div class="addAnswer_div">
-                            <img src="/images/01.png" class="addAnswer_img">
+                            <img src="/images/tab_course.png" class="addAnswer_img">
                             <p class="addAnswer_p">添加回答</p>
                         </div>
                     </a>
@@ -47,4 +47,12 @@
     </div>
 </div>
 </body>
+<script src="http://apps.bdimg.com/libs/jquery.cookie/1.4.1/jquery.cookie.js"></script>
+<script>
+    if($.cookie("questionDetail") == "true"){
+        location.reload();
+        $.cookie("questionDetail",false);
+        $.cookie("questionList",true);
+    }
+</script>
 </html>

@@ -1,6 +1,7 @@
 var db = require('../db/courseDBHelper')
 
 exports.getCourse = function(userId,callback){
+    var moment = require("moment");
     var adList,myCourse;
     db.getAdList(function (rows) {
         adList = rows;
@@ -11,7 +12,8 @@ exports.getCourse = function(userId,callback){
                     courseList:{
                         rotation:adList,
                         myCourse:myCourse,
-                        allCourse:rows
+                        allCourse:rows,
+                        moment:moment
                     }
                 })
             })
@@ -20,8 +22,10 @@ exports.getCourse = function(userId,callback){
 }
 
 exports.getCourseList = function (teacherId,callback) {
+    var moment = require("moment")
     db.getCourseById(teacherId,function (rows) {
-        callback({myCourse:rows});
+        callback({myCourse:rows,
+        moment:moment});
     })
 }
 

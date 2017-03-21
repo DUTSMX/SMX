@@ -20,7 +20,8 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -46,7 +47,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="question.html" >问答编辑<!--  <span class="caret"></span> --></a>
+                    <a href="question.html">问答编辑<!--  <span class="caret"></span> --></a>
                     <!-- <ul class="dropdown-menu" role="menu">
                       <li><a href="#">Action</a></li>
                       <li><a href="#">Another action</a></li>
@@ -71,7 +72,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="version.html" >版本管理</a>
+                    <a href="version.html">版本管理</a>
                 </li>
                 <li><a href="#">数据统计</a></li>
                 <li><a href="recycleBin.html">回收站</a></li>
@@ -87,7 +88,7 @@
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Search">
                 </div>
-                <a href="search.html"  class="btn btn-default" ><span class="glyphicon glyphicon-search" ></span></a>
+                <a href="search.html" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></a>
             </form>
         </div>
     </div>
@@ -122,13 +123,13 @@
                         <div class="form-group">
                             <label class="col-md-2 control-label" for="time">日期</label>
                             <div class="col-md-6" id="name">
-                                <input type="time" id="courseDate"  class="form-control">
+                                <input type="time" id="courseDate" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-2 control-label" for="time">开始时间</label>
                             <div class="col-md-6" id="name">
-                                <input type="time" id="beginTime"class="form-control">
+                                <input type="time" id="beginTime" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
@@ -156,14 +157,16 @@
                             </div>
                         </div>
                         <center>
-                            <button class="btn btn-default " onclick="addCourse()" >确定</button>
+                            <button class="btn btn-default " onclick="addCourse()">确定</button>
 
                         </center>
                     </div>
                     <p style="margin:0;text-align:center;padding-top:50px;" id="hint"></p>
+                </div>
             </div>
         </div>
     </div>
+<<<<<<< HEAD
 </div>
 <script>
     function addCourse() {
@@ -202,18 +205,72 @@ else{
         }
         else{
             $("#hint").text(data.desc);
+=======
+    <script>
+        function addCourse() {
+            var courseName = $("#courseName").val();
+            var teacherName = $("#teacherName").val();
+            var courseDate = $("#courseDate").val();
+            var beginTime = $("#beginTime").val();
+            var finishTime = $("#finishTime").val();
+            var courseTime = $("#courseTime").val();
+            var objectOriented = $("#objectOriented").val();
+            var courseContent = $("#courseContent").val();
+            var data = {
+                courseName: courseName,
+                teacherName: teacherName,
+                courseDate: courseDate,
+                beginTime: beginTime,
+                finishTime: finishTime,
+                courseTime: courseTime,
+                objectOriented: objectOriented,
+                courseContent: courseContent
+            }
+            console.log("data:" + JSON.stringify(data));
+            if (courseName.length == 0) {
+                $("#hint").text("课程名不能为空");
+            }
+            else if (teacherName.length == 0) {
+                $("#hint").text("老师姓名不能为空");
+            }
+            else if (courseDate.length == 0) {
+                $("#hint").text("日期不能为空");
+            }
+            else if (beginTime.length == 0) {
+                $("#hint").text("开始时间不能为空");
+            }
+            else if (finishTime.length == 0) {
+                $("#hint").text("结束时间不能为空");
+            }
+            else if (courseTime.length == 0) {
+                $("#hint").text("课程时长不能为空");
+            }
+            else if (objectOriented.length == 0) {
+                $("#hint").text("面向对象不能为空");
+            }
+            else if (courseContent.length == 0) {
+                $("#hint").text("课程内容不能为空");
+            }
+            else {
+                $.post("/addCourse", data, function (data) {
+                    if (data.status) {
+                        $("#hint").text(data.desc);
+                        window.open("./course");
+                    }
+                    else {
+                        $("#hint").text(data.desc);
 //            console.log(data.desc);
+                    }
+                }, "json")
+
+            }
         }
-    },"json")
+    </script>
 
-}
-    }
-</script>
-
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="/javascripts/jquery.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/javascripts/bootstrap.min.js"></script>
-
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="/javascripts/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/javascripts/bootstrap.min.js"></script>
+</div>
 </body>
 </html>
