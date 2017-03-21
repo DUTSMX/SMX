@@ -46,6 +46,7 @@ router.post("/addCourse",function (req,res) {
     res.send(rows);
   })
 });
-
-
+router.get("/addVideo",function (req,res) {
+  res.render("addVideo",{});
+});
 module.exports = router;

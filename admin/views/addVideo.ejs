@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>课程</title>
+    <!-- Bootstrap -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/video.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">尚名校管理系统</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-left">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">课程编辑 <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="addCourse.html">添加课程</a></li>
+                        <li><a href="course.html">已有课程</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">视频编辑 <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="addvideo.html">添加视频</a></li>
+                        <li><a href="video.html">已有视频</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="question.html">问答编辑<!--  <span class="caret"></span> --></a>
+                    <!-- <ul class="dropdown-menu" role="menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul> -->
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">审核管理 <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="waitChecking.html">待审核</a></li>
+                        <li><a href="checked.html">已审核</a></li>
+                        <li><a href="suggestion.html">意见反馈</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">用户管理<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="teacherList.html">老师列表</a></li>
+                        <li><a href="studentList.html">学生列表</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="version.html" >版本管理</a>
+                </li>
+                <li><a href="#">数据统计</a></li>
+                <li><a href="recycleBin.html">回收站</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">登录/注销<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="login.html">登录</a></li>
+                        <li><a href="logout.html">注销</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <a href="search.html"  class="btn btn-default" ><span class="glyphicon glyphicon-search" ></span></a>
+            </form>
+        </div>
+    </div>
+</nav>
+<div class="main">
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">添加视频</h3>
+            </div>
+            <div class="panel-body">
+                <div class="container">
+                    <div  class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="name">名称</label>
+                            <div class="col-md-6" id="name">
+                                <input type="text" name="name" value="" class="form-control">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="name">教师编号</label>
+                            <div class="col-md-6" id="name">
+                                <input type="text" name="name" value="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="time">时长</label>
+                            <div class="col-md-6" id="name">
+                                <input type="time" name="time" value="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="introduce">简介</label>
+                            <div class="col-md-6" id="name">
+                                <textarea id="introduce" rows="3" name="introduce" class="form-control"></textarea>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="video">视频上传</label>
+                            <div class="col-md-6" id="name">
+                                <input type="file" name="video" value="" class="form-control">
+                            </div>
+                            <button class="btn btn-default" onclick="uploadVideo()">上传</button>
+                        </div>
+                        <center>
+                            <a class="btn btn-default " href="videoDetails.html" >确定</a>
+
+                        </center>
+                        <p id="head"></p>
+                        <p id="age"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="../js/jquery.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../js/bootstrap.min.js"></script>\
+<script src="../js/crypto-js.js"></script>
+<script src="/javascripts/sdk/qcloud_sdk.js"></script>
+<script src="/javascripts/sdk/swfobject.js"></script>
+<script>
+    function uploadImg() {
+        var cos = new CosCloud("10068625","/");
+        var successCallBack = function (result) {
+            console.log("success")
+            console.log("result:"+JSON.stringify(result))
+            console.log("type"+typeof result)
+            console.log("上传视频"+JSON.parse(result).data.access_url)
+            $("#head").val(JSON.parse(result).data.access_url)
+        }
+        var errorCallBack = function (result) {
+            $("#age").val("error:"+result);
+            console.log("error")
+            console.log("result:"+JSON.stringify(result))
+        }
+        var inputElements = document.getElementById("file");
+        inputElements.addEventListener("change",handleFiles,false);
+        function handleFiles(){
+            var fileList = this.files;
+            if(fileList.length>0){
+                selectedFile = fileList[0];
+                var name = selectedFile.name;
+                var postfix = name.substr(name.lastIndexOf("."))
+                console.log("postfix:/head/"+userId+postfix)
+
+                cos.uploadFile(successCallBack,errorCallBack,"smxbucket","/"+selectedFile.name,selectedFile,0)
+//                cos.getFolderStat(successCallBack,errorCallBack,"smxbucket","/");
+            }
+        }
+    }
+    function editInfo(){
+        var head = $("#head").val();
+        var name = $("#name").val()
+        var gender = $('input:radio[name="radio-view"]:checked').val();
+        var age = $("#age").val();
+        var school = $("#school").val();
+        var grade = $("#grade").val();
+        var address = $("#address").val();
+        var from = "<%=from%>";
+        if(name.length == 0){
+            $("#hint").text("姓名不能为空")
+        }else{
+            var data = {
+                head:head,
+                name:name,
+                gender:gender,
+                age:age,
+                school:school,
+                grade:grade,
+                address:address
+            }
+            $.post("./editInfo",data,function (data,textStatus,jqXHR) {
+                if(data.status){
+                    console.log("from = "+ from);
+                    if(from){
+                        console.log("from = "+ true);
+                    }else{
+                        console.log("from = "+ false);
+                    }
+                    if(from){
+                        location.replace("addVideo")
+                    }else{
+                        $("#hint").text(data.desc)
+                    }
+                }else{
+                    console.log(data.desc)
+                }
+            },"json")
+        }
+//        console.log("head:"+head+"  name:"+name+"  gender:"+gender+" age:"+age+" school:"+school+" grade:"+grade+" address:"+address);
+
+    }
+</script>
+</body>
+
+</html>

@@ -166,6 +166,46 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
+</div>
+<script>
+    function addCourse() {
+        var courseName=$("#courseName").val();
+        var teacherName=$("#teacherName").val();
+        var courseDate=$("#courseDate").val();
+        var beginTime=$("#beginTime").val();
+        var finishTime=$("#finishTime").val();
+        var courseTime=$("#courseTime").val();
+        var objectOriented=$("#objectOriented").val();
+        var courseContent=$("#courseContent").val();
+        var data={
+            courseName:courseName,
+            teacherName:teacherName,
+            courseDate:courseDate,
+            beginTime:beginTime,
+            finishTime:finishTime,
+            courseTime:courseTime,
+            objectOriented:objectOriented,
+            courseContent:courseContent
+        }
+        console.log("data:"+JSON.stringify(data));
+if(courseName.length==0){$("#hint").text("课程名不能为空");}
+else if(teacherName.length==0){$("#hint").text("老师姓名不能为空");}
+else if(courseDate.length==0){$("#hint").text("日期不能为空");}
+else if(beginTime.length==0){$("#hint").text("开始时间不能为空");}
+else if(finishTime.length==0){$("#hint").text("结束时间不能为空");}
+else if(courseTime.length==0){$("#hint").text("课程时长不能为空");}
+else if(objectOriented.length==0){$("#hint").text("面向对象不能为空");}
+else if(courseContent.length==0){$("#hint").text("课程内容不能为空");}
+else{
+    $.post("addCourse",data,function (data) {
+        if(data.status){
+            $("#hint").text(data.desc);
+            window.open("course");
+        }
+        else{
+            $("#hint").text(data.desc);
+=======
     <script>
         function addCourse() {
             var courseName = $("#courseName").val();
