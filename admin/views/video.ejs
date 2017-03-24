@@ -98,35 +98,36 @@
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">
-                    <h3 class="panel-title">学生列表</h3>
+                    <h3 class="panel-title">已有视频</h3>
                 </div>
                 <!-- Table -->
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th>用户ID</th>
-                            <th>注册时间</th>
-                            <th>用户名称</th>
-                            <th>年龄</th>
-                            <th>年级</th>
-                            <th>学校</th>
-                            <th>住址</th>
+                            <th>编号</th>
+                            <th>老师</th>
+                            <th>名称</th>
+                            <th>时长</th>
+                            <th>观看人数</th>
+                            <th>上传时间</th>
+                            <th>标签</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <%studentList.forEach(function (item){ %>
+                        <%video.forEach(function (item){ %>
                         <tr>
-                            <td><%=item.studentId%></td>
-                            <td><%=item.studentRegisterDate%></td>
-                            <td><%=item.studentName%></td>
-                            <td><%=item.studentAge%></td>
-                            <td><%=item.studentGrade%></td>
-                            <td><%=item.studentSchool%></td>
-                            <td><%=item.studentAddress%></td>
+                            <td><%=item.videoId%></td>
+                            <td><%=item.teacherName%></td>
+                            <td><%=item.videoName%></td>
+                            <td><%=item.videoTime%></td>
+                            <td><%=item.videoWatchCount%></td>
+                            <td><%=item.videoCreateTime%></td>
+                            <td><%=item.videoTagName%></td>
                             <td>
-                                <a class="btn btn-success" href="studentListEdit?studentId=<%=item.studentId%>">编辑</a>
-                                <a class="btn btn-primary" href="studentListDetails?studentId=<%=item.studentId%>">查看详情</a>
+                                <a class="btn btn-success" href="videoDetailsEdit?videoId=<%=item.videoId%>">编辑</a>
+                                <a class="btn btn-primary" href="videoDetails?videoId=<%=item.videoId%>">查看详情</a>
                             </td>
                         </tr>
                         <%})%>
