@@ -16,12 +16,6 @@ exports.getChecked=function (callback) {
     })
 };
 
-exports.bohui=function(teacherId,callback){
-    db.bohui(teacherId,function (rows) {
-        // console.log("rows:"+JSON.stringify(rows));
-        callback(rows)
-    })
-};
 
 exports.getWaitChecking=function (callback) {
     db.getWaitChecking(function (rows) {
@@ -34,11 +28,31 @@ exports.getSuggestion=function (callback) {
     })
 };
 
+exports.getSuggestionReply=function (feedbackId,callback) {
+    db.getSuggestionReply(feedbackId,function (detail) {
+        callback(detail[0]);
+    })
+};
+exports.suggestionReply = function (feedbackId,reply,callback){
+    console.log("feedbackId:"+feedbackId+ "reply:"+reply);
+    db.suggestionReply(feedbackId,reply,function(rows) {
+        callback(rows);
+    })
+};
+
 exports.getCourseDetails=function (courseId,callback) {
     db.getCourseDetails(courseId,function (detail) {
         callback(detail[0]);
     })
 };
+exports.courseDetailsEdit = function(courseId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent,callback){
+    console.log("courseId:"+courseId+"courseName:"+courseName+"courseDate:"+courseDate+" beginTime:"+beginTime+" finishTime:"+finishTime +
+        " courseTime:"+courseTime+" objectOriented:"+objectOriented+" courseContent:"+courseContent);
+    db.courseDetailsEdit(courseId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent,function (rows) {
+        // console.log("rows:"+JSON.stringify(rows));
+        callback(rows)
+    })
+}
 
 exports.getVideo=function (callback) {
     db.getVideo(function (rows) {

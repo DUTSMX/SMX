@@ -29,13 +29,6 @@ router.get('/checked',function (req,res) {
 
 
 
-router.post("/bohui",function (req,res) {
-    var teacherId = req.query.teacherId;
-    api.bohui(teacherId,function (rows) {
-    })
-});
-
-
 router.get('/waitChecking',function (req,res) {
     api.getWaitChecking(function(waitChecking){
         console.log("waitChecking:"+JSON.stringify(waitChecking));
@@ -50,6 +43,23 @@ router.get('/suggestion',function (req,res) {
     })
 });
 
+router.get('/suggestionReply',function(req,res){
+    var feedbackId = req.query.feedbackId;
+    api.getSuggestionReply(feedbackId,function(suggestionReply){
+        console.log("suggestionReply:"+JSON.stringify(suggestionReply));
+        res.render('suggestionReply',{suggestionReply:suggestionReply})
+    })
+});
+router.post('/suggestionReply',function (req,res) {
+    var feedbackId = req.body.feedbackId;
+    var reply = req.body.reply;
+    console.log("feedbackId:"+feedbackId+ "reply:"+reply)
+    api.suggestionReply(feedbackId,reply,function (rows) {
+        console.log("rows:"+JSON.stringify(rows))
+        res.send(rows);
+    })
+});
+
 router.get('/courseDetails',function (req,res) {
     var courseId = req.query.courseId;
     api.getCourseDetails(courseId,function(courseDetails){
@@ -57,6 +67,27 @@ router.get('/courseDetails',function (req,res) {
         res.render('courseDetails',courseDetails)
     })
 });
+
+router.get("/courseDetailsEdit",function (req,res) {
+        res.render("courseDetailsEdit",{});
+})
+router.post("/courseDetailsEdit",function (req,res) {
+    var courseId = req.body.courseId;
+    var courseName = req.body.courseName;
+    var courseDate =req.body.courseDate;
+    var beginTime = req.body.beginTime;
+    var finishTime = req.body.finishTime;
+    var courseTime = req.body.courseTime;
+    var objectOriented = req.body.objectOriented;
+    var courseContent = req.body.courseContent;
+    console.log("courseId:"+courseId+" courseName:"+courseName+" courseDate:"+courseDate+" beginTime:"+beginTime+" finishTime:"+finishTime +
+        " courseTime:"+courseTime+" objectOriented:"+objectOriented+" courseContent:"+courseContent)
+    api.courseDetailsEdit(courseId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent,function (rows) {
+        console.log("rows:"+JSON.stringify(rows))
+        res.send(rows);
+    })
+});
+
 
 router.get('/video',function (req,res) {
     api.getVideo(function(video){
