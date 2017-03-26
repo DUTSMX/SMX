@@ -16,12 +16,28 @@ exports.getChecked=function (callback) {
     })
 };
 
+exports.getTurnBack=function(teacherId,callback) {
+    db.getTurnBack(teacherId, function () {
+        callback({desc:"已驳回"})
+    })
+};
 
 exports.getWaitChecking=function (callback) {
     db.getWaitChecking(function (rows) {
         callback(rows);
     })
 };
+exports.getAgree=function(teacherId,callback) {
+    db.getAgree(teacherId, function () {
+        callback({desc:"已同意"})
+    })
+};
+exports.getDisagree=function(teacherId,callback) {
+    db.getDisagree(teacherId, function () {
+        callback({desc:"已反对"})
+    })
+};
+
 exports.getSuggestion=function (callback) {
     db.getSuggestion(function (rows) {
         callback(rows);
@@ -124,4 +140,4 @@ exports.getTeacherDetails=function (teacherId,callback) {
             })
         })
     })
-};
+}

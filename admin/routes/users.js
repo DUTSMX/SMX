@@ -27,13 +27,24 @@ router.get('/checked',function (req,res) {
     })
 });
 
-
+router.get('/turnBack',function(req,res){
+    var teacherId = req.query.teacherId;
+    api.getTurnBack(teacherId,function(){})
+});
 
 router.get('/waitChecking',function (req,res) {
     api.getWaitChecking(function(waitChecking){
         console.log("waitChecking:"+JSON.stringify(waitChecking));
         res.render('waitChecking',{waitChecking:waitChecking})
     })
+});
+router.get('/agree',function(req,res){
+    var teacherId = req.query.teacherId;
+    api.getAgree(teacherId,function(){})
+});
+router.get('/disagree',function(req,res){
+    var teacherId = req.query.teacherId;
+    api.getDisagree(teacherId,function(){})
 });
 
 router.get('/suggestion',function (req,res) {

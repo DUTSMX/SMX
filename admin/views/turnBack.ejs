@@ -98,41 +98,13 @@
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">
-                    <h3 class="panel-title">已审核申请</h3>
+                    <h3 class="panel-title">已审核驳回</h3>
                 </div>
-                <!-- Table -->
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>老师ID</th>
-                            <th>申请时间</th>
-                            <th>老师姓名</th>
-                            <th>擅长课程</th>
-                            <th>个人简介</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <%checked.forEach(function (item){ %>
-                        <tr>
-                            <td><%=item.teacherId%></td>
-                            <td><%=item.teacherRegisterDate%></td>
-                            <td><%=item.teacherName%></td>
-                            <td><%=item.teacherGoodCourse%></td>
-                            <td><%=item.teacherSelfIntroduction%></td>
-                            <td>
-                                <a class="btn btn-danger" href="turnBack?teacherId=<%=item.teacherId%>" >驳回</a>
-                            </td>
-
-                        </tr>
-                        <%})%>
-                        </tbody>
-                    </table>
-                </div>
+                <button class="btn btn-danger " onclick="getTurnBack()">确认驳回</button>
             </div>
         </div>
     </div>
+</div>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/javascripts/jquery.js"></script>

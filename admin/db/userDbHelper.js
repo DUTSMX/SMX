@@ -65,25 +65,14 @@ exports.getChecked = function(callback){
     })
 };
 
-/*exports.turnback = function(teacherId,callback){
+exports.getTurnBack = function(teacherId,callback){
     var sql = "update account a set a.role = 0 where a.userId = "+teacherId+"";
-    console.log("sql:"+sql)
-    conn.query(sql, function (err,rows) {
-        if (err) {
-            console.log(err);
-            callback({
-                status:false,
-                desc:err
-            })
-        }else {
-            callback({
-                status:true,
-                desc:"已驳回"
-            });
-        }
+    console.log("sql:" + sql);
+    conn.query(sql,function (err,rows) {
+        console.log(sql);
+        callback({desc:"已驳回"})
     })
-};*/
-
+};
 
 exports.getWaitChecking = function(callback){
     var sql = "SELECT a.userId as teacherId, " +
@@ -101,6 +90,23 @@ exports.getWaitChecking = function(callback){
         }else{
             callback(rows);
         }
+    })
+};
+
+exports.getAgree = function(teacherId,callback){
+    var sql = "update account a set a.role = 2 where a.userId = "+teacherId+"";
+    console.log("sql:" + sql);
+    conn.query(sql,function (err,rows) {
+        console.log(sql);
+        callback({desc:"已同意"})
+    })
+};
+exports.getDisagree = function(teacherId,callback){
+    var sql = "update account a set a.role = 0 where a.userId = "+teacherId+"";
+    console.log("sql:" + sql);
+    conn.query(sql,function (err,rows) {
+        console.log(sql);
+        callback({desc:"已反对"})
     })
 };
 
