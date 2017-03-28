@@ -132,9 +132,9 @@
                         <div class="form-group">
                             <label class="col-md-2 control-label" for="video">视频上传</label>
                             <div class="col-md-6" id="name">
-                                <input type="file" name="video" value="" class="form-control">
+                                <input type="file" id="file" value="" class="form-control">
                             </div>
-                            <button class="btn btn-default" onclick="uploadVideo()">上传</button>
+                            <!--<button class="btn btn-default" onclick="uploadVideo()">上传</button>-->
                         </div>
                         <center>
                             <a class="btn btn-default " href="videoDetails.html" >确定</a>
@@ -149,14 +149,13 @@
     </div>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="../js/jquery.js"></script>
+<script src="/javascripts/jquery.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="../js/bootstrap.min.js"></script>\
-<script src="../js/crypto-js.js"></script>
+<script src="/javascripts/bootstrap.min.js"></script>
 <script src="/javascripts/sdk/qcloud_sdk.js"></script>
 <script src="/javascripts/sdk/swfobject.js"></script>
 <script>
-    function uploadImg() {
+        console.log("12")
         var cos = new CosCloud("10068625","/");
         var successCallBack = function (result) {
             console.log("success")
@@ -173,6 +172,7 @@
         var inputElements = document.getElementById("file");
         inputElements.addEventListener("change",handleFiles,false);
         function handleFiles(){
+            console.log("123")
             var fileList = this.files;
             if(fileList.length>0){
                 selectedFile = fileList[0];
@@ -181,10 +181,9 @@
                 console.log("postfix:/head/"+userId+postfix)
 
                 cos.uploadFile(successCallBack,errorCallBack,"smxbucket","/"+selectedFile.name,selectedFile,0)
-//                cos.getFolderStat(successCallBack,errorCallBack,"smxbucket","/");
             }
+            console.log("1234")
         }
-    }
     function editInfo(){
         var head = $("#head").val();
         var name = $("#name").val()
@@ -193,7 +192,6 @@
         var school = $("#school").val();
         var grade = $("#grade").val();
         var address = $("#address").val();
-        var from = "<%=from%>";
         if(name.length == 0){
             $("#hint").text("姓名不能为空")
         }else{
@@ -208,17 +206,9 @@
             }
             $.post("./editInfo",data,function (data,textStatus,jqXHR) {
                 if(data.status){
-                    console.log("from = "+ from);
-                    if(from){
-                        console.log("from = "+ true);
-                    }else{
-                        console.log("from = "+ false);
-                    }
-                    if(from){
-                        location.replace("addVideo")
-                    }else{
+
                         $("#hint").text(data.desc)
-                    }
+
                 }else{
                     console.log(data.desc)
                 }

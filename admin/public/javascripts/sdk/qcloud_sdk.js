@@ -1,6 +1,6 @@
 function CosCloud(appid, signUrl){
 	this.appid = appid;
-	this.sign_url = "../appSign";
+	this.sign_url = "www.shangmingxiao.com.cn/appSign";
 }
 
 //512K
