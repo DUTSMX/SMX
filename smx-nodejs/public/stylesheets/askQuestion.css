@@ -21,8 +21,11 @@
 /*详情输入框高度*/
 textarea{
      clear: both;
-     height:160px!important;
+    height:80px!important;
  }
+.textarea{
+    height:160px!important;
+}
 textarea.ui-input-text.ui-textinput-autogrow{
     background-color: white;!important;
 }

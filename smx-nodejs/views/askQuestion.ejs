@@ -31,8 +31,11 @@
 			<img src="/images/type_icon_green.png">
 			<h4 class="question">详情</h4>
 			<img src="/images/line_green.png" class="courseLine">
-			<textarea id="questionContent" type="text" placeholder="请填写问题相关描述信息" class="textarea"></textarea>
+			<!--<div id="questionContent" contentEditable="true" class="textarea">-->
+			<!--</div>-->
+			<!--<img src="/images/tab_course.png" style="width:20px;height:20px" onclick="uploadImage()">-->
 		</div>
+		<textarea id="questionContent" type="text" placeholder="请填写问题相关描述信息" class="textarea"></textarea>
 	</div>
 	<p class="hint" id="hint"></p>
 	<div class="publish">
@@ -40,6 +43,8 @@
 	</div>
 </div>
 <script src="http://apps.bdimg.com/libs/jquery.cookie/1.4.1/jquery.cookie.js"></script>
+<script src="/javascripts/sdk/qcloud_sdk.js"></script>
+<script src="/javascripts/sdk/swfobject.js"></script>
 <script>
 	function askQuestion() {
 		var questionTitle = $("#questionTitle").val();
@@ -63,6 +68,15 @@
 				}
 			}, "json")
 		}
+	}
+	function uploadImage(){
+
+	}
+	var editer=document.getElementById('editer');
+	function InsertImage(){
+		ImagePath = window.prompt('图片URL:', '');
+		editer.focus();
+		document.execCommand('InsertImage', false, ImagePath);
 	}
 </script>
 </body>

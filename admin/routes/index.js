@@ -30,6 +30,7 @@ router.get('/questionDetails',function (req,res) {
 router.get("/addCourse",function (req,res) {
   res.render("addCourse",{});
 })
+
 router.post("/addCourse",function (req,res) {
   var courseName = req.body.courseName;
   var courseDate =req.body.courseDate;
@@ -46,6 +47,7 @@ router.post("/addCourse",function (req,res) {
     res.send(rows);
   })
 });
+
 router.get("/addVideo",function (req,res) {
   res.render("addVideo",{});
 });

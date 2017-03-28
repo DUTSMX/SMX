@@ -105,22 +105,26 @@
                     <table class="table table-hover">
                         <thead>
                         <tr>
+                            <th>反馈ID</th>
                             <th>用户ID</th>
                             <th>用户名称</th>
                             <th>反馈时间</th>
                             <th>反馈内容</th>
+                            <th>回复状态</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
                         <%suggestion.forEach(function (item){ %>
                         <tr>
+                            <td><%=item.feedbackId%></td>
                             <td><%=item.userId%></td>
                             <td><%=item.userName%></td>
                             <td><%=item.feedbackTime%></td>
                             <td><%=item.feedback%></td>
+                            <td><%=item.replyState%></td>
                             <td>
-                                <a class="btn btn-success" href="suggestionReply?userId=<%=item.userId%>">回复</a>
+                                <a class="btn btn-success" href="suggestionReply?feedbackId=<%=item.feedbackId%>">回复</a>
                             </td>
                         </tr>
                         <%})%>

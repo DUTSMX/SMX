@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>课程</title>
+    <title>�γ�</title>
     <!-- Bootstrap -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
     <link href="/stylesheets/video.css" rel="stylesheet">
@@ -26,27 +26,27 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">尚名校管理系统</a>
+            <a class="navbar-brand" href="#">����У����ϵͳ</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-left">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">课程编辑 <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">�γ̱༭ <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="addCourse.html">添加课程</a></li>
-                        <li><a href="course.html">已有课程</a></li>
+                        <li><a href="addCourse.html">���ӿγ�</a></li>
+                        <li><a href="course.html">���пγ�</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">视频编辑 <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">��Ƶ�༭ <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="addVideo.html">添加视频</a></li>
-                        <li><a href="video.html">已有视频</a></li>
+                        <li><a href="addVideo.html">������Ƶ</a></li>
+                        <li><a href="video.html">������Ƶ</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="question" >问答编辑<!--  <span class="caret"></span> --></a>
+                    <a href="question.html" >�ʴ�༭<!--  <span class="caret"></span> --></a>
                     <!-- <ul class="dropdown-menu" role="menu">
                       <li><a href="#">Action</a></li>
                       <li><a href="#">Another action</a></li>
@@ -56,30 +56,30 @@
                     </ul> -->
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">审核管理 <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">��˹��� <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="waitChecking.html">待审核</a></li>
-                        <li><a href="checked.html">已审核</a></li>
-                        <li><a href="suggestion.html">意见反馈</a></li>
+                        <li><a href="waitChecking.html">�����</a></li>
+                        <li><a href="checked.html">�����</a></li>
+                        <li><a href="suggestion.html">�������</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">用户管理<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">�û�����<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="teacherList.html">老师列表</a></li>
-                        <li><a href="studentList.html">学生列表</a></li>
+                        <li><a href="teacherList.html">��ʦ�б�</a></li>
+                        <li><a href="studentList.html">ѧ���б�</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="version.html">版本管理</a>
+                    <a href="version.html">�汾����</a>
                 </li>
-                <li><a href="#">数据统计</a></li>
-                <li><a href="recycleBin.html">回收站</a></li>
+                <li><a href="#">����ͳ��</a></li>
+                <li><a href="recycleBin.html">����վ</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">登录/注销<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">��¼/ע��<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="login.html">登录</a></li>
-                        <li><a href="logout.html">注销</a></li>
+                        <li><a href="login.html">��¼</a></li>
+                        <li><a href="logout.html">ע��</a></li>
                     </ul>
                 </li>
             </ul>
@@ -98,40 +98,9 @@
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">
-                    <h3 class="panel-title">学生列表</h3>
+                    <h3 class="panel-title">����˲���</h3>
                 </div>
-                <!-- Table -->
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>用户ID</th>
-                            <th>注册时间</th>
-                            <th>用户名称</th>
-                            <th>年龄</th>
-                            <th>年级</th>
-                            <th>学校</th>
-                            <th>住址</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <%studentList.forEach(function (item){ %>
-                        <tr>
-                            <td><%=item.studentId%></td>
-                            <td><%=item.studentRegisterDate%></td>
-                            <td><%=item.studentName%></td>
-                            <td><%=item.studentAge%></td>
-                            <td><%=item.studentGrade%></td>
-                            <td><%=item.studentSchool%></td>
-                            <td><%=item.studentAddress%></td>
-                            <td>
-                                <a class="btn btn-success" href="studentListEdit?studentId=<%=item.studentId%>">编辑</a>
-                                <a class="btn btn-primary" href="studentListDetails?studentId=<%=item.studentId%>">查看详情</a>
-                            </td>
-                        </tr>
-                        <%})%>
-                        </tbody>
-                    </table>
+                <button class="btn btn-danger " onclick="getTurnBack()">ȷ�ϲ���</button>
                 </div>
             </div>
         </div>

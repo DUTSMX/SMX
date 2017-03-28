@@ -7,30 +7,8 @@
     padding:0px;!important;
     padding-left:26px;!important;
 }
-/*搜索icon*/
-.img-search{
-    position:absolute;
-    left:6px;
-    top:70px;
-}
-/*删除icon*/
-.img-delete{
-    float:right;
-    position: absolute;
-    top:70px;
-    right:6px;
-}
 .search-empty{
     text-align: center;
-}
-/*类型icon*/
-.type{
-    margin:0px;
-    padding-left:1em;
-}
-/*类型分割线*/
-.div_line{
-    width:100vw;
 }
 /*搜索类型*/
 .search-type{
