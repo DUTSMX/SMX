@@ -6,3 +6,7 @@
     -webkit-border-bottom-left-radius:16px;
     border-bottom-left-radius:16px;
 }
+/*课程内容 两侧边距*/
+.ui-listview>li .content{
+    margin-top:1em;
+}

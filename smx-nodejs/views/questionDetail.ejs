@@ -24,7 +24,7 @@
             <ul data-role="listview">
                 <li>
                     <h4><%=question.questionTitle%></h4>
-                    <p class="question_content"><%=question.questionContent%></p>
+                    <p class="question_content"><%-question.questionContent%></p>
                     </li>
                 <li data-icon="false">
                     <a href="./answerQuestion?questionId=<%=question.questionId%>" data-ajax="false">
