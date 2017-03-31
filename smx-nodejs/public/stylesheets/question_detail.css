@@ -25,6 +25,8 @@
     position: absolute;
     top:25%;
     left:41%;
+    border-radius: 0px;border-bottom-left-radius:0px;!important;
+    -webkit-border-bottom-left-radius:0px;!important;
 }
 .ui-listview>li .addAnswer_p{
     display:inline-block;
@@ -36,3 +38,4 @@
     -webkit-border-bottom-left-radius:24px;
     border-bottom-left-radius:24px;
 }
+

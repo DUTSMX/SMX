@@ -31,7 +31,13 @@
 			<img src="/images/type_icon_green.png">
 			<h4 class="question">详情</h4>
 			<img src="/images/line_green.png" class="courseLine">
-			<textarea id="questionContent" type="text" placeholder="请填写问题相关描述信息" class="textarea"></textarea>
+			<div>
+				<img src="/images/tab_course.png" class="add_image">
+				<div class="add_image_div">
+					<input type="file" id="file" accept="image/"/>
+				</div>
+			</div>
+            <iframe id = "iframe" src="/squire/document.html" onload = "iframe_load()" class="iframe_textarea"></iframe>
 		</div>
 	</div>
 	<p class="hint" id="hint"></p>
@@ -40,29 +46,47 @@
 	</div>
 </div>
 <script src="http://apps.bdimg.com/libs/jquery.cookie/1.4.1/jquery.cookie.js"></script>
+<script src="/javascripts/sdk/qcloud_sdk.js"></script>
+<script src="/javascripts/sdk/swfobject.js"></script>
+<script src="/squire/squire.js"></script>
+<script src="/javascripts/uploadQuestionImg.js"></script>
 <script>
 	function askQuestion() {
 		var questionTitle = $("#questionTitle").val();
-		var questionContent = $("#questionContent").val();
+		var questionContent = editor.getHTML();
+        var questionAbstract = questionContent;
+        while(questionAbstract.indexOf("<img") >0){
+            var start = questionAbstract.indexOf("<img");
+            var end = questionAbstract.indexOf(">",start)-start+1;
+            questionAbstract = questionAbstract.replace(questionAbstract.substr(start,end),"[图片]");
+        }
+        questionAbstract = questionAbstract.replace(/<div style="font-size:14px;font-weight:normal">/g,"")
+        questionAbstract = questionAbstract.replace(/<div>/g,"")
+        questionAbstract = questionAbstract.replace(/<\/div>/g,"")
+        questionAbstract = questionAbstract.replace(/<br>/g,"")
+        console.log("questionContent:"+questionContent);
+        console.log("questionAbstract:"+questionAbstract);
+
 		if (questionTitle.length == 0) {
-			$("#hint").text("问题标题不能为空");
-		} else if (questionContent.length == 0) {
-			$("#hint").text("问题内容不能为空");
-		} else {
-			data = {
-				questionTitle: questionTitle,
-				questionContent: questionContent
-			}
-			$.post("askQuestion", data, function (data) {
-				if (data.status) {
-					$("#hint").text(data.desc)
-					$.cookie("questionList",true);
-					window.history.back();
-				} else {
-					console.log(data.desc)
-				}
-			}, "json")
-		}
+            $("#hint").text("问题标题不能为空");
+        } else if (questionContent.length == 0) {
+            $("#hint").text("问题内容不能为空");
+        } else {
+            var data = {
+                questionTitle: questionTitle,
+                questionContent: questionContent,
+                questionAbstract:questionAbstract
+            }
+            $.post("askQuestion", data, function (data) {
+                if (data.status) {
+                    $("#hint").text(data.desc)
+                    $.cookie("questionList",true);
+                    window.history.back();
+                } else {
+                    console.log(data.desc)
+                }
+            }, "json")
+        }
 	}
 </script>
 </body>

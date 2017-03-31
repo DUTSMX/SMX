@@ -21,8 +21,14 @@
     </div>
     <div data-role="content">
         <div>
-            <textarea id="answerContent" type="text" placeholder="请填写问题的答案" class="textarea"></textarea>
+            <img src="/images/tab_course.png" class="add_image" onclick="uploadImage()">
+            <div class="add_image_div">
+                <input type="file" id="file" accept="image/"/>
+            </div>
         </div>
+        <iframe id = "iframe" src="/squire/document.html" onload = "iframe_load()"class="iframe_textarea" ></iframe>
+        <!--<div id="questionContent" contentEditable="true" class="textarea">-->
+        <!--</div>-->
     </div>
     <p class="hint" id="hint"></p>
     <div class="publish">
@@ -30,16 +36,37 @@
     </div>
 </div>
 <script src="http://apps.bdimg.com/libs/jquery.cookie/1.4.1/jquery.cookie.js"></script>
+<script src="/javascripts/sdk/qcloud_sdk.js"></script>
+<script src="/javascripts/sdk/swfobject.js"></script>
+<script src="/squire/squire.js"></script>
+<script src="/javascripts/uploadQuestionImg.js"></script>
 <script>
     function answerQuestion() {
-        var answerContent = $("#answerContent").val();
+        var answerContent = editor.getHTML();
+        var answerAbstract = answerContent;
+        while(answerAbstract.indexOf("<img") >0){
+            var start = answerAbstract.indexOf("<img");
+            var end = answerAbstract.indexOf(">",start)-start+1;
+            answerAbstract = answerAbstract.replace(answerAbstract.substr(start,end),"[图片]");
+        }
+        answerAbstract = answerAbstract.replace(/<div style="font-size:14px;font-weight:normal">/g,"")
+        answerAbstract = answerAbstract.replace(/<div>/g,"")
+        answerAbstract = answerAbstract.replace(/<\/div>/g,"")
+        answerAbstract = answerAbstract.replace(/<br>/g,"")
+        answerAbstract = answerAbstract.substr(0,answerAbstract.length-3);
+        answerContent = answerContent.substr(0,answerContent.length-3);
+        console.log("Content:"+answerContent)
+        console.log("Abstract:"+answerAbstract)
+        console.log("Abstract:"+answerAbstract.length);
         if(answerContent.length == 0){
             $("#hint").text("答案内容不能为空");
         }else{
-            data = {
+            var data = {
                 questionId:"<%=questionId%>",
-                answerContent:answerContent
+                answerContent:answerContent,
+                answerAbstract:answerAbstract
             }
+            console.log("data:"+JSON.stringify(data));
             $.post("answerQuestion",data,function (data) {
                 if(data.status){
                     $("#hint").text(data.desc)

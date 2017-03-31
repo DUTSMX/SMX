@@ -71,7 +71,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="version.html">版本管理</a>
+                    <a href="version.html" >版本管理</a>
                 </li>
                 <li><a href="#">数据统计</a></li>
                 <li><a href="recycleBin.html">回收站</a></li>
@@ -92,72 +92,118 @@
         </div>
     </div>
 </nav>
-
 <div class="main">
     <div class="container">
         <div class="bs-example">
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">
-                    <h3 class="panel-title">教师列表详情</h3>
+                    <h3 class="panel-title">学生列表详情</h3>
                 </div>
-                <!-- Table -->
-                <div class="table-responsive">
-                    <table class="table table-hover" >
-                        <thead>
-                        <tr>
-                            <th>老师ID</th>
-                            <td><%=detail.teacherId%></td>
-                        </tr>
-                        <tr>
-                            <th>申请时间</th>
-                            <td><%=detail.teacherCreateTime%></td>
-                        </tr>
-                        <tr>
-                            <th>通过时间</th>
-                            <td><%=detail.teacherRegisterDate%></td>
-                        </tr>
-                        <tr>
-                            <th>老师姓名</th>
-                            <td><%=detail.teacherName%></td>
-                        </tr>
-                        <tr>
-                            <th>年龄</th>
-                            <td><%=detail.teacherAge%></td>
-                        </tr>
-                        <tr>
-                            <th>教育经历</th>
-                            <td><%=detail.teacherSchool%></td>
-                        </tr>
-                        <tr>
-                            <th >擅长科目</th>
-                            <td><%=detail.teacherGoodCourse%></td>
-                        </tr>
-                        <tr>
-                            <th >简介</th>
-                            <td><%=detail.teacherSelfIntroduction%></td>
-                        </tr>
-                        <tr>
+                <div class="panel-body">
+                    <div class="container">
+                        <div class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="name">用户ID</label>
+                                <div class="col-md-6" id="name">
+                                    <input type="text" id="studentId" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="teacherid">注册时间</label>
+                                <div class="col-md-6" id="name">
+                                    <input type="number" id="registerDate" value="" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="teacherid">用户名称</label>
+                                <div class="col-md-6" id="name">
+                                    <input type="text" id="studentName" value="" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="time">年龄</label>
+                                <div class="col-md-6" id="name">
+                                    <input type="time" id="studentAge" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="time">年级</label>
+                                <div class="col-md-6" id="name">
+                                    <input type="time" id="studentGrade" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="time">学校</label>
+                                <div class="col-md-6" id="name">
+                                    <input type="time" id="studentSchool" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="name">家庭住址</label>
+                                <div class="col-md-6" id="name">
+                                    <input type="text" id="studentAddress" class="form-control">
+                                </div>
+                            </div>
 
-                        </tr>
-                        </thead>
+                        </div>
+                        <p style="margin:0;text-align:center;padding-top:50px;" id="hint"></p>
+                    </div>
 
-                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<script>
+    function studentListEdit() {
+        var studentId=$("#studentId").val();
+        var registerDate=$("#registerDate").val();
+        var studentName=$("#studentName").val();
+        var studentAge=$("#studentAge").val();
+        var studentGrade=$("#studentGrade").val();
+        var studentSchool=$("#studentSchool").val();
+        var studentAddress=$("#studentAddress").val();
+        var data={
+            studentId:studentId,
+            registerDate:registerDate,
+            studentName:studentName,
+            studentAge:studentAge,
+            studentGrade:studentGrade,
+            studentSchool:studentSchool,
+            studentAddress:studentAddress,
+        }
+        console.log("data:"+JSON.stringify(data));
+        if(studentId.length==0){$("#hint").text("用户ID不能为空");}
+        else if(registerDate.length==0){$("#hint").text("注册时间不能为空");}
+        else if(studentName.length==0){$("#hint").text("用户名称不能为空");}
+        else if(studentAge.length==0){$("#hint").text("年龄不能为空");}
+        else if(studentGrade.length==0){$("#hint").text("年级不能为空");}
+        else if(studentSchool.length==0){$("#hint").text("学校不能为空");}
+        else if(studentAddress.length==0){$("#hint").text("家庭住址不能为空");}
+        else{
+            $.post("studentListEdit",data,function (data) {
+                if (data.status) {
+                    $("#hint").text(data.desc);
+                    window.open("studentlist");
+                }
+                else
+                    $("#hint").text(data.desc);
+            })
+        }
+    }
+</script>
+
 <div class="main">
     <div class="container">
         <div class="bs-example">
             <div class="panel panel-default">
-                <!-- Default panel contents -->
+
                 <div class="panel-heading">
                     <h3 class="panel-title">已有课程</h3>
                 </div>
-                <!-- Table -->
+
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
@@ -168,12 +214,12 @@
                             <th>时长</th>
                             <th>面向对象</th>
                             <th>课程内容</th>
-                            <th>参与人数</th>
+                            <th>参与学生</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <%list1.forEach(function (item1){ %>
+                        <%list.forEach(function (item1){%>
                         <tr>
                             <td><%=item1.courseId%></td>
                             <td><%=item1.teacherName%></td>
@@ -183,69 +229,25 @@
                             <td><%=item1.courseContent%></td>
                             <td><%=item1.courseCount%>人</td>
                             <td>
-                                <a class="btn btn-success" href="courseDetailsEdit?courseId=<%=item1.courseId%>">编辑</a>
                                 <a class="btn btn-primary" href="courseDetails?courseId=<%=item1.courseId%>">查看详情</a>
                             </td>
                         </tr>
                         <%})%>
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-
-<div class="main">
-    <div class="container">
-        <div class="bs-example">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading">
-                    <h3 class="panel-title">已有视频</h3>
-                </div>
-                <!-- Table -->
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>编号</th>
-                            <th>老师</th>
-                            <th>名称</th>
-                            <th>时长</th>
-                            <th>观看人数</th>
-                            <th>上传时间</th>
-                            <th>标签</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <%list2.forEach(function (item2){ %>
-                        <tr>
-                            <td><%=item2.videoId%></td>
-                            <td><%=item2.teacherName%></td>
-                            <td><%=item2.videoName%></td>
-                            <td><%=item2.videoTime%></td>
-                            <td><%=item2.videoWatchCount%></td>
-                            <td><%=item2.videoCreateTime%></td>
-                            <td><%=item2.videoTagName%></td>
-                            <td>
-                                <a class="btn btn-success" href="teacherListEdit.html">编辑</a>
-                                <a class="btn btn-primary" href="videoDetails?videoId=<%=item2.videoId%>">查看详情</a>
-                            </td>
-                        </tr>
-                        <%})%>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
+<center>
+    <button class="btn btn-default " onclick="studentListEdit()">确定修改</button>
+</center>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+
 <script src="/javascripts/jquery.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/javascripts/bootstrap.min.js"></script>

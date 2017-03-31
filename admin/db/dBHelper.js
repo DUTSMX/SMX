@@ -101,6 +101,7 @@ exports.getAnswers=function (questionId,callback) {
 };
 exports.addCourse = function (courseName,courseDate,teacherName,beginTime,finishTime,courseTime,objectOriented,courseContent, callback) {
    var sql= "SELECT userId FROM account WHERE userName ='"+teacherName+"'";
+    console.log("sql:"+sql);
     conn.query(sql,function (err,rows) {
         if(err){
             callback({

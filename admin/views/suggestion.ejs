@@ -46,7 +46,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="question" >问答编辑<!--  <span class="caret"></span> --></a>
+                    <a href="question.html" >问答编辑<!--  <span class="caret"></span> --></a>
                     <!-- <ul class="dropdown-menu" role="menu">
                       <li><a href="#">Action</a></li>
                       <li><a href="#">Another action</a></li>
@@ -92,99 +92,39 @@
         </div>
     </div>
 </nav>
-
 <div class="main">
     <div class="container">
         <div class="bs-example">
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">
-                    <h3 class="panel-title">教师列表详情</h3>
-                </div>
-                <!-- Table -->
-                <div class="table-responsive">
-                    <table class="table table-hover" >
-                        <thead>
-                        <tr>
-                            <th>老师ID</th>
-                            <td><%=detail.teacherId%></td>
-                        </tr>
-                        <tr>
-                            <th>申请时间</th>
-                            <td><%=detail.teacherCreateTime%></td>
-                        </tr>
-                        <tr>
-                            <th>通过时间</th>
-                            <td><%=detail.teacherRegisterDate%></td>
-                        </tr>
-                        <tr>
-                            <th>老师姓名</th>
-                            <td><%=detail.teacherName%></td>
-                        </tr>
-                        <tr>
-                            <th>年龄</th>
-                            <td><%=detail.teacherAge%></td>
-                        </tr>
-                        <tr>
-                            <th>教育经历</th>
-                            <td><%=detail.teacherSchool%></td>
-                        </tr>
-                        <tr>
-                            <th >擅长科目</th>
-                            <td><%=detail.teacherGoodCourse%></td>
-                        </tr>
-                        <tr>
-                            <th >简介</th>
-                            <td><%=detail.teacherSelfIntroduction%></td>
-                        </tr>
-                        <tr>
-
-                        </tr>
-                        </thead>
-
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="main">
-    <div class="container">
-        <div class="bs-example">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading">
-                    <h3 class="panel-title">已有课程</h3>
+                    <h3 class="panel-title">意见反馈</h3>
                 </div>
                 <!-- Table -->
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th>编号</th>
-                            <th>老师</th>
-                            <th>名称</th>
-                            <th>时长</th>
-                            <th>面向对象</th>
-                            <th>课程内容</th>
-                            <th>参与人数</th>
+                            <th>反馈ID</th>
+                            <th>用户ID</th>
+                            <th>用户名称</th>
+                            <th>反馈时间</th>
+                            <th>反馈内容</th>
+                            <th>回复状态</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <%list1.forEach(function (item1){ %>
+                        <%suggestion.forEach(function (item){ %>
                         <tr>
-                            <td><%=item1.courseId%></td>
-                            <td><%=item1.teacherName%></td>
-                            <td><%=item1.courseName%></td>
-                            <td><%=item1.courseTime%></td>
-                            <td><%=item1.objectOriented%></td>
-                            <td><%=item1.courseContent%></td>
-                            <td><%=item1.courseCount%>人</td>
+                            <td><%=item.feedbackId%></td>
+                            <td><%=item.userId%></td>
+                            <td><%=item.userName%></td>
+                            <td><%=item.feedbackTime%></td>
+                            <td><%=item.feedback%></td>
+                            <td><%=item.replyState%></td>
                             <td>
-                                <a class="btn btn-success" href="courseDetailsEdit?courseId=<%=item1.courseId%>">编辑</a>
-                                <a class="btn btn-primary" href="courseDetails?courseId=<%=item1.courseId%>">查看详情</a>
+                                <a class="btn btn-success" href="suggestionReply?feedbackId=<%=item.feedbackId%>">回复</a>
                             </td>
                         </tr>
                         <%})%>
@@ -195,56 +135,6 @@
         </div>
     </div>
 </div>
-
-
-<div class="main">
-    <div class="container">
-        <div class="bs-example">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading">
-                    <h3 class="panel-title">已有视频</h3>
-                </div>
-                <!-- Table -->
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>编号</th>
-                            <th>老师</th>
-                            <th>名称</th>
-                            <th>时长</th>
-                            <th>观看人数</th>
-                            <th>上传时间</th>
-                            <th>标签</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <%list2.forEach(function (item2){ %>
-                        <tr>
-                            <td><%=item2.videoId%></td>
-                            <td><%=item2.teacherName%></td>
-                            <td><%=item2.videoName%></td>
-                            <td><%=item2.videoTime%></td>
-                            <td><%=item2.videoWatchCount%></td>
-                            <td><%=item2.videoCreateTime%></td>
-                            <td><%=item2.videoTagName%></td>
-                            <td>
-                                <a class="btn btn-success" href="teacherListEdit.html">编辑</a>
-                                <a class="btn btn-primary" href="videoDetails?videoId=<%=item2.videoId%>">查看详情</a>
-                            </td>
-                        </tr>
-                        <%})%>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/javascripts/jquery.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->

@@ -21,8 +21,28 @@
 /*详情输入框高度*/
 textarea{
      clear: both;
-     height:160px!important;
+    height:80px!important;
  }
+.textarea{
+    background: white;
+    height:160px!important;
+}
+.add_image{
+    margin-top:15px;
+    display:inline-block;
+    width:20px;
+    height:20px;
+}
+.add_image_div{
+    opacity: 0;
+    float: left;
+    width:20px;
+    height:20px;
+}
+.add_image input{
+    height:10px;
+    width:10px;
+}
 textarea.ui-input-text.ui-textinput-autogrow{
     background-color: white;!important;
 }
@@ -42,4 +62,16 @@ textarea.ui-input-text.ui-textinput-autogrow{
 /*"发布问题"字体阴影*/
 .ui-page-theme-a .ui-btn{
     text-shadow: none;!important;
+}
+.ui-btn, label.ui-btn{
+    font-weight:100;
+}
+.content_img{
+    height:10px;
+}
+.iframe_textarea{
+    border-style: none;
+    width:100%;
+    background-color:white;
+    height:50%
 }

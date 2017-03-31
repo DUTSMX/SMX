@@ -18,6 +18,7 @@ router.get('/', function (req, res) {
 * */
 router.get('/question', function (req, res) {
     api.getQuestion(function (rows) {
+        console.log("rows:"+JSON.stringify(rows))
         res.render("question", rows);
     })
 })
@@ -63,7 +64,8 @@ router.post('/askQuestion', function (req, res) {
     var userId = req.session.userId;
     var questionTitle = req.body.questionTitle;
     var questionContent = req.body.questionContent;
-    api.addQuestion(userId, questionTitle, questionContent, function (rows) {
+    var questionAbstract = req.body.questionAbstract;
+    api.addQuestion(userId, questionTitle, questionContent, questionAbstract, function (rows) {
         console.log(rows);
         res.send(rows);
     })
@@ -86,7 +88,8 @@ router.post("/answerQuestion",function (req,res) {
     var userId =req.session.userId;
     var questionId = req.body.questionId;
     var answerContent = req.body.answerContent;
-    api.answerQuestion(userId,questionId,answerContent,function (ret) {
+    var answerAbstract = req.body.answerAbstract;
+    api.answerQuestion(userId,questionId,answerContent,answerAbstract,function (ret) {
         res.send(ret);
     })
 
