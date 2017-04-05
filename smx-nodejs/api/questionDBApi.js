@@ -1,8 +1,8 @@
 var db = require('../db/questionDBHelper')
 
-exports.addQuestion = function(userId,questionTitle,questionContent,callback){
+exports.addQuestion = function(userId,questionTitle,questionContent,questionAbstract,callback){
     console.log("p")
-    db.addQuestion(userId,questionTitle,questionContent,function (rows) {
+    db.addQuestion(userId,questionTitle,questionContent,questionAbstract,function (rows) {
         callback(rows);
     })
 }
@@ -46,8 +46,8 @@ exports.askQuestion= function(userId,questionTitle,questionContent,callback){
         callback(rows);
     })
 }
-exports.answerQuestion = function (userId,questionId,answerContent,callback) {
-    db.addAnswer(userId,questionId,answerContent,function (rows) {
+exports.answerQuestion = function (userId,questionId,answerContent,answerAbstract,callback) {
+    db.addAnswer(userId,questionId,answerContent,answerAbstract,function (rows) {
         callback(rows);
     })
 }

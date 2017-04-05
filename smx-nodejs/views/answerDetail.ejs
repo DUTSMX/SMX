@@ -31,15 +31,10 @@
                 <div class="answer_person">
                     <img class="head_24" src="<%= authorHeadUrl %>"/> <%= authorName %>
                 </div>
-                <p id="content"class="content"><%= answerContent %></p>
+                <div id="content"class="content"><%- answerContent %></div>
             </li>
         </ul>
     </div>
 </div>
 </body>
-<script>
-    var title = "";
-    title += "<%=answerContent%>";
-    $("#content").append(title);
-</script>
 </html>

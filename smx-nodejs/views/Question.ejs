@@ -50,12 +50,12 @@
                 <li data-icon="false">
                     <a href="<%= item.aHref %>" data-ajax="false">
                         <span class="ans_teacher"><img class="head_small"
-                                                       src="<%= item.authorHeadUrl %>"><%= item.authorName %></span>
+                        src="<%= item.authorHeadUrl %>"><%= item.authorName %></span>
                         <!--<div class="zan">
                             <p>12</p>
                             <span>赞同</span>
                         </div>-->
-                        <h5><%= item.questionTitle %></h5>
+                        <h5><%- item.questionTitle %></h5>
                         <p><%= item.answerAbstract %></p>
                     </a>
                 </li>
@@ -83,6 +83,9 @@
 </body>
 <script src="http://apps.bdimg.com/libs/jquery.cookie/1.4.1/jquery.cookie.js"></script>
 <script>
+    function rechange(str) {
+        return str.replace("<div><imp (.*) </div>","[图片]");
+    }
     function course() {
         location.replace("/course/course")
     }
