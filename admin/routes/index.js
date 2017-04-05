@@ -12,6 +12,13 @@ router.get('/course',function (req,res,next) {
     res.render('course',{courseList:courseList})
   })
 });
+router.get("/courseDetails",function (req,res) {
+  var courseId=req.query.courseId;
+  api.getCourseDetails(courseId,function (courseDetailsList) {
+    console.log("courseDetailsList:"+JSON.stringify(courseDetailsList));
+    res.render('courseDetails',{courseDetailsList:courseDetailsList[0]});
+  })
+})
 router.get('/question',function (req,res) {
   api.getQuestion(function(questionList){
     var moment = require("moment");
@@ -50,5 +57,43 @@ router.post("/addCourse",function (req,res) {
 
 router.get("/addVideo",function (req,res) {
   res.render("addVideo",{});
+});
+router.get("/login",function (req,res) {
+  res.render("login",{});
+})
+router.post('/login',function(req,res){
+  var phoneNumber = req.body.phoneNumber;
+  var password = req.body.password;
+  console.log("phoneNumber:"+phoneNumber+" password:"+password);
+  api.login(phoneNumber,password,function (ret) {
+    console.log("ret:"+JSON.stringify(ret));
+     var userId = ret.userId;
+    if(ret.status){
+       // req.session.userId = userId;
+      // console.log("req:"+req.session.userId);
+       ret.sourceUrl = req.session.sourceUrl;
+       console.log("url:"+req.session.sourceUrl)
+      console.log("ret:"+JSON.stringify(ret))
+      res.send(ret);
+    }else{
+      console.log(ret)
+      res.send(ret);
+    }
+  })
+})
+router.get('/logout',function (req,res) {
+  delete req.session.userId;
+  res.render('login',{});
+})
+router.get('/EditPassword',function (req,res) {
+  res.render('EditPassword',{})
+})
+router.post('/editPassword',function (req,res) {
+  var userId=req.session.userId;
+  var oldPassword=req.body.oldPassword;
+  var password=req.body.password;
+  api.editPassword(userId,oldPassword,password,function (data) {
+    res.send(data);
+  })
 });
 module.exports = router;

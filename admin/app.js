@@ -4,7 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+// var session=require('express-session');
+// var utils = require('./utils/utils');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
@@ -31,7 +32,40 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+// app.use(session({
+//   resave:true,
+//   saveUninitialized:false,
+//   secret: utils.getRandom128(),
+//   cookie: {maxAge: 30 * 24 * 60 * 60 * 1000}
+// }))
 
+var unInterceptionList = ["/users/forgetPassword","/users/register","/users/getCheckCode"]
+//登录过滤器，如果session中的userId为空，则跳转到登录页面，登陆成功后跳转回来。
+app.use(function (req,res,next) {
+  var url = req.originalUrl;
+  var regex = "(.css|.js|.png|.gif|.ico|.map\s*)$";
+  var ret = url.match(regex);
+
+  if(ret == null) {
+    if (url != "/index/login" && !req.session.userId) {
+      var flag = true;
+      unInterceptionList.forEach(function (item) {
+        if(item == url){
+          flag = false;
+          return;
+        }
+      })
+      if(flag){
+        console.log(url + "  redirect  login")
+        req.session.sourceUrl = url;
+        return res.redirect("/index/login")
+      }
+    }else{
+
+    }
+  }
+  next();
+})
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development

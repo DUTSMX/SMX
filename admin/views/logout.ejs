@@ -20,7 +20,8 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -41,12 +42,12 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">视频编辑 <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="addVideo.html">添加视频</a></li>
+                        <li><a href="addvideo.html">添加视频</a></li>
                         <li><a href="video.html">已有视频</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="question" >问答编辑<!--  <span class="caret"></span> --></a>
+                    <a href="question.html">问答编辑<!--  <span class="caret"></span> --></a>
                     <!-- <ul class="dropdown-menu" role="menu">
                       <li><a href="#">Action</a></li>
                       <li><a href="#">Another action</a></li>
@@ -71,7 +72,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="version.html" >版本管理</a>
+                    <a href="version.html">版本管理</a>
                 </li>
                 <li><a href="#">数据统计</a></li>
                 <li><a href="recycleBin.html">回收站</a></li>
@@ -87,72 +88,51 @@
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Search">
                 </div>
-                <a href="search.html"  class="btn btn-default" ><span class="glyphicon glyphicon-search" ></span></a>
+                <a href="search.html" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></a>
             </form>
         </div>
     </div>
 </nav>
 <div class="main">
     <div class="container">
-        <div class="bs-example">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading">
-                    <h3 class="panel-title">课程详情页面</h3>
-                </div>
-                <!-- Table -->
-                <div class="table-responsive">
-                    <table class="table table-hover" >
-                        <thead>
-                        <tr>
-                            <th>名称</th>
-                            <td><%=courseDetailsList.courseName %></td>
-                        </tr>
-                        <tr>
-                            <th>教师编号</th>
-                            <td><%=courseDetailsList.teacherName%></td>
-                        </tr>
-                        <tr>
-                            <th>开始时间</th>
-                            <td><%=courseDetailsList.beginTime%></td>
-                        </tr>
-                        <tr>
-                            <th>结束时间</th>
-                            <td><%=courseDetailsList.finishTime%></td>
-                        </tr>
-                        <tr>
-                            <th>时长</th>
-                            <td><%=courseDetailsList.courseTime%></td>
-                        </tr>
-                        <tr>
-                            <th>面向对象</th>
-                            <td><%=courseDetailsList.objectOriented%></td>
-                        </tr>
-                        <tr>
-                            <th >课程内容</th>
-                            <td><%=courseDetailsList.courseContent%></td>
-                        </tr>
-                        <tr>
-                            <th >参与学生</th>
-                            <td><%=courseDetailsList.courseCount%></td>
-                        </tr>
-                        <tr>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">注销</h3>
+            </div>
+            <div class="panel-body">
+                <div class="container">
+                    <div action="#" method="post" class="form-horizontal" role="form">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>账号名</th>
+                                    <th>状态</th>
 
-                        </tr>
-                        </thead>
-
-                    </table>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><%=userId%></td>
+                                    <td>已登录</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <center>
+                                <a class="btn btn-default " href="login.html">注销</a>
+                            </center>
+                            <div style="float: right; margin-right: 100px;">
+                                <a class="btn btn-default " href="editPassword">修改密码</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-
-<script src="/javascripts/jquery.js"></script>
-
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/javascripts/bootstrap.min.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="/javascripts/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/javascripts/bootstrap.min.js"></script>
 </body>
 </html>
