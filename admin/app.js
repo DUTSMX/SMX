@@ -4,8 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-// var session=require('express-session');
-// var utils = require('./utils/utils');
+var session=require('express-session');
+var utils = require('./utils/utils');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
@@ -32,12 +32,12 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
-// app.use(session({
-//   resave:true,
-//   saveUninitialized:false,
-//   secret: utils.getRandom128(),
-//   cookie: {maxAge: 30 * 24 * 60 * 60 * 1000}
-// }))
+app.use(session({
+  resave:true,
+  saveUninitialized:false,
+  secret: utils.getRandom128(),
+  cookie: {maxAge: 30 * 24 * 60 * 60 * 1000}
+}))
 
 var unInterceptionList = ["/users/forgetPassword","/users/register","/users/getCheckCode"]
 //登录过滤器，如果session中的userId为空，则跳转到登录页面，登陆成功后跳转回来。
