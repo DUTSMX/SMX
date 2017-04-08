@@ -33,7 +33,7 @@ exports.getCourse = function(callback){
         "GROUP BY s.courseId";
 
     conn.query(sql,function (err,rows) {
-        console.log(sql);
+        console.log("sql:"+sql);
         if(err){
             console.log(err);
             return;
@@ -198,4 +198,25 @@ exports.findAccount = function (phoneNumber, password, callback) {
             }
         })
     }
+}
+exports.Delete=function (Id,type,desc,callback) {
+    var sql="DELETE FROM question WHERE questionId= "+Id;
+    conn.query(sql,function (err,rows) {
+        if(err){
+            console.log(err);
+        }
+        else{
+            var sql="INSERT INTO delete (id,type,desc) VALUES (Id,type,desc)";
+            conn.query(sql,function (err,rows) {
+                if(err){callback({
+                    status:false
+                })}
+                else{
+                    callback({
+                        status:true
+                    })
+                }
+            })
+        }
+    })
 }
