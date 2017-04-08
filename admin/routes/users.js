@@ -23,28 +23,42 @@ router.get('/teacherList',function (req,res) {
 router.get('/checked',function (req,res) {
     api.getChecked(function(checked){
         console.log("checked:"+JSON.stringify(checked));
-        res.render('checked',{checked:checked})
+        res.render('checked',checked)
     })
 });
-
-router.get('/turnBack',function(req,res){
-    var teacherId = req.query.teacherId;
-    api.getTurnBack(teacherId,function(){})
-});
+router.post('/checked',function (req,res) {
+    var teacherId = req.body.teacherId;
+    console.log( "teacherId:"+teacherId)
+    api.checked(teacherId,function(rows){
+        rows.teacherId=teacherId;
+        console.log("rows:"+JSON.stringify(rows));
+        res.send(rows);
+    })
+})
 
 router.get('/waitChecking',function (req,res) {
     api.getWaitChecking(function(waitChecking){
         console.log("waitChecking:"+JSON.stringify(waitChecking));
-        res.render('waitChecking',{waitChecking:waitChecking})
+        res.render('waitChecking',waitChecking)
     })
 });
-router.get('/agree',function(req,res){
-    var teacherId = req.query.teacherId;
-    api.getAgree(teacherId,function(){})
-});
-router.get('/disagree',function(req,res){
-    var teacherId = req.query.teacherId;
-    api.getDisagree(teacherId,function(){})
+router.post('/waitChecking',function(req,res){
+    var teacherId = req.body.teacherId;
+    var type = req.body.type;
+    console.log( "teacherId:"+teacherId);
+    if(type==2){
+        api.agree(teacherId,function(rows){
+            rows.teacherId=teacherId;
+            console.log("rows:"+JSON.stringify(rows));
+            res.send(rows);
+        });
+    } else{
+        api.disagree(teacherId,function(rows){
+            rows.teacherId=teacherId;
+            console.log("rows:"+JSON.stringify(rows));
+            res.send(rows);
+        });
+    }
 });
 
 router.get('/suggestion',function (req,res) {
@@ -57,8 +71,9 @@ router.get('/suggestion',function (req,res) {
 router.get('/suggestionReply',function(req,res){
     var feedbackId = req.query.feedbackId;
     api.getSuggestionReply(feedbackId,function(suggestionReply){
+        suggestionReply.feedbackId = feedbackId;
         console.log("suggestionReply:"+JSON.stringify(suggestionReply));
-        res.render('suggestionReply',{suggestionReply:suggestionReply})
+        res.render('suggestionReply',suggestionReply)
     })
 });
 router.post('/suggestionReply',function (req,res) {
@@ -79,9 +94,17 @@ router.get('/courseDetails',function (req,res) {
     })
 });
 
-router.get("/courseDetailsEdit",function (req,res) {
+/*router.get("/courseDetailsEdit",function (req,res) {
         res.render("courseDetailsEdit",{});
-})
+})*/
+router.get('/courseDetailsEdit',function (req,res) {
+    var courseId = req.query.courseId;
+    api.getCourseDetailsEdit(courseId,function (courseEdit) {
+        courseEdit.courseId = courseId;
+        console.log("courseDetailsEdit:"+JSON.stringify(courseEdit));
+        res.render('courseDetailsEdit',courseEdit)
+    })
+});
 router.post("/courseDetailsEdit",function (req,res) {
     var courseId = req.body.courseId;
     var courseName = req.body.courseName;
@@ -127,6 +150,7 @@ router.get('/studentListDetails',function (req,res) {
 router.get('/studentListEdit',function (req,res) {
     var studentId = req.query.studentId;
     api.getStudentListEdit(studentId,function (studentEdit) {
+        studentEdit.studentId = studentId;
         console.log("studentEdit:"+JSON.stringify(studentEdit));
         res.render('studentListEdit',studentEdit)
     })
@@ -151,6 +175,7 @@ router.post("/studentListEdit",function (req,res) {
 router.get('/teacherListEdit',function (req,res) {
     var teacherId = req.query.teacherId;
     api.getTeacherListEdit(teacherId,function (teacherEdit) {
+        teacherEdit.teacherId = teacherId;
         console.log("teacherEdit:"+JSON.stringify(teacherEdit));
         res.render('teacherListEdit',teacherEdit)
     })
@@ -179,6 +204,16 @@ router.get('/teacherListDetails',function (req,res) {
         res.render('teacherListDetails',teacherDetails)
     })
 });
-
+router.get("/teststudentlist",function (req,res) {
+    api.getStudent(function(studentList) {
+        console.log("student:" + JSON.stringify(studentList));
+        res.render('teststudentlist', {studentList: studentList})
+    });
+});
+router.get("/navigation",function (req,res) {
+    console.log("nag")
+    var path = require('path');
+    res.sendFile(path.resolve(__dirname,'..')+"/navigation.html")
+})
 
 module.exports = router;

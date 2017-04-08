@@ -124,7 +124,7 @@
                             <td><%=item.feedback%></td>
                             <td><%=item.replyState%></td>
                             <td>
-                                <a class="btn btn-success" href="suggestionReply?feedbackId=<%=item.feedbackId%>">回复</a>
+                                <a class="<%if(item.replyState == "已回复"){%>btn btn-info disabled<%}else{%>btn btn-success<%}%>" href="suggestionReply?feedbackId=<%=item.feedbackId%>">回复</a>
                             </td>
                         </tr>
                         <%})%>
@@ -135,6 +135,7 @@
         </div>
     </div>
 </div>
+
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/javascripts/jquery.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->

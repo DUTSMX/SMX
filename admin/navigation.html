@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>�γ�</title>
+    <title>导航栏</title>
     <!-- Bootstrap -->
-    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
-    <link href="/stylesheets/video.css" rel="stylesheet">
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/stylesheets/video.css" rel="stylesheet" type="text/css"/>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -26,60 +26,53 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">����У����ϵͳ</a>
+            <a class="navbar-brand" href="#">尚名校管理系统</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-left">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">�γ̱༭ <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">课程编辑 <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="addCourse.html">���ӿγ�</a></li>
-                        <li><a href="course.html">���пγ�</a></li>
+                        <li><a href="http://localhost:8081/admin/addCourse">添加课程</a></li>
+                        <li><a href="http://localhost:8081/admin/course">已有课程</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">��Ƶ�༭ <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">视频编辑 <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="addVideo.html">������Ƶ</a></li>
-                        <li><a href="video.html">������Ƶ</a></li>
+                        <li><a href="http://localhost:8081/admin/addVideo">添加视频</a></li>
+                        <li><a href="http://localhost:8081/users/video">已有视频</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="question.html" >�ʴ�༭<!--  <span class="caret"></span> --></a>
-                    <!-- <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Action</a></li>
-                      <li><a href="#">Another action</a></li>
-                      <li><a href="#">Something else here</a></li>
-                      <li class="divider"></li>
-                      <li><a href="#">Separated link</a></li>
-                    </ul> -->
+                    <a href="http://localhost:8081/admin/question" target="_parent" >问答编辑<!--  <span class="caret"></span> --></a>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">��˹��� <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">审核管理 <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="waitChecking.html">�����</a></li>
-                        <li><a href="checked.html">�����</a></li>
-                        <li><a href="suggestion.html">�������</a></li>
+                        <li><a href="http://localhost:8081/users/waitChecking">待审核</a></li>
+                        <li><a href="http://localhost:8081/users/checked">已审核</a></li>
+                        <li><a href="http://localhost:8081/users/suggestion">意见反馈</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">�û�����<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">用户管理<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="teacherList.html">��ʦ�б�</a></li>
-                        <li><a href="studentList.html">ѧ���б�</a></li>
+                        <li><a href="http://localhost:8081/users/teacherList">老师列表</a></li>
+                        <li><a href="http://localhost:8081/users/studentList">学生列表</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="version.html">�汾����</a>
+                    <a href="#">版本管理</a>
                 </li>
-                <li><a href="#">����ͳ��</a></li>
-                <li><a href="recycleBin.html">����վ</a></li>
+                <li><a href="#">数据统计</a></li>
+                <li><a href="http://localhost:8081/admin/recycleBin">回收站</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">��¼/ע��<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">登录/注销<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="login.html">��¼</a></li>
-                        <li><a href="logout.html">ע��</a></li>
+                        <li><a href="http://localhost:8081/admin/login">登录</a></li>
+                        <li><a href="http://localhost:8081/admin/logout">注销</a></li>
                     </ul>
                 </li>
             </ul>
@@ -92,21 +85,6 @@
         </div>
     </div>
 </nav>
-<div class="main">
-    <div class="container">
-        <div class="bs-example">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading">
-                    <h3 class="panel-title">����˲���</h3>
-                </div>
-                <button class="btn btn-danger " onclick="getTurnBack()">ȷ�ϲ���</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/javascripts/jquery.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/javascripts/bootstrap.min.js"></script>

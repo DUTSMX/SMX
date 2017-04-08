@@ -105,21 +105,15 @@
                     <div class="container">
                         <div class="form-horizontal" role="form">
                             <div class="form-group">
-                                <label class="col-md-2 control-label" for="name">老师ID</label>
-                                <div class="col-md-6" id="name">
-                                    <input type="text" id="teacherId" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 <label class="col-md-2 control-label" for="teacherid">申请时间</label>
                                 <div class="col-md-6" id="name">
-                                    <input type="number" id="teacherCreateTime" value="" class="form-control">
+                                    <input type="int" id="teacherCreateTime" value="" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="teacherid">通过时间</label>
                                 <div class="col-md-6" id="name">
-                                    <input type="number" id="teacherRegisterDate" value="" class="form-control">
+                                    <input type="datetime" id="teacherRegisterDate" value="" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -131,19 +125,19 @@
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="time">年龄</label>
                                 <div class="col-md-6" id="name">
-                                    <input type="time" id="teacherAge" class="form-control">
+                                    <input type="text" id="teacherAge" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="time">教育经历</label>
                                 <div class="col-md-6" id="name">
-                                    <input type="time" id="teacherSchool" class="form-control">
+                                    <input type="text" id="teacherSchool" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="time">擅长科目</label>
                                 <div class="col-md-6" id="name">
-                                    <input type="time" id="teacherGoodCourse" class="form-control">
+                                    <input type="text" id="teacherGoodCourse" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -165,7 +159,7 @@
 
 <script>
     function teacherListEdit() {
-        var teacherId=$("#teacherId").val();
+        var teacherId="<%=teacherId%>";
         var teacherCreateTime=$("#teacherCreateTime").val();
         var teacherRegisterDate=$("#teacherRegisterDate").val();
         var teacherName=$("#teacherName").val();

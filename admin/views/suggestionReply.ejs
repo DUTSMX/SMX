@@ -92,6 +92,7 @@
         </div>
     </div>
 </nav>
+
 <div class="main">
     <div class="container">
         <div class="bs-example">
@@ -101,32 +102,53 @@
                     <h3 class="panel-title">意见回复</h3>
                 </div>
                 <!-- Table -->
+                <div class="table-responsive">
+                    <table class="table table-hover" rules="none">
+                        <thead>
+                        <tr >
+                            <th>用户ID</th>
+                            <td><%=userId%></td>
+                        </tr>
+                        <tr>
+                            <th>用户名称</th>
+                            <td><%=userName%></td>
+                        </tr>
+                        <tr>
+                            <th>反馈时间</th>
+                            <td><%=feedbackTime%></td>
+                        </tr>
+                        <tr>
+                            <th>反馈内容</th>
+                            <td><%=feedback%></td>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
                 <div class="panel-body">
                     <div class="container">
-                        <div class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <label class="col-md-2 control-label" for="name">确认反馈ID</label>
-                                <div class="col-md-6" id="name">
-                                    <input type="text" id="feedbackId" value="" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label" for="name">回复内容</label>
-                                <div class="col-md-6" id="name">
-                                    <textarea id="reply" rows="3" name="content" class="form-control"></textarea>
-                                </div>
-                            </div>
+                      <div class="form-horizontal" role="form">
+                        <div class="form-group">
+                          <label class="col-md-2 control-label" for="name">回复内容</label>
+                          <div class="col-md-6" id="name">
+                            <textarea id="reply" rows="3" name="content" class="form-control"></textarea>
+                          </div>
                         </div>
+                      </div>
                     </div>
                 </div>
             </div>
+            <p style="margin:0;text-align:center;padding-top:20px;padding-bottom:20px;" id="hint"></p>
         </div>
     </div>
 </div>
 
+<center>
+    <button class="btn btn-default " onclick="suggestionReply()">确定回复</button>
+</center>
+
 <script>
     function suggestionReply() {
-        var feedbackId=$("#feedbackId").val();
+        var feedbackId="<%=feedbackId%>";
         var reply=$("#reply").val();
         var data={
             feedbackId:feedbackId,
@@ -135,7 +157,7 @@
         console.log("data:"+JSON.stringify(data));
         if(feedbackId.length==0){$("#hint").text("确认反馈ID不能为空");}
         else if (reply.length==0){$("#hint").text("回复内容不能为空");}
-            else{
+        else{
             $.post("suggestionReply",data,function (data) {
                 if (data.status) {
                     $("#hint").text(data.desc);
@@ -148,50 +170,6 @@
     }
 </script>
 
-
-<div class="main">
-    <div class="container">
-        <div class="bs-example">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading">
-                    <h3 class="panel-title">意见回复</h3>
-                </div>
-                <!-- Table -->
-                <div class="table-responsive">
-                    <table class="table table-hover" >
-                        <thead>
-                        <tr>
-                            <th>反馈ID</th>
-                            <td><%=suggestionReply.feedbackId%></td>
-                        </tr>
-                        <tr>
-                            <th>用户ID</th>
-                            <td><%=suggestionReply.userId%></td>
-                        </tr>
-                        <tr>
-                            <th>用户名称</th>
-                            <td><%=suggestionReply.userName%></td>
-                        </tr>
-                        <tr>
-                            <th>反馈时间</th>
-                            <td><%=suggestionReply.feedbackTime%></td>
-                        </tr>
-                        <tr>
-                            <th>反馈内容</th>
-                            <td><%=suggestionReply.feedback%></td>
-                        </tr>
-                        </thead>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<center>
-    <button class="btn btn-default " onclick="suggestionReply()">确定回复</button>
-</center>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/javascripts/jquery.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
