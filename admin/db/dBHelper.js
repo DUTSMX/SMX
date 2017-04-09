@@ -170,7 +170,7 @@ exports.findAccount = function (phoneNumber, password, callback) {
         callback(rows)
     })
     exports.editPassword=function (userId,oldPassword,password,callback) {
-        var sql="SELECT * FROM account WHERE userId="+userId+"and password= '"+oldPassword+"'";
+        var sql="SELECT * FROM account WHERE userId="+userId+" and password= '"+oldPassword+"'";
         console.log("sql:"+sql);
         conn.query(sql,function (err,rows) {
             if(err){

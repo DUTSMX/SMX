@@ -84,7 +84,12 @@ router.post('/login',function(req,res){
 })
 router.get('/logout',function (req,res) {
   delete req.session.userId;
+  //   var userId=req.session.userId;
   res.render('login',{});
+})
+router.get('/loginAlready',function (req,res) {
+    var userId=req.session.userId;
+    res.render('loginAlready',{userId:userId});
 })
 router.get('/EditPassword',function (req,res) {
   res.render('EditPassword',{})
