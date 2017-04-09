@@ -73,5 +73,10 @@ exports.editPassword=function (userId,oldPassword,password,callback) {
         callback(data);
     })
 };
+exports.Delete=function (Id,type,desc,callback) {
+    db.Delete(Id,type,desc,function (ret) {
+        callback(ret);
+    })
+}
 
 
