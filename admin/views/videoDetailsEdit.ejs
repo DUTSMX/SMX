@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>课程</title>
+    <title>视频详情编辑</title>
     <!-- Bootstrap -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
     <link href="/stylesheets/video.css" rel="stylesheet">
@@ -104,28 +104,29 @@
                         <div class="form-group">
                             <label class="col-md-2 control-label" for="name">名称</label>
                             <div class="col-md-6" id="name">
-                                <input type="text" name="name" value="" class="form-control">
+                                <input type="text" id="videoName" value="" class="form-control">
                             </div>
                         </div>
+
+
                         <div class="form-group">
                             <label class="col-md-2 control-label" for="name">教师编号</label>
                             <div class="col-md-6" id="name">
-                                <input type="text" name="name" value="" class="form-control">
+                                <input type="text" id="authorId" value="" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-2 control-label" for="time">时长</label>
                             <div class="col-md-6" id="name">
-                                <input type="time" name="time" value="" class="form-control">
+                                <input type="time" id="videoTime" value="" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-2 control-label" for="introduce">简介</label>
                             <div class="col-md-6" id="name">
-                                <textarea id="introduce" rows="3" name="introduce" class="form-control"></textarea>
+                                <textarea id="introduce" rows="3" id="videoAbstract" class="form-control"></textarea>
                             </div>
                         </div>
-
 
                         <div class="form-group">
                             <label class="col-md-2 control-label" for="video">视频上传</label>
@@ -135,8 +136,7 @@
                             <!--<button class="btn btn-default" onclick="uploadVideo()">上传</button>-->
                         </div>
                         <center>
-                            <a class="btn btn-default " href="videoDetails.html" >确定</a>
-
+                            <button class="btn btn-default " onclick="videoDetailsEdit()">确定修改</button>
                         </center>
                         <p id="head"></p>
                         <p id="age"></p>
@@ -153,59 +153,62 @@
 <script src="/javascripts/sdk/qcloud_sdk.js"></script>
 <script src="/javascripts/sdk/swfobject.js"></script>
 <script>
-        console.log("12")
-        var cos = new CosCloud("10068625","/");
-        var successCallBack = function (result) {
-            console.log("success")
-            console.log("result:"+JSON.stringify(result))
-            console.log("type"+typeof result)
-            console.log("上传视频"+JSON.parse(result).data.access_url)
-            $("#head").val(JSON.parse(result).data.access_url)
-        }
-        var errorCallBack = function (result) {
-            $("#age").val("error:"+result);
-            console.log("error")
-            console.log("result:"+JSON.stringify(result))
-        }
-        var inputElements = document.getElementById("file");
-        inputElements.addEventListener("change",handleFiles,false);
-        function handleFiles(){
-            console.log("123")
-            var fileList = this.files;
-            if(fileList.length>0){
-                selectedFile = fileList[0];
-                var name = selectedFile.name;
-                var postfix = name.substr(name.lastIndexOf("."))
-                console.log("postfix:/head/"+userId+postfix)
+    console.log("12")
+    var cos = new CosCloud("10068625","/");
+    var successCallBack = function (result) {
+        console.log("success")
+        console.log("result:"+JSON.stringify(result))
+        console.log("type"+typeof result)
+        console.log("上传视频"+JSON.parse(result).data.access_url)
+        $("#head").val(JSON.parse(result).data.access_url)
+    }
+    var errorCallBack = function (result) {
+        $("#age").val("error:"+result);
+        console.log("error")
+        console.log("result:"+JSON.stringify(result))
+    }
+    var inputElements = document.getElementById("file");
+    inputElements.addEventListener("change",handleFiles,false);
+    function handleFiles(){
+        console.log("123")
+        var fileList = this.files;
+        if(fileList.length>0){
+            selectedFile = fileList[0];
+            var name = selectedFile.name;
+            var postfix = name.substr(name.lastIndexOf("."))
+            console.log("postfix:/head/"+userId+postfix)
 
-                cos.uploadFile(successCallBack,errorCallBack,"smxbucket","/"+selectedFile.name,selectedFile,0)
-            }
-            console.log("1234")
+            cos.uploadFile(successCallBack,errorCallBack,"smxbucket","/"+selectedFile.name,selectedFile,0)
         }
-    function editInfo(){
+        console.log("1234")
+    }
+    function videoDetailsEdit(){
+        var videoId="<%=videoId%>";
         var head = $("#head").val();
-        var name = $("#name").val()
-        var gender = $('input:radio[name="radio-view"]:checked').val();
         var age = $("#age").val();
-        var school = $("#school").val();
-        var grade = $("#grade").val();
-        var address = $("#address").val();
-        if(name.length == 0){
-            $("#hint").text("姓名不能为空")
+        var videoName = $("#videoName").val();
+        var authorId = $("#authorId").val()
+        var videoTime = $("#videoTime").val();
+        var videoAbstract = $("#videoAbstract").val();
+        var videoUrl = $("#videoUrl").val();
+
+        if(videoId.length == 0){
+            $("#hint").text("编号不能为空")
         }else{
             var data = {
+                videoId:videoId,
                 head:head,
-                name:name,
-                gender:gender,
                 age:age,
-                school:school,
-                grade:grade,
-                address:address
+                videoName:videoName,
+                authorId:authorId,
+                videoTime:videoTime,
+                videoAbstract:videoAbstract,
+                videoUrl:videoUrl
             }
-            $.post("./editInfo",data,function (data,textStatus,jqXHR) {
+            $.post("./videoDetailsEdit",data,function (data,textStatus,jqXHR) {
                 if(data.status){
 
-                        $("#hint").text(data.desc)
+                    $("#hint").text(data.desc)
 
                 }else{
                     console.log(data.desc)
@@ -213,7 +216,6 @@
             },"json")
         }
 //        console.log("head:"+head+"  name:"+name+"  gender:"+gender+" age:"+age+" school:"+school+" grade:"+grade+" address:"+address);
-
     }
 </script>
 </body>

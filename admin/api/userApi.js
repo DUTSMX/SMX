@@ -91,6 +91,32 @@ exports.getVideoDetails=function (videoId,callback) {
         callback(detail[0]);
     })
 };
+/*exports.getCourseDetailsEdit = function(courseId,callback){
+    db.getCourseDetailsEdit (courseId,function(rows){
+        callback(rows);
+    })
+}
+exports.courseDetailsEdit = function(courseId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent,callback){
+    console.log("courseId:"+courseId+"courseName:"+courseName+"courseDate:"+courseDate+" beginTime:"+beginTime+" finishTime:"+finishTime +
+        " courseTime:"+courseTime+" objectOriented:"+objectOriented+" courseContent:"+courseContent);
+    db.courseDetailsEdit(courseId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent,function (rows) {
+        // console.log("rows:"+JSON.stringify(rows));
+        callback(rows)
+    })
+}*/
+exports.getVideoDetailsEdit = function(videoId,callback){
+    db.getVideoDetailsEdit (videoId,function(rows){
+        callback(rows);
+    })
+}
+exports.videoDetailsEdit = function(videoId,videoName,authorId,videoTime,videoAbstract ,videoUrl, callback){
+    console.log("videoId:"+videoId+"videoName:"+videoName+"authorId:"+authorId+" videoTime:"+videoTime+" videoAbstract:"+videoAbstract +" videoUrl:"+videoUrl);
+    db.videoDetailsEdit(videoId,videoName,authorId,videoTime,videoAbstract,videoUrl,function (rows) {
+        // console.log("rows:"+JSON.stringify(rows));
+        callback(rows);
+    })
+}
+
 
 exports.getStudentDetails=function (studentId,callback) {
     db.getStudentDetails(studentId,function (detail) {

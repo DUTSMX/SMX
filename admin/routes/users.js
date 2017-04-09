@@ -94,9 +94,6 @@ router.get('/courseDetails',function (req,res) {
     })
 });
 
-/*router.get("/courseDetailsEdit",function (req,res) {
-        res.render("courseDetailsEdit",{});
-})*/
 router.get('/courseDetailsEdit',function (req,res) {
     var courseId = req.query.courseId;
     api.getCourseDetailsEdit(courseId,function (courseEdit) {
@@ -135,6 +132,52 @@ router.get('/videoDetails',function (req,res) {
     api.getVideoDetails(videoId,function(videoDetails){
         console.log("videoDetails:"+JSON.stringify(videoDetails));
         res.render('videoDetails',videoDetails)
+    })
+});
+
+/*router.get('/courseDetailsEdit',function (req,res) {
+    var courseId = req.query.courseId;
+    api.getCourseDetailsEdit(courseId,function (courseEdit) {
+        courseEdit.courseId = courseId;
+        console.log("courseDetailsEdit:"+JSON.stringify(courseEdit));
+        res.render('courseDetailsEdit',courseEdit)
+    })
+});
+router.post("/courseDetailsEdit",function (req,res) {
+    var courseId = req.body.courseId;
+    var courseName = req.body.courseName;
+    var courseDate =req.body.courseDate;
+    var beginTime = req.body.beginTime;
+    var finishTime = req.body.finishTime;
+    var courseTime = req.body.courseTime;
+    var objectOriented = req.body.objectOriented;
+    var courseContent = req.body.courseContent;
+    console.log("courseId:"+courseId+" courseName:"+courseName+" courseDate:"+courseDate+" beginTime:"+beginTime+" finishTime:"+finishTime +
+        " courseTime:"+courseTime+" objectOriented:"+objectOriented+" courseContent:"+courseContent)
+    api.courseDetailsEdit(courseId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent,function (rows) {
+        console.log("rows:"+JSON.stringify(rows))
+        res.send(rows);
+    })
+});*/
+router.get('/videoDetailsEdit',function (req,res) {
+    var videoId = req.query.videoId;
+    api.getVideoDetailsEdit(videoId,function (videoEdit) {
+        videoEdit.videoId = videoId;
+        console.log("videoDetailsEdit:"+JSON.stringify(videoEdit));
+        res.render('videoDetailsEdit',videoEdit)
+    })
+});
+router.post("/videoDetailsEdit",function (req,res) {
+    var videoId = req.body.videoId;
+    var videoName = req.body.videoName;
+    var authorId = req.body.authorId;
+    var videoTime = req.body.videoTime;
+    var videoAbstract = req.body.videoAbstract;
+    var videoUrl = req.body.videoUrl;
+    console.log("videoId:"+videoId+"videoName:"+videoName+"authorId:"+authorId+" videoTime:"+videoTime+" videoAbstract:"+videoAbstract +" videoUrl:"+videoUrl);
+    api.videoDetailsEdit(videoId,videoName,authorId,videoTime,videoAbstract,videoUrl,function (rows) {
+        console.log("rows:"+JSON.stringify(rows))
+        res.send(rows);
     })
 });
 

@@ -284,6 +284,70 @@ exports.getVideoDetails = function(videoId,callback){
         }
     })
 };
+/*
+exports.getCourseDetailsEdit = function(courseId,callback){
+    var sql="select courseId from course where courseId="+courseId+"";
+    conn.query(sql,function(err,rows){
+        console.log(sql);
+        if(err){
+            console.log(err);
+            return;
+        }else{
+            callback(rows);
+        }
+    })
+};
+exports.courseDetailsEdit = function (courseId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent, callback) {
+    var sql ="UPDATE course set courseName='"+courseName+"',courseDate='"+courseDate+"',beginTime='"+beginTime+"',finishTime='"+finishTime+"',courseTime='"+courseTime+"',objectOriented='"+objectOriented+"',courseContent='"+courseContent+"' "+
+        "WHERE courseId="+courseId+"";
+    console.log("sql:"+sql)
+    conn.query(sql, function (err,rows) {
+        if (err) {
+            console.log(err);
+            callback({
+                status:false,
+                desc:err
+            })
+        }else {
+            callback({
+                status:true,
+                desc:"课程修改成功"
+            });
+        }
+    })
+}
+*/
+exports.getVideoDetailsEdit = function(videoId,callback){
+    var sql="select videoId from video where videoId="+videoId+"";
+    conn.query(sql,function(err,rows){
+        console.log(sql);
+        if(err){
+            console.log(err);
+            return;
+        }else{
+            callback(rows);
+        }
+    })
+};
+exports.videoDetailsEdit = function (videoId,videoName,authorId,videoTime,videoAbstract ,videoUrl, callback) {
+    var sql ="UPDATE video set videoName='"+videoName+"',authorId="+authorId+",videoTime='"+videoTime+"',videoAbstract='"+videoAbstract+"',videoUrl='"+videoUrl+"' "+
+        "WHERE videoId="+videoId+" ";
+    console.log("sql:"+sql)
+    conn.query(sql, function (err,rows) {
+        if (err) {
+            console.log(err);
+            callback({
+                status:false,
+                desc:err
+            })
+        }else {
+            callback({
+                status:true,
+                desc:"视频修改成功"
+            });
+        }
+    })
+}
 
 exports.getStudentDetails = function(studentId,callback){
     var sql = "SELECT a.userId as studentId, " +
