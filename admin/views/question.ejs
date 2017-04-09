@@ -118,14 +118,14 @@
                         <tbody>
                         <%questionList.forEach(function (item){ %>
                         <tr>
-                            <td><%=item.questionId%></td>
-                            <td><%=item.questionTitle%></td>
-                            <td class="line-clamp-3"><%=item.questionContent%></td>
-                            <td><%=item.asker%></td>
-                            <td><%=moment(item.questionTime).format("MM DD YYYY, HH:mm:ss a")%></td>
-                            <td><%=item.answerNumber%></td>
+                            <td id="questionId"><%=item.questionId%></td>
+                            <td id="questionTitle"><%=item.questionTitle%></td>
+                            <td class="line-clamp-3" id="questionContent"><%=item.questionContent%></td>
+                            <td id="asker"><%=item.asker%></td>
+                            <td id="questionTime"><%=moment(item.questionTime).format("MM DD YYYY, HH:mm:ss a")%></td>
+                            <td id="questionNumber"><%=item.answerNumber%></td>
                             <td>
-                                <div class="btn btn-danger" onclick="Delete(this)">删除</div>
+                                <div class="btn btn-danger" onclick="Delete()">删除</div>
                                 <a class="btn btn-primary" href="questionDetails?questionId=<%=item.questionId%>">查看详情</a>
                             </td>
                         </tr>
@@ -142,15 +142,15 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/javascripts/bootstrap.min.js"></script>
 <script>
-    function Delete(item) {
-        console.log("1");
-        console.log(temp);
-        var questionId=temp.questionId;
-        var questionTitle=temp.questionTitle;
-        var questionContent=temp.questionContent;
-        var asker=temp.asker;
-        var questionTime=temp.questionTime;
-        var answerNumber=temp.answerNumber;
+    function Delete() {
+        console.log("111111");
+//        console.log(temp);
+        var questionId=$("#questionId").val();
+        var questionTitle=$("#questionTitle").val();
+        var questionContent=$("#questionContent").val();
+        var asker=$("#asker").val();
+        var questionTime=$("#questionTime").val()
+        var answerNumber=$("#questionNumber").val();
         var type="question";
         var data={
             Id:questionId,

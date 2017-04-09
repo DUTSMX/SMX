@@ -10,7 +10,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
-
+app.use(cookieParser());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -20,10 +20,16 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  resave:true,
+  saveUninitialized:false,
+  secret: utils.getRandom128(),
+  cookie: {maxAge: 30 * 24 * 60 * 60 * 1000}
+}))
 app.use('/admin', index);
+
 app.use('/users', users);
 
 // catch 404 and forward to error handler
@@ -32,12 +38,7 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
-app.use(session({
-  resave:true,
-  saveUninitialized:false,
-  secret: utils.getRandom128(),
-  cookie: {maxAge: 30 * 24 * 60 * 60 * 1000}
-}))
+
 
 var unInterceptionList = ["/users/forgetPassword","/users/register","/users/getCheckCode"]
 //登录过滤器，如果session中的userId为空，则跳转到登录页面，登陆成功后跳转回来。

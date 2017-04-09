@@ -69,6 +69,7 @@ router.post('/login',function(req,res){
     console.log("ret:"+JSON.stringify(ret));
      var userId = ret.userId;
     if(ret.status){
+      console.log("userId:"+userId);
       req.session.userId = userId;
       console.log("req:"+req.session.userId);
        ret.sourceUrl = req.session.sourceUrl;
@@ -90,8 +91,11 @@ router.get('/EditPassword',function (req,res) {
 })
 router.post('/editPassword',function (req,res) {
   var userId=req.session.userId;
+  console.log("userId:"+userId);
   var oldPassword=req.body.oldPassword;
+  console.log("oldPassword:"+oldPassword);
   var password=req.body.password;
+  console.log("password:"+password);
   api.editPassword(userId,oldPassword,password,function (data) {
     res.send(data);
   })
@@ -100,6 +104,7 @@ router.post('/Delete',function (req,res) {
   var Id=req.body.Id;
   var type=req.body.type;
   var desc=req.body.desc;
+  console.log("Id:"+Id);
   api.Delete(Id,type,desc,function (ret) {
     res.send(ret);
   })
