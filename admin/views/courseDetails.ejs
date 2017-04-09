@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>课程</title>
+    <title>课程详情</title>
     <!-- Bootstrap -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
     <link href="/stylesheets/video.css" rel="stylesheet">
@@ -98,7 +98,7 @@
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">
-                    <h3 class="panel-title">课程详情页面</h3>
+                    <h3 class="panel-title">课程详情</h3>
                 </div>
                 <!-- Table -->
                 <div class="table-responsive">
@@ -106,35 +106,35 @@
                         <thead>
                         <tr>
                             <th>名称</th>
-                            <td><%=courseDetailsList.courseName %></td>
+                            <td><%=courseName %></td>
                         </tr>
                         <tr>
                             <th>教师编号</th>
-                            <td><%=courseDetailsList.teacherName%></td>
+                            <td><%=teacherId%></td>
                         </tr>
                         <tr>
                             <th>开始时间</th>
-                            <td><%=courseDetailsList.beginTime%></td>
+                            <td><%=courseBeginTime%></td>
                         </tr>
                         <tr>
                             <th>结束时间</th>
-                            <td><%=courseDetailsList.finishTime%></td>
+                            <td><%=courseFinishTime%></td>
                         </tr>
                         <tr>
                             <th>时长</th>
-                            <td><%=courseDetailsList.courseTime%></td>
+                            <td><%=courseTime%></td>
                         </tr>
                         <tr>
                             <th>面向对象</th>
-                            <td><%=courseDetailsList.objectOriented%></td>
+                            <td><%=objectOriented%></td>
                         </tr>
                         <tr>
                             <th >课程内容</th>
-                            <td><%=courseDetailsList.courseContent%></td>
+                            <td><%=courseContent%></td>
                         </tr>
                         <tr>
                             <th >参与学生</th>
-                            <td><%=courseDetailsList.courseCount%></td>
+                            <td><%=courseCount%></td>
                         </tr>
                         <tr>
 

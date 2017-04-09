@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>课程</title>
+    <title>导航栏</title>
     <!-- Bootstrap -->
-    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
-    <link href="/stylesheets/video.css" rel="stylesheet">
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/stylesheets/video.css" rel="stylesheet" type="text/css"/>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -34,52 +34,45 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">课程编辑 <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="addCourse.html">添加课程</a></li>
-                        <li><a href="course.html">已有课程</a></li>
+                        <li><a href="http://localhost:8081/admin/addCourse">添加课程</a></li>
+                        <li><a href="http://localhost:8081/admin/course">已有课程</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">视频编辑 <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="addVideo.html">添加视频</a></li>
-                        <li><a href="video.html">已有视频</a></li>
+                        <li><a href="http://localhost:8081/admin/addVideo">添加视频</a></li>
+                        <li><a href="http://localhost:8081/users/video">已有视频</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="question.html" >问答编辑<!--  <span class="caret"></span> --></a>
-                    <!-- <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Action</a></li>
-                      <li><a href="#">Another action</a></li>
-                      <li><a href="#">Something else here</a></li>
-                      <li class="divider"></li>
-                      <li><a href="#">Separated link</a></li>
-                    </ul> -->
+                    <a href="http://localhost:8081/admin/question" target="_parent" >问答编辑<!--  <span class="caret"></span> --></a>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">审核管理 <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="waitChecking.html">待审核</a></li>
-                        <li><a href="checked.html">已审核</a></li>
-                        <li><a href="suggestion.html">意见反馈</a></li>
+                        <li><a href="http://localhost:8081/users/waitChecking">待审核</a></li>
+                        <li><a href="http://localhost:8081/users/checked">已审核</a></li>
+                        <li><a href="http://localhost:8081/users/suggestion">意见反馈</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">用户管理<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="teacherList.html">老师列表</a></li>
-                        <li><a href="studentList.html">学生列表</a></li>
+                        <li><a href="http://localhost:8081/users/teacherList">老师列表</a></li>
+                        <li><a href="http://localhost:8081/users/studentList">学生列表</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="version.html">版本管理</a>
+                    <a href="#">版本管理</a>
                 </li>
                 <li><a href="#">数据统计</a></li>
-                <li><a href="recycleBin.html">回收站</a></li>
+                <li><a href="http://localhost:8081/admin/recycleBin">回收站</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">登录/注销<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="login.html">登录</a></li>
-                        <li><a href="logout.html">注销</a></li>
+                        <li><a href="http://localhost:8081/admin/login">登录</a></li>
+                        <li><a href="http://localhost:8081/admin/logout">注销</a></li>
                     </ul>
                 </li>
             </ul>
@@ -92,21 +85,6 @@
         </div>
     </div>
 </nav>
-<div class="main">
-    <div class="container">
-        <div class="bs-example">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading">
-                    <h3 class="panel-title">已审核驳回</h3>
-                </div>
-                <button class="btn btn-danger " onclick="getTurnBack()">确认驳回</button>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/javascripts/jquery.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/javascripts/bootstrap.min.js"></script>

@@ -8,6 +8,7 @@ var session=require('express-session');
 var utils = require('./utils/utils');
 var index = require('./routes/index');
 var users = require('./routes/users');
+var defau = require('./routes/default');
 
 var app = express();
 app.use(cookieParser());
@@ -31,6 +32,7 @@ app.use(session({
 app.use('/admin', index);
 
 app.use('/users', users);
+app.use('/',defau)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

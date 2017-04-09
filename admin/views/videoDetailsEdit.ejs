@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>登录</title>
+    <title>视频详情编辑</title>
     <!-- Bootstrap -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
     <link href="/stylesheets/video.css" rel="stylesheet">
@@ -46,7 +46,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="question.html" >问答编辑<!--  <span class="caret"></span> --></a>
+                    <a href="question.html">问答编辑<!--  <span class="caret"></span> --></a>
                     <!-- <ul class="dropdown-menu" role="menu">
                       <li><a href="#">Action</a></li>
                       <li><a href="#">Another action</a></li>
@@ -96,68 +96,128 @@
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">登录</h3>
+                <h3 class="panel-title">视频详情编辑</h3>
             </div>
             <div class="panel-body">
                 <div class="container">
-                    <div action="#" method="post" class="form-horizontal" role="form">
+                    <div  class="form-horizontal">
                         <div class="form-group">
-                            <label class="col-md-2 control-label" for="name">账号</label>
+                            <label class="col-md-2 control-label" for="name">名称</label>
                             <div class="col-md-6" id="name">
-                                <input type="text" id="phoneNumber" value="" class="form-control">
+                                <input type="text" id="videoName" value="" class="form-control">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="name">教师编号</label>
+                            <div class="col-md-6" id="name">
+                                <input type="text" id="authorId" value="" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-2 control-label" for="name">密码</label>
+                            <label class="col-md-2 control-label" for="time">时长</label>
                             <div class="col-md-6" id="name">
-                                <input type="text" id="password" value="" class="form-control">
+                                <input type="time" id="videoTime" value="" class="form-control">
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="introduce">简介</label>
+                            <div class="col-md-6" id="name">
+                                <textarea id="introduce" rows="3" id="videoAbstract" class="form-control"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="video">视频上传</label>
+                            <div class="col-md-6" id="name">
+                                <input type="file" id="file" value="" class="form-control">
+                            </div>
+                            <!--<button class="btn btn-default" onclick="uploadVideo()">上传</button>-->
                         </div>
                         <center>
-                            <p class="btn btn-default "onclick="login()" >登录</p>
+                            <button class="btn btn-default " onclick="videoDetailsEdit()">确定修改</button>
                         </center>
-                        <p id="hint"></p>
+                        <p id="head"></p>
+                        <p id="age"></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/javascripts/jquery.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/javascripts/bootstrap.min.js"></script>
+<script src="/javascripts/sdk/qcloud_sdk.js"></script>
+<script src="/javascripts/sdk/swfobject.js"></script>
 <script>
-    function login() {
-        var phoneNumber=$("#phoneNumber").val();
-        var password=$("#password").val()
-        if(phoneNumber.length==0){$("#hint").text("账号不能为空;")}
-        else if(!(/^1[34578]\d{9}$/.test(phoneNumber))){
-            $("#hint").html("手机号格式不正确")}
-        else if(password.length==0){$("#hint").text("密码不能为空;")}
-        else{
-            var data={
-                phoneNumber:phoneNumber,
-                password:password
+    console.log("12")
+    var cos = new CosCloud("10068625","/");
+    var successCallBack = function (result) {
+        console.log("success")
+        console.log("result:"+JSON.stringify(result))
+        console.log("type"+typeof result)
+        console.log("上传视频"+JSON.parse(result).data.access_url)
+        $("#head").val(JSON.parse(result).data.access_url)
+    }
+    var errorCallBack = function (result) {
+        $("#age").val("error:"+result);
+        console.log("error")
+        console.log("result:"+JSON.stringify(result))
+    }
+    var inputElements = document.getElementById("file");
+    inputElements.addEventListener("change",handleFiles,false);
+    function handleFiles(){
+        console.log("123")
+        var fileList = this.files;
+        if(fileList.length>0){
+            selectedFile = fileList[0];
+            var name = selectedFile.name;
+            var postfix = name.substr(name.lastIndexOf("."))
+            console.log("postfix:/head/"+userId+postfix)
+
+            cos.uploadFile(successCallBack,errorCallBack,"smxbucket","/"+selectedFile.name,selectedFile,0)
+        }
+        console.log("1234")
+    }
+    function videoDetailsEdit(){
+        var videoId="<%=videoId%>";
+        var head = $("#head").val();
+        var age = $("#age").val();
+        var videoName = $("#videoName").val();
+        var authorId = $("#authorId").val()
+        var videoTime = $("#videoTime").val();
+        var videoAbstract = $("#videoAbstract").val();
+        var videoUrl = $("#videoUrl").val();
+
+        if(videoId.length == 0){
+            $("#hint").text("编号不能为空")
+        }else{
+            var data = {
+                videoId:videoId,
+                head:head,
+                age:age,
+                videoName:videoName,
+                authorId:authorId,
+                videoTime:videoTime,
+                videoAbstract:videoAbstract,
+                videoUrl:videoUrl
             }
-            $.post("./login",data,function (data) {
+            $.post("./videoDetailsEdit",data,function (data,textStatus,jqXHR) {
                 if(data.status){
-                    $("hint").text(data.desc);
-                    if(!data.sourseUrl||data.sourseUrl=='login'){
-                        window.location.href="course";
-                    }
-                    else{
-                        window.location.href=data.sourseUrl;
-                    }
+
+                    $("#hint").text(data.desc)
 
                 }else{
-                    $("#hint").html(data.desc);
+                    console.log(data.desc)
                 }
             },"json")
         }
-
+//        console.log("head:"+head+"  name:"+name+"  gender:"+gender+" age:"+age+" school:"+school+" grade:"+grade+" address:"+address);
     }
 </script>
 </body>
+
 </html>

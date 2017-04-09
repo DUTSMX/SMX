@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>课程</title>
+    <title>课程详情编辑</title>
     <!-- Bootstrap -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
     <link href="/stylesheets/video.css" rel="stylesheet">
@@ -102,13 +102,6 @@
             <div class="panel-body">
                 <div class="container">
                     <div class="form-horizontal" role="form">
-
-                         <div class="form-group">
-                            <label class="col-md-2 control-label" for="name">课程ID</label>
-                            <div class="col-md-6" id="name">
-                                <input type="text" id="courseId" class="form-control">
-                            </div>
-                        </div>
                         <div class="form-group">
                             <label class="col-md-2 control-label" for="name">课程名称</label>
                             <div class="col-md-6" id="name">
@@ -153,7 +146,6 @@
                         </div>
                         <center>
                             <button class="btn btn-default " onclick="courseDetailsEdit()">确定修改</button>
-
                         </center>
                     </div>
                     <p style="margin:0;text-align:center;padding-top:50px;" id="hint"></p>
@@ -165,7 +157,7 @@
 </div>
 <script>
     function courseDetailsEdit() {
-        var courseId=$("#courseId").val();
+        var courseId="<%=courseId%>";
         var courseName=$("#courseName").val();
         var courseDate=$("#courseDate").val();
         var beginTime=$("#beginTime").val();

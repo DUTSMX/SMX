@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>课程</title>
+    <title>待审核管理</title>
     <!-- Bootstrap -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
     <link href="/stylesheets/video.css" rel="stylesheet">
@@ -98,7 +98,7 @@
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">
-                    <h3 class="panel-title">待审核申请</h3>
+                    <h3 class="panel-title">待审核管理</h3>
                 </div>
                 <!-- Table -->
                 <div class="table-responsive">
@@ -114,7 +114,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <%waitChecking.forEach(function (item){ %>
+                        <%list.forEach(function (item){ %>
                         <tr>
                             <td><%=item.teacherId%></td>
                             <td><%=item.teacherCreateTime%></td>
@@ -122,8 +122,8 @@
                             <td><%=item.teacherGoodCourse%></td>
                             <td><%=item.teacherSelfIntroduction%></td>
                             <td>
-                                <a class="btn btn-success" href="agree?teacherId=<%=item.teacherId%>">同意</a>
-                                <a class="btn btn-primary" href="disagree?teacherId=<%=item.teacherId%>">不同意</a>
+                                <button class="btn btn-success " onclick="agree(<%=item.teacherId%>)">同意</button>
+                                <button class="btn btn-danger " onclick="disagree(<%=item.teacherId%>)">不同意</button>
                             </td>
                         </tr>
                         <%})%>
@@ -135,6 +135,38 @@
     </div>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script type="text/javascript">
+    console.log("script")
+    function agree(teacherId) {
+        var data={teacherId:teacherId, type:2}
+        if(teacherId.length==0){$("#hint").text("用户ID不能为空");}
+        else{
+            $.post("waitChecking",data,function (data) {
+                if (data.status) {
+                    $("#hint").text(data.desc);
+                    location.reload();
+                }
+                else
+                    $("#hint").text(data.desc);
+            })
+        }
+    }
+    function disagree(teacherId) {
+        var data={teacherId:teacherId, type:0}
+        if(teacherId.length==0){$("#hint").text("用户ID不能为空");}
+        else{
+            $.post("waitChecking",data,function (data) {
+                if (data.status) {
+                    $("#hint").text(data.desc);
+                    location.reload();
+                }
+                else
+                    $("#hint").text(data.desc);
+            })
+        }
+    }
+
+</script>
 <script src="/javascripts/jquery.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/javascripts/bootstrap.min.js"></script>
