@@ -1,0 +1,25 @@
+#syllabus {
+	border-collapse:collapse;
+}
+#syllabus.caption {
+    font-size:20px;
+}
+#syllabus, th, td {
+	border: 1px solid gray;
+}
+#syllabus td {
+	padding:15px 10px 15px 10px;
+	text-align:center;
+	font-size:14px;
+	width:130px;
+	/*height:150px;*/
+}
+#syllabus th.time {
+	height:15%;
+	padding:10px;
+}
+#syllabus th.teacher {
+	width:50px;
+	padding-left:25px;
+	padding-right:25px;
+}
