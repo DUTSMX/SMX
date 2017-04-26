@@ -24,7 +24,7 @@
     <div class="ad_Images">
         <%courseList.rotation.forEach(function(item){%>
             <div class="ad_Image_style">
-                <img src="<%=item.adImageUrl%>">
+               <a href="<%=item.adSkipUrl%>"><img src="<%=item.adImageUrl%>"></a>
             </div>
         <%})%>
     </div>
