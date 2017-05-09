@@ -97,5 +97,13 @@ exports.Delete=function (Id,type,desc,callback) {
         callback(ret);
     })
 }
+exports.register=function (userName,phoneNumber,callback) {
+    db.register(userName,phoneNumber,function (data) {
+        if(date.status)
+        callback({
+            desc:注册成功
+        });
+    })
+}
 
 

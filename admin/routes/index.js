@@ -15,10 +15,10 @@ router.get('/course',function (req,res,next) {
 });
 router.get('/courseDetails',function (req,res) {
   var courseId = req.query.courseId;
-  api.getCourseDetails(courseId,function(courseDetails){
+  api.getCourseDetails(courseId,function(courseDetails) {
     courseDetails.courseDate = moment(courseDetails.courseDate).format("YYYY-MM-DD")
-    console.log("courseDetails:"+JSON.stringify(courseDetails))
-    res.render('courseDetails',courseDetails)
+    console.log("courseDetails:" + JSON.stringify(courseDetails))
+    res.render('courseDetails', courseDetails)
   })
 });
 
@@ -146,6 +146,16 @@ router.post('/Delete',function (req,res) {
   console.log("Id:"+Id);
   api.Delete(Id,type,desc,function (ret) {
     res.send(ret);
+  })
+})
+router.get('/register',function (req,res) {
+  res.render('register',{});
+});
+router.post('/register',function (req,res) {
+  var userName=req.body.userName;
+  var phoneNumber=req.body.phoneNumber;
+  api.register(userName,phoneNumber,function (data) {
+    res.send(data);
   })
 })
 module.exports = router;

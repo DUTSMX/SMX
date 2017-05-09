@@ -268,3 +268,17 @@ exports.Delete=function (Id,type,desc,callback) {
         }
     })
 }
+exports.register=function (userName,phoneNumber,callback) {
+    var date=new Date();
+    var sql="INSERT INTO account(userName,phoneNumber,registerDate) VALUES ('"+userName+"','"+phoneNumber+"',"+conn.escape(data)+")";
+    conn.query(sql,function (err,res) {
+        if(err){
+            console.log(err);
+        }
+        else{
+            callback({
+                status:true
+            })
+        }
+    })
+}
