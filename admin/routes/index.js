@@ -123,4 +123,14 @@ router.post('/Delete',function (req,res) {
     res.send(ret);
   })
 })
+router.get('/register',function (req,res) {
+  res.render('register',{});
+});
+router.post('/register',function (req,res) {
+  var userName=req.body.userName;
+  var phoneNumber=req.body.phoneNumber;
+  api.register(userName,phoneNumber,function (data) {
+    res.send(data);
+  })
+})
 module.exports = router;
