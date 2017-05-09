@@ -45,6 +45,7 @@ exports.getCourse = function(callback){
 exports.getCourseDetails=function (courseId,callback) {
     var sql = "SELECT c.courseId, " +
         "a.userName as teacherName, " +
+        "a.userId as teacherId, " +
         "c.courseName, " +
         "c.courseDate, " +
         "c.beginTime, " +
@@ -55,14 +56,39 @@ exports.getCourseDetails=function (courseId,callback) {
         "COUNT(s.userId) as courseCount " +
         "FROM course c JOIN account a ON a.userId = c.userId JOIN joinCourse s on c.courseId = s.courseId "+
         "WHERE c.courseId ="+courseId;
+    console.log("sql:"+sql);
+    console.log("courseId:"+courseId)
     conn.query(sql,function (err,rows) {
         if(err){
             console.log(err);
             return false;
         }else{
-            callback(rows);
+            callback(rows[0]);
         }
     })
+}
+exports.getCourseStudentList = function (courseId,callback) {
+    var sql = "SELECT a.userName, " +
+        "a.userId " +
+        /*",j.attend, " +
+        "j.cost, " +
+        "j.reason, " +
+        "j.studentEval, " +
+        "j.studentEvalDesc, " +
+        "j.teacherEval, " +
+        "j.teacherEvalDesc " +*/
+        "FROM account a JOIN joinCourse j on a.userId = j.userId " +
+        "WHERE j.courseId = "+courseId;
+    console.log("sql:"+sql);
+    conn.query(sql,function (err, rows) {
+        if(err){
+            console.log(err)
+        }else{
+            callback(rows)
+        }
+    })
+
+
 }
 
 exports.courseDetailsEdit = function (courseId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent, callback) {

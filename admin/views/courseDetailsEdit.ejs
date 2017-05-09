@@ -15,8 +15,8 @@
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
-<iframe src="/users/navigation" style="width:100vw;height:145px;z-index: 100" frameborder="0" scrolling="no"></iframe>
+<body onload="putComment('<%=courseContent%>')">
+<iframe src="/users/navigation" style="width:100vw;height:60px;z-index: 100" frameborder="0" scrolling="no"></iframe>
 <div class="main">
     <div class="container">
         <div class="panel panel-default">
@@ -35,7 +35,7 @@
                         <div class="form-group">
                             <label class="col-md-2 control-label" for="time">日期</label>
                             <div class="col-md-6" id="name">
-                                <input type="time" id="courseDate" class="form-control" value="<%=courseDate%>">
+                                <input type="date" id="courseDate" class="form-control" value="<%=courseDate%>">
                             </div>
                         </div>
                         <div class="form-group">
@@ -65,11 +65,11 @@
                         <div class="form-group">
                             <label class="col-md-2 control-label" for="content">课程内容</label>
                             <div class="col-md-6" id="name">
-                                <textarea id="courseContent" rows="3" name="content" class="form-control"  value="<%=courseContent%>"></textarea>
+                                <textarea id="courseContent" rows="3" name="content" class="form-control"></textarea>
                             </div>
                         </div>
                         <center>
-                            <button class="btn btn-default " onclick="courseDetailsEdit()">确定修改</button>
+                            <button class="btn btn-default " onclick="courseDetailsEdit()">确定</button>
                         </center>
                     </div>
                     <p style="margin:0;text-align:center;padding-top:50px;" id="hint"></p>
@@ -80,6 +80,9 @@
 
 </div>
 <script>
+    function putComment(comment) {
+        $("#courseContent").val(comment);
+    }
     function courseDetailsEdit() {
         var courseId="<%=courseId%>";
         var courseName=$("#courseName").val();

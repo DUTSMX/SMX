@@ -8,13 +8,16 @@ exports.getCourse = function(callback){
 
 exports.getCourseDetails=function (courseId,callback) {
     db.getCourseDetails(courseId,function (detail) {
-        callback(detail[0]);
+        db.getCourseStudentList(courseId, function (studentList) {
+            detail.student = studentList;
+            callback(detail);
+        })
     })
 };
 
 exports.getCourseDetailsEdit = function(courseId,callback){
     db.getCourseDetails(courseId,function(rows){
-        callback(rows[0]);
+        callback(rows);
     })
 }
 exports.courseDetailsEdit = function(courseId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent,callback){

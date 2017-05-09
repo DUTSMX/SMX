@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var api = require('../api/api')
+var moment = require("moment");
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -15,6 +16,7 @@ router.get('/course',function (req,res,next) {
 router.get('/courseDetails',function (req,res) {
   var courseId = req.query.courseId;
   api.getCourseDetails(courseId,function(courseDetails){
+    courseDetails.courseDate = moment(courseDetails.courseDate).format("YYYY-MM-DD")
     console.log("courseDetails:"+JSON.stringify(courseDetails))
     res.render('courseDetails',courseDetails)
   })
@@ -23,11 +25,34 @@ router.get('/courseDetails',function (req,res) {
 router.get('/courseDetailsEdit',function (req,res) {
   var courseId = req.query.courseId;
   api.getCourseDetailsEdit(courseId,function (courseEdit) {
-    courseEdit.courseId = courseId;
-    console.log("courseDetailsEdit:"+JSON.stringify(courseEdit));
-    res.render('courseDetailsEdit',courseEdit)
+    console.log("courseEdit:"+JSON.stringify(courseEdit))
+    if(courseEdit){
+      courseEdit.courseId = courseId;
+      courseEdit.courseDate = moment(courseEdit.courseDate).format("YYYY-MM-DD")
+      console.log("courseDetailsEdit:"+JSON.stringify(courseEdit));
+      res.render('courseDetailsEdit',courseEdit)
+    }else{
+      res.render('error',{message:"courseDetailsEdit",error:{status:404,stack:""}});
+    }
   })
 });
+router.post("/courseDetailsEdit",function (req,res) {
+  var courseId = req.body.courseId;
+  var courseName = req.body.courseName;
+  var courseDate =req.body.courseDate;
+  var beginTime = req.body.beginTime;
+  var finishTime = req.body.finishTime;
+  var courseTime = req.body.courseTime;
+  var objectOriented = req.body.objectOriented;
+  var courseContent = req.body.courseContent;
+  console.log("courseId:"+courseId+" courseName:"+courseName+" courseDate:"+courseDate+" beginTime:"+beginTime+" finishTime:"+finishTime +
+      " courseTime:"+courseTime+" objectOriented:"+objectOriented+" courseContent:"+courseContent)
+  api.courseDetailsEdit(courseId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent,function (rows) {
+    console.log("rows:"+JSON.stringify(rows))
+    res.send(rows);
+  })
+});
+
 router.get('/question',function (req,res) {
   api.getQuestion(function(questionList){
     var moment = require("moment");

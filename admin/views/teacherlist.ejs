@@ -40,7 +40,7 @@
                         </thead>
                         <tbody>
                         <%teacherList.forEach(function (item){ %>
-                        <tr>
+                        <tr  onclick="details('<%=item.teacherId%>')">
                             <!--<td><%=item.teacherId%></td>-->
                             <td><%=item.teacherName%></td>
                             <!--<td><%=item.teacherCreateTime%></td>-->
@@ -64,5 +64,10 @@
 <script src="/javascripts/jquery.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/javascripts/bootstrap.min.js"></script>
+<script>
+    function details(userId) {
+        location.href="/users/teacherDetails?teacherId="+userId;
+    }
+</script>
 </body>
 </html>

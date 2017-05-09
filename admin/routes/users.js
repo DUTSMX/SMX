@@ -166,7 +166,7 @@ router.post("/videoDetailsEdit",function (req,res) {
     })
 });
 
-router.get('/studentListDetails',function (req,res) {
+router.get('/studentDetails',function (req,res) {
     var studentId = req.query.studentId;
     api.getStudentDetails(studentId,function (studentListDetails) {
         // studentDetails={studentDetails:studentDetails};
@@ -225,7 +225,7 @@ router.post("/teacherListEdit",function (req,res) {
     })
 });
 
-router.get('/teacherListDetails',function (req,res) {
+router.get('/teacherDetails',function (req,res) {
     var teacherId = req.query.teacherId;
     api.getTeacherDetails(teacherId,function (teacherDetails) {
         console.log("teacherDetails:"+JSON.stringify(teacherDetails));
