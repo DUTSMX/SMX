@@ -16,7 +16,7 @@ router.get("/courseDetails",function (req,res) {
   var courseId=req.query.courseId;
   api.getCourseDetails(courseId,function (courseDetailsList) {
     console.log("courseDetailsList:"+JSON.stringify(courseDetailsList));
-    res.render('courseDetails',{courseDetailsList:courseDetailsList[0]});
+    res.render('courseDetails',courseDetailsList[0]);
   })
 })
 router.get('/question',function (req,res) {
