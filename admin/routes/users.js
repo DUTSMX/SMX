@@ -86,22 +86,7 @@ router.post('/suggestionReply',function (req,res) {
     })
 });
 
-router.get('/courseDetails',function (req,res) {
-    var courseId = req.query.courseId;
-    api.getCourseDetails(courseId,function(courseDetails){
-        console.log("courseDetails:"+JSON.stringify(courseDetails));
-        res.render('courseDetails',courseDetails)
-    })
-});
 
-router.get('/courseDetailsEdit',function (req,res) {
-    var courseId = req.query.courseId;
-    api.getCourseDetailsEdit(courseId,function (courseEdit) {
-        courseEdit.courseId = courseId;
-        console.log("courseDetailsEdit:"+JSON.stringify(courseEdit));
-        res.render('courseDetailsEdit',courseEdit)
-    })
-});
 router.post("/courseDetailsEdit",function (req,res) {
     var courseId = req.body.courseId;
     var courseName = req.body.courseName;

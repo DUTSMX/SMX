@@ -12,13 +12,22 @@ router.get('/course',function (req,res,next) {
     res.render('course',{courseList:courseList})
   })
 });
-router.get("/courseDetails",function (req,res) {
-  var courseId=req.query.courseId;
-  api.getCourseDetails(courseId,function (courseDetailsList) {
-    console.log("courseDetailsList:"+JSON.stringify(courseDetailsList));
-    res.render('courseDetails',{courseDetailsList:courseDetailsList[0]});
+router.get('/courseDetails',function (req,res) {
+  var courseId = req.query.courseId;
+  api.getCourseDetails(courseId,function(courseDetails){
+    console.log("courseDetails:"+JSON.stringify(courseDetails))
+    res.render('courseDetails',courseDetails)
   })
-})
+});
+
+router.get('/courseDetailsEdit',function (req,res) {
+  var courseId = req.query.courseId;
+  api.getCourseDetailsEdit(courseId,function (courseEdit) {
+    courseEdit.courseId = courseId;
+    console.log("courseDetailsEdit:"+JSON.stringify(courseEdit));
+    res.render('courseDetailsEdit',courseEdit)
+  })
+});
 router.get('/question',function (req,res) {
   api.getQuestion(function(questionList){
     var moment = require("moment");

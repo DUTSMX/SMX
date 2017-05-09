@@ -16,14 +16,15 @@
     <![endif]-->
 </head>
 <body>
-<iframe src="/users/navigation" style="width:100vw;height:145px;z-index: 100" frameborder="0" scrolling="no"></iframe>
+<iframe src="/users/navigation" style="width:100vw;height:60px;z-index: 100" frameborder="0" scrolling="no"></iframe>
 <div class="main">
     <div class="container">
         <div class="bs-example">
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">
-                    <h3 class="panel-title">课程详情</h3>
+                    <h3 class="panel-title" style="display:inline-block">课程详情</h3>
+                    <a href="/admin/courseDetailsEdit?courseId=<%=courseId%>" ><h3 class="panel-title" style="float:right">编辑</h3></a>
                 </div>
                 <!-- Table -->
                 <div class="table-responsive">
@@ -34,16 +35,12 @@
                             <td><%=courseName %></td>
                         </tr>
                         <tr>
-                            <th>教师编号</th>
-                            <td><%=teacherId%></td>
-                        </tr>
-                        <tr>
                             <th>开始时间</th>
-                            <td><%=courseBeginTime%></td>
+                            <td><%=beginTime%></td>
                         </tr>
                         <tr>
                             <th>结束时间</th>
-                            <td><%=courseFinishTime%></td>
+                            <td><%=finishTime%></td>
                         </tr>
                         <tr>
                             <th>时长</th>

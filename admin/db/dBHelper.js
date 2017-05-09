@@ -46,6 +46,7 @@ exports.getCourseDetails=function (courseId,callback) {
     var sql = "SELECT c.courseId, " +
         "a.userName as teacherName, " +
         "c.courseName, " +
+        "c.courseDate, " +
         "c.beginTime, " +
         "c.objectOriented, " +
         "c.courseContent, " +
@@ -60,6 +61,26 @@ exports.getCourseDetails=function (courseId,callback) {
             return false;
         }else{
             callback(rows);
+        }
+    })
+}
+
+exports.courseDetailsEdit = function (courseId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent, callback) {
+    var sql ="UPDATE course set courseName='"+courseName+"',courseDate='"+courseDate+"',beginTime='"+beginTime+"',finishTime='"+finishTime+"',courseTime='"+courseTime+"',objectOriented='"+objectOriented+"',courseContent='"+courseContent+"' "+
+        "WHERE courseId="+courseId+"";
+    console.log("sql:"+sql)
+    conn.query(sql, function (err,rows) {
+        if (err) {
+            console.log(err);
+            callback({
+                status:false,
+                desc:err
+            })
+        }else {
+            callback({
+                status:true,
+                desc:"课程修改成功"
+            });
         }
     })
 }

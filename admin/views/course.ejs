@@ -16,44 +16,45 @@
   <![endif]-->
 </head>
 <body>
-<iframe src="/users/navigation" style="width:100vw;height:145px;z-index: 100" frameborder="0" scrolling="no"></iframe>
+<iframe src="/users/navigation" style="width:100vw;height:60px;z-index: 100" frameborder="0" scrolling="no"></iframe>
 <div class="main">
   <div class="container">
     <div class="bs-example">
       <div class="panel panel-default">
         <!-- Default panel contents -->
         <div class="panel-heading">
-          <h3 class="panel-title">已有课程</h3>
+          <h3 class="panel-title" style="display:inline-block">课程列表</h3>
+          <a href="/admin/addCourse" ><h3 class="panel-title" style="float:right">添加课程</h3></a>
         </div>
         <!-- Table -->
         <div class="table-responsive">
           <table class="table table-hover">
             <thead>
             <tr>
-              <th>编号</th>
-              <th>老师</th>
+              <!--<th>编号</th>-->
               <th>名称</th>
-              <th>时长</th>
-              <th>面向对象</th>
-              <th>课程内容</th>
-              <th>参与学生</th>
-              <th>操作</th>
+              <th>老师</th>
+              <th>时间</th>
+              <!--<th>面向对象</th>
+              <th>课程内容</th>-->
+              <th>上课人数</th>
+              <!--<th>操作</th>-->
             </tr>
             </thead>
             <tbody>
             <% courseList.forEach(function (item) {%>
-            <tr>
-              <td><%=item.courseId%></td>
-              <td><%=item.teacherName%></td>
+            <tr onclick="details('<%=item.courseId%>')">
+              <!--<td><%=item.courseId%></td>-->
               <td><%=item.courseName%></td>
+              <td><%=item.teacherName%></td>
               <td><%=item.beginTime%></td>
-              <td><%=item.objectOriented%></td>
-              <td><%=item.courseContent%></td>
-              <td><%=item.courseCount%>人</td>
-              <td>
+              <!--<td><%=item.objectOriented%></td>
+              <td><%=item.courseContent%></td>-->
+              <td><%=item.courseCount%></td>
+              <!--<td>
                 <a class="btn btn-success" href="courseDetailsEdit.html">编辑</a>
                 <a class="btn btn-primary" href="courseDetails?courseId=<%=item.courseId%>">查看详情</a>
-              </td>
+              </td>-->
             </tr>
             <%})%>
             </tbody>
@@ -67,5 +68,10 @@
 <script src="/javascripts/jquery.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/javascripts/bootstrap.min.js"></script>
+<script>
+  function details(courseId) {
+    location.href="/admin/courseDetails?courseId="+courseId;
+  }
+</script>
 </body>
 </html>

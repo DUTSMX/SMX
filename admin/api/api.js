@@ -5,12 +5,27 @@ exports.getCourse = function(callback){
         callback(rows);
     })
 };
+
 exports.getCourseDetails=function (courseId,callback) {
-    console.log("courseId:"+courseId);
-    db.getCourseDetails(courseId,function (rows) {
-        callback(rows);
+    db.getCourseDetails(courseId,function (detail) {
+        callback(detail[0]);
+    })
+};
+
+exports.getCourseDetailsEdit = function(courseId,callback){
+    db.getCourseDetails(courseId,function(rows){
+        callback(rows[0]);
     })
 }
+exports.courseDetailsEdit = function(courseId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent,callback){
+    console.log("courseId:"+courseId+"courseName:"+courseName+"courseDate:"+courseDate+" beginTime:"+beginTime+" finishTime:"+finishTime +
+        " courseTime:"+courseTime+" objectOriented:"+objectOriented+" courseContent:"+courseContent);
+    db.courseDetailsEdit(courseId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent,function (rows) {
+        // console.log("rows:"+JSON.stringify(rows));
+        callback(rows)
+    })
+}
+
 exports.getQuestion=function (callback) {
   db.getQuestion(function (rows) {
       callback(rows);
