@@ -1,5 +1,5 @@
 var db = require('../db/dBHelper')
-
+var user = require('../db/userDbHelper')
 exports.getCourse = function(callback){
     db.getCourse(function (rows) {
         callback(rows);
@@ -8,9 +8,21 @@ exports.getCourse = function(callback){
 
 exports.getCourseDetails=function (courseId,callback) {
     db.getCourseDetails(courseId,function (detail) {
-        db.getCourseStudentList(courseId, function (studentList) {
-            detail.student = studentList;
-            callback(detail);
+        db.getCourseStudentList(courseId, function (courseStudentList) {
+            user.getStudent(function (studentList) {
+                studentList.forEach(function (student) {
+                    student.join=0;
+                    courseStudentList.forEach(function(courseStudent) {
+                        console.log("student:"+student.studentId+  "course:"+courseStudent.userId)
+                    if(student.studentId == courseStudent.userId){
+                        student.join=1;
+                    }
+                    })
+                })
+                detail.studentList = studentList;
+                callback(detail);
+            })
+
         })
     })
 };
@@ -112,5 +124,19 @@ exports.register=function (userName,phoneNumber,callback) {
         }
     })
 }
-
+exports.registerTeacher=function (userName,phoneNumber,courseName,callback) {
+    console.log('userName1:'+userName);
+    db.registerTeacher(userName,phoneNumber,courseName,function (data) {
+        if(data.status){
+            callback({
+                desc:"注册成功"
+            });
+        }
+        else{
+            callback({
+                desc:"注册失败"
+            })
+        }
+    })
+}
 

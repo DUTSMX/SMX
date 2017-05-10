@@ -54,15 +54,16 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <% student.forEach(function (item) {%>
-                        <tr onclick="details('<%=item.userId%>')">
-                            <td><%=item.userName%></td>
+                        <% studentList.forEach(function (item) {%>
+                        <%if(item.join == 1){%>
+                        <tr onclick="details('<%=item.studentId%>')">
+                            <td><%=item.studentName%></td>
                             <!--<td> </td>
                             <td> </td>
                             <td> </td>
                             <td> </td>-->
                         </tr>
-                        <%})%>
+                        <%}})%>
                         </tbody>
                     </table>
                 </div>

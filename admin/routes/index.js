@@ -161,4 +161,20 @@ router.post('/register',function (req,res) {
     res.send(data);
   })
 })
+router.get('/registerTeacher',function (req,res) {
+  res.render('registerTeacher',{});
+});
+
+router.post('/registerTeacher',function (req,res) {
+  var userName=req.body.userName;
+  var phoneNumber=req.body.phoneNumber;
+  var courseName=req.body.courseName;
+  console.log("userName:"+userName);
+  console.log("phoneNumber:"+phoneNumber);
+  console.log("courseName:"+courseName);
+  api.registerTeacher(userName,phoneNumber,courseName,function (data) {
+    console.log("data2:"+data);
+    res.send(data);
+  })
+})
 module.exports = router;
