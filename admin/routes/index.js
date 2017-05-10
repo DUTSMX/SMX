@@ -52,6 +52,18 @@ router.post("/courseDetailsEdit",function (req,res) {
     res.send(rows);
   })
 });
+router.get('/selfStudy',function (req,res) {
+  api.getSelfStudyByDate(function (selfStudy) {
+    res.render('selfStudy',{selfStudy:selfStudy})
+  })
+})
+router.get('/selfStudyDetails',function (req,res) {
+  var date = req.query.date;
+  api.getSelfStudyDetails(date,function (details) {
+    console.log("details："+JSON.stringify(details))
+    res.render('selfStudyDetails',{date:date,student:details});
+  })
+})
 
 router.get('/question',function (req,res) {
   api.getQuestion(function(questionList){

@@ -473,7 +473,7 @@ exports.getTeacherListDetails = function(teacherId,callback) {
     var sql =" SELECT c.courseId, "+
         "a.userName as teacherName, "+
         "c.courseName, "+
-        "c.courseTime, "+
+        "c.beginTime, "+
         "c.objectOriented, "+
         "c.courseContent , "+
         "count(j.userId) as courseCount "+

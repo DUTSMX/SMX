@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>自习管理</title>
+    <!-- Bootstrap -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/video.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<iframe src="/users/navigation" style="width:100vw;height:60px;z-index: 100" frameborder="0" scrolling="no"></iframe>
+<div class="main">
+    <div class="container">
+        <div class="bs-example">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+                    <h3 class="panel-title" style="display:inline-block">自习管理</h3>
+                    <a href="/admin/selfStudyDetails?date=<%=selfStudy.moment(new Date()).format("YYYY-MM-DD")%>" ><h3 class="panel-title" style="float:right">添加记录</h3></a>
+                </div>
+                <!-- Table -->
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>日期</th>
+                            <th>人数</th>
+                            <th>收入</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <% selfStudy.forEach(function (item) {%>
+                        <tr onclick="details('<%=selfStudy.moment(item.date).format("YYYY-MM-DD")%>')">
+                            <td><%=selfStudy.moment(item.date).format("YYYY-MM-DD")%></td>
+                            <td><%=item.count%></td>
+                            <td><%=item.income%></td>
+                        </tr>
+                        <%})%>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/javascripts/jquery.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/javascripts/bootstrap.min.js"></script>
+<script>
+    function details(date) {
+        location.href="/admin/selfStudyDetails?date="+date;
+    }
+</script>
+</body>
+</html>

@@ -1,4 +1,5 @@
 var db = require('../db/dBHelper')
+var moment = require("moment");
 
 exports.getCourse = function(callback){
     db.getCourse(function (rows) {
@@ -29,6 +30,17 @@ exports.courseDetailsEdit = function(courseId,courseName,courseDate,beginTime,fi
     })
 }
 
+exports.getSelfStudyByDate = function(callback){
+    db.getSelfStudyByDate(function(selfStudy){
+        selfStudy.moment = moment;
+        callback(selfStudy);
+    })
+}
+exports.getSelfStudyDetails = function (date,callback) {
+    db.getSelfStudyDetails(date,function (details) {
+        callback(details);
+    })
+}
 exports.getQuestion=function (callback) {
   db.getQuestion(function (rows) {
       callback(rows);
@@ -44,7 +56,6 @@ exports.getQuestionDetails=function (questionId,callback) {
     db.getQuestionContent(questionId,function (rows) {
          var question=rows;
         db.getAnswers(questionId,function (rows) {
-            var moment = require("moment");
             callback({
                 moment:moment,
                 question:question,

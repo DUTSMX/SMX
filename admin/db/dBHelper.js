@@ -111,6 +111,29 @@ exports.courseDetailsEdit = function (courseId,courseName,courseDate,beginTime,f
     })
 }
 
+exports.getSelfStudyByDate = function(callback){
+    var sql = "select date,count(userId) as count, sum(cost) as income from selfStudy group by date order by date desc";
+    conn.query(sql,function (err,rows) {
+        if(err){
+            console.log(err)
+        }else{
+            callback(rows)
+        }
+    })
+}
+
+exports.getSelfStudyDetails = function (date,callback) {
+    var sql = "select a.userId,a.userName,s.cost from selfStudy s join account a on s.userId = a.userId where cast(date as date) = '"+date+"'";
+    console.log("sql:"+sql)
+    conn.query(sql,function (err,rows) {
+        if(err){
+            console.log(err)
+        }else{
+            callback(rows);
+        }
+    })
+}
+
 exports.getQuestion = function(callback){
     var aContent =  100;
     var sql = "SELECT d.questionId, " +

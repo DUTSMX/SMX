@@ -25,8 +25,11 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">学生详情</h3>
                 </div>
+                <div style="margin-left:30px">
+                    <h3><%=detail.studentName%></h3><h5><%=detail.studentGrade%></h5>
+                </div>
                 <!-- Table -->
-                <div class="table-responsive">
+                <!--<div class="table-responsive">
                     <table class="table table-hover" >
                         <thead>
                         <tr>
@@ -63,7 +66,7 @@
                         </thead>
 
                     </table>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>
@@ -74,41 +77,39 @@
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">
-                    <h3 class="panel-title">已有课程</h3>
+                    <h3 class="panel-title">课程列表</h3>
                 </div>
-                <!-- Table -->
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th>编号</th>
-                            <th>老师</th>
-                            <th>名称</th>
-                            <th>时长</th>
+                            <!--<th>编号</th>-->
+                            <th>课程名称</th>
+                            <th>老师姓名</th>
+                            <th>课程时间</th>
                             <th>面向对象</th>
-                            <th>课程内容</th>
-                            <th>参与学生</th>
-                            <th>操作</th>
+                            <!--<th>课程内容</th>-->
+                            <th>学生人数</th>
+                            <!--<th>操作</th>-->
                         </tr>
                         </thead>
                         <tbody>
                         <%list.forEach(function (item1){%>
-                        <tr>
-                            <td><%=item1.courseId%></td>
-                            <td><%=item1.teacherName%></td>
+                        <tr onclick="details(<%=item1.courseId%>)">
+                            <!--<td><%=item1.courseId%></td>-->
                             <td><%=item1.courseName%></td>
+                            <td><%=item1.teacherName%></td>
                             <td><%=item1.courseTime%></td>
                             <td><%=item1.objectOriented%></td>
-                            <td><%=item1.courseContent%></td>
-                            <td><%=item1.courseCount%>人</td>
-                            <td>
+                            <!--<td><%=item1.courseContent%></td>-->
+                            <td><%=item1.courseCount%>人</td>-->
+                            <!--<td>
                                 <a class="btn btn-primary" href="courseDetails?courseId=<%=item1.courseId%>">查看详情</a>
-                            </td>
+                            </td>-->
                         </tr>
                         <%})%>
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </div>
@@ -121,5 +122,10 @@
 <script src="/javascripts/jquery.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/javascripts/bootstrap.min.js"></script>
+<script>
+    function details(courseId) {
+        location.href="/admin/courseDetails?courseId="+courseId;
+    }
+</script>
 </body>
 </html>
