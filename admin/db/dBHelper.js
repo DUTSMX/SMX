@@ -292,13 +292,47 @@ exports.Delete=function (Id,type,desc,callback) {
     })
 }
 exports.register=function (userName,phoneNumber,callback) {
+    console.log("userName2:"+userName);
     var date=new Date();
-    var sql="INSERT INTO account(userName,phoneNumber,registerDate) VALUES ('"+userName+"','"+phoneNumber+"',"+conn.escape(data)+")";
-    conn.query(sql,function (err,res) {
+    var role=0;
+    console.log("date:"+date);
+    var sql="INSERT INTO account(userName,phoneNumber,role,registerDate) VALUES ('"+userName+"','"+phoneNumber+"','"+role+"',"+conn.escape(date)+")";
+    //var sql = "INSERT INTO account(userName,phoneNumber,registerDate) VALUES ('"+userName+"','"+phoneNumber+"',"+conn.escape(date)+")";
+    console.log("111");
+    conn.query(sql,function (err,rows) {
         if(err){
             console.log(err);
         }
         else{
+            callback({
+                status:true
+            })
+        }
+    })
+}
+exports.registerTeacher=function (userName,phoneNumber,courseName,callback) {
+    console.log("userName2:"+userName);
+    var date=new Date();
+    var role=2;
+    console.log("date:"+date);
+    var sql="INSERT INTO account(userName,phoneNumber,role,registerDate) VALUES ('"+userName+"','"+phoneNumber+"','"+role+"',"+conn.escape(date)+")";
+    //var sql = "INSERT INTO account(userName,phoneNumber,registerDate) VALUES ('"+userName+"','"+phoneNumber+"',"+conn.escape(date)+")";
+    console.log("111");
+    conn.query(sql,function (err,rows) {
+        if(err){
+            console.log(err);
+        }
+        else{
+            var userId=rows.insertId;
+            var sql="INSERT INTO teacher(teacherId,goodCourse) VALUES('"+userId+"',"+"'"+courseName+"'"+")";
+            conn.query(sql,function (err,rows) {
+                if(err){
+                    console.log(err);
+                }
+                else{
+                    console.log("写入成功");
+                }
+            })
             callback({
                 status:true
             })

@@ -23,8 +23,17 @@
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">
-                    <h3 class="panel-title">学生列表</h3>
+                    <h3 class="panel-title" style="display: inline-block;">学生列表</h3>
+                    <a href="/admin/register" ><h3 class="panel-title" style="float:right">添加学生</h3></a>
                 </div>
+                <button onclick="show()">选择老师</button>
+                <div id="light" class="white_content">
+                    This is the lightbox content.
+                    <button onclick="hide()">
+                        Close
+                    </button>
+                </div>
+                <div id="fade" class="black_overlay"></div>
                 <!-- Table -->
                 <div class="table-responsive">
                     <table class="table table-hover">

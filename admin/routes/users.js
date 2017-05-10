@@ -13,6 +13,7 @@ router.get('/studentList',function (req,res) {
         res.render('studentList',{studentList:studentList})
     })
 });
+
 router.get('/teacherList',function (req,res) {
     api.getTeacher(function(teacherList){
         console.log("teacher:"+JSON.stringify(teacherList));
