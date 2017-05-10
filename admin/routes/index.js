@@ -154,7 +154,10 @@ router.get('/register',function (req,res) {
 router.post('/register',function (req,res) {
   var userName=req.body.userName;
   var phoneNumber=req.body.phoneNumber;
+  console.log("userName:"+userName);
+  console.log("phoneNumber:"+phoneNumber);
   api.register(userName,phoneNumber,function (data) {
+    console.log("data2:"+data);
     res.send(data);
   })
 })

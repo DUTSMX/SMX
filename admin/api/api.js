@@ -98,11 +98,18 @@ exports.Delete=function (Id,type,desc,callback) {
     })
 }
 exports.register=function (userName,phoneNumber,callback) {
+    console.log('userName1:'+userName);
     db.register(userName,phoneNumber,function (data) {
-        if(date.status)
+        if(data.status){
         callback({
-            desc:注册成功
+            desc:"注册成功"
         });
+        }
+        else{
+            callback({
+                desc:"注册失败"
+            })
+        }
     })
 }
 

@@ -269,9 +269,13 @@ exports.Delete=function (Id,type,desc,callback) {
     })
 }
 exports.register=function (userName,phoneNumber,callback) {
+    console.log("userName2:"+userName);
     var date=new Date();
-    var sql="INSERT INTO account(userName,phoneNumber,registerDate) VALUES ('"+userName+"','"+phoneNumber+"',"+conn.escape(data)+")";
-    conn.query(sql,function (err,res) {
+    console.log("date:"+date);
+    var sql="INSERT INTO account(userName,phoneNumber,registerDate) VALUES ('"+userName+"','"+phoneNumber+"',"+conn.escape(date)+")";
+    //var sql = "INSERT INTO account(userName,phoneNumber,registerDate) VALUES ('"+userName+"','"+phoneNumber+"',"+conn.escape(date)+")";
+    console.log("111");
+    conn.query(sql,function (err,rows) {
         if(err){
             console.log(err);
         }

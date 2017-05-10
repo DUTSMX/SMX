@@ -65,7 +65,9 @@
         userName:userName,
         phoneNumber:phoneNumber
       }
+      console.log("data:"+JSON.stringify(data));
       $.post('./register',data,function (data) {
+        console.log("data1:"+data.desc);
         $("#hint").text(data.desc);
       })
     }
