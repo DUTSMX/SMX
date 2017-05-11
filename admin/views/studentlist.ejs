@@ -8,6 +8,7 @@
     <!-- Bootstrap -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
     <link href="/stylesheets/video.css" rel="stylesheet">
+    <link href="/stylesheets/scroll-table.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -16,46 +17,65 @@
     <![endif]-->
 </head>
 <body>
-<iframe src="/users/navigation" style="width:100vw;height:145px;z-index: 100" frameborder="0" scrolling="no"></iframe>
-<div class="main">
+<%include navigation.ejs%>
+<div class="main" style="height:80vh">
     <div class="container">
         <div class="bs-example">
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">
-                    <h3 class="panel-title">学生列表</h3>
+                    <h3 class="panel-title" style="display: inline-block;">学生列表</h3>
+                    <a onclick="show()"><h3 class="panel-title" style="float:right">添加学生</h3></a>
                 </div>
+                <!--<button onclick="show()">选择老师</button>
+                <div id="light" class="white_content">
+                    <form>
+                        <input type="checkbox" name="vehicle" value="Bike">I have a bike<br>
+                    </form>
+
+                    <button class="btn btn-default" onclick="hide()">
+                        确认添加
+                    </button>
+                </div>-->
+                <div id="fade" class="black_overlay"></div>
                 <!-- Table -->
-                <div class="table-responsive">
-                    <table class="table table-hover">
+                <div>
+                    <table class="table table-hover" style="margin-bottom:0px">
                         <thead>
-                        <tr>
-                            <th>用户ID</th>
-                            <th>注册时间</th>
-                            <th>用户名称</th>
-                            <th>年龄</th>
+                        <tr style="padding-left:17px">
+                            <!--<th>用户ID</th>-->
+                            <!--<th>注册时间</th>-->
+                            <th>姓名</th>
+                            <!--<th>年龄</th>-->
                             <th>年级</th>
-                            <th>学校</th>
-                            <th>住址</th>
+                            <!--<th>学校</th>-->
+                            <!--<th>住址</th>-->
                         </tr>
                         </thead>
-                        <tbody>
-                        <%studentList.forEach(function (item){ %>
-                        <tr>
-                            <td><%=item.studentId%></td>
-                            <td><%=item.studentRegisterDate%></td>
-                            <td><%=item.studentName%></td>
-                            <td><%=item.studentAge%></td>
-                            <td><%=item.studentGrade%></td>
-                            <td><%=item.studentSchool%></td>
-                            <td><%=item.studentAddress%></td>
-                            <td>
-                                <a class="btn btn-success" href="studentListEdit?studentId=<%=item.studentId%>">编辑</a>
-                                <a class="btn btn-primary" href="studentListDetails?studentId=<%=item.studentId%>">查看详情</a>
-                            </td>
-                        </tr>
-                        <%})%>
-                        </tbody>
+                        </table>
+                    </div>
+
+                        <div class="table-details"style="overflow:scroll;overflow-x:hidden;height:65vh;">
+                            <table  class="table table-hover">
+                            <tbody>
+                            <%studentList.forEach(function (item){ %>
+                            <tr onclick="details('<%=item.studentId%>')">
+                                <!--<td><%=item.studentId%></td>-->
+                                <!--<td><%=item.studentRegisterDate%></td>-->
+                                <td><%=item.studentName%></td>
+                                <!--<td><%=item.studentAge%></td>-->
+                                <td><%=item.studentGrade%></td>
+                                <!--<td><%=item.studentSchool%></td>-->
+                                <!--<td><%=item.studentAddress%></td>-->
+                                <!--<td>
+                                    <a class="btn btn-success" href="studentListEdit?studentId=<%=item.studentId%>">编辑</a>
+                                    <a class="btn btn-primary" href="studentListDetails?studentId=<%=item.studentId%>">查看详情</a>
+                                </td>-->
+                            </tr>
+                            <%})%>
+                            </tbody>
+                            </table>
+                        </div>
                     </table>
                 </div>
             </div>
@@ -66,5 +86,10 @@
 <script src="/javascripts/jquery.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/javascripts/bootstrap.min.js"></script>
+<script>
+    function details(userId) {
+        location.href="/users/studentDetails?studentId="+userId;
+    }
+</script>
 </body>
 </html>

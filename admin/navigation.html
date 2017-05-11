@@ -32,13 +32,21 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-left">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">课程编辑 <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
+                    <a href="http://localhost:8081/admin/course" target="_parent">课程管理</a>
+                    <!--<ul class="dropdown-menu" role="menu">
                         <li><a href="/admin/addCourse" target="_parent">添加课程</a></li>
-                        <li><a href="http://localhost:8081/admin/course" target="_parent">已有课程</a></li>
-                    </ul>
+                        <li><a href="http://localhost:8081/admin/course" target="_parent">课程列表</a></li>
+                    </ul>-->
                 </li>
+
                 <li class="dropdown">
+                    <a href="/admin/selfStudy" target="_parent">自习管理</a>
+                    <!--<ul class="dropdown-menu" role="menu">
+                        <li><a href="/admin/addCourse" target="_parent">添加课程</a></li>
+                        <li><a href="http://localhost:8081/admin/course" target="_parent">课程列表</a></li>
+                    </ul>-->
+                </li>
+                <!--<li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">视频编辑 <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="http://localhost:8081/admin/addVideo" target="_parent">添加视频</a></li>
@@ -46,7 +54,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="/admin/question" target="_parent" >问答编辑<!--  <span class="caret"></span> --></a>
+                    <a href="/admin/question" target="_parent" >问答编辑</a>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">审核管理 <span class="caret"></span></a>
@@ -55,15 +63,17 @@
                         <li><a href="http://localhost:8081/users/checked" target="_parent">已审核</a></li>
                         <li><a href="http://localhost:8081/users/suggestion" target="_parent">意见反馈</a></li>
                     </ul>
-                </li>
-                <li class="dropdown">
+                </li>-->
+                <li><a href="http://localhost:8081/users/teacherList" target="_parent">老师列表</a></li>
+                <li><a href="http://localhost:8081/users/studentList" target="_parent">学生列表</a></li>
+                <!--<li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">用户管理<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="http://localhost:8081/users/teacherList" target="_parent">老师列表</a></li>
                         <li><a href="http://localhost:8081/users/studentList" target="_parent">学生列表</a></li>
                     </ul>
-                </li>
-                <li class="dropdown">
+                </li>-->
+                <!--<li class="dropdown">
                     <a href="#">版本管理</a>
                 </li>
                 <li><a href="#">数据统计</a></li>
@@ -74,15 +84,16 @@
                         <li><a href="http://localhost:8081/admin/login" target="_parent">登录</a></li>
                         <li><a href="http://localhost:8081/admin/logout" target="_parent">注销</a></li>
                     </ul>
-                </li>
+                </li>-->
             </ul>
-            <form class="navbar-form navbar-right" role="search">
+            <!--<form class="navbar-form navbar-right" role="search">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Search">
                 </div>
                 <a href="search.html"  class="btn btn-default" ><span class="glyphicon glyphicon-search" ></span></a>
-            </form>
+            </form>-->
         </div>
+        <iframe style="width:100vw;height:100vh;border: none"></iframe>
     </div>
 </nav>
 <script src="/javascripts/jquery.js"></script>

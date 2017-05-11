@@ -1,11 +1,32 @@
 .container{
-    padding:40rpx;
+    padding:0rpx;
+}
+.hide{
+    display:none;
+}
+.hint-view{
+    display:flex;
+    justify-content: center;
+    padding-top:6rpx;
+    padding-bottom:5rpx;
+    margin-top:-1rpx;
+    width:100vw;
+    height:40rpx;
+    background-color: #e64340;
+}
+.hint-text{
+    text-align: center;
+    color:#ffffff;
+    background-color: #e64340;
+    font-size:28rpx;
 }
 .type{
     display:flex;
-    width:100%;
+    width:94%;
     flex-direction: row;
     margin-top:50rpx;
+    margin-left:3%;
+    align-items: center;
 }
 .account-type{
     width:170rpx;
@@ -14,13 +35,13 @@
 }
 .button{
     margin-top:50rpx;
-    width:100%;
+    width:94%;
     background-color: #1aad1b;
     color:#ffffff;
 }
 .button-press{
     margin-top:50rpx;
-    width:100%;
+    width:94%;
     background-color: #179b16;
     color:#ffffff;
 }

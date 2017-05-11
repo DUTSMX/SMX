@@ -62,7 +62,7 @@
                             <!--<button class="btn btn-default" onclick="uploadVideo()">上传</button>-->
                         </div>
                         <center>
-                            <a class="btn btn-default " href="videoDetails.html" >确定</a>
+                            <div class="btn btn-default ">确定</div>
 
                         </center>
                         <p id="head"></p>
@@ -103,7 +103,6 @@
                 selectedFile = fileList[0];
                 var name = selectedFile.name;
                 var postfix = name.substr(name.lastIndexOf("."))
-                console.log("postfix:/head/"+userId+postfix)
 
                 cos.uploadFile(successCallBack,errorCallBack,"smxbucket","/"+selectedFile.name,selectedFile,0)
             }

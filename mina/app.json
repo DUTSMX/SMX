@@ -1,6 +1,5 @@
 {
   "pages":[
-    "pages/audit/login/login",
     "pages/audit/main/main",
     "pages/audit/account/account",
     "pages/index/index",

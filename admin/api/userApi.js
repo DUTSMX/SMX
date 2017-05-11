@@ -151,7 +151,7 @@ exports.getStudentDetails=function (studentId,callback) {
     db.getStudentDetails(studentId,function (detail) {
         db.getStudentListDetails(studentId,function (rows) {
             callback({
-                detail: detail[0],
+                detail: detail,
                 list: rows
             });
         })
@@ -159,14 +159,14 @@ exports.getStudentDetails=function (studentId,callback) {
 };
 
 exports.getStudentListEdit=function(studentId,callback) {
-    db.getStudentListDetails(studentId,function (rows) {
-        callback({list:rows});
+    db.getStudentDetails(studentId,function (rows) {
+        callback(rows);
     })
 };
 
-exports.studentListEdit = function(studentId,registerDate,studentName,studentAge,studentGrade,studentSchool,studentAddress,callback){
-    console.log( "studentId:"+studentId+"registerDate:"+registerDate+"studentName:"+studentName+"studentAge:"+studentAge+"studentGrade:"+studentGrade+"studentSchool:"+studentSchool+"studentAddress:"+studentAddress);
-    db.studentListEdit(studentId,registerDate,studentName,studentAge,studentGrade,studentSchool,studentAddress,function (rows) {
+exports.studentListEdit = function(studentId,phoneNumber,studentName,studentAge,studentGrade,studentSchool,studentAddress,callback){
+    console.log( "studentId:"+studentId+"phoneNumber:"+phoneNumber+"studentName:"+studentName+"studentAge:"+studentAge+"studentGrade:"+studentGrade+"studentSchool:"+studentSchool+"studentAddress:"+studentAddress);
+    db.studentListEdit(studentId,phoneNumber,studentName,studentAge,studentGrade,studentSchool,studentAddress,function (rows) {
         // console.log("rows:"+JSON.stringify(rows));
         callback(rows)
     })
@@ -174,19 +174,13 @@ exports.studentListEdit = function(studentId,registerDate,studentName,studentAge
 
 
 exports.getTeacherListEdit=function(teacherId,callback) {
-    db.getTeacherListDetails(teacherId,function (list1) {
-        db.getTeacherVideo(teacherId, function (list2) {
-            callback({
-                list1: list1,
-                list2: list2
-            });
-        })
+    db.getTeacherDetails(teacherId,function (details) {
+        callback(details)
     })
 };
 
-exports.teacherListEdit = function(teacherId,teacherCreateTime,teacherRegisterDate,teacherName,teacherAge,teacherSchool,teacherGoodCourse,teacherSelfIntroduction,callback){
-    console.log( "teacherId:"+teacherId+"teacherCreateTime:"+teacherCreateTime+"teacherRegisterDate:"+teacherRegisterDate+"teacherName:"+teacherName+"teacherAge:"+teacherAge+"teacherSchool:"+teacherSchool+"teacherGoodCourse:"+teacherGoodCourse+"teacherSelfIntroduction:"+teacherSelfIntroduction);
-    db.teacherListEdit(teacherId,teacherCreateTime,teacherRegisterDate,teacherName,teacherAge,teacherSchool,teacherGoodCourse,teacherSelfIntroduction,function (rows) {
+exports.teacherListEdit = function(teacherId,teacherName,phoneNumber,teacherAge,teacherSchool,teacherGoodCourse,teacherSelfIntroduction,callback){
+    db.teacherListEdit(teacherId,teacherName,phoneNumber,teacherAge,teacherSchool,teacherGoodCourse,teacherSelfIntroduction,function (rows) {
         // console.log("rows:"+JSON.stringify(rows));
         callback(rows)
     })
@@ -198,7 +192,7 @@ exports.getTeacherDetails=function (teacherId,callback) {
         db.getTeacherListDetails(teacherId,function (list1) {
             db.getTeacherVideo(teacherId,function (list2) {
                 callback({
-                detail:detail[0],
+                detail:detail,
                 list1:list1 ,
                 list2:list2
                 });

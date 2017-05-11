@@ -15,8 +15,8 @@
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
-<iframe src="/users/navigation" style="width:100vw;height:145px;z-index: 100" frameborder="0" scrolling="no"></iframe>
+<body  onload="putComment('<%=teacherSelfIntroduction%>')">
+<%include navigation.ejs%>
 
 <div class="main">
     <div class="container">
@@ -30,39 +30,39 @@
                     <div class="container">
                         <div class="form-horizontal" role="form">
                             <div class="form-group">
-                                <label class="col-md-2 control-label" for="teacherid">申请时间</label>
+                                <label class="col-md-2 control-label" for="teacherid">姓名</label>
                                 <div class="col-md-6" id="name">
-                                    <input type="int" id="teacherCreateTime" value="" class="form-control">
+                                    <input type="int" id="teacherName" value="<%=teacherName%>" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-2 control-label" for="teacherid">通过时间</label>
+                                <label class="col-md-2 control-label" for="teacherid">手机号</label>
                                 <div class="col-md-6" id="name">
-                                    <input type="datetime" id="teacherRegisterDate" value="" class="form-control">
+                                    <input type="datetime" id="phoneNumber" value="<%=phoneNumber%>" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <!--<div class="form-group">
                                 <label class="col-md-2 control-label" for="teacherid">老师姓名</label>
                                 <div class="col-md-6" id="name">
                                     <input type="text" id="teacherName" value="" class="form-control">
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="time">年龄</label>
                                 <div class="col-md-6" id="name">
-                                    <input type="text" id="teacherAge" class="form-control">
+                                    <input type="text" id="teacherAge" class="form-control" value="<%=teacherAge%>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="time">教育经历</label>
                                 <div class="col-md-6" id="name">
-                                    <input type="text" id="teacherSchool" class="form-control">
+                                    <input type="text" id="teacherSchool" class="form-control" value="<%=teacherSchool%>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="time">擅长科目</label>
                                 <div class="col-md-6" id="name">
-                                    <input type="text" id="teacherGoodCourse" class="form-control">
+                                    <input type="text" id="teacherGoodCourse" class="form-control" value="<%=teacherGoodCourse%>">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -85,18 +85,16 @@
 <script>
     function teacherListEdit() {
         var teacherId="<%=teacherId%>";
-        var teacherCreateTime=$("#teacherCreateTime").val();
-        var teacherRegisterDate=$("#teacherRegisterDate").val();
         var teacherName=$("#teacherName").val();
+        var phoneNumber = $("#phoneNumber").val();
         var teacherAge=$("#teacherAge").val();
         var teacherSchool=$("#teacherSchool").val();
         var teacherGoodCourse=$("#teacherGoodCourse").val();
         var teacherSelfIntroduction=$("#teacherSelfIntroduction").val();
         var data={
             teacherId:teacherId,
-            teacherCreateTime:teacherCreateTime,
-            teacherRegisterDate:teacherRegisterDate,
             teacherName:teacherName,
+            phoneNumber:phoneNumber,
             teacherAge:teacherAge,
             teacherSchool:teacherSchool,
             teacherGoodCourse:teacherGoodCourse,
@@ -104,8 +102,6 @@
         }
         console.log("data:"+JSON.stringify(data));
         if(teacherId.length==0){$("#hint").text("老师ID不能为空");}
-        else if(teacherCreateTime.length==0){$("#hint").text("申请时间不能为空");}
-        else if(teacherRegisterDate.length==0){$("#hint").text("通过时间不能为空");}
         else if(teacherName.length==0){$("#hint").text("老师姓名不能为空");}
         else if(teacherAge.length==0){$("#hint").text("年龄不能为空");}
         else if(teacherSchool.length==0){$("#hint").text("教育经历不能为空");}
@@ -123,103 +119,6 @@
         }
     }
 </script>
-
-
-<div class="main">
-    <div class="container">
-        <div class="bs-example">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading">
-                    <h3 class="panel-title">已有课程</h3>
-                </div>
-                <!-- Table -->
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>编号</th>
-                            <th>老师</th>
-                            <th>名称</th>
-                            <th>时长</th>
-                            <th>面向对象</th>
-                            <th>课程内容</th>
-                            <th>参与人数</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <%list1.forEach(function (item1){ %>
-                        <tr>
-                            <td><%=item1.courseId%></td>
-                            <td><%=item1.teacherName%></td>
-                            <td><%=item1.courseName%></td>
-                            <td><%=item1.courseTime%></td>
-                            <td><%=item1.objectOriented%></td>
-                            <td><%=item1.courseContent%></td>
-                            <td><%=item1.courseCount%>人</td>
-                            <td>
-                                <a class="btn btn-success" href="courseDetailsedit?courseId=<%=item1.courseId%>">编辑</a>
-                                <a class="btn btn-primary" href="courseDetails?courseId=<%=item1.courseId%>">查看详情</a>
-                            </td>
-                        </tr>
-                        <%})%>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="main">
-    <div class="container">
-        <div class="bs-example">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading">
-                    <h3 class="panel-title">已有视频</h3>
-                </div>
-                <!-- Table -->
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>编号</th>
-                            <th>老师</th>
-                            <th>名称</th>
-                            <th>时长</th>
-                            <th>观看人数</th>
-                            <th>上传时间</th>
-                            <th>标签</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <%list2.forEach(function (item2){ %>
-                        <tr>
-                            <td><%=item2.videoId%></td>
-                            <td><%=item2.teacherName%></td>
-                            <td><%=item2.videoName%></td>
-                            <td><%=item2.videoTime%></td>
-                            <td><%=item2.videoWatchCount%></td>
-                            <td><%=item2.videoCreateTime%></td>
-                            <td><%=item2.videoTagName%></td>
-                            <td>
-                                <a class="btn btn-success" href="videoDetailsEdit?videoId=<%=item2.videoId%>">编辑</a>
-                                <a class="btn btn-primary" href="videoDetails?videoId=<%=item2.videoId%>">查看详情</a>
-                            </td>
-                        </tr>
-                        <%})%>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <center>
     <button class="btn btn-default " onclick="teacherListEdit()">确定修改</button>
 </center>
@@ -228,5 +127,10 @@
 <script src="/javascripts/jquery.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/javascripts/bootstrap.min.js"></script>
+<script>
+    function putComment(comment) {
+        $("#teacherSelfIntroduction").val(comment);
+    }
+</script>
 </body>
 </html>

@@ -16,57 +16,20 @@
     <![endif]-->
 </head>
 <body>
-<iframe src="/users/navigation" style="width:100vw;height:145px;z-index: 100" frameborder="0" scrolling="no"></iframe>
+<%include navigation.ejs%>
 <div class="main">
     <div class="container">
         <div class="bs-example">
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">
-                    <h3 class="panel-title">教师详情</h3>
+                    <h3 class="panel-title" style="display: inline-block">教师详情</h3>
+                    <a href="/users/teacherListEdit?teacherId=<%=detail.teacherId%>"><h3 class="panel-title" style="float:right">编辑</h3></a>
                 </div>
-                <!-- Table -->
-                <div class="table-responsive">
-                    <table class="table table-hover" >
-                        <thead>
-                        <tr>
-                            <th>老师ID</th>
-                            <td><%=detail.teacherId%></td>
-                        </tr>
-                        <tr>
-                            <th>申请时间</th>
-                            <td><%=detail.teacherCreateTime%></td>
-                        </tr>
-                        <tr>
-                            <th>通过时间</th>
-                            <td><%=detail.teacherRegisterDate%></td>
-                        </tr>
-                        <tr>
-                            <th>老师姓名</th>
-                            <td><%=detail.teacherName%></td>
-                        </tr>
-                        <tr>
-                            <th>年龄</th>
-                            <td><%=detail.teacherAge%></td>
-                        </tr>
-                        <tr>
-                            <th>教育经历</th>
-                            <td><%=detail.teacherSchool%></td>
-                        </tr>
-                        <tr>
-                            <th >擅长科目</th>
-                            <td><%=detail.teacherGoodCourse%></td>
-                        </tr>
-                        <tr>
-                            <th >简介</th>
-                            <td><%=detail.teacherSelfIntroduction%></td>
-                        </tr>
-                        <tr>
-
-                        </tr>
-                        </thead>
-
-                    </table>
+                <div style="margin-left:30px">
+                    <h3 style="display: inline-block;"><%=detail.teacherName%></h3> <h4 style="display: inline-block;"> <%=detail.phoneNumber%></h4>
+                    <h5><%=detail.teacherSchool%></h5><h5><%=detail.teacherGoodCourse%></h5>
+                    <h6><%=detail.teacherSelfIntroduction%></h6>
                 </div>
             </div>
         </div>
@@ -82,34 +45,38 @@
                     <h3 class="panel-title">已有课程</h3>
                 </div>
                 <!-- Table -->
-                <div class="table-responsive">
+                <div class="table-responsive" style="padding-right: 17px">
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th>编号</th>
-                            <th>老师</th>
-                            <th>名称</th>
-                            <th>时长</th>
+                            <!--<th>编号</th>-->
+                            <!--<th>老师</th>-->
+                            <th>课程名称</th>
+                            <th>开始时间</th>
                             <th>面向对象</th>
-                            <th>课程内容</th>
+                            <!--<th>课程内容</th>-->
                             <th>参与人数</th>
-                            <th>操作</th>
+                            <!--<th>操作</th>-->
                         </tr>
                         </thead>
+                    </table>
+                </div>
+                <div  class="table-responsive"style="max-height: 40vh;overflow:scroll; overflow-x:hidden;">
+                    <table  class="table table-hover" style="table-layout: fixed">
                         <tbody>
                         <%list1.forEach(function (item1){ %>
-                        <tr>
-                            <td><%=item1.courseId%></td>
-                            <td><%=item1.teacherName%></td>
+                        <tr onclick="details(<%=item1.courseId%>)">
+                            <!--<td><%=item1.courseId%></td>-->
+                            <!--<td><%=item1.teacherName%></td>-->
                             <td><%=item1.courseName%></td>
-                            <td><%=item1.courseTime%></td>
+                            <td><%=item1.beginTime%></td>
                             <td><%=item1.objectOriented%></td>
-                            <td><%=item1.courseContent%></td>
-                            <td><%=item1.courseCount%>人</td>
-                            <td>
+                            <!--<td><%=item1.courseContent%></td>-->
+                            <td><%=item1.courseCount%></td>
+                            <!--<td>
                                 <a class="btn btn-success" href="courseDetailsEdit?courseId=<%=item1.courseId%>">编辑</a>
                                 <a class="btn btn-primary" href="courseDetails?courseId=<%=item1.courseId%>">查看详情</a>
-                            </td>
+                            </td>-->
                         </tr>
                         <%})%>
                         </tbody>
@@ -121,15 +88,13 @@
 </div>
 
 
-<div class="main">
+<!--<div class="main">
     <div class="container">
         <div class="bs-example">
             <div class="panel panel-default">
-                <!-- Default panel contents -->
                 <div class="panel-heading">
                     <h3 class="panel-title">已有视频</h3>
                 </div>
-                <!-- Table -->
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
@@ -166,12 +131,17 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
 
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/javascripts/jquery.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/javascripts/bootstrap.min.js"></script>
+<script>
+    function details(courseId) {
+        location.href = "/admin/courseDetails?courseId="+courseId;
+    }
+</script>
 </body>
 </html>

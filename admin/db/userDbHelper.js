@@ -28,7 +28,7 @@ exports.getStudent = function(callback){
         "a.userGrade as studentGrade, " +
         "a.userSchool as studentSchool, " +
         "a.userAddress as studentAddress " +
-        "FROM account a WHERE a.role= 0 " +
+        "FROM account a WHERE a.role<2 " +
         "GROUP BY a.userId";
 
     conn.query(sql,function (err,rows) {
@@ -338,6 +338,7 @@ exports.videoDetailsEdit = function (videoId,videoName,authorId,videoTime,videoA
 
 exports.getStudentDetails = function(studentId,callback){
     var sql = "SELECT a.userId as studentId, " +
+        "a.phoneNumber, " +
         "a.registerDate as studentRegisterDate, " +
         "a.userName as studentName, " +
         "a.userAge as studentAge, " +
@@ -351,7 +352,7 @@ exports.getStudentDetails = function(studentId,callback){
             console.log(err);
             return;
         }else{
-            callback(rows);
+            callback(rows[0]);
         }
     })
 };
@@ -380,9 +381,9 @@ exports.getStudentListDetails = function (studentId,callback) {
     })
 };
 
-exports.studentListEdit = function (studentId,registerDate,studentName,studentAge,studentGrade,studentSchool,studentAddress, callback) {
+exports.studentListEdit = function (studentId,phoneNumber,studentName,studentAge,studentGrade,studentSchool,studentAddress, callback) {
             //console.log("rows[0]:"+JSON.stringify(rows[0]));
-            var sql = "UPDATE account set userId="+studentId+",registerDate='"+registerDate+"',userName='"+studentName+"',userAge='"+studentAge+"',userGrade='"+studentGrade+"',userSchool='"+studentSchool+"',userAddress='"+studentAddress+"' "+
+            var sql = "UPDATE account set userId="+studentId+",phoneNumber="+phoneNumber+",userName='"+studentName+"',userAge='"+studentAge+"',userGrade='"+studentGrade+"',userSchool='"+studentSchool+"',userAddress='"+studentAddress+"' "+
                     "WHERE userId="+studentId+"";
             console.log("sql:"+sql)
             conn.query(sql, function (err,rows) {
@@ -400,10 +401,10 @@ exports.studentListEdit = function (studentId,registerDate,studentName,studentAg
                 }
             })
 };
-exports.teacherListEdit = function (teacherId,teacherCreateTime,teacherRegisterDate,teacherName,teacherAge,teacherSchool,teacherGoodCourse,teacherSelfIntroduction, callback) {
-            var sql = "UPDATE account set registerDate='"+teacherRegisterDate+"',userName='"+teacherName+"',userAge='"+teacherAge+"',userSchool='"+teacherSchool+"' "+
+exports.teacherListEdit = function (teacherId,teacherName,phoneNumber,teacherAge,teacherSchool,teacherGoodCourse,teacherSelfIntroduction, callback) {
+            var sql = "UPDATE account set phoneNumber="+phoneNumber+",userName='"+teacherName+"',userAge='"+teacherAge+"',userSchool='"+teacherSchool+"' "+
                 "WHERE userId="+teacherId+"";
-            console.log("sql:"+sql)
+                console.log(sql);
             conn.query(sql, function (err,rows) {
                 if (err) {
                     console.log(err);
@@ -413,7 +414,7 @@ exports.teacherListEdit = function (teacherId,teacherCreateTime,teacherRegisterD
                     })
                 }else {
                     //console.log("rows[0]:"+JSON.stringify(rows[0]));
-                    var sql = "UPDATE teacher set createTime='"+teacherCreateTime+"',goodCourse='"+teacherGoodCourse+"',selfIntroduction='"+teacherSelfIntroduction+"' "+
+                    var sql = "UPDATE teacher set goodCourse='"+teacherGoodCourse+"',selfIntroduction='"+teacherSelfIntroduction+"' "+
                         "WHERE teacherId="+teacherId+"";
                     console.log("sql:"+sql)
                     conn.query(sql, function (err,rows) {
@@ -437,6 +438,7 @@ exports.teacherListEdit = function (teacherId,teacherCreateTime,teacherRegisterD
 
 exports.getTeacherDetails = function(teacherId,callback) {
     var sql = "SELECT a.userId as teacherId , " +
+        "a.phoneNumber, " +
         "x.createTime as teacherCreateTime , " +
         "a.registerDate as teacherRegisterDate , " +
         "a.userName as teacherName , " +
@@ -451,7 +453,7 @@ exports.getTeacherDetails = function(teacherId,callback) {
             console.log(err);
             return;
         } else {
-            callback(rows);
+            callback(rows[0]);
         }
     })
 };
@@ -460,7 +462,7 @@ exports.getTeacherListDetails = function(teacherId,callback) {
     var sql =" SELECT c.courseId, "+
         "a.userName as teacherName, "+
         "c.courseName, "+
-        "c.courseTime, "+
+        "c.beginTime, "+
         "c.objectOriented, "+
         "c.courseContent , "+
         "count(j.userId) as courseCount "+

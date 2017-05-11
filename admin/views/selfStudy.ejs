@@ -4,8 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>学生列表</title>
-    <!--<link rel="import" href="navigation.html">-->
+    <title>自习管理</title>
+    <!-- Bootstrap -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/video.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -17,41 +19,33 @@
 <%include navigation.ejs%>
 <div class="main">
     <div class="container">
-       <iframe src="/users/navigation" style="width:100vw;height:80px" frameborder="0" scrolling="no"></iframe>
         <div class="bs-example">
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">
-                    <h3 class="panel-title">学生列表</h3>
+                    <h3 class="panel-title" style="display:inline-block">自习管理</h3>
+                    <a href="/admin/selfStudyDetails?date=<%=selfStudy.moment(new Date()).format("YYYY-MM-DD")%>" ><h3 class="panel-title" style="float:right">添加记录</h3></a>
                 </div>
                 <!-- Table -->
-                <div class="table-responsive">
+                <div class="table-responsive" style="padding-right:17px">
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th>用户ID</th>
-                            <th>注册时间</th>
-                            <th>用户名称</th>
-                            <th>年龄</th>
-                            <th>年级</th>
-                            <th>学校</th>
-                            <th>住址</th>
+                            <th>日期</th>
+                            <th>人数</th>
+                            <th>收入</th>
                         </tr>
                         </thead>
+                    </table>
+                </div>
+                <div  class="table-responsive"style="max-height: 80vh;overflow:scroll; overflow-x:hidden;">
+                    <table  class="table table-hover" style="table-layout: fixed">
                         <tbody>
-                        <%studentList.forEach(function (item){ %>
-                        <tr>
-                            <td><%=item.studentId%></td>
-                            <td><%=item.studentRegisterDate%></td>
-                            <td><%=item.studentName%></td>
-                            <td><%=item.studentAge%></td>
-                            <td><%=item.studentGrade%></td>
-                            <td><%=item.studentSchool%></td>
-                            <td><%=item.studentAddress%></td>
-                            <td>
-                                <a class="btn btn-success" href="studentListEdit?studentId=<%=item.studentId%>">编辑</a>
-                                <a class="btn btn-primary" href="studentListDetails?studentId=<%=item.studentId%>">查看详情</a>
-                            </td>
+                        <% selfStudy.forEach(function (item) {%>
+                        <tr onclick="details('<%=selfStudy.moment(item.date).format("YYYY-MM-DD")%>')">
+                            <td><%=selfStudy.moment(item.date).format("YYYY-MM-DD")%></td>
+                            <td><%=item.count%></td>
+                            <td><%=item.income%></td>
                         </tr>
                         <%})%>
                         </tbody>
@@ -65,5 +59,10 @@
 <script src="/javascripts/jquery.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/javascripts/bootstrap.min.js"></script>
+<script>
+    function details(date) {
+        location.href="/admin/selfStudyDetails?date="+date;
+    }
+</script>
 </body>
 </html>

@@ -15,8 +15,8 @@
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
-<iframe src="/users/navigation" style="width:100vw;height:145px;z-index: 100" frameborder="0" scrolling="no"></iframe>
+<body onload="show()">
+<%include navigation.ejs%>
 <div class="main">
     <div class="container">
         <div class="bs-example">
@@ -29,42 +29,41 @@
                     <div class="container">
                         <div class="form-horizontal" role="form">
                             <div class="form-group">
-                                <label class="col-md-2 control-label" for="teacherid">注册时间</label>
+                                <label class="col-md-2 control-label" for="teacherid">手机号</label>
                                 <div class="col-md-6" id="name">
-                                    <input type="datetime" id="registerDate" value="" class="form-control">
+                                    <input type="datetime" id="phoneNumber" class="form-control" value="<%=phoneNumber%>">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-2 control-label" for="teacherid">用户名称</label>
+                                <label class="col-md-2 control-label" for="teacherid">姓名</label>
                                 <div class="col-md-6" id="name">
-                                    <input type="text" id="studentName" value="" class="form-control">
+                                    <input type="text" id="studentName" class="form-control" value="<%=studentName%>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="time">年龄</label>
                                 <div class="col-md-6" id="name">
-                                    <input type="text" id="studentAge" class="form-control">
+                                    <input type="text" id="studentAge" class="form-control" value="<%=studentAge%>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="time">年级</label>
                                 <div class="col-md-6" id="name">
-                                    <input type="text" id="studentGrade" class="form-control">
+                                    <input type="text" id="studentGrade" class="form-control" value="<%=studentGrade%>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="time">学校</label>
                                 <div class="col-md-6" id="name">
-                                    <input type="text" id="studentSchool" class="form-control">
+                                    <input type="text" id="studentSchool" class="form-control" value="<%=studentSchool%>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="name">家庭住址</label>
                                 <div class="col-md-6" id="name">
-                                    <input type="text" id="studentAddress" class="form-control">
+                                    <input type="text" id="studentAddress" class="form-control" value="<%=studentAddress%>">
                                 </div>
                             </div>
-
                         </div>
                         <p style="margin:0;text-align:center;padding-top:50px;" id="hint"></p>
                     </div>
@@ -73,11 +72,20 @@
         </div>
     </div>
 </div>
-
+<center>
+    <button class="btn btn-default " onclick="studentListEdit()">确定修改</button>
+</center>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/javascripts/jquery.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/javascripts/bootstrap.min.js"></script>
 <script>
+    function show(){
+        console.log("name:<%=studentName%>")
+    }
     function studentListEdit() {
         var studentId="<%=studentId%>";
-        var registerDate=$("#registerDate").val();
+        var phoneNumber=$("#phoneNumber").val();
         var studentName=$("#studentName").val();
         var studentAge=$("#studentAge").val();
         var studentGrade=$("#studentGrade").val();
@@ -85,7 +93,7 @@
         var studentAddress=$("#studentAddress").val();
         var data={
             studentId:studentId,
-            registerDate:registerDate,
+            phoneNumber:phoneNumber,
             studentName:studentName,
             studentAge:studentAge,
             studentGrade:studentGrade,
@@ -94,7 +102,7 @@
         }
         console.log("data:"+JSON.stringify(data));
         if(studentId.length==0){$("#hint").text("用户ID不能为空");}
-        else if(registerDate.length==0){$("#hint").text("注册时间不能为空");}
+        else if(phoneNumber.length==0){$("#hint").text("手机号不能为空");}
         else if(studentName.length==0){$("#hint").text("用户名称不能为空");}
         else if(studentAge.length==0){$("#hint").text("年龄不能为空");}
         else if(studentGrade.length==0){$("#hint").text("年级不能为空");}
@@ -113,62 +121,5 @@
         }
     }
 </script>
-
-<div class="main">
-    <div class="container">
-        <div class="bs-example">
-            <div class="panel panel-default">
-
-                <div class="panel-heading">
-                    <h3 class="panel-title">已有课程</h3>
-                </div>
-
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>编号</th>
-                            <th>老师</th>
-                            <th>名称</th>
-                            <th>时长</th>
-                            <th>面向对象</th>
-                            <th>课程内容</th>
-                            <th>参与学生</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <%list.forEach(function (item1){%>
-                        <tr>
-                            <td><%=item1.courseId%></td>
-                            <td><%=item1.teacherName%></td>
-                            <td><%=item1.courseName%></td>
-                            <td><%=item1.courseTime%></td>
-                            <td><%=item1.objectOriented%></td>
-                            <td><%=item1.courseContent%></td>
-                            <td><%=item1.courseCount%>人</td>
-                            <td>
-                                <a class="btn btn-primary" href="courseDetails?courseId=<%=item1.courseId%>">查看详情</a>
-                            </td>
-                        </tr>
-                        <%})%>
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<center>
-    <button class="btn btn-default " onclick="studentListEdit()">确定修改</button>
-</center>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-
-
-<script src="/javascripts/jquery.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/javascripts/bootstrap.min.js"></script>
 </body>
 </html>

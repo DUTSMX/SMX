@@ -8,6 +8,7 @@
     <!-- Bootstrap -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
     <link href="/stylesheets/video.css" rel="stylesheet">
+    <link href="/stylesheets/scroll-table.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -16,56 +17,59 @@
     <![endif]-->
 </head>
 <body>
-<iframe src="/users/navigation" style="width:100vw;height:145px;z-index: 100" frameborder="0" scrolling="no"></iframe>
+<%include navigation.ejs%>
 <div class="main">
     <div class="container">
         <div class="bs-example">
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">
-                    <h3 class="panel-title">课程详情</h3>
+                    <h3 class="panel-title" style="display:inline-block">课程详情</h3>
+                    <a href="/admin/courseDetailsEdit?courseId=<%=courseId%>" ><h3 class="panel-title" style="float:right">编辑</h3></a>
                 </div>
+                <div style="padding-left:30px;padding-bottom:30px">
+                    <h2 style="display: inline-block;"><%=courseName%></h2> <h4 style="display: inline-block; margin-left:10px"><%=objectOriented%></h4>
+                    <a href="/users/teacherDetails?teacherId=<%=teacherId%>"><h3><%=teacherName%></h3></a>
+                    <h5> <%=courseDate%>   <%=beginTime%>-<%=finishTime%></h5>
+                    <p ><%=courseContent%></p>
+                </div>
+                <div class="panel-heading">
+                    <h3 class="panel-title" style="display:inline-block">学生列表</h3>
+                    <a href="/admin/courseDetailsEdit?courseId=<%=courseId%>" ><h3 class="panel-title" style="float:right">添加</h3></a>
+                </div>
+
                 <!-- Table -->
-                <div class="table-responsive">
-                    <table class="table table-hover" >
+                <div class="table-responsive"   style="padding-right:17px">
+                    <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th>名称</th>
-                            <td><%=courseName %></td>
-                        </tr>
-                        <tr>
-                            <th>教师编号</th>
-                            <td><%=teacherId%></td>
-                        </tr>
-                        <tr>
-                            <th>开始时间</th>
-                            <td><%=courseBeginTime%></td>
-                        </tr>
-                        <tr>
-                            <th>结束时间</th>
-                            <td><%=courseFinishTime%></td>
-                        </tr>
-                        <tr>
-                            <th>时长</th>
-                            <td><%=courseTime%></td>
-                        </tr>
-                        <tr>
-                            <th>面向对象</th>
-                            <td><%=objectOriented%></td>
-                        </tr>
-                        <tr>
-                            <th >课程内容</th>
-                            <td><%=courseContent%></td>
-                        </tr>
-                        <tr>
-                            <th >参与学生</th>
-                            <td><%=courseCount%></td>
-                        </tr>
-                        <tr>
-
+                            <!--<th>编号</th>-->
+                            <th><div class="omit">姓名</div></th>
+                            <!--<th>出勤</th>
+                            <th>原因</th>
+                            <th>学费</th>-->
+                            <!--<th>学生评价</th>
+                            <th>学生意见</th>
+                            <th>老师评价</th>
+                            <th>老师评语</th>-->
                         </tr>
                         </thead>
-
+                    </table>
+                </div>
+                <div  class="table-responsive"style="max-height: 40vh;overflow:scroll; overflow-x:hidden;">
+                    <table  class="table table-hover" style="table-layout: fixed">
+                        <tbody>
+                        <% studentList.forEach(function (item) {%>
+                        <%if(item.join == 1){%>
+                        <tr onclick="details('<%=item.studentId%>')">
+                            <td><div class="omit"><%=item.studentName%></div></td>
+                            <!--<td> </td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>-->
+                        </tr>
+                        <%}})%>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -79,5 +83,12 @@
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/javascripts/bootstrap.min.js"></script>
+
+<script>
+    function details(userId) {
+        console.log("userId:"+userId)
+        location.href="/users/studentDetails?studentId="+userId;
+    }
+</script>
 </body>
 </html>
