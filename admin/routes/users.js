@@ -3,6 +3,25 @@ var router = express.Router();
 var api = require("../api/userApi")
 
 /* GET users listing. */
+router.get('/syllabus',function(req,res){
+    // var data = {'data':[{'teacher':'齐书强','course':[
+    //     {'time':'7:00-8:30','grade':'高三','course':'数学','student':[{'id':1,'name':'时'}]},
+    //     {'time':'8:40-10:10','grade':'高三','course':'数学','student':[{'id':1,'name':'广'}]},
+    //     {'time':'10:20-11:50','grade':'高三','course':'数学','student':[{'id':1,'name':'毅'}]}
+    // ]},
+    //     {'teacher':'齐','course':[
+    //         {'time':'7:00-8:30','grade':'高三','course':'数学','student':[{'id':1,'name':'时'}]},
+    //         {'time':'8:40-10:10','grade':'高三','course':'数学','student':[{'id':1,'name':'广'}]},
+    //         {'time':'10:20-11:50','grade':'高三','course':'数学','student':[{'id':1,'name':'毅'}]}
+    //     ]}]};
+    // console.log("data:"+JSON.stringify(data))
+    // res.render('syllabus',data);
+    api.getSyllabus(function(data){
+        console.log("syllabus:"+JSON.stringify(data));
+        res.render('syllabus',data)
+    })
+});
+
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });

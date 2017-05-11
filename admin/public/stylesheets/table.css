@@ -1,17 +1,16 @@
 #syllabus {
 	border-collapse:collapse;
+                width:100%;
+border:1px solid #98bf21;
 }
 #syllabus.caption {
     font-size:20px;
 }
-#syllabus, th, td {
-	border: 1px solid gray;
-}
+
 #syllabus td {
 	padding:15px 10px 15px 10px;
 	text-align:center;
 	font-size:14px;
-	width:130px;
 	/*height:150px;*/
 }
 #syllabus th.time {
