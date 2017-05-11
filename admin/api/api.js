@@ -15,9 +15,9 @@ exports.getCourseDetails=function (courseId,callback) {
                     student.join=0;
                     courseStudentList.forEach(function(courseStudent) {
                         console.log("student:"+student.studentId+  "course:"+courseStudent.userId)
-                    if(student.studentId == courseStudent.userId){
-                        student.join=1;
-                    }
+                        if(student.studentId == courseStudent.userId){
+                            student.join=1;
+                        }
                     })
                 })
                 detail.studentList = studentList;
