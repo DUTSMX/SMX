@@ -4,9 +4,13 @@ var api = require('../api/api')
 var moment = require("moment");
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('navigation');
 });
 
+router.get('/favicon.ico', function (req, res) {
+  var now = path.resolve(__dirname, '..') + "/";
+  res.sendFile(now + "favicon.ico")
+})
 router.get('/course',function (req,res,next) {
   api.getCourse(function (courseList) {
     console.log("course:"+JSON.stringify(courseList));

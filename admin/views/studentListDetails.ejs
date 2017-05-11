@@ -16,7 +16,7 @@
     <![endif]-->
 </head>
 <body>
-<iframe src="/users/navigation" style="width:100vw;height:60px;z-index: 100" frameborder="0" scrolling="no"></iframe>
+<!--<iframe src="/users/navigation" style="width:100vw;height:60px;z-index: 100" frameborder="0" scrolling="no"></iframe>-->
 <div class="main">
     <div class="container">
         <div class="bs-example">
@@ -28,45 +28,6 @@
                 <div style="margin-left:30px">
                     <h3><%=detail.studentName%></h3><h5><%=detail.studentGrade%></h5>
                 </div>
-                <!-- Table -->
-                <!--<div class="table-responsive">
-                    <table class="table table-hover" >
-                        <thead>
-                        <tr>
-                            <th>用户ID</th>
-                            <td><%=detail.studentId%></td>
-                        </tr>
-                        <tr>
-                            <th>注册时间</th>
-                            <td><%=detail.studentRegisterDate%></td>
-                        </tr>
-                        <tr>
-                            <th>用户名称</th>
-                            <td><%=detail.studentName%></td>
-                        </tr>
-                        <tr>
-                            <th>年龄</th>
-                            <td><%=detail.studentAge%></td>
-                        </tr>
-                        <tr>
-                            <th>年级</th>
-                            <td><%=detail.studentGrade%></td>
-                        </tr>
-                        <tr>
-                            <th>学校</th>
-                            <td><%=detail.studentSchool%></td>
-                        </tr>
-                        <tr>
-                            <th >家庭住址</th>
-                            <td><%=detail.studentAddress%></td>
-                        </tr>
-                        <tr>
-
-                        </tr>
-                        </thead>
-
-                    </table>
-                </div>-->
             </div>
         </div>
     </div>
@@ -80,6 +41,7 @@
                     <h3 class="panel-title">课程列表</h3>
                 </div>
                 <div class="table-responsive">
+
                     <table class="table table-hover">
                         <thead>
                         <tr>
@@ -102,7 +64,7 @@
                             <td><%=item1.courseTime%></td>
                             <td><%=item1.objectOriented%></td>
                             <!--<td><%=item1.courseContent%></td>-->
-                            <td><%=item1.courseCount%>人</td>-->
+                            <td><%=item1.courseCount%>人</td>
                             <!--<td>
                                 <a class="btn btn-primary" href="courseDetails?courseId=<%=item1.courseId%>">查看详情</a>
                             </td>-->
