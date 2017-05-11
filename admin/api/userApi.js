@@ -10,31 +10,35 @@ exports.getTeacher=function (callback) {
         callback(rows);
     })
 };
+
 exports.getChecked=function (callback) {
     db.getChecked(function (rows) {
-        callback(rows);
+        callback({list:rows});
     })
 };
 
-exports.getTurnBack=function(teacherId,callback) {
-    db.getTurnBack(teacherId, function () {
-        callback({desc:"已驳回"})
+exports.checked=function(teacherId,callback) {
+    console.log( "teacherId:"+teacherId)
+    db.checked(teacherId, function (rows) {
+        callback(rows)
     })
 };
 
 exports.getWaitChecking=function (callback) {
     db.getWaitChecking(function (rows) {
-        callback(rows);
+        callback({list:rows});
     })
 };
-exports.getAgree=function(teacherId,callback) {
-    db.getAgree(teacherId, function () {
-        callback({desc:"已同意"})
+exports.agree=function(teacherId,callback) {
+    console.log( "teacherId:"+teacherId)
+    db.agree(teacherId, function (rows) {
+        callback(rows)
     })
 };
-exports.getDisagree=function(teacherId,callback) {
-    db.getDisagree(teacherId, function () {
-        callback({desc:"已反对"})
+exports.disagree=function(teacherId,callback) {
+    console.log( "teacherId:"+teacherId)
+    db.disagree(teacherId, function (rows) {
+        callback(rows)
     })
 };
 
@@ -61,6 +65,12 @@ exports.getCourseDetails=function (courseId,callback) {
         callback(detail[0]);
     })
 };
+
+exports.getCourseDetailsEdit = function(courseId,callback){
+    db.getCourseDetailsEdit (courseId,function(rows){
+        callback(rows);
+    })
+}
 exports.courseDetailsEdit = function(courseId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent,callback){
     console.log("courseId:"+courseId+"courseName:"+courseName+"courseDate:"+courseDate+" beginTime:"+beginTime+" finishTime:"+finishTime +
         " courseTime:"+courseTime+" objectOriented:"+objectOriented+" courseContent:"+courseContent);
@@ -81,6 +91,32 @@ exports.getVideoDetails=function (videoId,callback) {
         callback(detail[0]);
     })
 };
+/*exports.getCourseDetailsEdit = function(courseId,callback){
+    db.getCourseDetailsEdit (courseId,function(rows){
+        callback(rows);
+    })
+}
+exports.courseDetailsEdit = function(courseId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent,callback){
+    console.log("courseId:"+courseId+"courseName:"+courseName+"courseDate:"+courseDate+" beginTime:"+beginTime+" finishTime:"+finishTime +
+        " courseTime:"+courseTime+" objectOriented:"+objectOriented+" courseContent:"+courseContent);
+    db.courseDetailsEdit(courseId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent,function (rows) {
+        // console.log("rows:"+JSON.stringify(rows));
+        callback(rows)
+    })
+}*/
+exports.getVideoDetailsEdit = function(videoId,callback){
+    db.getVideoDetailsEdit (videoId,function(rows){
+        callback(rows);
+    })
+}
+exports.videoDetailsEdit = function(videoId,videoName,authorId,videoTime,videoAbstract ,videoUrl, callback){
+    console.log("videoId:"+videoId+"videoName:"+videoName+"authorId:"+authorId+" videoTime:"+videoTime+" videoAbstract:"+videoAbstract +" videoUrl:"+videoUrl);
+    db.videoDetailsEdit(videoId,videoName,authorId,videoTime,videoAbstract,videoUrl,function (rows) {
+        // console.log("rows:"+JSON.stringify(rows));
+        callback(rows);
+    })
+}
+
 
 exports.getStudentDetails=function (studentId,callback) {
     db.getStudentDetails(studentId,function (detail) {

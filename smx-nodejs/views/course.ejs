@@ -24,7 +24,7 @@
     <div class="ad_Images">
         <%courseList.rotation.forEach(function(item){%>
             <div class="ad_Image_style">
-                <img src="<%=item.adImageUrl%>">
+               <a href="<%=item.adSkipUrl%>"><img src="<%=item.adImageUrl%>"></a>
             </div>
         <%})%>
     </div>
@@ -89,6 +89,7 @@
                 </ul>
             </div>
         </div>
+
     </div>
     <div data-role="footer" data-position="fixed" data-theme="t">
         <div data-role="navbar">
@@ -105,7 +106,6 @@
         </div>
     </div>
 </div>
-
 <script src="http://apps.bdimg.com/libs/jquery.cookie/1.4.1/jquery.cookie.js"></script>
 <script>
     function video() {

@@ -52,8 +52,7 @@ exports.getChecked = function(callback){
         "x.goodCourse as teacherGoodCourse, " +
         "x.selfIntroduction as teacherSelfIntroduction " +
         "FROM account a LEFT JOIN teacher x ON a.userId = x.teacherId WHERE a.role = 2 " +
-        "GROUP BY a.userId";
-
+        "GROUP BY a.userId ";
     conn.query(sql,function (err,rows) {
         console.log(sql);
         if(err){
@@ -65,12 +64,22 @@ exports.getChecked = function(callback){
     })
 };
 
-exports.getTurnBack = function(teacherId,callback){
-    var sql = "update account a set a.role = 0 where a.userId = "+teacherId+"";
+exports.checked = function(teacherId,callback){
+    var sql = "UPDATE account a SET a.role = 0 WHERE a.userId = "+teacherId+"";
     console.log("sql:" + sql);
-    conn.query(sql,function (err,rows) {
-        console.log(sql);
-        callback({desc:"已驳回"})
+    conn.query(sql, function (err,rows) {
+        if (err) {
+            console.log(err);
+            callback({
+                status:false,
+                desc:err
+            })
+        }else {
+            callback({
+                status:true,
+                desc:"已驳回"
+            });
+        }
     })
 };
 
@@ -93,20 +102,40 @@ exports.getWaitChecking = function(callback){
     })
 };
 
-exports.getAgree = function(teacherId,callback){
+exports.agree = function(teacherId,callback){
     var sql = "update account a set a.role = 2 where a.userId = "+teacherId+"";
     console.log("sql:" + sql);
-    conn.query(sql,function (err,rows) {
-        console.log(sql);
-        callback({desc:"已同意"})
+    conn.query(sql, function (err,rows) {
+        if (err) {
+            console.log(err);
+            callback({
+                status:false,
+                desc:err
+            })
+        }else {
+            callback({
+                status:true,
+                desc:"已同意"
+            });
+        }
     })
 };
-exports.getDisagree = function(teacherId,callback){
+exports.disagree = function(teacherId,callback){
     var sql = "update account a set a.role = 0 where a.userId = "+teacherId+"";
     console.log("sql:" + sql);
-    conn.query(sql,function (err,rows) {
-        console.log(sql);
-        callback({desc:"已反对"})
+    conn.query(sql, function (err,rows) {
+        if (err) {
+            console.log(err);
+            callback({
+                status:false,
+                desc:err
+            })
+        }else {
+            callback({
+                status:true,
+                desc:"已否决"
+            });
+        }
     })
 };
 
@@ -144,21 +173,6 @@ exports.getSuggestionReply = function(feedbackId,callback){
     })
 };
 exports.suggestionReply = function (feedbackId,reply,callback) {
-    var sql = "SELECT userId FROM feedback WHERE feedbackId =" + feedbackId + "";
-    console.log("sql:" + sql);
-    conn.query(sql, function (err, rows) {
-        if (err) {
-            callback({
-                status: false,
-                desc: err
-            });
-        } else if (rows.length == 0) {
-            callback({
-                status: false,
-                desc: "没有该反馈"
-            });
-        } else {
-            console.log("rows[0]:" + JSON.stringify(rows[0]));
             var sql = "UPDATE feedback set replyState = '已回复', reply='" + reply + "' WHERE feedbackId=" + feedbackId + "";
             console.log("sql:" + sql)
             conn.query(sql, function (err, rows) {
@@ -175,8 +189,6 @@ exports.suggestionReply = function (feedbackId,reply,callback) {
                     });
                 }
             })
-        }
-    });
 }
 
 
@@ -201,23 +213,19 @@ exports.getCourseDetails = function(courseId,callback){
         }
     })
 };
-
-exports.courseDetailsEdit = function (courseId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent, callback) {
-    var sql= "SELECT userId FROM course WHERE courseId ="+courseId+"";
-    console.log("sql:"+sql);
-    conn.query(sql,function (err,rows) {
+exports.getCourseDetailsEdit = function(courseId,callback){
+    var sql="select courseId from course where courseId="+courseId+"";
+    conn.query(sql,function(err,rows){
+        console.log(sql);
         if(err){
-            callback({
-                status:false,
-                desc:err
-            });
-        }else if(rows.length == 0){
-            callback({
-                status:false,
-                desc:"没有该课程"
-            });
+            console.log(err);
+            return;
         }else{
-            console.log("rows[0]:"+JSON.stringify(rows[0]));
+            callback(rows);
+        }
+    })
+};
+exports.courseDetailsEdit = function (courseId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent, callback) {
             var sql ="UPDATE course set courseName='"+courseName+"',courseDate='"+courseDate+"',beginTime='"+beginTime+"',finishTime='"+finishTime+"',courseTime='"+courseTime+"',objectOriented='"+objectOriented+"',courseContent='"+courseContent+"' "+
                 "WHERE courseId="+courseId+"";
             console.log("sql:"+sql)
@@ -235,8 +243,6 @@ exports.courseDetailsEdit = function (courseId,courseName,courseDate,beginTime,f
                     });
                 }
             })
-        }
-    })
 }
 
 exports.getVideo = function(callback){
@@ -278,6 +284,70 @@ exports.getVideoDetails = function(videoId,callback){
         }
     })
 };
+/*
+exports.getCourseDetailsEdit = function(courseId,callback){
+    var sql="select courseId from course where courseId="+courseId+"";
+    conn.query(sql,function(err,rows){
+        console.log(sql);
+        if(err){
+            console.log(err);
+            return;
+        }else{
+            callback(rows);
+        }
+    })
+};
+exports.courseDetailsEdit = function (courseId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent, callback) {
+    var sql ="UPDATE course set courseName='"+courseName+"',courseDate='"+courseDate+"',beginTime='"+beginTime+"',finishTime='"+finishTime+"',courseTime='"+courseTime+"',objectOriented='"+objectOriented+"',courseContent='"+courseContent+"' "+
+        "WHERE courseId="+courseId+"";
+    console.log("sql:"+sql)
+    conn.query(sql, function (err,rows) {
+        if (err) {
+            console.log(err);
+            callback({
+                status:false,
+                desc:err
+            })
+        }else {
+            callback({
+                status:true,
+                desc:"课程修改成功"
+            });
+        }
+    })
+}
+*/
+exports.getVideoDetailsEdit = function(videoId,callback){
+    var sql="select videoId from video where videoId="+videoId+"";
+    conn.query(sql,function(err,rows){
+        console.log(sql);
+        if(err){
+            console.log(err);
+            return;
+        }else{
+            callback(rows);
+        }
+    })
+};
+exports.videoDetailsEdit = function (videoId,videoName,authorId,videoTime,videoAbstract ,videoUrl, callback) {
+    var sql ="UPDATE video set videoName='"+videoName+"',authorId="+authorId+",videoTime='"+videoTime+"',videoAbstract='"+videoAbstract+"',videoUrl='"+videoUrl+"' "+
+        "WHERE videoId="+videoId+" ";
+    console.log("sql:"+sql)
+    conn.query(sql, function (err,rows) {
+        if (err) {
+            console.log(err);
+            callback({
+                status:false,
+                desc:err
+            })
+        }else {
+            callback({
+                status:true,
+                desc:"视频修改成功"
+            });
+        }
+    })
+}
 
 exports.getStudentDetails = function(studentId,callback){
     var sql = "SELECT a.userId as studentId, " +
@@ -324,21 +394,7 @@ exports.getStudentListDetails = function (studentId,callback) {
 };
 
 exports.studentListEdit = function (studentId,registerDate,studentName,studentAge,studentGrade,studentSchool,studentAddress, callback) {
-    var sql= "SELECT userId FROM account WHERE userName ='"+studentName+"'";
-    console.log("sql:"+sql);
-    conn.query(sql,function (err,rows) {
-        if(err){
-            callback({
-                status:false,
-                desc:err
-            });
-        }else if(rows.length == 0){
-            callback({
-                status:false,
-                desc:"没有该学生"
-            });
-        }else{
-            console.log("rows[0]:"+JSON.stringify(rows[0]));
+            //console.log("rows[0]:"+JSON.stringify(rows[0]));
             var sql = "UPDATE account set userId="+studentId+",registerDate='"+registerDate+"',userName='"+studentName+"',userAge='"+studentAge+"',userGrade='"+studentGrade+"',userSchool='"+studentSchool+"',userAddress='"+studentAddress+"' "+
                     "WHERE userId="+studentId+"";
             console.log("sql:"+sql)
@@ -356,27 +412,9 @@ exports.studentListEdit = function (studentId,registerDate,studentName,studentAg
                     });
                 }
             })
-        }
-    })
 };
-
 exports.teacherListEdit = function (teacherId,teacherCreateTime,teacherRegisterDate,teacherName,teacherAge,teacherSchool,teacherGoodCourse,teacherSelfIntroduction, callback) {
-    var sql= "SELECT userId FROM account WHERE userName ='"+teacherName+"'";
-    console.log("sql:"+sql);
-    conn.query(sql,function (err,rows) {
-        if(err){
-            callback({
-                status:false,
-                desc:err
-            });
-        }else if(rows.length == 0){
-            callback({
-                status:false,
-                desc:"没有该老师"
-            });
-        }else{
-            console.log("rows[0]:"+JSON.stringify(rows[0]));
-            var sql = "UPDATE account set userId="+teacherId+",registerDate='"+teacherRegisterDate+"',userName='"+teacherName+"',userAge='"+teacherAge+"',userSchool='"+teacherSchool+"' "+
+            var sql = "UPDATE account set registerDate='"+teacherRegisterDate+"',userName='"+teacherName+"',userAge='"+teacherAge+"',userSchool='"+teacherSchool+"' "+
                 "WHERE userId="+teacherId+"";
             console.log("sql:"+sql)
             conn.query(sql, function (err,rows) {
@@ -387,7 +425,7 @@ exports.teacherListEdit = function (teacherId,teacherCreateTime,teacherRegisterD
                         desc:err
                     })
                 }else {
-                    console.log("rows[0]:"+JSON.stringify(rows[0]));
+                    //console.log("rows[0]:"+JSON.stringify(rows[0]));
                     var sql = "UPDATE teacher set createTime='"+teacherCreateTime+"',goodCourse='"+teacherGoodCourse+"',selfIntroduction='"+teacherSelfIntroduction+"' "+
                         "WHERE teacherId="+teacherId+"";
                     console.log("sql:"+sql)
@@ -407,8 +445,6 @@ exports.teacherListEdit = function (teacherId,teacherCreateTime,teacherRegisterD
                    })
                 }
             })
-        }
-    })
 };
 
 
@@ -437,7 +473,7 @@ exports.getTeacherListDetails = function(teacherId,callback) {
     var sql =" SELECT c.courseId, "+
         "a.userName as teacherName, "+
         "c.courseName, "+
-        "c.courseTime, "+
+        "c.beginTime, "+
         "c.objectOriented, "+
         "c.courseContent , "+
         "count(j.userId) as courseCount "+

@@ -27,7 +27,7 @@ app.use(session({
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-var unInterceptionList = ["/users/forgetPassword","/users/register","/users/getCheckCode"]
+var unInterceptionList = ["/users/forgetPassword","/users/register","/users/getCheckCode","/AppSign"]
 //登录过滤器，如果session中的userId为空，则跳转到登录页面，登陆成功后跳转回来。
 app.use(function (req,res,next) {
   var url = req.originalUrl;

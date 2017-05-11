@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>登录</title>
+    <!-- Bootstrap -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/video.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<iframe src="/users/navigation" style="width:100vw;height:145px;z-index: 100" frameborder="0" scrolling="no"></iframe>
+<div class="main">
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">内置注册</h3>
+            </div>
+            <div class="panel-body">
+                <div class="container">
+                    <div action="#" method="post" class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="name">姓名</label>
+                            <div class="col-md-6" id="name">
+                                <input type="text" id="userName" value="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="name">课程</label>
+                            <div class="col-md-6" id="name">
+                                <input type="text" id="courseName" value="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="name">手机号</label>
+                            <div class="col-md-6" id="name">
+                                <input type="text" id="phoneNumber" value="" class="form-control">
+                            </div>
+                        </div>
+                        <center>
+                            <p class="btn btn-default "onclick="register()" >注册</p>
+                        </center>
+                        <p id="hint"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/javascripts/jquery.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/javascripts/bootstrap.min.js"></script>
+<script>
+    function register() {
+        var userName=$("#userName").val();
+        var phoneNumber=$("#phoneNumber").val();
+        var courseName=$("#courseName").val();
+        if(userName.length==0){
+            $("#hint").text("用户名不能为空")
+        }
+        else if(phoneNumber.length==0){
+            $("#hint").text("电话号码不能为空");
+        }
+        else if(courseName.length==0){
+            $("hint").text("课程名不能为空");
+        }
+        else{
+            var data={
+                userName:userName,
+                phoneNumber:phoneNumber,
+                courseName:courseName
+            }
+            console.log("data:"+JSON.stringify(data));
+            $.post('./registerTeacher',data,function (data) {
+                console.log("data1:"+data.desc);
+                $("#hint").text(data.desc);
+            })
+        }
+    }
+</script>
+</body>
+</html>

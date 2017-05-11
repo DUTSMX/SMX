@@ -33,7 +33,7 @@ exports.getCourse = function(callback){
         "GROUP BY s.courseId";
 
     conn.query(sql,function (err,rows) {
-        console.log(sql);
+        console.log("sql:"+sql);
         if(err){
             console.log(err);
             return;
@@ -42,6 +42,98 @@ exports.getCourse = function(callback){
         }
     })
 };
+exports.getCourseDetails=function (courseId,callback) {
+    var sql = "SELECT c.courseId, " +
+        "a.userName as teacherName, " +
+        "a.userId as teacherId, " +
+        "c.courseName, " +
+        "c.courseDate, " +
+        "c.beginTime, " +
+        "c.objectOriented, " +
+        "c.courseContent, " +
+        "c.finishTime,"+
+        "c.courseTime,"+
+        "COUNT(s.userId) as courseCount " +
+        "FROM course c JOIN account a ON a.userId = c.userId JOIN joinCourse s on c.courseId = s.courseId "+
+        "WHERE c.courseId ="+courseId;
+    console.log("sql:"+sql);
+    console.log("courseId:"+courseId)
+    conn.query(sql,function (err,rows) {
+        if(err){
+            console.log(err);
+            return false;
+        }else{
+            callback(rows[0]);
+        }
+    })
+}
+exports.getCourseStudentList = function (courseId,callback) {
+    var sql = "SELECT a.userName, " +
+        "a.userId " +
+        /*",j.attend, " +
+        "j.cost, " +
+        "j.reason, " +
+        "j.studentEval, " +
+        "j.studentEvalDesc, " +
+        "j.teacherEval, " +
+        "j.teacherEvalDesc " +*/
+        "FROM account a JOIN joinCourse j on a.userId = j.userId " +
+        "WHERE j.courseId = "+courseId;
+    console.log("sql:"+sql);
+    conn.query(sql,function (err, rows) {
+        if(err){
+            console.log(err)
+        }else{
+            callback(rows)
+        }
+    })
+
+
+}
+
+exports.courseDetailsEdit = function (courseId,courseName,courseDate,beginTime,finishTime,courseTime,objectOriented,courseContent, callback) {
+    var sql ="UPDATE course set courseName='"+courseName+"',courseDate='"+courseDate+"',beginTime='"+beginTime+"',finishTime='"+finishTime+"',courseTime='"+courseTime+"',objectOriented='"+objectOriented+"',courseContent='"+courseContent+"' "+
+        "WHERE courseId="+courseId+"";
+    console.log("sql:"+sql)
+    conn.query(sql, function (err,rows) {
+        if (err) {
+            console.log(err);
+            callback({
+                status:false,
+                desc:err
+            })
+        }else {
+            callback({
+                status:true,
+                desc:"课程修改成功"
+            });
+        }
+    })
+}
+
+exports.getSelfStudyByDate = function(callback){
+    var sql = "select date,count(userId) as count, sum(cost) as income from selfStudy group by date order by date desc";
+    conn.query(sql,function (err,rows) {
+        if(err){
+            console.log(err)
+        }else{
+            callback(rows)
+        }
+    })
+}
+
+exports.getSelfStudyDetails = function (date,callback) {
+    var sql = "select a.userId,a.userName,s.cost from selfStudy s join account a on s.userId = a.userId where cast(date as date) = '"+date+"'";
+    console.log("sql:"+sql)
+    conn.query(sql,function (err,rows) {
+        if(err){
+            console.log(err)
+        }else{
+            callback(rows);
+        }
+    })
+}
+
 exports.getQuestion = function(callback){
     var aContent =  100;
     var sql = "SELECT d.questionId, " +
@@ -135,4 +227,115 @@ exports.addCourse = function (courseName,courseDate,teacherName,beginTime,finish
 
     })
 
+}
+exports.findAccount = function (phoneNumber, password, callback) {
+    // console.log(phoneNumber+password);
+    var sql = "SELECT * FROM account WHERE phoneNumber = '"+ phoneNumber + "' and  password = '"+ password+"'";
+    conn.query(sql, function (err, rows, fields) {
+        // console.log(rows);
+        if (err) {
+            console.log(err);
+            return;
+        }
+        callback(rows)
+    })
+    exports.editPassword=function (userId,oldPassword,password,callback) {
+        var sql="SELECT * FROM account WHERE userId="+userId+" and password= '"+oldPassword+"'";
+        console.log("sql:"+sql);
+        conn.query(sql,function (err,rows) {
+            if(err){
+                console.
+                console.log(err);
+                return;
+            }else if(rows == null || rows[0] == null){
+                callback({
+                    status:false,
+                    desc:"密码错误"
+                })
+            }else{
+                console.log("password:"+password)
+                var sql = "UPDATE account set password = '"+password+"' WHERE userId = "+userId;
+                conn.query(sql,function (err,rows) {
+                    if(err){
+                        console.log(err);
+                        return;
+                    }else{
+                        callback({
+                            status:true,
+                            desc:"修改成功"
+                        })
+                    }
+                })
+            }
+        })
+    }
+}
+exports.Delete=function (Id,type,desc,callback) {
+    var sql="DELETE FROM question WHERE questionId= "+Id;
+    conn.query(sql,function (err,rows) {
+        if(err){
+            console.log(err);
+        }
+        else{
+            var sql="INSERT INTO delete (id,type,desc) VALUES (Id,type,desc)";
+            conn.query(sql,function (err,rows) {
+                if(err){callback({
+                    status:false
+                })}
+                else{
+                    callback({
+                        status:true
+                    })
+                }
+            })
+        }
+    })
+}
+exports.register=function (userName,phoneNumber,callback) {
+    console.log("userName2:"+userName);
+    var date=new Date();
+    var role=0;
+    console.log("date:"+date);
+    var sql="INSERT INTO account(userName,phoneNumber,role,registerDate) VALUES ('"+userName+"','"+phoneNumber+"','"+role+"',"+conn.escape(date)+")";
+    //var sql = "INSERT INTO account(userName,phoneNumber,registerDate) VALUES ('"+userName+"','"+phoneNumber+"',"+conn.escape(date)+")";
+    console.log("111");
+    conn.query(sql,function (err,rows) {
+        if(err){
+            console.log(err);
+        }
+        else{
+            callback({
+                status:true
+            })
+        }
+    })
+}
+exports.registerTeacher=function (userName,phoneNumber,courseName,callback) {
+    console.log("userName2:"+userName);
+    var date=new Date();
+    var role=2;
+    console.log("date:"+date);
+    var sql="INSERT INTO account(userName,phoneNumber,role,registerDate) VALUES ('"+userName+"','"+phoneNumber+"','"+role+"',"+conn.escape(date)+")";
+    //var sql = "INSERT INTO account(userName,phoneNumber,registerDate) VALUES ('"+userName+"','"+phoneNumber+"',"+conn.escape(date)+")";
+    console.log("111");
+    conn.query(sql,function (err,rows) {
+        if(err){
+            console.log(err);
+        }
+        else{
+            var userId=rows.insertId;
+            var sql="INSERT INTO teacher(teacherId,goodCourse) VALUES('"+userId+"',"+"'"+courseName+"'"+")";
+            conn.query(sql,function (err,rows) {
+                if(err){
+                    console.log(err);
+                }
+                else{
+                    console.log("写入成功");
+                }
+            })
+            callback({
+                status:true
+            })
+        }
+    })
 }

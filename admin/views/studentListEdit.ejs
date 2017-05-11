@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>课程</title>
+    <title>学生详情编辑</title>
     <!-- Bootstrap -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
     <link href="/stylesheets/video.css" rel="stylesheet">
@@ -16,103 +16,22 @@
     <![endif]-->
 </head>
 <body>
-<nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">尚名校管理系统</a>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-left">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">课程编辑 <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="addCourse.html">添加课程</a></li>
-                        <li><a href="course.html">已有课程</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">视频编辑 <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="addVideo.html">添加视频</a></li>
-                        <li><a href="video.html">已有视频</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="question" >问答编辑<!--  <span class="caret"></span> --></a>
-                    <!-- <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Action</a></li>
-                      <li><a href="#">Another action</a></li>
-                      <li><a href="#">Something else here</a></li>
-                      <li class="divider"></li>
-                      <li><a href="#">Separated link</a></li>
-                    </ul> -->
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">审核管理 <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="waitChecking.html">待审核</a></li>
-                        <li><a href="checked.html">已审核</a></li>
-                        <li><a href="suggestion.html">意见反馈</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">用户管理<span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="teacherList.html">老师列表</a></li>
-                        <li><a href="studentList.html">学生列表</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="version.html" >版本管理</a>
-                </li>
-                <li><a href="#">数据统计</a></li>
-                <li><a href="recycleBin.html">回收站</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">登录/注销<span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="login.html">登录</a></li>
-                        <li><a href="logout.html">注销</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <form class="navbar-form navbar-right" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <a href="search.html"  class="btn btn-default" ><span class="glyphicon glyphicon-search" ></span></a>
-            </form>
-        </div>
-    </div>
-</nav>
+<iframe src="/users/navigation" style="width:100vw;height:145px;z-index: 100" frameborder="0" scrolling="no"></iframe>
 <div class="main">
     <div class="container">
         <div class="bs-example">
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">
-                    <h3 class="panel-title">学生列表详情</h3>
+                    <h3 class="panel-title">学生详情编辑</h3>
                 </div>
                 <div class="panel-body">
                     <div class="container">
                         <div class="form-horizontal" role="form">
                             <div class="form-group">
-                                <label class="col-md-2 control-label" for="name">用户ID</label>
-                                <div class="col-md-6" id="name">
-                                    <input type="text" id="studentId" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 <label class="col-md-2 control-label" for="teacherid">注册时间</label>
                                 <div class="col-md-6" id="name">
-                                    <input type="number" id="registerDate" value="" class="form-control">
+                                    <input type="datetime" id="registerDate" value="" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -124,19 +43,19 @@
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="time">年龄</label>
                                 <div class="col-md-6" id="name">
-                                    <input type="time" id="studentAge" class="form-control">
+                                    <input type="text" id="studentAge" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="time">年级</label>
                                 <div class="col-md-6" id="name">
-                                    <input type="time" id="studentGrade" class="form-control">
+                                    <input type="text" id="studentGrade" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="time">学校</label>
                                 <div class="col-md-6" id="name">
-                                    <input type="time" id="studentSchool" class="form-control">
+                                    <input type="text" id="studentSchool" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -149,7 +68,6 @@
                         </div>
                         <p style="margin:0;text-align:center;padding-top:50px;" id="hint"></p>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -158,7 +76,7 @@
 
 <script>
     function studentListEdit() {
-        var studentId=$("#studentId").val();
+        var studentId="<%=studentId%>";
         var registerDate=$("#registerDate").val();
         var studentName=$("#studentName").val();
         var studentAge=$("#studentAge").val();
@@ -186,7 +104,8 @@
             $.post("studentListEdit",data,function (data) {
                 if (data.status) {
                     $("#hint").text(data.desc);
-                    window.open("studentlist");
+//                    window.open("studentlist");
+                    location.reload();
                 }
                 else
                     $("#hint").text(data.desc);
