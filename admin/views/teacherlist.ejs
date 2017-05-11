@@ -16,7 +16,7 @@
     <![endif]-->
 </head>
 <body>
-<!--<iframe src="/users/navigation" style="width:100vw;height:60px;z-index: 100" frameborder="0" scrolling="no"></iframe>-->
+<%include navigation.ejs%>
 <div class="main">
     <div class="container">
         <div class="bs-example">
@@ -26,7 +26,7 @@
                     <h3 class="panel-title">教师列表</h3>
                 </div>
                 <!-- Table -->
-                <div class="table-responsive">
+                <div class="table-responsive" style="padding-right: 17px">
                     <table class="table table-hover">
                         <thead>
                         <tr>
@@ -38,6 +38,10 @@
                             <!--<th>个人简介</th>-->
                         </tr>
                         </thead>
+                    </table>
+                </div>
+                <div  class="table-responsive"style="max-height: 80vh;overflow:scroll; overflow-x:hidden;">
+                    <table  class="table table-hover" style="table-layout: fixed">
                         <tbody>
                         <%teacherList.forEach(function (item){ %>
                         <tr  onclick="details('<%=item.teacherId%>')">

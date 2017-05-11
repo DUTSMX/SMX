@@ -8,6 +8,7 @@
     <!-- Bootstrap -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
     <link href="/stylesheets/video.css" rel="stylesheet">
+    <link href="/stylesheets/scroll-table.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -16,8 +17,8 @@
     <![endif]-->
 </head>
 <body>
-<!--<iframe src="/users/navigation" style="width:100vw;height:60px;z-index: 100" frameborder="0" scrolling="no"></iframe>-->
-<div class="main">
+<%include navigation.ejs%>
+<div class="main" style="height:80vh">
     <div class="container">
         <div class="bs-example">
             <div class="panel panel-default">
@@ -38,10 +39,10 @@
                 </div>-->
                 <div id="fade" class="black_overlay"></div>
                 <!-- Table -->
-                <div class="table-responsive">
-                    <table class="table table-hover">
+                <div>
+                    <table class="table table-hover" style="margin-bottom:0px">
                         <thead>
-                        <tr   style="margin-right:400px">
+                        <tr style="padding-left:17px">
                             <!--<th>用户ID</th>-->
                             <!--<th>注册时间</th>-->
                             <th>姓名</th>
@@ -54,7 +55,7 @@
                         </table>
                     </div>
 
-                        <div style="overflow:scroll;overflow-x:hidden;height:85vh;">
+                        <div class="table-details"style="overflow:scroll;overflow-x:hidden;height:65vh;">
                             <table  class="table table-hover">
                             <tbody>
                             <%studentList.forEach(function (item){ %>

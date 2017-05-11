@@ -192,6 +192,7 @@ router.get('/studentDetails',function (req,res) {
 });
 
 router.get('/studentListEdit',function (req,res) {
+    console.log("student:"+studentId)
     var studentId = req.query.studentId;
     api.getStudentListEdit(studentId,function (studentEdit) {
         studentEdit.studentId = studentId;
@@ -202,14 +203,14 @@ router.get('/studentListEdit',function (req,res) {
 
 router.post("/studentListEdit",function (req,res) {
     var studentId = req.body.studentId;
-    var registerDate =req.body.registerDate;
+    var phoneNumber =req.body.phoneNumber;
     var studentName=req.body.studentName;
     var studentAge = req.body.studentAge;
     var studentGrade = req.body.studentGrade;
     var studentSchool = req.body.studentSchool;
     var studentAddress = req.body.studentAddress;
-    console.log( "studentId:"+studentId+"registerDate:"+registerDate+"studentName:"+studentName+"studentAge:"+studentAge+"studentGrade:"+studentGrade+"studentSchool:"+studentSchool+"studentAddress:"+studentAddress);
-    api.studentListEdit(studentId,registerDate,studentName,studentAge,studentGrade,studentSchool,studentAddress,function (rows) {
+    console.log( "studentId:"+studentId+"phoneNumber:"+phoneNumber+"studentName:"+studentName+"studentAge:"+studentAge+"studentGrade:"+studentGrade+"studentSchool:"+studentSchool+"studentAddress:"+studentAddress);
+    api.studentListEdit(studentId,phoneNumber,studentName,studentAge,studentGrade,studentSchool,studentAddress,function (rows) {
         console.log("rows:"+JSON.stringify(rows))
         res.send(rows);
     })
@@ -227,15 +228,14 @@ router.get('/teacherListEdit',function (req,res) {
 
 router.post("/teacherListEdit",function (req,res) {
     var teacherId = req.body.teacherId;
-    var teacherCreateTime =req.body.teacherCreateTime;
-    var teacherRegisterDate =req.body.teacherRegisterDate;
     var teacherName=req.body.teacherName;
+    var phoneNumber = req.body.phoneNumber;
     var teacherAge = req.body.teacherAge;
     var teacherSchool = req.body.teacherSchool;
     var teacherGoodCourse = req.body.teacherGoodCourse;
     var teacherSelfIntroduction = req.body.teacherSelfIntroduction;
-    console.log( "teacherId:"+teacherId+"teacherCreateTime:"+teacherCreateTime+"teacherRegisterDate:"+teacherRegisterDate+"teacherName:"+teacherName+"teacherAge:"+teacherAge+"teacherSchool:"+teacherSchool+"teacherGoodCourse:"+teacherGoodCourse+"teacherSelfIntroduction:"+teacherSelfIntroduction);
-    api.teacherListEdit(teacherId,teacherCreateTime,teacherRegisterDate,teacherName,teacherAge,teacherSchool,teacherGoodCourse,teacherSelfIntroduction,function (rows) {
+    console.log("phoneNumber"+phoneNumber)
+    api.teacherListEdit(teacherId,teacherName,phoneNumber,teacherAge,teacherSchool,teacherGoodCourse,teacherSelfIntroduction,function (rows) {
         console.log("rows:"+JSON.stringify(rows))
         res.send(rows);
     })

@@ -4,17 +4,16 @@ var api = require('../api/api')
 var moment = require("moment");
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('navigation');
-});
-
-router.get('/favicon.ico', function (req, res) {
-  var now = path.resolve(__dirname, '..') + "/";
-  res.sendFile(now + "favicon.ico")
+  var date = moment(new Date()).format("YYYY-MM-DD");
+  api.getCourse(date,function (course) {
+  res.render('course',course)
 })
+});
 router.get('/course',function (req,res,next) {
-  api.getCourse(function (courseList) {
-    console.log("course:"+JSON.stringify(courseList));
-    res.render('course',{courseList:courseList})
+  var date = moment(new Date()).format("YYYY-MM-DD");
+  api.getCourse(date,function (course) {
+    console.log("course:"+JSON.stringify(course))
+    res.render('course',course)
   })
 });
 router.get('/courseDetails',function (req,res) {

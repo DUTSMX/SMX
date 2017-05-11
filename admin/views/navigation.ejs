@@ -15,7 +15,7 @@
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body  style="height:10%">
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -26,19 +26,19 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/admin" target="detail">尚名校管理系统</a>
+            <a class="navbar-brand" href="/admin">尚名校管理系统</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-left">
-                <li class="dropdown"><a onclick="jump('/admin/course')" target="_parent">课程管理</a></li>
+                <li class="dropdown"><a href="/admin/course">课程管理</a></li>
 
-                <li class="dropdown"><a onclick="jump('/admin/selfStudy')" target="detail">自习管理</a></li>
-                <li><a onclick="jump('/users/teacherList')" target="_parent">老师列表</a></li>
-                <li><a onclick="jump('/users/studentList')">学生列表</a></li>
+                <li class="dropdown"><a href="/admin/selfStudy">自习管理</a></li>
+                <li><a href="/users/teacherList">老师列表</a></li>
+                <li><a href="/users/studentList">学生列表</a></li>
             </ul>
         </div>
-        <iframe id="iframe"style="width:100vw;height:85vh;border: none;" src="/admin/course"></iframe>
+        <!--<iframe id="iframe"style="width:100vw;height:85vh;border: none;" src="/admin/course"></iframe>-->
     </div>
 </nav>
 <script src="/javascripts/jquery.js"></script>

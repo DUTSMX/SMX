@@ -16,17 +16,22 @@
     <![endif]-->
 </head>
 <body>
-<!--<iframe src="/users/navigation" style="width:100vw;height:60px;z-index: 100" frameborder="0" scrolling="no"></iframe>-->
+<%include navigation.ejs%>
 <div class="main">
     <div class="container">
         <div class="bs-example">
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">
-                    <h3 class="panel-title">学生详情</h3>
+                    <h3 class="panel-title"style="display: inline-block">学生详情</h3>
+                    <a href="/users/studentListEdit?studentId=<%=detail.studentId%>"><h3 class="panel-title" style="float:right">编辑</h3></a>
                 </div>
                 <div style="margin-left:30px">
-                    <h3><%=detail.studentName%></h3><h5><%=detail.studentGrade%></h5>
+                    <h3 style="display: inline-block;"><%=detail.studentName%></h3>
+                    <h4 style="display: inline-block;"><%=detail.phoneNumber%></h4><br>
+                    <h5 style="display: inline-block;"><%=detail.studentSchool%></h5>
+                    <h5 style="display: inline-block;"><%=detail.studentGrade%></h5>
+                    <h6><%=detail.studentAddress%></h6>
                 </div>
             </div>
         </div>
@@ -40,7 +45,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">课程列表</h3>
                 </div>
-                <div class="table-responsive">
+                <div class="table-responsive" style="padding-right: 17px">
 
                     <table class="table table-hover">
                         <thead>
@@ -55,6 +60,10 @@
                             <!--<th>操作</th>-->
                         </tr>
                         </thead>
+                    </table>
+                </div>
+                <div  class="table-responsive"style="max-height: 80vh;overflow:scroll; overflow-x:hidden;">
+                    <table  class="table table-hover" style="table-layout: fixed">
                         <tbody>
                         <%list.forEach(function (item1){%>
                         <tr onclick="details(<%=item1.courseId%>)">

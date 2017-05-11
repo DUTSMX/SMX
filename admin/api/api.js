@@ -1,9 +1,14 @@
 var db = require('../db/dBHelper')
 var moment = require("moment");
 var user = require('../db/userDbHelper')
-exports.getCourse = function(callback){
-    db.getCourse(function (rows) {
-        callback(rows);
+exports.getCourse = function(date,callback){
+    var course = new Object();
+    db.getCourse(date,function (futureCourse) {
+        db.getHistoryCourse(date,function(historyCourse){
+            callback({futureCourse:futureCourse,
+            historyCourse:historyCourse,
+            moment:moment});
+        })
     })
 };
 

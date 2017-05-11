@@ -16,7 +16,7 @@
     <![endif]-->
 </head>
 <body>
-<!--<iframe src="/users/navigation" style="width:100vw;height:60px;z-index: 100" frameborder="0" scrolling="no"></iframe>-->
+<%include navigation.ejs%>
 <div class="main">
     <div class="container">
         <div class="bs-example">
@@ -34,12 +34,13 @@
                 </div>
 
                 <!-- Table -->
-                <div class="table-responsive">
+                <div class="table-responsive" style="padding-right:17px">
                     <table class="table table-hover" >
                         <thead>
                         <tr>
                             <!--<th>编号</th>-->
                             <th>姓名</th>
+                            <th>消费</th>
                             <!--<th>出勤</th>
                             <th>原因</th>
                             <th>学费</th>-->
@@ -49,10 +50,15 @@
                             <th>老师评语</th>-->
                         </tr>
                         </thead>
+                    </table>
+                </div>
+                <div  class="table-responsive"style="max-height: 40vh;overflow:scroll; overflow-x:hidden;">
+                    <table  class="table table-hover" style="table-layout: fixed">
                         <tbody>
                         <% student.forEach(function (item) {%>
                         <tr onclick="details('<%=item.userId%>')">
                             <td><%=item.userName%></td>
+                            <td><%=item.cost%></td>
                             <!--<td> </td>
                             <td> </td>
                             <td> </td>
