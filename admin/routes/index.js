@@ -169,7 +169,7 @@ router.post('/register',function (req,res) {
   console.log("userName:"+userName);
   console.log("phoneNumber:"+phoneNumber);
   api.register(userName,phoneNumber,function (data) {
-    console.log("data2:"+data);
+    console.log("data2:"+JSON.stringify(data));
     res.send(data);
   })
 })
@@ -185,8 +185,16 @@ router.post('/registerTeacher',function (req,res) {
   console.log("phoneNumber:"+phoneNumber);
   console.log("courseName:"+courseName);
   api.registerTeacher(userName,phoneNumber,courseName,function (data) {
-    console.log("data2:"+data);
+    console.log("data2:"+JSON.stringify(data));
     res.send(data);
+  })
+})
+router.post('/addStudent',function (req,res) {
+  var data=req.body.checkedStudent;
+  console.log("data:"+data);
+  api.addStudent(data,function (ret) {
+    console.log("ret:"+JSON.stringify(ret))
+    res.render(ret);
   })
 })
 module.exports = router;

@@ -150,4 +150,18 @@ exports.registerTeacher=function (userName,phoneNumber,courseName,callback) {
         }
     })
 }
-
+exports.addStudent=function(data,callback){
+    console.log("data:"+data);
+    db.addCourse(data,function (ret) {
+        if(data.status){
+            callback({
+                desc:""
+            });
+        }
+        else{
+            callback({
+                desc:""
+            })
+        }
+    })
+}

@@ -34,9 +34,24 @@
                 </div>
                 <div class="panel-heading">
                     <h3 class="panel-title" style="display:inline-block">学生列表</h3>
-                    <a href="/admin/courseDetailsEdit?courseId=<%=courseId%>" ><h3 class="panel-title" style="float:right">添加</h3></a>
+                    <a onclick="show()" class="add"><h3 class="panel-title" style="float:right">添加</h3></a>
                 </div>
-
+                <div id="light" class="white_content">
+                        <%studentList.forEach(function (student) { %>
+                        <%if(student.join==0){%>
+                           <label class="btn btn-primary">
+                               <input type="checkbox" class="checked" value="<%=student.studentName%>" name="<%=student.studentId%>"><%=student.studentName%>
+                           </label>
+                        <%} else {%>
+                        <label class="btn btn-primary">
+                               <input type="checkbox" value="<%=student.studentName%>" disabled="disabled"><%=student.studentName%>
+                        </label>
+                        <%}})%>
+                    <button class="btn btn-default button" onclick="hide(),addStudent()">
+                        确认添加
+                    </button>
+                </div>
+                <div id="fade" class="black_overlay"></div>
                 <!-- Table -->
                 <div class="table-responsive">
                     <table class="table table-hover" >
@@ -67,6 +82,7 @@
                         </tbody>
                     </table>
                 </div>
+                <p id="hint"></p>
             </div>
         </div>
     </div>
@@ -83,6 +99,35 @@
     function details(userId) {
         console.log("userId:"+userId)
         location.href="/users/studentDetails?studentId="+userId;
+    }
+    function show() {
+        document.getElementById('light').style.display='block';
+        document.getElementById('fade').style.display='block'
+    }
+    function hide() {
+        document.getElementById('light').style.display='none';
+        document.getElementById('fade').style.display='none';
+    }
+    function addStudent() {
+        var checked=$(".checked");
+        var s={'data':[]};
+        for(var i=0;i<checked.length;i++){
+            if(checked[i].checked){
+                s.data.push({'name':checked[i].value,'studentId':checked[i].name});
+                //s+="{"+checked[i].value+"}"+",";
+            }
+        }
+        console.log("s:"+JSON.stringify(s));
+        $.post('addStudent',data,function (ret) {
+          console.log("ret:"+JSON.stringify(ret));
+            if(ret.status){
+             $("#hint").text(ret.desc);
+             window.location.reload();
+            }
+            else{
+                $("#hint").text(ret.desc);
+            }
+        })
     }
 </script>
 </body>
