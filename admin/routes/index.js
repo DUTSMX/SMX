@@ -193,11 +193,13 @@ router.post('/registerTeacher',function (req,res) {
   })
 })
 router.post('/addStudent',function (req,res) {
-  var data=req.body.checkedStudent;
-  console.log("data:"+data);
-  api.addStudent(data,function (ret) {
-    console.log("ret:"+JSON.stringify(ret))
-    res.render(ret);
+  var data=req.body.data;
+  var courseId=req.body.courseId;
+  console.log("data1:"+data);
+  console.log("courseId:"+courseId);
+  api.addStudent(courseId,data,function (ret) {
+   // console.log("ret:"+JSON.stringify(ret))
+    res.send(ret);
   })
-})
+});
 module.exports = router;

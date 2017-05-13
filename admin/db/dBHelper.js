@@ -367,3 +367,32 @@ exports.registerTeacher=function (userName,phoneNumber,courseName,callback) {
         }
     })
 }
+exports.addStudent=function (courseId,data,callback) {
+    console.log("data2:"+JSON.stringify(data[0]));
+    console.log("courseId:"+courseId);
+    var date=new Date();
+    var sql="INSERT INTO joinCourse(courseId,userId,joinTime) VALUES";
+    var first=true;
+    data.forEach(function (item) {
+        if(!first){
+            sql+=",";
+        }
+        else{
+            first=false;
+        }
+        sql+="('"+courseId+"','"+item.studentId+"',"+conn.escape(date)+")";
+    })
+   conn.query(sql,function (err,rows) {
+       if (err) {
+        console.log(err);
+        callback({
+            status:false,
+            desc:err
+        })
+    }else{
+        callback({
+            status:true,
+            desc:"已加入课程"
+        });
+}
+})}

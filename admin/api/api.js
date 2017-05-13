@@ -19,7 +19,7 @@ exports.getCourseDetails=function (courseId,callback) {
                 studentList.forEach(function (student) {
                     student.join=0;
                     courseStudentList.forEach(function(courseStudent) {
-                        console.log("student:"+student.studentId+  "course:"+courseStudent.userId)
+                       // console.log("student:"+student.studentId+  "course:"+courseStudent.userId)
                         if(student.studentId == courseStudent.userId){
                             student.join=1;
                         }
@@ -155,18 +155,15 @@ exports.registerTeacher=function (userName,phoneNumber,courseName,callback) {
         }
     })
 }
-exports.addStudent=function(data,callback){
-    console.log("data:"+data);
-    db.addCourse(data,function (ret) {
-        if(data.status){
-            callback({
-                desc:""
-            });
+exports.addStudent=function(courseId,data,callback){
+    console.log("data2:"+data);
+    console.log("courseId:"+courseId);
+    db.addStudent(courseId,data,function (ret) {
+        if(ret.status){
+            callback(ret);
         }
         else{
-            callback({
-                desc:""
-            })
+            callback(ret)
         }
     })
 }
