@@ -1,9 +1,14 @@
 var db = require('../db/dBHelper')
 var moment = require("moment");
 var user = require('../db/userDbHelper')
-exports.getCourse = function(callback){
-    db.getCourse(function (rows) {
-        callback(rows);
+exports.getCourse = function(date,callback){
+    var course = new Object();
+    db.getCourse(date,function (futureCourse) {
+        db.getHistoryCourse(date,function(historyCourse){
+            callback({futureCourse:futureCourse,
+            historyCourse:historyCourse,
+            moment:moment});
+        })
     })
 };
 
@@ -15,9 +20,9 @@ exports.getCourseDetails=function (courseId,callback) {
                     student.join=0;
                     courseStudentList.forEach(function(courseStudent) {
                         console.log("student:"+student.studentId+  "course:"+courseStudent.userId)
-                    if(student.studentId == courseStudent.userId){
-                        student.join=1;
-                    }
+                        if(student.studentId == courseStudent.userId){
+                            student.join=1;
+                        }
                     })
                 })
                 detail.studentList = studentList;

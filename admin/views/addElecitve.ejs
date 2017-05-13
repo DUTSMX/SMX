@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>学生选课</title>
+    <!-- Bootstrap -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/video.css" rel="stylesheet">
+    <link href="/stylesheets/scroll-table.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="main" style="height:80vh">
+    <div class="container">
+        <div class="bs-example">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+                    <h3 class="panel-title" style="display: inline-block;">学生选课</h3>
+                </div>
+            <div class="panel-body">
+                <div class="container">
+                    <div class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="name">学生ID</label>
+                            <div class="col-md-6" id="name">
+                                <input type="text" id="studentId" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="name">老师姓名</label>
+                            <fieldset data-role="controlgroup" data-type="horizontal" class="select_gender">
+                                <input type="radio" name="radio-teacher" id="radio-teacher-1" value="2"
+                                       checked="checked"/>
+                                <label for="radio-teacher-1">齐书强</label>
+                                <input type="radio" name="radio-teacher" id="radio-teacher-2" value="3"  />
+                                <label for="radio-teacher-2">张可爽</label>
+                                <input type="radio" name="radio-teacher" id="radio-teacher-3" value="4" />
+                                <label for="radio-teacher-3">李金泰</label>
+                                <input type="radio" name="radio-teacher" id="radio-teacher-4" value="5" />
+                                <label for="radio-teacher-4">韩军</label>
+                                <input type="radio" name="radio-teacher" id="radio-teacher-5" value="6" />
+                                <label for="radio-teacher-5">李丹丹</label>
+                            </fieldset>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="name">课程时间</label>
+                            <fieldset data-role="controlgroup" data-type="horizontal" class="select_gender">
+                                <input type="radio" name="radio-time" id="radio-time-1" value="7:00-8:30"
+                                       checked="checked"/>
+                                <label for="radio-time-1">7:00-8:30</label>
+                                <input type="radio" name="radio-time" id="radio-time-2" value="8:40-10:10" />
+                                <label for="radio-time-2">8:40-10:10</label>
+                                <input type="radio" name="radio-time" id="radio-time-3" value="10:20-11:50" />
+                                <label for="radio-time-3">10:20-11:50</label>
+                                <input type="radio" name="radio-time" id="radio-time-4" value="13:30-15:00" />
+                                <label for="radio-time-4">13:30-15:00</label>
+                                <input type="radio" name="radio-time" id="radio-time-5" value="15:10-16:40" />
+                                <label for="radio-time-5">15:10-16:40</label>
+                                <input type="radio" name="radio-time" id="radio-time-6" value="16:50-18:20" />
+                                <label for="radio-time-6">16:50-18:20</label>
+                            </fieldset>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="name">科目名称</label>
+                            <div class="col-md-6" id="name">
+                                <input type="text" id="courseName" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="content">所在年级</label>
+                            <div class="col-md-6" id="name">
+                                <input type="text" id="grade" class="form-control">
+                            </div>
+                        </div>
+                        <center>
+                            <button class="btn btn-default " onclick="addElective()">确定</button>
+
+                        </center>
+                    </div>
+                    <p style="margin:0;text-align:center;padding-top:50px;" id="hint"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function addElective() {
+        var studentId = $("#studentId").val();
+        var teacherId = $('input:radio[name="radio-teacher"]:checked').val();
+        var courseTime = $('input:radio[name="radio-time"]:checked').val();
+        var courseName = $("#courseName").val();
+        var grade = $("#grade").val();
+        var data = {
+            studentId: studentId,
+            teacherId: teacherId,
+            courseTime: courseTime,
+            courseName: courseName,
+            grade: grade
+        }
+        console.log("data:" + JSON.stringify(data));
+        if (studentId.length == 0) {
+            $("#hint").text("学生ID不能为空");
+        }
+//        else if (teacherId.length == 0) {
+//            $("#hint").value("老师姓名不能为空");
+//        }
+//        else if (courseTime.length == 0) {
+//            $("#hint").value("课程时间不能为空");
+//        }
+        else if (courseName.length == 0) {
+            $("#hint").text("科目名称不能为空");
+        }
+        else if (grade.length == 0) {
+            $("#hint").text("年级不能为空");
+        }
+        else {
+            $.post("addElective", data, function (data) {
+                if (data.status) {
+                    $("#hint").text(data.desc);
+                }
+                else {
+                    $("#hint").text(data.desc);
+                }
+            })
+        }
+    }
+</script>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/javascripts/jquery.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/javascripts/bootstrap.min.js"></script>
+</div>
+</body>
+</html>

@@ -8,6 +8,7 @@
   <!-- Bootstrap -->
   <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
   <link href="/stylesheets/video.css" rel="stylesheet">
+  <link href="/stylesheets/scroll-table.css" rel="stylesheet">
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -16,8 +17,8 @@
   <![endif]-->
 </head>
 <body>
-<iframe src="/users/navigation" style="width:100vw;height:60px;z-index: 100" frameborder="0" scrolling="no"></iframe>
-<div class="main">
+<%include navigation.ejs%>
+<div class="main" height="80%">
   <div class="container">
     <div class="bs-example">
       <div class="panel panel-default">
@@ -27,34 +28,66 @@
           <a href="/admin/addCourse" ><h3 class="panel-title" style="float:right">添加课程</h3></a>
         </div>
         <!-- Table -->
-        <div class="table-responsive">
+        <div class="table-responsive" style="padding-right:17px">
           <table class="table table-hover">
             <thead>
             <tr>
-              <!--<th>编号</th>-->
-              <th>名称</th>
-              <th>老师</th>
-              <th>时间</th>
-              <!--<th>面向对象</th>
-              <th>课程内容</th>-->
-              <th>上课人数</th>
-              <!--<th>操作</th>-->
+              <th><div class="omit">名称</div></th>
+              <th><div class="omit">老师</div></th>
+              <th><div class="omit">日期</div></th>
+              <th><div class="omit">时间</div></th>
+              <th><div class="omit">人数</div></th>
             </tr>
             </thead>
+            </table>
+          </div>
+          <div  class="table-responsive"style="max-height: 40vh;overflow:scroll; overflow-x:hidden;">
+            <table  class="table table-hover" style="table-layout: fixed">
             <tbody>
-            <% courseList.forEach(function (item) {%>
+            <% futureCourse.forEach(function (item) {%>
             <tr onclick="details('<%=item.courseId%>')">
-              <!--<td><%=item.courseId%></td>-->
-              <td><%=item.courseName%></td>
-              <td><%=item.teacherName%></td>
-              <td><%=item.beginTime%></td>
-              <!--<td><%=item.objectOriented%></td>
-              <td><%=item.courseContent%></td>-->
-              <td><%=item.courseCount%></td>
-              <!--<td>
-                <a class="btn btn-success" href="courseDetailsEdit.html">编辑</a>
-                <a class="btn btn-primary" href="courseDetails?courseId=<%=item.courseId%>">查看详情</a>
-              </td>-->
+              <td><div class="omit"><%=item.courseName%></div></td>
+              <td><div class="omit"><%=item.teacherName%></div></td>
+              <td><div class="omit"><%=moment(item.courseDate).format("YYYY-MM-DD")%></div></td>
+              <td><div class="omit"><%=item.beginTime%></div></td>
+              <td><div class="omit"><%=item.courseCount%></div></td>
+            </tr>
+            <%})%>
+            </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+          <h3 class="panel-title" style="display:inline-block">往期课程</h3>
+        </div>
+        <!-- Table -->
+        <div class="table-responsive"  style="padding-right:17px">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th><div class="omit">名称</div></th>
+              <th><div class="omit">老师</div></th>
+              <th><div class="omit">日期</div></th>
+              <th><div class="omit">时间</div></th>
+              <th><div class="omit">人数</div></th>
+            </tr>
+            </thead>
+          </table>
+        </div>
+        <div  class="table-responsive"style="max-height: 40vh;overflow:scroll; overflow-x:hidden;">
+          <table  class="table table-hover" style="table-layout: fixed">
+            <tbody>
+            <% historyCourse.forEach(function (item) {%>
+            <tr onclick="details('<%=item.courseId%>')">
+              <td><div class="omit"><%=item.courseName%></div></td>
+              <td><div class="omit"><%=item.teacherName%></div></td>
+              <td><div class="omit"><%=moment(item.courseDate).format("YYYY-MM-DD")%> </div></td>
+              <td><div class="omit"><%=item.beginTime%></div></td>
+              <td><div class="omit"><%=item.courseCount%></div></td>
             </tr>
             <%})%>
             </tbody>
@@ -64,6 +97,7 @@
     </div>
   </div>
 </div>
+</body>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/javascripts/jquery.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -73,5 +107,5 @@
     location.href="/admin/courseDetails?courseId="+courseId;
   }
 </script>
-</body>
+
 </html>

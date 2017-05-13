@@ -21,16 +21,19 @@ setInterval(function () {
     conn.query('SELECT 1');
 }, 5000);
 
-exports.getCourse = function(callback){
+exports.getCourse = function(date,callback){
     var sql = "SELECT c.courseId, " +
         "a.userName as teacherName, " +
         "c.courseName, " +
+        "c.courseDate, " +
         "c.beginTime, " +
         "c.objectOriented, " +
         "c.courseContent, " +
         "COUNT(s.userId)+'人' as courseCount " +
-        "FROM course c JOIN account a ON a.userId = c.userId JOIN joinCourse s on c.courseId = s.courseId " +
-        "GROUP BY s.courseId";
+        "FROM course c LEFT JOIN account a ON a.userId = c.userId LEFT JOIN joinCourse s on c.courseId = s.courseId " +
+        "WHERE c.courseDate >= '" +date+"' " +
+        " GROUP BY c.courseId " +
+        "ORDER BY c.courseDate,c.beginTime";
 
     conn.query(sql,function (err,rows) {
         console.log("sql:"+sql);
@@ -42,6 +45,31 @@ exports.getCourse = function(callback){
         }
     })
 };
+
+exports.getHistoryCourse = function (date,callback) {
+    var sql = "SELECT c.courseId, " +
+        "a.userName as teacherName, " +
+        "c.courseName, " +
+        "c.courseDate, " +
+        "c.beginTime, " +
+        "c.objectOriented, " +
+        "c.courseContent, " +
+        "COUNT(s.userId)+'人' as courseCount " +
+        "FROM course c LEFT JOIN account a ON a.userId = c.userId LEFT JOIN joinCourse s on c.courseId = s.courseId " +
+        "WHERE c.courseDate < '" +date+"' " +
+        "GROUP BY c.courseId " +
+        "ORDER BY c.courseDate desc,c.beginTime desc";
+
+    conn.query(sql,function (err,rows) {
+        console.log("sql:"+sql);
+        if(err){
+            console.log(err);
+            return;
+        }else{
+            callback(rows);
+        }
+    })
+}
 exports.getCourseDetails=function (courseId,callback) {
     var sql = "SELECT c.courseId, " +
         "a.userName as teacherName, " +
