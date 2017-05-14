@@ -26,6 +26,7 @@ exports.getCourseDetails=function (courseId,callback) {
                     })
                 })
                 detail.studentList = studentList;
+                detail.courseStudentList = courseStudentList;
                 callback(detail);
             })
 

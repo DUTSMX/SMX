@@ -98,13 +98,13 @@ exports.getCourseDetails=function (courseId,callback) {
 exports.getCourseStudentList = function (courseId,callback) {
     var sql = "SELECT a.userName, " +
         "a.userId " +
-        /*",j.attend, " +
+        ",j.attend, " +
         "j.cost, " +
         "j.reason, " +
         "j.studentEval, " +
         "j.studentEvalDesc, " +
         "j.teacherEval, " +
-        "j.teacherEvalDesc " +*/
+        "j.teacherEvalDesc "+
         "FROM account a JOIN joinCourse j on a.userId = j.userId " +
         "WHERE j.courseId = "+courseId;
     console.log("sql:"+sql);

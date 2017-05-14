@@ -38,15 +38,15 @@
                     </button>
                 </div>-->
                 <!-- Table -->
-                <div>
-                    <table class="table table-hover" style="margin-bottom:0px">
+                <div style="padding-right: 17px">
+                    <table class="table table-hover" style="margin-bottom:0px;">
                         <thead>
-                        <tr style="padding-left:17px">
+                        <tr>
                             <!--<th>用户ID</th>-->
                             <!--<th>注册时间</th>-->
-                            <th>姓名</th>
+                            <th><div class="omit">姓名</div></th>
                             <!--<th>年龄</th>-->
-                            <th>年级</th>
+                            <th><div class="omit">年级</div></th>
                             <!--<th>学校</th>-->
                             <!--<th>住址</th>-->
                         </tr>
@@ -55,15 +55,15 @@
                     </div>
 
                         <div class="table-details"style="overflow:scroll;overflow-x:hidden;height:65vh;">
-                            <table  class="table table-hover">
+                            <table  class="table table-hover"style="table-layout: fixed">
                             <tbody>
                             <%studentList.forEach(function (item){ %>
                             <tr onclick="details('<%=item.studentId%>')">
                                 <!--<td><%=item.studentId%></td>-->
                                 <!--<td><%=item.studentRegisterDate%></td>-->
-                                <td><%=item.studentName%></td>
+                                <td><div class="omit"><%=item.studentName%></div></td>
                                 <!--<td><%=item.studentAge%></td>-->
-                                <td><%=item.studentGrade%></td>
+                                <td><div class="omit"><%=item.studentGrade%></div></td>
                                 <!--<td><%=item.studentSchool%></td>-->
                                 <!--<td><%=item.studentAddress%></td>-->
                                 <!--<td>
