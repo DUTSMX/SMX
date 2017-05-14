@@ -60,9 +60,10 @@
                         <tr>
                             <!--<th>编号</th>-->
                             <th><div class="omit">姓名</div></th>
+                            <th><div class="omit">学费</div></th>
+                            <th class="omit"><div class="omit">操作</div></th>
                             <!--<th>出勤</th>
                             <th>原因</th>
-                            <th>学费</th>-->
                             <!--<th>学生评价</th>
                             <th>学生意见</th>
                             <th>老师评价</th>
@@ -78,6 +79,10 @@
                         <%if(item.join == 1){%>
                         <tr onclick="details('<%=item.studentId%>')">
                             <td><div class="omit"><%=item.studentName%></div></td>
+                            <td><div class="omit">100</div></td>
+                            <td>
+                                <div class="btn btn-danger omit" onclick="">请假</div>
+                            </td>
                             <!--<td> </td>
                             <td> </td>
                             <td> </td>
@@ -115,7 +120,7 @@
     }
     function addStudent() {
         var checked=$(".checked");
-        var courseId=<%=courseId%>;
+        var courseId="<%=courseId%>";
         var s={courseId:courseId,data:[]};
         console.log("courseId:"+courseId);
         for(var i=0;i<checked.length;i++){
