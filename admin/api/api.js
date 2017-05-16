@@ -56,8 +56,19 @@ exports.getSelfStudyByDate = function(callback){
 }
 exports.getSelfStudyDetails = function (date,callback) {
     db.getSelfStudyDetails(date,function (details) {
-        callback(details);
-    })
+        user.getStudent(function (studentList) {
+            studentList.forEach(function (student) {
+                student.join=0;
+                details.forEach(function (selfStudy) {
+                    if(selfStudy.userId==student.studentId){
+                        student.join=1;
+                    }
+                })
+            })
+                details.studentList=studentList;
+                callback(details);
+        })
+        })
 }
 exports.getQuestion=function (callback) {
   db.getQuestion(function (rows) {
@@ -160,11 +171,32 @@ exports.addStudent=function(courseId,data,callback){
     console.log("data2:"+data);
     console.log("courseId:"+courseId);
     db.addStudent(courseId,data,function (ret) {
-        if(ret.status){
             callback(ret);
-        }
-        else{
-            callback(ret)
-        }
     })
 }
+exports.addSelfStudy=function (data,date,callback) {
+    console.log("data:"+JSON.stringify(data));
+    console.log("date2:"+date);
+    db.addSelfStudy(data,date,function (ret) {
+        console.log("ret:"+ret);
+        callback(ret);
+    })
+}
+exports.deleteSelfStudy=function (userId, date, callback){
+    db.deleteSelfStudy(userId,date,function (ret) {
+        callback(ret);
+    })
+}
+exports.takeOff=function (courId,userId,attend,callback) {
+    db.takeOff(courId,userId,attend,function (ret) {
+        console.log("ret:"+JSON.stringify(ret));
+        callback(ret);
+    })
+}
+exports.unTakeOff=function (courId,userId,attend,callback) {
+    db.unTakeOff(courId,userId,attend,function (ret) {
+        console.log("ret:"+JSON.stringify(ret));
+        callback(ret);
+    })
+}
+

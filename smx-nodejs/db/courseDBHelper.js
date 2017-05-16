@@ -172,7 +172,8 @@ exports.joinCourse = function (userId, courseId, callback) {
             })
         }else{
             var date = new Date();
-            var sql = "INSERT INTO joinCourse(userId,courseId,joinTime) VALUES ('" + userId + "','" + courseId + "',"+conn.escape(new Date())+")";
+            var attend=1;
+            var sql = "INSERT INTO joinCourse(userId,courseId,joinTime,attend) VALUES ('" + userId + "','" + courseId + "',"+conn.escape(new Date())+"'"+attend+"'')";
             conn.query(sql, function (err, rows) {
                 if (err) {
                     console.log(err)

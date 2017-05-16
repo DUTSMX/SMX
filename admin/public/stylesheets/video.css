@@ -75,3 +75,14 @@ width: 23%;
 	position: absolute;
 	bottom:25px;
 }
+.selfStudyName:hover{
+	color: red;
+	cursor: pointer;
+}
+.selfStudyAdd{
+	/*position: absolute;*/
+	width: 30vw;
+	position: fixed;
+	bottom: 16vh;
+	right: 36vw;
+}

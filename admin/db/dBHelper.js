@@ -140,7 +140,7 @@ exports.courseDetailsEdit = function (courseId,courseName,courseDate,beginTime,f
 }
 
 exports.getSelfStudyByDate = function(callback){
-    var sql = "select date,count(userId) as count, sum(cost) as income from selfStudy group by date order by date desc";
+    var sql = "select date,count(userId) as count, sum(cost) as income from selfStudy group by DATE_FORMAT( date, '%Y-%m-%d' ) order by date desc";
     conn.query(sql,function (err,rows) {
         if(err){
             console.log(err)
@@ -386,13 +386,101 @@ exports.addStudent=function (courseId,data,callback) {
        if (err) {
         console.log(err);
         callback({
-            status:false,
             desc:err
         })
     }else{
         callback({
-            status:true,
             desc:"已加入课程"
         });
 }
 })}
+exports.addSelfStudy=function (data,date,callback) {
+    console.log("data2:"+JSON.stringify(data));
+    //var date=new Date();
+    console.log("date3:"+date);
+    var cost=5;
+    var sql="INSERT INTO selfStudy(userId,cost,date) VALUES";
+    var first=true;
+    data.forEach(function (item) {
+        if(!first){
+            sql+=",";
+        }
+        else{
+            first=false;
+        }
+        sql+="('"+item.studentId+"','"+cost+"','"+date+"')";
+    })
+    conn.query(sql,function (err,rows) {
+        if(err){
+            callback({
+                status:false,
+                desc:err
+            });
+        }
+        else{
+            callback({
+                status:true,
+                desc:"添加成功"
+            });
+        }
+    })
+}
+exports.deleteSelfStudy=function (userId,date,callback) {
+    console.log("userId:"+userId);
+    console.log("date:"+date);
+    var sql="DELETE FROM selfStudy WHERE userId ='"+userId+"'and date ='"+date+"'";
+    conn.query(sql,function (err,rows) {
+        if(err){
+            callback({
+                status:false,
+                desc:err
+            })
+        }
+        else{
+            callback({
+                status:true,
+                desc:"删除成功"
+            })
+        }
+    })
+}
+exports.takeOff=function (courseId,userId,attend,callback) {
+    console.log("courseId:"+courseId);
+    console.log("userId:"+userId);
+    console.log("attend:"+attend);
+    var sql="UPDATE joinCourse set attend = '"+attend+"'WHERE userId = '"+userId+"'and courseId="+courseId;
+    conn.query(sql,function (err,rows) {
+        if(err){
+            callback({
+                status:false,
+                desc:err
+            })
+        }
+        else{
+            callback({
+                status:true,
+                desc:"请假成功"
+            })
+        }
+    })
+}
+exports.unTakeOff=function (courseId,userId,attend,callback) {
+    console.log("courseId:"+courseId);
+    console.log("userId:"+userId);
+    console.log("attend:"+attend);
+    var sql="UPDATE joinCourse set attend = '"+attend+"'WHERE userId = '"+userId+"'and courseId="+courseId;
+    conn.query(sql,function (err,rows) {
+        if(err){
+            callback({
+                status:false,
+                desc:err
+            })
+        }
+        else{
+            callback({
+                status:true,
+                desc:"销假成功"
+            })
+        }
+    })
+}
