@@ -196,10 +196,10 @@ router.post('/registerTeacher',function (req,res) {
 router.post('/addStudent',function (req,res) {
   var data=req.body.data;
   var courseId=req.body.courseId;
-  console.log("data1:"+data);
+  console.log("data1:"+JSON.stringify(data));
   console.log("courseId:"+courseId);
   api.addStudent(courseId,data,function (ret) {
-   // console.log("ret:"+JSON.stringify(ret))
+   console.log("ret:"+JSON.stringify(ret))
     res.send(ret);
   })
 });
@@ -240,6 +240,18 @@ router.post('/unTakeOff',function (req,res) {
   console.log("userId:"+userId);
   console.log("attend:"+attend);
   api.unTakeOff(courseId,userId,attend,function (ret) {
+    console.log("ret:"+JSON.stringify(ret));
+    res.send(ret);
+  })
+})
+router.post("/costEdit",function (req,res) {
+  var courseId=req.body.courseId;
+  var userId=req.body.userId;
+  var cost=req.body.cost;
+  console.log("courseId:"+courseId);
+  console.log("userId:"+userId);
+  console.log("cost:"+cost);
+  api.costEdit(courseId,userId,cost,function (ret) {
     console.log("ret:"+JSON.stringify(ret));
     res.send(ret);
   })

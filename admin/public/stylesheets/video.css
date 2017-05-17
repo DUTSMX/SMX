@@ -70,11 +70,6 @@ width: 23%;
 	width: 20vw;
 	margin-left: 2vw;
 }
-.white_content .button{
-	width:30vw;
-	position: absolute;
-	bottom:25px;
-}
 .selfStudyName:hover{
 	color: red;
 	cursor: pointer;
@@ -85,4 +80,10 @@ width: 23%;
 	position: fixed;
 	bottom: 16vh;
 	right: 36vw;
+}
+.white_content button.courseAdd{
+	width: 30vw;
+	position: fixed;
+	bottom: 16vh;
+	left: 36vw;
 }

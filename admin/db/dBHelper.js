@@ -386,10 +386,12 @@ exports.addStudent=function (courseId,data,callback) {
        if (err) {
         console.log(err);
         callback({
+            status:false,
             desc:err
         })
     }else{
         callback({
+            status:true,
             desc:"已加入课程"
         });
 }
@@ -480,6 +482,26 @@ exports.unTakeOff=function (courseId,userId,attend,callback) {
             callback({
                 status:true,
                 desc:"销假成功"
+            })
+        }
+    })
+}
+exports.costEdit=function (courseId,userId,cost,callback) {
+    console.log("courseId:"+courseId);
+    console.log("userId:"+userId);
+    console.log("attend:"+cost);
+    var sql="UPDATE joinCourse set cost = '"+cost+"'WHERE userId = '"+userId+"'and courseId="+courseId;
+    conn.query(sql,function (err,rows) {
+        if(err){
+            callback({
+                status:false,
+                desc:err
+            })
+        }
+        else{
+            callback({
+                status:true,
+                desc:"保存成功"
             })
         }
     })

@@ -48,7 +48,7 @@
                                <input type="checkbox" value="<%=student.studentName%>" disabled="disabled"><%=student.studentName%>
                         </label>
                         <%}})%>
-                    <button class="btn btn-default button" onclick="hide(),addStudent()">
+                    <button class="btn btn-default courseAdd"  onclick="hide(),addStudent()">
                         确认添加
                     </button>
                 </div>
@@ -85,14 +85,37 @@
                             <td>
                                 <div class="btn btn-danger omit" title="<%=item.userId%>" onclick="takeOff(this)">请假</div>
                                 <div class="btn btn-danger omit" title="<%=item.userId%>" onclick="unTakeOff(this)" disabled="disabled">销假</div>
+                                <div type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" title="<%=item.userId%>" onclick="costUserId(this)">学费</div>
                             </td>
                             <%}else{%>
                             <td>
                                 <div class="btn btn-danger omit" title="<%=item.userId%>" onclick="" disabled="disabled">请假</div>
                                 <div class="btn btn-danger omit" title="<%=item.userId%>" onclick="unTakeOff(this)">销假</div>
+                                <div type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" title="<%=item.userId%>" onclick="costUserId(this)">学费</div>
                             </td>
                             <%}%>
-
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">请填写学费</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label" for="time">学费</label>
+                                                <div class="col-md-6" id="name">
+                                                    <input type="text" id="cost" class="form-control" value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                            <button type="button" class="btn btn-primary" name="<%=item.userId%>" onclick="costEdit(this)">保存</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <!--<td> </td>
                             <td> </td>
                             <td> </td>
@@ -171,6 +194,8 @@
                 var x=$(obj).parent().children()[1];
 //                  console.log("sss:"+x);
                 $(x).attr("disabled",false);
+                var attendEdit=$(obj).parent().parent().children()[2];
+                $(attendEdit).text(0);
 //                obj.nextElementSibling.disabled=false;
 //                $(obj).next().disabled=false;
             }
@@ -197,6 +222,37 @@
                 var x=$(obj).parent().children()[0];
 //                  console.log("sss:"+x);
                 $(x).attr("disabled",false);
+                var attendEdit=$(obj).parent().parent().children()[2];
+                console.log("attendEdit:"+attendEdit);
+                $(attendEdit).text(1);
+            }
+        })
+    }
+    var costId;
+    function costUserId(obj){
+        costId=obj.title;
+    }
+    function costEdit(obj) {
+        var x=$(obj).parent().prev()[0];
+        var cost=x.getElementsByTagName("input")[0].value;
+        var courseId=<%=courseId%>;
+        var userId=costId;
+        console.log("cost:"+cost);
+        console.log("courseId:"+courseId);
+        console.log("userId:"+userId);
+        var data={
+            cost:cost,
+            courseId:courseId,
+            userId:userId
+        }
+        $.post("costEdit",data,function (ret) {
+            console.log("ret:"+JSON.stringify(ret));
+            if(ret.status){
+//                x.getElementsByTagName("input")[0].value=cost;
+                $("#hint").text(ret.desc);
+            }
+            else{
+                $("#hint").text(ret.desc)
             }
         })
     }

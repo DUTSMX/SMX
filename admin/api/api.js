@@ -168,7 +168,7 @@ exports.registerTeacher=function (userName,phoneNumber,courseName,callback) {
     })
 }
 exports.addStudent=function(courseId,data,callback){
-    console.log("data2:"+data);
+    console.log("data2:"+JSON.stringify(data));
     console.log("courseId:"+courseId);
     db.addStudent(courseId,data,function (ret) {
             callback(ret);
@@ -195,6 +195,12 @@ exports.takeOff=function (courId,userId,attend,callback) {
 }
 exports.unTakeOff=function (courId,userId,attend,callback) {
     db.unTakeOff(courId,userId,attend,function (ret) {
+        console.log("ret:"+JSON.stringify(ret));
+        callback(ret);
+    })
+}
+exports.costEdit=function (courId,userId,cost,callback) {
+    db.costEdit(courId,userId,cost,function (ret) {
         console.log("ret:"+JSON.stringify(ret));
         callback(ret);
     })
