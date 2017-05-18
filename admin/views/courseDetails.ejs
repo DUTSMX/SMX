@@ -38,16 +38,16 @@
                     <a onclick="show()" class="add"><h3 class="panel-title" style="float:right">添加</h3></a>
                 </div>
                 <div id="light" class="white_content">
-                        <%studentList.forEach(function (student) { %>
-                        <%if(student.join==0){%>
-                           <label class="btn btn-primary">
-                               <input type="checkbox" class="checked" value="<%=student.studentName%>" name="<%=student.studentId%>"><%=student.studentName%>
-                           </label>
-                        <%} else {%>
-                        <label class="btn btn-primary">
-                               <input type="checkbox" value="<%=student.studentName%>" disabled="disabled"><%=student.studentName%>
-                        </label>
-                        <%}})%>
+                    <%studentList.forEach(function (student) { %>
+                    <%if(student.join==0){%>
+                    <label class="btn btn-primary">
+                        <input type="checkbox" class="checked" value="<%=student.studentName%>" name="<%=student.studentId%>"><%=student.studentName%>
+                    </label>
+                    <%} else {%>
+                    <label class="btn btn-primary">
+                        <input type="checkbox" value="<%=student.studentName%>" disabled="disabled"><%=student.studentName%>
+                    </label>
+                    <%}})%>
                     <button class="btn btn-default courseAdd"  onclick="hide(),addStudent()">
                         确认添加
                     </button>

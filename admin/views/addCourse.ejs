@@ -16,38 +16,38 @@
     <![endif]-->
 </head>
 <body>
-<!--<iframe src="/users/navigation" style="width:100vw;height:60px;z-index: 100" frameborder="0" scrolling="no"></iframe>-->
+<%include navigation.ejs%>
 <div class="main">
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">添加课程</h3>
             </div>
+            <div id="light" class="white_content">
+                <%teacherList.forEach(function (teacher) { %>
+                <label onclick="choose('<%=teacher.teacherId%>','<%=teacher.teacherName%>')"class="btn btn-primary"><%=teacher.teacherName%></label>
+                <%})%>
+            </div>
+            <div id="fade" class="black_overlay"></div>
             <div class="panel-body">
                 <div class="container">
                     <div class="form-horizontal" role="form">
                         <div class="form-group">
-                            <label class="col-md-2 control-label" for="name">名称</label>
+                            <label class="col-md-2 control-label" for="name">课程名称</label>
                             <div class="col-md-6" id="name">
                                 <input type="text" id="courseName" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-2 control-label" for="teacherid">教师编号</label>
+                            <label class="col-md-2 control-label" for="teacherid">教师编号</label><br>
                             <div class="col-md-6" id="name">
-                                <input type="number" id="teacherId" value="" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label" for="teacherid">教师姓名</label>
-                            <div class="col-md-6" id="name">
-                                <input type="text" id="teacherName" value="" class="form-control">
+                                <input type="text" id="teacherName" class="form-control" onclick="showTeacher()" contenteditable="false">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-2 control-label" for="time">日期</label>
                             <div class="col-md-6" id="name">
-                                <input type="time" id="courseDate" class="form-control">
+                                <input type="date" id="courseDate" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
@@ -92,6 +92,15 @@
     </div>
 </div>
 <script>
+    function showTeacher() {
+        $("#light").show();
+        $("#fade").show();
+    }
+    function choose(id,name) {
+        $("#teacherName").val(name)
+        $("#light").hide();
+        $("#fade").hide();
+    }
     function addCourse() {
         var courseName = $("#courseName").val();
         var teacherName = $("#teacherName").val();
