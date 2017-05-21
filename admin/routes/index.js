@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var api = require('../api/api')
+var user = require("../api/userApi")
 var moment = require("moment");
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -62,6 +63,7 @@ router.get('/selfStudy',function (req,res) {
 })
 router.get('/selfStudyDetails',function (req,res) {
   var date = req.query.date;
+  console.log("date:"+date);
   api.getSelfStudyDetails(date,function (details) {
     console.log("details："+JSON.stringify(details))
     res.render('selfStudyDetails',{date:date,student:details});
@@ -84,7 +86,10 @@ router.get('/questionDetails',function (req,res) {
   })
  });
 router.get("/addCourse",function (req,res) {
-  res.render("addCourse",{});
+  user.getTeacher(function (rows) {
+    console.log("teacherList:"+JSON.stringify(rows))
+    res.render("addCourse",{teacherList:rows});
+  })
 })
 
 router.post("/addCourse",function (req,res) {
@@ -172,7 +177,7 @@ router.post('/register',function (req,res) {
   console.log("userName:"+userName);
   console.log("phoneNumber:"+phoneNumber);
   api.register(userName,phoneNumber,function (data) {
-    console.log("data2:"+data);
+    console.log("data2:"+JSON.stringify(data));
     res.send(data);
   })
 })
@@ -188,8 +193,71 @@ router.post('/registerTeacher',function (req,res) {
   console.log("phoneNumber:"+phoneNumber);
   console.log("courseName:"+courseName);
   api.registerTeacher(userName,phoneNumber,courseName,function (data) {
-    console.log("data2:"+data);
+    console.log("data2:"+JSON.stringify(data));
     res.send(data);
+  })
+})
+router.post('/addStudent',function (req,res) {
+  var data=req.body.data;
+  var courseId=req.body.courseId;
+  console.log("data1:"+JSON.stringify(data));
+  console.log("courseId:"+courseId);
+  api.addStudent(courseId,data,function (ret) {
+   console.log("ret:"+JSON.stringify(ret))
+    res.send(ret);
+  })
+});
+router.post('/addSelfStudy',function (req,res) {
+  var data=req.body.data;
+  var date=req.body.date;
+  console.log("date1:"+date);
+  console.log("data1:"+JSON.stringify(data));
+  api.addSelfStudy(data,date,function (ret) {
+    res.send(ret);
+  })
+})
+router.post('/deleteSelfStudy',function (req,res) {
+  var userId=req.body.userId;
+  var date=req.body.date;
+  api.deleteSelfStudy(userId,date,function (ret) {
+    console.log("ret:"+JSON.stringify(ret));
+    res.send(ret);
+  })
+})
+router.post('/takeOff',function (req,res) {
+  var courseId=req.body.courseId;
+  var userId=req.body.userId;
+  var attend=req.body.attend;
+  console.log("courseId:"+courseId);
+  console.log("userId:"+userId);
+  console.log("attend:"+attend);
+  api.takeOff(courseId,userId,attend,function (ret) {
+    console.log("ret:"+JSON.stringify(ret));
+    res.send(ret);
+  })
+})
+router.post('/unTakeOff',function (req,res) {
+  var courseId=req.body.courseId;
+  var userId=req.body.userId;
+  var attend=req.body.attend;
+  console.log("courseId:"+courseId);
+  console.log("userId:"+userId);
+  console.log("attend:"+attend);
+  api.unTakeOff(courseId,userId,attend,function (ret) {
+    console.log("ret:"+JSON.stringify(ret));
+    res.send(ret);
+  })
+})
+router.post("/costEdit",function (req,res) {
+  var courseId=req.body.courseId;
+  var userId=req.body.userId;
+  var cost=req.body.cost;
+  console.log("courseId:"+courseId);
+  console.log("userId:"+userId);
+  console.log("cost:"+cost);
+  api.costEdit(courseId,userId,cost,function (ret) {
+    console.log("ret:"+JSON.stringify(ret));
+    res.send(ret);
   })
 })
 module.exports = router;

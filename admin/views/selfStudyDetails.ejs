@@ -26,12 +26,28 @@
                     <h3 class="panel-title" style="display:inline-block">自习详情</h3>
                 </div>
                 <div style="padding-left:30px;padding-bottom:30px">
-                    <h2 style="display: inline-block;"><%=date%></h2>
+                    <h2 style="display: inline-block;" id="hdate"><%=date%></h2>
                 </div>
                 <div class="panel-heading">
                     <h3 class="panel-title" style="display:inline-block">学生列表</h3>
-                    <a href="#" ><h3 class="panel-title" style="float:right">添加</h3></a>
+                    <a onclick="show()"><h3 class="panel-title" style="float:right">添加</h3></a>
                 </div>
+                <div id="light" class="white_content">
+                    <%student.studentList.forEach(function (student) { %>
+                    <%if(student.join==0){%>
+                    <label class="btn btn-primary">
+                        <input type="checkbox" class="checked" value="<%=student.studentName%>" name="<%=student.studentId%>"><%=student.studentName%>
+                    </label>
+                    <%} else {%>
+                    <label class="btn btn-primary">
+                        <input type="checkbox" value="<%=student.studentName%>" disabled="disabled"><%=student.studentName%>
+                    </label>
+                    <%}})%>
+                    <button class="btn btn-default selfStudyAdd" onclick="hide(),addSelfStudy()">
+                        确认添加
+                    </button>
+                </div>
+                <div id="fade" class="black_overlay"></div>
 
                 <!-- Table -->
                 <div class="table-responsive" style="padding-right:17px">
@@ -41,6 +57,7 @@
                             <!--<th>编号</th>-->
                             <th>姓名</th>
                             <th>消费</th>
+                            <th>操作</th>
                             <!--<th>出勤</th>
                             <th>原因</th>
                             <th>学费</th>-->
@@ -55,20 +72,29 @@
                 <div  class="table-responsive"style="max-height: 40vh;overflow:scroll; overflow-x:hidden;">
                     <table  class="table table-hover" style="table-layout: fixed">
                         <tbody>
+                        <%if(student.length!=0){%>
                         <% student.forEach(function (item) {%>
-                        <tr onclick="details('<%=item.userId%>')">
-                            <td><%=item.userName%></td>
+                        <tr>
+                            <td onclick="details('<%=item.userId%>')" class="selfStudyName"><%=item.userName%></td>
                             <td><%=item.cost%></td>
                             <!--<td> </td>
                             <td> </td>
                             <td> </td>
                             <td> </td>-->
+                            <td>
+                                <div class="btn btn-danger omit" title="<%=item.userId%>" onclick="deleteSelfStudy(this)">删除</div>
+                                <!--<div style="display:none;"></div>-->
+                            </td>
                         </tr>
                         <%})%>
+                        <%}else{%>
+                        <p style="text-align: center ;padding-top:5px;">没有更多记录</p>
+                        <%}%>
                         </tbody>
                     </table>
                 </div>
             </div>
+            <p id="hint"></p>
         </div>
     </div>
 </div>
@@ -84,6 +110,60 @@
     function details(userId) {
         console.log("userId:"+userId)
         location.href="/users/studentDetails?studentId="+userId;
+    }
+    function show() {
+        document.getElementById('light').style.display='block';
+        document.getElementById('fade').style.display='block'
+    }
+    function hide() {
+        document.getElementById('light').style.display='none';
+        document.getElementById('fade').style.display='none';
+    }
+   function addSelfStudy() {
+        var checked=$(".checked");
+       // var courseId=""
+       var date=$("#hdate").text();
+        var s={data:[],date:date};
+        console.log("date:"+date);
+        //console.log("courseId:"+courseId);
+        for(var i=0;i<checked.length;i++){
+            if(checked[i].checked){
+                s.data.push({studentId:checked[i].name});
+                //s+="{"+checked[i].value+"}"+",";
+            }
+        }
+        console.log("s:"+JSON.stringify(s));
+        $.post('addSelfStudy',s,function (ret) {
+            console.log("ret:"+JSON.stringify(ret));
+            if(ret.status){
+                $("#hint").text(ret.desc);
+                location.reload();
+            }
+            else{
+                $("#hint").text(ret.desc);
+            }
+        })
+    }
+    function deleteSelfStudy(obj) {
+        //console.log($(this));
+        var ptr=$(obj).parent().parent();
+        //console.log("ptr:"+ptr.html());
+        var userId=obj.title;
+        console.log("userId:"+userId);
+        var date=$("#hdate").text();
+        var data={userId:userId,date:date};
+        console.log("data:"+JSON.stringify(data));
+        $.post('deleteSelfStudy',data,function (ret) {
+            console.log("ret:"+JSON.stringify(ret));
+            if(ret.status){
+                $('#hint').text(ret.desc);
+               // location.reload();
+                ptr.remove();
+            }
+            else{
+                $("#hint").text(ret.desc);
+            }
+        })
     }
 </script>
 </body>
