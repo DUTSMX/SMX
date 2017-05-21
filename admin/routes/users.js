@@ -21,6 +21,32 @@ router.get('/syllabus',function(req,res){
         res.render('syllabus',data)
     })
 });
+router.get('/addElective1',function (req,res) {
+    res.render("addElective1");
+})
+router.post("/addElective1",function(req,res){
+    var studentId = req.body.studentId;
+    var teacherId = req.body.teacherId;
+    var courseTime = req.body.courseTime;
+    var courseName = req.body.courseName;
+    var grade = req.body.grade;
+    console.log("studentId:"+studentId+"teacherId:"+teacherId+"courseTime:"+courseTime+" courseName:"+courseName+" grade:"+grade);
+    api.addElective1(studentId,teacherId,courseTime,courseName,grade,function(rows){
+        console.log("rows:"+JSON.stringify(rows));
+        res.send(rows);
+    })
+})
+
+router.post('/getCourseMessage',function (req,res) {
+    var studentId = req.body.studentId;
+    console.log("studentId:"+studentId)
+    api.sentCourseMessage(studentId,function (message) {
+        console.log("message:"+JSON.stringify(message))
+        res.send(message);
+    })
+})
+
+
 
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');

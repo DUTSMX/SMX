@@ -1,25 +1,27 @@
-#syllabus {
-	border-collapse:collapse;
-                width:100%;
-border:1px solid #98bf21;
-}
-#syllabus.caption {
-    font-size:20px;
-}
-
-#syllabus td {
-	padding:15px 10px 15px 10px;
-	text-align:center;
-	font-size:14px;
-	/*height:150px;*/
-}
-#syllabus th.time {
-	height:15%;
-	padding:10px;
-}
-#syllabus th.teacher {
-	width:50px;
-	padding-left:25px;
-	padding-right:25px;
-}
-
+        #syllabus {
+            border-collapse:collapse;
+            width:100%;
+        }
+        #syllabus ,#syllabus tr td , #stllabus tr th {
+            border:1px solid black;
+        }
+        #syllabus.caption {
+            font-size:20px;
+        }
+        #syllabus td {
+            padding:10px 5px 15px 10px;
+            text-align:center;
+            font-size:14px;
+        }
+        #syllabus th.time {
+            height:15%;
+            width:15%;
+            padding:10px;
+            border:1px solid black;
+        }
+        #syllabus th.teacher {
+            width:7%;
+            padding-left:15px;
+            padding-right:15px;
+            border:1px solid black;
+        }

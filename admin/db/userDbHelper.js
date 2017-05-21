@@ -19,6 +19,83 @@ exports.getSyllabus = function(callback){
         }
     })
 };
+exports.addElective1 = function(studentId,teacherId,courseTime,courseName,grade,callback){
+    var sql = "INSERT INTO elective (studentId,teacherId,courseTime,courseName,grade) " +
+        "VALUES ("+studentId+","+teacherId+",'"+courseTime+"','"+courseName+"','"+grade+"');"
+    conn.query(sql, function (err,rows) {
+        if (err) {
+            console.log(err);
+            callback({
+                status:false,
+                desc:err
+            })
+        }else {
+            callback({
+                status:true,
+                desc:"选择课程成功"
+            });
+        }
+    })
+}
+// exports.saveCourseMessage = function(phoneNumber,checkCode,callback){
+//     this.getCourseMessage(phoneNumber,function (ret) {
+//         if(ret == -1){
+//             var sql = "INSERT INTO checkCode(phoneNumber,code) VALUES('"+phoneNumber+"','"+checkCode+"')";
+//             conn.query(sql,function (err,rows) {
+//                 if(err){
+//                     console.log(err)
+//                     callback({
+//                         status:false,
+//                         desc:err
+//                     })
+//                 }else{
+//                     callback({
+//                         status:true,
+//                         desc:"验证码发送成功"
+//                     })
+//                 }
+//             })
+//         }else{
+//             var sql = "UPDATE checkCode set code = '"+checkCode +"' WHERE phoneNumber = '"+phoneNumber+"'";
+//             conn.query(sql,function (err,rows) {
+//                 if(err){
+//                     console.log(err)
+//                     callback({
+//                         status:false,
+//                         desc:err
+//                     })
+//                 }else{
+//                     callback({
+//                         status:true,
+//                         desc:"验证码发送成功"
+//                     })
+//                 }
+//             })
+//         }
+//     })
+// }
+exports.getCourseMessage = function(studentId,callback){
+    var sql = "select a.phoneNumber as phoneNumber, a.userName as studentName , t.teacherName as teacherName, e.courseTime as courseTime, e.courseName as courseName , e.grade as grade " +
+        " from elective e left join account a on a.userId = e.studentId " +
+        "left join courseTeacher t on t.teacherId = e.teacherId " +
+        "where e.studentId = '"+studentId+"'";
+    conn.query(sql,function (err,rows) {
+        if(err){
+            console.log(err);
+            callback(-1)
+        }else if(rows == null){
+            console.log("saveCourseMessage rows is null")
+            callback(-1)
+        }else if(rows[0] == null){
+            callback(-1)
+        }else{
+            console.log("rows:"+JSON.stringify(rows));
+            callback(rows);
+        }
+    })
+
+
+}
 
 exports.getStudent = function(callback){
     var sql = "SELECT a.userId as studentId, " +

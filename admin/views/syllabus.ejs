@@ -2,63 +2,40 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-    <style type="text/css">
-        #syllabus {
-            border-collapse:collapse;
-            width:80%;
-        }
-        #syllabus ,#syllabus tr td , #stllabus tr th {
-            border:1px solid black;
-        }
-        #syllabus.caption {
-            font-size:20px;
-        }
-        #syllabus td {
-            padding:10px 5px 15px 10px;
-            text-align:center;
-            font-size:14px;
-        }
-        #syllabus th.time {
-            height:15%;
-            padding:10px;
-            border:1px solid black;
-        }
-        #syllabus th.teacher {
-            width:50px;
-            padding-left:25px;
-            padding-right:25px;
-            border:1px solid black;
-        }
-    </style>
+    <link href="/stylesheets/table.css" rel="stylesheet">
 	<title>课程表</title>
 </head>
-
 <body>
-	<table id="syllabus" >
-	<caption>
+<table id="syllabus" >
+    <caption>
         <h2>课程表</h2>
     </caption>
-	<tr>
-	<th>1月3日版</th>
-	<th class="time">7:00-8:30</th>
-	<th class="time">8:40-10:10</th>
-	<th class="time">10:20-11:50</th>
-	<th class="time">13:30-15:00</th>
-	<th class="time">15:10-16:40</th>
-	<th class="time">16:50-18:20</th>
-	</tr>
-		<%data.forEach(function (teacher) {%>
-			<tr>
-			<th class="teacher"><%=teacher.teacherName%></th>
-			<%teacher.course.forEach(function (course) {%>
-			<td > <%=course.length%> <br/> （<%=course.grade%> <%=course.courseName%>） <br/>
-                <div>
-				<%course.student.forEach(function(student){%>
-				<%-student.studentName %>
-				</div>
- 			</td>
-			<%})})})%>
-			</tr>
-	</table>
+
+    <%data.forEach(function (teacher) {%>
+    <tr>
+        <th class="teacher"><%=teacher.teacherName%></th>
+        <%teacher.course.forEach(function (course) {%>
+        <td>
+            <%if(course.courseName != ""){%>
+            <%=course.length%> <br/> （<%=course.grade%> <%=course.courseName%>） <br/>
+            <p>
+                <%-course.student %>
+            </p>
+            <%}%>
+        </td>
+        <%})})%>
+    </tr>
+</table>
+
+<button onclick="send()">发送</button>
 </body>
+<script src="/javascripts/jquery.js"></script>
+<script>
+    function send() {
+        console.log("send")
+        $.post("getCourseMessage",{studentId:52},function (data) {
+            console.log("data:"+JSON.stringify(data));
+        });
+    }
+    </script>
 </html>
