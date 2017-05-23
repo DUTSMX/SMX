@@ -248,8 +248,9 @@
         $.post("costEdit",data,function (ret) {
             console.log("ret:"+JSON.stringify(ret));
             if(ret.status){
-//                x.getElementsByTagName("input")[0].value=cost;
+               // x.getElementsByTagName("input")[0].value=cost;
                 $("#hint").text(ret.desc);
+                location.reload();
             }
             else{
                 $("#hint").text(ret.desc)
