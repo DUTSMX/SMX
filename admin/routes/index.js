@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var api = require('../api/api')
+var user = require("../api/userApi")
 var moment = require("moment");
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -85,7 +86,10 @@ router.get('/questionDetails',function (req,res) {
   })
  });
 router.get("/addCourse",function (req,res) {
-  res.render("addCourse",{});
+  user.getTeacher(function (rows) {
+    console.log("teacherList:"+JSON.stringify(rows))
+    res.render("addCourse",{teacherList:rows});
+  })
 })
 
 router.post("/addCourse",function (req,res) {
