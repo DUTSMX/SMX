@@ -77,6 +77,33 @@
     </div>
 </body>
 <script>
+    function automatic() {
+        var courseDate = $("#courseDate").val();
+        var beginTime =$("#beginTime").val();
+        var finishTime =$("#finishTime").val();
+        var x=courseDate+" "+beginTime;
+        var y=courseDate+" "+finishTime;
+        x=x.replace(/-/g,"/");
+        y=y.replace(/-/g,"/");
+        var beginTime_1 =new Date(x);
+        var finishTime_1=new Date(y);
+        var timeLength=finishTime_1.getTime()-beginTime_1.getTime();
+        console.log("timeLength:"+timeLength);
+        //var timeLength=beginTime.getTime()-finishTime.getTime();
+        if(timeLength<=0){
+            $("#hint").text("时间冲突请重新填写");
+        }
+        var hours=Math.floor(timeLength/(3600*1000));
+        var level=Math.floor(timeLength%(3600*1000));
+        var minutes=Math.floor(level/(60*1000));
+        console.log("hours:"+hours);
+        console.log("level:"+level);
+        console.log("minutes:"+minutes);
+        var timeLength_1=hours+"小时"+minutes+"分钟";
+        console.log("timeLength_1:"+timeLength_1);
+        $("#courseTime").val(timeLength_1);
+    }
+    $("#finishTime").on("change",automatic);
     function createCourse () {
         var courseName = $("#courseName").val();
         var courseDate = $("#courseDate").val();

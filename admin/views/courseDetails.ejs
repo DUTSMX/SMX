@@ -79,7 +79,7 @@
                         <% courseStudentList.forEach(function (item) {%>
                         <tr>
                             <td onclick="details('<%=item.userId%>')" class="selfStudyName"><div class="omit"><%=item.userName%></div></td>
-                            <td><div class="omit"><%=item.cost%></div></td>
+                            <td><div class="omit" id="costShow"><%=item.cost%></div></td>
                             <td><div class="omit"><%=item.attend%></div></td>
                             <%if(item.attend==1){%>
                             <td>
@@ -248,8 +248,10 @@
         $.post("costEdit",data,function (ret) {
             console.log("ret:"+JSON.stringify(ret));
             if(ret.status){
-//                x.getElementsByTagName("input")[0].value=cost;
+               // x.getElementsByTagName("input")[0].value=cost;
                 $("#hint").text(ret.desc);
+                //location.reload();
+                $("#costShow").text(cost);
             }
             else{
                 $("#hint").text(ret.desc)

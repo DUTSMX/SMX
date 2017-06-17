@@ -25,13 +25,13 @@
                 <div class="panel-heading">
                     <h3 class="panel-title" style="display: inline-block;">学生选课</h3>
                 </div>
-                <div class="panel-body">
-                    <div class="container">
+                <div class="panel-body" >
                         <div class="form-horizontal" role="form">
+                            <font size="4">
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="name">学生ID</label>
                                 <div class="col-md-6" id="name">
-                                    <input type="text" id="studentId" class="form-control">
+                                    <input type="text" id="studentId" class="form-control" style="width: 130px;">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -39,50 +39,53 @@
                                 <fieldset data-role="controlgroup" data-type="horizontal" class="select_gender">
                                     <input type="radio" name="radio-teacher" id="radio-teacher-1" value="2"
                                            checked="checked"/>
-                                    <label for="radio-teacher-1">齐书强</label>
+                                    <label for="radio-teacher-1">齐书强</label><br/>
                                     <input type="radio" name="radio-teacher" id="radio-teacher-2" value="3"  />
-                                    <label for="radio-teacher-2">张可爽</label>
+                                    <label for="radio-teacher-2">张可爽</label><br/>
                                     <input type="radio" name="radio-teacher" id="radio-teacher-3" value="4" />
-                                    <label for="radio-teacher-3">李金泰</label>
+                                    <label for="radio-teacher-3">李金泰</label><br/>
                                     <input type="radio" name="radio-teacher" id="radio-teacher-4" value="5" />
-                                    <label for="radio-teacher-4">韩军</label>
+                                    <label for="radio-teacher-4">韩军</label><br/>
                                     <input type="radio" name="radio-teacher" id="radio-teacher-5" value="6" />
-                                    <label for="radio-teacher-5">李丹丹</label>
+                                    <label for="radio-teacher-5">李丹丹</label><br/>
                                 </fieldset>
                             </div>
+                            <br/>
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="name">课程时间</label>
                                 <fieldset data-role="controlgroup" data-type="horizontal" class="select_gender">
                                     <input type="radio" name="radio-time" id="radio-time-1" value="7:00-8:30"
                                            checked="checked"/>
-                                    <label for="radio-time-1">7:00-8:30</label>
+                                    <label for="radio-time-1">7:00-8:30</label><br/>
                                     <input type="radio" name="radio-time" id="radio-time-2" value="8:40-10:10" />
-                                    <label for="radio-time-2">8:40-10:10</label>
+                                    <label for="radio-time-2">8:40-10:10</label><br/>
                                     <input type="radio" name="radio-time" id="radio-time-3" value="10:20-11:50" />
-                                    <label for="radio-time-3">10:20-11:50</label>
+                                    <label for="radio-time-3">10:20-11:50</label><br/>
                                     <input type="radio" name="radio-time" id="radio-time-4" value="13:30-15:00" />
-                                    <label for="radio-time-4">13:30-15:00</label>
+                                    <label for="radio-time-4">13:30-15:00</label><br/>
                                     <input type="radio" name="radio-time" id="radio-time-5" value="15:10-16:40" />
-                                    <label for="radio-time-5">15:10-16:40</label>
+                                    <label for="radio-time-5">15:10-16:40</label><br/>
                                     <input type="radio" name="radio-time" id="radio-time-6" value="16:50-18:20" />
-                                    <label for="radio-time-6">16:50-18:20</label>
+                                    <label for="radio-time-6">16:50-18:20</label><br/>
                                 </fieldset>
                             </div>
+                            <br/>
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="name">科目名称</label>
                                 <div class="col-md-6" id="name">
-                                    <input type="text" id="courseName" class="form-control">
+                                    <input type="text" id="courseName" class="form-control" style="width: 130px;">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="content">所在年级</label>
                                 <div class="col-md-6" id="name">
-                                    <input type="text" id="grade" class="form-control">
+                                    <input type="text" id="grade" class="form-control" style="width: 130px;">
                                 </div>
                             </div>
                             <center>
-                                <button class="btn btn-default " onclick="addElective()">确定</button>
+                                <button  class="btn btn-success " onclick="addElective1()">确定选课</button>
                             </center>
+                            </font>
                         </div>
                         <p style="margin:0;text-align:center;padding-top:50px;" id="hint"></p>
                     </div>
@@ -91,7 +94,7 @@
         </div>
     </div>
     <script>
-        function addElective() {
+        function addElective1() {
             var studentId = $("#studentId").val();
             var teacherId = $('input:radio[name="radio-teacher"]:checked').val();
             var courseTime = $('input:radio[name="radio-time"]:checked').val();
@@ -121,7 +124,7 @@
                 $("#hint").text("年级不能为空");
             }
             else {
-                $.post("addElective", data, function (data) {
+                $.post("addElective1", data, function (data) {
                     if (data.status) {
                         $("#hint").text(data.desc);
                     }

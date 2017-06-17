@@ -1,0 +1,21 @@
+
+<div style="width:15%;height:90vh;background-color:#3e3e3e;display: inline-block;">
+    <p style="margin-left:20px;padding:10px;color:#b8b8b8">加盟管理</p>
+    <p style="margin-left:20px;padding:10px;color:#b8b8b8"onclick="userManager()">用户管理</p>
+    <div id="userManager" style="display: none">
+        <p style="margin-left:20px;padding:10px;color:#b8b8b8" onclick="studentManager()">学生管理</p>
+        <p style="margin-left:20px;padding:10px;color:#b8b8b8" onclick="teacherManager()">老师管理</p>
+    </div>
+    <p style="margin-left:20px;padding:10px;color:#b8b8b8">用户管理</p>
+</div>
+<script>
+    function userManager(){
+        $("#userManager").slideToggle();
+    }
+    function studentManager(){
+        location.href="studentList"
+    }
+    function teacherManager(){
+        location.href="teacherList"
+    }
+</script>

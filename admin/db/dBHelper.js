@@ -1,13 +1,13 @@
 var mysql = require('mysql');
 var moment = require('moment');
 var conn = mysql.createConnection({
-    host: '5835638b397af.gz.cdb.myqcloud.com',
+    host: '59432c47c3382.bj.cdb.myqcloud.com',
     // host:'localhost',
-    user: 'root',
+    user: 'cdb_outerroot',
     // password: 'root',
     password:'smxsjk123456',
     database: 'smx_work',
-    port: 12409
+    port: 4243
     // port:3306
 })
 conn.connect();

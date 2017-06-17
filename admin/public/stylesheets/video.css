@@ -52,7 +52,7 @@ width: 23%;
 }
 .white_content {
 	display: none;
-	position: absolute;
+	position: fixed;
 	top: 10%;
 	left: 10%;
 	width: 80%;
