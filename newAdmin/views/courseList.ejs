@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>尚名校</title>
+    <!-- Bootstrap -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/stylesheets/admin.css" rel="stylesheet" type="text/css"/>
+    <link href="/stylesheets/scroll-table.css" rel="stylesheet" type="text/css"/>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        *{margin: 0; padding: 0;}
+        .home{ width: 700px; margin: auto; background: #008573;}
+        .home thead>tr>td{ width: 100px; height: 40px; text-align: center; color: #fff;}
+        .home tbody>tr>td{ width: 100px; height: 100px; margin: 1px; background: #ececec; text-align: center;border-style: solid;border-width: 1px}
+        .float{ float: left;}
+        .color{ color: red; font-size: 10px;text-align:center;}
+        .los{ color: #008573;font-size: 20px;}
+        .weiqian{color: #03A9F4; font-size: 30px;}
+    </style>
+</head>
+<body style="height:100%">
+<%include navigation.ejs%>
+<%include adminNavigation.ejs%>
+<div style="width:85%;height:90vh;float:right;padding-left:50px;padding-right:50px;padding-top:20px">
+    <div style="display: block;height:5%;width: 700px;text-align: center;margin:0 auto">
+        <div class="btn-group" style="float:left">
+            <button type="button" class="btn btn-default dropdown-toggle"
+                    data-toggle="dropdown">
+                <span  id="joinName">全部店铺</span> <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a onclick="choose(0,'所有店铺')">所有店铺</a></li>
+                <li class="divider"></li>
+                <li><a onclick="choose(1,'台安店')">台安店</a></li>
+                <li><a onclick="choose(2,'大连店')">大连店</a></li>
+                <li><a onclick="choose(3,'沈阳店')">沈阳店</a></li>
+            </ul>
+        </div>
+        <button class="btn btn-default" style="float:right" onclick="createCourse()" >添加课程</button>
+    </div>
+    <input name="" type="hidden" value="" id="inputselect"/>
+    <div style="width: 700px;margin:auto">
+        <p style="float:left" onclick="before()">上一月</p>
+        <p style="float:right" onclick="next()">下一月</p>
+        <p id="month" style="text-align: center"></p>
+    </div>
+    <div class="home">
+        <table  cellspacing="1" cellpadding="1" >
+            <thead id="thead">
+            <tr>
+                <td>日</td>
+                <td>一</td>
+                <td>二</td>
+                <td>三</td>
+                <td>四</td>
+                <td>五</td>
+                <td>六</td>
+            </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+        </table>
+    </div>
+</div>
+</body>
+
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="/javascripts/divselect.js"></script>
+
+<script type="text/javascript">
+    var type = 0;
+    var name= ["所有店铺","台安店","大连店","沈阳店"];
+    var number=[
+        [16,17,16,18,13,16,19,16,17,16,18,13,16,19,16,17,16,18,13,16,19,16,17,16,18,13,16,19,13,16,19],
+        [9,8,2,1,3,6,7,9,8,2,1,3,6,7,9,8,2,1,3,6,7,9,8,2,1,3,6,7,9,8,2],
+        [5,3,4,5,3,4,6,5,3,4,5,3,4,6,5,3,4,5,3,4,6,5,3,4,5,3,4,6,5,3,4],
+        [2,6,10,12,7,6,6,2,6,10,12,7,6,6,2,6,10,12,7,6,6,2,6,10,12,7,6,6,2,6,10]
+    ];
+
+    var slidate=new Date();
+    var year = slidate.getFullYear();
+    var month = slidate.getMonth()+1;
+    setData(year,month,type)
+    function before() {
+        if(--month<1){
+            month = 12;
+            year--;
+        }
+        setData(year,month,type)
+    }
+    function next() {
+        if(++month>12){
+            month = 1;
+            year++;
+        }
+        setData(year,month,type)
+    }
+    function setData(year,month,type){
+        var monthFirst = new Date(year, month-1, 1).getDay();//获取当月的1日等于星期几
+        var d = new Date(year, month, 0); //获取月
+        var conter=d.getDate();//获取当前月的天数
+        var html = '';
+        $("#month").text(year+"年"+month+"月")
+        //遍历日历网格
+        for(var i=1; i<=6;i++){
+            html+="<tr>";
+            for(var j=1; j<=7;j++)
+            {
+                html+='<td onclick="dayDetail()"></td>';
+            }
+            html+="</tr>";
+        }
+        $("#tbody").html(html);
+
+        //遍历网格内容
+        var $slitd=$("#tbody").find("td");
+        for(var i=0; i<conter; i++)
+        {
+            $slitd.eq(i+monthFirst).html("<p class='color'>"+parseInt(i+1)+"</p><br><p class='los'>"+number[type][i]+"</p>")
+        }
+    }
+    function choose(type,name) {
+        $("#joinName").text(name);
+        setData(year,month,type)
+    }
+    $("#person").text("学生姓名")
+    function detail() {
+        location.href="studentDetail"
+    }
+    function dayDetail(){
+        location.href="courseDetail"
+    }
+    function createCourse() {
+        location.href="createCourse"
+    }
+</script>
+</html>

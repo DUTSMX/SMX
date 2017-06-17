@@ -7,57 +7,74 @@
     <!-- Bootstrap -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="/stylesheets/admin.css" rel="stylesheet" type="text/css"/>
-    <link href="/stylesheets/scroll-table.css" rel="stylesheet" type="text/css"/>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .head{width:96px;height:96px;}
+        .base-info{display: inline-block;height: 96px;vertical-align: middle;}
+        .image{width:49%;display: inline-block;text-align: center;margin-top:20px}
+        .image img{width:80%}
+    </style>
 </head>
 <body style="height:100%">
 <%include navigation.ejs%>
-<%include adminNavigation.ejs%>
-<div style="width:85%;height:90vh;float:right;padding:50px">
-    <div class="bs-example">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title" style="display: inline-block;">学生列表</h3>
-                <a href="/admin/register" ><h3 class="panel-title" style="float:right">添加学生</h3></a>
-            </div>
-            <div style="padding-right: 17px">
-                <table class="table table-hover" style="margin-bottom:0px;">
-                    <thead>
-                    <tr>
-                        <th><div class="omit">姓名</div></th>
-                        <th><div class="omit">年级</div></th>
-                    </tr>
-                    </thead>
-                </table>
-            </div>
-            <div class="table-details"style="overflow:scroll;overflow-x:hidden;height:65vh;">
-                <table  class="table table-hover"style="table-layout: fixed">
-                    <tbody>
-                    <tr onclick="detail()">
-                        <td><div class="omit">赵学生</div></td>
-                        <td><div class="omit">高一</div></td>
-                    </tr>
-                    <tr onclick="detail()">
-                        <td><div class="omit">钱学生</div></td>
-                        <td><div class="omit">高二</div></td>
-                    </tr>
-                    <tr onclick="detail()">
-                        <td><div class="omit">孙学生</div></td>
-                        <td><div class="omit">高三</div></td>
-                    </tr>
-                    <tr onclick="detail()">
-                        <td><div class="omit">李学生</div></td>
-                        <td><div class="omit">高三</div></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            </table>
+<%include navigationStudent.ejs%>
+<div class="right-content">
+    <div class="panel-heading title-block">
+        <h3 class="panel-title title-white">基本信息</h3>
+        <a href="#"><h3 class="panel-title right-button">编辑</h3></a>
+    </div>
+    <div class="margin-left-30"   style="display: none">
+        <img src="/images/icon.png" class="head img-circle">
+        <div class="base-info">
+            <h3>学生姓名(台安店)</h3>
+            <h4 class="inline">手机号码</h4>
+        </div>
+        <br>
+        <h4 class="inline">学生学校</h4>
+        <h4 class="inline">学生年级</h4><br>
+        <h4 class="inline">学习情况：中等</h4>
+        <h5>家庭地址</h5>
+    </div>
+    <div class="margin-left-30">
+        <div class="inline">
+            <input type="file" style="opacity: 0;position:absolute;width:96px;height:96px;z-index: 1000"/>
+            <p style="position:absolute;text-align:center;margin-top:40px;width:96px;height:96px;z-index: 900">编辑图片</p>
+            <img src="/images/icon.png" class="head img-circle">
+        </div>
+        <div class="base-info">
+            <input class="inline margin-top-20" value="学生姓名" placeholder="请输入学生姓名" disabled="false"/>
+            <select style="padding:3px">
+                <option>台安店</option>
+                <option>大连店</option>
+                <option>沈阳店</option>
+            </select><br>
+            <input class="inline margin-top-20" value="手机号码" placeholder="请输入学生姓名" disabled="false"/>
+
+        </div>
+        <br>
+        <input value="学生学校"/><br>
+        <input value="学生年级"/><br>
+        <input value="学习情况：中等" disabled="false"></h4><br>
+        <input value="家庭地址">
+    </div>
+    <div class="panel-heading title-block">
+        <h3 class="panel-title title-white">隐私信息</h3>
+        <a href="#"><h3 class="panel-title right-button">编辑</h3></a>
+    </div>
+    <div class="margin-left-30">
+        <h4>身份证号:123456789012345678</h4>
+        <div class="image">
+            <img src="/images/logo.png"/>
+            <p>身份证正面</p>
+        </div>
+        <div class="image">
+            <img src="/images/logo.png"/>
+            <p>身份证背面</p>
         </div>
     </div>
 </div>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>尚名校</title>
+    <!-- Bootstrap -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/stylesheets/admin.css" rel="stylesheet" type="text/css"/>
+    <link href="/stylesheets/scroll-table.css" rel="stylesheet" type="text/css"/>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body style="height:100%">
+<%include navigation.ejs%>
+<%include adminNavigation.ejs%>
+<div style="width:85%;height:90vh;float:right;padding:50px">
+    <div class="panel-heading" style="background-color: #4cae4c">
+        <h3 class="panel-title"style="display: inline-block;color:white">店铺信息</h3>
+        <a href="#"><h3 class="panel-title" style="float:right;color:white">编辑</h3></a>
+    </div>
+    <div style="margin-left:30px">
+        <div style="display: inline-block;height: 96px;vertical-align: middle;">
+            <h3 style="display: inline-block;">台安店</h3><br>
+            <h4 style="display: inline-block;">辽宁省鞍山市台安县</h4>
+        </div>
+        <br>
+        <h4 style="display: inline-block;">负责人：XXX</h4><button>查看详情</button>
+    </div>
+    <div class="panel-heading" style="background-color: #4cae4c">
+        <h3 class="panel-title"style="display: inline-block;color:white">经营状况</h3>
+    </div>
+    <div>
+        <div style="padding-right: 17px">
+            <table class="table table-hover" style="margin-bottom:0px;">
+                <thead>
+                <tr>
+                    <th><div class="omit">日期</div></th>
+                    <th><div class="omit">课程数量</div></th>
+                    <th><div class="omit">课程人数</div></th>
+                    <th><div class="omit">课程收入</div></th>
+                    <th><div class="omit">自习人数</div></th>
+                    <th><div class="omit">自习收入</div></th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="table-details"style="overflow:scroll;overflow-x:hidden;height:50vh;">
+            <table  class="table table-hover"style="table-layout: fixed">
+                <tbody>
+                <tr>
+                    <td><div class="omit">2017-6-17</div></td>
+                    <td><div class="omit">3</div></td>
+                    <td><div class="omit">8</div></td>
+                    <td><div class="omit">720</div></td>
+                    <td><div class="omit">20</div></td>
+                    <td><div class="omit">80</div></td>
+                </tr>
+                <tr>
+                    <td><div class="omit">2017-6-16</div></td>
+                    <td><div class="omit">3</div></td>
+                    <td><div class="omit">8</div></td>
+                    <td><div class="omit">720</div></td>
+                    <td><div class="omit">20</div></td>
+                    <td><div class="omit">80</div></td>
+                </tr>
+                <tr>
+                    <td><div class="omit">2017-6-15</div></td>
+                    <td><div class="omit">3</div></td>
+                    <td><div class="omit">8</div></td>
+                    <td><div class="omit">720</div></td>
+                    <td><div class="omit">20</div></td>
+                    <td><div class="omit">80</div></td>
+                </tr>
+                <tr>
+                    <td><div class="omit">2017-6-14</div></td>
+                    <td><div class="omit">3</div></td>
+                    <td><div class="omit">8</div></td>
+                    <td><div class="omit">720</div></td>
+                    <td><div class="omit">20</div></td>
+                    <td><div class="omit">80</div></td>
+                </tr>
+                <tr>
+                    <td><div class="omit">2017-6-13</div></td>
+                    <td><div class="omit">3</div></td>
+                    <td><div class="omit">8</div></td>
+                    <td><div class="omit">720</div></td>
+                    <td><div class="omit">20</div></td>
+                    <td><div class="omit">80</div></td>
+                </tr>
+                <tr>
+                    <td><div class="omit">2017-6-12</div></td>
+                    <td><div class="omit">3</div></td>
+                    <td><div class="omit">8</div></td>
+                    <td><div class="omit">720</div></td>
+                    <td><div class="omit">20</div></td>
+                    <td><div class="omit">80</div></td>
+                </tr>
+                <tr>
+                    <td><div class="omit">2017-6-11</div></td>
+                    <td><div class="omit">3</div></td>
+                    <td><div class="omit">8</div></td>
+                    <td><div class="omit">720</div></td>
+                    <td><div class="omit">20</div></td>
+                    <td><div class="omit">80</div></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+</body>
+
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+
+    $("#person").text("学生姓名")
+    function detail() {
+        location.href="studentDetail"
+    }
+</script>
+</html>

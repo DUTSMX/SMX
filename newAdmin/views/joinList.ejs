@@ -22,38 +22,21 @@
     <div class="bs-example">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title" style="display: inline-block;">学生列表</h3>
-                <a href="/admin/register" ><h3 class="panel-title" style="float:right">添加学生</h3></a>
-            </div>
-            <div style="padding-right: 17px">
-                <table class="table table-hover" style="margin-bottom:0px;">
-                    <thead>
-                    <tr>
-                        <th><div class="omit">姓名</div></th>
-                        <th><div class="omit">科目</div></th>
-                    </tr>
-                    </thead>
-                </table>
+                <h3 class="panel-title" style="display: inline-block;">加盟列表</h3>
+                <a href="/admin/register" ><h3 class="panel-title" style="float:right">添加加盟商</h3></a>
             </div>
             <div class="table-details"style="overflow:scroll;overflow-x:hidden;height:65vh;">
                 <table  class="table table-hover"style="table-layout: fixed">
                     <tbody>
-                    <tr onclick="detail()">
-                        <td><div class="omit">赵老师</div></td>
-                        <td><div class="omit">数学</div></td>
-                    </tr>
-                    <tr onclick="detail()">
-                        <td><div class="omit">钱老师</div></td>
-                        <td><div class="omit">物理</div></td>
-                    </tr>
-                    <tr onclick="detail()">
-                        <td><div class="omit">孙老师</div></td>
-                        <td><div class="omit">化学</div></td>
-                    </tr>
-                    <tr onclick="detail()">
-                        <td><div class="omit">李老师</div></td>
-                        <td><div class="omit">生物</div></td>
-                    </tr>
+                        <tr onclick="detail()">
+                            <td><div class="omit">台安店</div></td>
+                        </tr>
+                        <tr onclick="detail()">
+                            <td><div class="omit">大连店</div></td>
+                        </tr>
+                        <tr onclick="detail()">
+                            <td><div class="omit">海城店</div></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -67,9 +50,9 @@
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
 
-    $("#person").text("学生姓名")
+    $("#person").text("用户姓名")
     function detail() {
-        location.href="teacherDetail"
+        location.href="joinDetail"
     }
 </script>
 </html>

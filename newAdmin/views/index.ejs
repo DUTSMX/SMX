@@ -4,44 +4,64 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>尚名校</title>
-    <!-- Bootstrap -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="/stylesheets/admin.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="/stylesheets/slick.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/slick-theme.css">
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        /*设置轮播图大小*/
+        .ad-Image-style{height: 50vh;width: auto;text-align: center;margin:0 auto ;}
+        .slick{height:50vh;width:100%;}
+        .slick-dotted.slick-slider{margin-bottom:0px;}
+        .slick-dots li button:before{font-size:30px;}
+        .slick-dots{bottom:10px;}
+        .bottom-block{height:auto;width:100%;}
+        .left-block{width:50%;height:40vh;display: inline-block;padding:10px;}
+        .right-block{width:50%;height:40vh;float:right;padding:10px;}
+        .inline{display: inline-block;}
+        .more{display:inline-block;float:right}
+        .black-overlay{display: none;position: absolute;top: 0%;left: 0%;width: 100%;height: 120%;background-color: black;z-index:1001;-moz-opacity: 0.15;opacity:.15;filter: alpha(opacity=15);}
+        .white-content {display: none;position: fixed;top: 25%;left: 35%;width: 450px;height: 300px;border: none;z-index:1002;text-align: center;}
+        .login{width:350px;height:300px;background-color: white;display: inline-block}
+        .login-logo-div{text-align:left;background-color: #f7f7f7;padding:10px}
+        .login-logo{display:inline-block;height:24px;width:24px}
+        .font-20{font-size: 20px}
+        .right{float:right}
+        .login-input{width:90%;margin:10px;padding:5px}
+        .test-login{float:right;margin-right:10px;}
+        .login-type{height:350px;width:100px;text-align: left;background-color: white;float:right}
+    </style>
 </head>
-<body style="height:100%">
+<body>
     <%include navigation.ejs%>
-    <div style="height:50vh;width:100%;">
-        <div class="ad_Images">
-            <div class="ad_Image_style">
-                <img src="/images/图片1.png">
+    <div class="slick">
+        <div class="ad-Images">
+            <div>
+                <img class="ad-Image-style" src="/images/图片1.png">
             </div>
-            <div class="ad_Image_style">
-                <img src="/images/图片2.png">
+            <div>
+                <img class="ad-Image-style" src="/images/图片2.png">
             </div>
-            <div class="ad_Image_style">
-                <img src="/images/图片3.png">
+            <div>
+                <img class="ad-Image-style" src="/images/图片3.png">
             </div>
         </div>
     </div>
-    <div style="height:auto;width:100%">
-        <div style="width:50%;height:40vh;display: inline-block;padding:10px;">
-            <h3 style="display:inline-block;">新闻资讯</h3> <h3 style="display:inline-block;float:right">more>></h3>
+    <div class="bottom-block">
+        <div class="left-block">
+            <h3 class="inline">新闻资讯</h3> <h3 class="more">more>></h3>
             <ul class="list-group">
                 <li class="list-group-item">台安店推出高考冲刺班</li>
                 <li class="list-group-item">尚名校教师介绍</li>
                 <li class="list-group-item">尚名校正式开始运营</li>
             </ul>
         </div>
-        <div style="width:50%;height:40vh;float:right;padding:10px;">
-            <h3 style="display:inline-block;">微信推送</h3> <h3 style="display:inline-block;float:right">more>></h3>
+        <div class="right-block">
+            <h3 class="inline">微信推送</h3> <h3 class="more">more>></h3>
             <ul class="list-group">
                 <li class="list-group-item">大学生创业应有大志向</li>
                 <li class="list-group-item">大学生创业应有大志向</li>
@@ -49,40 +69,55 @@
             </ul>
         </div>
     </div>
-
-    <div id="light" class="white_content">
-        <div style="text-align:left;background-color: #f7f7f7;padding:10px"><image src="/images/icon.png" style="display:inline-block;height:24px;width:24px"></image><span style="font-size: 20px">  登录尚名校</span><span style="float:right" onclick="closeDialog()">x</span></div>
-        <input style="width:90%;margin:10px;padding:5px" placeholder="手机号"/>
-        <input style="width:90%;margin:10px;padding:5px" placeholder="密码"/>
-        <button style="width:90%;margin:10px;padding:5px" onclick="login()">登录</button>
-        <label style="float:right;margin-right:10px;"onclick="admin()" >管理员登录</label>
+    <div id="fade" class="black-overlay"></div>
+    <div id="light" class="white-content">
+        <div class="login">
+            <div class="login-logo-div"><image class="login-logo"src="/images/icon.png"></image><span class="font-20">  登录尚名校</span><span class="right" onclick="closeDialog()">x</span></div>
+            <input class="login-input" placeholder="手机号"/>
+            <input class="login-input" placeholder="密码"/>
+            <button class="btn btn-default login-input" onclick="login()">登录</button>
+            <label class="test-login" onclick="test()">测试登录</label>
+        </div>
+        <div id="type" class="login-type">
+            <button class="btn btn-default">管理员</button><br>
+            <button class="btn btn-default">总公司高管</button><br>
+            <button class="btn btn-default">财务</button><br>
+            <button class="btn btn-default">教务</button><br>
+            <button class="btn btn-default">培训</button><br>
+            <button class="btn btn-default">加盟店长</button><br>
+            <button class="btn btn-default">加盟店前台</button><br>
+            <button class="btn btn-default">教师</button><br>
+            <button class="btn btn-default" onclick="student()">学生</button>
+        </div>
     </div>
-    <div id="fade" class="black_overlay"></div>
 </body>
 
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="/javascripts/slick.min.js"></script>
 <script>
-    /*轮播图*/
-//    $(document).ready(function () {
-        $(".ad_Images").slick({
-            autoplay: true,
-            autoplaySpeed: "4000",
-            dots: true
-        });
-//    });
+    closeDialog()
+    $(".ad-Images").slick({
+        autoplay: true,
+        autoplaySpeed: "4000",
+        dots: true
+    });
     function loginDialog(){
         $("#light").show();
         $("#fade").show();
+        $("#type").hide();
     }
     function closeDialog(){
         $("#light").hide();
         $("#fade").hide();
+        $("#type").hide();
     }
     function login(){
-        location.href="student";
+//        location.href="student";
     }
-    function admin(){
-        location.href="admin"
+    function test(){
+        $("#type").show();
+    }
+    function student() {
+        location.href = "student";
     }
 </script>

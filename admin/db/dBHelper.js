@@ -6,7 +6,7 @@ var conn = mysql.createConnection({
     user: 'cdb_outerroot',
     // password: 'root',
     password:'smxsjk123456',
-    database: 'smx_work',
+    database: 'smx',
     port: 4243
     // port:3306
 })

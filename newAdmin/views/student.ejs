@@ -15,18 +15,52 @@
     <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-</head>
-<body style="height:100%">
-<%include navigation.ejs%>
-<div style="width:15%;height:90vh;background-color:#3e3e3e;display: inline-block;">
-    <p style="margin-left:20px;padding:20px;color:#b8b8b8">课程安排</p>
-</div>
-<div style="width:85%;height:90vh;float:right;background-color: yellow"></div>
-</body>
+    <style>
 
+        .course-block{height:60px;border-radius: 5px;border-style:solid;border-width:1px;border-color:#4cae4c;margin-top:5px}
+        .course-title{color:#4cae4c}
+        .inline{display: inline-block;margin:2px;}
+        .right{float:right}
+        .left{float:left}
+        .center{margin-left:12px;margin-top:12px}
+    </style>
+</head>
+<body>
+<%include navigation.ejs%>
+<%include navigationStudent.ejs%>
+<div class="right-content">
+    <div class="panel-heading title-block">
+        <h3 class="panel-title title-white">课程提醒</h3>
+    </div>
+    <div class="course-block">
+        <div class="inline left">
+            <h3 class="inline course-title">圆锥曲线</h3>
+            <h4 class="inline">齐书强</h4><br>
+            <h4 class="inline">高三数学 第6/10课时</h4>
+        </div>
+        <h2 class="inline left center">2017-6-17 8:40</h2>
+        <h4 class="inline left center">教室2</h4>
+    </div>
+    <div class="course-block">
+        <div class="inline left">
+            <h3 class="inline course-title">遗传定律</h3>
+            <h4 class="inline">张可爽</h4><br>
+            <h4 class="inline">高三生物 第6/10课时</h4>
+        </div>
+        <h2 class="inline left center">2017-6-17 13:30</h2>
+        <h4 class="inline left center">教室1</h4>
+    </div>
+    <button class="btn btn-default margin-top-20">课程报名</button>
+</div>
+</body>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-
     $("#person").text("学生姓名")
+    function course(){
+        location.href="student"
+    }
+    function person(){
+        location.href="studentDetail"
+    }
 </script>
 </html>
