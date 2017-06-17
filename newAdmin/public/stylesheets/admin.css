@@ -1,0 +1,46 @@
+/*
+模块：轮播图
+*/
+/*设置轮播图大小*/
+.ad_Image_style img{
+	height: 50vh;
+	width: auto;
+	text-align: center;margin:0 auto ;
+}
+.slick-dotted.slick-slider{
+	margin-bottom:0px;
+}
+
+.slick-dots li button:before{
+	font-size:30px;
+}
+.slick-dots{
+	bottom:10px;
+}
+
+.black_overlay{
+    display: none;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 120%;
+    background-color: black;
+    z-index:1001;
+    -moz-opacity: 0.8;
+    opacity:.15;
+    filter: alpha(opacity=15);
+}
+.white_content {
+    display: none;
+    position: fixed;
+    top: 25%;
+    left: 35%;
+    width: 300px;
+    height: 300px;
+    border: none;
+    background-color: white;
+    z-index:1002;
+    overflow: auto;
+    text-align: center;
+}

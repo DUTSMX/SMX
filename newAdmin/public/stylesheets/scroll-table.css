@@ -1,0 +1,11 @@
+.table-details{
+    overflow:scroll;
+    overflow-x:hidden;
+}
+.omit{
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    text-align:center;
+    margin: auto 0;
+}
