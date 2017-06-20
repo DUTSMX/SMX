@@ -7,56 +7,132 @@
     <!-- Bootstrap -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="/stylesheets/admin.css" rel="stylesheet" type="text/css"/>
-    <link href="/stylesheets/scroll-table.css" rel="stylesheet" type="text/css"/>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .head{width:96px;height:96px;}
+        .head-input{opacity: 0;position:absolute;width:96px;height:96px;z-index: 1000}
+        .head-edit{position:absolute;text-align:center;margin-top:40px;width:96px;height:96px;z-index: 900}
+        .base-info{display: inline-block;height: 96px;vertical-align: middle;}
+        .image{width:49%;display: inline-block;text-align: center;margin-top:20px}
+        .image img{width:80%}
+        .image-input{opacity: 0;position:absolute;width:40%;height:20%;z-index: 1000}
+        .image-edit{position:absolute;text-align:center;margin-top:5%;width:40%;z-index: 900}
+        .width-60{width:60px;}
+    </style>
 </head>
 <body style="height:100%">
 <%include navigation.ejs%>
-<%include adminNavigation.ejs%>
-<div style="width:85%;height:90vh;float:right;padding:50px;overflow: scroll">
-    <div class="panel-heading" style="background-color: #4cae4c">
-        <h3 class="panel-title"style="display: inline-block;color:white">基本信息</h3>
-        <a href="#"><h3 class="panel-title" style="float:right;color:white">编辑</h3></a>
+<%include navigationTeacher.ejs%>
+<div class="right-content">
+    <div class="panel-heading title-block">
+        <h3 class="panel-title title-white">基本信息</h3>
+        <h3 class="panel-title right-button" onclick="edit()" id="edit">编辑</h3>
     </div>
-    <div style="margin-left:30px">
-        <img src="/images/icon.png" style="width:96px;height:96px;">
-        <div style="display: inline-block;height: 96px;vertical-align: middle;">
-            <h3 style="display: inline-block;">老师姓名</h3><br>
-            <h4 style="display: inline-block;">手机号码</h4><h4 style="display: inline-block;margin-left:20px">邮箱地址</h4><br>
+    <div class="margin-left-30" id="person-info">
+        <img src="/images/icon.png" class="head img-circle">
+        <div class="base-info">
+            <h3 class="inline">老师姓名</h3><button class="btn btn-default">退出登录</button><br>
+            <h4 class="inline">手机号码</h4>
         </div>
         <br>
-        <h4 style="display: inline-block;">授课科目：数学</h4><br>
-        <h4 style="display: inline-block;">高考成绩：语文120 数学130 英语130 综合230</h4><br>
-        <h4 style="display: inline-block;">学生学校</h4><br>
-        <h5>家庭地址</h5>
-        <div style="margin-left: 30px">
-            <div style="width:49%;display: inline-block;text-align: center">
-                <img src="/images/logo.png" style="width:80%"/>
-                <p>学生证</p>
-            </div>
-            <div style="width:49%;display: inline-block;text-align: center">
-                <img src="/images/logo.png" style="width:80%"/>
-                <p>家教认证</p>
-            </div>
+        <h4 class="inline">教授科目：数学</h4><br>
+        <h4 class="inline">老师学校</h4>
+        <h4 class="inline">老师年级</h4><br>
+        <!--<h4 class="inline">学习情况：中等</h4>-->
+        <h4>家庭省份  家庭城市  高中学校</h4>
+        <h4> 高考成绩 650（数学135  语文120 英语125 物理90 化学90 生物90）</h4>
+
+        <div class="image">
+            <img src="/images/logo.png"/>
+            <p>学生证</p>
+        </div>
+        <div class="image">
+            <img src="/images/logo.png"/>
+            <p>家教认证</p>
         </div>
     </div>
-    <div class="panel-heading" style="background-color: #4cae4c">
-        <h3 class="panel-title"style="display: inline-block;color:white">隐私信息</h3>
-        <a href="#"><h3 class="panel-title" style="float:right;color:white">编辑</h3></a>
+    <div class="margin-left-30"   style="display: none" id="person-edit">
+        <div class="inline">
+            <input type="file" class="head-input"/>
+            <p class="head-edit">编辑图片</p>
+            <img src="/images/icon.png" class="head img-circle">
+        </div>
+        <div class="base-info">
+            <input id="person-name"class="inline margin-top-20" value="学生姓名" placeholder="请输入学生姓名" disabled="false"/>
+            <button id="apply-modify"class="btn btn-defalut padding-4" onclick="applyModify()">申请修改</button><br>
+            <input id="person-phoneNumber"class="inline margin-top-10" value="手机号码" placeholder="请输入手机号码" disabled="false"/>
+        </div>
+        <br>
+        <label>教授科目&nbsp</label><input value="教授科目" placeholder="请输入教授科目" disabled="false" id="subject"/><br>
+        <label>学校名称&nbsp</label><input value="学生学校" placeholder="请输入学校名称"/><br>
+        <label>学校年级&nbsp</label><input value="学生年级" placeholder="请输入学校年级"/><br>
+        <!--<input value="学习情况：中等" disabled="false" placeholder="请输入学习情况"></h4><br>-->
+        <input class="width-60" value="辽宁" placeholder="请输入家庭省份"><label>省</label><input class="width-60" value="大连" placeholder="请输入家庭城市"><label>市</label><input value="育明中学" placeholder="请输入中学名称">
+        <select id="change-subject"class="padding-4" onchange="changeSubject()">
+            <option grade="science" value="理科">理科</option>
+            <option grade="liberal" value="文科">文科</option>
+        </select><br>
+        <label>高考总分&nbsp</label><input class="width-60" value="650" placeholder="请输入高考总分"/>
+        <label>数学&nbsp</label><input class="width-60" value="135" placeholder="请输入高考数学分"/>
+        <label>语文&nbsp</label><input class="width-60" value="120" placeholder="请输入高考语文分"/>
+        <label>英语&nbsp</label><input class="width-60" value="125" placeholder="请输入高考英语分"/>
+        <div id="science" class="inline">
+            <label>物理&nbsp</label><input class="width-60" value="90" placeholder="请输入高考物理分"/>
+            <label>化学&nbsp</label><input class="width-60" value="90" placeholder="请输入高考化学分"/>
+            <label>生物&nbsp</label><input class="width-60" value="90" placeholder="请输入高考生物分"/><br>
+        </div>
+        <div id="liberal" class="inline" style="display: none">
+            <label>政治&nbsp</label><input class="width-60" value="90" placeholder="请输入高考政治分"/>
+            <label>历史&nbsp</label><input class="width-60" value="90" placeholder="请输入高考历史分"/>
+            <label>地理&nbsp</label><input class="width-60" value="90" placeholder="请输入高考地理分"/><br>
+        </div>
+        <div class="image">
+            <input type="file" class="image-input"/>
+            <p class="image-edit">编辑图片</p>
+            <img src="/images/logo.png"/>
+            <p>学生证</p>
+        </div>
+        <div class="image">
+            <input type="file" class="image-input"/>
+            <p class="image-edit">编辑图片</p>
+            <img src="/images/logo.png"/>
+            <p>家教认证</p>
+        </div>
     </div>
-    <div style="margin-left: 30px">
-        <h4 style="display: block;margin-bottom:20px">身份证号:123456789012345678</h4>
-        <div style="width:49%;display: inline-block;text-align: center">
-            <img src="/images/logo.png" style="width:80%"/>
+    <div class="panel-heading title-block">
+        <h3 class="panel-title title-white">隐私信息</h3>
+        <h3 id="applyId" class="panel-title right-button" onclick="applyId()">申请修改</h3>
+    </div>
+    <div class="margin-left-30" id="id">
+        <h4>身份证号:123456789012345678</h4>
+        <div class="image">
+            <img src="/images/logo.png"/>
             <p>身份证正面</p>
         </div>
-        <div style="width:49%;display: inline-block;text-align: center">
-            <img src="/images/logo.png" style="width:80%"/>
+        <div class="image">
+            <img src="/images/logo.png"/>
+            <p>身份证背面</p>
+        </div>
+    </div>
+    <div class="margin-left-30" style="display:none" id="id-edit">
+        <div class="margin-10">
+            <label>身份证号&nbsp</label><input value="123456789012345678"placeholder="请输入身份证号"/><br>
+        </div>
+        <div class="image">
+            <input type="file" class="image-input"/>
+            <p class="image-edit">编辑图片</p>
+            <img src="/images/logo.png"/>
+            <p>身份证正面</p>
+        </div>
+        <div class="image">
+            <input type="file" class="image-input"/>
+            <p class="image-edit">编辑图片</p>
+            <img src="/images/logo.png"/>
             <p>身份证背面</p>
         </div>
     </div>
@@ -66,10 +142,66 @@
 
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-
-    $("#person").text("老师姓名")
+    var editFlag = true;
+    var applyFlag = true;
+    var applyIdFlag = true;
+    var modifySubFlag = true;
+    function edit(){
+        if(editFlag){
+            editFlag = false;
+            $("#edit").text("完成")
+            $("#person-info").hide();
+            $("#person-edit").show();
+        }else{
+            editFlag = true;
+            $("#edit").text("编辑")
+            $("#person-info").show();
+            $("#person-edit").hide();
+        }
+    }
+    $("#person").text("学生姓名")
     function detail() {
-        location.href="teacherDetail"
+        location.href="studentDetail"
+    }
+    function applyModify() {
+        if(applyFlag){
+            applyFlag = false;
+            $("#apply-modify").text("提交修改")
+            $("#person-name").attr('disabled',false);
+            $("#person-phoneNumber").attr('disabled',false);
+            $("#subject").attr("disabled",false);
+        }else{
+            applyFlag = true;
+            $("#apply-modify").text("申请修改")
+            $("#person-name").attr('disabled',true);
+            $("#person-phoneNumber").attr('disabled',true);
+            $("#subject").attr("disabled",true);
+        }
+    }
+    function applyId(){
+        if(applyIdFlag){
+            applyIdFlag = false;
+            $("#applyId").text("提交申请");
+            $("#id").hide();
+            $("#id-edit").show();
+        }else{
+            applyIdFlag = true;
+            $("#applyId").text("申请修改");
+            $("#id").show();
+            $("#id-edit").hide();
+        }
+    }
+    $("#person").className="left-button:hover"
+    function changeSubject() {
+        var obj = document.getElementById("change-subject");
+        var index = obj.selectedIndex;
+        if(index == 0){
+            $("#science").show();
+            $("#liberal").hide();
+        }else{
+            $("#science").hide();
+            $("#liberal").show();
+        }
     }
 </script>
 </html>

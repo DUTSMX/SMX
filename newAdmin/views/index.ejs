@@ -24,14 +24,10 @@
         .right-block{width:50%;height:40vh;float:right;padding:10px;}
         .inline{display: inline-block;}
         .more{display:inline-block;float:right}
-        .black-overlay{display: none;position: absolute;top: 0%;left: 0%;width: 100%;height: 120%;background-color: black;z-index:1001;-moz-opacity: 0.15;opacity:.15;filter: alpha(opacity=15);}
-        .white-content {display: none;position: fixed;top: 25%;left: 35%;width: 450px;height: 300px;border: none;z-index:1002;text-align: center;}
-        .login{width:350px;height:300px;background-color: white;display: inline-block}
         .login-logo-div{text-align:left;background-color: #f7f7f7;padding:10px}
         .login-logo{display:inline-block;height:24px;width:24px}
         .font-20{font-size: 20px}
         .right{float:right}
-        .login-input{width:90%;margin:10px;padding:5px}
         .test-login{float:right;margin-right:10px;}
         .login-type{height:350px;width:100px;text-align: left;background-color: white;float:right}
     </style>
@@ -71,11 +67,11 @@
     </div>
     <div id="fade" class="black-overlay"></div>
     <div id="light" class="white-content">
-        <div class="login">
-            <div class="login-logo-div"><image class="login-logo"src="/images/icon.png"></image><span class="font-20">  登录尚名校</span><span class="right" onclick="closeDialog()">x</span></div>
-            <input class="login-input" placeholder="手机号"/>
-            <input class="login-input" placeholder="密码"/>
-            <button class="btn btn-default login-input" onclick="login()">登录</button>
+        <div class="dialog">
+            <div class="login-logo-div"><image class="login-logo"src="/images/icon.png"></image><span class="font-20">登录尚名校</span><span class="right" onclick="closeDialog()">x</span></div>
+            <input class="dialog-input" placeholder="手机号"/>
+            <input class="dialog-input" placeholder="密码"/>
+            <button class="btn btn-default dialog-input" onclick="login()">登录</button>
             <label class="test-login" onclick="test()">测试登录</label>
         </div>
         <div id="type" class="login-type">
@@ -84,9 +80,9 @@
             <button class="btn btn-default">财务</button><br>
             <button class="btn btn-default">教务</button><br>
             <button class="btn btn-default">培训</button><br>
-            <button class="btn btn-default">加盟店长</button><br>
-            <button class="btn btn-default">加盟店前台</button><br>
-            <button class="btn btn-default">教师</button><br>
+            <button class="btn btn-default" onclick="joinManager()">加盟店长</button><br>
+            <button class="btn btn-default" onclick="joinReception()">加盟店前台</button><br>
+            <button class="btn btn-default" onclick="teacher()">教师</button><br>
             <button class="btn btn-default" onclick="student()">学生</button>
         </div>
     </div>
@@ -107,6 +103,7 @@
         $("#type").hide();
     }
     function closeDialog(){
+        $(".white-content").width("300px")
         $("#light").hide();
         $("#fade").hide();
         $("#type").hide();
@@ -115,9 +112,19 @@
 //        location.href="student";
     }
     function test(){
+        $(".white-content").width("450px")
         $("#type").show();
     }
     function student() {
-        location.href = "student";
+        location.href = "studentCourse";
+    }
+    function teacher() {
+        location.href = "teacherCourse";
+    }
+    function joinReception() {
+        location.href = "joinReception"
+    }
+    function joinManager(){
+        location.href = "joinManager"
     }
 </script>

@@ -7,121 +7,144 @@
     <!-- Bootstrap -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="/stylesheets/admin.css" rel="stylesheet" type="text/css"/>
-    <link href="/stylesheets/scroll-table.css" rel="stylesheet" type="text/css"/>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .head{width:96px;height:96px;}
+        .head-input{opacity: 0;position:absolute;width:96px;height:96px;z-index: 1000}
+        .head-edit{position:absolute;text-align:center;margin-top:40px;width:96px;height:96px;z-index: 900}
+        .base-info{display: inline-block;height: 96px;vertical-align: middle;}
+        .image{width:49%;display: inline-block;text-align: center;margin-top:20px}
+        .image img{width:80%}
+        .image-input{opacity: 0;position:absolute;width:40%;height:20%;z-index: 1000}
+        .image-edit{position:absolute;text-align:center;margin-top:5%;width:40%;z-index: 900}
+    </style>
 </head>
 <body style="height:100%">
 <%include navigation.ejs%>
-<%include adminNavigation.ejs%>
-<div style="width:85%;height:90vh;float:right;padding:50px">
-    <div class="panel-heading" style="background-color: #4cae4c">
-        <h3 class="panel-title"style="display: inline-block;color:white">店铺信息</h3>
-        <a href="#"><h3 class="panel-title" style="float:right;color:white">编辑</h3></a>
+<%include navigationJoinManager.ejs%>
+<div class="right-content">
+    <div class="panel-heading title-block">
+        <h3 class="panel-title title-white">基本信息</h3>
+        <h3 class="panel-title right-button" onclick="edit()" id="edit">编辑</h3>
     </div>
-    <div style="margin-left:30px">
-        <div style="display: inline-block;height: 96px;vertical-align: middle;">
-            <h3 style="display: inline-block;">台安店</h3><br>
-            <h4 style="display: inline-block;">辽宁省鞍山市台安县</h4>
+    <div class="margin-left-30" id="person-info">
+        <img src="/images/icon.png" class="head img-circle">
+        <div class="base-info">
+            <h3 class="inline">齐书强(台安店长)</h3><button class="btn btn-default inline right">退出登录</button><br>
+            <h4 class="inline">手机号码</h4>
         </div>
         <br>
-        <h4 style="display: inline-block;">负责人：XXX</h4><button>查看详情</button>
+        <h5>家庭地址</h5>
     </div>
-    <div class="panel-heading" style="background-color: #4cae4c">
-        <h3 class="panel-title"style="display: inline-block;color:white">经营状况</h3>
-    </div>
-    <div>
-        <div style="padding-right: 17px">
-            <table class="table table-hover" style="margin-bottom:0px;">
-                <thead>
-                <tr>
-                    <th><div class="omit">日期</div></th>
-                    <th><div class="omit">课程数量</div></th>
-                    <th><div class="omit">课程人数</div></th>
-                    <th><div class="omit">课程收入</div></th>
-                    <th><div class="omit">自习人数</div></th>
-                    <th><div class="omit">自习收入</div></th>
-                </tr>
-                </thead>
-            </table>
+    <div class="margin-left-30"   style="display: none" id="person-edit">
+        <div class="inline">
+            <input type="file" class="head-input"/>
+            <p class="head-edit">编辑图片</p>
+            <img src="/images/icon.png" class="head img-circle">
         </div>
-        <div class="table-details"style="overflow:scroll;overflow-x:hidden;height:50vh;">
-            <table  class="table table-hover"style="table-layout: fixed">
-                <tbody>
-                <tr>
-                    <td><div class="omit">2017-6-17</div></td>
-                    <td><div class="omit">3</div></td>
-                    <td><div class="omit">8</div></td>
-                    <td><div class="omit">720</div></td>
-                    <td><div class="omit">20</div></td>
-                    <td><div class="omit">80</div></td>
-                </tr>
-                <tr>
-                    <td><div class="omit">2017-6-16</div></td>
-                    <td><div class="omit">3</div></td>
-                    <td><div class="omit">8</div></td>
-                    <td><div class="omit">720</div></td>
-                    <td><div class="omit">20</div></td>
-                    <td><div class="omit">80</div></td>
-                </tr>
-                <tr>
-                    <td><div class="omit">2017-6-15</div></td>
-                    <td><div class="omit">3</div></td>
-                    <td><div class="omit">8</div></td>
-                    <td><div class="omit">720</div></td>
-                    <td><div class="omit">20</div></td>
-                    <td><div class="omit">80</div></td>
-                </tr>
-                <tr>
-                    <td><div class="omit">2017-6-14</div></td>
-                    <td><div class="omit">3</div></td>
-                    <td><div class="omit">8</div></td>
-                    <td><div class="omit">720</div></td>
-                    <td><div class="omit">20</div></td>
-                    <td><div class="omit">80</div></td>
-                </tr>
-                <tr>
-                    <td><div class="omit">2017-6-13</div></td>
-                    <td><div class="omit">3</div></td>
-                    <td><div class="omit">8</div></td>
-                    <td><div class="omit">720</div></td>
-                    <td><div class="omit">20</div></td>
-                    <td><div class="omit">80</div></td>
-                </tr>
-                <tr>
-                    <td><div class="omit">2017-6-12</div></td>
-                    <td><div class="omit">3</div></td>
-                    <td><div class="omit">8</div></td>
-                    <td><div class="omit">720</div></td>
-                    <td><div class="omit">20</div></td>
-                    <td><div class="omit">80</div></td>
-                </tr>
-                <tr>
-                    <td><div class="omit">2017-6-11</div></td>
-                    <td><div class="omit">3</div></td>
-                    <td><div class="omit">8</div></td>
-                    <td><div class="omit">720</div></td>
-                    <td><div class="omit">20</div></td>
-                    <td><div class="omit">80</div></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+        <div class="base-info">
+            <input id="person-name"class="inline margin-top-20" value="学生姓名" placeholder="请输入学生姓名" disabled="false"/>
+            <select class="padding-4">
+                <option>台安店</option>
+                <option>大连店</option>
+                <option>沈阳店</option>
+            </select><br>
+            <input id="person-phoneNumber"class="inline margin-top-20" value="手机号码" placeholder="请输入手机号码" disabled="false"/>
+            <button id="apply-modify"class="btn btn-defalut padding-4" onclick="applyModify()">申请修改</button>
 
+        </div>
+        <br>
+        <label>家庭地址&nbsp</label><input value="家庭地址" placeholder="请输入家庭信息">
+    </div>
+    <div class="panel-heading title-block">
+        <h3 class="panel-title title-white">隐私信息</h3>
+        <h3 id="applyId" class="panel-title right-button" onclick="applyId()">申请修改</h3>
+    </div>
+    <div class="margin-left-30" id="id">
+        <h4>身份证号:123456789012345678</h4>
+        <div class="image">
+            <img src="/images/logo.png"/>
+            <p>身份证正面</p>
+        </div>
+        <div class="image">
+            <img src="/images/logo.png"/>
+            <p>身份证背面</p>
+        </div>
+    </div>
+    <div class="margin-left-30" style="display:none" id="id-edit">
+        <div class="margin-10">
+            <label>身份证号&nbsp</label><input value="123456789012345678"placeholder="请输入身份证号"/><br>
+        </div>
+        <div class="image">
+            <input type="file" class="image-input"/>
+            <p class="image-edit">编辑图片</p>
+            <img src="/images/logo.png"/>
+            <p>身份证正面</p>
+        </div>
+        <div class="image">
+            <input type="file" class="image-input"/>
+            <p class="image-edit">编辑图片</p>
+            <img src="/images/logo.png"/>
+            <p>身份证背面</p>
+        </div>
+    </div>
+</div>
 </div>
 </body>
 
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-
+    var editFlag = true;
+    var applyFlag = true;
+    var applyIdFlag = true;
+    function edit(){
+        if(editFlag){
+            editFlag = false;
+            $("#edit").text("完成")
+            $("#person-info").hide();
+            $("#person-edit").show();
+        }else{
+            editFlag = true;
+            $("#edit").text("编辑")
+            $("#person-info").show();
+            $("#person-edit").hide();
+        }
+    }
     $("#person").text("学生姓名")
     function detail() {
         location.href="studentDetail"
     }
+    function applyModify() {
+        if(applyFlag){
+            applyFlag = false;
+            $("#apply-modify").text("提交修改")
+            $("#person-name").attr('disabled',false);
+            $("#person-phoneNumber").attr('disabled',false);
+        }else{
+            applyFlag = true;
+            $("#apply-modify").text("申请修改")
+            $("#person-name").attr('disabled',true);
+            $("#person-phoneNumber").attr('disabled',true);
+        }
+    }
+    function applyId(){
+        if(applyIdFlag){
+            applyIdFlag = false;
+            $("#applyId").text("提交申请");
+            $("#id").hide();
+            $("#id-edit").show();
+        }else{
+            applyIdFlag = true;
+            $("#applyId").text("申请修改");
+            $("#id").show();
+            $("#id-edit").hide();
+        }
+    }
+    $("#person").className="left-button:hover"
 </script>
 </html>
