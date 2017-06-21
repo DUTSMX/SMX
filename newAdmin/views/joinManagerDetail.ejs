@@ -22,12 +22,11 @@
         .image img{width:80%}
         .image-input{opacity: 0;position:absolute;width:40%;height:20%;z-index: 1000}
         .image-edit{position:absolute;text-align:center;margin-top:5%;width:40%;z-index: 900}
-        .width-60{width:60px;}
     </style>
 </head>
-<body style="height:100%">
+<body>
 <%include navigation-index.ejs%>
-<%include navigation-teacher.ejs%>
+<%include navigation-joinManager.ejs%>
 <div class="right-content">
     <div class="panel-heading title-block">
         <h3 class="panel-title title-white">基本信息</h3>
@@ -36,26 +35,12 @@
     <div class="margin-left-30" id="person-info">
         <img src="/images/icon.png" class="head img-circle">
         <div class="base-info">
-            <h3 class="inline">老师姓名</h3><br>
+            <h3 class="inline">齐书强(台安店长)</h3><br>
             <h4 class="inline">手机号码</h4>
         </div>
-        <button class="btn btn-default right" onclick="logout()">退出登录</button>
+        <button class="btn btn-default inline right" onclick="logout()">退出登录</button>
         <br>
-        <h4 class="inline">教授科目：数学</h4><br>
-        <h4 class="inline">老师学校</h4>
-        <h4 class="inline">老师年级</h4><br>
-        <!--<h4 class="inline">学习情况：中等</h4>-->
-        <h4>家庭省份  家庭城市  高中学校</h4>
-        <h4> 高考成绩 650（数学135  语文120 英语125 物理90 化学90 生物90）</h4>
-
-        <div class="image">
-            <img src="/images/logo.png"/>
-            <p>学生证</p>
-        </div>
-        <div class="image">
-            <img src="/images/logo.png"/>
-            <p>家教认证</p>
-        </div>
+        <h5>家庭地址</h5>
     </div>
     <div class="margin-left-30"   style="display: none" id="person-edit">
         <div class="inline">
@@ -65,45 +50,17 @@
         </div>
         <div class="base-info">
             <input id="person-name"class="inline margin-top-20" value="学生姓名" placeholder="请输入学生姓名" disabled="false"/>
-            <button id="apply-modify"class="btn btn-defalut padding-4" onclick="applyModify()">申请修改</button><br>
-            <input id="person-phoneNumber"class="inline margin-top-10" value="手机号码" placeholder="请输入手机号码" disabled="false"/>
+            <select class="padding-4">
+                <option>台安店</option>
+                <option>大连店</option>
+                <option>沈阳店</option>
+            </select><br>
+            <input id="person-phoneNumber"class="inline margin-top-20" value="手机号码" placeholder="请输入手机号码" disabled="false"/>
+            <button id="apply-modify"class="btn btn-defalut padding-4" onclick="applyModify()">申请修改</button>
+
         </div>
         <br>
-        <label>教授科目&nbsp</label><input value="教授科目" placeholder="请输入教授科目" disabled="false" id="subject"/><br>
-        <label>学校名称&nbsp</label><input value="学生学校" placeholder="请输入学校名称"/><br>
-        <label>学校年级&nbsp</label><input value="学生年级" placeholder="请输入学校年级"/><br>
-        <!--<input value="学习情况：中等" disabled="false" placeholder="请输入学习情况"></h4><br>-->
-        <input class="width-60" value="辽宁" placeholder="请输入家庭省份"><label>省</label><input class="width-60" value="大连" placeholder="请输入家庭城市"><label>市</label><input value="育明中学" placeholder="请输入中学名称">
-        <select id="change-subject"class="padding-4" onchange="changeSubject()">
-            <option grade="science" value="理科">理科</option>
-            <option grade="liberal" value="文科">文科</option>
-        </select><br>
-        <label>高考总分&nbsp</label><input class="width-60" value="650" placeholder="请输入高考总分"/>
-        <label>数学&nbsp</label><input class="width-60" value="135" placeholder="请输入高考数学分"/>
-        <label>语文&nbsp</label><input class="width-60" value="120" placeholder="请输入高考语文分"/>
-        <label>英语&nbsp</label><input class="width-60" value="125" placeholder="请输入高考英语分"/>
-        <div id="science" class="inline">
-            <label>物理&nbsp</label><input class="width-60" value="90" placeholder="请输入高考物理分"/>
-            <label>化学&nbsp</label><input class="width-60" value="90" placeholder="请输入高考化学分"/>
-            <label>生物&nbsp</label><input class="width-60" value="90" placeholder="请输入高考生物分"/><br>
-        </div>
-        <div id="liberal" class="inline" style="display: none">
-            <label>政治&nbsp</label><input class="width-60" value="90" placeholder="请输入高考政治分"/>
-            <label>历史&nbsp</label><input class="width-60" value="90" placeholder="请输入高考历史分"/>
-            <label>地理&nbsp</label><input class="width-60" value="90" placeholder="请输入高考地理分"/><br>
-        </div>
-        <div class="image">
-            <input type="file" class="image-input"/>
-            <p class="image-edit">编辑图片</p>
-            <img src="/images/logo.png"/>
-            <p>学生证</p>
-        </div>
-        <div class="image">
-            <input type="file" class="image-input"/>
-            <p class="image-edit">编辑图片</p>
-            <img src="/images/logo.png"/>
-            <p>家教认证</p>
-        </div>
+        <label>家庭地址&nbsp</label><input value="家庭地址" placeholder="请输入家庭信息">
     </div>
     <div class="panel-heading title-block">
         <h3 class="panel-title title-white">隐私信息</h3>
@@ -143,12 +100,11 @@
 
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-
-    $("#person").text("老师姓名")
-
+    $("#person").text("店长姓名")
     function loginDialog(){
-        location.href="teacherDetail"
+        location.href = "joinManagerDetail"
     }
+    $("#navigation-person").addClass("select-left-button")
     var editFlag = true;
     var applyFlag = true;
     var applyIdFlag = true;
@@ -171,13 +127,11 @@
             $("#apply-modify").text("提交修改")
             $("#person-name").attr('disabled',false);
             $("#person-phoneNumber").attr('disabled',false);
-            $("#subject").attr("disabled",false);
         }else{
             applyFlag = true;
             $("#apply-modify").text("申请修改")
             $("#person-name").attr('disabled',true);
             $("#person-phoneNumber").attr('disabled',true);
-            $("#subject").attr("disabled",true);
         }
     }
     function applyId(){
@@ -193,21 +147,9 @@
             $("#id-edit").hide();
         }
     }
-    $("#person").className="left-button:hover"
-    function changeSubject() {
-        var obj = document.getElementById("change-subject");
-        var index = obj.selectedIndex;
-        if(index == 0){
-            $("#science").show();
-            $("#liberal").hide();
-        }else{
-            $("#science").hide();
-            $("#liberal").show();
-        }
+    function logout() {
+        location.href = "/"
     }
-    function logout(){
-        location.href="/"
-    }
-    $("#navigation-person").addClass("select-left-button");
+    $("#navication-person").addClass("selected-left-button")
 </script>
 </html>

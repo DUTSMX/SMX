@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>尚名校</title>
+    <!-- Bootstrap -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/stylesheets/admin.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/slick.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/slick-theme.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .course-block{height:60px;border-radius: 5px;border-style:solid;border-width:1px;border-color:#4cae4c;margin-bottom:10px;margin-top:10px}
+        .course-title{color:#4cae4c}
+        .inline{display: inline-block;margin:2px;}
+        .right{float:right}
+        .left{float:left}
+        .center{margin-left:12px;margin-top:12px}
+        .sign-up{margin-top:10px;margin-right:10px}
+        .title{text-align:left;background-color: #f7f7f7;padding:10px}
+        .course-list{height:35vh;overflow: auto}
+        .student{width:30%;margin:5px;}
+    </style>
+</head>
+<body>
+<%include navigation-index.ejs%>
+<%include navigation-joinReception.ejs%>
+<div class="right-content">
+    <div class="panel-heading title-block">
+        <h3 class="panel-title title-white">课程列表</h3>
+    </div>
+    <div class="course-list">
+        <div class="course-block">
+            <div class="inline left">
+                <h3 class="inline course-title">齐书强</h3>
+                <h4 class="inline">高三数学冲刺班</h4><br>
+                <h4 class="inline">学生(1):时广毅</h4>
+            </div>
+            <h3 class="inline right center">每天07:00 8.20截止</h3>
+        </div>
+        <div class="course-block">
+            <div class="inline left">
+                <h3 class="inline course-title">齐书强</h3>
+                <h4 class="inline">高三数学冲刺班</h4><br>
+                <h4 class="inline">学生(1):李苓苓</h4>
+            </div>
+            <h3 class="inline right center">每天08:40 8.20截止</h3>
+        </div>
+        <div class="course-block">
+            <div class="inline left">
+                <h3 class="inline course-title">齐书强</h3>
+                <h4 class="inline">高三数学冲刺班</h4><br>
+                <h4 class="inline">学生(1):王婉月</h4>
+            </div>
+            <h3 class="inline right center">每天10:20 8.20截止</h3>
+        </div>
+        <div class="course-block">
+            <div class="inline left">
+                <h3 class="inline course-title">齐书强</h3>
+                <h4 class="inline">高三数学冲刺班</h4><br>
+                <h4 class="inline">学生(5):李程 常诗涵 王欣淼 张佳伟 乔文韬</h4>
+            </div>
+            <h3 class="inline right center">每天13:30 8.20截止</h3>
+        </div>
+        <div class="course-block">
+            <div class="inline left">
+                <h3 class="inline course-title">齐书强</h3>
+                <h4 class="inline">高三数学冲刺班</h4><br>
+                <h4 class="inline">学生(2):丁佳兴 高城博</h4>
+            </div>
+            <h3 class="inline right center">每天15:10 8.20截止</h3>
+        </div>
+        <div class="course-block">
+            <div class="inline left">
+                <h3 class="inline course-title">齐书强</h3>
+                <h4 class="inline">高三数学冲刺班</h4><br>
+                <h4 class="inline">学生(3):刘跃 王赛 张秋雨</h4>
+            </div>
+            <h3 class="inline right center">每天15:10 8.20截止</h3>
+        </div>
+        <div class="course-block">
+            <div class="inline left">
+                <h3 class="inline course-title">张可爽</h3>
+                <h4 class="inline">高一生物冲刺班</h4><br>
+                <h4 class="inline">学生(4):李苓苓 李程 常诗涵 刘跃</h4>
+            </div>
+            <h3 class="inline right center">每天07:00 8.20截止</h3>
+        </div>
+        <div class="course-block">
+            <div class="inline left">
+                <h3 class="inline course-title">张可爽</h3>
+                <h4 class="inline">高三生物冲刺班</h4><br>
+                <h4 class="inline">学生(1):庞爱迪</h4>
+            </div>
+            <h3 class="inline right center">每天13:30 8.20截止</h3>
+        </div>
+        <div class="course-block">
+            <div class="inline left">
+                <h3 class="inline course-title">李金泰</h3>
+                <h4 class="inline">高三数学冲刺班</h4><br>
+                <h4 class="inline">学生(4):王赛 方静 张秋雨 高城博</h4>
+            </div>
+            <h3 class="inline right center">每天07:00 8.20截止</h3>
+        </div>
+        <div class="course-block">
+            <div class="inline left">
+                <h3 class="inline course-title">李金泰</h3>
+                <h4 class="inline">高一语文冲刺班</h4><br>
+                <h4 class="inline">学生(1):贾楠</h4>
+            </div>
+            <h3 class="inline right center">每天13:30 8.20截止</h3>
+        </div>
+        <div class="course-block">
+            <div class="inline left">
+                <h3 class="inline course-title">李金泰</h3>
+                <h4 class="inline">高一语文冲刺班</h4><br>
+                <h4 class="inline">学生(1):李程</h4>
+            </div>
+            <h3 class="inline right center">每天15:10 8.20截止</h3>
+        </div>
+        <div class="course-block">
+            <div class="inline left">
+                <h3 class="inline course-title">李丹丹</h3>
+                <h4 class="inline">高二文数冲刺班</h4><br>
+                <h4 class="inline">学生(1):韩莹</h4>
+            </div>
+            <h3 class="inline right center">每天07:00 8.20截止</h3>
+        </div>
+        <div class="course-block">
+            <div class="inline left">
+                <h3 class="inline course-title">李丹丹</h3>
+                <h4 class="inline">高一英语冲刺班</h4><br>
+                <h4 class="inline">学生(1):庞爱迪</h4>
+            </div>
+            <h3 class="inline right center">每天08:40 8.20截止</h3>
+        </div>
+    </div>
+    <div class="course-list margin-top-20">
+        <div class="panel-heading title-block">
+            <h3 class="panel-title title-white">课程申请</h3>
+        </div>
+        <div class="course-block">
+            <div class="inline left">
+                <h3 class="inline course-title">张三，李四，王五</h3><br>
+                <h4 class="inline">高三数学冲刺班</h4>
+            </div>
+            <button class="btn btn-success right sign-up" onclick="add()">添加</button>
+            <button class="btn btn-success right sign-up" onclick="post()">提交</button>
+        </div>
+        <div class="course-block">
+            <div class="inline left">
+                <h3 class="inline course-title">张三</h3><br>
+                <h4 class="inline">高三数学</h4>
+            </div>
+            <button class="btn btn-success right sign-up" onclick="add()">添加</button>
+            <button class="btn btn-success right sign-up" onclick="post()">提交</button>
+        </div>
+    </div>
+</div>
+<div id="fade" class="black-overlay"></div>
+<div id="light" class="white-content">
+    <div class="dialog" id="add-student" display="none">
+        <div class="dialog-title"><span class="font-20 title-white">添加学生</span><span class="right title-white" onclick="closeDialog()">x</span></div>
+        <button class="student">赵学生</button>
+        <button class="student">钱学生</button>
+        <button class="student">孙学生</button>
+        <button class="student">李学生</button>
+        <button class="student">周学生</button>
+        <button class="student">吴学生</button>
+        <button class="student">郑学生</button>
+        <button class="student">王学生</button>
+        <button class="btn btn-default dialog-button" onclick="closeDialog()">提交申请</button>
+    </div>
+    <div class="dialog" id="post" display="none">
+        <div class="dialog-title"><span class="font-20 title-white">申请课程</span><span class="right title-white" onclick="closeDialog()">X</span></div>
+        <label class="dialog-label">课程名称</label><input class="dialog-input" placeholder="请输入课程名称">
+        <label class="dialog-label">上课老师</label><input class="dialog-input" placeholder="请输入老师">
+        <label class="dialog-label">上课同学</label><input class="dialog-input" placeholder="请输入同学">
+        <label class="dialog-label">期望时间</label>
+        <select id="time"class="dialog-input" onchange="selectTime()">
+            <option>时间不限</option>
+            <option>每天</option>
+            <option>每周</option>
+        </select>
+        <div id="select-day" style="display: none">
+            <input type="checkbox">周一
+            <input type="checkbox">周二
+            <input type="checkbox">周三
+            <input type="checkbox">周四
+            <input type="checkbox">周五
+            <input type="checkbox">周六
+            <input type="checkbox">周日
+        </div>
+        <div id="select-course" style="display: none">
+            <input type="checkbox">07:00
+            <input type="checkbox">08:40
+            <input type="checkbox">10:20
+            <input type="checkbox">13:30<br>
+            <input type="checkbox">15:10
+            <input type="checkbox">16:50
+            <input type="checkbox">19:30
+            <input type="checkbox">21:10
+        </div>
+        <button class="btn btn-default dialog-button" onclick="closeDialog()">提交申请</button>
+    </div>
+</div>
+</body>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+
+    $("#person").text("前台姓名")
+    function loginDialog(){
+        location.href="joinReceptionDetail"
+    }
+    $("#navigation-manager").addClass("select-left-button");
+    function add(){
+        $("#fade").show()
+        $("#light").show()
+        $("#add-student").show()
+        $("#post").hide()
+    }
+    function post(){
+        $("#fade").show()
+        $("#light").show()
+        $("#add-student").hide()
+        $("#post").show()
+    }
+    function closeDialog(){
+        $("#fade").hide()
+        $("#light").hide()
+        $("#add-student").hide()
+        $("#post").hide()
+    }
+    function selectTime(){
+        var time = $("#time").val();
+        if(time == "每天"){
+            $("#select-day").show();
+            $("#select-course").show();
+        }else if(time == "每周"){
+            $("#select-day").hide();
+            $("#select-course").show();
+        }else{
+            $("#select-day").hide();
+            $("#select-course").hide();
+        }
+    }
+</script>
+</html>

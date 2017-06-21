@@ -24,9 +24,9 @@
         .image-edit{position:absolute;text-align:center;margin-top:5%;width:40%;z-index: 900}
     </style>
 </head>
-<body style="height:100%">
-<%include navigation.ejs%>
-<%include navigationJoinManager.ejs%>
+<body>
+<%include navigation-index.ejs%>
+<%include navigation-joinReception.ejs%>
 <div class="right-content">
     <div class="panel-heading title-block">
         <h3 class="panel-title title-white">基本信息</h3>
@@ -35,9 +35,10 @@
     <div class="margin-left-30" id="person-info">
         <img src="/images/icon.png" class="head img-circle">
         <div class="base-info">
-            <h3 class="inline">齐书强(台安店长)</h3><button class="btn btn-default inline right">退出登录</button><br>
+            <h3 class="inline">齐书强(台安前台)</h3><br>
             <h4 class="inline">手机号码</h4>
         </div>
+        <button class="btn btn-default inline right" onclick="logout()">退出登录</button>
         <br>
         <h5>家庭地址</h5>
     </div>
@@ -99,6 +100,11 @@
 
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
+    $("#person").text("前台姓名")
+    function loginDialog(){
+        location.href="joinReceptionDetail"
+    }
+    $("#navigation-person").addClass("select-left-button")
     var editFlag = true;
     var applyFlag = true;
     var applyIdFlag = true;
@@ -114,10 +120,6 @@
             $("#person-info").show();
             $("#person-edit").hide();
         }
-    }
-    $("#person").text("学生姓名")
-    function detail() {
-        location.href="studentDetail"
     }
     function applyModify() {
         if(applyFlag){
@@ -145,6 +147,8 @@
             $("#id-edit").hide();
         }
     }
-    $("#person").className="left-button:hover"
+    function logout() {
+        location.href = "/"
+    }
 </script>
 </html>

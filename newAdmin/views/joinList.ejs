@@ -15,18 +15,18 @@
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body style="height:100%">
-<%include navigation.ejs%>
-<%include adminNavigation.ejs%>
-<div style="width:85%;height:90vh;float:right;padding:50px">
+<body>
+<%include navigation-index.ejs%>
+<%include navigation-admin.ejs%>
+<div class="right-content">
     <div class="bs-example">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title" style="display: inline-block;">加盟列表</h3>
-                <a href="/admin/register" ><h3 class="panel-title" style="float:right">添加加盟商</h3></a>
+                <h3 class="panel-title inline">加盟列表</h3>
+                <a href="/admin/register" ><h3 class="panel-title right">添加加盟商</h3></a>
             </div>
-            <div class="table-details"style="overflow:scroll;overflow-x:hidden;height:65vh;">
-                <table  class="table table-hover"style="table-layout: fixed">
+            <div class="table-details">
+                <table  class="table table-hover table-body">
                     <tbody>
                         <tr onclick="detail()">
                             <td><div class="omit">台安店</div></td>

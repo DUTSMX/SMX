@@ -27,8 +27,8 @@
     </style>
 </head>
 <body>
-<%include navigation.ejs%>
-<%include navigationTeacher.ejs%>
+<%include navigation-index.ejs%>
+<%include navigation-teacher.ejs%>
 <div class="right-content">
     <div class="panel-heading title-block">
         <h3 class="panel-title title-white">课程提醒</h3>
@@ -72,7 +72,7 @@
             <h4 class="inline">高三数学 共10课时</h4>
         </div>
         <button class="btn btn-success right sign-up" onclick="detail()">详情</button>
-        <button class="btn btn-success right sign-up">申请</button>
+        <button class="btn btn-failed right sign-up">已申请</button>
     </div>
     <div class="course-block">
         <div class="inline left">
@@ -94,7 +94,7 @@
 </body>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-    $("#person").text("学生姓名")
+    $("#person").text("老师姓名")
     function applyCourse(){
         $("#fade").show()
         $("#light").show()
@@ -103,8 +103,12 @@
         $("#fade").hide()
         $("#light").hide()
     }
+    function loginDialog(){
+        location.href="teacherDetail"
+    }
     function detail(){
         location.href = "teacherCourseDetail"
     }
+    $("#navigation-course").addClass("select-left-button");
 </script>
 </html>

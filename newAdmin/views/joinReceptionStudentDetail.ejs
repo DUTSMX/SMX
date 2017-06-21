@@ -25,8 +25,8 @@
     </style>
 </head>
 <body style="height:100%">
-<%include navigation.ejs%>
-<%include navigationJoinReception.ejs%>
+<%include navigation-index.ejs%>
+<%include navigation-joinReception.ejs%>
 <div class="right-content">
     <div class="panel-heading title-block">
         <h3 class="panel-title title-white">学生信息</h3>
@@ -72,6 +72,10 @@
 
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-    $("#person").text("学生姓名")
+    $("#person").text("前台姓名")
+    function loginDialog(){
+        location.href="joinReceptionDetail"
+    }
+    $("#navigation-student").addClass("select-left-button");
 </script>
 </html>

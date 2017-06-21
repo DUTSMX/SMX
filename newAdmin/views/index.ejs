@@ -33,7 +33,7 @@
     </style>
 </head>
 <body>
-    <%include navigation.ejs%>
+    <%include navigation-index.ejs%>
     <div class="slick">
         <div class="ad-Images">
             <div>
@@ -69,9 +69,9 @@
     <div id="light" class="white-content">
         <div class="dialog">
             <div class="login-logo-div"><image class="login-logo"src="/images/icon.png"></image><span class="font-20">登录尚名校</span><span class="right" onclick="closeDialog()">x</span></div>
-            <input class="dialog-input" placeholder="手机号"/>
-            <input class="dialog-input" placeholder="密码"/>
-            <button class="btn btn-default dialog-input" onclick="login()">登录</button>
+            <label class="dialog-label">手机号</label><input class="dialog-input" placeholder="手机号"/>
+            <label class="dialog-label">密码</label><input class="dialog-input" placeholder="密码"/>
+            <button class="btn btn-default dialog-button" onclick="login()">登录</button>
             <label class="test-login" onclick="test()">测试登录</label>
         </div>
         <div id="type" class="login-type">
@@ -122,9 +122,9 @@
         location.href = "teacherCourse";
     }
     function joinReception() {
-        location.href = "joinReception"
+        location.href = "joinReceptionTodayCourse"
     }
     function joinManager(){
-        location.href = "joinManager"
+        location.href = "joinManagerReport"
     }
 </script>

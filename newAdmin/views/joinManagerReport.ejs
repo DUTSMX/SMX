@@ -19,8 +19,8 @@
     </style>
 </head>
 <body style="height:100%">
-<%include navigation.ejs%>
-<%include navigationJoinManager.ejs%>
+<%include navigation-index.ejs%>
+<%include navigation-joinManager.ejs%>
 <div class="right-content">
     <div class="panel-heading title-block">
         <h3 class="panel-title title-white">店铺信息</h3>
@@ -129,8 +129,13 @@
 
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-    var modifyFlag = true;
     $("#person").text("店长姓名")
+    function loginDialog(){
+        location.href="joinManagerDetail"
+    }
+    $("#navigation-report").addClass("select-left-button")
+
+    var modifyFlag = true;
     function detail() {
         location.href="studentDetail"
     }
