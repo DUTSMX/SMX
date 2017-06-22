@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>尚名校</title>
+    <!-- Bootstrap -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/stylesheets/admin.css" rel="stylesheet" type="text/css"/>
+    <link href="/stylesheets/scroll-table.css" rel="stylesheet" type="text/css"/>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        .table>thead>tr>th{border:1px solid black !important;text-align: center}
+        .table>tbody>tr>td{border:1px solid black !important;text-align: center}
+        .table>tbody>tr>th{border:1px solid black !important;text-align: center}
+        .width-700{width: 700px;margin:auto}
+        .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td{vertical-align: middle;}
+        .width-15{width:12%}
+        .content{padding:20px;}
+    </style>
+</head>
+<body>
+<div class="content">
+    <button class="btn btn-default inline right" onclick="print()">打印</button>
+    <div class="width-700">
+        <p id="month" class="center">2017年6月17日签到表</p>
+    </div>
+    <div class="padding-scroll" id="home">
+        <table class="table table-hover" style="margin-bottom:0px;">
+            <thead>
+                <tr>
+                    <th>上课时间</th>
+                    <th>课程名称</th>
+                    <th>任课教师</th>
+                    <th>教室信息</th>
+                    <th>学生姓名</th>
+                    <th>联系方式</th>
+                    <th>出勤情况</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th class="width-15" rowspan="10">7：00</th>
+                    <th class="width-15">高三数学</th>
+                    <td class="width-15">齐书强</td>
+                    <td class="width-15">教室1</td>
+                    <td class="width-15">时广毅</td>
+                    <td class="width-15">12345678901</td>
+                    <td class="width-15"></td>
+                </tr>
+                <tr>
+                    <th class="width-15" rowspan="4">高一生物</th>
+                    <td class="width-15" rowspan="4">张可爽</td>
+                    <td class="width-15" rowspan="4">教室2</td>
+                    <td class="width-15">李苓苓</td>
+                    <td class="width-15">12345678901</td>
+                    <td class="width-15"></td>
+                </tr>
+                <tr>
+                    <td class="width-15">李程</td>
+                    <td class="width-15">12345678901</td>
+                    <td class="width-15"></td>
+                </tr>
+                <tr>
+                    <td class="width-15">常诗涵</td>
+                    <td class="width-15">12345678901</td>
+                    <td class="width-15"></td>
+                </tr>
+                <tr>
+                    <td class="width-15">刘跃</td>
+                    <td class="width-15">12345678901</td>
+                    <td class="width-15"></td>
+                </tr>
+                <tr>
+                    <th class="width-15" rowspan="4">高三数学</th>
+                    <td class="width-15" rowspan="4">李金泰</td>
+                    <td class="width-15" rowspan="4">教室3</td>
+                    <td class="width-15">王赛</td>
+                    <td class="width-15">12345678901</td>
+                    <td class="width-15"></td>
+                </tr>
+                <tr>
+                    <td class="width-15">方静</td>
+                    <td class="width-15">12345678901</td>
+                    <td class="width-15"></td>
+                </tr>
+                <tr>
+                    <td class="width-15">张秋雨 </td>
+                    <td class="width-15">12345678901</td>
+                    <td class="width-15"></td>
+                </tr>
+                <tr>
+                    <td class="width-15">高城博</td>
+                    <td class="width-15">12345678901</td>
+                    <td class="width-15"></td>
+                </tr>
+                <tr>
+                    <th class="width-15">高二文数</th>
+                    <td class="width-15">李丹丹</td>
+                    <td class="width-15">教室4</td>
+                    <td class="width-15">韩莹</td>
+                    <td class="width-15">12345678901</td>
+                    <td class="width-15"></td>
+                </tr>
+                <tr>
+                    <th class="width-15" rowspan="2">8：40</th>
+                    <th class="width-15">高三数学</th>
+                    <td class="width-15">齐书强</td>
+                    <td class="width-15">教室1</td>
+                    <td class="width-15">李苓苓</td>
+                    <td class="width-15">12345678901</td>
+                    <td class="width-15"></td>
+                </tr>
+                <tr>
+                    <th class="width-15">高三英语</th>
+                    <td class="width-15">李丹丹</td>
+                    <td class="width-15">教室5</td>
+                    <td class="width-15">庞爱迪</td>
+                    <td class="width-15">12345678901</td>
+                    <td class="width-15"></td>
+                </tr>
+                <tr>
+                    <th class="width-15">10：20</th>
+                    <th class="width-15">高三数学</th>
+                    <td class="width-15">齐书强</td>
+                    <td class="width-15">教室1</td>
+                    <td class="width-15">王婉月</td>
+                    <td class="width-15">12345678901</td>
+                    <td class="width-15"></td>
+                </tr>
+                <tr>
+                    <th class="width-15" rowspan="7">13：30</th>
+                    <th class="width-15" rowspan="5">高二数学</th>
+                    <td class="width-15" rowspan="5">齐书强</td>
+                    <td class="width-15" rowspan="5">教室1</td>
+                    <td class="width-15">李程</td>
+                    <td class="width-15">12345678901</td>
+                    <td class="width-15"></td>
+                </tr>
+                <tr>
+                    <td class="width-15">常诗涵</td>
+                    <td class="width-15">12345678901</td>
+                    <td class="width-15"></td>
+                </tr>
+                <tr>
+                    <td class="width-15">王欣淼</td>
+                    <td class="width-15">12345678901</td>
+                    <td class="width-15"></td>
+                </tr>
+                <tr>
+                    <td class="width-15">张佳伟</td>
+                    <td class="width-15">12345678901</td>
+                    <td class="width-15"></td>
+                </tr>
+                <tr>
+                    <td class="width-15">乔文韬</td>
+                    <td class="width-15">12345678901</td>
+                    <td class="width-15"></td>
+                </tr>
+                <tr>
+                    <th class="width-15">高三生物</th>
+                    <td class="width-15">张可爽</td>
+                    <td class="width-15">教室2</td>
+                    <td class="width-15">庞爱迪</td>
+                    <td class="width-15">12345678901</td>
+                    <td class="width-15"></td>
+                </tr>
+                <tr>
+                    <th class="width-15">高一语文</th>
+                    <td class="width-15">李金泰</td>
+                    <td class="width-15">教室3</td>
+                    <td class="width-15">贾楠</td>
+                    <td class="width-15">12345678901</td>
+                    <td class="width-15"></td>
+                </tr>
+                <tr>
+                    <th class="width-15" rowspan="3">15：10</th>
+                    <th class="width-15" rowspan="2">高三数学</th>
+                    <td class="width-15" rowspan="2">齐书强</td>
+                    <td class="width-15" rowspan="2">教室1</td>
+                    <td class="width-15">丁家兴</td>
+                    <td class="width-15">12345678901</td>
+                    <td class="width-15"></td>
+                </tr>
+                <tr>
+                    <td class="width-15">高城博</td>
+                    <td class="width-15">12345678901</td>
+                    <td class="width-15"></td>
+                </tr>
+                <tr>
+                    <th class="width-15">高二语文</th>
+                    <td class="width-15">李金泰</td>
+                    <td class="width-15">教室3</td>
+                    <td class="width-15">李程</td>
+                    <td class="width-15">12345678901</td>
+                    <td class="width-15"></td>
+                </tr>
+                <tr>
+                    <th class="width-15" rowspan="3">16：50</th>
+                    <th class="width-15" rowspan="3">高三数学</th>
+                    <td class="width-15" rowspan="3">齐书强</td>
+                    <td class="width-15" rowspan="3">教室1</td>
+                    <td class="width-15">刘跃</td>
+                    <td class="width-15">12345678901</td>
+                    <td class="width-15"></td>
+                </tr>
+                <tr>
+                    <td class="width-15">王赛</td>
+                    <td class="width-15">12345678901</td>
+                    <td class="width-15"></td>
+                </tr>
+                <tr>
+                    <td class="width-15">张秋雨</td>
+                    <td class="width-15">12345678901</td>
+                    <td class="width-15"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="/javascripts/divselect.js">
+
+$("#person").text("前台姓名")
+function loginDialog(){
+    location.href="joinReceptionDetail"
+}
+$("#navigation-course").addClass("select-left-button");
+</script>
+</html>

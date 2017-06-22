@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>尚名校</title>
+    <!-- Bootstrap -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/stylesheets/admin.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/slick.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/slick-theme.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .course-block{height:60px;border-radius: 5px;border-style:solid;border-width:1px;border-color:#4cae4c;margin-bottom:10px;margin-top:10px}
+        .course-title{color:#4cae4c}
+        .inline{display: inline-block;margin:2px;}
+        .right{float:right}
+        .left{float:left}
+        .center{margin-left:12px;margin-top:12px}
+        .sign-up{margin-top:10px;margin-right:10px}
+    </style>
+</head>
+<body>
+<%include navigation-index.ejs%>
+<%include navigation-student.ejs%>
+<div class="right-content">
+    <div class="panel-heading title-block">
+        <h3 class="panel-title title-white">课程提醒</h3>
+    </div>
+    <div class="course-block">
+        <div class="inline left">
+            <h3 class="inline course-title">圆锥曲线</h3>
+            <h4 class="inline">齐书强</h4><br>
+            <h4 class="inline">高三数学 第6/10课时</h4>
+        </div>
+        <h2 class="inline left center">2017-6-17 8:40</h2>
+        <h4 class="inline left center margin-top-20">教室2</h4>
+        <button class="btn btn-success right sign-up" onclick="courseDetail()">详情</button>
+    </div>
+    <div class="course-block">
+        <div class="inline left">
+            <h3 class="inline course-title">遗传定律</h3>
+            <h4 class="inline">张可爽</h4><br>
+            <h4 class="inline">高三生物 第6/10课时</h4>
+
+        </div>
+        <h2 class="inline left center">2017-6-17 13:30</h2>
+        <h4 class="inline left center margin-top-20">教室1</h4>
+        <button class="btn btn-success right sign-up" onclick="courseDetail()">详情</button>
+    </div>
+    <div class="panel-heading title-block">
+        <h3 class="panel-title title-white">课程推荐</h3>
+        <h3 class="panel-title right-button" onclick="applyCourse()" id="applyCourse">申请课程</h3>
+    </div>
+    <div class="course-block">
+        <div class="inline left">
+            <h3 class="inline course-title">高考数学冲刺班</h3><br>
+            <h4 class="inline">高三生物 共10课时</h4>
+        </div>
+        <button class="btn btn-success right sign-up" onclick="courseDetail()">详情</button>
+        <button class="btn btn-success right sign-up" onclick="enter()">报名</button>
+    </div>
+    <div class="course-block">
+        <div class="inline left">
+            <h3 class="inline course-title">高考物理冲刺班</h3><br>
+            <h4 class="inline">高三物理 共10课时</h4>
+        </div>
+        <button class="btn btn-success right sign-up" onclick="courseDetail()">详情</button>
+        <button class="btn btn-success right sign-up" onclick="enter()">报名</button>
+    </div>
+    <div class="course-block">
+        <div class="inline left">
+            <h3 class="inline course-title">高考化学冲刺班</h3><br>
+            <h4 class="inline">高三化学 共10课时</h4>
+        </div>
+        <button class="btn btn-success right sign-up" onclick="courseDetail()">详情</button>
+        <button class="btn btn-success right sign-up" onclick="enter()">报名</button>
+    </div>
+    <div class="course-block">
+        <div class="inline left">
+            <h3 class="inline course-title">高考生物冲刺班</h3><br>
+            <h4 class="inline">高三生物 共10课时</h4>
+        </div>
+        <button class="btn btn-success right sign-up" onclick="courseDetail()">详情</button>
+        <button class="btn btn-success right sign-up" onclick="enter()">报名</button>
+    </div>
+</div>
+<div id="fade" class="black-overlay"></div>
+<div id="light" class="white-content">
+    <div class="dialog" id="apply-course" display="none">
+        <div class="dialog-title"><span class="font-20 title-white">申请课程</span><span class="right title-white" onclick="closeDialog()">x</span></div>
+        <label class="dialog-label">年级</label><input class="dialog-input" placeholder="请输入年级"/>
+        <label class="dialog-label">班级</label><input class="dialog-input" placeholder="请输入班级"/>
+        <label class="dialog-label">科目</label><input class="dialog-input" placeholder="请输入科目"/>
+        <label class="dialog-label">内容</label><input class="dialog-input" placeholder="请输入内容"/>
+        <label class="dialog-label">同学</label><input class="dialog-input" placeholder="请输入同学"/>
+        <button class="btn btn-default dialog-button" onclick="closeDialog()">提交申请</button>
+    </div>
+    <div class="dialog" id="enter" display="none">
+        <div class="dialog-title"><span class="font-20 title-white">申请课程</span><span class="right title-white" onclick="closeDialog()">X</span></div>
+        <label class="dialog-label">课程名称</label><input class="dialog-input" placeholder="请输入课程名称">
+        <label class="dialog-label">上课同学</label><input class="dialog-input" placeholder="请输入同学">
+        <label class="dialog-label">期望时间</label>
+        <select id="time"class="dialog-input" onchange="selectTime()">
+            <option>时间不限</option>
+            <option>每天</option>
+            <option>每周</option>
+        </select>
+        <div id="select-day" style="display: none">
+            <input type="checkbox">周一
+            <input type="checkbox">周二
+            <input type="checkbox">周三
+            <input type="checkbox">周四
+            <input type="checkbox">周五
+            <input type="checkbox">周六
+            <input type="checkbox">周日
+        </div>
+        <div id="select-course" style="display: none">
+            <input type="checkbox">07:00
+            <input type="checkbox">08:40
+            <input type="checkbox">10:20
+            <input type="checkbox">13:30<br>
+            <input type="checkbox">15:10
+            <input type="checkbox">16:50
+            <input type="checkbox">19:30
+            <input type="checkbox">21:10
+        </div>
+        <button class="btn btn-default dialog-button" onclick="closeDialog()">提交申请</button>
+    </div>
+</div>
+</body>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+    $("#person").text("学生姓名")
+    function loginDialog(){
+        location.href="studentDetail"
+    }
+    function applyCourse(){
+        $("#fade").show()
+        $("#light").show()
+        $("#apply-course").show();
+        $("#enter").hide();
+    }
+    function enter(){
+        $("#fade").show()
+        $("#light").show()
+        $("#apply-course").hide();
+        $("#enter").show();
+    }
+    function closeDialog(){
+        $("#fade").hide()
+        $("#light").hide()
+        $("#apply-course").hide();
+        $("#enter").hide();
+    }
+    function courseDetail(){
+        location.href="studentCourseDetail"
+    }
+    $("#navigation-course").addClass("select-left-button");
+    function selectTime(){
+        var time = $("#time").val();
+        if(time == "每天"){
+            $("#select-day").show();
+            $("#select-course").show();
+        }else if(time == "每周"){
+            $("#select-day").hide();
+            $("#select-course").show();
+        }else{
+            $("#select-day").hide();
+            $("#select-course").hide();
+        }
+    }
+</script>
+</html>

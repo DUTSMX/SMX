@@ -1,6 +1,7 @@
 .table-details{
     overflow:scroll;
     overflow-x:hidden;
+    height:50vh;
 }
 .omit{
     overflow:hidden;
@@ -8,4 +9,13 @@
     text-overflow:ellipsis;
     text-align:center;
     margin: auto 0;
+}
+.padding-scroll{
+    padding-right: 17px
+}
+.table-head{
+    margin-bottom:0px;!important;
+}
+.table-body{
+    table-layout: fixed
 }

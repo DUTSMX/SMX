@@ -1,46 +1,31 @@
-/*
-模块：轮播图
-*/
-/*设置轮播图大小*/
-.ad_Image_style img{
-	height: 50vh;
-	width: auto;
-	text-align: center;margin:0 auto ;
-}
-.slick-dotted.slick-slider{
-	margin-bottom:0px;
-}
-
-.slick-dots li button:before{
-	font-size:30px;
-}
-.slick-dots{
-	bottom:10px;
-}
-
-.black_overlay{
-    display: none;
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    width: 100%;
-    height: 120%;
-    background-color: black;
-    z-index:1001;
-    -moz-opacity: 0.8;
-    opacity:.15;
-    filter: alpha(opacity=15);
-}
-.white_content {
-    display: none;
-    position: fixed;
-    top: 25%;
-    left: 35%;
-    width: 300px;
-    height: 300px;
-    border: none;
-    background-color: white;
-    z-index:1002;
-    overflow: auto;
-    text-align: center;
-}
+body{height:100%}
+.left-navigation{width:15%;height:90vh;background-color:#3e3e3e;display: inline-block;}
+.left-button{padding-left:40px;padding:20px;color:#b8b8b8}
+.left-button:hover{padding-left:40px;padding:20px;color:#4cae4c;background-color: #575757}
+.select-left-button{padding-left:40px;padding:20px;color:#4cae4c;background-color: #575757}
+.sub-left-button-div{display: none;background-color:#131212;}
+.sub-left-button{padding-left:40px;padding:20px;color:#b8b8b8;margin:0px;}
+.sub-left-button:hover{padding-left:40px;padding:20px;color:#4cae4c;background-color: #575757}
+.right-content{width:85%;height:90vh;float:right;padding:20px;overflow-y:scroll }
+.title-block{background-color: #4cae4c}
+.title-white{display: inline-block;color:white !important}
+.right-button{float:right;color:white}
+.right{float:right}
+.center{text-align:center}
+.left{float:left}
+.margin-left-30{margin-left:30px;}
+.inline{display: inline-block}
+.margin-left-20{margin-left:20px}
+.margin-top-20{margin-top:20px;}
+.margin-top-10{margin-top:10px;}
+.margin-top-50{margin-top:50px;}
+.margin-10{margin:10px}
+.padding-4{padding:4px}
+.hide{display:none}
+.black-overlay{display: none;position: absolute;top: 0%;left: 0%;width: 100%;height: 100%;background-color: black;z-index:1001;-moz-opacity: 0.15;opacity:.15;filter: alpha(opacity=15);}
+.white-content {display: none;position: fixed;top: 25%;left: 35%;width: 300px;height: auto;border: none;z-index:1002;text-align: center;background-color: white;margin-bottom:20px}
+.dialog-label{width:20%;}
+.dialog-input{width:70%;margin:10px;padding:5px}
+.dialog{width:350px;height:auto;background-color: white;display: inline-block}
+.dialog-title{text-align:left;background-color: #4cae4c;padding: 10px}
+.dialog-button{width:90%;margin-bottom:20px}

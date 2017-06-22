@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>尚名校</title>
+    <!-- Bootstrap -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/stylesheets/admin.css" rel="stylesheet" type="text/css"/>
+    <link href="/stylesheets/scroll-table.css" rel="stylesheet" type="text/css"/>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<%include navigation-index.ejs%>
+<%include navigation-admin.ejs%>
+<div class="right-content">
+    <div class="bs-example">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title inline">加盟列表</h3>
+                <h3 class="panel-title right" onclick="addJoin()">添加加盟商</h3>
+            </div>
+            <div class="table-details">
+                <table  class="table table-hover table-body">
+                    <tbody>
+                        <tr onclick="detail()">
+                            <td><div class="omit">台安店</div></td>
+                        </tr>
+                        <tr onclick="detail()">
+                            <td><div class="omit">大连店</div></td>
+                        </tr>
+                        <tr onclick="detail()">
+                            <td><div class="omit">海城店</div></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            </table>
+        </div>
+    </div>
+</div>
+<div id="fade" class="black-overlay"></div>
+<div id="light" class="white-content">
+    <div class="dialog">
+        <div class="dialog-title"><span class="font-20 title-white">添加加盟商</span><span class="right title-white" onclick="closeDialog()">X</span></div>
+        <input class="dialog-input" placeholder="请输入加盟店名称"/>
+        <input class="dialog-input" placeholder="请搜索加盟店负责人"/>
+        <input class="dialog-input" placeholder="请输入加盟店地址"/>
+        <button class="btn btn-default dialog-input" onclick="closeDialog()">确认添加</button>
+    </div>
+</div>
+
+</body>
+
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+
+    $("#person").text("管理姓名")
+    function loginDialog(){
+        location.href = "adminManagerDetail"
+    }
+    $("#navigation-join").addClass("select-left-button")
+    function detail(){
+        location.href = "adminJoinDetail"
+    }
+    function addJoin(){
+        $("#fade").show()
+        $("#light").show()
+    }
+    function closeDialog(){
+        $("#fade").hide()
+        $("#light").hide()
+    }
+</script>
+</html>

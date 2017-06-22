@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>尚名校</title>
+    <!-- Bootstrap -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/stylesheets/admin.css" rel="stylesheet" type="text/css"/>
+    <link href="/stylesheets/scroll-table.css" rel="stylesheet" type="text/css"/>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .join-info{display: inline-block;height: 96px;vertical-align: middle;}
+        .chart{width:50vw;height:30vh;display:inline-block}
+        .pie{width:30vw;height:30vh;display:inline-block}
+    </style>
+</head>
+<body>
+<%include navigation-index.ejs%>
+<%include navigation-office.ejs%>
+<div class="right-content">
+    <div class="panel-heading title-block">
+        <h3 class="panel-title title-white">经营状况</h3>
+    </div>
+    <div width="">
+        <div class="chart" id="userChart">
+
+        </div>
+        <div class="pie" id="userPie">
+
+        </div>
+    </div>
+
+    <div>
+        <div class="chart" id="courseChart">
+
+        </div>
+        <div class="pie" id="coursePie">
+
+        </div>
+    </div>
+</div>
+</body>
+
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+<script>
+    $("#person").text("高管姓名")
+    function loginDialog(){
+        location.href="joinManagerDetail"
+    }
+    $("#navigation-report").addClass("select-left-button")
+
+    var userChart,userPie,courseChart,coursePie;
+
+    var data = {"name":[],"value":[]};
+    var now = +new Date(2017, 1, 1);
+    var oneDay = 24 * 3600 * 1000;
+    var value = Math.random() * 1000;
+    for (var i = 0; i < 150; i++) {
+        now = new Date(+now + oneDay);
+        value = value + Math.random() * 100 - 10;
+        data.name.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
+        data.value.push(Math.round(value))
+    }
+    console.log("data:"+JSON.stringify(data))
+    require.config({
+        paths: {
+            echarts: 'http://echarts.baidu.com/build/dist'
+        }
+    });
+    require(
+        [
+            'echarts',
+            'echarts/chart/bar',
+            'echarts/chart/line',
+            'echarts/chart/pie',
+            'echarts/chart/gauge',
+            'echarts/chart/funnel',
+            'echarts/chart/radar'// 使用柱状图就加载bar模块，按需加载
+        ],
+        function (ec) {
+            userChart = ec.init(document.getElementById("userChart"),"macarons")
+            userPie = ec.init(document.getElementById("userPie"),"macarons")
+            courseChart = ec.init(document.getElementById("courseChart"),"macarons")
+            coursePie = ec.init(document.getElementById("coursePie"),"macarons")
+            var chartOptions = {
+                title :{text : "用户数量",x:'left'},
+                tooltip : {trigger: 'axis'},
+                xAxis : [{show: true,type : 'category',data : data.name}],
+                yAxis : [{show:true,name: "",type : 'value', min : 0, max : 10000}],
+                series : [
+                    {
+                        name:value,
+                        type:'line',
+                        clickable:true,
+                        itemStyle: {normal: {color : 'rgba(18,189,4,1)'}},
+                        data:data.value
+                    }
+                ]
+            }
+            var PieOptions = {
+                title : {
+                    text: '',
+                            x:'center'
+                },
+                tooltip : {
+                    trigger: 'item',
+                            formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                series : [
+                    {
+                        name: '访问来源',
+                        type: 'pie',
+                        radius : '55%',
+                        center: ['50%', '60%'],
+                        data:[
+                            {value:335, name:'台安店'},
+                            {value:310, name:'大连店'},
+                            {value:234, name:'沈阳店'}
+                        ],
+                        itemStyle: {
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            }
+            userChart.setOption(chartOptions); //End of TotalTransactionChart}
+            userPie.setOption(PieOptions)
+            chartOptions.title.text="课程数量"
+            courseChart.setOption(chartOptions); //End of TotalTransactionChart}
+            coursePie.setOption(PieOptions)
+        }
+    )
+    setTimeout(function (){
+        window.onresize = function () {
+            userChart.resize();
+            userPie.resize();
+        }
+    },200)
+</script>
+</html>

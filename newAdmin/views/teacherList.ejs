@@ -16,13 +16,13 @@
     <![endif]-->
 </head>
 <body style="height:100%">
-<%include navigation.ejs%>
-<%include adminNavigation.ejs%>
+<%include navigation-index.ejs%>
+<%include navigation-admin.ejs%>
 <div style="width:85%;height:90vh;float:right;padding:50px">
     <div class="bs-example">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title" style="display: inline-block;">学生列表</h3>
+                <h3 class="panel-title inline">老师列表</h3>
                 <a href="/admin/register" ><h3 class="panel-title" style="float:right">添加学生</h3></a>
             </div>
             <div style="padding-right: 17px">
@@ -69,7 +69,7 @@
 
     $("#person").text("学生姓名")
     function detail() {
-        location.href="studentDetail"
+        location.href="teacherDetail"
     }
 </script>
 </html>
