@@ -37,6 +37,9 @@ router.get('/joinReceptionCourseManager',function (req,res,next) {
 router.get('/studentCourse',function (req,res,next) {
   res.render('studentCourse');
 })
+router.get('/studentCourseRecord',function (req,res,next) {
+  res.render('studentCourseRecord');
+})
 router.get('/studentDetail',function (req,res,next) {
   res.render('studentDetail');
 })
@@ -46,6 +49,9 @@ router.get('/studentCourseDetail',function (req,res,next) {
 
 router.get('/teacherCourse',function (req,res,next) {
   res.render('teacherCourse')
+})
+router.get('/teacherCourseRecord',function (req,res,next) {
+  res.render('teacherCourseRecord')
 })
 router.get('/teacherCourseDetail',function (req,res,next) {
   res.render('teacherCourseDetail')
@@ -57,11 +63,38 @@ router.get('/teacherDetail',function (req,res,next) {
   res.render('teacherDetail');
 })
 
-
-router.get('/joinList',function (req,res,next) {
-  res.render('joinList');
+router.get('/officeManagerReport',function (req,res,next) {
+  res.render('officeManagerReport');
 })
-router.get('/createCourse',function (req,res,next) {
-  res.render('createCourse');
+router.get('/officeManagerDetail',function (req,res,next) {
+  res.render('officeManagerDetail');
+})
+
+router.get('/adminJoinList',function (req,res,next) {
+  res.render('adminJoinList');
+})
+router.get('/adminJoinDetail',function (req,res,next) {
+  res.render('adminJoinDetail');
+})
+router.get('/adminUserList',function (req,res,next) {
+  res.render('adminUserList');
+})
+router.get('/adminUserDetail',function (req,res,next) {
+  res.render('adminUserDetail');
+})
+router.get('/adminDetail',function (req,res,next) {
+  res.render('adminDetail');
+})
+router.get('/educationCourse',function (req,res,next) {
+  res.render('educationCourse');
+})
+router.get('/educationCreateCourse',function (req,res,next) {
+  res.render('educationCreateCourse');
+})
+router.get('/educationCourseDetail',function (req,res,next) {
+  res.render('educationCourseDetail');
+})
+router.get('/educationDetail',function (req,res,next) {
+  res.render('educationDetail');
 })
 module.exports = router;

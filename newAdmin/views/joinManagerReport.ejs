@@ -16,141 +16,95 @@
     <![endif]-->
     <style>
         .join-info{display: inline-block;height: 96px;vertical-align: middle;}
+        .chart{width:80vw;height:30vh;display:inline-block}
     </style>
 </head>
-<body style="height:100%">
+<body>
 <%include navigation-index.ejs%>
 <%include navigation-joinManager.ejs%>
 <div class="right-content">
     <div class="panel-heading title-block">
-        <h3 class="panel-title title-white">店铺信息</h3>
-        <h3 onclick="modify()"class="panel-title right-button" id="modify">申请修改</h3>
-    </div>
-    <div class="margin-left-30" id="join-info">
-        <div class="join-info">
-            <h3 class="inline">台安店</h3><br>
-            <h4 class="inline">辽宁省鞍山市台安县</h4>
-        </div>
-        <br>
-        <h4 class="inline">负责人：齐书强</h4>
-    </div>
-    <div class="margin-left-30" id="join-info-edit" style="display: none">
-        <div class="join-info">
-            <label>店铺名称&nbsp</label><input id="join-name"class="inline margin-top-20" value="台安店" placeholder="请输入店铺名称"/><br>
-            <label>店铺地址&nbsp</label><input id="join-address"class="inline margin-top-20" value="辽宁省鞍山市台安县" placeholder="请输入店铺地址"/>
-        </div>
-        <br>
-        <label>负责人&nbsp&nbsp&nbsp&nbsp</label><input id="person-name"class="inline margin-top-20" value="齐书强" placeholder="请输入负责人">
-    </div>
-    <div class="panel-heading title-block">
         <h3 class="panel-title title-white">经营状况</h3>
     </div>
-    <div>
-        <div class="padding-scroll">
-            <table class="table table-hover" style="margin-bottom:0px;">
-                <thead>
-                <tr>
-                    <th width="190px"><div class="omit">日期日期</div></th>
-                    <th><div class="omit">课程数量</div></th>
-                    <th><div class="omit">课程人数</div></th>
-                    <th><div class="omit">课程收入</div></th>
-                    <th><div class="omit">自习人数</div></th>
-                    <th><div class="omit">自习收入</div></th>
-                </tr>
-                </thead>
-            </table>
-        </div>
-        <div class="table-details">
-            <table  class="table table-hover table-body">
-                <tbody>
-                <tr>
-                    <td><div class="omit">2017-6-17</div></td>
-                    <td><div class="omit">3</div></td>
-                    <td><div class="omit">8</div></td>
-                    <td><div class="omit">720</div></td>
-                    <td><div class="omit">20</div></td>
-                    <td><div class="omit">80</div></td>
-                </tr>
-                <tr>
-                    <td><div class="omit">2017-6-16</div></td>
-                    <td><div class="omit">3</div></td>
-                    <td><div class="omit">8</div></td>
-                    <td><div class="omit">720</div></td>
-                    <td><div class="omit">20</div></td>
-                    <td><div class="omit">80</div></td>
-                </tr>
-                <tr>
-                    <td><div class="omit">2017-6-15</div></td>
-                    <td><div class="omit">3</div></td>
-                    <td><div class="omit">8</div></td>
-                    <td><div class="omit">720</div></td>
-                    <td><div class="omit">20</div></td>
-                    <td><div class="omit">80</div></td>
-                </tr>
-                <tr>
-                    <td><div class="omit">2017-6-14</div></td>
-                    <td><div class="omit">3</div></td>
-                    <td><div class="omit">8</div></td>
-                    <td><div class="omit">720</div></td>
-                    <td><div class="omit">20</div></td>
-                    <td><div class="omit">80</div></td>
-                </tr>
-                <tr>
-                    <td><div class="omit">2017-6-13</div></td>
-                    <td><div class="omit">3</div></td>
-                    <td><div class="omit">8</div></td>
-                    <td><div class="omit">720</div></td>
-                    <td><div class="omit">20</div></td>
-                    <td><div class="omit">80</div></td>
-                </tr>
-                <tr>
-                    <td><div class="omit">2017-6-12</div></td>
-                    <td><div class="omit">3</div></td>
-                    <td><div class="omit">8</div></td>
-                    <td><div class="omit">720</div></td>
-                    <td><div class="omit">20</div></td>
-                    <td><div class="omit">80</div></td>
-                </tr>
-                <tr>
-                    <td><div class="omit">2017-6-11</div></td>
-                    <td><div class="omit">3</div></td>
-                    <td><div class="omit">8</div></td>
-                    <td><div class="omit">720</div></td>
-                    <td><div class="omit">20</div></td>
-                    <td><div class="omit">80</div></td>
-                </tr>
-                </tbody>
-            </table>
+    <div width="">
+        <div class="chart" id="userChart">
+
         </div>
     </div>
 
+    <div>
+        <div class="chart" id="courseChart">
+
+        </div>
+    </div>
 </div>
 </body>
 
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
 <script>
-    $("#person").text("店长姓名")
+    $("#person").text("高管姓名")
     function loginDialog(){
         location.href="joinManagerDetail"
     }
     $("#navigation-report").addClass("select-left-button")
 
-    var modifyFlag = true;
-    function detail() {
-        location.href="studentDetail"
+    var userChart,userPie,courseChart,coursePie;
+
+    var data = {"name":[],"value":[]};
+    var now = +new Date(2017, 1, 1);
+    var oneDay = 24 * 3600 * 1000;
+    var value = Math.random() * 1000;
+    for (var i = 0; i < 150; i++) {
+        now = new Date(+now + oneDay);
+        value = value + Math.random() * 100 - 10;
+        data.name.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
+        data.value.push(Math.round(value))
     }
-    function modify(){
-        if(modifyFlag){
-            modifyFlag = false;
-            $("#modify").text("提交申请")
-            $("#join-info").hide();
-            $("#join-info-edit").show();
-        }else{
-            modifyFlag = true;
-            $("#join-info").show();
-            $("#join-info-edit").hide();
-            $("#modify").text("申请修改")
+    console.log("data:"+JSON.stringify(data))
+    require.config({
+        paths: {
+            echarts: 'http://echarts.baidu.com/build/dist'
         }
-    }
+    });
+    require(
+            [
+                'echarts',
+                'echarts/chart/bar',
+                'echarts/chart/line',
+                'echarts/chart/pie',
+                'echarts/chart/gauge',
+                'echarts/chart/funnel',
+                'echarts/chart/radar'// 使用柱状图就加载bar模块，按需加载
+            ],
+            function (ec) {
+                userChart = ec.init(document.getElementById("userChart"),"macarons")
+                courseChart = ec.init(document.getElementById("courseChart"),"macarons")
+                var chartOptions = {
+                    title :{text : "用户数量",x:'left'},
+                    tooltip : {trigger: 'axis'},
+                    xAxis : [{show: true,type : 'category',data : data.name}],
+                    yAxis : [{show:true,name: "",type : 'value', min : 0, max : 10000}],
+                    series : [
+                        {
+                            name:value,
+                            type:'line',
+                            clickable:true,
+                            itemStyle: {normal: {color : 'rgba(18,189,4,1)'}},
+                            data:data.value
+                        }
+                    ]
+                }
+                userChart.setOption(chartOptions); //End of TotalTransactionChart}
+                chartOptions.title.text="课程数量"
+                courseChart.setOption(chartOptions); //End of TotalTransactionChart}
+            }
+    )
+    setTimeout(function (){
+        window.onresize = function () {
+            userChart.resize();
+            courseChart.resize();
+        }
+    },200)
 </script>
 </html>

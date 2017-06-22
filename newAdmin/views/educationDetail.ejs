@@ -22,13 +22,13 @@
         .image img{width:80%}
         .image-input{opacity: 0;position:absolute;width:40%;height:20%;z-index: 1000}
         .image-edit{position:absolute;text-align:center;margin-top:5%;width:40%;z-index: 900}
+        .width-60{width:60px;}
     </style>
 </head>
-<body>
+<body style="height:100%">
 <%include navigation-index.ejs%>
-<%include navigation-joinManager.ejs%>
+<%include navigation-education.ejs%>
 <div class="right-content">
-
     <div class="panel-heading title-block">
         <h3 class="panel-title title-white">基本信息</h3>
         <h3 class="panel-title right-button" onclick="edit()" id="edit">编辑</h3>
@@ -36,12 +36,10 @@
     <div class="margin-left-30" id="person-info">
         <img src="/images/icon.png" class="head img-circle">
         <div class="base-info">
-            <h3 class="inline">齐书强(台安店长)</h3><br>
+            <h3 class="inline">教务姓名</h3><br>
             <h4 class="inline">手机号码</h4>
         </div>
-        <button class="btn btn-default inline right" onclick="logout()">退出登录</button>
-        <br>
-        <h5>家庭地址</h5>
+        <button class="btn btn-default right" onclick="logout()">退出登录</button>
     </div>
     <div class="margin-left-30"   style="display: none" id="person-edit">
         <div class="inline">
@@ -51,17 +49,10 @@
         </div>
         <div class="base-info">
             <input id="person-name"class="inline margin-top-20" value="学生姓名" placeholder="请输入学生姓名" disabled="false"/>
-            <select class="padding-4">
-                <option>台安店</option>
-                <option>大连店</option>
-                <option>沈阳店</option>
-            </select><br>
-            <input id="person-phoneNumber"class="inline margin-top-20" value="手机号码" placeholder="请输入手机号码" disabled="false"/>
-            <button id="apply-modify"class="btn btn-defalut padding-4" onclick="applyModify()">申请修改</button>
-
+            <button id="apply-modify"class="btn btn-defalut padding-4" onclick="applyModify()">申请修改</button><br>
+            <input id="person-phoneNumber"class="inline margin-top-10" value="手机号码" placeholder="请输入手机号码" disabled="false"/>
         </div>
         <br>
-        <label>家庭地址&nbsp</label><input value="家庭地址" placeholder="请输入家庭信息">
     </div>
     <div class="panel-heading title-block">
         <h3 class="panel-title title-white">隐私信息</h3>
@@ -95,33 +86,18 @@
             <p>身份证背面</p>
         </div>
     </div>
-    <div class="panel-heading title-block">
-        <h3 class="panel-title title-white">店铺信息</h3>
-        <h3 onclick="modify()"class="panel-title right-button" id="modify">申请修改</h3>
-    </div>
-    <div class="margin-left-30" id="join-info">
-        <div class="join-info">
-            <h3 class="inline">台安店</h3><br>
-            <h4 class="inline">辽宁省鞍山市台安县</h4>
-        </div>
-    </div>
-    <div class="margin-left-30" id="join-info-edit" style="display: none">
-        <div class="join-info">
-            <label>店铺名称&nbsp</label><input id="join-name"class="inline margin-top-20" value="台安店" placeholder="请输入店铺名称"/><br>
-            <label>店铺地址&nbsp</label><input id="join-address"class="inline margin-top-20" value="辽宁省鞍山市台安县" placeholder="请输入店铺地址"/>
-        </div>
-    </div>
 </div>
 </div>
 </body>
 
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-    $("#person").text("店长姓名")
+
+    $("#person").text("教务姓名")
     function loginDialog(){
-        location.href = "joinManagerDetail"
+        location.href="educationDetail"
     }
-    $("#navigation-person").addClass("select-left-button")
+    $("#navigation-person").addClass("select-left-button");
     var editFlag = true;
     var applyFlag = true;
     var applyIdFlag = true;
@@ -144,11 +120,13 @@
             $("#apply-modify").text("提交修改")
             $("#person-name").attr('disabled',false);
             $("#person-phoneNumber").attr('disabled',false);
+            $("#subject").attr("disabled",false);
         }else{
             applyFlag = true;
             $("#apply-modify").text("申请修改")
             $("#person-name").attr('disabled',true);
             $("#person-phoneNumber").attr('disabled',true);
+            $("#subject").attr("disabled",true);
         }
     }
     function applyId(){
@@ -164,23 +142,19 @@
             $("#id-edit").hide();
         }
     }
-    var modifyFlag = true;
-    function modify(){
-        if(modifyFlag){
-            modifyFlag = false;
-            $("#modify").text("提交申请")
-            $("#join-info").hide();
-            $("#join-info-edit").show();
+    function changeSubject() {
+        var obj = document.getElementById("change-subject");
+        var index = obj.selectedIndex;
+        if(index == 0){
+            $("#science").show();
+            $("#liberal").hide();
         }else{
-            modifyFlag = true;
-            $("#join-info").show();
-            $("#join-info-edit").hide();
-            $("#modify").text("申请修改")
+            $("#science").hide();
+            $("#liberal").show();
         }
     }
-    function logout() {
-        location.href = "/"
+    function logout(){
+        location.href="/"
     }
-    $("#navication-person").addClass("selected-left-button")
 </script>
 </html>

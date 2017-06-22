@@ -1,8 +1,12 @@
 <div class="left-navigation">
     <p class="left-button" onclick="course()" id="navigation-course">课程安排</p>
+    <p class="left-button" onclick="record()" id="navigation-record">课程记录</p>
     <p class="left-button" onclick="person()" id="navigation-person">个人信息</p>
 </div>
 <script>
+    function record(){
+        location.href = "studentCourseRecord"
+    }
     function course(){
         location.href="studentCourse"
     }

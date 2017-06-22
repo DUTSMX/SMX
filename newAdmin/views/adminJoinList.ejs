@@ -23,7 +23,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title inline">加盟列表</h3>
-                <a href="/admin/register" ><h3 class="panel-title right">添加加盟商</h3></a>
+                <h3 class="panel-title right" onclick="addJoin()">添加加盟商</h3>
             </div>
             <div class="table-details">
                 <table  class="table table-hover table-body">
@@ -44,15 +44,37 @@
         </div>
     </div>
 </div>
+<div id="fade" class="black-overlay"></div>
+<div id="light" class="white-content">
+    <div class="dialog">
+        <div class="dialog-title"><span class="font-20 title-white">添加加盟商</span><span class="right title-white" onclick="closeDialog()">X</span></div>
+        <input class="dialog-input" placeholder="请输入加盟店名称"/>
+        <input class="dialog-input" placeholder="请搜索加盟店负责人"/>
+        <input class="dialog-input" placeholder="请输入加盟店地址"/>
+        <button class="btn btn-default dialog-input" onclick="closeDialog()">确认添加</button>
+    </div>
 </div>
+
 </body>
 
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
 
-    $("#person").text("用户姓名")
-    function detail() {
-        location.href="joinDetail"
+    $("#person").text("管理姓名")
+    function loginDialog(){
+        location.href = "adminManagerDetail"
+    }
+    $("#navigation-join").addClass("select-left-button")
+    function detail(){
+        location.href = "adminJoinDetail"
+    }
+    function addJoin(){
+        $("#fade").show()
+        $("#light").show()
+    }
+    function closeDialog(){
+        $("#fade").hide()
+        $("#light").hide()
     }
 </script>
 </html>

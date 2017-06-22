@@ -27,5 +27,5 @@ body{height:100%}
 .dialog-label{width:20%;}
 .dialog-input{width:70%;margin:10px;padding:5px}
 .dialog{width:350px;height:auto;background-color: white;display: inline-block}
-.dialog-title{text-align:left;background-color: #4cae4c;padding:10px}
+.dialog-title{text-align:left;background-color: #4cae4c;padding: 10px}
 .dialog-button{width:90%;margin-bottom:20px}

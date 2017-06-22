@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>尚名校</title>
+    <!-- Bootstrap -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/stylesheets/admin.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/slick.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/slick-theme.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .course-block{height:60px;border-radius: 5px;border-style:solid;border-width:1px;border-color:#4cae4c;margin-bottom:10px;margin-top:10px}
+        .course-title{color:#4cae4c}
+        .inline{display: inline-block;margin:2px;}
+        .right{float:right}
+        .left{float:left}
+        .center{margin-left:12px;margin-top:12px}
+        .sign-up{margin-top:10px;margin-right:10px}
+        .title{text-align:left;background-color: #f7f7f7;padding:10px}
+    </style>
+</head>
+<body>
+<%include navigation-index.ejs%>
+<%include navigation-education.ejs%>
+<div class="right-content">
+    <div class="panel-heading title-block">
+        <h3 class="panel-title title-white">课程列表</h3>
+        <h3 class="panel-title right-button" onclick="addCourse()">添加课程</h3>
+    </div>
+    <div class="course-block">
+        <div class="inline left">
+            <h3 class="inline course-title">高三数学基础班</h3><br>
+            <h4 class="inline">共10课时</h4><br>
+        </div>
+        <button class="btn btn-success right sign-up" onclick="detail()">详情</button>
+    </div>
+    <div class="course-block">
+        <div class="inline left">
+            <h3 class="inline course-title">高三数学提高班</h3><br>
+            <h4 class="inline">共10课时</h4><br>
+        </div>
+        <button class="btn btn-success right sign-up" onclick="detail()">详情</button>
+    </div>
+    <div class="course-block">
+        <div class="inline left">
+            <h3 class="inline course-title">高三数学冲刺班</h3><br>
+            <h4 class="inline">共10课时</h4><br>
+        </div>
+        <button class="btn btn-success right sign-up" onclick="detail()">详情</button>
+    </div>
+</div>
+</body>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+    $("#person").text("教务姓名")
+    function loginDialog(){
+        location.href="educationDetail"
+    }
+    $("#navigation-course").addClass("select-left-button");
+    function addCourse(){
+        location.href = "educationCreateCourse"
+    }
+    function detail(){
+        location.href = "educationCourseDetail"
+    }
+</script>
+</html>

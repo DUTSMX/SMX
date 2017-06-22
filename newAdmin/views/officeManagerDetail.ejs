@@ -26,9 +26,8 @@
 </head>
 <body>
 <%include navigation-index.ejs%>
-<%include navigation-joinManager.ejs%>
+<%include navigation-office.ejs%>
 <div class="right-content">
-
     <div class="panel-heading title-block">
         <h3 class="panel-title title-white">基本信息</h3>
         <h3 class="panel-title right-button" onclick="edit()" id="edit">编辑</h3>
@@ -36,7 +35,7 @@
     <div class="margin-left-30" id="person-info">
         <img src="/images/icon.png" class="head img-circle">
         <div class="base-info">
-            <h3 class="inline">齐书强(台安店长)</h3><br>
+            <h3 class="inline">齐书强</h3><br>
             <h4 class="inline">手机号码</h4>
         </div>
         <button class="btn btn-default inline right" onclick="logout()">退出登录</button>
@@ -50,12 +49,7 @@
             <img src="/images/icon.png" class="head img-circle">
         </div>
         <div class="base-info">
-            <input id="person-name"class="inline margin-top-20" value="学生姓名" placeholder="请输入学生姓名" disabled="false"/>
-            <select class="padding-4">
-                <option>台安店</option>
-                <option>大连店</option>
-                <option>沈阳店</option>
-            </select><br>
+            <input id="person-name"class="inline margin-top-20" value="学生姓名" placeholder="请输入学生姓名" disabled="false"/><br>
             <input id="person-phoneNumber"class="inline margin-top-20" value="手机号码" placeholder="请输入手机号码" disabled="false"/>
             <button id="apply-modify"class="btn btn-defalut padding-4" onclick="applyModify()">申请修改</button>
 
@@ -95,29 +89,13 @@
             <p>身份证背面</p>
         </div>
     </div>
-    <div class="panel-heading title-block">
-        <h3 class="panel-title title-white">店铺信息</h3>
-        <h3 onclick="modify()"class="panel-title right-button" id="modify">申请修改</h3>
-    </div>
-    <div class="margin-left-30" id="join-info">
-        <div class="join-info">
-            <h3 class="inline">台安店</h3><br>
-            <h4 class="inline">辽宁省鞍山市台安县</h4>
-        </div>
-    </div>
-    <div class="margin-left-30" id="join-info-edit" style="display: none">
-        <div class="join-info">
-            <label>店铺名称&nbsp</label><input id="join-name"class="inline margin-top-20" value="台安店" placeholder="请输入店铺名称"/><br>
-            <label>店铺地址&nbsp</label><input id="join-address"class="inline margin-top-20" value="辽宁省鞍山市台安县" placeholder="请输入店铺地址"/>
-        </div>
-    </div>
 </div>
 </div>
 </body>
 
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-    $("#person").text("店长姓名")
+    $("#person").text("高管姓名")
     function loginDialog(){
         location.href = "joinManagerDetail"
     }
@@ -162,20 +140,6 @@
             $("#applyId").text("申请修改");
             $("#id").show();
             $("#id-edit").hide();
-        }
-    }
-    var modifyFlag = true;
-    function modify(){
-        if(modifyFlag){
-            modifyFlag = false;
-            $("#modify").text("提交申请")
-            $("#join-info").hide();
-            $("#join-info-edit").show();
-        }else{
-            modifyFlag = true;
-            $("#join-info").show();
-            $("#join-info-edit").hide();
-            $("#modify").text("申请修改")
         }
     }
     function logout() {

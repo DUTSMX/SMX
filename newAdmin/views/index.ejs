@@ -29,7 +29,7 @@
         .font-20{font-size: 20px}
         .right{float:right}
         .test-login{float:right;margin-right:10px;}
-        .login-type{height:350px;width:100px;text-align: left;background-color: white;float:right}
+        .login-type{height:auto;width:100px;text-align: left;background-color: white;float:right}
     </style>
 </head>
 <body>
@@ -75,11 +75,11 @@
             <label class="test-login" onclick="test()">测试登录</label>
         </div>
         <div id="type" class="login-type">
-            <button class="btn btn-default">管理员</button><br>
-            <button class="btn btn-default">总公司高管</button><br>
-            <button class="btn btn-default">财务</button><br>
-            <button class="btn btn-default">教务</button><br>
-            <button class="btn btn-default">培训</button><br>
+            <button class="btn btn-default" onclick="admin()">管理员</button><br>
+            <button class="btn btn-default" onclick="officeManager()">总公司高管</button><br>
+            <button class="btn btn-default" disabled="true">财务</button><br>
+            <button class="btn btn-default" onclick="education()">教务</button><br>
+            <button class="btn btn-default" disabled="true">培训</button><br>
             <button class="btn btn-default" onclick="joinManager()">加盟店长</button><br>
             <button class="btn btn-default" onclick="joinReception()">加盟店前台</button><br>
             <button class="btn btn-default" onclick="teacher()">教师</button><br>
@@ -126,5 +126,14 @@
     }
     function joinManager(){
         location.href = "joinManagerReport"
+    }
+    function officeManager(){
+        location.href = "officeManagerReport"
+    }
+    function admin(){
+        location.href = "adminJoinList"
+    }
+    function education(){
+        location.href = "educationCourse"
     }
 </script>

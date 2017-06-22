@@ -26,6 +26,7 @@
         .title{text-align:left;background-color: #f7f7f7;padding:10px}
         .course-list{height:35vh;overflow: auto}
         .student{width:30%;margin:5px;}
+        .select{width:150px;text-align: left;background-color: white;float:right;display: none;padding-top:30px;height:300px;overflow-y: scroll;overflow-x:hidden}
     </style>
 </head>
 <body>
@@ -180,8 +181,8 @@
     <div class="dialog" id="post" display="none">
         <div class="dialog-title"><span class="font-20 title-white">申请课程</span><span class="right title-white" onclick="closeDialog()">X</span></div>
         <label class="dialog-label">课程名称</label><input class="dialog-input" placeholder="请输入课程名称">
-        <label class="dialog-label">上课老师</label><input class="dialog-input" placeholder="请输入老师">
-        <label class="dialog-label">上课同学</label><input class="dialog-input" placeholder="请输入同学">
+        <label class="dialog-label">上课老师</label><input id="chooseTeacher" class="dialog-input" placeholder="请选择老师" onclick="chooseTeacher()">
+        <label class="dialog-label">上课同学</label><input id="chooseStudent" class="dialog-input" placeholder="请输入同学" onclick="chooseStudent()">
         <label class="dialog-label">期望时间</label>
         <select id="time"class="dialog-input" onchange="selectTime()">
             <option>时间不限</option>
@@ -208,6 +209,26 @@
             <input type="checkbox">21:10
         </div>
         <button class="btn btn-default dialog-button" onclick="closeDialog()">提交申请</button>
+    </div>
+    <div id="select-teacher" class="select">
+        <button class="btn btn-default center">赵老师</button><br>
+        <button class="btn btn-default center">钱老师</button><br>
+        <button class="btn btn-default center">孙老师</button><br>
+        <button class="btn btn-default center">李老师</button><br>
+        <button class="btn btn-default center">周老师</button><br>
+        <button class="btn btn-default center">吴老师</button><br>
+        <button class="btn btn-default center">郑老师</button><br>
+        <button class="btn btn-default center">王老师</button><br>
+    </div>
+    <div id="select-student" class="select">
+        <button class="btn btn-default center">冯同学</button><br>
+        <button class="btn btn-default center">陈同学</button><br>
+        <button class="btn btn-default center">褚同学</button><br>
+        <button class="btn btn-default center">卫同学</button><br>
+        <button class="btn btn-default center">蒋同学</button><br>
+        <button class="btn btn-default center">沈同学</button><br>
+        <button class="btn btn-default center">韩同学</button><br>
+        <button class="btn btn-default center">杨同学</button><br>
     </div>
 </div>
 </body>
@@ -236,6 +257,12 @@
         $("#light").hide()
         $("#add-student").hide()
         $("#post").hide()
+        $(".white-content").width("350px")
+        $(".dialog-title").width("330px")
+        $("#chooseTeacher").attr("disabled",false)
+        $("#chooseStudent").attr("disabled",false)
+        $("#select-teacher").hide();
+        $("#select-student").hide();
     }
     function selectTime(){
         var time = $("#time").val();
@@ -249,6 +276,24 @@
             $("#select-day").hide();
             $("#select-course").hide();
         }
+    }
+    function chooseTeacher(){
+        $(".white-content").width("500px")
+        $(".white-content").height("300px")
+        $(".dialog-title").width("480px")
+        $("#select-teacher").show();
+        $("#select-student").hide();
+        $("#chooseTeacher").attr("disabled",true)
+        $("#chooseStudent").attr("disabled",false)
+    }
+    function chooseStudent(){
+        $(".white-content").width("500px")
+        $(".white-content").height("300px")
+        $(".dialog-title").width("480px")
+        $("#select-teacher").hide();
+        $("#select-student").show();
+        $("#chooseTeacher").attr("disabled",false)
+        $("#chooseStudent").attr("disabled",true)
     }
 </script>
 </html>

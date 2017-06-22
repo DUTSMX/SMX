@@ -26,7 +26,7 @@
 </head>
 <body>
 <%include navigation-index.ejs%>
-<%include navigation-joinManager.ejs%>
+<%include navigation-admin.ejs%>
 <div class="right-content">
 
     <div class="panel-heading title-block">
@@ -36,7 +36,7 @@
     <div class="margin-left-30" id="person-info">
         <img src="/images/icon.png" class="head img-circle">
         <div class="base-info">
-            <h3 class="inline">齐书强(台安店长)</h3><br>
+            <h3 class="inline">齐书强(管理员)</h3><br>
             <h4 class="inline">手机号码</h4>
         </div>
         <button class="btn btn-default inline right" onclick="logout()">退出登录</button>
@@ -95,31 +95,15 @@
             <p>身份证背面</p>
         </div>
     </div>
-    <div class="panel-heading title-block">
-        <h3 class="panel-title title-white">店铺信息</h3>
-        <h3 onclick="modify()"class="panel-title right-button" id="modify">申请修改</h3>
-    </div>
-    <div class="margin-left-30" id="join-info">
-        <div class="join-info">
-            <h3 class="inline">台安店</h3><br>
-            <h4 class="inline">辽宁省鞍山市台安县</h4>
-        </div>
-    </div>
-    <div class="margin-left-30" id="join-info-edit" style="display: none">
-        <div class="join-info">
-            <label>店铺名称&nbsp</label><input id="join-name"class="inline margin-top-20" value="台安店" placeholder="请输入店铺名称"/><br>
-            <label>店铺地址&nbsp</label><input id="join-address"class="inline margin-top-20" value="辽宁省鞍山市台安县" placeholder="请输入店铺地址"/>
-        </div>
-    </div>
 </div>
 </div>
 </body>
 
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-    $("#person").text("店长姓名")
+    $("#person").text("管理姓名")
     function loginDialog(){
-        location.href = "joinManagerDetail"
+        location.href = "adminDetail"
     }
     $("#navigation-person").addClass("select-left-button")
     var editFlag = true;
