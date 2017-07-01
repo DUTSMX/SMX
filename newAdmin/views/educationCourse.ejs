@@ -34,27 +34,15 @@
         <h3 class="panel-title title-white">课程列表</h3>
         <h3 class="panel-title right-button" onclick="addCourse()">添加课程</h3>
     </div>
+    <%courseSeries.forEach(function (item){%>
     <div class="course-block">
         <div class="inline left">
-            <h3 class="inline course-title">高三数学基础班</h3><br>
-            <h4 class="inline">共10课时</h4><br>
+            <h3 class="inline course-title"><%=item.courseSeriesName%></h3><br>
+            <h4 class="inline">共<%=item.courseSeriesNumber%>课时</h4><br>
         </div>
-        <button class="btn btn-success right sign-up" onclick="detail()">详情</button>
+        <button class="btn btn-success right sign-up" onclick="detail(<%=item.courseSeriesId%>)">详情</button>
     </div>
-    <div class="course-block">
-        <div class="inline left">
-            <h3 class="inline course-title">高三数学提高班</h3><br>
-            <h4 class="inline">共10课时</h4><br>
-        </div>
-        <button class="btn btn-success right sign-up" onclick="detail()">详情</button>
-    </div>
-    <div class="course-block">
-        <div class="inline left">
-            <h3 class="inline course-title">高三数学冲刺班</h3><br>
-            <h4 class="inline">共10课时</h4><br>
-        </div>
-        <button class="btn btn-success right sign-up" onclick="detail()">详情</button>
-    </div>
+    <%})%>
 </div>
 </body>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -67,8 +55,8 @@
     function addCourse(){
         location.href = "educationCreateCourse"
     }
-    function detail(){
-        location.href = "educationCourseDetail"
+    function detail(courseSeriesId){
+        location.href = "educationCourseDetail?courseSeriesId="+courseSeriesId;
     }
 </script>
 </html>

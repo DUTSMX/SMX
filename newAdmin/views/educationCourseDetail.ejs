@@ -26,6 +26,8 @@
         .sign-up{margin-top:10px;margin-right:10px}
         .title{text-align:left;background-color: #f7f7f7;padding:10px}
         .course{width:150px}
+        .doBtn{float:right;padding-bottom: 3vh;}
+        .clear{clear: both;}
     </style>
 </head>
 <body>
@@ -33,8 +35,13 @@
 <%include navigation-education.ejs%>
 <div class="right-content">
     <div class="panel-heading title-block">
-        <h2 class="title-white">高考数学冲刺班（共10课时）</h2><br>
-        <h4 class="title-white">我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍</h4>
+        <h2 class="title-white"><%=courseSeries.courseSeriesName%>（共<%=courseSeries.courseSeriesNumber%>课时）</h2><br>
+        <div class="doBtn">
+        <button type="button" class="btn btn-default">编辑</button>
+        <button type="button" class="btn btn-default" onclick="courseSeriesDelete(<%=courseSeries.courseSeriesId%>)">删除</button>
+        </div>
+        <div class="clear"></div>
+        <h4 class="title-white"><%=courseSeries.courseSeriesIntro%></h4>
     </div>
     <div class="course-block">
         <div class="inline left course">
@@ -96,6 +103,7 @@
             <h4 class="inline">课时10</h4>
         </div>
     </div>
+    <p id="hint"></p>
 </div>
 </body>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -106,5 +114,14 @@
         location.href="educationDetail"
     }
     $("#navigation-course").addClass("select-left-button");
+    function courseSeriesDelete(courseSeriesId) {
+        var courseSeriesId={courseSeriesId:courseSeriesId};
+        $.post('courseSeriesDelete',courseSeriesId,function (ret) {
+            if(ret.status==true){
+                //$("#hint").text(ret);
+                location.href='educationCourse';
+            }
+        })
+    }
 </script>
 </html>
