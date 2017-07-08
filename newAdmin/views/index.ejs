@@ -69,8 +69,8 @@
     <div id="light" class="white-content">
         <div class="dialog">
             <div class="login-logo-div"><image class="login-logo"src="/images/icon.png"></image><span class="font-20">登录尚名校</span><span class="right" onclick="closeDialog()">x</span></div>
-            <label class="dialog-label">手机号</label><input class="dialog-input" placeholder="手机号"/>
-            <label class="dialog-label">密码</label><input class="dialog-input" placeholder="密码"/>
+            <label class="dialog-label">手机号</label><input class="dialog-input" id="phoneNumber" placeholder="手机号"/>
+            <label class="dialog-label">密码</label><input class="dialog-input" id="password" placeholder="密码"/>
             <button class="btn btn-default dialog-button" onclick="login()">登录</button>
             <label class="test-login" onclick="test()">测试登录</label>
         </div>
@@ -109,14 +109,38 @@
         $("#type").hide();
     }
     function login(){
-//        location.href="student";
+        var phoneNumber=$("#phoneNumber").val();
+        var password=$('#password').val();
+        if(phoneNumber.length==0){
+            $("#phoneNumber").attr('placeholder',"手机号不能为空");
+        }
+        else if(password.length==0){
+            $("#password").attr('placeholder','密码不能为空');
+        }
+        else {
+            var data={
+            phoneNumber:phoneNumber,
+            password:password
+        }
+        console.log("data:"+JSON.stringify(data));
+        $.post('user/login',data,function (ret) {
+            console.log("identityId:"+ret.ret);
+            var ret=ret.ret;
+            if(ret==0){location.href='student/studentCourse'}
+            else if(ret==1){location.href='teacherCourse'}
+            else if(ret==2){location.href='educationCourse'}
+            else if(ret==3){location.href='admainDetail'}
+            else if(ret==4){location.href='joinManagerDetail'}
+            else if(ret==5){location.href='joinReceptionDetail'}
+        })
+        }
     }
     function test(){
         $(".white-content").width("450px")
         $("#type").show();
     }
     function student() {
-        location.href = "studentCourse";
+        location.href = "student/studentCourse";
     }
     function teacher() {
         location.href = "teacherCourse";

@@ -33,11 +33,11 @@
 <%include navigation-student.ejs%>
 <div class="right-content">
     <div class="panel-heading title-block">
-        <h2 class="title-white">高考数学冲刺班（共10课时）</h2><br>
-        <h4 class="title-white">教师：齐书强</h4><br>
-        <h4 class="title-white">地点：台安店教室1</h4><br>
+        <h2 class="title-white"><%=courseSeries.courseSeriesName%>（共<%=courseSeries.courseSeriesNumber%>课时）</h2><br>
+        <h4 class="title-white">教师：<%=courseSeries.courseSeriesTeacher%></h4><br>
+        <h4 class="title-white">地点：<%=courseSeriesDetails[0].courseRoom%></h4><br>
         <h4 class="title-white">学生：李程，常诗涵，王欣淼，张佳伟，乔文韬</h4><br>
-        <h4 class="title-white">我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍我是课程介绍</h4>
+        <h4 class="title-white"><%=courseSeries.courseSeriesIntro%></h4>
     </div>
     <div class="course-block-finished">
         <div class="inline left course">

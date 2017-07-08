@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var courseSeries=require('../model/course');
+var course=require('../model/course');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -35,20 +35,6 @@ router.get('/joinReceptionCourseManager',function (req,res,next) {
   res.render('joinReceptionCourseManager');
 })
 
-router.get('/studentCourse',function (req,res,next) {
-  courseSeries.findAll().then(function (data) {
-    res.render('studentCourse',{data:data});
-  })
-})
-router.get('/studentCourseRecord',function (req,res,next) {
-  res.render('studentCourseRecord');
-})
-router.get('/studentDetail',function (req,res,next) {
-  res.render('studentDetail');
-})
-router.get('/studentCourseDetail',function (req,res,next) {
-  res.render('studentCourseDetail')
-})
 
 router.get('/teacherCourse',function (req,res,next) {
   res.render('teacherCourse')

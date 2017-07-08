@@ -3,16 +3,17 @@
  */
 var express = require('express');
 var router = express.Router();
-var courseSeries=require('../model/course');
+var course=require('../model/course');
+var moment = require("moment");
 router.get('/',function (req,res) {
-    courseSeries.findAll().then(function (ret) {
+    course.courseSeries.findAll().then(function (ret) {
         console.log("ret:" + JSON.stringify(ret));
         res.render('educationCourse',{courseSeries:ret});
     });
 })
 router.get('/educationCourse',function (req,res,next) {
     //console.log("11111");
-    courseSeries.findAll().then(function (ret) {
+    course.courseSeries.findAll().then(function (ret) {
         console.log("ret:"+JSON.stringify(ret));
         res.render('educationCourse',{courseSeries:ret});
     })
@@ -27,15 +28,29 @@ router.post('/addCourseSeries',function (req,res) {
     var courseSeriesGrade=req.body.courseSeriesGrade;
     var courseSeriesNumber=req.body.courseSeriesNumber;
     var courseSeriesCourseName=req.body.courseSeriesCourseName;
-    courseSeries.create({
+    console.log("courseSeriesCourseName:"+JSON.stringify(courseSeriesCourseName));
+    course.courseSeries.create({
         courseSeriesName:courseSeriesName,
         courseSeriesSubject:courseSeriesSubject,
         courseSeriesIntro:courseSeriesIntro,
         courseSeriesGrade:courseSeriesGrade,
         courseSeriesNumber:courseSeriesNumber,
-        courseSeriesCourseName:courseSeriesCourseName
+        //courseSeriesCourseName:courseSeriesCourseName
         }).then(function (data) {
         console.log(data);
+        courseSeriesCourseName.forEach(function (item) {
+            console.log("item:"+item);
+            var date=new Date();
+            console.log("date:"+date);
+            console.log("courseSeriesCourseName.IndexOf(item):"+courseSeriesCourseName.indexOf(item));
+            course.course.create({
+                courseName:item,
+                objectOriented:courseSeriesSubject,
+                courseSeriesId:data.courseSeriesId,
+                courseSeriesCourseId:courseSeriesCourseName.indexOf(item)+1,
+                createDate:date
+            })
+        });
         res.send("添加成功");
     }).catch(function (err) {
         console.log(err);
@@ -45,13 +60,21 @@ router.post('/addCourseSeries',function (req,res) {
 router.get('/educationCourseDetail',function (req,res,next) {
     var courseSeriesId=req.query.courseSeriesId;
     console.log("courseSeriesId:"+courseSeriesId);
-    courseSeries.findOne({'where':{'courseSeriesId':courseSeriesId}}).then(function (ret) {
+    course.courseSeries.findOne({
+        'where':{'courseSeriesId':courseSeriesId}
+    }).then(function (ret) {
         console.log("ret:"+JSON.stringify(ret));
-        res.render('educationCourseDetail',{courseSeries:ret});
+          ret.getCourse({
+              'where':{'courseSeriesId':courseSeriesId}
+          }).then(function (ret1) {
+              console.log("ret1:"+JSON.stringify(ret1));
+              res.render('educationCourseDetail',{courseSeries:ret,course:ret1});
+          });
+});
 });
 router.post('/courseSeriesDelete',function (req,res) {
     var courseSeriesId=req.body.courseSeriesId;
-    courseSeries.destroy({where:{courseSeriesId:courseSeriesId}}).then(function (ret) {
+    course.courseSeries.destroy({where:{courseSeriesId:courseSeriesId}}).then(function (ret) {
        console.log("ret:"+ret);
         res.send({
             status:true,
@@ -62,5 +85,4 @@ router.post('/courseSeriesDelete',function (req,res) {
 router.get('/educationDetail',function (req,res,next) {
     res.render('educationDetail');
     })
-})
 module.exports=router;

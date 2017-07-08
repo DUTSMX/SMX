@@ -572,7 +572,7 @@ class QueryInterface {
     options.type = QueryTypes.UPSERT;
     options.raw = true;
 
-    const sql = this.QueryGenerator.upsertQuery(tableName, valuesByField, updateValues, where, model.rawAttributes, options);
+    const sql = this.QueryGenerator.upsertQuery(tableName, valuesByField, updateValues, where, model, options);
     return this.sequelize.query(sql, options).then(rowCount => {
       if (rowCount === undefined) {
         return rowCount;
@@ -847,7 +847,7 @@ class QueryInterface {
       throw new Error('Unable to set autocommit for a transaction without transaction object!');
     }
     if (transaction.parent) {
-      // Not possible to set a seperate isolation level for savepoints
+      // Not possible to set a separate isolation level for savepoints
       return Promise.resolve();
     }
 
@@ -870,7 +870,7 @@ class QueryInterface {
     }
 
     if (transaction.parent || !value) {
-      // Not possible to set a seperate isolation level for savepoints
+      // Not possible to set a separate isolation level for savepoints
       return Promise.resolve();
     }
 

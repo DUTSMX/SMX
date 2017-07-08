@@ -2,6 +2,7 @@
  * Created by zhangchong on 2017/7/1.
  */
 var Sequelize = require('sequelize');
+var course=require('./course')
 var sequelize=new Sequelize(
     'smx',
     'cdb_outerroot',
@@ -17,3 +18,51 @@ var sequelize=new Sequelize(
         }
     }
 );
+var user = sequelize.define('account', {
+        userId:{ //自增长课程系列Id,主键,整形
+            type:Sequelize.INTEGER,
+            primaryKey: true,
+            autoIncrement:true
+        },
+        phoneNumber: { //课程系列名称
+            type: Sequelize.INTEGER
+        },
+        password:{//课程系列的科目
+            type:Sequelize.STRING(30)
+        },
+        role:{
+            type:Sequelize.INTEGER
+        },
+        userName: { //课程面向对象年级
+            type: Sequelize.STRING(30)
+        },
+        userSchool: { //课程面向对象年级
+            type: Sequelize.STRING(30)
+        },
+        userGrade: { //课程面向对象年级
+            type: Sequelize.STRING(30)
+        },
+        userAge: { //课程系列课程数
+            type: Sequelize.INTEGER
+        },
+        userAddress: { //课程系列简介
+            type: Sequelize.STRING(30)
+        },
+        userHeadUrl:{//课程系列每节课课程名称
+            type:Sequelize.STRING(30)
+        },
+        registerDate:{//课程系列每节课内容
+            type:Sequelize.DATE
+        },
+        gender:{
+            type:Sequelize.INTEGER
+        },
+        identityId:{
+            type:Sequelize.INTEGER
+        }
+},
+    {
+        freezeTableName: true
+    }
+);
+module.exports=user;
