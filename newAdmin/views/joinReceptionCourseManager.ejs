@@ -146,22 +146,16 @@
         <div class="panel-heading title-block">
             <h3 class="panel-title title-white">课程申请</h3>
         </div>
-        <div class="course-block">
-            <div class="inline left">
-                <h3 class="inline course-title">张三，李四，王五</h3><br>
-                <h4 class="inline">高三数学冲刺班</h4>
+        <%post.forEach(function (item) {%>
+            <div class="course-block">
+                <div class="inline left">
+                    <h3 class="inline course-title"><%=item.students%></h3><br>
+                    <h4 class="inline"><%=item.courseSeriesName%>  <%=item.courseSeriesClassType%> <%=item.time%> <%=item.teacher%></h4>
+                </div>
+                <button class="btn btn-success right sign-up" onclick="add()">添加</button>
+                <button class="btn btn-success right sign-up" onclick="post('<%=item.courseSeriesId%>','<%=item.courseSeriesName%>','<%=item.students%>','<%=item.courseSeriesClassType%>','<%=item.courseSeriesTeacher%>')">提交</button>
             </div>
-            <button class="btn btn-success right sign-up" onclick="add()">添加</button>
-            <button class="btn btn-success right sign-up" onclick="post()">提交</button>
-        </div>
-        <div class="course-block">
-            <div class="inline left">
-                <h3 class="inline course-title">张三</h3><br>
-                <h4 class="inline">高三数学</h4>
-            </div>
-            <button class="btn btn-success right sign-up" onclick="add()">添加</button>
-            <button class="btn btn-success right sign-up" onclick="post()">提交</button>
-        </div>
+        <%})%>
     </div>
 </div>
 <div id="fade" class="black-overlay"></div>
@@ -180,9 +174,10 @@
     </div>
     <div class="dialog" id="post" display="none">
         <div class="dialog-title"><span class="font-20 title-white">申请课程</span><span class="right title-white" onclick="closeDialog()">X</span></div>
-        <label class="dialog-label">课程名称</label><input class="dialog-input" placeholder="请输入课程名称">
+        <label class="dialog-label">课程名称</label><input id="courseName" class="dialog-input" placeholder="请输入课程名称">
         <label class="dialog-label">上课老师</label><input id="chooseTeacher" class="dialog-input" placeholder="请选择老师" onclick="chooseTeacher()">
         <label class="dialog-label">上课同学</label><input id="chooseStudent" class="dialog-input" placeholder="请输入同学" onclick="chooseStudent()">
+        <label class="dialog-label">班    型</label><input id="classType" class="dialog-input" placeholder="请输入班型" onclick="chooseStudent()">
         <label class="dialog-label">期望时间</label>
         <select id="time"class="dialog-input" onchange="selectTime()">
             <option>时间不限</option>
@@ -246,7 +241,20 @@
         $("#add-student").show()
         $("#post").hide()
     }
-    function post(){
+    function post(id,name,student,type,teacher){
+        $("#courseName").val(name)
+        $("#studentName").val(student)
+        $("#classType").val(type)
+        var data = {
+            id:id,
+            students:student,
+            room:"教室1",
+            teacher:teacher,
+            classType:type
+        }
+        $.post("postCourse",data,function (data) {
+            console.log(JSON.stringify(data))
+        })
         $("#fade").show()
         $("#light").show()
         $("#add-student").hide()

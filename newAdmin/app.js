@@ -10,7 +10,7 @@ var index = require('./routes/index');
 var education=require('./routes/education');
 var user = require('./routes/user');
 var student = require('./routes/student');
-
+var joinReception = require('./routes/joinReception');
 var app = express();
 var getRandom128 = function(){
   var length = 128;
@@ -39,7 +39,7 @@ app.use('/', index);
 app.use('/user',user);
 app.use('/education',education);
 app.use('/student',student);
-
+app.use('/joinReception',joinReception)
 // app.use('/users', users);
 
 // catch 404 and forward to error handler

@@ -59,7 +59,7 @@
             <h4 class="inline"><%=item.subject%> 共<%=item.number%>课时</h4>
         </div>
         <button class="btn btn-success right sign-up" onclick="courseDetail(<%=item.templateId%>)">详情</button>
-        <button class="btn btn-success right sign-up" onclick="enter(<%=item.seriesName%>)">报名</button>
+        <button class="btn btn-success right sign-up" onclick="enter('<%=item.seriesName%>','<%=item.templateId%>')">报名</button>
     </div>
     <%})%>
 </div>
@@ -76,8 +76,16 @@
     </div>
     <div class="dialog" id="enter" display="none">
         <div class="dialog-title"><span class="font-20 title-white">申请课程</span><span class="right title-white" onclick="closeDialog()">X</span></div>
-        <label class="dialog-label">课程名称</label><input class="dialog-input" placeholder="请输入课程名称">
-        <label class="dialog-label">上课同学</label><input class="dialog-input" placeholder="请输入同学">
+        <label class="dialog-label">课程名称</label><input id="courseName" class="dialog-input" placeholder="请输入课程名称">
+        <label class="dialog-label">上课同学</label><input id="courseStudent" class="dialog-input" placeholder="请输入同学">
+        <label class="dialog-label">期望老师</label><input id="courseTeacher" class="dialog-input" placeholder="请输入老师">
+        <label class="dialog-label">期望班型</label>
+        <span id="select-class" class="btn-group dialog-input">
+            <input type="radio">1人&nbsp&nbsp&nbsp&nbsp
+            <input type="radio">2人&nbsp&nbsp&nbsp&nbsp
+            <input type="radio">3-4人&nbsp&nbsp&nbsp&nbsp
+            <input type="radio">5-8人
+        </span><br>
         <label class="dialog-label">期望时间</label>
         <select id="time"class="dialog-input" onchange="selectTime()">
             <option>时间不限</option>
@@ -103,12 +111,13 @@
             <input type="checkbox">19:30
             <input type="checkbox">21:10
         </div>
-        <button class="btn btn-default dialog-button" onclick="closeDialog()">提交申请</button>
+        <button class="btn btn-default dialog-button" onclick="postHope()">提交申请</button>
     </div>
 </div>
 </body>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
+    var selectId;
     $("#person").text("学生姓名")
     function loginDialog(){
         location.href="studentDetail"
@@ -119,11 +128,28 @@
         $("#apply-course").show();
         $("#enter").hide();
     }
-    function enter(){
+    function enter(name,id){
+        selectId = id;
+        $("#courseName").val(name)
+        $("#courseStudent").val("学生姓名")
+        console.log("enter")
         $("#fade").show()
         $("#light").show()
         $("#apply-course").hide();
         $("#enter").show();
+    }
+    function postHope(){
+        var data = {
+            templateId:selectId,
+            classType:"2人",
+            time:"8:00",
+            teacher:"齐书强",
+            student:"姚晗"
+        }
+        $.post("postHope",data,function (data) {
+            console.log(data)
+            closeDialog();
+        })
     }
     function closeDialog(){
         $("#fade").hide()
@@ -131,17 +157,17 @@
         $("#apply-course").hide();
         $("#enter").hide();
     }
-    function courseDetail(courseSeriesId){
-        location.href="studentCourseDetail?courseSeriesId="+courseSeriesId;
+    function courseDetail(id){
+        location.href="studentCourseDetail?templateId="+id;
     }
     $("#navigation-course").addClass("select-left-button");
     function selectTime(){
         var time = $("#time").val();
         if(time == "每天"){
-            $("#select-day").show();
+            $("#select-day").hide();
             $("#select-course").show();
         }else if(time == "每周"){
-            $("#select-day").hide();
+            $("#select-day").show();
             $("#select-course").show();
         }else{
             $("#select-day").hide();

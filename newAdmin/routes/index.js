@@ -14,6 +14,15 @@ router.get('/joinManagerDetail', function (req, res, next) {
     res.render('joinManagerDetail');
 });
 
+router.get('/education/joinReceptionTeacherList',function (req,res,next) {
+    user.findAll({where:{role:1}}).then(function(ret){
+        console.log(JSON.stringify(ret))
+        res.render('joinReceptionTeacherList',{teacher:ret});
+    })
+})
+router.get('/education/joinReceptionTeacherDetail',function (req,res,next) {
+    res.render('joinReceptionTeacherDetail');
+})
 
 router.post('/createStudent', function (req, res, next) {
     console.log("body:"+JSON.stringify(req.body));
@@ -29,58 +38,6 @@ router.post('/createStudent', function (req, res, next) {
     });
     res.end("235")
 });
-
-
-router.get('/joinReceptionStudentDetail', function (req, res, next) {
-    res.render('joinReceptionStudentDetail');
-});
-router.get('/joinReceptionTodayCourse', function (req, res, next) {
-    res.render('joinReceptionTodayCourse');
-});
-router.get('/joinReceptionPrint', function (req, res, next) {
-    res.render('joinReceptionPrint');
-});
-router.get('/joinReceptionCourseCalendar', function (req, res, next) {
-    res.render('joinReceptionCourseCalendar');
-});
-router.get('/joinReceptionDetail',function (req,res,next) {
-  user.findOne({where:{userId:1}}).then(function(ret){
-    console.log(JSON.stringify(ret))
-    res.render('joinReceptionDetail',{info:ret});
-  })
-})
-router.get('/joinReceptionStudentList',function (req,res,next) {
-  user.findAll({where:{role:0}}).then(function(ret){
-    console.log(JSON.stringify(ret))
-    res.render('joinReceptionStudentList',{student:ret});
-  })
-})
-router.get('/joinReceptionStudentDetail',function (req,res,next) {
-  res.render('joinReceptionStudentDetail');
-})
-
-router.get('/education/joinReceptionTeacherList',function (req,res,next) {
-    user.findAll({where:{role:1}}).then(function(ret){
-        console.log(JSON.stringify(ret))
-        res.render('joinReceptionTeacherList',{teacher:ret});
-    })
-})
-router.get('/education/joinReceptionTeacherDetail',function (req,res,next) {
-    res.render('joinReceptionTeacherDetail');
-})
-
-router.get('/joinReceptionTodayCourse',function (req,res,next) {
-  res.render('joinReceptionTodayCourse');
-})
-router.get('/joinReceptionPrint',function (req,res,next) {
-  res.render('joinReceptionPrint');
-})
-router.get('/joinReceptionCourseCalendar',function (req,res,next) {
-  res.render('joinReceptionCourseCalendar');
-})
-router.get('/joinReceptionCourseManager',function (req,res,next) {
-  res.render('joinReceptionCourseManager');
-})
 router.get('/teacherCourse', function (req, res, next) {
     res.render('teacherCourse')
 });

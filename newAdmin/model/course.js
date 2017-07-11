@@ -40,12 +40,42 @@ exports.sequelize=sequelize;
         courseSeriesIntro: { //课程系列简介
             type: Sequelize.TEXT
         },
-        courseSeriesCourseName: {//课程系列每节课课程名称
-            type: Sequelize.STRING(30)
+        nowNumber:{
+            type:Sequelize.INTEGER
         },
-        courseSeriesCourseContent: {//课程系列每节课内容
-            type: Sequelize.TEXT
+        status:{
+            type:Sequelize.INTEGER
+        },
+        courseSeriesTeacher:{
+            type:Sequelize.STRING(255)
+        },
+        courseIds:{
+            type:Sequelize.STRING(255)
+        },
+        courseSeriesLevel:{
+            type:Sequelize.STRING(255)
+        },
+        courseSeriesClassType:{
+            type:Sequelize.STRING(255)
+        },
+        shopId:{
+            type:Sequelize.INTEGER
+        },
+        time:{
+            type:Sequelize.STRING(255)
+        },
+        room:{
+            type:Sequelize.STRING(255)
+        },
+        students:{
+            type:Sequelize.STRING(255)
         }
+        // courseSeriesCourseName: {//课程系列每节课课程名称
+        //     type: Sequelize.STRING(30)
+        // },
+        // courseSeriesCourseContent: {//课程系列每节课内容
+        //     type: Sequelize.TEXT
+        // }
     },
     {
         freezeTableName: true
