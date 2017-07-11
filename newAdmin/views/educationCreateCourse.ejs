@@ -78,7 +78,7 @@
     <label>课程科目&nbsp</label><input class="input" id="courseSeriesSubject" placeholder="请输入课程科目"/><br>
     <label>课程介绍&nbsp</label><input class="input" id="courseSeriesIntro" placeholder="请输入课程介绍"/><br>
     <label>课程年级&nbsp</label><input class="input" id="courseSeriesGrade" placeholder="请输入课程年级"/><br>
-    <label>学生水平&nbsp</label><input class="input" placeholder="请输入学生水平"/><br>
+    <label>学生水平&nbsp</label><input class="input" id="courseSeriesLevel" placeholder="请输入学生水平"/><br>
     <label>课时数目&nbsp</label><input id="courseSeriesNumber" type="number" oninput="change()" onporpertychange="change()"
                                    class="input" placeholder="请输入课时数"/><br>
     <div id="course-detail">
@@ -107,6 +107,7 @@
         var courseSeriesSubject=$("#courseSeriesSubject").val();
         var courseSeriesIntro=$("#courseSeriesIntro").val();
         var courseSeriesGrade=$("#courseSeriesGrade").val();
+        var courseSeriesLevel=$("#courseSeriesLevel").val();
         var courseSeriesNumber=$("#courseSeriesNumber").val();
         var courseSeriesCourseName=[];
         for(var i=0;i<courseSeriesNumber;i++){
@@ -117,11 +118,13 @@
             courseSeriesSubject:courseSeriesSubject,
             courseSeriesIntro:courseSeriesIntro,
             courseSeriesGrade:courseSeriesGrade,
+            courseSeriesLevel:courseSeriesLevel,
             courseSeriesNumber:courseSeriesNumber,
             courseSeriesCourseName:courseSeriesCourseName
         }
         console.log("data:"+JSON.stringify(data));
         $.post("addCourseSeries",data,function (ret) {
+            console.log(ret)
             $("#hint").text(ret);
         })
     }

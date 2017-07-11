@@ -36,9 +36,7 @@ router.get('/studentCourse',function (req,res,next) {
             res.render('studentCourse',{
                 courseDetails:ret,courseSeries:data});
         });
-
     });
-
 });
 
 router.get('/studentCourseRecord',function (req,res,next) {
@@ -79,5 +77,4 @@ router.get('/studentCourseDetail',function (req,res,next) {
         });
     });
 });
-
 module.exports=router;
