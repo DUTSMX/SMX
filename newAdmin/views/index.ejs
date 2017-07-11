@@ -119,20 +119,20 @@
         }
         else {
             var data={
-            phoneNumber:phoneNumber,
-            password:password
-        }
-        console.log("data:"+JSON.stringify(data));
-        $.post('user/login',data,function (ret) {
-            console.log("identityId:"+ret.ret);
-            var ret=ret.ret;
-            if(ret==0){location.href='student/studentCourse'}
-            else if(ret==1){location.href='teacherCourse'}
-            else if(ret==2){location.href='educationCourse'}
-            else if(ret==3){location.href='admainDetail'}
-            else if(ret==4){location.href='joinManagerDetail'}
-            else if(ret==5){location.href='joinReceptionDetail'}
-        })
+                phoneNumber:phoneNumber,
+                password:password
+            }
+            console.log("data:"+JSON.stringify(data));
+            $.post('user/login',data,function (ret) {
+                console.log("identityId:"+ret.ret);
+                var ret=ret.ret;
+                if(ret==0){location.href='student/studentCourse'}
+                else if(ret==1){location.href='teacherCourse'}
+                else if(ret==2){location.href='educationCourse'}
+                else if(ret==3){location.href='admainDetail'}
+                else if(ret==4){location.href='joinManagerDetail'}
+                else if(ret==5){location.href='joinReceptionDetail'}
+            })
         }
     }
     function test(){
