@@ -30,6 +30,23 @@ router.post('/createStudent', function (req, res, next) {
     res.end("235")
 });
 
+router.post('/createTeacher', function (req, res, next) {
+    console.log("body:"+JSON.stringify(req.body));
+    user.create({
+        phoneNumber:req.body.phoneNumber,
+        userName:req.body.teacherName,
+        userSchool:req.body.schoolName,
+        userGrade:req.body.classInfo
+    }).then(function (data) {
+        console.log("data:"+JSON.stringify(data));
+    }).cache(function(err){
+        console.log("err:"+JSON.stringify(err))
+    });
+    res.end("235")
+});
+
+
+
 
 router.get('/joinReceptionStudentDetail', function (req, res, next) {
     res.render('joinReceptionStudentDetail');
@@ -60,7 +77,7 @@ router.get('/joinReceptionStudentDetail',function (req,res,next) {
 })
 
 router.get('/education/joinReceptionTeacherList',function (req,res,next) {
-    user.findAll({where:{role:1}}).then(function(ret){
+    user.findAll({where:{role:2}}).then(function(ret){
         console.log(JSON.stringify(ret))
         res.render('joinReceptionTeacherList',{teacher:ret});
     })
