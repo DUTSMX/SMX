@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var course=require('../model/course');
+var teacher=require('../model/teacher');
 var user =require("../model/user")
-
 /* GET home page. */
 router.get('/', function (req, res, next) {
     res.render('index');
@@ -38,18 +38,35 @@ router.post('/createStudent', function (req, res, next) {
     });
     res.end("235")
 });
-router.get('/teacherCourse', function (req, res, next) {
-    res.render('teacherCourse')
-});
-router.get('/teacherCourseRecord', function (req, res, next) {
-    res.render('teacherCourseRecord')
-});
-router.get('/teacherCourseDetail', function (req, res, next) {
-    res.render('teacherCourseDetail')
-});
-router.get('/teacherList', function (req, res, next) {
-    res.render('teacherList');
-});
+router.get('/teacherDetail',function (req,res,next) {
+    teacher.findOne({teacherId:15}).then(function (ret) {
+        console.log("ret:"+JSON.stringify(ret));
+        ret.getUser().then(function (ret1) {
+            console.log("ret1:"+JSON.stringify(ret1));
+            res.render('teacherDetail',{info:ret1,infos:ret});
+        })
+
+    })
+
+})
+router.get('/teacherCourse',function (req,res,next) {
+  res.render('teacherCourse')
+})
+router.get('/teacherCourseRecord',function (req,res,next) {
+  res.render('teacherCourseRecord')
+})
+router.get('/teacherCourseDetail',function (req,res,next) {
+  res.render('teacherCourseDetail')
+})
+router.get('/teacherList',function (req,res,next) {
+  res.render('teacherList');
+})
+router.get('/officeManagerReport',function (req,res,next) {
+  res.render('officeManagerReport');
+})
+router.get('/officeManagerDetail',function (req,res,next) {
+  res.render('officeManagerDetail');
+})
 router.get('/teacherDetail', function (req, res, next) {
     res.render('teacherDetail');
 });
@@ -76,6 +93,9 @@ router.get('/adminUserDetail', function (req, res, next) {
 router.get('/adminDetail', function (req, res, next) {
     res.render('adminDetail');
 });
-
+router.post("/editInfo",function (req,res) {
+    console.log(JSON.stringify(req.body))
+    res.send({desc:"修改成功！"})
+})
 
 module.exports = router;
