@@ -27,7 +27,7 @@
 </head>
 <body>
 <%include navigation-index.ejs%>
-<%include navigation-student.ejs%>
+<%include navigation-teacher.ejs%>
 <div class="right-content">
     <div>
         <div class="panel-heading title-block">
@@ -139,9 +139,9 @@
 </body>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-    $("#person").text("学生姓名")
+    $("#person").text("老师姓名")
     function loginDialog(){
-        location.href="studentDetail"
+        location.href="teacherDetail"
     }
     $("#navigation-record").addClass("select-left-button");
     function applyCourse(){

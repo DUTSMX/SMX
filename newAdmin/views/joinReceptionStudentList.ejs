@@ -82,11 +82,11 @@
 <div id="light" class="white-content">
     <div class="dialog">
         <div class="dialog-title"><span class="font-20 title-white">添加学生</span><span class="right title-white" onclick="closeDialog()">X</span></div>
-        <input class="dialog-input" placeholder="请输入学生姓名"/>
-        <input class="dialog-input" placeholder="请输入手机号码"/>
-        <input class="dialog-input" placeholder="请输入学校名称"/>
-        <input class="dialog-input" placeholder="请输入年级信息"/>
-        <button class="btn btn-default dialog-input" onclick="closeDialog()">确认添加</button>
+        <input class="dialog-input" id="studentName" placeholder="请输入学生姓名"/>
+        <input class="dialog-input" id="phoneNumber" placeholder="请输入手机号码"/>
+        <input class="dialog-input" id= "schoolName" placeholder="请输入学校名称"/>
+        <input class="dialog-input" id= "classInfo" placeholder="请输入年级信息"/>
+        <button class="btn btn-default dialog-input" onclick="postInfo()">确认添加</button>
     </div>
 </div>
 </body>
@@ -105,9 +105,52 @@
         $("#fade").show()
         $("#light").show()
     }
-    function closeDialog(){
+
+    function closeDialog() {
         $("#fade").hide()
         $("#light").hide()
+
+
     }
+    function postInfo(){
+
+
+        var phoneNumber = $("#phoneNumber").val();
+        var studentName = $("#studentName").val();
+        var schoolName = $("#schoolName").val();
+        var classInfo = $("#classInfo").val();
+
+        if (phoneNumber.length == 0) {
+            $("#phoneNumber").attr('placeholder', "手机号不能为空");
+        }
+        else if (studentName.length == 0) {
+            $("#studentName").attr('placeholder', '姓名不能为空');
+        }
+        else if(schoolName.length == 0)
+        {
+            $("#schoolName").attr('placeholder','学校名称不能为空');
+
+        }
+        else if(classInfo.length == 0)
+        {
+            $("#classInfo").attr('placeholder','年级信息不能为空');
+
+        }
+        else {
+            var data = {
+                phoneNumber:phoneNumber,
+                studentName:studentName,
+                schoolName:schoolName,
+                classInfo:classInfo
+            }
+            $.post("./createStudent",data,function (ret) {
+                console.log(ret)
+
+                $("#fade").hide()
+                $("#light").hide()
+            })
+        }
+    }
+
 </script>
 </html>
