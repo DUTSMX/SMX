@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>尚名校</title>
+    <!-- Bootstrap -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/stylesheets/admin.css" rel="stylesheet" type="text/css"/>
+    <link href="/stylesheets/scroll-table.css" rel="stylesheet" type="text/css"/>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .course-block{height:60px;border-radius: 5px;border-style:solid;border-width:1px;border-color:#4cae4c;margin-bottom:10px;margin-top:10px}
+        .sign-up{margin-top:10px;margin-right:10px}
+        .margin-left-10{margin-left:10px}
+    </style>
+</head>
+<body>
+<%include navigation-index.ejs%>
+<%include navigation-education.ejs%>
+<div class="right-content">
+    <div class="bs-example">
+        <div class="panel-heading title-block">
+            <h3 class="panel-title inline title-white">教师列表</h3>
+            <h3 class="panel-title right-button" onclick="addTeacher()">添加教师</h3>
+        </div>
+        <div class="padding-scroll">
+            <table class="table table-hover" style="margin-bottom:0px;">
+                <thead>
+                <tr>
+                    <th><div class="omit">姓名</div></th>
+                    <th><div class="omit">学科</div></th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="table-details" style="height:40vh">
+            <table  class="table table-hover table-body">
+                <tbody>
+                <%teacher.forEach(function(item){%>
+                <tr onclick="detail()">
+                    <td><div class="omit"><%=item.userName%></div></td>
+                    <td><div class="omit"><%=item.userGrade%></div></td>
+                </tr>
+                <%})%>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+<div id="fade" class="black-overlay"></div>
+<div id="light" class="white-content">
+    <div class="dialog">
+        <div class="dialog-title"><span class="font-20 title-white">添加教师</span><span class="right title-white" onclick="closeDialog()">X</span></div>
+        <input class="dialog-input" placeholder="请输入教师姓名"/>
+        <input class="dialog-input" placeholder="请输入手机号码"/>
+        <input class="dialog-input" placeholder="请输入学校名称"/>
+        <input class="dialog-input" placeholder="请输入年级信息"/>
+        <button class="btn btn-default dialog-input" onclick="closeDialog()">确认添加</button>
+    </div>
+</div>
+</body>
+
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+    function detail(){
+        location.href = "joinReceptionTeacherDetail"
+    }
+    $("#person").text("前台姓名")
+    function loginDialog() {
+        location.href="educationDetail"
+    }
+    $("#navigation-teacher").addClass("select-left-button");
+    function addTeacher(){
+        $("#fade").show()
+        $("#light").show()
+    }
+    function closeDialog(){
+        $("#fade").hide()
+        $("#light").hide()
+    }
+</script>
+</html>

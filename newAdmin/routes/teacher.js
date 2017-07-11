@@ -1,12 +1,12 @@
 /**
- * Created by zhangchong on 2017/7/2.
+ * Created by ASUS on 2017/7/11.
  */
 var express = require('express');
 var router = express.Router();
 var course=require('../model/course');
 var user=require(('../model/user'));
 var moment=require("moment");
-router.get('/studentCourse',function (req,res,next) {
+router.get('/teacherCourse',function (req,res,next) {
 
     course.courseSeries.findAll().then(function (data) {
         console.log("data:"+JSON.stringify(data));
@@ -20,9 +20,9 @@ router.get('/studentCourse',function (req,res,next) {
             "c.objectOriented, " +
             "c.courseContent," +
             "b.courseSeriesNumber,"+
-             "c.courseDate,"+
-             "c.courseRoom,"+
-             "c.courseSeriesId,"+
+            "c.courseDate,"+
+            "c.courseRoom,"+
+            "c.courseSeriesId,"+
             "c.courseSeriesCourseId "+
             "FROM course c JOIN account a ON a.userId = c.userId  JOIN joinCourse s on (c.courseSeriesId = s.courseSeriesId and c.courseSeriesCourseId=s.courseSeriesCourseId) JOIN courseSeries b on s.courseSeriesId=b.courseSeriesId "+
             "WHERE s.userId = "+userId;
@@ -33,48 +33,50 @@ router.get('/studentCourse',function (req,res,next) {
             //         console.log("ret1:"+JSON.stringify(ret1));
             //     }
             // )
-            res.render('studentCourse',{
+            res.render('teacherCourse',{
                 courseDetails:ret,courseSeries:data});
         });
     });
 });
 
-router.get('/studentCourseRecord',function (req,res,next) {
-    res.render('studentCourseRecord');
+router.get('/teacherCourseRecord',function (req,res,next) {
+    res.render('teacherCourseRecord');
 })
-router.get('/studentDetail',function (req,res,next) {
-    res.render('studentDetail');
+router.get('/teacherDetail',function (req,res,next) {
+    res.render('teacherDetail');
 })
-router.get('/studentCourseDetail',function (req,res,next) {
+router.get('/teacherCourseDetail',function (req,res,next) {
     var courseSeriesId=req.query.courseSeriesId;
-    var studentName=[];
     course.courseSeries.findOne({where:{courseSeriesId:courseSeriesId}}).then(function (ret) {
         console.log("ret:"+JSON.stringify(ret));
         ret.getJoinCourse().then(function (ret0) {
             console.log("ret0:"+JSON.stringify(ret0));
-            var student=[];
+            var teacher=[];
             ret0.forEach(function (item) {
-                if(student.indexOf(item.userId)==-1){
-                    student.push(item.userId);
+                if(teacher.indexOf(item.userId)==-1){
+                    teacher.push(item.userId);
                 }
             });
-            console.log("student:"+JSON.stringify(student));
-           student.forEach(function (item) {
-                console.log("userId:"+item);
-                user.findOne({where:{userId:item}}).then(function (student) {
-                    console.log("student:"+JSON.stringify(student));
-                    studentName.push({userName:student.userName});
+            console.log("teacher:"+teacher);
+            var teacherName=[];
+            teacher.forEach(function (item) {
+                user.findOne({attributes:userName,userId:item}).then(function (userName) {
+                    console.log("userName:"+userName);
+                    teacherName.push({userName:userName});
                 })
-            });
-                console.log("studentName:"+studentName);
-                ret.getCourse().then(function (ret1) {
-                    console.log("ret1:"+JSON.stringify(ret1));
-                    res.render('studentCourseDetail',{
-                        courseSeries:ret,
-                        courseSeriesDetails:ret1
-                    })
-                })
+            })
         });
+        ret.getCourse().then(function (ret1) {
+            console.log("ret1:"+JSON.stringify(ret1));
+            res.render('teacherCourseDetail',{
+                courseSeries:ret,
+                courseSeriesDetails:ret1
+            })
+        })
     });
-});
+})
+router.get('/joinReceptionTeacherList',function (req,res) {
+
+})
+
 module.exports=router;

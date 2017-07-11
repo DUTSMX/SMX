@@ -4,6 +4,7 @@
       <env name="DEBUG" value="newAdmin:*" />
     </envs>
     <browser url="http://localhost:3000/" />
+<<<<<<< HEAD
     <EXTENSION ID="com.jetbrains.nodejs.remote.docker.NodeJSDockerRunConfigurationExtension">
       <option name="envVars">
         <list />
@@ -25,6 +26,8 @@
         <list />
       </option>
     </EXTENSION>
+=======
+>>>>>>> ab967b207268730c801753a888fa56ae867c39c2
     <EXTENSION ID="com.jetbrains.nodejs.run.NodeJSStartBrowserRunConfigurationExtension">
       <browser url="http://localhost:3000/" />
     </EXTENSION>
