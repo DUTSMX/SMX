@@ -29,6 +29,17 @@ router.get('/joinReceptionStudentList',function (req,res,next) {
 router.get('/joinReceptionStudentDetail',function (req,res,next) {
   res.render('joinReceptionStudentDetail');
 })
+
+router.get('/education/joinReceptionTeacherList',function (req,res,next) {
+    user.findAll({where:{role:1}}).then(function(ret){
+        console.log(JSON.stringify(ret))
+        res.render('joinReceptionTeacherList',{teacher:ret});
+    })
+})
+router.get('/education/joinReceptionTeacherDetail',function (req,res,next) {
+    res.render('joinReceptionTeacherDetail');
+})
+
 router.get('/joinReceptionTodayCourse',function (req,res,next) {
   res.render('joinReceptionTodayCourse');
 })
