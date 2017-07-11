@@ -51,6 +51,7 @@ exports.sequelize=sequelize;
         freezeTableName: true
     }
 );
+
 exports.courseSeries=courseSeries;
  var course= sequelize.define('course', {
         courseId: { //自增长课程系列Id,主键,整形
@@ -152,3 +153,16 @@ courseSeries.hasMany(joinCourse,{foreignKey:'courseSeriesId',as:'JoinCourse'});
 //joinCourse.belongsTo(courseSeries,{foreignKey:'courseSeriesId',as:'CourseSeries'});
 //courseSeries.sync();
 //module.exports=courseSeries;
+var seriesTemplate = sequelize.define("seriesTemplate",{
+    templateId:{type:Sequelize.INTEGER,primaryKey: true},
+    seriesName:{type:Sequelize.STRING(255)},
+    seriesIntro:{type:Sequelize.STRING(255)},
+    subject:{type:Sequelize.STRING(255)},
+    grade:{type:Sequelize.STRING(255)},
+    level:{type:Sequelize.STRING(255)},
+    number:{type:Sequelize.INTEGER},
+    courseName:{type:Sequelize.STRING(255)}
+},{
+    freezeTableName: true
+})
+exports.seriesTemplate=seriesTemplate;

@@ -32,56 +32,22 @@
         <div class="padding-scroll">
             <table class="table table-hover" style="margin-bottom:0px;">
                 <thead>
-                <tr>
-                    <th><div class="omit">姓名</div></th>
-                    <th><div class="omit">年级</div></th>
-                </tr>
+                    <tr>
+                        <th><div class="omit">姓名</div></th>
+                        <th><div class="omit">年级</div></th>
+                    </tr>
                 </thead>
             </table>
         </div>
         <div class="table-details" style="height:40vh">
             <table  class="table table-hover table-body">
                 <tbody>
+                <%student.forEach(function(item){%>
                     <tr onclick="detail()">
-                        <td><div class="omit">赵学生</div></td>
-                        <td><div class="omit">高一</div></td>
+                        <td><div class="omit"><%=item.userName%></div></td>
+                        <td><div class="omit"><%=item.userGrade%></div></td>
                     </tr>
-                    <tr onclick="detail()">
-                        <td><div class="omit">钱学生</div></td>
-                        <td><div class="omit">高二</div></td>
-                    </tr>
-                    <tr onclick="detail()">
-                        <td><div class="omit">孙学生</div></td>
-                        <td><div class="omit">高三</div></td>
-                    </tr>
-                    <tr onclick="detail()">
-                        <td><div class="omit">李学生</div></td>
-                        <td><div class="omit">高三</div></td>
-                    </tr>
-                    <tr onclick="detail()">
-                        <td><div class="omit">周学生</div></td>
-                        <td><div class="omit">高一</div></td>
-                    </tr>
-                    <tr onclick="detail()">
-                        <td><div class="omit">吴学生</div></td>
-                        <td><div class="omit">高二</div></td>
-                    </tr>
-                    <tr onclick="detail()">
-                        <td><div class="omit">郑学生</div></td>
-                        <td><div class="omit">高三</div></td>
-                    </tr>
-                    <tr onclick="detail()">
-                        <td><div class="omit">王学生</div></td>
-                        <td><div class="omit">高三</div></td>
-                    </tr>
-                    <tr onclick="detail()">
-                        <td><div class="omit">冯学生</div></td>
-                        <td><div class="omit">高三</div></td>
-                    </tr>
-                    <tr onclick="detail()">
-                        <td><div class="omit">陈学生</div></td>
-                        <td><div class="omit">高三</div></td>
-                    </tr>
+                <%})%>
                 </tbody>
             </table>
         </div>
@@ -127,7 +93,9 @@
 
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-
+    function detail(){
+        location.href = "joinReceptionStudentDetail"
+    }
     $("#person").text("前台姓名")
     function loginDialog() {
         location.href="joinReceptionDetail"
