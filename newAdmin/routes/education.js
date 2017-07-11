@@ -10,17 +10,17 @@ router.get('/',function (req,res) {
         console.log("ret:" + JSON.stringify(ret));
         res.render('educationCourse',{courseSeries:ret});
     });
-})
+});
 router.get('/educationCourse',function (req,res,next) {
     //console.log("11111");
     course.courseSeries.findAll().then(function (ret) {
         console.log("ret:"+JSON.stringify(ret));
         res.render('educationCourse',{courseSeries:ret});
     })
-})
+});
 router.get('/educationCreateCourse',function (req,res,next) {
     res.render('educationCreateCourse');
-})
+});
 router.post('/addCourseSeries',function (req,res) {
     var courseSeriesName=req.body.courseSeriesName;
     var courseSeriesSubject=req.body.courseSeriesSubject;
@@ -56,7 +56,7 @@ router.post('/addCourseSeries',function (req,res) {
         console.log(err);
         res.send(err);
     })
-})
+});
 router.get('/educationCourseDetail',function (req,res,next) {
     var courseSeriesId=req.query.courseSeriesId;
     console.log("courseSeriesId:"+courseSeriesId);
