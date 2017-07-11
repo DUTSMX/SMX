@@ -59,10 +59,14 @@ var user = sequelize.define('account', {
         },
         identityId:{
             type:Sequelize.INTEGER
+        },
+        cardNumber:{
+            type:Sequelize.STRING(30)
         }
 },
     {
         freezeTableName: true
     }
 );
+
 module.exports=user;

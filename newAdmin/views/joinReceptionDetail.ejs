@@ -35,12 +35,12 @@
     <div class="margin-left-30" id="person-info">
         <img src="/images/icon.png" class="head img-circle">
         <div class="base-info">
-            <h3 class="inline">齐书强(台安前台)</h3><br>
-            <h4 class="inline">手机号码</h4>
+            <h3 class="inline"><%=info.userName%>&nbsp;<%if(info.gender== 0){%>男<%}else{%>女<%}%>%></h3><br>
+            <h4 class="inline">年龄:<%=info.userAge%>&nbsp;电话号码:<%=info.phoneNumber%></h4>
         </div>
         <button class="btn btn-default inline right" onclick="logout()">退出登录</button>
         <br>
-        <h5>家庭地址</h5>
+        <h5>家庭地址:<%=info.userAddress%></h5>
     </div>
     <div class="margin-left-30"   style="display: none" id="person-edit">
         <div class="inline">
@@ -49,25 +49,25 @@
             <img src="/images/icon.png" class="head img-circle">
         </div>
         <div class="base-info">
-            <input id="person-name"class="inline margin-top-20" value="学生姓名" placeholder="请输入学生姓名" disabled="false"/>
+            <input id="person-name"class="inline margin-top-20" value=<%=info.userName%> placeholder="请输入学生姓名" disabled="false"/>
             <select class="padding-4">
                 <option>台安店</option>
                 <option>大连店</option>
                 <option>沈阳店</option>
             </select><br>
-            <input id="person-phoneNumber"class="inline margin-top-20" value="手机号码" placeholder="请输入手机号码" disabled="false"/>
+            <input id="person-phoneNumber"class="inline margin-top-20" value=<%=info.phoneNumber%> placeholder="请输入手机号码" disabled="false"/>
             <button id="apply-modify"class="btn btn-defalut padding-4" onclick="applyModify()">申请修改</button>
 
         </div>
         <br>
-        <label>家庭地址&nbsp</label><input value="家庭地址" placeholder="请输入家庭信息">
+        <label>家庭地址 &nbsp</label><input value="<%=info.userAddress%>" placeholder="请输入家庭信息">
     </div>
     <div class="panel-heading title-block">
         <h3 class="panel-title title-white">隐私信息</h3>
         <h3 id="applyId" class="panel-title right-button" onclick="applyId()">申请修改</h3>
     </div>
     <div class="margin-left-30" id="id">
-        <h4>身份证号:123456789012345678</h4>
+        <h4>身份证号码:<%=info.cardNumber%></h4>
         <div class="image">
             <img src="/images/logo.png"/>
             <p>身份证正面</p>
@@ -115,6 +115,7 @@
             $("#person-info").hide();
             $("#person-edit").show();
         }else{
+            editInfo()
             editFlag = true;
             $("#edit").text("编辑")
             $("#person-info").show();
@@ -149,6 +150,37 @@
     }
     function logout() {
         location.href = "/"
+    }
+    function editInfo(){
+        var userName = $("#person-name").val();
+        var phoneNumber = $("#phoneNumber").val();
+        var data = {
+            userName:userName,
+            phoneNumber:phoneNumber,
+        }
+        jQuery.post("./editInfo",data,function (data,textStatus,jqXHR) {
+            alert(data.desc)
+            console.log(data)
+            console.log(textStatus)
+            console.log(jqXHR)
+            if(data.status){
+                console.log("from = "+ from);
+                if(from){
+                    console.log("from = "+ true);
+                }else{
+                    console.log("from = "+ false);
+                }
+                if(from){
+                    location.replace("../course/course")
+                }else{
+                    $("#hint").text(data.desc)
+                    $.cookie("personDetail",true);
+                    window.history.back()
+                }
+            }else{
+                console.log(data.desc)
+            }
+        },"json")
     }
 </script>
 </html>

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var course=require('../model/course');
+var teacher=require('../model/teacher');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -14,7 +15,11 @@ router.get('/joinManagerDetail',function (req,res,next) {
 })
 
 router.get('/joinReceptionDetail',function (req,res,next) {
-  res.render('joinReceptionDetail');
+    var user =require("../model/user")
+    user.findOne({where:{userId:1}}).then(function(ret){
+        console.log(JSON.stringify(ret))
+        res.render('joinReceptionDetail',{info:ret});
+    })
 })
 router.get('/joinReceptionStudentList',function (req,res,next) {
   res.render('joinReceptionStudentList');
@@ -34,8 +39,17 @@ router.get('/joinReceptionCourseCalendar',function (req,res,next) {
 router.get('/joinReceptionCourseManager',function (req,res,next) {
   res.render('joinReceptionCourseManager');
 })
+router.get('/teacherDetail',function (req,res,next) {
+    teacher.findOne({teacherId:15}).then(function (ret) {
+        console.log("ret:"+JSON.stringify(ret));
+        ret.getUser().then(function (ret1) {
+            console.log("ret1:"+JSON.stringify(ret1));
+            res.render('teacherDetail',{info:ret1,infos:ret});
+        })
 
+    })
 
+})
 router.get('/teacherCourse',function (req,res,next) {
   res.render('teacherCourse')
 })
@@ -48,10 +62,6 @@ router.get('/teacherCourseDetail',function (req,res,next) {
 router.get('/teacherList',function (req,res,next) {
   res.render('teacherList');
 })
-router.get('/teacherDetail',function (req,res,next) {
-  res.render('teacherDetail');
-})
-
 router.get('/officeManagerReport',function (req,res,next) {
   res.render('officeManagerReport');
 })
@@ -73,6 +83,11 @@ router.get('/adminUserDetail',function (req,res,next) {
 })
 router.get('/adminDetail',function (req,res,next) {
   res.render('adminDetail');
+})
+
+router.post("/editInfo",function (req,res) {
+    console.log(JSON.stringify(req.body))
+    res.send({desc:"修改成功！"})
 })
 
 module.exports = router;
