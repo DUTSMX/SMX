@@ -49,6 +49,7 @@ router.get('/studentDetail',function (req,res,next) {
 })
 router.get('/studentCourseDetail',function (req,res,next) {
     var courseSeriesId=req.query.courseSeriesId;
+    var studentName=[];
     course.courseSeries.findOne({where:{courseSeriesId:courseSeriesId}}).then(function (ret) {
         console.log("ret:"+JSON.stringify(ret));
         ret.getJoinCourse().then(function (ret0) {
@@ -59,23 +60,24 @@ router.get('/studentCourseDetail',function (req,res,next) {
                     student.push(item.userId);
                 }
             });
-            console.log("student:"+student);
-            var studentName=[];
-            student.forEach(function (item) {
-                user.findOne({attributes:userName,userId:item}).then(function (userName) {
-                    console.log("userName:"+userName);
-                    studentName.push({userName:userName});
+            console.log("student:"+JSON.stringify(student));
+           student.forEach(function (item) {
+                console.log("userId:"+item);
+                user.findOne({where:{userId:item}}).then(function (student) {
+                    console.log("student:"+JSON.stringify(student));
+                    studentName.push({userName:student.userName});
                 })
-            })
+            });
+                console.log("studentName:"+studentName);
+                ret.getCourse().then(function (ret1) {
+                    console.log("ret1:"+JSON.stringify(ret1));
+                    res.render('studentCourseDetail',{
+                        courseSeries:ret,
+                        courseSeriesDetails:ret1
+                    })
+                })
         });
-        ret.getCourse().then(function (ret1) {
-            console.log("ret1:"+JSON.stringify(ret1));
-            res.render('studentCourseDetail',{
-                courseSeries:ret,
-                courseSeriesDetails:ret1
-            })
-        })
     });
-})
+});
 
 module.exports=router;
