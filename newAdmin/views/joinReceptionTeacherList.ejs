@@ -22,67 +22,43 @@
 </head>
 <body>
 <%include navigation-index.ejs%>
-<%include navigation-joinReception.ejs%>
+<%include navigation-education.ejs%>
 <div class="right-content">
     <div class="bs-example">
         <div class="panel-heading title-block">
-            <h3 class="panel-title inline title-white">学生列表</h3>
-            <h3 class="panel-title right-button" onclick="addStudent()">添加学生</h3>
+            <h3 class="panel-title inline title-white">教师列表</h3>
+            <h3 class="panel-title right-button" onclick="addTeacher()">添加教师</h3>
         </div>
         <div class="padding-scroll">
             <table class="table table-hover" style="margin-bottom:0px;">
                 <thead>
-                    <tr>
-                        <th><div class="omit">姓名</div></th>
-                        <th><div class="omit">年级</div></th>
-                    </tr>
+                <tr>
+                    <th><div class="omit">姓名</div></th>
+                    <th><div class="omit">学科</div></th>
+                </tr>
                 </thead>
             </table>
         </div>
         <div class="table-details" style="height:40vh">
             <table  class="table table-hover table-body">
                 <tbody>
-                <%student.forEach(function(item){%>
-                    <tr onclick="detail()">
-                        <td><div class="omit"><%=item.userName%></div></td>
-                        <td><div class="omit"><%=item.userGrade%></div></td>
-                    </tr>
+                <%teacher.forEach(function(item){%>
+                <tr onclick="detail()">
+                    <td><div class="omit"><%=item.userName%></div></td>
+                    <td><div class="omit"><%=item.userGrade%></div></td>
+                </tr>
                 <%})%>
                 </tbody>
             </table>
         </div>
-        <div class="panel-heading title-block">
-            <h3 class="panel-title inline title-white">审核列表</h3>
-        </div>
-        <div style="height:30vh;overflow: auto" >
-            <div class="course-block">
-                <h4 class="inline left center margin-top-20 margin-left-10">赵学生修改姓名：赵三</h4>
-                <button class="btn btn-warning right sign-up">驳回</button>
-                <button class="btn btn-success right sign-up">通过</button>
-            </div>
-            <div class="course-block">
-                <h4 class="inline left center margin-top-20 margin-left-10">钱学生修改手机号：12345678901</h4>
-                <button class="btn btn-warning right sign-up">驳回</button>
-                <button class="btn btn-success right sign-up">通过</button>
-            </div>
-            <div class="course-block">
-                <h4 class="inline left center margin-top-20 margin-left-10">王学生修改姓名：王五，手机号：12345678901</h4>
-                <button class="btn btn-warning right sign-up">驳回</button>
-                <button class="btn btn-success right sign-up">通过</button>
-            </div>
-            <div class="course-block">
-                <h4 class="inline left center margin-top-20 margin-left-10">李学生修改身份证号：123456789012345678</h4>
-                <button class="btn btn-warning right sign-up">驳回</button>
-                <button class="btn btn-success right sign-up">通过</button>
-            </div>
-        </div>
+
     </div>
 </div>
 <div id="fade" class="black-overlay"></div>
 <div id="light" class="white-content">
     <div class="dialog">
-        <div class="dialog-title"><span class="font-20 title-white">添加学生</span><span class="right title-white" onclick="closeDialog()">X</span></div>
-        <input class="dialog-input" id="studentName" placeholder="请输入学生姓名"/>
+        <div class="dialog-title"><span class="font-20 title-white">添加教师</span><span class="right title-white" onclick="closeDialog()">X</span></div>
+        <input class="dialog-input" id="teacherName" placeholder="请输入教师姓名"/>
         <input class="dialog-input" id="phoneNumber" placeholder="请输入手机号码"/>
         <input class="dialog-input" id= "schoolName" placeholder="请输入学校名称"/>
         <input class="dialog-input" id= "classInfo" placeholder="请输入年级信息"/>
@@ -94,36 +70,34 @@
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
     function detail(){
-        location.href = "joinReceptionStudentDetail"
+        location.href = "joinReceptionTeacherDetail"
     }
     $("#person").text("前台姓名")
     function loginDialog() {
-        location.href="joinReceptionDetail"
+        location.href="educationDetail"
     }
-    $("#navigation-student").addClass("select-left-button");
-    function addStudent(){
+    $("#navigation-teacher").addClass("select-left-button");
+    function addTeacher(){
         $("#fade").show()
         $("#light").show()
     }
-
-    function closeDialog() {
+    function closeDialog(){
         $("#fade").hide()
         $("#light").hide()
-
-
     }
+
     function postInfo(){
 
 
         var phoneNumber = $("#phoneNumber").val();
-        var studentName = $("#studentName").val();
+        var studentName = $("#teacherName").val();
         var schoolName = $("#schoolName").val();
         var classInfo = $("#classInfo").val();
 
         if (phoneNumber.length == 0) {
             $("#phoneNumber").attr('placeholder', "手机号不能为空");
         }
-        else if (studentName.length == 0) {
+        else if (teacherName.length == 0) {
             $("#studentName").attr('placeholder', '姓名不能为空');
         }
         else if(schoolName.length == 0)
@@ -139,11 +113,11 @@
         else {
             var data = {
                 phoneNumber:phoneNumber,
-                studentName:studentName,
+                teacherName:teacherName,
                 schoolName:schoolName,
                 classInfo:classInfo
             }
-            $.post("./createStudent",data,function (ret) {
+            $.post("./createTeacher",data,function (ret) {
                 console.log(ret)
 
                 $("#fade").hide()
@@ -151,6 +125,5 @@
             })
         }
     }
-
 </script>
 </html>

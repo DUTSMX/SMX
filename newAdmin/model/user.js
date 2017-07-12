@@ -19,7 +19,7 @@ var sequelize=new Sequelize(
     }
 );
 var user = sequelize.define('account', {
-        userId:{ //自增长课程系列Id,主键,整形
+        userId:{ //自增长课程系列Id,主键,整型
             type:Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement:true
@@ -59,10 +59,14 @@ var user = sequelize.define('account', {
         },
         identityId:{
             type:Sequelize.INTEGER
+        },
+        cardNumber:{
+            type:Sequelize.STRING(30)
         }
 },
     {
         freezeTableName: true
     }
 );
+
 module.exports=user;

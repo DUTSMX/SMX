@@ -10,17 +10,19 @@ router.get('/',function (req,res) {
         console.log("ret:" + JSON.stringify(ret));
         res.render('educationCourse',{courseSeries:ret});
     });
-})
+});
 router.get('/educationCourse',function (req,res,next) {
     //console.log("11111");
     course.seriesTemplate.findAll().then(function (ret) {
-        console.log("ret:"+JSON.stringify(ret));
-        res.render('educationCourse',{courseSeries:ret});
+        course.courseSeries.findAll({'where':{status:1}}).then(function (data) {
+            console.log(JSON.stringify(data))
+            res.render('educationCourse',{courseSeries:ret,post:data});
+        })
     })
-})
+});
 router.get('/educationCreateCourse',function (req,res,next) {
     res.render('educationCreateCourse');
-})
+});
 router.post('/addCourseSeries',function (req,res) {
     var courseSeriesName=req.body.courseSeriesName;
     var courseSeriesSubject=req.body.courseSeriesSubject;
@@ -45,7 +47,7 @@ router.post('/addCourseSeries',function (req,res) {
         console.log("err:"+err);
         res.send(err);
     })
-})
+});
 router.get('/educationCourseDetail',function (req,res,next) {
     var templateId=req.query.templateId;
     course.seriesTemplate.findOne({
@@ -68,4 +70,12 @@ router.post('/courseSeriesDelete',function (req,res) {
 router.get('/educationDetail',function (req,res,next) {
     res.render('educationDetail');
     })
+router.post('/createCourse',function (req,res) {
+    course.courseSeries.findOne({'where':{courseSeriesId:req.body.seriesId}}).then(function (data) {
+        console.log("data:"+JSON.stringify(data))
+        //TODO 创建course和joinCourse
+
+    })
+    res.send("success")
+})
 module.exports=router;
