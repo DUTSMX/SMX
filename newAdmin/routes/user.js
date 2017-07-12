@@ -28,18 +28,19 @@ router.post('/login',function (req,res) {
 
         req.session.userName = ret[0].userName;
         console.log(req.session.userName);
-        console.log("------------------");
+        //console.log("------------------");
 
         console.log("req.session.userId:"+req.session.userId);
-        //var ret={ret:ret[0].identityId};
-           ret.identityId = ret[0].identityId;
-           //console.log("+++"+ret.identityId);
-             ret.username = req.session.userName;
-            //console.log("++"+ret.username);
-            //console.log(ret);
+        var ret={ret:ret[0].identityId};
+
         res.send(ret);
         }
 
     })
+})
+
+router.post('/logout',function (req,res) {
+    req.session.userName = "";
+    res.send("123")
 })
 module.exports=router;
