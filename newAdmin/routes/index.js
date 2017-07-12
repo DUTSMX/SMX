@@ -13,7 +13,6 @@ router.get('/joinManagerReport', function (req, res, next) {
 router.get('/joinManagerDetail', function (req, res, next) {
     res.render('joinManagerDetail');
 });
-
 router.get('/education/joinReceptionTeacherList',function (req,res,next) {
     user.findAll({where:{role:1}}).then(function(ret){
         console.log(JSON.stringify(ret))
@@ -23,7 +22,6 @@ router.get('/education/joinReceptionTeacherList',function (req,res,next) {
 router.get('/education/joinReceptionTeacherDetail',function (req,res,next) {
     res.render('joinReceptionTeacherDetail');
 })
-
 router.post('/createStudent', function (req, res, next) {
     console.log("body:"+JSON.stringify(req.body));
     var phoneNumber = req.body.phoneNumber;
@@ -67,9 +65,6 @@ router.post('/createTeacher', function (req, res, next) {
     });
     res.end("235")
 });
-router.get('/teacherCourse',function (req,res,next) {
-  res.render('teacherCourse')
-})
 
 router.get('/education/joinReceptionTeacherList',function (req,res,next) {
     user.findAll({where:{role:2}}).then(function(ret){
@@ -77,15 +72,32 @@ router.get('/education/joinReceptionTeacherList',function (req,res,next) {
         res.render('joinReceptionTeacherList',{teacher:ret});
     })
 })
-router.get('/education/joinReceptionTeacherDetail',function (req,res,next) {
-    res.render('joinReceptionTeacherDetail');
+
+router.get('/joinReceptionTodayCourse',function (req,res,next) {
+  res.render('joinReceptionTodayCourse');
 })
-router.get('/teacherCourseRecord',function (req,res,next) {
-  res.render('teacherCourseRecord')
+router.get('/joinReceptionPrint',function (req,res,next) {
+  res.render('joinReceptionPrint');
 })
-router.get('/teacherCourseDetail',function (req,res,next) {
-  res.render('teacherCourseDetail')
+router.get('/joinReceptionCourseCalendar',function (req,res,next) {
+  res.render('joinReceptionCourseCalendar');
 })
+router.get('/joinReceptionCourseManager',function (req,res,next) {
+  res.render('joinReceptionCourseManager');
+})
+
+
+router.post("/editInfo",function (req,res) {
+    console.log(JSON.stringify(req.body))
+    user.update({
+        userName:req.body.userName,
+        phoneNumber:req.body.phoneNumber,
+    },{'where':{userId:2}}).then(
+        joinreceptionshop.update({
+            JoinReceptionLocation:req.body.joinreceptionlocation,
+        },{'where':{userId:2}})
+    )})
+
 router.get('/teacherList',function (req,res,next) {
   res.render('teacherList');
 })
@@ -95,17 +107,6 @@ router.get('/officeManagerReport',function (req,res,next) {
 router.get('/officeManagerDetail',function (req,res,next) {
   res.render('officeManagerDetail');
 })
-router.get('/teacherDetail', function (req, res, next) {
-    res.render('teacherDetail');
-});
-
-router.get('/officeManagerReport', function (req, res, next) {
-    res.render('officeManagerReport');
-});
-router.get('/officeManagerDetail', function (req, res, next) {
-    res.render('officeManagerDetail');
-});
-
 router.get('/adminJoinList', function (req, res, next) {
     res.render('adminJoinList');
 });

@@ -1,5 +1,5 @@
 /**
- * Created by asus on 2017/7/11.
+ * Created by asus on 2017/7/12.
  */
 var Sequelize = require('sequelize');
 var course=require('./course');
@@ -19,7 +19,7 @@ var sequelize=new Sequelize(
         }
     }
 );
-var teacher = sequelize.define('teacher', {
+var joinreceptionshop = sequelize.define('joinreceptionshop', {
         teacherId:{ //自增长课程系列Id,主键,整型
             type:Sequelize.INTEGER,
             primaryKey: true,
