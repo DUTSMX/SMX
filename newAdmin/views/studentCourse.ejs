@@ -105,7 +105,15 @@
 </body>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-    $("#person").text("学生姓名")
+    function getStudentName() {
+        $.get("./login",data,function (ret) {
+            var studentName = ret.username;
+            console.log("+++++"+studentName);
+            //document.getElementById("person").write(studentName);
+        })
+    }
+
+    $("#person").text("<%=name%>")
     function loginDialog(){
         location.href="studentDetail"
     }
@@ -114,6 +122,7 @@
         $("#light").show()
         $("#apply-course").show();
         $("#enter").hide();
+
     }
     function enter(){
         $("#fade").show()

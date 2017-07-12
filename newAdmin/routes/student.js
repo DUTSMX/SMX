@@ -33,7 +33,7 @@ router.get('/studentCourse',function (req,res,next) {
             //         console.log("ret1:"+JSON.stringify(ret1));
             //     }
             // )
-            res.render('studentCourse',{
+            res.render('studentCourse',{name:req.session.userName,
                 courseDetails:ret,courseSeries:data});
         });
     });

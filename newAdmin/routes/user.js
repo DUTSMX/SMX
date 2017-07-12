@@ -25,8 +25,18 @@ router.post('/login',function (req,res) {
         console.log("ret:"+JSON.stringify(ret));
         console.log("identityId:"+ret[0].identityId);
         req.session.userId=ret[0].userId;
+
+        req.session.userName = ret[0].userName;
+        console.log(req.session.userName);
+        console.log("------------------");
+
         console.log("req.session.userId:"+req.session.userId);
-        var ret={ret:ret[0].identityId};
+        //var ret={ret:ret[0].identityId};
+           ret.identityId = ret[0].identityId;
+           //console.log("+++"+ret.identityId);
+             ret.username = req.session.userName;
+            //console.log("++"+ret.username);
+            //console.log(ret);
         res.send(ret);
         }
 
