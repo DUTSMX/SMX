@@ -98,9 +98,22 @@
         dots: true
     });
     function loginDialog(){
-        $("#light").show();
-        $("#fade").show();
-        $("#type").hide();
+        userName = '<%=session.userName%>';
+        if (userName.length == 0){
+            $("#light").show();
+            $("#fade").show();
+            $("#type").hide();
+        } else {
+            var identityId = '<%=session.identityId%>' ;
+            console.log("identityId:"+identityId);
+            if(identityId==0){location.href='student/studentCourse'}
+            else if(identityId==1){location.href='teacherCourse'}
+            else if(identityId==2){location.href='educationCourse'}
+            else if(identityId==3){location.href='admainDetail'}
+            else if(identityId==4){location.href='joinManagerDetail'}
+            else if(identityId==5){location.href='joinReceptionDetail'}
+        }
+
     }
     function closeDialog(){
         $(".white-content").width("300px")
@@ -146,7 +159,7 @@
         location.href = "teacherCourse";
     }
     function joinReception() {
-        location.href = "joinReceptionTodayCourse"
+        location.href = "joinReception/joinReceptionTodayCourse"
     }
     function joinManager(){
         location.href = "joinManagerReport"

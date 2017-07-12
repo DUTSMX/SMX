@@ -15,8 +15,10 @@ router.get('/',function (req,res) {
 router.get('/educationCourse',function (req,res,next) {
     //console.log("11111");
     course.seriesTemplate.findAll().then(function (ret) {
-        console.log("ret:"+JSON.stringify(ret));
-        res.render('educationCourse',{courseSeries:ret});
+        course.courseSeries.findAll({'where':{status:1}}).then(function (data) {
+            console.log(JSON.stringify(data))
+            res.render('educationCourse',{courseSeries:ret,post:data});
+        })
     })
 });
 router.get('/educationCreateCourse',function (req,res,next) {
@@ -87,4 +89,12 @@ router.post('/createTeacher', function (req, res, next) {
     });
     //res.end("235")
 });
+router.post('/createCourse',function (req,res) {
+    course.courseSeries.findOne({'where':{courseSeriesId:req.body.seriesId}}).then(function (data) {
+        console.log("data:"+JSON.stringify(data))
+        //TODO 创建course和joinCourse
+
+    })
+    res.send("success")
+})
 module.exports=router;

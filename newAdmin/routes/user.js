@@ -25,11 +25,24 @@ router.post('/login',function (req,res) {
         console.log("ret:"+JSON.stringify(ret));
         console.log("identityId:"+ret[0].identityId);
         req.session.userId=ret[0].userId;
+
+        req.session.userName = ret[0].userName;
+        req.session.identityId = ret[0].identityId;
+        console.log(req.session.userName);
+        //console.log("------------------");
+
         console.log("req.session.userId:"+req.session.userId);
         var ret={ret:ret[0].identityId};
+
         res.send(ret);
         }
 
     })
+})
+
+router.post('/logout',function (req,res) {
+    req.session.userName = "";
+    req.session.identityId = "";
+    res.send("123")
 })
 module.exports=router;

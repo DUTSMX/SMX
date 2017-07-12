@@ -36,17 +36,17 @@
     <div class="margin-left-30" id="person-info">
         <img src="/images/icon.png" class="head img-circle">
         <div class="base-info">
-            <h3 class="inline">老师姓名 男</h3><br>
-            <h4 class="inline">手机号码</h4>
+            <h3 class="inline"><%=info.userName%> <%if(info.gender== 0){%>男<%}else{%>女<%}%>%></h3><br>
+            <h4 class="inline"><%=info.phoneNumber%></h4>
         </div>
         <button class="btn btn-default right" onclick="logout()">退出登录</button>
         <br>
-        <h4 class="inline">教授科目：数学</h4><br>
-        <h4 class="inline">老师学校</h4>
-        <h4 class="inline">老师年级</h4><br>
+        <h4 class="inline">教授课程:<%=infos.teachClass%></h4><br>
+        <h4 class="inline"><%=infos.college%></h4>
+        <h4 class="inline"><%=infos.class%></h4><br>
         <!--<h4 class="inline">学习情况：中等</h4>-->
-        <h4>家庭省份  家庭城市  高中学校</h4>
-        <h4> 高考成绩 650（数学135  语文120 英语125 物理90 化学90 生物90）</h4>
+        <h4><%=infos.province%>  <%=infos.city%>  <%=infos.highSchool%></h4>
+        <h4> <%=infos.collegeAttendingScore%></h4>
 
         <div class="image">
             <img src="/images/logo.png"/>
