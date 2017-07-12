@@ -66,14 +66,17 @@ router.get('/studentCourseDetail',function (req,res,next) {
                     studentName.push({userName:student.userName});
                 })
             });
-                console.log("studentName:"+studentName);
+            var timer=setTimeout(function () {
+                console.log("studentName:"+JSON.stringify(studentName));
                 ret.getCourse().then(function (ret1) {
                     console.log("ret1:"+JSON.stringify(ret1));
                     res.render('studentCourseDetail',{
                         courseSeries:ret,
-                        courseSeriesDetails:ret1
+                        courseSeriesDetails:ret1,
+                        student:studentName
                     })
                 })
+            },1000);
         });
     });
 });
