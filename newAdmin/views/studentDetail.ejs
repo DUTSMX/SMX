@@ -24,7 +24,7 @@
         .image-edit{position:absolute;text-align:center;margin-top:5%;width:40%;z-index: 900}
     </style>
 </head>
-<body style="height:100%">
+<body style="height:100%"   onload="uploadImg()">
 <%include navigation-index.ejs%>
 <%include navigation-student.ejs%>
 <div class="right-content">
@@ -101,7 +101,39 @@
 </body>
 
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="/javascripts/sdk/qcloud_sdk.js"></script>
+<script src="/javascripts/sdk/swfobject.js"></script>
 <script>
+    function uploadImg() {
+        var cos = new CosCloud("10068625","/")
+        var userId = "<%=userId%>"
+        var successCallBack = function (result) {
+            console.log("success")
+            console.log("result:"+JSON.stringify(result))
+            console.log("type"+typeof result)
+            console.log("修改图片"+JSON.parse(result).data.access_url)
+            $("#head").attr('src',JSON.parse(result).data.access_url)
+        }
+        var errorCallBack = function (result) {
+            $("#age").val("error:"+result);
+            console.log("error")
+            console.log("result:"+JSON.stringify(result))
+        }
+        var inputElements = document.getElementById("file");
+        inputElements.addEventListener("change",handleFiles,false);
+        function handleFiles(){
+            var fileList = this.files;
+            if(fileList.length>0){
+                selectedFile = fileList[0];
+                var name = selectedFile.name;
+                var postfix = name.substr(name.lastIndexOf("."))
+                console.log("postfix:/head/"+userId+postfix)
+
+                cos.uploadFile(successCallBack,errorCallBack,"smxbucket","/head/"+userId+"head"+Math.floor((Math.random()*9000+1000))+postfix,selectedFile,0)
+            }
+        }
+    }
+
     var editFlag = true;
     var applyFlag = true;
     var applyIdFlag = true;

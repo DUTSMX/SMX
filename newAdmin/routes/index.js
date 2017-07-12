@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var course=require('../model/course');
-var user =require("../model/user")
+var user =require("../model/user");
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -17,18 +17,26 @@ router.get('/joinManagerDetail', function (req, res, next) {
 
 router.post('/createStudent', function (req, res, next) {
     console.log("body:"+JSON.stringify(req.body));
+    var phoneNumber = req.body.phoneNumber;
+    var userName = req.body.studentName;
+    var userSchool = req.body.schoolName;
+    var userGrade = req.body.classInfo;
     user.create({
-        phoneNumber:req.body.phoneNumber,
-        userName:req.body.studentName,
-        userSchool:req.body.schoolName,
-        userGrade:req.body.classInfo
+        phoneNumber:phoneNumber,
+        userName:userName,
+        userSchool:userSchool,
+        userGrade:userGrade
     }).then(function (data) {
         console.log("data:"+JSON.stringify(data));
-    }).cache(function(err){
+        res.send("添加成功")
+
+    }).catch(function(err){
         console.log("err:"+JSON.stringify(err))
+        //res.send(JSON.stringify(err))
     });
-    res.end("235")
 });
+
+
 
 
 router.get('/joinReceptionStudentDetail', function (req, res, next) {
@@ -119,6 +127,50 @@ router.get('/adminUserDetail', function (req, res, next) {
 router.get('/adminDetail', function (req, res, next) {
     res.render('adminDetail');
 });
+var APPID = "10068625";
+var SECRET_ID = "AKIDGPM8i9uTM4a0FJlqMgoljZ8a0IPLLlGi";
+var SECRET_KEY = "TowscBYpzznPq5B6pLfnjTIwOGUfdbP2";
 
+var qcloud = require('qcloud_cos');
+exports.AUTH_URL_FORMAT_ERROR = -1;
+exports.AUTH_SECRET_ID_KEY_ERROR = -2;
+router.get('/appSign', function (req, res, next) {
+    var bucket = req.query.bucketName;
+    var expired = req.query.expired;
+    var now = parseInt(Date.now() / 1000);
+    console.log("expired:" + global.expired + "now>global.expired:" + (now > global.expired))
+    if (global.expired == null || now > global.expired) {
+        console.log("重新计算");
+        var sign = qcloud.auth.signMore(bucket, expired);
+        global.expired = expired;
+        global.sign = {"data": {"sign": sign}}
+    } else {
+        console.log("直接返回");
+    }
+    res.send(global.sign);
+})
+router.get('/appSignOnce', function (req, res, next) {
+    var bucket = req.query.bucketName;
+    var fileId = req.query.fileId;
+    var data = {"data": {"sign": appSign(bucket, fileId, 0)}}
+    res.send(JSON.stringify(data));
+})
+
+function appSign(bucket, fileid, expired) {
+    console.log(Date.now())
+    var now = parseInt(Date.now() / 1000);
+    var rdm = parseInt(Math.random() * Math.pow(2, 32));
+
+    var secretId = SECRET_ID, secretKey = SECRET_KEY;
+    var plainText = 'a=' + APPID + '&b=' + bucket + '&k=' + secretId + '&e=' + expired + '&t=' + now + '&r=' + rdm + '&f=' + fileid;
+    var data = new Buffer(plainText, 'utf8');
+
+    var res = crypto.createHmac('sha1', secretKey).update(data).digest();
+    var bin = Buffer.concat([res, data]);
+
+    var sign = bin.toString('base64');
+
+    return sign;
+}
 
 module.exports = router;
