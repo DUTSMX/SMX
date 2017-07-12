@@ -35,13 +35,8 @@
     <div class="margin-left-30" id="person-info">
         <img src="/images/icon.png" class="head img-circle">
         <div class="base-info">
-<<<<<<< HEAD
             <h3 class="inline"><%=info.userName%>&nbsp;<%if(info.gender== 0){%>男<%}else{%>女<%}%>%></h3><br>
-            <h4 class="inline">年龄:<%=info.userAge%>&nbsp;电话号码:<%=info.phoneNumber%></h4>
-=======
-            <h3 class="inline"><%=info.userName%></h3><br>
-            <h4 class="inline">手机号码</h4>
->>>>>>> ab967b207268730c801753a888fa56ae867c39c2
+            <h4 class="inline">电话号码:&nbsp;<%=info.phoneNumber%></h4>
         </div>
         <button class="btn btn-default inline right" onclick="logout()">退出登录</button>
         <br>
@@ -54,14 +49,14 @@
             <img src="/images/icon.png" class="head img-circle">
         </div>
         <div class="base-info">
-            <input id="person-name"class="inline margin-top-20" value=<%=info.userName%> placeholder="请输入学生姓名" disabled="false"/>
-            <select class="padding-4">
+            <label>前台姓名: &nbsp</label><input id="person-name"class="inline margin-top-20" value=<%=info.userName%> placeholder="请输入前台姓名" /><!--disabled="false"-->
+            <select id="location"class="padding-4">
                 <option>台安店</option>
                 <option>大连店</option>
                 <option>沈阳店</option>
             </select><br>
-            <input id="person-phoneNumber"class="inline margin-top-20" value=<%=info.phoneNumber%> placeholder="请输入手机号码" disabled="false"/>
-            <button id="apply-modify"class="btn btn-defalut padding-4" onclick="applyModify()">申请修改</button>
+            <label>前台手机号: &nbsp</label><input id="person-phoneNumber"class="inline margin-top-20" value=<%=info.phoneNumber%> placeholder="请输入手机号码" /><!--disabled="false"-->
+            <!--<button id="apply-modify"class="btn btn-defalut padding-4" onclick="applyModify()">申请修改</button>-->
 
         </div>
         <br>
@@ -159,33 +154,27 @@
     function editInfo(){
         var userName = $("#person-name").val();
         var phoneNumber = $("#phoneNumber").val();
+        var joinreceptionlocation;
+        var obj = document.getElementById("location");
+        var index = obj.selectedIndex;
+        if(index==0)
+        {
+            joinreceptionlocation="台安";
+        }
+        else if(index==1){
+            joinreceptionlocation="大连";
+        }
+        else if(index==2){
+            joinreceptionlocation="沈阳";
+        }
         var data = {
             userName:userName,
             phoneNumber:phoneNumber,
+            joinreceptionlocation:joinreceptionlocation,
         }
         jQuery.post("./editInfo",data,function (data,textStatus,jqXHR) {
-            alert(data.desc)
-            console.log(data)
-            console.log(textStatus)
-            console.log(jqXHR)
-            if(data.status){
-                console.log("from = "+ from);
-                if(from){
-                    console.log("from = "+ true);
-                }else{
-                    console.log("from = "+ false);
-                }
-                if(from){
-                    location.replace("../course/course")
-                }else{
-                    $("#hint").text(data.desc)
-                    $.cookie("personDetail",true);
-                    window.history.back()
-                }
-            }else{
-                console.log(data.desc)
-            }
-        },"json")
+            location.reload()
+        })
     }
 </script>
 </html>

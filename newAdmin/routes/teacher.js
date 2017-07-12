@@ -42,7 +42,7 @@ router.get('/teacherCourse',function (req,res,next) {
 router.get('/teacherCourseRecord',function (req,res,next) {
     res.render('teacherCourseRecord');
 })
-router.get('/teacherDetail',function (req,res,next) {
+router.get('/teacherDetail',function(req,res,next){
     res.render('teacherDetail');
 })
 router.get('/teacherCourseDetail',function (req,res,next) {

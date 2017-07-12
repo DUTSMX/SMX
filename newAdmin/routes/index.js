@@ -1,11 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var course=require('../model/course');
-<<<<<<< HEAD
 var teacher=require('../model/teacher');
-=======
 var user =require("../model/user")
->>>>>>> ab967b207268730c801753a888fa56ae867c39c2
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -17,8 +14,6 @@ router.get('/joinManagerReport', function (req, res, next) {
 router.get('/joinManagerDetail', function (req, res, next) {
     res.render('joinManagerDetail');
 });
-
-
 router.post('/createStudent', function (req, res, next) {
     console.log("body:"+JSON.stringify(req.body));
     user.create({
@@ -33,8 +28,6 @@ router.post('/createStudent', function (req, res, next) {
     });
     res.end("235")
 });
-
-
 router.get('/joinReceptionStudentDetail', function (req, res, next) {
     res.render('joinReceptionStudentDetail');
 });
@@ -48,18 +41,10 @@ router.get('/joinReceptionCourseCalendar', function (req, res, next) {
     res.render('joinReceptionCourseCalendar');
 });
 router.get('/joinReceptionDetail',function (req,res,next) {
-<<<<<<< HEAD
     var user =require("../model/user")
-    user.findOne({where:{userId:1}}).then(function(ret){
-        console.log(JSON.stringify(ret))
+    user.findOne({where:{userId:2}}).then(function(ret){
         res.render('joinReceptionDetail',{info:ret});
     })
-=======
-  user.findOne({where:{userId:1}}).then(function(ret){
-    console.log(JSON.stringify(ret))
-    res.render('joinReceptionDetail',{info:ret});
-  })
->>>>>>> ab967b207268730c801753a888fa56ae867c39c2
 })
 router.get('/joinReceptionStudentList',function (req,res,next) {
   user.findAll({where:{role:0}}).then(function(ret){
@@ -93,18 +78,52 @@ router.get('/joinReceptionCourseCalendar',function (req,res,next) {
 router.get('/joinReceptionCourseManager',function (req,res,next) {
   res.render('joinReceptionCourseManager');
 })
-<<<<<<< HEAD
 router.get('/teacherDetail',function (req,res,next) {
-    teacher.findOne({teacherId:15}).then(function (ret) {
+    teacher.findOne({'where':{teacherId:2}}).then(function (ret) {
         console.log("ret:"+JSON.stringify(ret));
         ret.getUser().then(function (ret1) {
             console.log("ret1:"+JSON.stringify(ret1));
             res.render('teacherDetail',{info:ret1,infos:ret});
         })
-
     })
-
 })
+router.post("/modifyInfo",function (req,res) {
+    console.log(JSON.stringify(req.body))
+    user.update({
+        userName:req.body.teacherName,
+        phoneNumber:req.body.phoneNumber,
+        gender:req.body.gender,
+    },{'where':{userId:2}}).then(
+        teacher.update({
+            college:req.body.college,
+            teachClass:req.body.teachClass,
+            class:req.body.class,
+            province:req.body.province,
+            city:req.body.city,
+            highSchool:req.body.highSchool,
+            SciOrLiber:req.body.SciOrLiber,
+            SumScore:req.SumScore,
+            Chinese:req.body.Chinese,
+            Math:req.body.Math,
+            English:req.body.English,
+            Physics:req.body.Physics,
+            Chemistry:req.body.Chemistry,
+            Biology:req.body.Biology,
+            Politics:req.body.Politics,
+            History:req.body.History,
+            Geography:req.body.Geography,
+        },{'where':{userId:2}})
+)})
+router.post("/editInfo",function (req,res) {
+    console.log(JSON.stringify(req.body))
+    user.update({
+        userName:req.body.userName,
+        phoneNumber:req.body.phoneNumber,
+    },{'where':{userId:2}}).then(
+        joinreceptionshop.update({
+            JoinReceptionLocation:req.body.joinreceptionlocation,
+        },{'where':{userId:2}})
+    )})
 router.get('/teacherCourse',function (req,res,next) {
   res.render('teacherCourse')
 })
@@ -123,30 +142,6 @@ router.get('/officeManagerReport',function (req,res,next) {
 router.get('/officeManagerDetail',function (req,res,next) {
   res.render('officeManagerDetail');
 })
-=======
-router.get('/teacherCourse', function (req, res, next) {
-    res.render('teacherCourse')
-});
-router.get('/teacherCourseRecord', function (req, res, next) {
-    res.render('teacherCourseRecord')
-});
-router.get('/teacherCourseDetail', function (req, res, next) {
-    res.render('teacherCourseDetail')
-});
-router.get('/teacherList', function (req, res, next) {
-    res.render('teacherList');
-});
-router.get('/teacherDetail', function (req, res, next) {
-    res.render('teacherDetail');
-});
-
-router.get('/officeManagerReport', function (req, res, next) {
-    res.render('officeManagerReport');
-});
-router.get('/officeManagerDetail', function (req, res, next) {
-    res.render('officeManagerDetail');
-});
-
 router.get('/adminJoinList', function (req, res, next) {
     res.render('adminJoinList');
 });
@@ -162,12 +157,4 @@ router.get('/adminUserDetail', function (req, res, next) {
 router.get('/adminDetail', function (req, res, next) {
     res.render('adminDetail');
 });
->>>>>>> ab967b207268730c801753a888fa56ae867c39c2
-
-
-router.post("/editInfo",function (req,res) {
-    console.log(JSON.stringify(req.body))
-    res.send({desc:"修改成功！"})
-})
-
 module.exports = router;
