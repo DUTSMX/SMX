@@ -27,6 +27,7 @@ router.post('/login',function (req,res) {
         req.session.userId=ret[0].userId;
 
         req.session.userName = ret[0].userName;
+        req.session.identityId = ret[0].identityId;
         console.log(req.session.userName);
         //console.log("------------------");
 
@@ -41,6 +42,7 @@ router.post('/login',function (req,res) {
 
 router.post('/logout',function (req,res) {
     req.session.userName = "";
+    req.session.identityId = "";
     res.send("123")
 })
 module.exports=router;
