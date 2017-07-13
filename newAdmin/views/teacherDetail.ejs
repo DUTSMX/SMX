@@ -214,7 +214,6 @@
     function modifyInfo(){
         var teacherName = $("#person-name").val();
         var phoneNumber = $("#person-phoneNumber").val();
-        var gendertmp = $("#person-gender").val();
         var gender = ($("#person-gender").val()=="男")?0:1;
         var teachClass = $("#subject").val();
         var college = $("#college").val();
@@ -239,7 +238,7 @@
             gender:gender,
             teachClass:teachClass,
             college:college,
-            class:Class,
+            Class:Class,
             province:province,
             city:city,
             highSchool:highSchool,
@@ -255,8 +254,9 @@
             History:History,
             Geography:Geography,
         }
-        jQuery.post("./modifyInfo",data,function (data,textStatus,jqXHR) {
-            location.reload()
+        console.log(JSON.stringify(data));
+        jQuery.post("./modifyInfo",data,function (ret) {
+            console.log(JSON.stringify(ret));
         })
     }
     $("#navigation-person").addClass("select-left-button");

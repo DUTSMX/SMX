@@ -9,35 +9,38 @@ var moment=require("moment");
 var teacher = require("../model/teacher")
 router.get('/teacherCourse',function (req,res,next) {
 
-    course.courseSeries.findAll().then(function (data) {
-        console.log("data:"+JSON.stringify(data));
-        var date = moment(new Date()).format("YYYY-MM-DD");
-        var userId=20;
-        var sql="SELECT c.courseId, " +
-            "a.userName, " +
-            "c.courseName, " +
-            "c.courseDate, " +
-            "c.beginTime, " +
-            "c.objectOriented, " +
-            "c.courseContent," +
-            "b.courseSeriesNumber,"+
-            "c.courseDate,"+
-            "c.courseRoom,"+
-            "c.courseSeriesId,"+
-            "c.courseSeriesCourseId "+
-            "FROM course c JOIN account a ON a.userId = c.userId  JOIN joinCourse s on (c.courseSeriesId = s.courseSeriesId and c.courseSeriesCourseId=s.courseSeriesCourseId) JOIN courseSeries b on s.courseSeriesId=b.courseSeriesId "+
-            "WHERE s.userId = "+userId;
-        course.sequelize.query(sql,{ type: course.sequelize.QueryTypes.SELECT }).then(function (ret) {
-            console.log("ret:"+JSON.stringify(ret));
-            // course.courseSeries.findAll({where:{courseSeriesId:ret.courseSeriesId}}).then(
-            //     function (ret1) {
-            //         console.log("ret1:"+JSON.stringify(ret1));
-            //     }
-            // )
-            res.render('teacherCourse',{name:req.session.name,
-                courseDetails:ret,courseSeries:data});
-        });
-    });
+        // course.courseSeries.findAll().then(function (data) {
+        //     console.log("data:"+JSON.stringify(data));
+        //     var date = moment(new Date()).format("YYYY-MM-DD");
+        //     var userId=20;
+        //     var sql="SELECT c.courseId, " +
+        //         "a.userName, " +
+        //         "c.courseName, " +
+        //         "c.courseDate, " +
+        //         "c.beginTime, " +
+        //         "c.objectOriented, " +
+        //         "c.courseContent," +
+        //         "b.courseSeriesNumber,"+
+        //         "c.courseDate,"+
+        //         "c.courseRoom,"+
+        //         "c.courseSeriesId,"+
+        //         "c.courseSeriesCourseId "+
+        //         "FROM course c JOIN account a ON a.userId = c.userId  JOIN joinCourse s on (c.courseSeriesId = s.courseSeriesId and c.courseSeriesCourseId=s.courseSeriesCourseId) JOIN courseSeries b on s.courseSeriesId=b.courseSeriesId "+
+        //         "WHERE s.userId = "+userId;
+        //     course.sequelize.query(sql,{ type: course.sequelize.QueryTypes.SELECT }).then(function (ret) {
+        //         console.log("ret:"+JSON.stringify(ret));
+        //         // course.courseSeries.findAll({where:{courseSeriesId:ret.courseSeriesId}}).then(
+        //         //     function (ret1) {
+        //         //         console.log("ret1:"+JSON.stringify(ret1));
+        //         //     }
+        //         // )
+        //         res.render('teacherCourse',{name:req.session.name,
+        //             courseDetails:ret,courseSeries:data});
+        //     });
+    // });
+
+            res.render('teacherCourse',{
+                courseDetails:[],courseSeries:[]});
 });
 
 router.get('/teacherCourseRecord',function (req,res,next) {
@@ -45,9 +48,7 @@ router.get('/teacherCourseRecord',function (req,res,next) {
 })
 router.get('/teacherDetail',function (req,res,next) {
     teacher.findOne({'where':{teacherId:2}}).then(function (ret) {
-        console.log("ret:"+JSON.stringify(ret));
         ret.getUser().then(function (ret1) {
-            console.log("ret1:"+JSON.stringify(ret1));
             res.render('teacherDetail',{info:ret1,infos:ret});
         })
     })
@@ -62,7 +63,7 @@ router.post("/modifyInfo",function (req,res) {
         teacher.update({
             college:req.body.college,
             teachClass:req.body.teachClass,
-            class:req.body.class,
+            class:req.body.Class,
             province:req.body.province,
             city:req.body.city,
             highSchool:req.body.highSchool,
@@ -87,7 +88,6 @@ router.get('/teacherCourseDetail',function (req,res,next) {
         console.log("ret:"+JSON.stringify(ret));
         ret.getJoinCourse().then(function (ret0) {
             console.log("ret0:"+JSON.stringify(ret0));
-            var teacher=[];
             ret0.forEach(function (item) {
                 if(teacher.indexOf(item.userId)==-1){
                     teacher.push(item.userId);
