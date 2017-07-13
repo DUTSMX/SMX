@@ -57,9 +57,17 @@ router.post("/modifyInfo",function (req,res) {
     user.update({
         userName:req.body.teacherName,
         phoneNumber:req.body.phoneNumber,
-        gender:req.body.gender,
-    },{'where':{userId:2}}).then(
+        gender:req.body.gender
+    }, {'where':{userId:2}}).then(
         teacher.update({
+
+            head : req.body.head,
+            head_1_id:req.body.head_1_id,
+            head_2_id:req.body.head_2_id,
+
+            student_card :req.body.student_card,
+            teacher_card :req.body.teacher_card,
+
             college:req.body.college,
             teachClass:req.body.teachClass,
             class:req.body.class,
@@ -76,11 +84,12 @@ router.post("/modifyInfo",function (req,res) {
             Biology:req.body.Biology,
             Politics:req.body.Politics,
             History:req.body.History,
-            Geography:req.body.Geography,
+            Geography:req.body.Geography
+
         },{'where':{userId:2}}).then(
             res.send("123")
         )
-    )})
+    )});
 router.get('/teacherCourseDetail',function (req,res,next) {
     var courseSeriesId=req.query.courseSeriesId;
     course.courseSeries.findOne({where:{courseSeriesId:courseSeriesId}}).then(function (ret) {

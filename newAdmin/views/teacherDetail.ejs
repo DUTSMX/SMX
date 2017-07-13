@@ -25,7 +25,7 @@
         .width-60{width:60px;}
     </style>
 </head>
-<body style="height:100%">
+<body style="height:100%"  onload="uploadImg()">
 <%include navigation-index.ejs%>
 <%include navigation-teacher.ejs%>
 <div class="right-content">
@@ -59,9 +59,8 @@
     </div>
     <div class="margin-left-30"   style="display: none" id="person-edit">
         <div class="inline">
-            <input type="file" class="head-input"/>
-            <p class="head-edit">编辑图片</p>
-            <img src="/images/icon.png" class="head img-circle">
+            <input id="head" type="file" class="head-input"/>
+            <img id= "head-image" src="/images/icon.png" class="head img-circle">
         </div><br>
         <label>老师姓名&nbsp</label><input id="person-name"class="inline margin-top-20" value=<%=info.userName%> placeholder="请输入老师姓名" /><!--disabled="false-->
         <!--<button id="apply-modify"class="btn btn-defalut padding-4" onclick="applyModify()">申请修改</button><br>-->
@@ -72,7 +71,7 @@
         <label>学校年级&nbsp</label><input id="class" value=<%=infos.class%> class="inline margin-top-20" placeholder="请输入学校年级"/><br>
         <!--<input value="学习情况：中等" disabled="false" placeholder="请输入学习情况"></h4><br>-->
         <input id="province" class="width-60" value=<%=infos.province%> placeholder="请输入家庭省份"><label>省</label><input id="city" class="width-60" value=<%=infos.city%> placeholder="请输入家庭城市"><label>市</label><input id="highschool" value=<%=infos.highSchool%> placeholder="请输入中学名称">
-        <select id="change-subject"class="padding-4" onchange="changeSubject()">
+        <select id="change-subject" class="padding-4" onchange="changeSubject()">
             <option grade="science" value="理科">理科</option>
             <option grade="liberal" value="文科">文科</option>
         </select><br>
@@ -92,15 +91,13 @@
         </div>
         <br>
         <div class="image">
-            <input type="file" class="image-input"/>
-            <p class="image-edit">编辑图片</p>
-            <img src="/images/logo.png"/>
+            <input type="file" id="student-card" class="image-input"/>
+            <img id="student-card-img" src="/images/logo.png"/>
             <p>学生证</p>
         </div>
         <div class="image">
-            <input type="file" class="image-input"/>
-            <p class="image-edit">编辑图片</p>
-            <img src="/images/logo.png"/>
+            <input type="file" id="teacher-card" class="image-input"/>
+            <img id="teacher-card-img" src="/images/logo.png"/>
             <p>家教认证</p>
         </div>
     </div>
@@ -123,16 +120,14 @@
         <div class="margin-10">
             <label>身份证号&nbsp</label><input value="123456789012345678"placeholder="请输入身份证号"/><br>
         </div>
-        <div class="image">
-            <input type="file" class="image-input"/>
-            <p class="image-edit">编辑图片</p>
-            <img src="/images/logo.png"/>
+        <div class="image" >
+            <input type="file"  id="head-1" class="image-input"/>
+            <img id="head-id-1-image"  src="/images/logo.png"/>
             <p>身份证正面</p>
         </div>
         <div class="image">
-            <input type="file" class="image-input"/>
-            <p class="image-edit">编辑图片</p>
-            <img src="/images/logo.png"/>
+            <input type="file" class="image-input"  id="head-2" />
+            <img id="head-id-2-image"  src="/images/logo.png"/>
             <p>身份证背面</p>
         </div>
     </div>
@@ -140,8 +135,154 @@
 </div>
 </body>
 
+
+
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="/javascripts/sdk/qcloud_sdk.js"></script>
+<script src="/javascripts/sdk/swfobject.js"></script>
+
 <script>
+
+    function uploadImg() {
+        var cos = new CosCloud("10068625", "/")
+        var userId = "2"
+        var successCallBack1 = function (result) {
+            console.log("success")
+            console.log("result:" + JSON.stringify(result))
+            console.log("type" + typeof result)
+            console.log("修改图片" + JSON.parse(result).data.access_url)
+            $("#head-image").attr('src', JSON.parse(result).data.access_url)
+        }
+        var errorCallBack1 = function (result) {
+            $("#age").val("error:" + result);
+            console.log("error")
+            console.log("result:" + JSON.stringify(result))
+        }
+
+        var successCallBack2 = function (result) {
+            console.log("success")
+            console.log("result:" + JSON.stringify(result))
+            console.log("type" + typeof result)
+            console.log("修改图片" + JSON.parse(result).data.access_url)
+            $("#head-id-1-image").attr('src', JSON.parse(result).data.access_url)
+        }
+        var errorCallBack2 = function (result) {
+            $("#age").val("error:" + result);
+            console.log("error")
+            console.log("result:" + JSON.stringify(result))
+        }
+
+        var successCallBack3 = function (result) {
+            console.log("success")
+            console.log("result:" + JSON.stringify(result))
+            console.log("type" + typeof result)
+            console.log("修改图片" + JSON.parse(result).data.access_url)
+            $("#head-id-2-image").attr('src', JSON.parse(result).data.access_url)
+        }
+        var errorCallBack3 = function (result) {
+            $("#age").val("error:" + result);
+            console.log("error")
+            console.log("result:" + JSON.stringify(result))
+        }
+
+        var successCallBack4 = function (result) {
+            console.log("success")
+            console.log("result:" + JSON.stringify(result))
+            console.log("type" + typeof result)
+            console.log("修改图片" + JSON.parse(result).data.access_url)
+            $("#student-card-img").attr('src', JSON.parse(result).data.access_url)
+        }
+        var errorCallBack4 = function (result) {
+            $("#age").val("error:" + result);
+            console.log("error")
+            console.log("result:" + JSON.stringify(result))
+        }
+
+        var successCallBack5 = function (result) {
+            console.log("success")
+            console.log("result:" + JSON.stringify(result))
+            console.log("type" + typeof result)
+            console.log("修改图片" + JSON.parse(result).data.access_url)
+            $("#teacher-card-img").attr('src', JSON.parse(result).data.access_url)
+        }
+        var errorCallBack5 = function (result) {
+            $("#age").val("error:" + result);
+            console.log("error")
+            console.log("result:" + JSON.stringify(result))
+        }
+
+
+        var inputElements1 = document.getElementById("head");
+        inputElements1.addEventListener("change", handleFiles1, false);
+        function handleFiles1() {
+            var fileList = this.files;
+            if (fileList.length > 0) {
+                selectedFile = fileList[0];
+                var name = selectedFile.name;
+                var postfix = name.substr(name.lastIndexOf("."))
+                console.log("postfix:/head/" + userId + postfix)
+
+                cos.uploadFile(successCallBack1, errorCallBack1, "smxbucket", "/head/" + userId + "head" + Math.floor((Math.random() * 9000 + 1000)) + postfix, selectedFile, 0)
+            }
+        }
+
+        var inputElements2 = document.getElementById("head-1");
+        inputElements2.addEventListener("change", handleFiles2, false);
+        function handleFiles2() {
+            var fileList = this.files;
+            if (fileList.length > 0) {
+                selectedFile = fileList[0];
+                var name = selectedFile.name;
+                var postfix = name.substr(name.lastIndexOf("."))
+                console.log("postfix:/head-1/" + userId + postfix)
+
+                cos.uploadFile(successCallBack2, errorCallBack2, "smxbucket", "/head-1/" + userId + "head-1" + Math.floor((Math.random() * 9000 + 1000)) + postfix, selectedFile, 0)
+            }
+        }
+
+        var inputElements3 = document.getElementById("head-2");
+        inputElements3.addEventListener("change", handleFiles3, false);
+        function handleFiles3() {
+            var fileList = this.files;
+            if (fileList.length > 0) {
+                selectedFile = fileList[0];
+                var name = selectedFile.name;
+                var postfix = name.substr(name.lastIndexOf("."))
+                console.log("postfix:/head-2/" + userId + postfix)
+
+                cos.uploadFile(successCallBack3, errorCallBack3, "smxbucket", "/head-2/" + userId + "head-2" + Math.floor((Math.random() * 9000 + 1000)) + postfix, selectedFile, 0)
+            }
+        }
+
+        var inputElements4 = document.getElementById("student-card");
+        inputElements4.addEventListener("change", handleFiles4, false);
+        function handleFiles4() {
+            var fileList = this.files;
+            if (fileList.length > 0) {
+                selectedFile = fileList[0];
+                var name = selectedFile.name;
+                var postfix = name.substr(name.lastIndexOf("."))
+                console.log("postfix:/student-card/" + userId + postfix)
+
+                cos.uploadFile(successCallBack4, errorCallBack4, "smxbucket", "/student-card/" + userId + "head-1" + Math.floor((Math.random() * 9000 + 1000)) + postfix, selectedFile, 0)
+            }
+        }
+
+        var inputElements5 = document.getElementById("teacher-card");
+        inputElements5.addEventListener("change", handleFiles5, false);
+        function handleFiles5() {
+            var fileList = this.files;
+            if (fileList.length > 0) {
+                selectedFile = fileList[0];
+                var name = selectedFile.name;
+                var postfix = name.substr(name.lastIndexOf("."))
+                console.log("postfix:/teacher-card/" + userId + postfix)
+
+                cos.uploadFile(successCallBack5, errorCallBack5, "smxbucket", "/teacher-card/" + userId + "head-2" + Math.floor((Math.random() * 9000 + 1000)) + postfix, selectedFile, 0)
+            }
+        }
+    }
+
     $("#person").text("老师姓名")
 
     function loginDialog(){
@@ -233,7 +374,26 @@
         var Politics = $("#politics").val();
         var History = $("#history").val();
         var Geography = $("#geography").val();
+
+        var student_card = $("#student-card-img").src.val();
+
+        var teacher_card = $("#teacher-card-img").src.val();
+
+        var head = $("#head-image").src.val();
+
+        var head_1_id = $("#head-id-1-image").src.val();
+
+        var head_2_id = $("#head-id-2-image").src.val();
+
         var data = {
+            head : head,
+            head_1_id:head_1_id,
+            head_2_id:head_2_id,
+
+            student_card :student_card,
+            teacher_card :teacher_card,
+
+
             teacherName:teacherName,
             phoneNumber:phoneNumber,
             gender:gender,
@@ -253,7 +413,7 @@
             Biology:Biology,
             Politics:Politics,
             History:History,
-            Geography:Geography,
+            Geography:Geography
         }
         jQuery.post("./modifyInfo",data,function (data,textStatus,jqXHR) {
             location.reload()
