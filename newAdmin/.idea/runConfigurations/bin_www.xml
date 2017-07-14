@@ -1,41 +1,12 @@
 <component name="ProjectRunConfigurationManager">
-<<<<<<< HEAD
-  <configuration default="false" name="bin\www" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="E:/Node.js/node" path-to-js-file="bin/www" working-dir="$PROJECT_DIR$">
-=======
-  <configuration default="false" name="bin\www" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="F:/nodejs/node" path-to-js-file="bin/www" working-dir="$PROJECT_DIR$">
->>>>>>> 3853ca6aeb027cc4d8dcbe8908c92edd81af3764
+  <configuration default="false" name="bin\www" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="C:/Program Files/nodejs/node" path-to-js-file="bin/www" working-dir="$PROJECT_DIR$">
     <envs>
       <env name="DEBUG" value="newAdmin:*" />
     </envs>
     <browser url="http://localhost:3000/" />
-    <EXTENSION ID="com.jetbrains.nodejs.remote.docker.NodeJSDockerRunConfigurationExtension">
-      <option name="envVars">
-        <list />
-      </option>
-      <option name="extraHosts">
-        <list />
-      </option>
-      <option name="links">
-        <list />
-      </option>
-      <option name="networkDisabled" value="false" />
-      <option name="networkMode" value="bridge" />
-      <option name="portBindings">
-        <list />
-      </option>
-      <option name="publishAllPorts" value="false" />
-      <option name="version" value="1" />
-      <option name="volumeBindings">
-        <list />
-      </option>
-<<<<<<< HEAD
-=======
-=======
     <profiling v8-profiler-path="" />
     <EXTENSION ID="com.jetbrains.nodejs.run.NodeJSProfilingRunConfigurationExtension">
       <profiling v8-profiler-path="" />
->>>>>>> 3853ca6aeb027cc4d8dcbe8908c92edd81af3764
->>>>>>> c114ed5d061997d6b7cd47af455b0bce34729c3a
     </EXTENSION>
     <EXTENSION ID="com.jetbrains.nodejs.run.NodeJSStartBrowserRunConfigurationExtension">
       <browser url="http://localhost:3000/" />

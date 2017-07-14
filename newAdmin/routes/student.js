@@ -103,9 +103,9 @@ router.post("/changeInfo",function (req,res) {
     })
 })
 router.get('/studentCourseDetail',function (req,res,next) {
-    var courseSeriesId = req.query.courseSeriesId;
-    var studentName = [];
-    course.courseSeries.findOne({where: {courseSeriesId: courseSeriesId}}).then(function (ret) {
+    var courseSeriesId=req.query.courseSeriesId;
+    var studentName=[];
+    course.courseSeries.findOne({where:{courseSeriesId:courseSeriesId}}).then(function (ret) {
         console.log("ret:" + JSON.stringify(ret));
         ret.getJoinCourse().then(function (ret0) {
             console.log("ret0:" + JSON.stringify(ret0));
@@ -135,10 +135,49 @@ router.get('/studentCourseDetail',function (req,res,next) {
                 })
             }, 1000);
         });
+        // var courseSeriesId=req.query.courseSeriesId;
+        // var studentName=[];
+        // course.courseSeries.findOne({where:{courseSeriesId:courseSeriesId}}).then(function (ret) {
+        //     console.log("ret:"+JSON.stringify(ret));
+        //     ret.getJoinCourse().then(function (ret0) {
+        //         console.log("ret0:"+JSON.stringify(ret0));
+        //         var student=[];
+        //         ret0.forEach(function (item) {
+        //             if(student.indexOf(item.userId)==-1){
+        //                 student.push(item.userId);
+        //             }
+        //         });
+        //         console.log("student:"+JSON.stringify(student));
+        //        student.forEach(function (item) {
+        //             console.log("userId:"+item);
+        //             user.findOne({where:{userId:item}}).then(function (student) {
+        //                 console.log("student:"+JSON.stringify(student));
+        //                 studentName.push({userName:student.userName});
+        //             })
+        //         });
+        //             console.log("studentName:"+studentName);
+        //             ret.getCourse().then(function (ret1) {
+        //                 console.log("ret1:"+JSON.stringify(ret1));
+        //                 res.render('studentCourseDetail',{
+        //                     courseSeries:ret,
+        //                     courseSeriesDetails:ret1
+        //                 })
+        //             })
+        //     });
+        // });
+
+//     var templateId=req.query.templateId;
+//     course.seriesTemplate.findOne({
+//         'where':{'templateId':templateId}
+//     }).then(function (ret) {
+//         console.log(JSON.stringify(ret))
+//         res.render('educationCourseDetail',{template:ret});
+// >>>>>>> 699ccafcc18bc2bb7461cff24481e9b82fe24849
+//     });
     })
 })
 
-router.get('/studentCourseDetail',function (req,res,next) {
+//router.get('/studentCourseDetail',function (req,res,next) {
     // var seriesId=req.query.seriesId;
     // series.courseSeries.findOne({
     //     'where':{'courseSeriesId':seriesId}
@@ -167,5 +206,4 @@ router.get('/studentCourseDetail',function (req,res,next) {
     //     })
     //
     // });
-});
 module.exports=router;
