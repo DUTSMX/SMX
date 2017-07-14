@@ -22,105 +22,59 @@
         .image img{width:80%}
         .image-input{opacity: 0;position:absolute;width:40%;height:20%;z-index: 1000}
         .image-edit{position:absolute;text-align:center;margin-top:5%;width:40%;z-index: 900}
+        .course-block{height:60px;border-radius: 5px;border-style:solid;border-width:1px;border-color:#4cae4c;margin-bottom:10px;margin-top:10px}
+        .course-title{color:#4cae4c}
+        .inline{display: inline-block;margin:2px;}
+        .sign-up{margin-top:10px;margin-right:10px}
     </style>
 </head>
 <body style="height:100%">
 <%include navigation-index.ejs%>
-<%include navigation-education.ejs%>
+<%include navigation-joinReception.ejs%>
 <div class="right-content">
-    <div class="panel-heading title-block">
-        <h3 class="panel-title title-white">教师信息</h3>
-        <h3 id="applyId" class="panel-title right-button" onclick="applyId()">确认</h3>
-    </div>
     <div class="margin-left-30" id="person-edit">
-        <div class="inline">
-            <input type="file" class="head-input"/>
-            <p class="head-edit">编辑头像</p>
-            <img src="/images/icon.png" class="head img-circle">
-        </div><br>
-        <label>老师姓名&nbsp</label><input id="person-name"class="inline margin-top-20" value="老师姓名" placeholder="请输入老师姓名" disabled="false"/>
-        <button id="apply-modify"class="btn btn-defalut padding-4" onclick="applyModify()">申请修改</button><br>
-        <label>老师性别&nbsp</label><input id="person-gender"class="inline margin-top-20" value="老师性别" placeholder="请输入老师性别" disabled="false"/><br>
-        <label>手机号码&nbsp</label><input id="person-phoneNumber"class="inline margin-top-20" value="手机号码" placeholder="请输入手机号码" disabled="false"/><br>
-        <label>教授科目&nbsp</label><input value="教授科目" class="inline margin-top-20" placeholder="请输入教授科目" disabled="false" id="subject"/><br>
-        <label>学校名称&nbsp</label><input value="学生学校" class="inline margin-top-20" placeholder="请输入学校名称"/><br>
-        <label>学校年级&nbsp</label><input value="学生年级" class="inline margin-top-20" placeholder="请输入学校年级"/><br>
-        <!--<input value="学习情况：中等" disabled="false" placeholder="请输入学习情况"></h4><br>-->
-        <input class="width-60" value="辽宁" placeholder="请输入家庭省份"><label>省</label><input class="width-60" value="大连" placeholder="请输入家庭城市"><label>市</label><input value="育明中学" placeholder="请输入中学名称">
-        <select id="change-subject"class="padding-4" onchange="changeSubject()">
-            <option grade="science" value="理科">理科</option>
-            <option grade="liberal" value="文科">文科</option>
-        </select><br>
-        <label>高考总分&nbsp</label><input class="width-60" value="650" placeholder="请输入高考总分"/>
-        <label>数学&nbsp</label><input class="width-60" value="135" placeholder="请输入高考数学分"/>
-        <label>语文&nbsp</label><input class="width-60" value="120" placeholder="请输入高考语文分"/>
-        <label>英语&nbsp</label><input class="width-60" value="125" placeholder="请输入高考英语分"/>
-        <div id="science" class="inline">
-            <label>物理&nbsp</label><input class="width-60" value="90" placeholder="请输入高考物理分"/>
-            <label>化学&nbsp</label><input class="width-60" value="90" placeholder="请输入高考化学分"/>
-            <label>生物&nbsp</label><input class="width-60" value="90" placeholder="请输入高考生物分"/><br>
+        <label><%=teacher.userName%>&nbsp</label> <label><%=teacher.phoneNumber%>&nbsp</label><button class="right btn btn-defalut" onclick="teacherDetail()">编辑信息</button>
+    </div>
+    <div class="panel-heading title-block" style="margin-top:20px">
+        <h3 class="panel-title title-white">进行中</h3>
+    </div>
+    <div style="height:20vh">
+        <%if(nowCourse.length == 0){%>
+        <h4 style="text-align: center;margin:10px">当前没有课程</h4>
+        <%} nowCourse.forEach(function (item) { %>
+        <div class="course-block">
+            <div class="inline left">
+                <h3 class="inline course-title"><%=item.courseSeriesName%></h3><h4 class="inline"><%=item.userName%></h4><br>
+                <h4 class="inline"><%=item.startDate%>~~<%=item.endDate%> <%=item.time%>  <%=item.room%></h4>
+            </div>
+            <button class="btn btn-success right sign-up" onclick="courseDetail(<%=item.courseSeriesId%>)">详情</button>
         </div>
-        <div id="liberal" class="inline" style="display: none">
-            <label>政治&nbsp</label><input class="width-60" value="90" placeholder="请输入高考政治分"/>
-            <label>历史&nbsp</label><input class="width-60" value="90" placeholder="请输入高考历史分"/>
-            <label>地理&nbsp</label><input class="width-60" value="90" placeholder="请输入高考地理分"/><br>
-        </div>
-        <br>
-        <div class="image">
-            <input type="file" class="image-input"/>
-            <p class="image-edit">编辑图片</p>
-            <img src="/images/logo.png"/>
-            <p>学生证</p>
-        </div>
-        <div class="image">
-            <input type="file" class="image-input"/>
-            <p class="image-edit">编辑图片</p>
-            <img src="/images/logo.png"/>
-            <p>家教认证</p>
-        </div>
+        <%})%>
     </div>
     <div class="panel-heading title-block">
-        <h3 class="panel-title title-white">隐私信息</h3>
-        <h3 id="applyId" class="panel-title right-button" onclick="applyId()">申请修改</h3>
+        <h3 class="panel-title title-white">已完成</h3>
     </div>
-    <div class="margin-left-30" id="id">
-        <h4>身份证号:123456789012345678</h4>
-        <div class="image">
-            <img src="/images/logo.png"/>
-            <p>身份证正面</p>
+    <div style="height:20vh">
+
+        <%if(finishCourse.length == 0){%>
+        <h4 style="text-align: center;margin:10px">没有已完成的课程</h4>
+        <%} finishCourse.forEach(function (item) { %>
+        <div class="course-block">
+            <div class="inline left">
+                <h3 class="inline course-title"><%=item.courseSeriesName%></h3><h4 class="inline"><%=item.userName%></h4><br>
+                <h4 class="inline"><%=item.startDate%>~~<%=item.endDate%> <%=item.time%>  <%=item.room%></h4>
+            </div>
+            <button class="btn btn-success right sign-up" onclick="courseDetail(<%=item.courseSeriesId%>)">详情</button>
         </div>
-        <div class="image">
-            <img src="/images/logo.png"/>
-            <p>身份证背面</p>
-        </div>
+        <%})%>
     </div>
-    <div class="margin-left-30" style="display:none" id="id-edit">
-        <div class="margin-10">
-            <label>身份证号&nbsp</label><input value="123456789012345678"placeholder="请输入身份证号"/><br>
-        </div>
-        <div class="image">
-            <input type="file" class="image-input"/>
-            <p class="image-edit">编辑图片</p>
-            <img src="/images/logo.png"/>
-            <p>身份证正面</p>
-        </div>
-        <div class="image">
-            <input type="file" class="image-input"/>
-            <p class="image-edit">编辑图片</p>
-            <img src="/images/logo.png"/>
-            <p>身份证背面</p>
-        </div>
-    </div>
-</div>
 </div>
 </body>
 
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-    $("#person").text("前台姓名")
-    function loginDialog(){
-        location.href="educationDetail"
+    function teacherDetail(){
+        location.href = "joinReceptionStudentDetailEdit?studentId="+'<%=teacher.userId%>'
     }
-    $("#navigation-teacher").addClass("select-left-button");
 </script>
 </html>

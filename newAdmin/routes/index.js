@@ -36,15 +36,6 @@ router.post('/createStudent', function (req, res, next) {
     });
     res.end("235")
 });
-router.get('/teacherDetail',function (req,res,next) {
-    teacher.findOne({teacherId: 15}).then(function (ret) {
-        console.log("ret:" + JSON.stringify(ret));
-        ret.getUser().then(function (ret1) {
-            console.log("ret1:" + JSON.stringify(ret1));
-            res.render('teacherDetail', {info: ret1, infos: ret});
-        })
-    });
-})
 router.post('/createTeacher', function (req, res, next) {
     console.log("body:"+JSON.stringify(req.body));
     user.create({
@@ -79,19 +70,6 @@ router.get('/joinReceptionCourseCalendar',function (req,res,next) {
 router.get('/joinReceptionCourseManager',function (req,res,next) {
   res.render('joinReceptionCourseManager');
 })
-
-
-router.post("/editInfo",function (req,res) {
-    console.log(JSON.stringify(req.body))
-    user.update({
-        userName:req.body.userName,
-        phoneNumber:req.body.phoneNumber,
-    },{'where':{userId:2}}).then(
-        joinreceptionshop.update({
-            JoinReceptionLocation:req.body.joinreceptionlocation,
-        },{'where':{userId:2}})
-    )})
-
 router.get('/teacherList',function (req,res,next) {
   res.render('teacherList');
 })
@@ -116,9 +94,4 @@ router.get('/adminUserDetail', function (req, res, next) {
 router.get('/adminDetail', function (req, res, next) {
     res.render('adminDetail');
 });
-router.post("/editInfo",function (req,res) {
-    console.log(JSON.stringify(req.body))
-    res.send({desc:"修改成功！"})
-})
-
 module.exports = router;

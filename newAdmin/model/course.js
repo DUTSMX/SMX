@@ -19,75 +19,14 @@ var sequelize = new Sequelize(
     }
 );
 exports.sequelize=sequelize;
- var courseSeries= sequelize.define('courseSeries', {
-        courseSeriesId: { //自增长课程系列Id,主键,整形
-            type: Sequelize.INTEGER,
-            primaryKey: true,
-            autoIncrement: true
-        },
-        courseSeriesName: { //课程系列名称
-            type: Sequelize.STRING(30)
-        },
-        courseSeriesSubject: {//课程系列的科目
-            type: Sequelize.STRING(30)
-        },
-        courseSeriesGrade: { //课程面向对象年级
-            type: Sequelize.STRING(30)
-        },
-        courseSeriesNumber: { //课程系列课程数
-            type: Sequelize.INTEGER
-        },
-        courseSeriesIntro: { //课程系列简介
-            type: Sequelize.TEXT
-        },
-        nowNumber:{
-            type:Sequelize.INTEGER
-        },
-        status:{
-            type:Sequelize.INTEGER
-        },
-        courseSeriesTeacher:{
-            type:Sequelize.STRING(255)
-        },
-        courseIds:{
-            type:Sequelize.STRING(255)
-        },
-        courseSeriesLevel:{
-            type:Sequelize.STRING(255)
-        },
-        courseSeriesClassType:{
-            type:Sequelize.STRING(255)
-        },
-        shopId:{
-            type:Sequelize.INTEGER
-        },
-        time:{
-            type:Sequelize.STRING(255)
-        },
-        room:{
-            type:Sequelize.STRING(255)
-        },
-        students:{
-            type:Sequelize.STRING(255)
-        }
-        // courseSeriesCourseName: {//课程系列每节课课程名称
-        //     type: Sequelize.STRING(30)
-        // },
-        // courseSeriesCourseContent: {//课程系列每节课内容
-        //     type: Sequelize.TEXT
-        // }
-    },
-    {
-        freezeTableName: true
-    }
-);
 
-exports.courseSeries=courseSeries;
  var course= sequelize.define('course', {
         courseId: { //自增长课程系列Id,主键,整形
             type: Sequelize.INTEGER,
-            autoIncrement: true
-            //primaryKey: true
+            autoIncrement: true,
+            primaryKey: true
+        }, courseSeriesId:{
+            type: Sequelize.INTEGER
         },
         userId: {
             type: Sequelize.INTEGER
@@ -99,10 +38,10 @@ exports.courseSeries=courseSeries;
             type: Sequelize.DATEONLY
         },
         beginTime: {
-            type: Sequelize.DATE
+            type: Sequelize.TIME
         },
         finishTime: {
-            type: Sequelize.DATE
+            type: Sequelize.TIME
         },
         courseTime: {
             type: Sequelize.STRING(30)
@@ -116,14 +55,9 @@ exports.courseSeries=courseSeries;
         createDate: {
             type: Sequelize.DATE
         },
-        courseSeriesId: {
-            type: Sequelize.INTEGER,
-            primaryKey: true
-        },
-    courseSeriesCourseId:{
-            type:Sequelize.INTEGER,
-            primaryKey: true
-    }
+        courseRoom: {
+            type: Sequelize.STRING(255),
+        }
     },
     {
         freezeTableName: true
@@ -133,13 +67,17 @@ exports.course=course;
 var joinCourse=sequelize.define("joinCourse",{
     joinCourseId:{
         type:Sequelize.INTEGER,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     userId:{
         type:Sequelize.INTEGER
     },
     courseId:{
         type:Sequelize.INTEGER
+    },
+    courseSeriesId:{
+        type: Sequelize.INTEGER
     },
     joinTime:{
         type:Sequelize.DATE
@@ -165,10 +103,6 @@ var joinCourse=sequelize.define("joinCourse",{
     teacherEvalDesc:{
         type:Sequelize.TEXT
     },
-    courseSeriesId: {
-        type: Sequelize.INTEGER
-        //primaryKey: true
-    },
     courseSeriesCourseId:{
         type:Sequelize.INTEGER
         //primaryKey: true
@@ -177,22 +111,3 @@ var joinCourse=sequelize.define("joinCourse",{
     freezeTableName: true
 });
 exports.joinCourse=joinCourse;
-courseSeries.hasMany(course,{foreignKey:'courseSeriesId',as:'Course'});
-course.hasMany(joinCourse,{foreignKey:'courseSeriesId',as:'JoinCourse'});
-courseSeries.hasMany(joinCourse,{foreignKey:'courseSeriesId',as:'JoinCourse'});
-//joinCourse.belongsTo(courseSeries,{foreignKey:'courseSeriesId',as:'CourseSeries'});
-//courseSeries.sync();
-//module.exports=courseSeries;
-var seriesTemplate = sequelize.define("seriesTemplate",{
-    templateId:{type:Sequelize.INTEGER,primaryKey: true},
-    seriesName:{type:Sequelize.STRING(255)},
-    seriesIntro:{type:Sequelize.STRING(255)},
-    subject:{type:Sequelize.STRING(255)},
-    grade:{type:Sequelize.STRING(255)},
-    level:{type:Sequelize.STRING(255)},
-    number:{type:Sequelize.INTEGER},
-    courseName:{type:Sequelize.STRING(255)}
-},{
-    freezeTableName: true
-})
-exports.seriesTemplate=seriesTemplate;

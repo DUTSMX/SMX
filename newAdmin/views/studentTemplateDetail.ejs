@@ -25,22 +25,17 @@
         .center{margin-left:12px;margin-top:12px}
         .sign-up{margin-top:10px;margin-right:10px}
         .title{text-align:left;background-color: #f7f7f7;padding:10px}
-        .course{width:150px}
+        .course{}
         .doBtn{float:right;padding-bottom: 3vh;}
         .clear{clear: both;}
     </style>
 </head>
 <body>
 <%include navigation-index.ejs%>
-<%include navigation-education.ejs%>
+<%include navigation-student.ejs%>
 <div class="right-content">
     <div class="panel-heading title-block">
         <h2 class="title-white"><%=template.seriesName%>（共<%=template.number%>课时）</h2><br>
-        <div class="doBtn">
-        <button type="button" class="btn btn-default">编辑</button>
-        <button type="button" class="btn btn-default" onclick="courseSeriesDelete(<%=template.templateId%>)">删除</button>
-        </div>
-        <div class="clear"></div>
         <h4 class="title-white"><%=template.seriesIntro%></h4>
     </div>
     <%var course = JSON.parse(template.courseName)
@@ -57,15 +52,14 @@
 </body>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-    $("#person").text("教务姓名")
-    $("#person").text("教务姓名")
+    $("#person").text("学生姓名")
     function loginDialog(){
-        location.href="educationDetail"
+        location.href="studentDetail"
     }
     $("#navigation-course").addClass("select-left-button");
-    function courseSeriesDelete(courseSeriesId) {
-        var courseSeriesId={courseSeriesId:courseSeriesId};
-        $.post('courseSeriesDelete',courseSeriesId,function (ret) {
+    function seriesTemplateDelete(id) {
+        var courseSeriesId={templateId:id};
+        $.post('seriesTemplateDelete',courseSeriesId,function (ret) {
             if(ret.status==true){
                 //$("#hint").text(ret);
                 location.href='educationCourse';

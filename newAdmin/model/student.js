@@ -1,9 +1,9 @@
 /**
- * Created by asus on 2017/7/12.
+ * Created by asus on 2017/7/13.
  */
 var Sequelize = require('sequelize');
 var course=require('./course');
-var user=require('./user')
+var user=require('./user');
 var sequelize=new Sequelize(
     'smx',
     'cdb_outerroot',
@@ -19,26 +19,29 @@ var sequelize=new Sequelize(
         }
     }
 );
-var joinreceptionshop = sequelize.define('joinreceptionshop', {
-        shopid:{ //自增长店铺Id,主键,整型
+var student = sequelize.define('student', {
+        studentId:{ //自增长学生编号Id,主键,整型
             type:Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement:true
         },
         userId:{//用户ID
-            type:Sequelize.INTEGER
+            type:Sequelize.INTEGER,
         },
-        shopname:{//店铺名字
-            type:Sequelize.STRING(30)
+        school:{//学生学校
+            type:Sequelize.STRING(30),
         },
-        location: { //店铺位置
-            type: Sequelize.STRING(30)
+        learningstatus: { //学习状态
+            type: Sequelize.STRING(30),
+        },
+        joinshop: { //所在门店
+            type: Sequelize.STRING(30),
         },
     },
     {
         freezeTableName: true
     }
 );
-user.belongsTo(joinreceptionshop,{foreignKey:'userId',as:'joinreceptionshop'});
-joinreceptionshop.hasOne(user,{foreignKey:'userId',as:'User'});
-module.exports=joinreceptionshop;
+user.belongsTo(student,{foreignKey:'userId',as:'student'});
+student.hasOne(user,{foreignKey:'userId',as:'User'});
+module.exports=student;

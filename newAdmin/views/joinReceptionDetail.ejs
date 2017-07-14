@@ -35,8 +35,8 @@
     <div class="margin-left-30" id="person-info">
         <img src="/images/icon.png" class="head img-circle">
         <div class="base-info">
-            <h3 class="inline"><%=info.userName%>&nbsp;<%if(info.gender== 0){%>男<%}else{%>女<%}%>%></h3><br>
-            <h4 class="inline">电话号码:&nbsp;<%=info.phoneNumber%></h4>
+            <h3 class="inline"><%=info.userName%>&nbsp;<%if(info.gender== 0){%>男<%}else{%>女<%}%>%></h3>   <h4 class="inline">年龄:<%=info.userAge%></h4><br>
+            <h4>电话号码:<%=info.phoneNumber%></h4>
         </div>
         <button class="btn btn-default inline right" onclick="logout()">退出登录</button>
         <br>
@@ -49,18 +49,18 @@
             <img src="/images/icon.png" class="head img-circle">
         </div>
         <div class="base-info">
-            <label>前台姓名: &nbsp</label><input id="person-name"class="inline margin-top-20" value=<%=info.userName%> placeholder="请输入前台姓名" /><!--disabled="false"-->
-            <select id="location"class="padding-4">
+            <label>前台姓名: &nbsp;</label><input id="person-name"class="inline margin-top-20" value="<%=info.userName%>" placeholder="请输入前台姓名" />
+            <select id="location"class="padding-4" >
                 <option>台安店</option>
-                <option>大连店</option>
+                <option selected="selected">大连店</option>
                 <option>沈阳店</option>
             </select><br>
-            <label>前台手机号: &nbsp</label><input id="person-phoneNumber"class="inline margin-top-20" value=<%=info.phoneNumber%> placeholder="请输入手机号码" /><!--disabled="false"-->
+            <label>前台手机号: &nbsp</label><input id="person-phoneNumber"class="inline margin-top-20" value="<%=info.phoneNumber%>" placeholder="请输入手机号码" />
             <!--<button id="apply-modify"class="btn btn-defalut padding-4" onclick="applyModify()">申请修改</button>-->
 
         </div>
         <br>
-        <label>家庭地址 &nbsp</label><input value="<%=info.userAddress%>" placeholder="请输入家庭信息">
+        <label>家庭地址 &nbsp;</label><input value="<%=info.userAddress%>" placeholder="请输入家庭信息">
     </div>
     <div class="panel-heading title-block">
         <h3 class="panel-title title-white">隐私信息</h3>
@@ -100,7 +100,6 @@
 
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-    $("#person").text("前台姓名")
     function loginDialog(){
         location.href="joinReceptionDetail"
     }
@@ -153,27 +152,27 @@
     }
     function editInfo(){
         var userName = $("#person-name").val();
-        var phoneNumber = $("#phoneNumber").val();
-        var joinreceptionlocation;
+        var phoneNumber = $("#person-phoneNumber").val();
         var obj = document.getElementById("location");
         var index = obj.selectedIndex;
+        var location;
         if(index==0)
         {
-            joinreceptionlocation="台安";
+            location="台安";
         }
         else if(index==1){
-            joinreceptionlocation="大连";
+            location="大连";
         }
         else if(index==2){
-            joinreceptionlocation="沈阳";
+            location="沈阳";
         }
         var data = {
             userName:userName,
             phoneNumber:phoneNumber,
-            joinreceptionlocation:joinreceptionlocation,
+            location:location
         }
-        jQuery.post("./editInfo",data,function (data,textStatus,jqXHR) {
-            location.reload()
+        jQuery.post("./editInfo",data,function (ret) {
+            console.log(JSON.stringify(ret));
         })
     }
 </script>
