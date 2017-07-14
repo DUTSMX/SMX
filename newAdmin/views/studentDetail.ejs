@@ -35,15 +35,15 @@
     <div class="margin-left-30" id="person-info">
         <img src="/images/icon.png" class="head img-circle">
         <div class="base-info">
-            <h3 class="inline">学生姓名(台安店) 男</h3><br>
-            <h4 class="inline">手机号码</h4>
+            <h3 class="inline"><%=info.userName%>&nbsp;(<%=infos.joinshop%>) <%if(info.gender== 0){%>男<%}else{%>女<%}%></h3><br>
+            <h4 class="inline">电话:<%=info.phoneNumber%></h4>
         </div>
         <button class="btn btn-default right" onclick="logout()">退出登录</button>
         <br>
-        <h4 class="inline">学生学校</h4>
-        <h4 class="inline">学生年级</h4><br>
+        <h4 class="inline">所在学校:<%=infos.school%></h4>
+        <h4 class="inline">年级:<%=info.userGrade%> 学习状况:<%=infos.learningstatus%></h4><br>
         <!--<h4 class="inline">学习情况：中等</h4>-->
-        <h5>家庭地址</h5>
+        <h5>家庭地址:<%=info.userAddress%></h5>
     </div>
     <div class="margin-left-30"   style="display: none" id="person-edit">
         <div class="inline">
@@ -51,19 +51,19 @@
             <p class="head-edit">编辑图片</p>
             <img src="/images/icon.png" class="head img-circle">
         </div><br>
-        <label>学生姓名&nbsp</label><input id="person-name"class="inline margin-top-20" value="学生姓名" placeholder="请输入学生姓名" disabled="false"/>
-        <select class="padding-4">
+        <label>学生姓名&nbsp</label><input id="person-name"class="inline margin-top-20" value=<%=info.userName%> placeholder="请输入学生姓名" /><!--disabled="false"-->
+        <select class="padding-4" id="change-shop" onclick="changeShop()">
             <option>台安店</option>
             <option>大连店</option>
             <option>沈阳店</option>
         </select><br>
-        <label>学生性别&nbsp</label><input id="person-gender"class="inline margin-top-20" value="男" placeholder="请输入性别" disabled="false"/><br>
-        <label>手机号码&nbsp</label><input id="person-phoneNumber"class="inline margin-top-20" value="手机号码" placeholder="请输入手机号码" disabled="false"/>
-        <button id="apply-modify"class="btn btn-defalut padding-4" onclick="applyModify()">申请修改</button><br>
-        <label>学校名称&nbsp</label><input value="学生学校" class="inline margin-top-20" placeholder="请输入学校名称"/><br>
-        <label>学校年级&nbsp</label><input value="学生年级" class="inline margin-top-20" placeholder="请输入学校年级"/><br>
+        <label>学生性别&nbsp</label><input id="person-gender"class="inline margin-top-20" value="<%if(info.gender== 0){%>男<%}else{%>女<%}%>" placeholder="请输入性别" /><br><!--disabled="false"-->
+        <label>手机号码&nbsp</label><input id="person-phoneNumber"class="inline margin-top-20" value="<%=info.phoneNumber%>" placeholder="请输入手机号码" /><!--disabled="false"-->
+        <!--<button id="apply-modify"class="btn btn-defalut padding-4" onclick="applyModify()">申请修改</button><br>-->
+        <label>学校名称&nbsp</label><input id="person-school" value="<%=infos.school%>" class="inline margin-top-20" placeholder="请输入学校名称"/><br>
+        <label>学校年级&nbsp</label><input id="person-class" value="<%=info.userGrade%>" class="inline margin-top-20" placeholder="请输入学校年级"/><br>
         <!--<input value="学习情况：中等" disabled="false" placeholder="请输入学习情况"></h4><br>-->
-        <label>家庭地址&nbsp</label><input value="家庭地址" class="inline margin-top-20" placeholder="请输入家庭信息">
+        <label>家庭地址&nbsp</label><input id="person-address" value="<%=info.userAddress%>" class="inline margin-top-20" placeholder="请输入家庭信息">
     </div>
     <div class="panel-heading title-block">
         <h3 class="panel-title title-white">隐私信息</h3>
@@ -105,6 +105,7 @@
     var editFlag = true;
     var applyFlag = true;
     var applyIdFlag = true;
+    var joinshop=null;
     function edit(){
         if(editFlag){
             editFlag = false;
@@ -113,6 +114,7 @@
             $("#person-edit").show();
         }else{
             editFlag = true;
+            changeInfo();
             $("#edit").text("编辑")
             $("#person-info").show();
             $("#person-edit").hide();
@@ -149,6 +151,42 @@
             $("#id").show();
             $("#id-edit").hide();
         }
+    }
+    function changeShop() {
+        var obj = document.getElementById("change-shop");
+        var index = obj.selectedIndex;
+        if(index == 0){
+            joinshop="台安店";
+        }else if(index==1){
+            joinshop="大连店";
+        }else if(index==2){
+            joinshop="沈阳店";
+        }
+        else{
+            joinshop=null;
+        }
+    }
+    function changeInfo(){
+        var userName = $("#person-name").val();
+        var phoneNumber = $("#person-phoneNumber").val();
+        var gender = ($("#person-gender").val()=="男")?0:1;
+        var userAddress = $("#person-address").val();
+        var userGrade = $("#person-class").val();
+        var join = joinshop;
+        var school = $("#person-school").val();
+        var data = {
+            userName:userName,
+            phoneNumber:phoneNumber,
+            gender:gender,
+            userAddress:userAddress,
+            userGrade:userGrade,
+            join:joinshop,
+            school:school,
+        }
+        console.log(JSON.stringify(data));
+        jQuery.post("./changeInfo",data,function (ret) {
+            console.log(JSON.stringify(ret));
+        })
     }
     $("#navigation-person").addClass("select-left-button");
 </script>

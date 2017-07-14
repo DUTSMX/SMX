@@ -6,6 +6,7 @@ var router = express.Router();
 var course=require('../model/course');
 var user=require(('../model/user'));
 var moment=require("moment");
+var student = require("../model/student" );
 router.get('/studentCourse',function (req,res,next) {
     course.seriesTemplate.findAll().then(function(data){
         console.log(JSON.stringify(data))
@@ -40,8 +41,28 @@ router.get('/studentCourseRecord',function (req,res,next) {
     res.render('studentCourseRecord');
 })
 router.get('/studentDetail',function (req,res,next) {
-    res.render('studentDetail');
+    student.findOne({'where':{studentId:2}}).then(function (ret) {
+        ret.getUser().then(function (ret1) {
+            res.render('studentDetail',{info:ret1,infos:ret});
+        })
+    })
 })
+router.post("/changeInfo",function (req,res) {
+    console.log(JSON.stringify(req.body))
+    user.update({
+        userName:req.body.teacherName,
+        phoneNumber:req.body.phoneNumber,
+        gender:req.body.gender,
+        userAddress:req.body.userAddress,
+        userGrade:req.body.userGrade,
+    },{'where':{userId:2}}).then(
+        student.update({
+            joinshop:req.body.join,
+            school:req.body.school,
+        },{'where':{userId:2}}).then(
+            res.send("123")
+        )
+    )})
 router.get('/studentCourseDetail',function (req,res,next) {
     var courseSeriesId=req.query.courseSeriesId;
     var studentName=[];
