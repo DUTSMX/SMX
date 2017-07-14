@@ -20,12 +20,12 @@ var sequelize=new Sequelize(
     }
 );
 var teacher = sequelize.define('teacher', {
-        teacherId:{ //自增长课程系列Id,主键,整形
+        teacherId:{ //自增长课程系列Id,主键,整型
             type:Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement:true
         },
-        userId:{
+        userId:{//用户ID
             type:Sequelize.INTEGER
         },
         teachClass:{//老师所教科目
@@ -37,7 +37,7 @@ var teacher = sequelize.define('teacher', {
         class: { //老师所在年级
             type: Sequelize.STRING(30)
         },
-        province: { //老师所在省份
+        province: {//老师所在省份
             type: Sequelize.STRING(30)
         },
         city: { //老师所在城市
@@ -46,14 +46,45 @@ var teacher = sequelize.define('teacher', {
         highSchool: { //老师毕业高中
             type: Sequelize.STRING(30)
         },
-        collegeAttendingScore:{//高考分数
-            type:Sequelize.STRING(60)
+        SciOrLiber:{//文还是理
+            type: Sequelize.INTEGER
         },
+        SumScore:{//高考总分
+            type: Sequelize.INTEGER
+        },
+        Chinese:{//语文
+            type: Sequelize.INTEGER
+        },
+        Math:{//数学
+            type: Sequelize.INTEGER
+        },
+        English:{//英语
+            type: Sequelize.INTEGER
+        },
+        Physics:{//物理
+            type: Sequelize.INTEGER
+        },
+        Chemistry:{//化学
+            type: Sequelize.INTEGER
+        },
+        Biology:{//生物
+            type: Sequelize.INTEGER
+        },
+        Politics:{//政治
+            type: Sequelize.INTEGER
+        },
+        History:{//历史
+            type: Sequelize.INTEGER
+        },
+        Geography:{//地理
+            type: Sequelize.INTEGER
+        },
+
     },
     {
         freezeTableName: true
     }
 );
-user.hasOne(teacher,{foreignKey:'userId',as:'Teacher'});
-teacher.belongsTo(user,{foreignKey:'userId',as:'User'});
+user.belongsTo(teacher,{foreignKey:'userId',as:'Teacher'});
+teacher.hasOne(user,{foreignKey:'userId',as:'User'});
 module.exports=teacher;

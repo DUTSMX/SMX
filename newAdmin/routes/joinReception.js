@@ -3,6 +3,7 @@ var router = express.Router();
 var course=require('../model/course');
 var user=require(('../model/user'));
 var series = require('../model/series')
+var user=require(('../model/user'));
 router.post("/postHope",function (req,res) {
     series.joinSeries.findAll({where:{templateId:req.body.templateId,studentId:req.body.studentId}}).then(function (joinList) {
         if(joinList.length == 0){
@@ -68,11 +69,26 @@ router.get('/joinReceptionStudentList',function (req,res,next) {
     })
 })
 router.get('/joinReceptionDetail',function (req,res,next) {
-    user.findOne({where:{userId:1}}).then(function(ret){
-        console.log(JSON.stringify(ret))
-        res.render('joinReceptionDetail',{info:ret});
+    joinreceptionshop.findOne({where:{userId:3}}).then(function(ret1){
+        console.log(JSON.stringify(ret1))
+        ret1.getUser().then(function (ret) {
+            console.log(JSON.stringify(ret))
+            res.render('joinReceptionDetail',{info:ret,infos:ret1});
+        })
     })
 })
+router.post("/editInfo",function (req,res) {
+    //console.log(JSON.stringify(req.body))
+    user.update({
+        userName:req.body.userName,
+        phoneNumber:req.body.phoneNumber,
+    },{'where':{userId:3}}).then(
+        joinreceptionshop.update({
+            location:req.body.location,
+        },{'where':{userId:3}}).then(
+            res.send("123")
+        )
+    )})
 router.post("/postCourse",function(req,res){
     console.log("body:"+JSON.stringify(req.body))
     course.courseSeries.update({
@@ -170,8 +186,6 @@ router.post('/createCourse',function (req,res) {
             res.send({status:true,desc:"创建成功"})
         })
     })
-
-
 })
 module.exports=router;
 

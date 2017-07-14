@@ -7,6 +7,7 @@ var course=require('../model/course');
 var user=require(('../model/user'));
 var series = require("../model/series")
 var moment=require("moment");
+var student = require("../model/student" );
 router.get('/studentCourse',function (req,res,next) {
     var sql = "SELECT j.joinSeriesId,s.templateId,s.seriesName,j.hopeClassType,j.hopeTeacher,j.hopeTime FROM seriesTemplate s JOIN joinSeries j ON s.templateId = j.templateId where studentId = 2"
     course.sequelize.query(sql).then(function (postCourse) {
@@ -69,7 +70,11 @@ router.get('/studentCourseRecord',function (req,res,next) {
     })
 })
 router.get('/studentDetail',function (req,res,next) {
-    res.render('studentDetail');
+    student.findOne({'where':{studentId:2}}).then(function (ret) {
+        ret.getUser().then(function (ret1) {
+            res.render('studentDetail',{info:ret1,infos:ret});
+        })
+    })
 })
 router.get('/studentTemplateDetail',function (req,res,next) {
     var templateId=req.query.templateId;
@@ -80,6 +85,59 @@ router.get('/studentTemplateDetail',function (req,res,next) {
         res.render('studentTemplateDetail',{template:ret,student:{status:true}});
     });
 });
+router.post("/changeInfo",function (req,res) {
+    console.log(JSON.stringify(req.body))
+    user.update({
+        userName:req.body.teacherName,
+        phoneNumber:req.body.phoneNumber,
+        gender:req.body.gender,
+        userAddress:req.body.userAddress,
+        userGrade:req.body.userGrade,
+    },{'where':{userId:2}}).then(function (data) {
+            student.update({
+                joinshop:req.body.join,
+                school:req.body.school,
+            },{'where':{userId:2}}).then(
+                res.send("123")
+            )
+    })
+})
+router.get('/studentCourseDetail',function (req,res,next) {
+    var courseSeriesId = req.query.courseSeriesId;
+    var studentName = [];
+    course.courseSeries.findOne({where: {courseSeriesId: courseSeriesId}}).then(function (ret) {
+        console.log("ret:" + JSON.stringify(ret));
+        ret.getJoinCourse().then(function (ret0) {
+            console.log("ret0:" + JSON.stringify(ret0));
+            var student = [];
+            ret0.forEach(function (item) {
+                if (student.indexOf(item.userId) == -1) {
+                    student.push(item.userId);
+                }
+            });
+            console.log("student:" + JSON.stringify(student));
+            student.forEach(function (item) {
+                console.log("userId:" + item);
+                user.findOne({where: {userId: item}}).then(function (student) {
+                    console.log("student:" + JSON.stringify(student));
+                    studentName.push({userName: student.userName});
+                })
+            });
+            var timer = setTimeout(function () {
+                console.log("studentName:" + JSON.stringify(studentName));
+                ret.getCourse().then(function (ret1) {
+                    console.log("ret1:" + JSON.stringify(ret1));
+                    res.render('studentCourseDetail', {
+                        courseSeries: ret,
+                        courseSeriesDetails: ret1,
+                        student: studentName
+                    })
+                })
+            }, 1000);
+        });
+    })
+})
+
 router.get('/studentCourseDetail',function (req,res,next) {
     // var seriesId=req.query.seriesId;
     // series.courseSeries.findOne({
