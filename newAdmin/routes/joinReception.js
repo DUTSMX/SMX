@@ -24,7 +24,7 @@ router.post("/postHope",function (req,res) {
     })
 })
 router.get('/joinReceptionCourseManager',function (req,res,next) {
-    var sql = "select c.courseSeriesId,c.courseSeriesName,c.startDate,c.endDate,c.time,c.room, a.userName from courseSeries c JOIN account a ON c.courseSeriesTeacher = a.userId"
+    var sql = "select c.courseSeriesId,c.courseSeriesName,c.startDate,c.endDate,c.time,c.room, a.userName from courseSeries c JOIN account a ON c.courseSeriesTeacher = a.userId order by userName,time"
     course.sequelize.query(sql).then(function (data) {
         console.log("course:"+JSON.stringify(data[0]))
         res.render('joinReceptionCourseManager',{allCourse:data[0]});
@@ -84,9 +84,10 @@ router.get('/joinReceptionStudentDetailEdit',function (req,res,next) {
     res.render('joinReceptionStudentDetailEdit');
 })
 router.get('/joinReceptionStudentList',function (req,res) {
-    user.findAll({where:{role:1}}).then(function(ret){
+    var sql = "select userId,userName,userGrade,count(joinSeriesId) from account a left join joinSeries j on a.userId = j.studentId where role = 1 group by a.userId order By count(joinSeriesId) desc"
+    user.sequelize.query(sql).then(function(ret){
         console.log("user:"+JSON.stringify(ret))
-        res.render('joinReceptionStudentList',{student:ret});
+        res.render('joinReceptionStudentList',{student:ret[0]});
     })
 })
 router.get('/joinReceptionDetail',function (req,res,next) {
@@ -179,58 +180,82 @@ router.get('/joinReceptionTeacherDetailEdit',function (req,res,next) {
 })
 router.post('/createCourse',function (req,res) {
     console.log("body:"+JSON.stringify(req.body))
-    series.seriesTemplate.findOne({'where':{templateId:req.body.templateId}}).then(function (template) {
-        series.courseSeries.create({
-            courseSeriesName:template.seriesName,
-            courseSeriesSubject:template.subject,
-            courseSeriesIntro:template.seriesIntro,
-            courseSeriesGrade:template.grade,
-            courseSeriesNumber:template.number,
-            courseSeriesCourseName:template.courseName,
-            courseSeriesLeve:template.level,
-            courseSeriesTeacher:req.body.teacherId,
-            shopId:req.body.shopId,
-            courseSeriesClassType:req.body.classType,
-            startDate:req.body.startDate,
-            endDate:req.body.endDate,
-            time:req.body.time,
-            room:req.body.room,
-            students:JSON.stringify(req.body.studentId)
-        }).then(function (courseSeries) {
-            console.log("courseSeries:"+JSON.stringify(courseSeries))
-            console.log("id:"+courseSeries.courseSeriesId)
-            var courseList = JSON.parse(template.courseName)
-            var startDate = new Date(req.body.startDate);
-            var tempDate = startDate;
-            var studentList = req.body.studentId
-            for (var i = 0; i < studentList.length; i++) {
-                series.joinSeries.update({
-                    courseSeriesId: courseSeries.courseSeriesId,
-                    process: 1
-                }, {'where': {studentId: studentList[i],templateId:req.body.templateId}})
-            }
-            for(var i=0;i<courseSeries.courseSeriesNumber;i++){
-                course.course.create({
-                    courseSeriesId:courseSeries.courseSeriesId,
-                    userId:req.body.teacherId,
-                    courseName:courseList[i],
-                    courseDate:startDate.setDate(startDate.getDate()+1),
-                    beginTime:req.body.time,
-                    createDate:Date.now(),
-                    courseRoom:req.body.room
-                }).then(function (courseRet) {
+    var sql = "select * from courseSeries where time = '"+req.body.time+"' and courseSeriesTeacher = "+req.body.teacherId
+    course.sequelize.query(sql).then(function (teacherConflict) {
+        if(teacherConflict[0].length > 0){
+            res.send({status:false,desc:"该老师在当前时间已经有其他课程"})
+        }else{
+            var sql = "select * from courseSeries where time = '"+req.body.time+"' and room = '"+req.body.room+"'"
+            course.sequelize.query(sql).then(function (roomConflict) {
+                if(roomConflict[0].length > 0){
+                    res.send({status:false,desc:"该教室在当前时间已经有其他课程"})
+                }else{
                     var studentList = req.body.studentId
-                    for (var i = 0; i < studentList.length; i++) {
-                        course.joinCourse.create({
-                            userId: studentList[i],
-                            courseId: courseRet.courseId,
-                            attend: 0
+                    for(var i=0;i<studentList.length;i++){
+                        var sql = "select * from courseSeries c JOIN joinSeries j ON c.courseSeriesId = j.courseSeriesId JOIN account a ON j.studentId = a.userId where c.time = '"+req.body.time+"' and j.studentId = "+studentList[i]+" and j.process = 1";
+                        course.sequelize.query(sql).then(function (studentConflict) {
+                            if(studentConflict[0].length > 0){
+                                res.send({status:false,desc:"学生"+studentConflict[0][0].userName+"在当前时间已有其他课程"})
+                                return;
+                            }
                         })
                     }
-                })
-            }
-            res.send({status:true,desc:"创建成功"})
-        })
+                    series.seriesTemplate.findOne({'where':{templateId:req.body.templateId}}).then(function (template) {
+                        series.courseSeries.create({
+                            courseSeriesName:template.seriesName,
+                            courseSeriesSubject:template.subject,
+                            courseSeriesIntro:template.seriesIntro,
+                            courseSeriesGrade:template.grade,
+                            courseSeriesNumber:template.number,
+                            courseSeriesCourseName:template.courseName,
+                            courseSeriesLeve:template.level,
+                            courseSeriesTeacher:req.body.teacherId,
+                            shopId:req.body.shopId,
+                            courseSeriesClassType:req.body.classType,
+                            startDate:req.body.startDate,
+                            endDate:req.body.endDate,
+                            time:req.body.time,
+                            room:req.body.room,
+                            students:JSON.stringify(req.body.studentId)
+                        }).then(function (courseSeries) {
+                            console.log("courseSeries:"+JSON.stringify(courseSeries))
+                            console.log("id:"+courseSeries.courseSeriesId)
+                            var courseList = JSON.parse(template.courseName)
+                            var startDate = new Date(req.body.startDate);
+                            var tempDate = startDate;
+                            var studentList = req.body.studentId
+                            for (var i = 0; i < studentList.length; i++) {
+                                series.joinSeries.update({
+                                    courseSeriesId: courseSeries.courseSeriesId,
+                                    process: 1
+                                }, {'where': {studentId: studentList[i],templateId:req.body.templateId}})
+                            }
+                            for(var i=0;i<courseSeries.courseSeriesNumber;i++){
+                                course.course.create({
+                                    courseSeriesId:courseSeries.courseSeriesId,
+                                    userId:req.body.teacherId,
+                                    courseName:courseList[i],
+                                    courseDate:startDate.setDate(startDate.getDate()+1),
+                                    beginTime:req.body.time,
+                                    createDate:Date.now(),
+                                    courseRoom:req.body.room
+                                }).then(function (courseRet) {
+                                    var studentList = req.body.studentId
+                                    for (var i = 0; i < studentList.length; i++) {
+                                        course.joinCourse.create({
+                                            userId: studentList[i],
+                                            courseId: courseRet.courseId,
+                                            attend: 0
+                                        })
+                                    }
+                                })
+                            }
+                            res.send({status:true,desc:"创建成功"})
+                        })
+                    })
+                }
+            })
+        }
     })
 })
 module.exports=router;

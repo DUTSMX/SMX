@@ -37,6 +37,6 @@ router.post('/logout',function (req,res) {
     req.session.userId = "";
     req.session.userName = "";
     req.session.identityId = "";
-    res.send("123")
+    res.send("退出登录")
 })
 module.exports=router;

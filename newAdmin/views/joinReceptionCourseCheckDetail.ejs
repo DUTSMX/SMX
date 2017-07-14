@@ -244,10 +244,14 @@
                             }
                             console.log(JSON.stringify(data))
                             $.post("createCourse",data,function (data) {
-                                closeDialog();
-                                alert(data.desc)
                                 console.log(JSON.stringify(data))
-                                location.reload()
+                                alert(data.desc)
+                                if(data.status){
+                                    closeDialog();
+                                    location.reload()
+                                }else{
+                                    $("#createCourse").attr('disabled',false);
+                                }
                             })
                         }
                     }
