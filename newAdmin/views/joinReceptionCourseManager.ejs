@@ -35,7 +35,7 @@
 <div class="right-content">
     <div class="panel-heading title-block">
         <h3 class="panel-title title-white">课程列表</h3>
-        <!--<h3 class="panel-title right-button" onclick="applyCourse()" id="applyCourse">申请课程</h3>-->
+        <h3 class="panel-title right-button" onclick="courseCalendar()" id="applyCourse">课程日历</h3>
     </div>
     <%if(allCourse.length == 0){%>
         <h4 style="text-align: center;margin:10px">当前没有课程</h4>
@@ -52,14 +52,15 @@
 </body>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-
-    $("#person").text("前台姓名")
     function loginDialog(){
         location.href="joinReceptionDetail"
     }
     $("#navigation-manager").addClass("select-left-button");
-    function courseDetail(id){
-        location.href = "joinReceptionCourseDetail?seriesId="+id
+    function courseDetail(id) {
+        location.href = "joinReceptionCourseDetail?seriesId=" + id
+    }
+    function courseCalendar(){
+        location.href = "joinReceptionCourseCalendar"
     }
 </script>
 </html>

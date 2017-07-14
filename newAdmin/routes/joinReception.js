@@ -3,7 +3,8 @@ var router = express.Router();
 var course=require('../model/course');
 var user=require(('../model/user'));
 var series = require('../model/series')
-var user=require(('../model/user'));
+var user=require(('../model/user'))
+var joinreceptionshop=require('../model/joinreceptionshop')
 router.post("/postHope",function (req,res) {
     series.joinSeries.findAll({where:{templateId:req.body.templateId,studentId:req.body.studentId}}).then(function (joinList) {
         if(joinList.length == 0){
@@ -60,16 +61,37 @@ router.get('/joinReceptionCourseCalendar',function (req,res,next) {
     res.render('joinReceptionCourseCalendar');
 })
 router.get('/joinReceptionStudentDetail',function (req,res,next) {
-    res.render('joinReceptionStudentDetail');
+    user.findOne({'where':{userId:req.query.studentId}}).then(function (student) {
+        var sql = "SELECT c.courseSeriesId,c.courseSeriesName, a.userName as teacher, c.startDate, c.endDate, c.time, c.room "+
+        "FROM courseSeries c JOIN account a ON c.courseSeriesTeacher = a.userId JOIN joinSeries j ON j.courseSeriesId = c.courseSeriesId "+
+        "WHERE j.process = 1  and c.endDate >= now() and j.studentId ="+req.query.studentId
+        course.sequelize.query(sql).then(function (nowCourse) {
+            var sql = "select j.joinSeriesId,s.seriesName,studentId,hopeTeacher,hopeClassType,hopeTime,other from joinSeries j JOIN seriesTemplate s ON s.templateId = j.templateId where process = 0 and j.studentId=24"
+            course.sequelize.query(sql).then(function (postCourse) {
+                var sql = "SELECT c.courseSeriesId,c.courseSeriesName, a.userName as teacher, c.startDate, c.endDate, c.time, c.room "+
+                    "FROM courseSeries c JOIN account a ON c.courseSeriesTeacher = a.userId JOIN joinSeries j ON j.courseSeriesId = c.courseSeriesId "+
+                    "WHERE j.process = 1  and c.endDate < now() and j.studentId ="+req.query.studentId
+                course.sequelize.query(sql).then(function (finishCourse) {
+                    console.log("studentList:"+JSON.stringify({student:student,nowCourse:nowCourse,postCourse:postCourse,finishCourse:finishCourse}))
+                    res.render('joinReceptionStudentDetail',{student:student,nowCourse:nowCourse[0],postCourse:postCourse[0],finishCourse:finishCourse[0]});
+                })
+            })
+        })
+    })
 })
-router.get('/joinReceptionStudentList',function (req,res,next) {
-    user.findAll({where:{role:0}}).then(function(ret){
-        console.log(JSON.stringify(ret))
+router.get('/joinReceptionStudentDetailEdit',function (req,res,next) {
+    console.log("query:"+JSON.stringify(req.query))
+    res.render('joinReceptionStudentDetailEdit');
+})
+router.get('/joinReceptionStudentList',function (req,res) {
+    user.findAll({where:{role:1}}).then(function(ret){
+        console.log("user:"+JSON.stringify(ret))
         res.render('joinReceptionStudentList',{student:ret});
     })
 })
 router.get('/joinReceptionDetail',function (req,res,next) {
-    joinreceptionshop.findOne({where:{userId:3}}).then(function(ret1){
+    console.log("userId:"+req.session.userId)
+    joinreceptionshop.findOne({where:{userId:req.session.userId}}).then(function(ret1){
         console.log(JSON.stringify(ret1))
         ret1.getUser().then(function (ret) {
             console.log(JSON.stringify(ret))
@@ -130,7 +152,31 @@ router.get('/joinReceptionTemplateDetail',function (req,res,next) {
         res.render('joinReceptionTemplateDetail',{template:ret,student:{status:true}});
     });
 });
-
+router.get('/joinReceptionTeacherList',function (req,res) {
+    user.findAll({where:{role:2}}).then(function(ret){
+        console.log(JSON.stringify(ret))
+        res.render('joinReceptionTeacherList',{teacher:ret});
+    })
+})
+router.get('/joinReceptionTeacherDetail',function (req,res,next) {
+    user.findOne({'where':{userId:req.query.teacherId}}).then(function (teacher) {
+        var sql = "SELECT c.courseSeriesId,c.courseSeriesName, a.userName as teacher, c.startDate, c.endDate, c.time, c.room "+
+        "FROM courseSeries c JOIN account a ON c.courseSeriesTeacher = a.userId "+
+        "WHERE c.endDate > now() and c.courseSeriesTeacher ="+req.query.teacherId;
+        course.sequelize.query(sql).then(function (nowCourse) {
+            var sql = "SELECT c.courseSeriesId,c.courseSeriesName, a.userName as teacher, c.startDate, c.endDate, c.time, c.room "+
+                "FROM courseSeries c JOIN account a ON c.courseSeriesTeacher = a.userId "+
+                "WHERE c.endDate < now() and c.courseSeriesTeacher ="+req.query.teacherId;
+            course.sequelize.query(sql).then(function (finishCourse) {
+                res.render('joinReceptionTeacherDetail',{teacher:teacher,nowCourse:nowCourse[0],finishCourse:finishCourse[0]});
+            })
+        })
+    })
+})
+router.get('/joinReceptionTeacherDetailEdit',function (req,res,next) {
+    console.log("query:"+JSON.stringify(req.query))
+    res.render('joinReceptionTeacherDetailEdit');
+})
 router.post('/createCourse',function (req,res) {
     console.log("body:"+JSON.stringify(req.body))
     series.seriesTemplate.findOne({'where':{templateId:req.body.templateId}}).then(function (template) {
@@ -161,7 +207,7 @@ router.post('/createCourse',function (req,res) {
                 series.joinSeries.update({
                     courseSeriesId: courseSeries.courseSeriesId,
                     process: 1
-                }, {'where': {studentId: studentList[i]}})
+                }, {'where': {studentId: studentList[i],templateId:req.body.templateId}})
             }
             for(var i=0;i<courseSeries.courseSeriesNumber;i++){
                 course.course.create({

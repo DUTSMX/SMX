@@ -4,6 +4,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>尚名校</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/javascripts/slick.min.js"></script>
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="/stylesheets/admin.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="/stylesheets/slick.css">
@@ -72,7 +74,7 @@
             <label class="dialog-label">手机号</label><input class="dialog-input" id="phoneNumber" placeholder="手机号"/>
             <label class="dialog-label">密码</label><input class="dialog-input" id="password" placeholder="密码"/>
             <button class="btn btn-default dialog-button" onclick="login()">登录</button>
-            <label class="test-login" onclick="test()">测试登录</label>
+            <!--<label class="test-login" onclick="test()">测试登录</label>-->
         </div>
         <div id="type" class="login-type">
             <button class="btn btn-default" onclick="admin()">管理员</button><br>
@@ -88,8 +90,6 @@
     </div>
 </body>
 
-<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="/javascripts/slick.min.js"></script>
 <script>
     closeDialog()
     $(".ad-Images").slick({
@@ -98,22 +98,23 @@
         dots: true
     });
     function loginDialog(){
+        console.log("loginDialog")
         userName = '<%=session.userName%>';
+        console.log("userName login:"+userName)
         if (userName.length == 0){
             $("#light").show();
             $("#fade").show();
             $("#type").hide();
         } else {
-            var identityId = '<%=session.identityId%>' ;
+            var identityId = '<%=session.identityId%>';
             console.log("identityId:"+identityId);
             if(identityId==0){location.href='student/studentCourse'}
             else if(identityId==1){location.href='teacherCourse'}
             else if(identityId==2){location.href='educationCourse'}
             else if(identityId==3){location.href='admainDetail'}
             else if(identityId==4){location.href='joinManagerDetail'}
-            else if(identityId==5){location.href='joinReceptionDetail'}
+            else if(identityId==5){location.href='joinReception/joinReceptionTodayCourse'}
         }
-
     }
     function closeDialog(){
         $(".white-content").width("300px")
