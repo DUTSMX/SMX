@@ -353,9 +353,9 @@
         location.href="/"
     }
     function modifyInfo(){
+
         var teacherName = $("#person-name").val();
         var phoneNumber = $("#person-phoneNumber").val();
-        var gendertmp = $("#person-gender").val();
         var gender = ($("#person-gender").val()=="男")?0:1;
         var teachClass = $("#subject").val();
         var college = $("#college").val();
@@ -375,17 +375,19 @@
         var History = $("#history").val();
         var Geography = $("#geography").val();
 
-        var student_card = $("#student-card-img").src.val();
+        var student_card = $("#student-card-img").src;
 
-        var teacher_card = $("#teacher-card-img").src.val();
+        var teacher_card = $("#teacher-card-img").src;
 
-        var head = $("#head-image").src.val();
+        var head = $("#head-image").src;
 
-        var head_1_id = $("#head-id-1-image").src.val();
+        var head_1_id = $("#head-id-1-image").src;
 
-        var head_2_id = $("#head-id-2-image").src.val();
+        var head_2_id = $("#head-id-2-image").src;
+
 
         var data = {
+
             head : head,
             head_1_id:head_1_id,
             head_2_id:head_2_id,
@@ -399,7 +401,7 @@
             gender:gender,
             teachClass:teachClass,
             college:college,
-            class:Class,
+            Class:Class,
             province:province,
             city:city,
             highSchool:highSchool,
@@ -415,8 +417,19 @@
             History:History,
             Geography:Geography
         }
-        jQuery.post("./modifyInfo",data,function (data,textStatus,jqXHR) {
-            location.reload()
+
+
+        console.log("jjflsakjfdlkasd"+JSON.stringify(head));
+        console.log("jjflsakjfdlkasd"+JSON.stringify(head_1_id));
+        console.log("jjflsakjfdlkasd"+JSON.stringify(head_2_id));
+        console.log("jjflsakjfdlkasd"+JSON.stringify(student_card));
+        console.log("jjflsakjfdlkasd"+JSON.stringify(teacher_card));
+
+
+
+       // console.log(JSON.stringify(data));
+        jQuery.post("./modifyInfo",data,function (ret) {
+            console.log(JSON.stringify(ret));
         })
     }
     $("#navigation-person").addClass("select-left-button");
