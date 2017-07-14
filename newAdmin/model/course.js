@@ -96,7 +96,7 @@ exports.courseSeries=courseSeries;
             type: Sequelize.STRING(30)
         },
         courseDate: {
-            type: Sequelize.DATE
+            type: Sequelize.DATEONLY
         },
         beginTime: {
             type: Sequelize.DATE

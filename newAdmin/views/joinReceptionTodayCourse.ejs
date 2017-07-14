@@ -74,94 +74,17 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th class="width-5"><p>教室1</p></th>
-                <td class="width-10">齐书强<br> （高三 数学） <br><p>时广毅</p></td>
-                <td class="width-10">齐书强<br> （高三 数学） <br><p>李苓苓</p></td>
-                <td class="width-10">齐书强<br> （高三 数学） <br><p>王婉月</p></td>
-                <td class="width-10">齐书强<br> （高二 数学） <br><p>李程 常诗涵 王欣淼 张佳伟 乔文韬</p></td>
-                <td class="width-10">齐书强<br> （高三 数学） <br><p>丁佳兴 高城博</p></td>
-                <td class="width-10">齐书强<br> （高三 数学） <br><p>刘跃 王赛 张秋雨</p></td>
-                <td class="width-10"></td>
-                <td class="width-10"></td>
+            <%data.forEach(function (item) {%>
+            <tr id="table">
+                <th class="width-5"><p><%=item.courseRoom%></p></th>
+                <td class="width-10"><%=item.course[0].courseTeacher%><br> <%=item.course[0].grade%> <%=item.course[0].courseName%> <br><p><%=item.course[0].student%></p></td>
+                <td class="width-10"><%=item.course[1].courseTeacher%><br> <%=item.course[1].grade%> <%=item.course[1].courseName%> <br><p><%=item.course[1].student%></p></td>
+                <td class="width-10"><%=item.course[2].courseTeacher%><br> <%=item.course[2].grade%> <%=item.course[2].courseName%> <br><p><%=item.course[2].student%></p></td>
+                <td class="width-10"><%=item.course[3].courseTeacher%><br> <%=item.course[3].grade%> <%=item.course[3].courseName%> <br><p><%=item.course[3].student%></p></td>
+                <td class="width-10"><%=item.course[4].courseTeacher%><br> <%=item.course[4].grade%> <%=item.course[4].courseName%> <br><p><%=item.course[4].student%></p></td>
+                <td class="width-10"><%=item.course[5].courseTeacher%><br> <%=item.course[5].grade%> <%=item.course[5].courseName%> <br><p><%=item.course[5].student%></p></td>
             </tr>
-            <tr>
-                <th>教室2</th>
-                <td>张可爽<br> （高一 生物） <br><p>李苓苓 李程 常诗涵 刘跃</p></td>
-                <td></td>
-                <td></td>
-                <td>张可爽<br> （高三 生物） <br><p>庞爱迪</p></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>教室3</th>
-                <td>李金泰<br> （高三 数学） <br><p>王赛 方静 张秋雨 高城博</p></td>
-                <td></td>
-                <td></td>
-                <td>李金泰<br> （高一 语文） <br><p>贾楠</p></td>
-                <td>李金泰<br> （高二 语文） <br><p>李程</p></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>教室4</th>
-                <td>李丹丹<br> （高二 文数） <br><p>韩莹</p></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>教室5</th>
-                <td></td>
-                <td>李丹丹<br> （高三 英语） <br><p>庞爱迪</p></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>教室6</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>教室7</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>教室8</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+            <%})%>
             </tbody>
         </table>
     </div>
@@ -195,5 +118,6 @@
         $("#fade").hide()
         $("#light").hide()
     }
+
 </script>
 </html>
