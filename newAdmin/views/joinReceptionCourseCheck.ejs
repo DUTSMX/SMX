@@ -23,10 +23,6 @@
         .left{float:left}
         .center{margin-left:12px;margin-top:12px}
         .sign-up{margin-top:10px;margin-right:10px}
-        .title{text-align:left;background-color: #f7f7f7;padding:10px}
-        .course-list{height:35vh;overflow: auto}
-        .student{width:30%;margin:5px;}
-        .select{width:150px;text-align: left;background-color: white;float:right;display: none;padding-top:30px;height:300px;overflow-y: scroll;overflow-x:hidden}
     </style>
 </head>
 <body>
@@ -34,32 +30,36 @@
 <%include navigation-joinReception.ejs%>
 <div class="right-content">
     <div class="panel-heading title-block">
-        <h3 class="panel-title title-white">课程列表</h3>
+        <h3 class="panel-title title-white">申请列表</h3>
         <!--<h3 class="panel-title right-button" onclick="applyCourse()" id="applyCourse">申请课程</h3>-->
     </div>
-    <%if(allCourse.length == 0){%>
-        <h4 style="text-align: center;margin:10px">当前没有课程</h4>
-    <%} allCourse.forEach(function (item) { %>
+
+    <%if(postCourse.length == 0){%>
+        <h4 style="margin:10px;text-align: center">当前没有申请中的课程</h4><br>
+    <%}else{
+        postCourse.forEach(function (item) { %>
     <div class="course-block">
         <div class="inline left">
-            <h3 class="inline course-title"><%=item.courseSeriesName%></h3><h4 class="inline"><%=item.userName%></h4><br>
-            <h4 class="inline"><%=item.startDate%>~~<%=item.endDate%> <%=item.time%>  <%=item.room%></h4>
+            <h3 class="inline course-title"><%=item.seriesName%></h3><br>
+            <h4 class="inline">报名人数：<%=item.studentNumber%>人</h4>
         </div>
-        <button class="btn btn-success right sign-up" onclick="courseDetail(<%=item.courseSeriesId%>)">详情</button>
+        <button class="btn btn-success right sign-up" onclick="postDetail(<%=item.templateId%>)">详情</button>
     </div>
-    <%})%>
+    <%})
+    }%>
+</div>
 </div>
 </body>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-
-    $("#person").text("前台姓名")
+    var selectId;
+    $("#person").text("学生姓名")
     function loginDialog(){
         location.href="joinReceptionDetail"
     }
-    $("#navigation-manager").addClass("select-left-button");
-    function courseDetail(id){
-        location.href = "joinReceptionCourseDetail?seriesId="+id
+    function postDetail(id){
+        location.href = "joinReceptionCourseCheckDetail?templateId="+id;
     }
+    $("#navigation-check").addClass("select-left-button");
 </script>
 </html>

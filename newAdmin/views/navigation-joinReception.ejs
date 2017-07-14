@@ -3,6 +3,8 @@
     <p class="left-button" onclick="student()" id="navigation-student">学生管理</p>
     <p class="left-button" onclick="course()" id="navigation-calendar">课程日历</p>
     <p class="left-button" onclick="manager()" id="navigation-manager">课程管理</p>
+    <p class="left-button" onclick="postCourse()" id="navigation-post">课程报名</p>
+    <p class="left-button" onclick="checkCourse()" id="navigation-check">课程审核</p>
     <p class="left-button" onclick="person()" id="navigation-person">个人信息</p>
 </div>
 <script>
@@ -17,6 +19,12 @@
     }
     function manager() {
         location.href="joinReceptionCourseManager"
+    }
+    function postCourse() {
+        location.href="joinReceptionCoursePost"
+    }
+    function checkCourse() {
+        location.href="joinReceptionCourseCheck"
     }
     function person(){
         location.href = "joinReceptionDetail"

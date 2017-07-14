@@ -1,6 +1,7 @@
 
 <div class="left-navigation">
     <h5 class="left-button" onclick="courseManager()" id="navigation-course">课程管理</h5>
+    <h5 class="left-button" onclick="courseTemplate()" id="navigation-template">培养方案</h5>
     <h5 class="left-button" onclick="teacher()" id="navigation-teacher">教师管理</h5>
     <h5 class="left-button" onclick="person()" id="navigation-person">个人信息</h5>
 </div>
@@ -11,7 +12,10 @@
     }
     function courseManager() {
         location.href="educationCourse"
-     }
+    }
+    function courseTemplate(){
+        location.href="educationTemplate"
+    }
     function person(){
         location.href="educationDetail"
     }

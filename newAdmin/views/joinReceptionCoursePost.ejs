@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>尚名校</title>
+    <!-- Bootstrap -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/stylesheets/admin.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/slick.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/slick-theme.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .course-block{height:60px;border-radius: 5px;border-style:solid;border-width:1px;border-color:#4cae4c;margin-bottom:10px;margin-top:10px}
+        .course-title{color:#4cae4c}
+        .inline{display: inline-block;margin:2px;}
+        .right{float:right}
+        .left{float:left}
+        .center{margin-left:12px;margin-top:12px}
+        .sign-up{margin-top:10px;margin-right:10px}
+        .title{text-align:left;background-color: #f7f7f7;padding:10px}
+        .course-list{height:35vh;overflow: auto}
+        .student{width:30%;margin:5px;}
+        .select{width:150px;text-align: left;background-color: white;float:right;display: none;padding-top:30px;height:361px;overflow-y: scroll;overflow-x:hidden}
+    </style>
+</head>
+<body>
+<%include navigation-index.ejs%>
+<%include navigation-joinReception.ejs%>
+<div class="right-content">
+    <div class="panel-heading title-block">
+        <h3 class="panel-title title-white">课程列表</h3>
+        <!--<h3 class="panel-title right-button" onclick="applyCourse()" id="applyCourse">申请课程</h3>-->
+    </div>
+    <%allCourse.forEach(function (item) { %>
+    <div class="course-block">
+        <div class="inline left">
+            <h3 class="inline course-title"><%=item.seriesName%></h3><br>
+            <h4 class="inline"><%=item.subject%> 共<%=item.number%>课时</h4>
+        </div>
+        <button class="btn btn-success right sign-up" onclick="templateDetail(<%=item.templateId%>)">详情</button>
+        <button class="btn btn-success right sign-up" onclick="enter('<%=item.seriesName%>','<%=item.templateId%>')">报名</button>
+    </div>
+    <%})%>
+</div>
+<div id="fade" class="black-overlay"></div>
+<div id="light" class="white-content">
+    <div class="dialog" id="post" display="none">
+        <div class="dialog-title"><span class="font-20 title-white">申请课程</span><span class="right title-white" onclick="closeDialog()">X</span></div>
+        <label class="dialog-label">基本信息</label><br>
+        <label class="dialog-label">课程名称</label><input id="courseName" class="dialog-input" placeholder="请输入课程名称">
+        <label class="dialog-label">上课同学</label><input id="chooseStudent" class="dialog-input" placeholder="请输入同学" onclick="chooseStudent()">
+        <label class="dialog-label">附加信息</label><br>
+        <label class="dialog-label">上课老师</label><input id="chooseTeacher" class="dialog-input" placeholder="请输入期望老师，默认为老师不限">
+        <label class="dialog-label">班    型</label><input id="classType" class="dialog-input" placeholder="请输入期望班型，默认为班型不限">
+        <label class="dialog-label">期望时间</label><input id="time" class="dialog-input" placeholder="请输入期望时间，默认为班型不限">
+        <label class="dialog-label">备    注</label><input id="other" class="dialog-input" placeholder="请输入期望时间，默认为班型不限">
+        <!--<select id="time"class="dialog-input" onchange="selectTime()">-->
+            <!--<option>时间不限</option>-->
+            <!--<option>每天</option>-->
+            <!--<option>每周</option>-->
+        <!--</select>-->
+        <!--<div id="select-day" style="display: none">-->
+            <!--<input type="checkbox">周一-->
+            <!--<input type="checkbox">周二-->
+            <!--<input type="checkbox">周三-->
+            <!--<input type="checkbox">周四-->
+            <!--<input type="checkbox">周五-->
+            <!--<input type="checkbox">周六-->
+            <!--<input type="checkbox">周日-->
+        <!--</div>-->
+        <!--<div id="select-course" style="display: none">-->
+            <!--<input type="checkbox">07:00-->
+            <!--<input type="checkbox">08:40-->
+            <!--<input type="checkbox">10:20-->
+            <!--<input type="checkbox">13:30<br>-->
+            <!--<input type="checkbox">15:10-->
+            <!--<input type="checkbox">16:50-->
+            <!--<input type="checkbox">19:30-->
+            <!--<input type="checkbox">21:10-->
+        <!--</div>-->
+        <button class="btn btn-default dialog-button" onclick="post()">提交申请</button>
+    </div>
+    <div id="select-teacher" class="select">
+        <button class="btn btn-default center">赵老师</button><br>
+        <button class="btn btn-default center">钱老师</button><br>
+        <button class="btn btn-default center">孙老师</button><br>
+        <button class="btn btn-default center">李老师</button><br>
+        <button class="btn btn-default center">周老师</button><br>
+        <button class="btn btn-default center">吴老师</button><br>
+        <button class="btn btn-default center">郑老师</button><br>
+        <button class="btn btn-default center">王老师</button><br>
+    </div>
+    <div id="select-student" class="select">
+        <%student.forEach(function (item) {%>
+            <button class="btn btn-default center" onclick="selectStudent('<%=item.userId%>','<%=item.userName%>')"><%=item.userName%></button><br>
+        <%})%>
+    </div>
+</div>
+</body>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+    var selectId;
+    var studentId;
+    $("#person").text("前台姓名")
+    function loginDialog(){
+        location.href="joinReceptionDetail"
+    }
+    $("#navigation-post").addClass("select-left-button");
+    function enter(name,id){
+        showDialog()
+        selectId = id;
+        $("#courseName").val(name)
+        $("#chooseStudent").val("")
+        $("#chooseTeacher").val("")
+        $("#classType").val("")
+        $("#time").val("")
+        $("#other").val("")
+        console.log("enter")
+        $("#fade").show()
+        $("#light").show()
+        $("#apply-course").hide();
+        $("#enter").show();
+    }
+    function post(){
+        if(studentId == null){
+            alert("请选择学生")
+        }else{
+            var data = {
+                templateId:selectId,
+                studentId:studentId,
+                teacher:$("#chooseTeacher").val(),
+                classType:$("#classType").val(),
+                time:$("#time").val(),
+                other:$("#other").val()
+            }
+            console.log(JSON.stringify(data))
+            $.post("postHope",data,function (data) {
+                closeDialog();
+                alert(data.desc)
+                console.log(JSON.stringify(data))
+            })
+        }
+    }
+    function showDialog(){
+        $("#fade").show()
+        $("#light").show()
+        $("#post").show()
+    }
+    function closeDialog(){
+        $("#fade").hide()
+        $("#light").hide()
+        $("#add-student").hide()
+        $("#post").hide()
+        $(".white-content").width("350px")
+        $(".dialog-title").width("330px")
+        $("#chooseTeacher").attr("disabled",false)
+        $("#chooseStudent").attr("disabled",false)
+        $("#select-teacher").hide();
+        $("#select-student").hide();
+    }
+    function selectTime(){
+        var time = $("#time").val();
+        if(time == "每天"){
+            $("#select-day").hide();
+            $("#select-course").show();
+        }else if(time == "每周"){
+            $("#select-day").show();
+            $("#select-course").show();
+        }else{
+            $("#select-day").hide();
+            $("#select-course").hide();
+        }
+    }
+    function chooseTeacher(){
+//        $(".white-content").width("500px")
+//        $(".white-content").height("361px")
+//        $(".dialog-title").width("480px")
+//        $("#select-teacher").show();
+//        $("#select-student").hide();
+//        $("#chooseTeacher").attr("disabled",true)
+//        $("#chooseStudent").attr("disabled",false)
+    }
+    function chooseStudent(){
+        $(".white-content").width("500px")
+        $(".white-content").height($("#post").height)
+        $("#select-student").attr("height",$("#post").height)
+        $(".dialog-title").width("480px")
+        $("#select-teacher").hide();
+        $("#select-student").show();
+        $("#chooseTeacher").attr("disabled",false)
+        $("#chooseStudent").attr("disabled",true)
+    }
+    function selectStudent(id,name){
+        console.log(id)
+        studentId = id;
+        $("#chooseStudent").val(name)
+    }
+    function templateDetail(id){
+        location.href="joinReceptionTemplateDetail?templateId="+id;
+    }
+</script>
+</html>

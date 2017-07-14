@@ -7,7 +7,6 @@ var course=require('../model/course');
 var user=require(('../model/user'));
 var moment=require("moment");
 router.get('/teacherCourse',function (req,res,next) {
-
     course.courseSeries.findAll().then(function (data) {
         console.log("data:"+JSON.stringify(data));
         var date = moment(new Date()).format("YYYY-MM-DD");
