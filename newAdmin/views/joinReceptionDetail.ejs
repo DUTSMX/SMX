@@ -24,7 +24,7 @@
         .image-edit{position:absolute;text-align:center;margin-top:5%;width:40%;z-index: 900}
     </style>
 </head>
-<body>
+<body onload="uploadImg()">
 <%include navigation-index.ejs%>
 <%include navigation-joinReception.ejs%>
 <div class="right-content"  onload="uploadImg()">
@@ -82,12 +82,12 @@
         </div>
         <div class="image">
             <input id= "head-1" type="file" class="image-input"/>
-            <img id="head-id-1-image" src="<%=info.userFrontIdHeadUrl%>" class="head img-circle">
+            <img id="head-id-1-image" src="<%=info.userFrontIdHeadUrl%>">
             <p>身份证正面</p>
         </div>
         <div class="image">
             <input id= "head-2" type="file" class="image-input"/>
-            <img id="head-id-2-image" src="<%=info.userBackIdHeadUrl%>" class="head img-circle">
+            <img id="head-id-2-image" src="<%=info.userBackIdHeadUrl%>">
             <p>身份证背面</p>
         </div>
     </div>
@@ -96,6 +96,8 @@
 </body>
 
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="/javascripts/sdk/qcloud_sdk.js"></script>
+<script src="/javascripts/sdk/swfobject.js"></script>
 <script>
 
 
@@ -145,6 +147,7 @@
         var inputElements1 = document.getElementById("head");
         inputElements1.addEventListener("change",handleFiles1,false);
         function handleFiles1(){
+            console.log("head change")
             var fileList = this.files;
             if(fileList.length>0){
                 selectedFile = fileList[0];
@@ -245,11 +248,11 @@
         var index = obj.selectedIndex;
         var location;
 
-        var userHeadUrl = $("#head-image").src;
+        var userHeadUrl = $("#head-image")[0].src;
 
-        var userFrontIdHeadUrl = $("#head-id-1-image").src;
+        var userFrontIdHeadUrl = $("#head-id-1-image")[0].src;
 
-        var userBackIdHeadUrl = $("#head-id-2-image").src;
+        var userBackIdHeadUrl = $("#head-id-2-image")[0].src;
 
 
         if(index==0)
@@ -263,16 +266,14 @@
             location="沈阳";
         }
         var data = {
-
             userHeadUrl:userHeadUrl,
             userFrontIdHeadUrl:userFrontIdHeadUrl,
             userBackIdHeadUrl:userBackIdHeadUrl,
-
-
             userName:userName,
             phoneNumber:phoneNumber,
             location:location
         }
+        console.log("data:"+JSON.stringify(data))
         jQuery.post("./editInfo",data,function (ret) {
             console.log(JSON.stringify(ret));
         })

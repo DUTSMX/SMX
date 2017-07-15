@@ -61,15 +61,15 @@ router.get('/joinReceptionTodayCourse',function (req,res,next) {
     var courseRoomList = ["教室一","教室二","教室三","教室四","教室五"];
    // data.courseTime = courseTime;
     courseRoomList.forEach(function (courseRoom) {
-        console.log("courseRoom:"+courseRoom);
+        // console.log("courseRoom:"+courseRoom);
         var temp= {'courseRoom':courseRoom,'course':[]};
         courseTime.forEach(function (courseTime) {
-            console.log("courseTime:"+courseTime);
+            // console.log("courseTime:"+courseTime);
             temp.course.push({'courseTime':courseTime,'courseTeacher':"",'grade':"",'courseName':"",'student':""})
         });
         data.push(temp);
     });
-    console.log("data:"+JSON.stringify(data));
+    // console.log("data:"+JSON.stringify(data));
     var sql="SELECT "+
         "c.courseId,c.beginTime as courseTime, c.courseName,a.userName as teacherName,co.room as courseRoom,GROUP_CONCAT(ac.userName) as studentName "+
         "FROM "+
@@ -90,7 +90,7 @@ router.get('/joinReceptionTodayCourse',function (req,res,next) {
                     courseRoomFlag = true;
                     var courseTimeFlag = false;
                     kind.course.forEach(function (course) {
-                        console.log("course:"+course.courseTime+" item:"+item.courseTime);
+                        // console.log("course:"+course.courseTime+" item:"+item.courseTime);
                         if(course.courseTime == item.courseTime) {
                             courseTimeFlag = true;
                             if(course.courseName == ""){
@@ -98,27 +98,27 @@ router.get('/joinReceptionTodayCourse',function (req,res,next) {
                                 course.grade = item.grade;
                                 course.courseName = item.courseName;
                                 course.student = item.studentName;
-                                console.log("student:"+course.student)
+                                // console.log("student:"+course.student)
                             }else if (course.grade == item.grade && course.courseName == item.courseName) {
                                 course.student = course.student + item.studentName;
-                                console.log("student:"+course.student)
+                                // console.log("student:"+course.student)
                             }
                         }
                     });
                     if(!courseTimeFlag){
-                        console.log("找不到该上课时间");
+                        // console.log("找不到该上课时间");
                         kind.course.push({'courseTime':item.courseTime,'grade':item.grade,'courseName':item.courseName,'student':[{'studentName':"<a href='www.baidu.com'>"+item.studentName+"</a>&nbsp;&nbsp;"}]})
                     }
                 }
             });
             if(!courseRoomFlag){
-                console.log("can't find "+item.courseRoom);
+                // console.log("can't find "+item.courseRoom);
                 data.push({'courseRoomName':item.courseRoomName,'course':[{'courseTime':item.courseTime,'grade':item.grade,'courseName':item.courseName,'student':[{'studentName':"<a href='www.baidu.com'>"+item.studentName+"</a>&nbsp;&nbsp;"}]}]});
             }
             x++;
         });
         if(x==rows.length) {
-            console.log("data:" + JSON.stringify(data));
+            // console.log("data:" + JSON.stringify(data));
             res.render('joinReceptionTodayCourse',{date:req.query.date,data:data,courseTime:courseTime});
         }
     });
@@ -171,29 +171,35 @@ router.get('/joinReceptionDetail',function (req,res,next) {
     console.log("userId:"+req.session.userId)
     joinreceptionshop.findOne({where:{userId:req.session.userId}}).then(function(ret1){
         console.log(JSON.stringify(ret1))
-        ret1.getUser().then(function (ret) {
+        user.findOne({'where':{userId:ret1.userId}}).then(function (ret) {
             console.log(JSON.stringify(ret))
             res.render('joinReceptionDetail',{info:ret,infos:ret1});
         })
     })
 })
 router.post("/editInfo",function (req,res) {
-    //console.log(JSON.stringify(req.body))
+    console.log(JSON.stringify(req.body))
     user.update({
-
-        userHeadUrl:userHeadUrl,
-        userFrontIdHeadUrl:userFrontIdHeadUrl,
-        userBackIdHeadUrl:userBackIdHeadUrl,
-
-        userName:req.body.userName,
-        phoneNumber:req.body.phoneNumber,
-    },{'where':{userId:3}}).then(
+        userHeadUrl: req.body.userHeadUrl,
+        userFrontIdHeadUrl: req.body.userFrontIdHeadUrl,
+        userBackIdHeadUrl: req.body.userBackIdHeadUrl,
+        userName: req.body.userName,
+        phoneNumber: req.body.phoneNumber,
+    }, {'where': {userId: req.session.userId}}).then(function (data) {
+        console.log("update user")
         joinreceptionshop.update({
-            location:req.body.location,
-        },{'where':{userId:3}}).then(
-            res.send("123")
-        )
-    )})
+            location: req.body.location
+        }, {'where': {userId: req.session.userId}}).then(function (data) {
+            console.log("update join")
+            res.send("修改成功")
+        }).catch(function (err) {
+            console.log(err)
+        })
+    }).catch(function (err) {
+        console.log(err)
+    })
+})
+
 router.post("/postCourse",function(req,res){
     console.log("body:"+JSON.stringify(req.body))
     course.courseSeries.update({

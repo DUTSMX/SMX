@@ -52,6 +52,7 @@ router.get('/teacherDetail',function (req,res,next) {
 router.post("/modifyInfo",function (req,res) {
     console.log(JSON.stringify(req.body));
     user.update({
+
         userName:req.body.teacherName,
         phoneNumber:req.body.phoneNumber,
         gender:req.body.gender,
@@ -60,7 +61,7 @@ router.post("/modifyInfo",function (req,res) {
         userFrontIdHeadUrl:req.body.userFrontIdHeadUrl,
         userBackIdHeadUrl:req.body.userBackIdHeadUrl
 
-    }, {'where':{userId:2}}).then(
+    }, {'where': {userId: req.session.userId}}).then(
         teacher.update({
 
             studentCard :req.body.studentCard,
@@ -84,7 +85,7 @@ router.post("/modifyInfo",function (req,res) {
             History:req.body.History,
             Geography:req.body.Geography
 
-        },{'where':{userId:2}}).then(
+        },{'where': {userId: req.session.userId}}).then(
             res.send("123")
         )
     )});
