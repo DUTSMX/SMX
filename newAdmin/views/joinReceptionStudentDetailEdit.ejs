@@ -14,7 +14,7 @@
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style>
-        .head{width:96px;height:96px;}
+        .head{width:96px;height:96px}
         .head-input{opacity: 0;position:absolute;width:96px;height:96px;z-index: 1000}
         .head-edit{position:absolute;text-align:center;margin-top:40px;width:96px;height:96px;z-index: 900}
         .base-info{display: inline-block;height: 96px;vertical-align: middle;}
@@ -29,30 +29,61 @@
 <%include navigation-joinReception.ejs%>
 <div class="right-content">
     <div class="panel-heading title-block">
-        <h3 class="panel-title title-white">学生信息</h3>
-        <h3 id="applyId" class="panel-title right-button" onclick="applyId()">确认</h3>
+        <h3 class="panel-title title-white">基本信息</h3>
+        <h3 class="panel-title right-button" onclick="edit()" id="edit">编辑</h3>
     </div>
-    <div class="margin-left-30" id="person-edit">
+    <div class="margin-left-30" id="person-info">
+        <img src="/images/icon.png" class="head img-circle">
+        <div class="base-info">
+            <h3 class="inline"><%=info.userName%>&nbsp;(<%=infos.joinshop%>) <%if(info.gender== 0){%>男<%}else{%>女<%}%></h3><br>
+            <h4 class="inline">电话:<%=info.phoneNumber%></h4>
+        </div>
+        <button class="btn btn-default right" onclick="logout()">退出登录</button>
+        <br>
+        <h4 class="inline">所在学校:<%=infos.school%></h4>
+        <h4 class="inline">年级:<%=infos.grade%> 学习状况:<%=infos.learningstatus%></h4><br>
+        <!--<h4 class="inline">学习情况：中等</h4>-->
+        <h5>家庭地址:<%=info.userAddress%></h5>
+    </div>
+    <div class="margin-left-30"   style="display: none" id="person-edit">
         <div class="inline">
             <input type="file" class="head-input"/>
-            <p class="head-edit">编辑头像</p>
+            <p class="head-edit">编辑图片</p>
             <img src="/images/icon.png" class="head img-circle">
-        </div>
-        <select class="padding-4">
-            <option>台安店</option>
+        </div><br>
+        <label>学生姓名&nbsp</label><input id="person-name"class="inline margin-top-20" value=<%=info.userName%> placeholder="请输入学生姓名" /><!--disabled="false"-->
+        <select class="padding-4" id="change-shop" onclick="changeShop()">
+            <option selected="selected">台安店</option>
             <option>大连店</option>
             <option>沈阳店</option>
         </select><br>
-        <label>学生姓名&nbsp</label><input id="person-name"class="inline margin-top-20" value="学生姓名" placeholder="请输入学生姓名"/><br>
-        <label>手机号码&nbsp</label><input id="person-phoneNumber"class="inline" value="手机号码" placeholder="请输入手机号码"/>
-        <br>
-        <label>学校名称&nbsp</label><input value="学生学校" placeholder="请输入学校名称"/><br>
-        <label>学校年级&nbsp</label><input value="学生年级" placeholder="请输入学校年级"/><br>
+        <label>学生性别&nbsp</label><input id="person-gender"class="inline margin-top-20" value="<%if(info.gender== 0){%>男<%}else{%>女<%}%>" placeholder="请输入性别" /><br><!--disabled="false"-->
+        <label>手机号码&nbsp</label><input id="person-phoneNumber"class="inline margin-top-20" value="<%=info.phoneNumber%>" placeholder="请输入手机号码" /><!--disabled="false"-->
+        <!--<button id="apply-modify"class="btn btn-defalut padding-4" onclick="applyModify()">申请修改</button><br>-->
+        <label>学校名称&nbsp</label><input id="person-school" value="<%=infos.school%>" class="inline margin-top-20" placeholder="请输入学校名称"/><br>
+        <label>学校年级&nbsp</label><input id="person-class" value="<%=infos.grade%>" class="inline margin-top-20" placeholder="请输入学校年级"/><br>
         <!--<input value="学习情况：中等" disabled="false" placeholder="请输入学习情况"></h4><br>-->
-        <label>家庭地址&nbsp</label><input value="家庭地址" placeholder="请输入家庭信息">
+        <label>家庭地址&nbsp</label><input id="person-address" value="<%=info.userAddress%>" class="inline margin-top-20" placeholder="请输入家庭信息">
     </div>
-    <div class="margin-left-30" id="id-edit">
-        <label>身份证号&nbsp</label><input value="123456789012345678"placeholder="请输入身份证号"/><br>
+    <div class="panel-heading title-block">
+        <h3 class="panel-title title-white">隐私信息</h3>
+        <h3 id="applyId" class="panel-title right-button" onclick="applyId()">申请修改</h3>
+    </div>
+    <div class="margin-left-30" id="id">
+        <h4>身份证号:123456789012345678</h4>
+        <div class="image">
+            <img src="/images/logo.png"/>
+            <p>身份证正面</p>
+        </div>
+        <div class="image">
+            <img src="/images/logo.png"/>
+            <p>身份证背面</p>
+        </div>
+    </div>
+    <div class="margin-left-30" style="display:none" id="id-edit">
+        <div class="margin-10">
+            <label>身份证号&nbsp</label><input value="123456789012345678"placeholder="请输入身份证号"/><br>
+        </div>
         <div class="image">
             <input type="file" class="image-input"/>
             <p class="image-edit">编辑图片</p>
@@ -67,14 +98,94 @@
         </div>
     </div>
 </div>
-</div>
 </body>
 
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-    function loginDialog(){
-        location.href="joinReceptionDetail"
+    var editFlag = true;
+    var applyFlag = true;
+    var applyIdFlag = true;
+    var joinshop="<%=infos.joinshop%>";
+    function edit(){
+        if(editFlag){
+            editFlag = false;
+            $("#edit").text("完成")
+            $("#person-info").hide();
+            $("#person-edit").show();
+        }else{
+            editFlag = true;
+            changeInfo();
+            $("#edit").text("编辑")
+            $("#person-info").show();
+            $("#person-edit").hide();
+        }
     }
-    $("#navigation-student").addClass("select-left-button");
+
+    function loginDialog(){
+        location.href="studentDetail"
+    }
+    function applyModify() {
+        if(applyFlag){
+            applyFlag = false;
+            $("#apply-modify").text("提交修改")
+            $("#person-name").attr('disabled',false);
+            $("#person-phoneNumber").attr('disabled',false);
+            $("#person-gender").attr('disabled',false);
+        }else{
+            applyFlag = true;
+            $("#apply-modify").text("申请修改")
+            $("#person-name").attr('disabled',true);
+            $("#person-phoneNumber").attr('disabled',true);
+            $("#person-gender").attr('disabled',true);
+        }
+    }
+    function applyId(){
+        if(applyIdFlag){
+            applyIdFlag = false;
+            $("#applyId").text("提交申请");
+            $("#id").hide();
+            $("#id-edit").show();
+        }else{
+            applyIdFlag = true;
+            $("#applyId").text("申请修改");
+            $("#id").show();
+            $("#id-edit").hide();
+        }
+    }
+    function changeShop() {
+        var obj = document.getElementById("change-shop");
+        var index = obj.selectedIndex;
+        if(index == 0){
+            joinshop="台安店";
+        }else if(index==1){
+            joinshop="大连店";
+        }else if(index==2){
+            joinshop="沈阳店";
+        }
+    }
+    function changeInfo(){
+        var userName = $("#person-name").val();
+        var phoneNumber = $("#person-phoneNumber").val();
+        var gender = ($("#person-gender").val()=="男")?0:1;
+        var userAddress = $("#person-address").val();
+        var grade = $("#person-class").val();
+        var school = $("#person-school").val();
+        var join = joinshop;
+        var data = {
+            userName:userName,
+            phoneNumber:phoneNumber,
+            gender:gender,
+            userAddress:userAddress,
+            grade:grade,
+            joinshop:join,
+            school:school,
+        }
+        console.log(JSON.stringify(data));
+        jQuery.post("./changeInfo",data,function (ret) {
+            console.log(JSON.stringify(ret));
+            location.reload()
+        })
+    }
+    $("#navigation-person").addClass("select-left-button");
 </script>
 </html>

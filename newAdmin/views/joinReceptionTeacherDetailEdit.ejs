@@ -22,48 +22,73 @@
         .image img{width:80%}
         .image-input{opacity: 0;position:absolute;width:40%;height:20%;z-index: 1000}
         .image-edit{position:absolute;text-align:center;margin-top:5%;width:40%;z-index: 900}
+        .width-60{width:60px;}
     </style>
 </head>
 <body style="height:100%">
 <%include navigation-index.ejs%>
-<%include navigation-education.ejs%>
+<%include navigation-joinReception.ejs%>
 <div class="right-content">
     <div class="panel-heading title-block">
-        <h3 class="panel-title title-white">教师信息</h3>
-        <h3 id="applyId" class="panel-title right-button" onclick="applyId()">确认</h3>
+        <h3 class="panel-title title-white">基本信息</h3>
+        <h3 class="panel-title right-button" onclick="edit()" id="edit">编辑</h3>
     </div>
-    <div class="margin-left-30" id="person-edit">
+    <div class="margin-left-30" id="person-info">
+        <img src="/images/icon.png" class="head img-circle">
+        <div class="base-info">
+            <h3 class="inline"><%=info.userName%> <%if(info.gender== 0){%>男<%}else{%>女<%}%></h3><br>
+            <h4 class="inline"><%=info.phoneNumber%></h4>
+        </div>
+        <button class="btn btn-default right" onclick="logout()">退出登录</button>
+        <br>
+        <h4 class="inline">教授课程:<%=infos.teachClass%></h4><br>
+        <h4 class="inline">所在大学:<%=infos.college%></h4>
+        <h4 class="inline">就读年级:<%=infos.class%></h4><br>
+        <!--<h4 class="inline">学习情况：中等</h4>-->
+        <h4><%=infos.province%>省  <%=infos.city%>市  <%=infos.highSchool%></h4>
+        <h4> 高考总成绩:<%=infos.SumScore%> 语文:<%=infos.Chinese%>数学:<%=infos.Math%>英语:<%=infos.English%><%if(infos.SciOrLiber== 0){%>物理:<%=infos.Physics%>化学:<%=infos.Chemistry%>生物:<%=infos.Biology%><%}else{%>政治:<%=infos.Politics%>历史:<%=infos.History%>地理:<%=infos.Geography%><%}%></h4>
+
+        <div class="image">
+            <img src="/images/logo.png"/>
+            <p>学生证</p>
+        </div>
+        <div class="image">
+            <img src="/images/logo.png"/>
+            <p>家教认证</p>
+        </div>
+    </div>
+    <div class="margin-left-30"   style="display: none" id="person-edit">
         <div class="inline">
             <input type="file" class="head-input"/>
-            <p class="head-edit">编辑头像</p>
+            <p class="head-edit">编辑图片</p>
             <img src="/images/icon.png" class="head img-circle">
         </div><br>
-        <label>老师姓名&nbsp</label><input id="person-name"class="inline margin-top-20" value="老师姓名" placeholder="请输入老师姓名" disabled="false"/>
-        <button id="apply-modify"class="btn btn-defalut padding-4" onclick="applyModify()">申请修改</button><br>
-        <label>老师性别&nbsp</label><input id="person-gender"class="inline margin-top-20" value="老师性别" placeholder="请输入老师性别" disabled="false"/><br>
-        <label>手机号码&nbsp</label><input id="person-phoneNumber"class="inline margin-top-20" value="手机号码" placeholder="请输入手机号码" disabled="false"/><br>
-        <label>教授科目&nbsp</label><input value="教授科目" class="inline margin-top-20" placeholder="请输入教授科目" disabled="false" id="subject"/><br>
-        <label>学校名称&nbsp</label><input value="学生学校" class="inline margin-top-20" placeholder="请输入学校名称"/><br>
-        <label>学校年级&nbsp</label><input value="学生年级" class="inline margin-top-20" placeholder="请输入学校年级"/><br>
+        <label>老师姓名&nbsp</label><input id="person-name"class="inline margin-top-20" value=<%=info.userName%> placeholder="请输入老师姓名" /><!--disabled="false-->
+        <!--<button id="apply-modify"class="btn btn-defalut padding-4" onclick="applyModify()">申请修改</button><br>-->
+        <label>老师性别&nbsp</label><input id="person-gender"class="inline margin-top-20" value=<%if(info.gender== 0){%>男<%}else{%>女<%}%> placeholder="请输入老师性别" /><br>
+        <label>手机号码&nbsp</label><input id="person-phoneNumber"class="inline margin-top-20" value="<%=info.phoneNumber%>" placeholder="请输入手机号码" /><br>
+        <label>教授科目&nbsp</label><input id="subject" class="inline margin-top-20" value="<%=infos.teachClass%>" placeholder="请输入教授科目" /><br>
+        <label>学校名称&nbsp</label><input id="college" value="<%=infos.college%>" class="inline margin-top-20" placeholder="请输入学校名称"/><br>
+        <label>学校年级&nbsp</label><input id="class" value="<%=infos.class%>" class="inline margin-top-20" placeholder="请输入学校年级"/><br>
         <!--<input value="学习情况：中等" disabled="false" placeholder="请输入学习情况"></h4><br>-->
-        <input class="width-60" value="辽宁" placeholder="请输入家庭省份"><label>省</label><input class="width-60" value="大连" placeholder="请输入家庭城市"><label>市</label><input value="育明中学" placeholder="请输入中学名称">
+        <input id="province" class="width-60" value=<%=infos.province%> placeholder="请输入家庭省份"><label>省</label><input id="city" class="width-60" value=<%=infos.city%> placeholder="请输入家庭城市"><label>市</label><input id="highschool" value=<%=infos.highSchool%> placeholder="请输入中学名称">
         <select id="change-subject"class="padding-4" onchange="changeSubject()">
             <option grade="science" value="理科">理科</option>
             <option grade="liberal" value="文科">文科</option>
         </select><br>
-        <label>高考总分&nbsp</label><input class="width-60" value="650" placeholder="请输入高考总分"/>
-        <label>数学&nbsp</label><input class="width-60" value="135" placeholder="请输入高考数学分"/>
-        <label>语文&nbsp</label><input class="width-60" value="120" placeholder="请输入高考语文分"/>
-        <label>英语&nbsp</label><input class="width-60" value="125" placeholder="请输入高考英语分"/>
+        <label>高考总分&nbsp</label><input id="sumscore" class="width-60" value=<%=infos.SumScore%> placeholder="请输入高考总分"/>
+        <label>数学&nbsp</label><input id="math" class="width-60" value=<%=infos.Math%> placeholder="请输入高考数学分"/>
+        <label>语文&nbsp</label><input id="chinese" class="width-60" value=<%=infos.Chinese%> placeholder="请输入高考语文分"/>
+        <label>英语&nbsp</label><input id="english" class="width-60" value=<%=infos.English%> placeholder="请输入高考英语分"/>
         <div id="science" class="inline">
-            <label>物理&nbsp</label><input class="width-60" value="90" placeholder="请输入高考物理分"/>
-            <label>化学&nbsp</label><input class="width-60" value="90" placeholder="请输入高考化学分"/>
-            <label>生物&nbsp</label><input class="width-60" value="90" placeholder="请输入高考生物分"/><br>
+            <label>物理&nbsp</label><input id="physics" class="width-60" value=<%=infos.Physics%> placeholder="请输入高考物理分"/>
+            <label>化学&nbsp</label><input id="chemistry" class="width-60" value=<%=infos.Chemistry%> placeholder="请输入高考化学分"/>
+            <label>生物&nbsp</label><input id="biology" class="width-60" value=<%=infos.Biology%> placeholder="请输入高考生物分"/><br>
         </div>
         <div id="liberal" class="inline" style="display: none">
-            <label>政治&nbsp</label><input class="width-60" value="90" placeholder="请输入高考政治分"/>
-            <label>历史&nbsp</label><input class="width-60" value="90" placeholder="请输入高考历史分"/>
-            <label>地理&nbsp</label><input class="width-60" value="90" placeholder="请输入高考地理分"/><br>
+            <label>政治&nbsp</label><input id="politics" class="width-60" value=<%=infos.Politics%> placeholder="请输入高考政治分"/>
+            <label>历史&nbsp</label><input id="history" class="width-60" value=<%=infos.History%> placeholder="请输入高考历史分"/>
+            <label>地理&nbsp</label><input id="geography" class="width-60" value=<%=infos.Geography%> placeholder="请输入高考地理分"/><br>
         </div>
         <br>
         <div class="image">
@@ -117,8 +142,123 @@
 
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
+    $("#person").text("老师姓名")
+
     function loginDialog(){
-        location.href="educationDetail"
+        location.href="teacherDetail"
+    }
+    var editFlag = true;
+    var applyFlag = true;
+    var applyIdFlag = true;
+    var ScienceOrLiberty = 1;
+    function edit(){
+        if(editFlag){
+            editFlag = false;
+            $("#edit").text("完成")
+            $("#person-info").hide();
+            $("#person-edit").show();
+        }else{
+            modifyInfo()
+            editFlag = true;
+            $("#edit").text("编辑")
+            $("#person-info").show();
+            $("#person-edit").hide();
+        }
+    }
+    function applyModify() {
+        if(applyFlag){
+            applyFlag = false;
+            $("#apply-modify").text("提交修改")
+            $("#person-name").attr('disabled',false);
+            $("#person-phoneNumber").attr('disabled',false);
+            $("#person-gender").attr('disabled',false);
+            $("#subject").attr("disabled",false);
+        }else{
+            applyFlag = true;
+            $("#apply-modify").text("申请修改")
+            $("#person-name").attr('disabled',true);
+            $("#person-phoneNumber").attr('disabled',true);
+            $("#person-gender").attr('disabled',true);
+            $("#subject").attr("disabled",true);
+        }
+    }
+    function applyId(){
+        if(applyIdFlag){
+            applyIdFlag = false;
+            $("#applyId").text("提交申请");
+            $("#id").hide();
+            $("#id-edit").show();
+        }else{
+            applyIdFlag = true;
+            $("#applyId").text("申请修改");
+            $("#id").show();
+            $("#id-edit").hide();
+        }
+    }
+    $("#person").className="left-button:hover"
+    function changeSubject() {
+        var obj = document.getElementById("change-subject");
+        var index = obj.selectedIndex;
+        if(index == 0){
+            $("#science").show();
+            $("#liberal").hide();
+        }else{
+            $("#science").hide();
+            $("#liberal").show();
+        }
+        ScienceOrLiberty=index;
+    }
+    function logout(){
+        location.href="/"
+    }
+    function modifyInfo(){
+        var teacherName = $("#person-name").val();
+        var phoneNumber = $("#person-phoneNumber").val();
+        var gender = ($("#person-gender").val()=="男")?0:1;
+        var teachClass = $("#subject").val();
+        var college = $("#college").val();
+        var Class = $("#class").val();
+        var province = $("#province").val();
+        var city = $("#city").val();
+        var highSchool = $("#highschool").val();
+        var SciOrLiber = ScienceOrLiberty;
+        var SumScore = $("#sumscore").val();
+        var Chinese = $("#chinese").val();
+        var English = $("#english").val();
+        var Math = $("#math").val();
+        var Physics = $("#physics").val();
+        var Chemistry = $("#chemistry").val();
+        var Biology = $("#biology").val();
+        var Politics = $("#politics").val();
+        var History = $("#history").val();
+        var Geography = $("#geography").val();
+        var data = {
+            teacherName:teacherName,
+            phoneNumber:phoneNumber,
+            gender:gender,
+            teachClass:teachClass,
+            college:college,
+            Class:Class,
+            province:province,
+            city:city,
+            highSchool:highSchool,
+            SciOrLiber:SciOrLiber,
+            SumScore:SumScore,
+            Math:Math,
+            Chinese:Chinese,
+            English:English,
+            Physics:Physics,
+            Chemistry:Chemistry,
+            Biology:Biology,
+            Politics:Politics,
+            History:History,
+            Geography:Geography,
+        }
+        console.log(JSON.stringify(data));
+        jQuery.post("./modifyInfo",data,function (ret) {
+            console.log(JSON.stringify(ret));
+            location.reload()
+        })
     }
     $("#navigation-teacher").addClass("select-left-button");
 </script>

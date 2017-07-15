@@ -155,12 +155,9 @@ router.get('/joinReceptionStudentDetail',function (req,res,next) {
         })
     })
 })
-router.get('/joinReceptionStudentDetailEdit',function (req,res,next) {
-    console.log("query:"+JSON.stringify(req.query))
-    res.render('joinReceptionStudentDetailEdit');
-})
+
 router.get('/joinReceptionStudentList',function (req,res) {
-    var sql = "SELECT a.userId, a.userName, s.grade, count(j.joinSeriesId) "+
+    var sql = "SELECT s.studentId as userId, a.userName, s.grade, count(j.joinSeriesId) "+
     "FROM account a JOIN student s ON a.userId = s.userId LEFT JOIN joinSeries j ON a.userId = j.studentId "+
     "WHERE role = 1 GROUP BY a.userId ORDER BY count(joinSeriesId) DESC"
     db.sequelize.query(sql).then(function(ret){
@@ -236,7 +233,7 @@ router.get('/joinReceptionTemplateDetail',function (req,res,next) {
     });
 });
 router.get('/joinReceptionTeacherList',function (req,res) {
-    var sql = "SELECT a.userId, a.userName, t.teachClass, count(c.courseSeriesTeacher) as teacherCount "+
+    var sql = "SELECT t.teacherId as userId, a.userName, t.teachClass, count(c.courseSeriesTeacher) as teacherCount "+
     "FROM account a JOIN teacher t ON a.userId = t.userId LEFT JOIN courseSeries c ON a.userId = c.courseSeriesTeacher "+
     "WHERE role = 2 GROUP BY a.userId ORDER BY userName DESC, teacherCount "
     db.sequelize.query(sql).then(function(ret){
@@ -245,23 +242,86 @@ router.get('/joinReceptionTeacherList',function (req,res) {
     })
 })
 router.get('/joinReceptionTeacherDetail',function (req,res,next) {
-    user.findOne({'where':{userId:req.query.teacherId}}).then(function (teacher) {
-        var sql = "SELECT c.courseSeriesId,c.courseSeriesName, a.userName as teacher, c.startDate, c.endDate, c.time, c.room "+
-        "FROM courseSeries c JOIN account a ON c.courseSeriesTeacher = a.userId "+
-        "WHERE c.endDate > now() and c.courseSeriesTeacher ="+req.query.teacherId;
-        db.sequelize.query(sql).then(function (nowCourse) {
+    teacher.findOne({'where':{teacherId:req.query.teacherId}}).then(function (teacher) {
+        user.findOne({'where':{userId:teacher.userId}}).then(function (teacher) {
+            teacher.teacherId =req.query.teacherId;
             var sql = "SELECT c.courseSeriesId,c.courseSeriesName, a.userName as teacher, c.startDate, c.endDate, c.time, c.room "+
                 "FROM courseSeries c JOIN account a ON c.courseSeriesTeacher = a.userId "+
-                "WHERE c.endDate < now() and c.courseSeriesTeacher ="+req.query.teacherId;
-            db.sequelize.query(sql).then(function (finishCourse) {
-                res.render('joinReceptionTeacherDetail',{teacher:teacher,nowCourse:nowCourse[0],finishCourse:finishCourse[0]});
+                "WHERE c.endDate > now() and c.courseSeriesTeacher ="+req.query.teacherId;
+            db.sequelize.query(sql).then(function (nowCourse) {
+                var sql = "SELECT c.courseSeriesId,c.courseSeriesName, a.userName as teacher, c.startDate, c.endDate, c.time, c.room "+
+                    "FROM courseSeries c JOIN account a ON c.courseSeriesTeacher = a.userId "+
+                    "WHERE c.endDate < now() and c.courseSeriesTeacher ="+req.query.teacherId;
+                db.sequelize.query(sql).then(function (finishCourse) {
+                    res.render('joinReceptionTeacherDetail',{teacher:teacher,nowCourse:nowCourse[0],finishCourse:finishCourse[0]});
+                })
             })
         })
     })
+
+
 })
+router.post("/changeInfo",function (req,res) {
+    console.log(JSON.stringify(req.body))
+    user.update({
+        userName:req.body.userName,
+        phoneNumber:req.body.phoneNumber,
+        gender:req.body.gender,
+        userAddress:req.body.userAddress,
+    },{'where':{userId:16}}).then(function (data) {
+        student.update({
+            grade:req.body.grade,
+            joinshop:req.body.joinshop,
+            school:req.body.school,
+        },{'where':{userId:16}}).then(
+            res.send("123")
+        )
+    })
+})
+router.post("/modifyInfo",function (req,res) {
+    console.log(JSON.stringify(req.body))
+    user.update({
+        userName:req.body.teacherName,
+        phoneNumber:req.body.phoneNumber,
+        gender:req.body.gender,
+    },{'where':{userId:2}}).then(
+        teacher.update({
+            college:req.body.college,
+            teachClass:req.body.teachClass,
+            class:req.body.Class,
+            province:req.body.province,
+            city:req.body.city,
+            highSchool:req.body.highSchool,
+            SciOrLiber:req.body.SciOrLiber,
+            SumScore:req.SumScore,
+            Chinese:req.body.Chinese,
+            Math:req.body.Math,
+            English:req.body.English,
+            Physics:req.body.Physics,
+            Chemistry:req.body.Chemistry,
+            Biology:req.body.Biology,
+            Politics:req.body.Politics,
+            History:req.body.History,
+            Geography:req.body.Geography,
+        },{'where':{userId:2}}).then(
+            res.send("123")
+        )
+    )})
 router.get('/joinReceptionTeacherDetailEdit',function (req,res,next) {
-    console.log("query:"+JSON.stringify(req.query))
-    res.render('joinReceptionTeacherDetailEdit');
+    teacher.findOne({'where':{teacherId:req.query.teacherId}}).then(function (ret) {
+        // ret.getUser().then(function (ret1) {
+        user.findOne({'where':{userId:ret.userId}}).then(function(ret1){
+            res.render('joinReceptionTeacherDetailEdit',{info:ret1,infos:ret});
+        })
+    })
+})
+router.get('/joinReceptionStudentDetailEdit',function (req,res,next) {
+    student.findOne({'where':{studentId:req.query.studentId}}).then(function (ret) {
+        // ret.getUser().then(function (ret1) {
+        user.findOne({'where':{userId:ret.userId}}).then(function(ret1){
+            res.render('joinReceptionStudentDetailEdit',{info:ret1,infos:ret});
+        })
+    })
 })
 router.post('/createCourse',function (req,res) {
     console.log("body:"+JSON.stringify(req.body))

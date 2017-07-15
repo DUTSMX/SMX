@@ -95,7 +95,7 @@ router.post("/changeInfo",function (req,res) {
         userGrade:req.body.userGrade,
     },{'where':{userId:2}}).then(function (data) {
             student.update({
-                joinshop:req.body.join,
+                joinshop:req.body.joinshop,
                 school:req.body.school,
             },{'where':{userId:2}}).then(
                 res.send("123")
