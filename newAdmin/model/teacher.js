@@ -1,24 +1,11 @@
 /**
  * Created by asus on 2017/7/11.
  */
-var Sequelize = require('sequelize');
-var course=require('./course');
+
+var Sequelize = require("sequelize")
+var db = require("./db")
+var sequelize = db.sequelize;var course=require('./course');
 var user=require('./user');
-var sequelize=new Sequelize(
-    'smx',
-    'cdb_outerroot',
-    'smxsjk123456',
-    {
-        host: '59432c47c3382.bj.cdb.myqcloud.com',
-        port: 4243,
-        dialect: 'mysql',
-        define: {
-            underscored: false,
-            timestamps: false,
-            paranoid: true,
-        }
-    }
-);
 var teacher = sequelize.define('teacher', {
         teacherId:{ //自增长课程系列Id,主键,整型
             type:Sequelize.INTEGER,

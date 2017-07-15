@@ -32,7 +32,7 @@
 </head>
 <body>
 <%include navigation-index.ejs%>
-<%include navigation-education.ejs%>
+<%include navigation-joinReception.ejs%>
 <div class="right-content">
     <div class="panel-heading title-block">
         <h2 class="title-white"><%=template.seriesName%>（共<%=template.number%>课时）</h2><br>
@@ -52,7 +52,6 @@
 </body>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-    $("#person").text("前台姓名")
     function loginDialog(){
         location.href="studentDetail"
     }

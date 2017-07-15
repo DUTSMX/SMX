@@ -26,63 +26,35 @@
         .teacher-name{margin-left:10px; display:inline-block}
         .sign-up{margin-top:-5px;margin-right:10px;display: inline-block}
         .hide{display:none}
+        .course-title{color:#4cae4c}
     </style>
 </head>
 <body style="height:100%">
 <%include navigation-index.ejs%>
 <%include navigation-joinReception.ejs%>
 <div class="right-content">
-    <!--<div class="panel-heading title-block">-->
-        <!--<h3 class="panel-title title-white">本周教师</h3>-->
-    <!--</div>-->
-    <!--<div class="teacher-block">-->
-        <!--<h4 class="teacher-name">齐书强</h4>-->
-        <!--<button class="btn btn-failed sign-up">已确认</button>-->
-    <!--</div>-->
-    <!--<div class="teacher-block">-->
-        <!--<h4 class="teacher-name">张可爽</h4>-->
-        <!--<button class="btn btn-failed sign-up">已确认</button>-->
-    <!--</div>-->
-    <!--<div class="teacher-block">-->
-        <!--<h4 class="teacher-name">李金泰</h4>-->
-        <!--<button class="btn btn-success sign-up" onclick="contact()">联系</button>-->
-    <!--</div>-->
-    <!--<div class="teacher-block">-->
-        <!--<h4 class="teacher-name">李丹丹</h4>-->
-        <!--<button class="btn btn-failed sign-up">已确认</button>-->
-    <!--</div>-->
-    <!--<div class="panel-heading title-block">-->
-        <!--<h3 class="panel-title title-white">当天课表</h3>-->
-    <!--</div>-->
     <button class="btn btn-default inline right" onclick="printSheet()">打印签到表</button>
     <div class="width-700">
-        <p id="month" class="center">2017年6月17日</p>
+        <%var date = date.split("-")%>
+        <p id="month" class="center"><%=date[0]%>年<%=date[1]%>月<%=date[2]%>日</p>
     </div>
     <div style="padding-right: 17px" id="home">
         <table class="table table-hover" style="margin-bottom:0px;">
             <thead>
             <tr>
                 <th></th>
-                <th>7:00</th>
-                <th>8:40</th>
-                <th>10:20</th>
-                <th>13:30</th>
-                <th>15:10</th>
-                <th>16:50</th>
-                <th>19:30</th>
-                <th>21:10</th>
+                <%courseTime.forEach(function (time) {%>
+                    <th><%=time%></th>
+                <%})%>
             </tr>
             </thead>
             <tbody>
             <%data.forEach(function (item) {%>
             <tr id="table">
                 <th class="width-5"><p><%=item.courseRoom%></p></th>
-                <td class="width-10"><%=item.course[0].courseTeacher%><br> <%=item.course[0].grade%> <%=item.course[0].courseName%> <br><p><%=item.course[0].student%></p></td>
-                <td class="width-10"><%=item.course[1].courseTeacher%><br> <%=item.course[1].grade%> <%=item.course[1].courseName%> <br><p><%=item.course[1].student%></p></td>
-                <td class="width-10"><%=item.course[2].courseTeacher%><br> <%=item.course[2].grade%> <%=item.course[2].courseName%> <br><p><%=item.course[2].student%></p></td>
-                <td class="width-10"><%=item.course[3].courseTeacher%><br> <%=item.course[3].grade%> <%=item.course[3].courseName%> <br><p><%=item.course[3].student%></p></td>
-                <td class="width-10"><%=item.course[4].courseTeacher%><br> <%=item.course[4].grade%> <%=item.course[4].courseName%> <br><p><%=item.course[4].student%></p></td>
-                <td class="width-10"><%=item.course[5].courseTeacher%><br> <%=item.course[5].grade%> <%=item.course[5].courseName%> <br><p><%=item.course[5].student%></p></td>
+                <%item.course.forEach(function(course){%>
+                    <td class="width-10"><%=course.courseTeacher%><br> <span class="course-title"><%=course.courseName%></span><br><span><%=course.student%></span></td>
+                <%})%>
             </tr>
             <%})%>
             </tbody>

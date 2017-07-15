@@ -40,185 +40,196 @@
                     <th>教室信息</th>
                     <th>学生姓名</th>
                     <th>联系方式</th>
-                    <th>出勤情况</th>
+                    <th>签字确认</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th class="width-15" rowspan="10">7：00</th>
-                    <th class="width-15">高三数学</th>
-                    <td class="width-15">齐书强</td>
-                    <td class="width-15">教室1</td>
-                    <td class="width-15">时广毅</td>
-                    <td class="width-15">12345678901</td>
+                <%print.forEach(function (item) {%>
+                    <tr>
+                    <th class="width-15"><%=item.beginTime%></th>
+                    <th class="width-15"><%=item.courseName%></th>
+                    <td class="width-15"><%=item.teacher%></td>
+                    <td class="width-15"><%=item.room%></td>
+                    <td class="width-15"><%=item.student%></td>
+                    <td class="width-15"><%=item.phoneNumber%></td>
                     <td class="width-15"></td>
-                </tr>
-                <tr>
-                    <th class="width-15" rowspan="4">高一生物</th>
-                    <td class="width-15" rowspan="4">张可爽</td>
-                    <td class="width-15" rowspan="4">教室2</td>
-                    <td class="width-15">李苓苓</td>
-                    <td class="width-15">12345678901</td>
-                    <td class="width-15"></td>
-                </tr>
-                <tr>
-                    <td class="width-15">李程</td>
-                    <td class="width-15">12345678901</td>
-                    <td class="width-15"></td>
-                </tr>
-                <tr>
-                    <td class="width-15">常诗涵</td>
-                    <td class="width-15">12345678901</td>
-                    <td class="width-15"></td>
-                </tr>
-                <tr>
-                    <td class="width-15">刘跃</td>
-                    <td class="width-15">12345678901</td>
-                    <td class="width-15"></td>
-                </tr>
-                <tr>
-                    <th class="width-15" rowspan="4">高三数学</th>
-                    <td class="width-15" rowspan="4">李金泰</td>
-                    <td class="width-15" rowspan="4">教室3</td>
-                    <td class="width-15">王赛</td>
-                    <td class="width-15">12345678901</td>
-                    <td class="width-15"></td>
-                </tr>
-                <tr>
-                    <td class="width-15">方静</td>
-                    <td class="width-15">12345678901</td>
-                    <td class="width-15"></td>
-                </tr>
-                <tr>
-                    <td class="width-15">张秋雨 </td>
-                    <td class="width-15">12345678901</td>
-                    <td class="width-15"></td>
-                </tr>
-                <tr>
-                    <td class="width-15">高城博</td>
-                    <td class="width-15">12345678901</td>
-                    <td class="width-15"></td>
-                </tr>
-                <tr>
-                    <th class="width-15">高二文数</th>
-                    <td class="width-15">李丹丹</td>
-                    <td class="width-15">教室4</td>
-                    <td class="width-15">韩莹</td>
-                    <td class="width-15">12345678901</td>
-                    <td class="width-15"></td>
-                </tr>
-                <tr>
-                    <th class="width-15" rowspan="2">8：40</th>
-                    <th class="width-15">高三数学</th>
-                    <td class="width-15">齐书强</td>
-                    <td class="width-15">教室1</td>
-                    <td class="width-15">李苓苓</td>
-                    <td class="width-15">12345678901</td>
-                    <td class="width-15"></td>
-                </tr>
-                <tr>
-                    <th class="width-15">高三英语</th>
-                    <td class="width-15">李丹丹</td>
-                    <td class="width-15">教室5</td>
-                    <td class="width-15">庞爱迪</td>
-                    <td class="width-15">12345678901</td>
-                    <td class="width-15"></td>
-                </tr>
-                <tr>
-                    <th class="width-15">10：20</th>
-                    <th class="width-15">高三数学</th>
-                    <td class="width-15">齐书强</td>
-                    <td class="width-15">教室1</td>
-                    <td class="width-15">王婉月</td>
-                    <td class="width-15">12345678901</td>
-                    <td class="width-15"></td>
-                </tr>
-                <tr>
-                    <th class="width-15" rowspan="7">13：30</th>
-                    <th class="width-15" rowspan="5">高二数学</th>
-                    <td class="width-15" rowspan="5">齐书强</td>
-                    <td class="width-15" rowspan="5">教室1</td>
-                    <td class="width-15">李程</td>
-                    <td class="width-15">12345678901</td>
-                    <td class="width-15"></td>
-                </tr>
-                <tr>
-                    <td class="width-15">常诗涵</td>
-                    <td class="width-15">12345678901</td>
-                    <td class="width-15"></td>
-                </tr>
-                <tr>
-                    <td class="width-15">王欣淼</td>
-                    <td class="width-15">12345678901</td>
-                    <td class="width-15"></td>
-                </tr>
-                <tr>
-                    <td class="width-15">张佳伟</td>
-                    <td class="width-15">12345678901</td>
-                    <td class="width-15"></td>
-                </tr>
-                <tr>
-                    <td class="width-15">乔文韬</td>
-                    <td class="width-15">12345678901</td>
-                    <td class="width-15"></td>
-                </tr>
-                <tr>
-                    <th class="width-15">高三生物</th>
-                    <td class="width-15">张可爽</td>
-                    <td class="width-15">教室2</td>
-                    <td class="width-15">庞爱迪</td>
-                    <td class="width-15">12345678901</td>
-                    <td class="width-15"></td>
-                </tr>
-                <tr>
-                    <th class="width-15">高一语文</th>
-                    <td class="width-15">李金泰</td>
-                    <td class="width-15">教室3</td>
-                    <td class="width-15">贾楠</td>
-                    <td class="width-15">12345678901</td>
-                    <td class="width-15"></td>
-                </tr>
-                <tr>
-                    <th class="width-15" rowspan="3">15：10</th>
-                    <th class="width-15" rowspan="2">高三数学</th>
-                    <td class="width-15" rowspan="2">齐书强</td>
-                    <td class="width-15" rowspan="2">教室1</td>
-                    <td class="width-15">丁家兴</td>
-                    <td class="width-15">12345678901</td>
-                    <td class="width-15"></td>
-                </tr>
-                <tr>
-                    <td class="width-15">高城博</td>
-                    <td class="width-15">12345678901</td>
-                    <td class="width-15"></td>
-                </tr>
-                <tr>
-                    <th class="width-15">高二语文</th>
-                    <td class="width-15">李金泰</td>
-                    <td class="width-15">教室3</td>
-                    <td class="width-15">李程</td>
-                    <td class="width-15">12345678901</td>
-                    <td class="width-15"></td>
-                </tr>
-                <tr>
-                    <th class="width-15" rowspan="3">16：50</th>
-                    <th class="width-15" rowspan="3">高三数学</th>
-                    <td class="width-15" rowspan="3">齐书强</td>
-                    <td class="width-15" rowspan="3">教室1</td>
-                    <td class="width-15">刘跃</td>
-                    <td class="width-15">12345678901</td>
-                    <td class="width-15"></td>
-                </tr>
-                <tr>
-                    <td class="width-15">王赛</td>
-                    <td class="width-15">12345678901</td>
-                    <td class="width-15"></td>
-                </tr>
-                <tr>
-                    <td class="width-15">张秋雨</td>
-                    <td class="width-15">12345678901</td>
-                    <td class="width-15"></td>
-                </tr>
+                    </tr>
+                <%})%>
+                <!--<tr>-->
+                    <!--<th class="width-15" rowspan="10">7：00</th>-->
+                    <!--<th class="width-15">高三数学</th>-->
+                    <!--<td class="width-15">齐书强</td>-->
+                    <!--<td class="width-15">教室1</td>-->
+                    <!--<td class="width-15">时广毅</td>-->
+                    <!--<td class="width-15">12345678901</td>-->
+                    <!--<td class="width-15"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<th class="width-15" rowspan="4">高一生物</th>-->
+                    <!--<td class="width-15" rowspan="4">张可爽</td>-->
+                    <!--<td class="width-15" rowspan="4">教室2</td>-->
+                    <!--<td class="width-15">李苓苓</td>-->
+                    <!--<td class="width-15">12345678901</td>-->
+                    <!--<td class="width-15"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td class="width-15">李程</td>-->
+                    <!--<td class="width-15">12345678901</td>-->
+                    <!--<td class="width-15"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td class="width-15">常诗涵</td>-->
+                    <!--<td class="width-15">12345678901</td>-->
+                    <!--<td class="width-15"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td class="width-15">刘跃</td>-->
+                    <!--<td class="width-15">12345678901</td>-->
+                    <!--<td class="width-15"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<th class="width-15" rowspan="4">高三数学</th>-->
+                    <!--<td class="width-15" rowspan="4">李金泰</td>-->
+                    <!--<td class="width-15" rowspan="4">教室3</td>-->
+                    <!--<td class="width-15">王赛</td>-->
+                    <!--<td class="width-15">12345678901</td>-->
+                    <!--<td class="width-15"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td class="width-15">方静</td>-->
+                    <!--<td class="width-15">12345678901</td>-->
+                    <!--<td class="width-15"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td class="width-15">张秋雨 </td>-->
+                    <!--<td class="width-15">12345678901</td>-->
+                    <!--<td class="width-15"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td class="width-15">高城博</td>-->
+                    <!--<td class="width-15">12345678901</td>-->
+                    <!--<td class="width-15"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<th class="width-15">高二文数</th>-->
+                    <!--<td class="width-15">李丹丹</td>-->
+                    <!--<td class="width-15">教室4</td>-->
+                    <!--<td class="width-15">韩莹</td>-->
+                    <!--<td class="width-15">12345678901</td>-->
+                    <!--<td class="width-15"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<th class="width-15" rowspan="2">8：40</th>-->
+                    <!--<th class="width-15">高三数学</th>-->
+                    <!--<td class="width-15">齐书强</td>-->
+                    <!--<td class="width-15">教室1</td>-->
+                    <!--<td class="width-15">李苓苓</td>-->
+                    <!--<td class="width-15">12345678901</td>-->
+                    <!--<td class="width-15"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<th class="width-15">高三英语</th>-->
+                    <!--<td class="width-15">李丹丹</td>-->
+                    <!--<td class="width-15">教室5</td>-->
+                    <!--<td class="width-15">庞爱迪</td>-->
+                    <!--<td class="width-15">12345678901</td>-->
+                    <!--<td class="width-15"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<th class="width-15">10：20</th>-->
+                    <!--<th class="width-15">高三数学</th>-->
+                    <!--<td class="width-15">齐书强</td>-->
+                    <!--<td class="width-15">教室1</td>-->
+                    <!--<td class="width-15">王婉月</td>-->
+                    <!--<td class="width-15">12345678901</td>-->
+                    <!--<td class="width-15"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<th class="width-15" rowspan="7">13：30</th>-->
+                    <!--<th class="width-15" rowspan="5">高二数学</th>-->
+                    <!--<td class="width-15" rowspan="5">齐书强</td>-->
+                    <!--<td class="width-15" rowspan="5">教室1</td>-->
+                    <!--<td class="width-15">李程</td>-->
+                    <!--<td class="width-15">12345678901</td>-->
+                    <!--<td class="width-15"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td class="width-15">常诗涵</td>-->
+                    <!--<td class="width-15">12345678901</td>-->
+                    <!--<td class="width-15"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td class="width-15">王欣淼</td>-->
+                    <!--<td class="width-15">12345678901</td>-->
+                    <!--<td class="width-15"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td class="width-15">张佳伟</td>-->
+                    <!--<td class="width-15">12345678901</td>-->
+                    <!--<td class="width-15"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td class="width-15">乔文韬</td>-->
+                    <!--<td class="width-15">12345678901</td>-->
+                    <!--<td class="width-15"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<th class="width-15">高三生物</th>-->
+                    <!--<td class="width-15">张可爽</td>-->
+                    <!--<td class="width-15">教室2</td>-->
+                    <!--<td class="width-15">庞爱迪</td>-->
+                    <!--<td class="width-15">12345678901</td>-->
+                    <!--<td class="width-15"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<th class="width-15">高一语文</th>-->
+                    <!--<td class="width-15">李金泰</td>-->
+                    <!--<td class="width-15">教室3</td>-->
+                    <!--<td class="width-15">贾楠</td>-->
+                    <!--<td class="width-15">12345678901</td>-->
+                    <!--<td class="width-15"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<th class="width-15" rowspan="3">15：10</th>-->
+                    <!--<th class="width-15" rowspan="2">高三数学</th>-->
+                    <!--<td class="width-15" rowspan="2">齐书强</td>-->
+                    <!--<td class="width-15" rowspan="2">教室1</td>-->
+                    <!--<td class="width-15">丁家兴</td>-->
+                    <!--<td class="width-15">12345678901</td>-->
+                    <!--<td class="width-15"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td class="width-15">高城博</td>-->
+                    <!--<td class="width-15">12345678901</td>-->
+                    <!--<td class="width-15"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<th class="width-15">高二语文</th>-->
+                    <!--<td class="width-15">李金泰</td>-->
+                    <!--<td class="width-15">教室3</td>-->
+                    <!--<td class="width-15">李程</td>-->
+                    <!--<td class="width-15">12345678901</td>-->
+                    <!--<td class="width-15"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<th class="width-15" rowspan="3">16：50</th>-->
+                    <!--<th class="width-15" rowspan="3">高三数学</th>-->
+                    <!--<td class="width-15" rowspan="3">齐书强</td>-->
+                    <!--<td class="width-15" rowspan="3">教室1</td>-->
+                    <!--<td class="width-15">刘跃</td>-->
+                    <!--<td class="width-15">12345678901</td>-->
+                    <!--<td class="width-15"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td class="width-15">王赛</td>-->
+                    <!--<td class="width-15">12345678901</td>-->
+                    <!--<td class="width-15"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td class="width-15">张秋雨</td>-->
+                    <!--<td class="width-15">12345678901</td>-->
+                    <!--<td class="width-15"></td>-->
+                <!--</tr>-->
             </tbody>
         </table>
     </div>

@@ -148,7 +148,9 @@
         }
     }
     function logout() {
-        location.href = "/"
+        $.post("/user/logout",{},function (data) {
+            location.href = "/"
+        })
     }
     function editInfo(){
         var userName = $("#person-name").val();

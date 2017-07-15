@@ -1,23 +1,10 @@
 /**
  * Created by zhangchong on 2017/7/1.
  */
-var Sequelize = require('sequelize');
-var course=require('./course')
-var sequelize=new Sequelize(
-    'smx',
-    'cdb_outerroot',
-    'smxsjk123456',
-    {
-        host: '59432c47c3382.bj.cdb.myqcloud.com',
-        port: 4243,
-        dialect: 'mysql',
-        define: {
-            underscored: false,
-            timestamps: false,
-            paranoid: true
-        }
-    }
-);
+
+var Sequelize = require("sequelize")
+var db = require("./db")
+var sequelize = db.sequelize;
 var user = sequelize.define('account', {
         userId:{ //自增长课程系列Id,主键,整型
             type:Sequelize.INTEGER,
@@ -53,6 +40,12 @@ var user = sequelize.define('account', {
         },
         cardNumber:{
             type:Sequelize.STRING(30)
+        },
+        userFrontIdHeadUrl:{
+            type:Sequelize.STRING
+        },
+        userBackIdHeadUrl:{
+            type:Sequelize.STRING
         }
 },
     {
