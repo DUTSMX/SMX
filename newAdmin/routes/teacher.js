@@ -8,40 +8,36 @@ var user=require(('../model/user'));
 var moment=require("moment");
 var teacher = require("../model/teacher")
 router.get('/teacherCourse',function (req,res,next) {
-
-        // course.courseSeries.findAll().then(function (data) {
-        //     console.log("data:"+JSON.stringify(data));
-        //     var date = moment(new Date()).format("YYYY-MM-DD");
-        //     var userId=20;
-        //     var sql="SELECT c.courseId, " +
-        //         "a.userName, " +
-        //         "c.courseName, " +
-        //         "c.courseDate, " +
-        //         "c.beginTime, " +
-        //         "c.objectOriented, " +
-        //         "c.courseContent," +
-        //         "b.courseSeriesNumber,"+
-        //         "c.courseDate,"+
-        //         "c.courseRoom,"+
-        //         "c.courseSeriesId,"+
-        //         "c.courseSeriesCourseId "+
-        //         "FROM course c JOIN account a ON a.userId = c.userId  JOIN joinCourse s on (c.courseSeriesId = s.courseSeriesId and c.courseSeriesCourseId=s.courseSeriesCourseId) JOIN courseSeries b on s.courseSeriesId=b.courseSeriesId "+
-        //         "WHERE s.userId = "+userId;
-        //     course.sequelize.query(sql,{ type: course.sequelize.QueryTypes.SELECT }).then(function (ret) {
-        //         console.log("ret:"+JSON.stringify(ret));
-        //         // course.courseSeries.findAll({where:{courseSeriesId:ret.courseSeriesId}}).then(
-        //         //     function (ret1) {
-        //         //         console.log("ret1:"+JSON.stringify(ret1));
-        //         //     }
-        //         // )
-        //         res.render('teacherCourse',{name:req.session.name,
-        //             courseDetails:ret,courseSeries:data});
-        //     });
-    // });
-
-            res.render('teacherCourse',{
-                courseDetails:[],courseSeries:[]});
-});
+    course.courseSeries.findAll().then(function (data) {
+        console.log("data:" + JSON.stringify(data));
+        var date = moment(new Date()).format("YYYY-MM-DD");
+        var userId = 20;
+        var sql = "SELECT c.courseId, " +
+            "a.userName, " +
+            "c.courseName, " +
+            "c.courseDate, " +
+            "c.beginTime, " +
+            "c.objectOriented, " +
+            "c.courseContent," +
+            "b.courseSeriesNumber," +
+            "c.courseDate," +
+            "c.courseRoom," +
+            "c.courseSeriesId," +
+            "c.courseSeriesCourseId " +
+            "FROM course c JOIN account a ON a.userId = c.userId  JOIN joinCourse s on (c.courseSeriesId = s.courseSeriesId and c.courseSeriesCourseId=s.courseSeriesCourseId) JOIN courseSeries b on s.courseSeriesId=b.courseSeriesId " +
+            "WHERE s.userId = " + userId;
+        course.sequelize.query(sql, {type: course.sequelize.QueryTypes.SELECT}).then(function (ret) {
+            console.log("ret:" + JSON.stringify(ret));
+            course.courseSeries.findAll({where:{courseSeriesId:ret.courseSeriesId}}).then(
+                function (ret1) {
+                    res.render('teacherCourse', {
+                        courseDetails: [], courseSeries: []
+                    });
+                }
+            )
+        });
+    })
+})
 
 router.get('/teacherCourseRecord',function (req,res,next) {
     res.render('teacherCourseRecord');

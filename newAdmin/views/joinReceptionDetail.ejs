@@ -35,8 +35,8 @@
     <div class="margin-left-30" id="person-info">
         <img src="/images/icon.png" class="head img-circle">
         <div class="base-info">
-            <h3 class="inline" ><%=info.userName%>&nbsp;<%if(info.gender== 0){%>男<%}else{%>女<%}%>%></h3><br>
-            <h4 class="inline" >电话号码:&nbsp;<%=info.phoneNumber%></h4>
+            <h3 class="inline"><%=info.userName%>&nbsp;<%if(info.gender== 0){%>男<%}else{%>女<%}%>%></h3>   <h4 class="inline">年龄:<%=info.userAge%></h4><br>
+            <h4>电话号码:<%=info.phoneNumber%></h4>
         </div>
         <button class="btn btn-default inline right" onclick="logout()">退出登录</button>
         <br>
@@ -100,7 +100,6 @@
 
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-    $("#person").text("前台姓名")
     function loginDialog(){
         location.href="joinReceptionDetail"
     }
@@ -170,7 +169,7 @@
         var data = {
             userName:userName,
             phoneNumber:phoneNumber,
-            location:location,
+            location:location
         }
         jQuery.post("./editInfo",data,function (ret) {
             console.log(JSON.stringify(ret));

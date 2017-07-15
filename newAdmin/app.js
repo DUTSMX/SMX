@@ -24,6 +24,27 @@ app.use(session({
   secret: getRandom128(),
   cookie: {maxAge: 30 * 24 * 60 * 60 * 1000}
 }));
+var unInterceptionList = ["/users/forgetPassword","/users/register","/users/getCheckCode","/AppSign"]
+//登录过滤器，如果session中的userId为空，则跳转到登录页面，登陆成功后跳转回来。
+app.use(function (req,res,next) {
+  var url = req.originalUrl;
+  var regex = "(.css|.js|.png|.gif|.ico|.map\s*)$";
+  var ret = url.match(regex);
+  if(ret == null) {
+    console.log("url:"+url)
+    console.log("userId:"+req.session.userId)
+    if(url == "/" || url == "/user/login"){
+      next();
+    }else if (!req.session.userId ||!url.startsWith("/joinReception/")) {
+        return res.redirect("/")
+    }else{
+      next();
+    }
+  }else{
+    next();
+  }
+})
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

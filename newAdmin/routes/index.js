@@ -52,10 +52,10 @@ router.get('/education/joinReceptionTeacherList',function (req,res,next) {
         res.render('joinReceptionTeacherList',{teacher:ret});
     })
 })
-
-router.get('/joinReceptionTodayCourse',function (req,res,next) {
-  res.render('joinReceptionTodayCourse');
-})
+//
+// router.get('/joinReceptionTodayCourse',function (req,res,next) {
+//   res.render('joinReceptionTodayCourse');
+// })
 router.get('/joinReceptionPrint',function (req,res,next) {
   res.render('joinReceptionPrint');
 })

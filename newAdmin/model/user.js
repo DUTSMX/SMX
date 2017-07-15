@@ -25,7 +25,7 @@ var user = sequelize.define('account', {
             autoIncrement:true
         },
         phoneNumber: { //课程系列名称
-            type: Sequelize.INTEGER
+            type: Sequelize.STRING
         },
         password:{//课程系列的科目
             type:Sequelize.STRING(30)
