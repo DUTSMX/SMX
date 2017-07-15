@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,117 +15,57 @@
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style>
-        .course-block {
-            height: 60px;
-            border-radius: 5px;
-            border-style: solid;
-            border-width: 1px;
-            border-color: #4cae4c;
-            margin-bottom: 10px;
-            margin-top: 10px
-        }
-
-        .sign-up {
-            margin-top: 10px;
-            margin-right: 10px
-        }
-
-        .margin-left-10 {
-            margin-left: 10px
-        }
+        .course-block{height:60px;border-radius: 5px;border-style:solid;border-width:1px;border-color:#4cae4c;margin-bottom:10px;margin-top:10px}
+        .sign-up{margin-top:10px;margin-right:10px}
+        .margin-left-10{margin-left:10px}
     </style>
 </head>
 <body>
-<% include navigation-index.ejs %>
-<% include navigation-joinReception.ejs %>
+<%include navigation-index.ejs%>
+<%include navigation-joinReception.ejs%>
 <div class="right-content">
     <div class="bs-example">
         <div class="panel-heading title-block">
             <h3 class="panel-title inline title-white">学生列表</h3>
             <h3 class="panel-title right-button" onclick="addStudent()">添加学生</h3>
         </div>
+        <%if(student.length == 0){%>
+        <h4 style="text-align: center;margin:10px;">学生列表为空</h4>
+        <%}else{%>
         <div class="padding-scroll">
             <table class="table table-hover" style="margin-bottom:0px;">
                 <thead>
                 <tr>
-                    <th>
-                        <div class="omit">姓名</div>
-                    </th>
-                    <th>
-                        <div class="omit">年级</div>
-                    </th>
+                    <th><div class="omit">姓名</div></th>
+                    <th><div class="omit">年级</div></th>
                 </tr>
                 </thead>
             </table>
         </div>
-<<<<<<< HEAD
-        <div class="table-details" style="height:40vh">
-            <table class="table table-hover table-body">
-                <tbody>
-                <% student.forEach(function(item){ %>
-                <tr onclick="detail()">
-                    <td>
-                        <div class="omit"><%= item.userName %></div>
-                    </td>
-                    <td>
-                        <div class="omit"><%= item.userGrade %></div>
-                    </td>
-                </tr>
-                <% }) %>
-                </tbody>
-            </table>
-        </div>
-        <div class="panel-heading title-block">
-            <h3 class="panel-title inline title-white">审核列表</h3>
-        </div>
-        <div style="height:30vh;overflow: auto">
-            <div class="course-block">
-                <h4 class="inline left center margin-top-20 margin-left-10">赵学生修改姓名：赵三</h4>
-                <button class="btn btn-warning right sign-up">驳回</button>
-                <button class="btn btn-success right sign-up">通过</button>
-            </div>
-            <div class="course-block">
-                <h4 class="inline left center margin-top-20 margin-left-10">钱学生修改手机号：12345678901</h4>
-                <button class="btn btn-warning right sign-up">驳回</button>
-                <button class="btn btn-success right sign-up">通过</button>
-            </div>
-            <div class="course-block">
-                <h4 class="inline left center margin-top-20 margin-left-10">王学生修改姓名：王五，手机号：12345678901</h4>
-                <button class="btn btn-warning right sign-up">驳回</button>
-                <button class="btn btn-success right sign-up">通过</button>
-            </div>
-            <div class="course-block">
-                <h4 class="inline left center margin-top-20 margin-left-10">李学生修改身份证号：123456789012345678</h4>
-                <button class="btn btn-warning right sign-up">驳回</button>
-                <button class="btn btn-success right sign-up">通过</button>
-            </div>
-        </div>
-=======
         <div class="table-details" style="height:70vh">
             <table  class="table table-hover table-body">
                 <tbody>
                 <%student.forEach(function(item){%>
-                    <tr onclick="detail(<%=item.userId%>)">
-                        <td><div class="omit"><%=item.userName%></div></td>
-                        <td><div class="omit"><%=item.userGrade%></div></td>
-                    </tr>
+                <tr onclick="detail(<%=item.userId%>)">
+                    <td><div class="omit"><%=item.userName%></div></td>
+                    <td><div class="omit"><%=item.grade%></div></td>
+                </tr>
                 <%})%>
                 </tbody>
             </table>
         </div>
->>>>>>> e0a84f5d15bbbb5d93a4652b29b3b930b295a2ed
+        <%}%>
+
     </div>
 </div>
 <div id="fade" class="black-overlay"></div>
 <div id="light" class="white-content">
     <div class="dialog">
-        <div class="dialog-title"><span class="font-20 title-white">添加学生</span><span class="right title-white"
-                                                                                     onclick="closeDialog()">X</span>
-        </div>
+        <div class="dialog-title"><span class="font-20 title-white">添加学生</span><span class="right title-white" onclick="closeDialog()">X</span></div>
         <input class="dialog-input" id="studentName" placeholder="请输入学生姓名"/>
         <input class="dialog-input" id="phoneNumber" placeholder="请输入手机号码"/>
-        <input class="dialog-input" id="schoolName" placeholder="请输入学校名称"/>
-        <input class="dialog-input" id="classInfo" placeholder="请输入年级信息"/>
+        <input class="dialog-input" id= "schoolName" placeholder="请输入学校名称"/>
+        <input class="dialog-input" id= "classInfo" placeholder="请输入年级信息"/>
         <button class="btn btn-default dialog-input" onclick="postInfo()">确认添加</button>
     </div>
 </div>
@@ -134,65 +73,53 @@
 
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-<<<<<<< HEAD
-    function detail() {
-        location.href = "joinReceptionStudentDetail"
-=======
     function detail(id){
         console.log("id:"+id)
         location.href = "joinReceptionStudentDetail?studentId="+id;
->>>>>>> e0a84f5d15bbbb5d93a4652b29b3b930b295a2ed
     }
     function loginDialog() {
-        location.href = "joinReceptionDetail"
+        location.href="joinReceptionDetail"
     }
     $("#navigation-student").addClass("select-left-button");
-    function addStudent() {
+    function addStudent(){
         $("#fade").show()
         $("#light").show()
     }
-
     function closeDialog() {
         $("#fade").hide()
         $("#light").hide()
     }
-<<<<<<< HEAD
-    function postInfo() {
-
-
-=======
     function postInfo(){
->>>>>>> e0a84f5d15bbbb5d93a4652b29b3b930b295a2ed
         var phoneNumber = $("#phoneNumber").val();
         var studentName = $("#studentName").val();
         var schoolName = $("#schoolName").val();
         var classInfo = $("#classInfo").val();
-
         if (phoneNumber.length == 0) {
             $("#phoneNumber").attr('placeholder', "手机号不能为空");
         }
         else if (studentName.length == 0) {
             $("#studentName").attr('placeholder', '姓名不能为空');
         }
-        else if (schoolName.length == 0) {
-            $("#schoolName").attr('placeholder', '学校名称不能为空');
-
+        else if(schoolName.length == 0)
+        {
+            $("#schoolName").attr('placeholder','学校名称不能为空');
         }
-        else if (classInfo.length == 0) {
-            $("#classInfo").attr('placeholder', '年级信息不能为空');
-
+        else if(classInfo.length == 0)
+        {
+            $("#classInfo").attr('placeholder','年级信息不能为空');
         }
         else {
             var data = {
-                phoneNumber: phoneNumber,
-                studentName: studentName,
-                schoolName: schoolName,
-                classInfo: classInfo
+                phoneNumber:phoneNumber,
+                studentName:studentName,
+                schoolName:schoolName,
+                classInfo:classInfo
             }
-            $.post("createStudent", data, function (ret) {
+            $.post("./createStudent",data,function (ret) {
                 console.log(ret)
                 $("#fade").hide()
                 $("#light").hide()
+                location.reload()
             })
         }
     }

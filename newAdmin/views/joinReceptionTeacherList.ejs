@@ -45,7 +45,7 @@
                 <%teacher.forEach(function(item){%>
                 <tr onclick="detail(<%=item.userId%>)">
                     <td><div class="omit"><%=item.userName%></div></td>
-                    <td><div class="omit"><%=item.userGrade%></div></td>
+                    <td><div class="omit"><%=item.teachClass%></div></td>
                 </tr>
                 <%})%>
                 </tbody>
@@ -60,8 +60,7 @@
         <div class="dialog-title"><span class="font-20 title-white">添加教师</span><span class="right title-white" onclick="closeDialog()">X</span></div>
         <input class="dialog-input" id="teacherName" placeholder="请输入教师姓名"/>
         <input class="dialog-input" id="phoneNumber" placeholder="请输入手机号码"/>
-        <input class="dialog-input" id= "schoolName" placeholder="请输入学校名称"/>
-        <input class="dialog-input" id= "classInfo" placeholder="请输入年级信息"/>
+        <input class="dialog-input" id= "subject" placeholder="请输入科目信息"/>
         <button class="btn btn-default dialog-input" onclick="postInfo()">确认添加</button>
     </div>
 </div>
@@ -81,44 +80,31 @@
         $("#light").show()
     }
     function closeDialog(){
-
         $("#fade").hide()
         $("#light").hide()
     }
-
-    function postInfo() {
-
-
+    function postInfo(){
         var phoneNumber = $("#phoneNumber").val();
         var teacherName = $("#teacherName").val();
-        var schoolName = $("#schoolName").val();
-        var classInfo = $("#classInfo").val();
-
+        var subject = $("#subject").val();
         if (phoneNumber.length == 0) {
             $("#phoneNumber").attr('placeholder', "手机号不能为空");
-        }
-        else if (teacherName.length == 0) {
-            $("#teacherName").attr('placeholder', '姓名不能为空');
-        }
-        else if (schoolName.length == 0) {
-            $("#schoolName").attr('placeholder', '学校名称不能为空');
-
-        }
-        else if (classInfo.length == 0) {
-            $("#classInfo").attr('placeholder', '年级信息不能为空');
-        }
-        else {
+        }else if (teacherName.length == 0) {
+            $("#studentName").attr('placeholder', '姓名不能为空');
+        }else if(subject.length == 0)
+        {
+            $("#subject").attr('placeholder','科目不能为空');
+        }else {
             var data = {
-                phoneNumber: phoneNumber,
-                teacherName: teacherName,
-                schoolName: schoolName,
-                classInfo: classInfo
+                phoneNumber:phoneNumber,
+                teacherName:teacherName,
+                subject:subject
             }
-            $.post("createTeacher", data, function (ret) {
+            $.post("./createTeacher",data,function (ret) {
                 console.log(ret)
-
                 $("#fade").hide()
                 $("#light").hide()
+                location.reload();
             })
         }
     }

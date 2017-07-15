@@ -1,20 +1,7 @@
 
-var Sequelize = require('sequelize');
-var sequelize=new Sequelize(
-    'smx',
-    'cdb_outerroot',
-    'smxsjk123456',
-    {
-        host: '59432c47c3382.bj.cdb.myqcloud.com',
-        port: 4243,
-        dialect: 'mysql',
-        define: {
-            underscored: false,
-            timestamps: false,
-            paranoid: true,
-        }
-    }
-);
+var Sequelize = require("sequelize")
+var db = require("./db")
+var sequelize = db.sequelize;
 var courseSeries= sequelize.define('courseSeries', {
         courseSeriesId: {type: Sequelize.INTEGER,primaryKey: true,autoIncrement: true}, //自增长课程系列Id,主键,整形
         courseSeriesName: {type: Sequelize.STRING(30)}, //课程系列名称
