@@ -35,8 +35,8 @@
 <div class="right-content">
     <button class="btn btn-default inline right" onclick="printSheet()">打印签到表</button>
     <div class="width-700">
-        <%var date = date.split("-")%>
-        <p id="month" class="center"><%=date[0]%>年<%=date[1]%>月<%=date[2]%>日</p>
+        <%var nowDate = date.split("-")%>
+        <p id="month" class="center"><%=nowDate[0]%>年<%=nowDate[1]%>月<%=nowDate[2]%>日</p>
     </div>
     <div style="padding-right: 17px" id="home">
         <table class="table table-hover" style="margin-bottom:0px;">
@@ -79,7 +79,7 @@
     }
     $("#navigation-course").addClass("select-left-button");
     function printSheet(){
-        location.href = "joinReceptionPrint";
+        location.href = "joinReceptionPrint?date=<%=date%>";
     }
     function contact(){
         $("#fade").show()

@@ -107,27 +107,28 @@
                 <input type="radio" name="time" value="19:30">19:30
                 <input type="radio" name="time" value="21:10">21:10
             </div>
-                </select>
             <button class="btn btn-default dialog-button" onclick="post()" id="createCourse">创建班级</button>
+        </div>
+        <div id="course" class="white-content">
+            <div class="dialog-title"><span class="font-20 title-white">选择已有</span><span class="right title-white" onclick="closeDialog()">X</span></div>
+            <label class="dialog-label">上课同学</label><input id="courseChooseStudent" class="dialog-input" placeholder="请输入同学" disabled>
+            <%if(allCourse.length == 0){%>
+            <h4 style="text-align: center;margin:10px">当前没有课程</h4>
+            <%} allCourse.forEach(function (item) { %>
+            <div class="course-block">
+                <div class="inline left">
+                    <h3 class="inline course-title"><%=item.courseSeriesName%></h3><br>
+                    <h4 class="inline"><%=item.userName%></h4><h4 class="inline"><%=item.time%>  <%=item.room%></h4>
+                </div>
+                <button class="btn btn-success right sign-up" onclick="courseDetail(<%=item.courseSeriesId%>)">选择</button>
+            </div>
+            <%})%>
         </div>
         <div id="select-teacher" class="select">
             <%teacher.forEach(function (item) {%>
                 <button class="btn btn-default center" onclick="selectTeacher('<%=item.userId%>','<%=item.userName%>')"><%=item.userName%></button><br>
             <%})%>
         </div>
-    </div>
-    <div id="course" class="white-content">
-        <%if(allCourse.length == 0){%>
-        <h4 style="text-align: center;margin:10px">当前没有课程</h4>
-        <%} allCourse.forEach(function (item) { %>
-        <div class="course-block">
-            <div class="inline left">
-                <h3 class="inline course-title"><%=item.courseSeriesName%></h3><h4 class="inline"><%=item.userName%></h4><br>
-                <h4 class="inline"><%=item.startDate%>~~<%=item.endDate%> <%=item.time%>  <%=item.room%></h4>
-            </div>
-            <button class="btn btn-success right sign-up" onclick="courseDetail(<%=item.courseSeriesId%>)">详情</button>
-        </div>
-        <%})%>
     </div>
 </div>
 </body>
@@ -196,12 +197,38 @@
         }else{
             console.log(checkedList)
             showDialog()
-            $("#courseName").val("<%=template.seriesName%>")
             $("#chooseStudent").val(students)
         }
     }
     function join(){
-
+        var allCourse = '<%=allCourse%>'
+        if(allCourse.length == 0){
+            alert("当前科目还没有课程")
+        }else{
+            clear();
+            var checkedList = $(".checkStudent");
+            var firstFlag = true;
+            for(var i=0;i<checkedList.length;i++){
+                if(checkedList[i].checked){
+                    studentList.push(checkedList[i].name)
+                    if(firstFlag){
+                        firstFlag = false;
+                        students = students + checkedList[i].value;
+                    }else{
+                        students = students + "," +checkedList[i].value;
+                    }
+                }
+            }
+            console.log("students:"+students+" studentList:"+JSON.stringify(studentList))
+            if(studentList.length == 0){
+                alert("您没有选择学生")
+            }else{
+                console.log(checkedList)
+                showCourse()
+                $("#courseName").val("<%=template.seriesName%>")
+                $("#courseChooseStudent").val(students)
+            }
+        }
     }
     function post(){
         $("#createCourse").attr('disabled',true);
@@ -299,6 +326,13 @@
         $("#fade").show()
         $("#light").show()
         $("#post").show()
+        $("#course").hide()
+    }
+    function showCourse(){
+        $("#fade").show();
+        $("#light").show();
+        $("#post").hide()
+        $("#course").show()
     }
     function closeDialog(){
         $("#fade").hide()
@@ -327,7 +361,7 @@
     }
     function chooseTeacher(){
         $(".white-content").width("500px")
-        $(".white-content").height("361px")
+        $(".white-content").height("507px")
         $(".dialog-title").width("480px")
         $("#select-teacher").show();
         $("#select-student").hide();

@@ -124,13 +124,24 @@ router.get('/joinReceptionTodayCourse',function (req,res,next) {
     });
 });
 router.get('/joinReceptionPrint',function (req,res,next) {
-    var sql = "SELECT c.courseId,c.beginTime, c.courseName,a.userName as teacher,co.room,ac.userName as student,ac.phoneNumber "+
-        "FROM course c JOIN account a ON c.userId = a.userId JOIN courseSeries co ON c.courseSeriesId = co.courseSeriesId  "+
+    var sql = "SELECT c.courseId,c.beginTime, c.courseName,a.userName as teacher,co.room,ac.userName as student,j.userId as studentId,j.attend,ac.phoneNumber "+
+    "FROM course c JOIN account a ON c.userId = a.userId JOIN courseSeries co ON c.courseSeriesId = co.courseSeriesId  "+
     "JOIN joinCourse j ON c.courseId = j.courseId JOIN account ac ON ac.userId = j.userId "+
-    "where c.courseDate = '2017-07-15' "
-            db.sequelize.query(sql).then(function (print) {
-                res.render('joinReceptionPrint',{print:print[0]});
-            })
+    "where c.courseDate = '"+req.query.date+"' "
+    db.sequelize.query(sql).then(function (print) {
+        console.log(JSON.stringify({date:req.query.date,print:print[0]}))
+        res.render('joinReceptionPrint',{date:req.query.date,print:print[0]});
+    })
+})
+router.post("/updateAttend",function (req,res) {
+    console.log("body:"+JSON.stringify(req.body))
+    var change = req.body.change;
+    for(var i=0;i<change.length;i++){
+        course.joinCourse.update({
+            attend:change[i].attend
+        },{'where':{userId:change[i].studentId,courseId:change[i].courseId}})
+    }
+    res.send("提交成功")
 })
 router.get('/joinReceptionCourseCalendar',function (req,res,next) {
     res.render('joinReceptionCourseCalendar');
@@ -215,7 +226,9 @@ router.get("/joinReceptionCourseCheckDetail",function (req,res) {
         db.sequelize.query(sql).then(function (postList) {
             var sql = "SELECT userId,userName from account where role = 2 order by userName"
             db.sequelize.query(sql).then(function(teacherList){
-                var sql = "select c.courseSeriesId,c.courseSeriesName,c.startDate,c.endDate,c.time,c.room, a.userName from courseSeries c JOIN account a ON c.courseSeriesTeacher = a.userId order by userName,time"
+                var sql = "SELECT c.courseSeriesId, c.courseSeriesName, c.time, c.room, a.userName "+
+                "FROM courseSeries c JOIN account a ON c.courseSeriesTeacher = a.userId "+
+                "WHERE c.courseSeriesName = '"+template.seriesName+"' ORDER BY userName, time"
                 db.sequelize.query(sql).then(function (data) {
                     console.log("checkDetail:"+JSON.stringify({template:template,postList:postList[0],teacher:teacherList[0]}))
                     res.render("joinReceptionCourseCheckDetail",{template:template,postList:postList[0],teacher:teacherList[0],allCourse:data[0]})

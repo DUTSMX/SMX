@@ -72,7 +72,7 @@
         <div class="dialog">
             <div class="login-logo-div"><image class="login-logo"src="/images/icon.png"></image><span class="font-20">登录尚名校</span><span class="right" onclick="closeDialog()">x</span></div>
             <label class="dialog-label">用户名</label><input class="dialog-input" id="phoneNumber" placeholder="用户名/手机号"/>
-            <label class="dialog-label">密码</label><input class="dialog-input" id="password" placeholder="密码"/>
+            <label class="dialog-label">密码</label><input class="dialog-input" id="password" type="password" placeholder="密码"/>
             <p id="hint" style="text-align: left;margin-left:20px;"></p>
             <button class="btn btn-default dialog-button" onclick="login()">登录</button>
             <!--<label class="test-login" onclick="test()">测试登录</label>-->
@@ -114,7 +114,9 @@
             else if(identityId==2){location.href='educationCourse'}
             else if(identityId==3){location.href='admainDetail'}
             else if(identityId==4){location.href='joinManagerDetail'}
-            else if(identityId==5){location.href='joinReception/joinReceptionTodayCourse'}
+            else if(identityId==5){
+                var date = new Date()
+                location.href="joinReception/joinReceptionTodayCourse?date="+date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();}
         }
     }
     function closeDialog(){

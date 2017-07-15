@@ -35,6 +35,10 @@
 <%include navigation-joinReception.ejs%>
 <div class="right-content">
     <div class="panel-heading title-block">
+        <div class="right">
+            <button class="btn btn-default" onclick="editCourse()">编辑</button>
+            <button class="btn btn-default" onclick="deleteCourse()">删除</button>
+        </div>
         <h2 class="title-white"><%=series.courseSeriesName%>（共<%=series.courseSeriesNumber%>课时）</h2><br>
         <h3 class="title-white">教师：<%=series.teacher%></h3><br>
         <h3 class="title-white">教室：<%=series.room%></h3><br>
