@@ -22,7 +22,7 @@
 </head>
 <body>
 <%include navigation-index.ejs%>
-<%include navigation-education.ejs%>
+<%include navigation-joinReception.ejs%>
 <div class="right-content">
     <div class="bs-example">
         <div class="panel-heading title-block">
@@ -39,11 +39,11 @@
                 </thead>
             </table>
         </div>
-        <div class="table-details" style="height:40vh">
+        <div class="table-details" style="height:70vh">
             <table  class="table table-hover table-body">
                 <tbody>
                 <%teacher.forEach(function(item){%>
-                <tr onclick="detail()">
+                <tr onclick="detail(<%=item.userId%>)">
                     <td><div class="omit"><%=item.userName%></div></td>
                     <td><div class="omit"><%=item.userGrade%></div></td>
                 </tr>
@@ -69,10 +69,9 @@
 
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-    function detail(){
-        location.href = "joinReceptionTeacherDetail"
+    function detail(id){
+        location.href = "joinReceptionTeacherDetail?teacherId="+id;
     }
-    $("#person").text("前台姓名")
     function loginDialog() {
         location.href="educationDetail"
     }

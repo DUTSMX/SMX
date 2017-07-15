@@ -32,28 +32,28 @@
 <%include navigation-index.ejs%>
 <%include navigation-joinReception.ejs%>
 <div class="right-content">
-    <div class="panel-heading title-block">
-        <h3 class="panel-title title-white">本周教师</h3>
-    </div>
-    <div class="teacher-block">
-        <h4 class="teacher-name">齐书强</h4>
-        <button class="btn btn-failed sign-up">已确认</button>
-    </div>
-    <div class="teacher-block">
-        <h4 class="teacher-name">张可爽</h4>
-        <button class="btn btn-failed sign-up">已确认</button>
-    </div>
-    <div class="teacher-block">
-        <h4 class="teacher-name">李金泰</h4>
-        <button class="btn btn-success sign-up" onclick="contact()">联系</button>
-    </div>
-    <div class="teacher-block">
-        <h4 class="teacher-name">李丹丹</h4>
-        <button class="btn btn-failed sign-up">已确认</button>
-    </div>
-    <div class="panel-heading title-block">
-        <h3 class="panel-title title-white">当天课表</h3>
-    </div>
+    <!--<div class="panel-heading title-block">-->
+        <!--<h3 class="panel-title title-white">本周教师</h3>-->
+    <!--</div>-->
+    <!--<div class="teacher-block">-->
+        <!--<h4 class="teacher-name">齐书强</h4>-->
+        <!--<button class="btn btn-failed sign-up">已确认</button>-->
+    <!--</div>-->
+    <!--<div class="teacher-block">-->
+        <!--<h4 class="teacher-name">张可爽</h4>-->
+        <!--<button class="btn btn-failed sign-up">已确认</button>-->
+    <!--</div>-->
+    <!--<div class="teacher-block">-->
+        <!--<h4 class="teacher-name">李金泰</h4>-->
+        <!--<button class="btn btn-success sign-up" onclick="contact()">联系</button>-->
+    <!--</div>-->
+    <!--<div class="teacher-block">-->
+        <!--<h4 class="teacher-name">李丹丹</h4>-->
+        <!--<button class="btn btn-failed sign-up">已确认</button>-->
+    <!--</div>-->
+    <!--<div class="panel-heading title-block">-->
+        <!--<h3 class="panel-title title-white">当天课表</h3>-->
+    <!--</div>-->
     <button class="btn btn-default inline right" onclick="printSheet()">打印签到表</button>
     <div class="width-700">
         <p id="month" class="center">2017年6月17日</p>
@@ -179,7 +179,6 @@
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="/javascripts/divselect.js"></script>
 <script>
-    $("#person").text("前台姓名")
     function loginDialog(){
         location.href="joinReceptionDetail"
     }

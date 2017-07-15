@@ -29,27 +29,34 @@
 <%include navigation-index.ejs%>
 <%include navigation-student.ejs%>
 <div class="right-content">
-    <div class="panel-heading title-block">
-        <h3 class="panel-title title-white">课程提醒</h3>
-    </div>
-    <%if(myCourse.length == 0){%>
-        <div style="text-align: center;margin:20px">当前没有课程</div>
-    <%}else{
-        myCourse.forEach(function (item) { %>
-    <div class="course-block">
-        <div class="inline left">
-            <h3 class="inline course-title"><%=item.courseName%></h3>
-            <h4 class="inline"><%=item.userName%></h4><br>
-            <h4 class="inline"><%=item.objectOriented%> 第<%=item.courseSeriesCourseId%>/<%=item.courseSeriesNumber%>课时</h4>
+    <div>
+        <div class="panel-heading title-block">
+            <h3 class="panel-title title-white">申请中</h3>
         </div>
-        <h2 class="inline left center"><%=item.courseDate%> 8:40</h2>
-        <h4 class="inline left center margin-top-20"><%=item.courseRoom%></h4>
-        <button class="btn btn-success right sign-up" onclick="courseDetail(<%=item.courseSeriesId%>)">详情</button>
+        <%if(postCourse.length == 0){%>
+            <h4 style="text-align: center;padding:10px">当前没有申请中的课程</h4>
+        <%}else{
+        postCourse.forEach(function (item) {%>
+        <div class="course-block">
+            <div class="inline left">
+                <h3 class="inline course-title"><%=item.seriesName%></h3><br>
+                <label class="dialog-label">基本信息</label><br>
+                <label class="dialog-label">课程名称</label><input id="courseName" class="dialog-input" placeholder="请输入课程名称">
+                <label class="dialog-label">上课同学</label><input id="chooseStudent" class="dialog-input" placeholder="请输入同学" onclick="chooseStudent()">
+                <label class="dialog-label">附加信息</label><br>
+                <label class="dialog-label">上课老师</label><input id="chooseTeacher" class="dialog-input" placeholder="请输入期望老师，默认为老师不限">
+                <label class="dialog-label">班    型</label><input id="classType" class="dialog-input" placeholder="请输入期望班型，默认为班型不限">
+                <label class="dialog-label">期望时间</label><input id="time" class="dialog-input" placeholder="请输入期望时间，默认为班型不限">
+                <label class="dialog-label">备    注</label><input id="other" class="dialog-input" placeholder="请输入期望时间，默认为班型不限">
+            </div>
+            <button class="btn btn-warning right sign-up" onclick="deleteHope('<%=item.joinSeriesId%>')">撤销</button>
+        </div>
+        <%})
+        }%>
+
     </div>
-    <%})
-    }%>
     <div class="panel-heading title-block">
-        <h3 class="panel-title title-white">课程推荐</h3>
+        <h3 class="panel-title title-white">课程列表</h3>
         <!--<h3 class="panel-title right-button" onclick="applyCourse()" id="applyCourse">申请课程</h3>-->
     </div>
     <%allCourse.forEach(function (item) { %>
@@ -58,7 +65,7 @@
             <h3 class="inline course-title"><%=item.seriesName%></h3><br>
             <h4 class="inline"><%=item.subject%> 共<%=item.number%>课时</h4>
         </div>
-        <button class="btn btn-success right sign-up" onclick="courseDetail(<%=item.templateId%>)">详情</button>
+        <button class="btn btn-success right sign-up" onclick="templateDetail(<%=item.templateId%>)">详情</button>
         <button class="btn btn-success right sign-up" onclick="enter('<%=item.seriesName%>','<%=item.templateId%>')">报名</button>
     </div>
     <%})%>
@@ -143,14 +150,25 @@
     function postHope(){
         var data = {
             templateId:selectId,
-            classType:"2人",
-            time:"8:00",
-            teacher:"齐书强",
-            student:"姚晗"
+            studentId:studentId,
+            teacher:$("#chooseTeacher").val(),
+            classType:$("#classType").val(),
+            time:$("#time").val(),
+            other:$("#other").val()
         }
         $.post("postHope",data,function (data) {
-            console.log(data)
-            closeDialog();
+            if(data.status){
+                location.reload()
+                closeDialog();
+            }else{
+                alert(data.desc)
+                closeDialog();
+            }
+        })
+    }
+    function deleteHope(id){
+        $.post("deleteHope",{joinSeriesId:id},function(data){
+            location.reload()
         })
     }
     function closeDialog(){
@@ -160,7 +178,10 @@
         $("#enter").hide();
     }
     function courseDetail(id){
-        location.href="studentCourseDetail?templateId="+id;
+        location.href="studentCourseDetail?seriesId="+id;
+    }
+    function templateDetail(id){
+        location.href="studentTemplateDetail?templateId="+id;
     }
     $("#navigation-course").addClass("select-left-button");
     function selectTime(){

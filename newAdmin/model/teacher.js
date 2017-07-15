@@ -79,7 +79,14 @@ var teacher = sequelize.define('teacher', {
         Geography:{//地理
             type: Sequelize.INTEGER
         },
+    
+        studentCard:{
+            type: Sequelize.STRING(60)
+        },
 
+        teacherCard:{
+            type: Sequelize.STRING(60)
+        }
     },
     {
         freezeTableName: true

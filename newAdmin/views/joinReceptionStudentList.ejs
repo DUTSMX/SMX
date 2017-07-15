@@ -59,6 +59,7 @@
                 </thead>
             </table>
         </div>
+<<<<<<< HEAD
         <div class="table-details" style="height:40vh">
             <table class="table table-hover table-body">
                 <tbody>
@@ -100,6 +101,20 @@
                 <button class="btn btn-success right sign-up">通过</button>
             </div>
         </div>
+=======
+        <div class="table-details" style="height:70vh">
+            <table  class="table table-hover table-body">
+                <tbody>
+                <%student.forEach(function(item){%>
+                    <tr onclick="detail(<%=item.userId%>)">
+                        <td><div class="omit"><%=item.userName%></div></td>
+                        <td><div class="omit"><%=item.userGrade%></div></td>
+                    </tr>
+                <%})%>
+                </tbody>
+            </table>
+        </div>
+>>>>>>> e0a84f5d15bbbb5d93a4652b29b3b930b295a2ed
     </div>
 </div>
 <div id="fade" class="black-overlay"></div>
@@ -119,10 +134,15 @@
 
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
+<<<<<<< HEAD
     function detail() {
         location.href = "joinReceptionStudentDetail"
+=======
+    function detail(id){
+        console.log("id:"+id)
+        location.href = "joinReceptionStudentDetail?studentId="+id;
+>>>>>>> e0a84f5d15bbbb5d93a4652b29b3b930b295a2ed
     }
-    $("#person").text("前台姓名")
     function loginDialog() {
         location.href = "joinReceptionDetail"
     }
@@ -135,12 +155,14 @@
     function closeDialog() {
         $("#fade").hide()
         $("#light").hide()
-
-
     }
+<<<<<<< HEAD
     function postInfo() {
 
 
+=======
+    function postInfo(){
+>>>>>>> e0a84f5d15bbbb5d93a4652b29b3b930b295a2ed
         var phoneNumber = $("#phoneNumber").val();
         var studentName = $("#studentName").val();
         var schoolName = $("#schoolName").val();
@@ -169,12 +191,10 @@
             }
             $.post("createStudent", data, function (ret) {
                 console.log(ret)
-
                 $("#fade").hide()
                 $("#light").hide()
             })
         }
     }
-
 </script>
 </html>

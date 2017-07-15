@@ -34,7 +34,7 @@
         <h3 class="panel-title right-button" onclick="edit()" id="edit">编辑</h3>
     </div>
     <div class="margin-left-30" id="person-info">
-        <img src="/images/icon.png" class="head img-circle">
+        <img src="<%=info.userHeadUrl%>" class="head img-circle">
         <div class="base-info">
             <h3 class="inline"><%=info.userName%> <%if(info.gender== 0){%>男<%}else{%>女<%}%></h3><br>
             <h4 class="inline"><%=info.phoneNumber%></h4>
@@ -49,18 +49,18 @@
         <h4> 高考总成绩:<%=infos.SumScore%> 语文:<%=infos.Chinese%>数学:<%=infos.Math%>英语:<%=infos.English%><%if(infos.SciOrLiber== 0){%>物理:<%=infos.Physics%>化学:<%=infos.Chemistry%>生物:<%=infos.Biology%><%}else{%>政治:<%=infos.Politics%>历史:<%=infos.History%>地理:<%=infos.Geography%><%}%></h4>
 
         <div class="image">
-            <img src="/images/logo.png"/>
+            <img src="<%=info.studentCard%>"/>
             <p>学生证</p>
         </div>
         <div class="image">
-            <img src="/images/logo.png"/>
+            <img src="<%=info.teacherCard%>"/>
             <p>家教认证</p>
         </div>
     </div>
     <div class="margin-left-30"   style="display: none" id="person-edit">
         <div class="inline">
             <input id="head" type="file" class="head-input"/>
-            <img id= "head-image" src="/images/icon.png" class="head img-circle">
+            <img id= "head-image" src="<%=info.userHeadUrl%>" class="head img-circle">
         </div><br>
         <label>老师姓名&nbsp</label><input id="person-name"class="inline margin-top-20" value=<%=info.userName%> placeholder="请输入老师姓名" /><!--disabled="false-->
         <!--<button id="apply-modify"class="btn btn-defalut padding-4" onclick="applyModify()">申请修改</button><br>-->
@@ -92,12 +92,12 @@
         <br>
         <div class="image">
             <input type="file" id="student-card" class="image-input"/>
-            <img id="student-card-img" src="/images/logo.png"/>
+            <img id="student-card-img" src="<%=info.studentCard%>"/>
             <p>学生证</p>
         </div>
         <div class="image">
             <input type="file" id="teacher-card" class="image-input"/>
-            <img id="teacher-card-img" src="/images/logo.png"/>
+            <img id="teacher-card-img" src="<%=info.teacherCard%>"/>
             <p>家教认证</p>
         </div>
     </div>
@@ -108,11 +108,11 @@
     <div class="margin-left-30" id="id">
         <h4>身份证号:123456789012345678</h4>
         <div class="image">
-            <img src="/images/logo.png"/>
+            <img src="<%=info.userFrontIdHeadUrl%>"/>
             <p>身份证正面</p>
         </div>
         <div class="image">
-            <img src="/images/logo.png"/>
+            <img src="<%=info.userBackIdHeadUrl%>" />
             <p>身份证背面</p>
         </div>
     </div>
@@ -122,12 +122,12 @@
         </div>
         <div class="image" >
             <input type="file"  id="head-1" class="image-input"/>
-            <img id="head-id-1-image"  src="/images/logo.png"/>
+            <img id="head-id-1-image"  src="<%=info.userFrontIdHeadUrl%>"/>
             <p>身份证正面</p>
         </div>
         <div class="image">
             <input type="file" class="image-input"  id="head-2" />
-            <img id="head-id-2-image"  src="/images/logo.png"/>
+            <img id="head-id-2-image"  src="<%=info.userBackIdHeadUrl%>"/>
             <p>身份证背面</p>
         </div>
     </div>
@@ -375,25 +375,25 @@
         var History = $("#history").val();
         var Geography = $("#geography").val();
 
-        var student_card = $("#student-card-img").src;
+        var studentCard = $("#student-card-img")[0].src;
 
-        var teacher_card = $("#teacher-card-img").src;
+        var teacherCard = $("#teacher-card-img")[0].src;
 
-        var head = $("#head-image").src;
+        var userHeadUrl = $("#head-image")[0].src;
 
-        var head_1_id = $("#head-id-1-image").src;
+        var userFrontIdHeadUrl = $("#head-id-1-image")[0].src;
 
-        var head_2_id = $("#head-id-2-image").src;
+        var userBackIdHeadUrl = $("#head-id-2-image")[0].src;
 
 
         var data = {
 
-            head : head,
-            head_1_id:head_1_id,
-            head_2_id:head_2_id,
+            userHeadUrl : userHeadUrl,
+            userFrontIdHeadUrl:userFrontIdHeadUrl,
+            userBackIdHeadUrl:userBackIdHeadUrl,
 
-            student_card :student_card,
-            teacher_card :teacher_card,
+            studentCard :studentCard,
+            teacherCard :teacherCard,
 
 
             teacherName:teacherName,
@@ -418,16 +418,8 @@
             Geography:Geography
         }
 
+        console.log(JSON.stringify(data));
 
-        console.log("jjflsakjfdlkasd"+JSON.stringify(head));
-        console.log("jjflsakjfdlkasd"+JSON.stringify(head_1_id));
-        console.log("jjflsakjfdlkasd"+JSON.stringify(head_2_id));
-        console.log("jjflsakjfdlkasd"+JSON.stringify(student_card));
-        console.log("jjflsakjfdlkasd"+JSON.stringify(teacher_card));
-
-
-
-       // console.log(JSON.stringify(data));
         jQuery.post("./modifyInfo",data,function (ret) {
             console.log(JSON.stringify(ret));
         })

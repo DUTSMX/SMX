@@ -25,7 +25,7 @@ var user = sequelize.define('account', {
             autoIncrement:true
         },
         phoneNumber: { //课程系列名称
-            type: Sequelize.INTEGER
+            type: Sequelize.STRING
         },
         password:{//课程系列的科目
             type:Sequelize.STRING(30)
@@ -48,9 +48,19 @@ var user = sequelize.define('account', {
         userAddress: { //课程系列简介
             type: Sequelize.STRING(30)
         },
-        userHeadUrl:{//课程系列每节课课程名称
-            type:Sequelize.STRING(30)
+        userHeadUrl:{//头像
+            type:Sequelize.STRING(60)
         },
+
+        userFrontIdHeadUrl:{//身份证正面
+            type:Sequelize.STRING(60)
+        },
+
+        userBackIdHeadUrl:{//身份证背面
+            type:Sequelize.STRING(60)
+        },
+
+
         registerDate:{//课程系列每节课内容
             type:Sequelize.DATE
         },

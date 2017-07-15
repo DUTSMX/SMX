@@ -17,6 +17,7 @@
     <![endif]-->
     <style>
         .course-block{height:60px;border-radius: 5px;border-style:solid;border-width:1px;border-color:#4cae4c;margin-bottom:10px;margin-top:10px}
+        .course-block-finished{height:60px;border-radius: 5px;border-style:solid;border-width:1px;border-color:#575757;margin-bottom:10px;margin-top:10px}
         .course-title{color:#4cae4c}
         .inline{display: inline-block;margin:2px;}
         .right{float:right}
@@ -24,43 +25,46 @@
         .center{margin-left:12px;margin-top:12px}
         .sign-up{margin-top:10px;margin-right:10px}
         .title{text-align:left;background-color: #f7f7f7;padding:10px}
-        .course-list{height:35vh;overflow: auto}
-        .student{width:30%;margin:5px;}
-        .select{width:150px;text-align: left;background-color: white;float:right;display: none;padding-top:30px;height:300px;overflow-y: scroll;overflow-x:hidden}
+        .course{}
+        .doBtn{float:right;padding-bottom: 3vh;}
+        .clear{clear: both;}
     </style>
 </head>
 <body>
 <%include navigation-index.ejs%>
-<%include navigation-joinReception.ejs%>
+<%include navigation-education.ejs%>
 <div class="right-content">
     <div class="panel-heading title-block">
-        <h3 class="panel-title title-white">课程列表</h3>
-        <h3 class="panel-title right-button" onclick="courseCalendar()" id="applyCourse">课程日历</h3>
+        <h2 class="title-white"><%=template.seriesName%>（共<%=template.number%>课时）</h2><br>
+        <h4 class="title-white"><%=template.seriesIntro%></h4>
     </div>
-    <%if(allCourse.length == 0){%>
-        <h4 style="text-align: center;margin:10px">当前没有课程</h4>
-    <%} allCourse.forEach(function (item) { %>
+    <%var course = JSON.parse(template.courseName)
+    for(var i=0;i<course.length;i++){%>
     <div class="course-block">
-        <div class="inline left">
-            <h3 class="inline course-title"><%=item.courseSeriesName%></h3><h4 class="inline"><%=item.userName%></h4><br>
-            <h4 class="inline"><%=item.startDate%>~~<%=item.endDate%> <%=item.time%>  <%=item.room%></h4>
+        <div class="inline left course">
+            <h3 class="inline course-title"><%=course[i]%></h3><br>
+            <h4 class="inline">课时<%=(i+1)%></h4>
         </div>
-        <button class="btn btn-success right sign-up" onclick="courseDetail(<%=item.courseSeriesId%>)">详情</button>
     </div>
-    <%})%>
+    <%}%>
+    <p id="hint"></p>
 </div>
 </body>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
+    $("#person").text("前台姓名")
     function loginDialog(){
-        location.href="joinReceptionDetail"
+        location.href="studentDetail"
     }
-    $("#navigation-manager").addClass("select-left-button");
-    function courseDetail(id) {
-        location.href = "joinReceptionCourseDetail?seriesId=" + id
-    }
-    function courseCalendar(){
-        location.href = "joinReceptionCourseCalendar"
+    $("#navigation-course").addClass("select-left-button");
+    function seriesTemplateDelete(id) {
+        var courseSeriesId={templateId:id};
+        $.post('seriesTemplateDelete',courseSeriesId,function (ret) {
+            if(ret.status==true){
+                //$("#hint").text(ret);
+                location.href='educationCourse';
+            }
+        })
     }
 </script>
 </html>
