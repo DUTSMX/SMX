@@ -36,12 +36,12 @@
     <div class="margin-left-30" id="person-info">
         <img src="/images/icon.png" class="head img-circle">
         <div class="base-info">
-            <h3 class="inline">齐书强(台安店长)</h3><br>
-            <h4 class="inline">手机号码</h4>
+            <h3 class="inline"><%=info.userName%>(<%=infos.shopmanager%>)</h3><br>
+            <h4 class="inline"><%=info.phoneNumber%></h4>
         </div>
         <button class="btn btn-default inline right" onclick="logout()">退出登录</button>
         <br>
-        <h5>家庭地址</h5>
+        <h5><%=info.userAddress%></h5>
     </div>
     <div class="margin-left-30"   style="display: none" id="person-edit">
         <div class="inline">
@@ -50,13 +50,13 @@
             <img src="/images/icon.png" class="head img-circle">
         </div>
         <div class="base-info">
-            <input id="person-name"class="inline margin-top-20" value="学生姓名" placeholder="请输入学生姓名" disabled="false"/>
+            <input id="person-name"class="inline margin-top-20" value="店长姓名" placeholder="请输入店长姓名" /><!--disabled="false"-->
             <select class="padding-4">
                 <option>台安店</option>
                 <option>大连店</option>
                 <option>沈阳店</option>
             </select><br>
-            <input id="person-phoneNumber"class="inline margin-top-20" value="手机号码" placeholder="请输入手机号码" disabled="false"/>
+            <input id="person-phoneNumber"class="inline margin-top-20" value="手机号码" placeholder="请输入手机号码" /><!--disabled="false"-->
             <button id="apply-modify"class="btn btn-defalut padding-4" onclick="applyModify()">申请修改</button>
 
         </div>
