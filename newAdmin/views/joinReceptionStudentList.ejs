@@ -29,28 +29,33 @@
             <h3 class="panel-title inline title-white">学生列表</h3>
             <h3 class="panel-title right-button" onclick="addStudent()">添加学生</h3>
         </div>
-        <div class="padding-scroll">
-            <table class="table table-hover" style="margin-bottom:0px;">
-                <thead>
+        <%if(student.length == 0){%>
+            <h4 style="text-align: center;margin:10px;">学生列表为空</h4>
+        <%}else{%>
+            <div class="padding-scroll">
+                <table class="table table-hover" style="margin-bottom:0px;">
+                    <thead>
                     <tr>
                         <th><div class="omit">姓名</div></th>
                         <th><div class="omit">年级</div></th>
                     </tr>
-                </thead>
-            </table>
-        </div>
-        <div class="table-details" style="height:70vh">
-            <table  class="table table-hover table-body">
-                <tbody>
-                <%student.forEach(function(item){%>
+                    </thead>
+                </table>
+            </div>
+            <div class="table-details" style="height:70vh">
+                <table  class="table table-hover table-body">
+                    <tbody>
+                    <%student.forEach(function(item){%>
                     <tr onclick="detail(<%=item.userId%>)">
                         <td><div class="omit"><%=item.userName%></div></td>
-                        <td><div class="omit"><%=item.userGrade%></div></td>
+                        <td><div class="omit"><%=item.grade%></div></td>
                     </tr>
-                <%})%>
-                </tbody>
-            </table>
-        </div>
+                    <%})%>
+                    </tbody>
+                </table>
+            </div>
+        <%}%>
+
     </div>
 </div>
 <div id="fade" class="black-overlay"></div>
@@ -105,7 +110,6 @@
         else if(classInfo.length == 0)
         {
             $("#classInfo").attr('placeholder','年级信息不能为空');
-
         }
         else {
             var data = {
@@ -118,6 +122,7 @@
                 console.log(ret)
                 $("#fade").hide()
                 $("#light").hide()
+                location.reload()
             })
         }
     }

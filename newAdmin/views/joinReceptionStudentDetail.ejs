@@ -26,6 +26,8 @@
         .course-title{color:#4cae4c}
         .inline{display: inline-block;margin:2px;}
         .sign-up{margin-top:10px;margin-right:10px}
+        /*.course-tab{height:20vh;overflow: auto}*/
+        .course-tab{}
     </style>
 </head>
 <body style="height:100%">
@@ -36,9 +38,9 @@
         <label><%=student.userName%>&nbsp</label> <label><%=student.phoneNumber%>&nbsp</label><button class="right btn btn-defalut" onclick="studentDetail()">编辑信息</button>
     </div>
     <div class="panel-heading title-block" style="margin-top:20px">
-        <h3 class="panel-title title-white">进行中</h3>
+        <h3 class="panel-title title-white">进行中(<%=nowCourse.length%>)</h3>
     </div>
-    <div style="height:20vh">
+    <div class="course-tab">
         <%if(nowCourse.length == 0){%>
         <h4 style="text-align: center;margin:10px">当前没有课程</h4>
         <%} nowCourse.forEach(function (item) { %>
@@ -52,56 +54,54 @@
         <%})%>
     </div>
     <div class="panel-heading title-block">
-        <h3 class="panel-title title-white">申请中</h3>
+        <h3 class="panel-title title-white">申请中(<%=postCourse.length%>)</h3>
     </div>
-    <div style="height:20vh">
-
-    <%if(postCourse.length == 0){%>
-    <h4 style="text-align: center;margin:10px">没有申请中的课程</h4>
-    <%} postCourse.forEach(function (item) { %>
-    <div class="course-block">
-        <div class="inline left">
-            <h3 class="inline course-title"><%=item.seriesName%></h3><br>
-            <%if(item.hopeClassType != ""){%>
-            <h4 class="inline"><b>期望班型：</b><%=item.hopeClassType%></h4>
-            <%}else{%>
-            <h4 class="inline"><b>班型不限</b></h4>
-            <%}%>
-            <%if(item.hopeTeacher != ""){%>
-            <h4 class="inline"><b>期望老师：</b><%=item.hopeTeacher%></h4>
-            <%}else{%>
-            <h4 class="inline"><b>老师不限</b></h4>
-            <%}%>
-            <%if(item.hopeTime != ""){%>
-            <h4 class="inline"><b>期望时间：</b><%=item.hopeTime%></h4>
-            <%}else{%>
-            <h4 class="inline"><b>时间不限</b></h4>
-            <%}%>
-            <%if(item.other != ""){%>
-            <h4 class="inline"><b>备注：</b><%=item.other%></h4>
-            <%}%>
-        </div>
-        <!--<button class="btn btn-success right sign-up" onclick="courseDetail(<%=item.courseSeriesId%>)">详情</button>-->
-    </div>
-    <%})%>
-</div>
-    <div class="panel-heading title-block">
-        <h3 class="panel-title title-white">已完成</h3>
-    </div>
-        <div style="height:20vh">
-
-        <%if(finishCourse.length == 0){%>
-    <h4 style="text-align: center;margin:10px">没有已完成的课程</h4>
-    <%} finishCourse.forEach(function (item) { %>
-    <div class="course-block">
-        <div class="inline left">
-            <h3 class="inline course-title"><%=item.courseSeriesName%></h3><h4 class="inline"><%=item.userName%></h4><br>
-            <h4 class="inline"><%=item.startDate%>~~<%=item.endDate%> <%=item.time%>  <%=item.room%></h4>
-        </div>
-        <!--<button class="btn btn-success right sign-up" onclick="courseDetail(<%=item.courseSeriesId%>)">详情</button>-->
-    </div>
-    <%})%>
+    <div class="course-tab">
+        <%if(postCourse.length == 0){%>
+        <h4 style="text-align: center;margin:10px">没有申请中的课程</h4>
+        <%} postCourse.forEach(function (item) { %>
+        <div class="course-block">
+            <div class="inline left">
+                <h3 class="inline course-title"><%=item.seriesName%></h3><br>
+                <%if(item.hopeClassType != ""){%>
+                <h4 class="inline"><b>期望班型：</b><%=item.hopeClassType%></h4>
+                <%}else{%>
+                <h4 class="inline"><b>班型不限</b></h4>
+                <%}%>
+                <%if(item.hopeTeacher != ""){%>
+                <h4 class="inline"><b>期望老师：</b><%=item.hopeTeacher%></h4>
+                <%}else{%>
+                <h4 class="inline"><b>老师不限</b></h4>
+                <%}%>
+                <%if(item.hopeTime != ""){%>
+                <h4 class="inline"><b>期望时间：</b><%=item.hopeTime%></h4>
+                <%}else{%>
+                <h4 class="inline"><b>时间不限</b></h4>
+                <%}%>
+                <%if(item.other != ""){%>
+                <h4 class="inline"><b>备注：</b><%=item.other%></h4>
+                <%}%>
             </div>
+            <!--<button class="btn btn-success right sign-up" onclick="courseDetail(<%=item.courseSeriesId%>)">详情</button>-->
+        </div>
+        <%})%>
+    </div>
+    <div class="panel-heading title-block">
+        <h3 class="panel-title title-white">已完成(<%=finishCourse.length%>)</h3>
+    </div>
+    <div class="course-tab">
+        <%if(finishCourse.length == 0){%>
+            <h4 style="text-align: center;margin:10px">没有已完成的课程</h4>
+        <%} finishCourse.forEach(function (item) { %>
+        <div class="course-block">
+            <div class="inline left">
+                <h3 class="inline course-title"><%=item.courseSeriesName%></h3><h4 class="inline"><%=item.userName%></h4><br>
+                <h4 class="inline"><%=item.startDate%>~~<%=item.endDate%> <%=item.time%>  <%=item.room%></h4>
+            </div>
+            <!--<button class="btn btn-success right sign-up" onclick="courseDetail(<%=item.courseSeriesId%>)">详情</button>-->
+        </div>
+        <%})%>
+    </div>
 </div>
 </body>
 
