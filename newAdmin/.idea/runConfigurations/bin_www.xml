@@ -11,10 +11,6 @@
       <env name="DEBUG" value="newAdmin:*" />
     </envs>
     <browser url="http://localhost:3000/" />
-    <profiling v8-profiler-path="" />
-    <EXTENSION ID="com.jetbrains.nodejs.run.NodeJSProfilingRunConfigurationExtension">
-      <profiling v8-profiler-path="" />
-    </EXTENSION>
     <EXTENSION ID="com.jetbrains.nodejs.run.NodeJSStartBrowserRunConfigurationExtension">
 >>>>>>> 57db1ab88373dc955c10babdf1908b95f1ccce3e
       <browser url="http://localhost:3000/" />

@@ -98,7 +98,6 @@ router.post("/changeInfo",function (req,res) {
         gender:req.body.gender,
         userAddress:req.body.userAddress,
         userGrade:req.body.userGrade
-
     },{'where':{userId:1}}).then(function (data) {
             student.update({
                 joinshop:req.body.join,
@@ -178,7 +177,6 @@ router.get('/studentCourseDetail',function (req,res,next) {
 //     }).then(function (ret) {
 //         console.log(JSON.stringify(ret))
 //         res.render('educationCourseDetail',{template:ret});
-// >>>>>>> 699ccafcc18bc2bb7461cff24481e9b82fe24849
 //     });
     })
 })

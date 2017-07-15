@@ -3,15 +3,10 @@ var router = express.Router();
 var course=require('../model/course');
 var teacher=require('../model/teacher');
 var user =require("../model/user")
+var joinreceptionmanager=require("../model/joinreceptionmanager")
 /* GET home page. */
 router.get('/', function (req, res, next) {
     res.render('index');
-});
-router.get('/joinManagerReport', function (req, res, next) {
-    res.render('joinManagerReport');
-});
-router.get('/joinManagerDetail', function (req, res, next) {
-    res.render('joinManagerDetail');
 });
 router.get('/education/joinReceptionTeacherList',function (req,res,next) {
     user.findAll({where:{role:1}}).then(function(ret){
