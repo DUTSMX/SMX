@@ -4,6 +4,7 @@
 var express = require('express');
 var router = express.Router();
 var course=require('../model/course');
+var user = require("../model/user")
 var moment = require("moment");
 router.get('/educationCourse',function (req,res,next) {
     course.seriesTemplate.findAll().then(function (ret) {
@@ -68,6 +69,24 @@ router.post('/seriesTemplateDelete',function (req,res) {
 router.get('/educationDetail',function (req,res,next) {
     res.render('educationDetail');
     })
+router.post('/createTeacher', function (req, res, next) {
+    console.log("body:"+JSON.stringify(req.body));
+    user.create({
+        phoneNumber:req.body.phoneNumber,
+        userName:req.body.teacherName,
+        userSchool:req.body.schoolName,
+        userGrade:req.body.classInfo
+    }).then(function (data) {
+
+        console.log("data:"+JSON.stringify(data));
+        res.send("添加成功")
+    }).catch(function(err){
+
+        console.log("err:"+JSON.stringify(err))
+
+    });
+    //res.end("235")
+});
 router.post('/createCourse',function (req,res) {
     course.courseSeries.findOne({'where':{courseSeriesId:req.body.seriesId}}).then(function (data) {
         console.log("data:"+JSON.stringify(data))

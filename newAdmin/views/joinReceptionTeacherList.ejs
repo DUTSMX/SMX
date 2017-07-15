@@ -83,12 +83,10 @@
         $("#fade").hide()
         $("#light").hide()
     }
-
     function postInfo(){
         var phoneNumber = $("#phoneNumber").val();
         var teacherName = $("#teacherName").val();
         var subject = $("#subject").val();
-
         if (phoneNumber.length == 0) {
             $("#phoneNumber").attr('placeholder', "手机号不能为空");
         }else if (teacherName.length == 0) {

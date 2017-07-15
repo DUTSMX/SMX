@@ -29,8 +29,16 @@ var user = sequelize.define('account', {
         userAddress: { //课程系列简介
             type: Sequelize.STRING(30)
         },
-        userHeadUrl:{//课程系列每节课课程名称
-            type:Sequelize.STRING(30)
+        userHeadUrl:{//头像
+            type:Sequelize.STRING(60)
+        },
+
+        userFrontIdHeadUrl:{//身份证正面
+            type:Sequelize.STRING(60)
+        },
+
+        userBackIdHeadUrl:{//身份证背面
+            type:Sequelize.STRING(60)
         },
         registerDate:{//课程系列每节课内容
             type:Sequelize.DATE
@@ -40,12 +48,6 @@ var user = sequelize.define('account', {
         },
         cardNumber:{
             type:Sequelize.STRING(30)
-        },
-        userFrontIdHeadUrl:{
-            type:Sequelize.STRING
-        },
-        userBackIdHeadUrl:{
-            type:Sequelize.STRING
         }
 },
     {

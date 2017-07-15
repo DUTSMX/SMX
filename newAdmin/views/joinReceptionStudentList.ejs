@@ -30,30 +30,30 @@
             <h3 class="panel-title right-button" onclick="addStudent()">添加学生</h3>
         </div>
         <%if(student.length == 0){%>
-            <h4 style="text-align: center;margin:10px;">学生列表为空</h4>
+        <h4 style="text-align: center;margin:10px;">学生列表为空</h4>
         <%}else{%>
-            <div class="padding-scroll">
-                <table class="table table-hover" style="margin-bottom:0px;">
-                    <thead>
-                    <tr>
-                        <th><div class="omit">姓名</div></th>
-                        <th><div class="omit">年级</div></th>
-                    </tr>
-                    </thead>
-                </table>
-            </div>
-            <div class="table-details" style="height:70vh">
-                <table  class="table table-hover table-body">
-                    <tbody>
-                    <%student.forEach(function(item){%>
-                    <tr onclick="detail(<%=item.userId%>)">
-                        <td><div class="omit"><%=item.userName%></div></td>
-                        <td><div class="omit"><%=item.grade%></div></td>
-                    </tr>
-                    <%})%>
-                    </tbody>
-                </table>
-            </div>
+        <div class="padding-scroll">
+            <table class="table table-hover" style="margin-bottom:0px;">
+                <thead>
+                <tr>
+                    <th><div class="omit">姓名</div></th>
+                    <th><div class="omit">年级</div></th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="table-details" style="height:70vh">
+            <table  class="table table-hover table-body">
+                <tbody>
+                <%student.forEach(function(item){%>
+                <tr onclick="detail(<%=item.userId%>)">
+                    <td><div class="omit"><%=item.userName%></div></td>
+                    <td><div class="omit"><%=item.grade%></div></td>
+                </tr>
+                <%})%>
+                </tbody>
+            </table>
+        </div>
         <%}%>
 
     </div>
@@ -85,7 +85,6 @@
         $("#fade").show()
         $("#light").show()
     }
-
     function closeDialog() {
         $("#fade").hide()
         $("#light").hide()
@@ -95,7 +94,6 @@
         var studentName = $("#studentName").val();
         var schoolName = $("#schoolName").val();
         var classInfo = $("#classInfo").val();
-
         if (phoneNumber.length == 0) {
             $("#phoneNumber").attr('placeholder', "手机号不能为空");
         }
@@ -105,7 +103,6 @@
         else if(schoolName.length == 0)
         {
             $("#schoolName").attr('placeholder','学校名称不能为空');
-
         }
         else if(classInfo.length == 0)
         {
