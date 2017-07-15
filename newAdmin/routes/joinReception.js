@@ -3,7 +3,7 @@ var router = express.Router();
 var course=require('../model/course');
 var user=require(('../model/user'));
 var joinreceptionshop=require('../model/joinreceptionshop')
-var user=require(('../model/user'));
+var joinreceptionmanager=require('../model/joinreceptionmanager');
 router.get('/joinReceptionCourseManager',function (req,res,next) {
     course.courseSeries.findAll({'where':{status:0}}).then(function (data) {
         console.log(JSON.stringify(data))
@@ -37,6 +37,7 @@ router.get('/joinReceptionDetail',function (req,res,next) {
         })
     })
 })
+
 router.post("/editInfo",function (req,res) {
     //console.log(JSON.stringify(req.body))
     user.update({

@@ -36,12 +36,6 @@ var user = sequelize.define('account', {
         userName: { //课程面向对象年级
             type: Sequelize.STRING(30)
         },
-        userSchool: { //课程面向对象年级
-            type: Sequelize.STRING(30)
-        },
-        userGrade: { //课程面向对象年级
-            type: Sequelize.STRING(30)
-        },
         userAge: { //课程系列课程数
             type: Sequelize.INTEGER
         },
@@ -55,9 +49,6 @@ var user = sequelize.define('account', {
             type:Sequelize.DATE
         },
         gender:{
-            type:Sequelize.INTEGER
-        },
-        identityId:{
             type:Sequelize.INTEGER
         },
         cardNumber:{
