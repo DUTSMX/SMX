@@ -643,6 +643,7 @@ router.post('/createCourse',function (req,res) {
                                             process: 1
                                         }, {'where': {studentId: studentList[i], templateId: req.body.templateId}})
                                     }
+                                    startDate.setDate(startDate.getDate()-1)
                                     for (var i = 0; i < courseSeries.courseSeriesNumber; i++) {
                                         course.course.create({
                                             courseSeriesId: courseSeries.courseSeriesId,
