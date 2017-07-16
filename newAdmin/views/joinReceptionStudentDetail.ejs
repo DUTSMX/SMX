@@ -22,60 +22,175 @@
         .image img{width:80%}
         .image-input{opacity: 0;position:absolute;width:40%;height:20%;z-index: 1000}
         .image-edit{position:absolute;text-align:center;margin-top:5%;width:40%;z-index: 900}
+        .course-block{height:60px;border-radius: 5px;border-style:solid;border-width:1px;border-color:#4cae4c;margin-bottom:10px;margin-top:10px}
+        .course-title{color:#4cae4c}
+        .inline{display: inline-block;margin:2px;}
+        .sign-up{margin-top:10px;margin-right:10px}
+        /*.course-tab{height:20vh;overflow: auto}*/
+        .course-tab{}
     </style>
 </head>
 <body style="height:100%">
 <%include navigation-index.ejs%>
 <%include navigation-joinReception.ejs%>
 <div class="right-content">
-    <div class="panel-heading title-block">
-        <h3 class="panel-title title-white">学生信息</h3>
-        <h3 id="applyId" class="panel-title right-button" onclick="applyId()">确认</h3>
-    </div>
     <div class="margin-left-30" id="person-edit">
-        <div class="inline">
-            <input type="file" class="head-input"/>
-            <p class="head-edit">编辑头像</p>
-            <img src="/images/icon.png" class="head img-circle">
-        </div>
-        <select class="padding-4">
-            <option>台安店</option>
-            <option>大连店</option>
-            <option>沈阳店</option>
-        </select><br>
-        <label>学生姓名&nbsp</label><input id="person-name"class="inline margin-top-20" value="学生姓名" placeholder="请输入学生姓名"/><br>
-        <label>手机号码&nbsp</label><input id="person-phoneNumber"class="inline" value="手机号码" placeholder="请输入手机号码"/>
-        <br>
-        <label>学校名称&nbsp</label><input value="学生学校" placeholder="请输入学校名称"/><br>
-        <label>学校年级&nbsp</label><input value="学生年级" placeholder="请输入学校年级"/><br>
-        <!--<input value="学习情况：中等" disabled="false" placeholder="请输入学习情况"></h4><br>-->
-        <label>家庭地址&nbsp</label><input value="家庭地址" placeholder="请输入家庭信息">
+        <label><%=student.userName%>&nbsp</label> <label><%=student.phoneNumber%>&nbsp</label><button class="right btn btn-defalut" onclick="studentDetail()">编辑信息</button>
     </div>
-    <div class="margin-left-30" id="id-edit">
-        <label>身份证号&nbsp</label><input value="123456789012345678"placeholder="请输入身份证号"/><br>
-        <div class="image">
-            <input type="file" class="image-input"/>
-            <p class="image-edit">编辑图片</p>
-            <img src="/images/logo.png"/>
-            <p>身份证正面</p>
+    <div class="panel-heading title-block" style="margin-top:20px">
+        <h3 class="panel-title title-white">进行中(<%=nowCourse.length%>)</h3>
+    </div>
+    <div class="course-tab">
+        <%if(nowCourse.length == 0){%>
+        <h4 style="text-align: center;margin:10px">没有进行中的课程</h4>
+        <%}nowCourse.forEach(function (item) { %>
+        <div class="course-block">
+            <div class="inline left">
+                <h3 class="inline course-title"><%=item.courseSeriesName%></h3><h4 class="inline"><%=item.userName%></h4><br>
+                <h4 class="inline"><%=item.startDate%>~~<%=item.endDate%> <%=item.time%>  <%=item.room%></h4>
+            </div>
+            <button class="btn btn-success right sign-up" onclick="courseDetail(<%=item.courseSeriesId%>)">详情</button>
         </div>
-        <div class="image">
-            <input type="file" class="image-input"/>
-            <p class="image-edit">编辑图片</p>
-            <img src="/images/logo.png"/>
-            <p>身份证背面</p>
+        <%})%>
+    </div>
+    <div class="panel-heading title-block">
+        <h3 class="panel-title title-white">申请中(<%=postCourse.length%>)</h3>
+    </div>
+    <div class="course-tab">
+        <%if(postCourse.length == 0){%>
+        <h4 style="text-align: center;margin:10px">没有申请中的课程</h4>
+        <%} postCourse.forEach(function (item) { %>
+        <div class="course-block">
+            <div class="inline left">
+                <h3 class="inline course-title"><%=item.seriesName%></h3><br>
+                <%if(item.hopeClassType != ""){%>
+                <h4 class="inline"><b>期望班型：</b><%=item.hopeClassType%></h4>
+                <%}else{%>
+                <h4 class="inline"><b>班型不限</b></h4>
+                <%}%>
+                <%if(item.hopeTeacher != ""){%>
+                <h4 class="inline"><b>期望老师：</b><%=item.hopeTeacher%></h4>
+                <%}else{%>
+                <h4 class="inline"><b>老师不限</b></h4>
+                <%}%>
+                <%if(item.hopeTime != ""){%>
+                <h4 class="inline"><b>期望时间：</b><%=item.hopeTime%></h4>
+                <%}else{%>
+                <h4 class="inline"><b>时间不限</b></h4>
+                <%}%>
+                <%if(item.other != ""){%>
+                <h4 class="inline"><b>备注：</b><%=item.other%></h4>
+                <%}%>
+            </div>
+            <button class="btn btn-warning right sign-up" onclick="deletePost(<%=item.joinSeriesId%>)">删除</button>
+            <button class="btn btn-primary right sign-up" onclick="enter('<%=item.joinSeriesId%>','<%=item.seriesName%>','<%=item.hopeClassType%>','<%=item.hopeTeacher%>','<%=item.hopeTime%>','<%=item.other%>')">编辑</button>
+        </div>
+        <%})%>
+    </div>
+    <div class="panel-heading title-block">
+        <h3 class="panel-title title-white">已完成(<%=finishCourse.length%>)</h3>
+    </div>
+    <div class="course-tab">
+        <%if(finishCourse.length == 0){%>
+            <h4 style="text-align: center;margin:10px">没有已完成的课程</h4>
+        <%} finishCourse.forEach(function (item) { %>
+        <div class="course-block">
+            <div class="inline left">
+                <h3 class="inline course-title"><%=item.courseSeriesName%></h3><h4 class="inline"><%=item.userName%></h4><br>
+                <h4 class="inline"><%=item.startDate%>~~<%=item.endDate%> <%=item.time%>  <%=item.room%></h4>
+            </div>
+            <button class="btn btn-success right sign-up" onclick="courseDetail('<%=item.courseSeriesId%>')">详情</button>
+        </div>
+        <%})%>
+    </div>
+    <div id="fade" class="black-overlay"></div>
+    <div id="light" class="white-content">
+        <div class="dialog" id="post" display="none">
+            <div class="dialog-title"><span class="font-20 title-white">申请课程</span><span class="right title-white" onclick="closeDialog()">X</span></div>
+            <label class="dialog-label">基本信息</label><br>
+            <label class="dialog-label">课程名称</label><input id="courseName" class="dialog-input" placeholder="请输入课程名称" disabled>
+            <label class="dialog-label">上课同学</label><input id="chooseStudent" class="dialog-input" placeholder="请输入同学" onclick="chooseStudent()">
+            <label class="dialog-label">附加信息</label><br>
+            <label class="dialog-label">上课老师</label><input id="chooseTeacher" class="dialog-input" placeholder="请输入期望老师，默认为老师不限">
+            <label class="dialog-label">班    型</label><input id="classType" class="dialog-input" placeholder="请输入期望班型，默认为班型不限">
+            <label class="dialog-label">期望时间</label><input id="time" class="dialog-input" placeholder="请输入期望时间，默认为班型不限">
+            <label class="dialog-label">备    注</label><input id="other" class="dialog-input" placeholder="请输入期望时间，默认为班型不限">
+            <button class="btn btn-default dialog-button" onclick="post()">修改申请</button>
         </div>
     </div>
-</div>
 </div>
 </body>
 
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-    $("#person").text("前台姓名")
-    function loginDialog(){
-        location.href="joinReceptionDetail"
+    var joinId;
+    function studentDetail(){
+        location.href = "joinReceptionStudentDetailEdit?studentId="+'<%=student.studentId%>'
+    }
+    function detail(){
+
+    }
+    function courseDetail(id){
+        location.href="joinReceptionCourseDetail?seriesId="+id
     }
     $("#navigation-student").addClass("select-left-button");
+    function enter(id,name,classType,teacher,time,other){
+        console.log("name:"+name+" classType:"+classType+" teacher:"+teacher+" time:"+time+" other:"+other)
+        showDialog()
+        joinId = id;
+        $("#courseName").val(name)
+        $("#chooseStudent").val("<%=student.userName%>")
+        $("#chooseTeacher").val(teacher)
+        $("#classType").val(classType)
+        $("#time").val(time)
+        $("#other").val(other)
+        console.log("enter")
+        $("#fade").show()
+        $("#light").show()
+        $("#apply-course").hide();
+        $("#enter").show();
+    }
+    function post(){
+        var data = {
+            joinSeriesId:joinId,
+            studentId:"<%=student.userId%>",
+            teacher:$("#chooseTeacher").val(),
+            classType:$("#classType").val(),
+            time:$("#time").val(),
+            other:$("#other").val()
+        }
+        console.log(JSON.stringify(data))
+        $.post("updateHope",data,function (data) {
+            closeDialog();
+            alert(data)
+            location.reload();
+        })
+    }
+    function deletePost(id){
+        var deletePost = confirm("删除课程")
+        if(deletePost){
+            $.post("deleteHope",{joinSeries:id,userId:"<%=student.userId%>"},function (data) {
+            alert(data)
+            location.reload();
+        })
+        }
+    }
+    function showDialog(){
+        $("#fade").show()
+        $("#light").show()
+        $("#post").show()
+    }
+    function closeDialog(){
+        $("#fade").hide()
+        $("#light").hide()
+        $("#add-student").hide()
+        $("#post").hide()
+        $(".white-content").width("350px")
+        $(".dialog-title").width("330px")
+        $("#chooseTeacher").attr("disabled",false)
+        $("#chooseStudent").attr("disabled",false)
+        $("#select-teacher").hide();
+        $("#select-student").hide();
+    }
 </script>
 </html>

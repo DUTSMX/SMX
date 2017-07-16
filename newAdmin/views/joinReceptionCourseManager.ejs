@@ -35,265 +35,32 @@
 <div class="right-content">
     <div class="panel-heading title-block">
         <h3 class="panel-title title-white">课程列表</h3>
+        <h3 class="panel-title right-button" onclick="courseCalendar()" id="applyCourse">课程日历</h3>
     </div>
-    <div class="course-list">
-        <div class="course-block">
-            <div class="inline left">
-                <h3 class="inline course-title">齐书强</h3>
-                <h4 class="inline">高三数学冲刺班</h4><br>
-                <h4 class="inline">学生(1):时广毅</h4>
-            </div>
-            <h3 class="inline right center">每天07:00 8.20截止</h3>
+    <%if(allCourse.length == 0){%>
+        <h4 style="text-align: center;margin:10px">当前没有课程</h4>
+    <%} allCourse.forEach(function (item) { %>
+    <div class="course-block">
+        <div class="inline left">
+            <h3 class="inline course-title"><%=item.courseSeriesName%></h3><h4 class="inline"><%=item.userName%></h4><br>
+            <h4 class="inline"><%=item.startDate%>~~<%=item.endDate%> <%=item.time%>  <%=item.room%></h4>
         </div>
-        <div class="course-block">
-            <div class="inline left">
-                <h3 class="inline course-title">齐书强</h3>
-                <h4 class="inline">高三数学冲刺班</h4><br>
-                <h4 class="inline">学生(1):李苓苓</h4>
-            </div>
-            <h3 class="inline right center">每天08:40 8.20截止</h3>
-        </div>
-        <div class="course-block">
-            <div class="inline left">
-                <h3 class="inline course-title">齐书强</h3>
-                <h4 class="inline">高三数学冲刺班</h4><br>
-                <h4 class="inline">学生(1):王婉月</h4>
-            </div>
-            <h3 class="inline right center">每天10:20 8.20截止</h3>
-        </div>
-        <div class="course-block">
-            <div class="inline left">
-                <h3 class="inline course-title">齐书强</h3>
-                <h4 class="inline">高三数学冲刺班</h4><br>
-                <h4 class="inline">学生(5):李程 常诗涵 王欣淼 张佳伟 乔文韬</h4>
-            </div>
-            <h3 class="inline right center">每天13:30 8.20截止</h3>
-        </div>
-        <div class="course-block">
-            <div class="inline left">
-                <h3 class="inline course-title">齐书强</h3>
-                <h4 class="inline">高三数学冲刺班</h4><br>
-                <h4 class="inline">学生(2):丁佳兴 高城博</h4>
-            </div>
-            <h3 class="inline right center">每天15:10 8.20截止</h3>
-        </div>
-        <div class="course-block">
-            <div class="inline left">
-                <h3 class="inline course-title">齐书强</h3>
-                <h4 class="inline">高三数学冲刺班</h4><br>
-                <h4 class="inline">学生(3):刘跃 王赛 张秋雨</h4>
-            </div>
-            <h3 class="inline right center">每天15:10 8.20截止</h3>
-        </div>
-        <div class="course-block">
-            <div class="inline left">
-                <h3 class="inline course-title">张可爽</h3>
-                <h4 class="inline">高一生物冲刺班</h4><br>
-                <h4 class="inline">学生(4):李苓苓 李程 常诗涵 刘跃</h4>
-            </div>
-            <h3 class="inline right center">每天07:00 8.20截止</h3>
-        </div>
-        <div class="course-block">
-            <div class="inline left">
-                <h3 class="inline course-title">张可爽</h3>
-                <h4 class="inline">高三生物冲刺班</h4><br>
-                <h4 class="inline">学生(1):庞爱迪</h4>
-            </div>
-            <h3 class="inline right center">每天13:30 8.20截止</h3>
-        </div>
-        <div class="course-block">
-            <div class="inline left">
-                <h3 class="inline course-title">李金泰</h3>
-                <h4 class="inline">高三数学冲刺班</h4><br>
-                <h4 class="inline">学生(4):王赛 方静 张秋雨 高城博</h4>
-            </div>
-            <h3 class="inline right center">每天07:00 8.20截止</h3>
-        </div>
-        <div class="course-block">
-            <div class="inline left">
-                <h3 class="inline course-title">李金泰</h3>
-                <h4 class="inline">高一语文冲刺班</h4><br>
-                <h4 class="inline">学生(1):贾楠</h4>
-            </div>
-            <h3 class="inline right center">每天13:30 8.20截止</h3>
-        </div>
-        <div class="course-block">
-            <div class="inline left">
-                <h3 class="inline course-title">李金泰</h3>
-                <h4 class="inline">高一语文冲刺班</h4><br>
-                <h4 class="inline">学生(1):李程</h4>
-            </div>
-            <h3 class="inline right center">每天15:10 8.20截止</h3>
-        </div>
-        <div class="course-block">
-            <div class="inline left">
-                <h3 class="inline course-title">李丹丹</h3>
-                <h4 class="inline">高二文数冲刺班</h4><br>
-                <h4 class="inline">学生(1):韩莹</h4>
-            </div>
-            <h3 class="inline right center">每天07:00 8.20截止</h3>
-        </div>
-        <div class="course-block">
-            <div class="inline left">
-                <h3 class="inline course-title">李丹丹</h3>
-                <h4 class="inline">高一英语冲刺班</h4><br>
-                <h4 class="inline">学生(1):庞爱迪</h4>
-            </div>
-            <h3 class="inline right center">每天08:40 8.20截止</h3>
-        </div>
+        <button class="btn btn-success right sign-up" onclick="courseDetail(<%=item.courseSeriesId%>)">详情</button>
     </div>
-    <div class="course-list margin-top-20">
-        <div class="panel-heading title-block">
-            <h3 class="panel-title title-white">课程申请</h3>
-        </div>
-        <div class="course-block">
-            <div class="inline left">
-                <h3 class="inline course-title">张三，李四，王五</h3><br>
-                <h4 class="inline">高三数学冲刺班</h4>
-            </div>
-            <button class="btn btn-success right sign-up" onclick="add()">添加</button>
-            <button class="btn btn-success right sign-up" onclick="post()">提交</button>
-        </div>
-        <div class="course-block">
-            <div class="inline left">
-                <h3 class="inline course-title">张三</h3><br>
-                <h4 class="inline">高三数学</h4>
-            </div>
-            <button class="btn btn-success right sign-up" onclick="add()">添加</button>
-            <button class="btn btn-success right sign-up" onclick="post()">提交</button>
-        </div>
-    </div>
-</div>
-<div id="fade" class="black-overlay"></div>
-<div id="light" class="white-content">
-    <div class="dialog" id="add-student" display="none">
-        <div class="dialog-title"><span class="font-20 title-white">添加学生</span><span class="right title-white" onclick="closeDialog()">x</span></div>
-        <button class="student">赵学生</button>
-        <button class="student">钱学生</button>
-        <button class="student">孙学生</button>
-        <button class="student">李学生</button>
-        <button class="student">周学生</button>
-        <button class="student">吴学生</button>
-        <button class="student">郑学生</button>
-        <button class="student">王学生</button>
-        <button class="btn btn-default dialog-button" onclick="closeDialog()">提交申请</button>
-    </div>
-    <div class="dialog" id="post" display="none">
-        <div class="dialog-title"><span class="font-20 title-white">申请课程</span><span class="right title-white" onclick="closeDialog()">X</span></div>
-        <label class="dialog-label">课程名称</label><input class="dialog-input" placeholder="请输入课程名称">
-        <label class="dialog-label">上课老师</label><input id="chooseTeacher" class="dialog-input" placeholder="请选择老师" onclick="chooseTeacher()">
-        <label class="dialog-label">上课同学</label><input id="chooseStudent" class="dialog-input" placeholder="请输入同学" onclick="chooseStudent()">
-        <label class="dialog-label">期望时间</label>
-        <select id="time"class="dialog-input" onchange="selectTime()">
-            <option>时间不限</option>
-            <option>每天</option>
-            <option>每周</option>
-        </select>
-        <div id="select-day" style="display: none">
-            <input type="checkbox">周一
-            <input type="checkbox">周二
-            <input type="checkbox">周三
-            <input type="checkbox">周四
-            <input type="checkbox">周五
-            <input type="checkbox">周六
-            <input type="checkbox">周日
-        </div>
-        <div id="select-course" style="display: none">
-            <input type="checkbox">07:00
-            <input type="checkbox">08:40
-            <input type="checkbox">10:20
-            <input type="checkbox">13:30<br>
-            <input type="checkbox">15:10
-            <input type="checkbox">16:50
-            <input type="checkbox">19:30
-            <input type="checkbox">21:10
-        </div>
-        <button class="btn btn-default dialog-button" onclick="closeDialog()">提交申请</button>
-    </div>
-    <div id="select-teacher" class="select">
-        <button class="btn btn-default center">赵老师</button><br>
-        <button class="btn btn-default center">钱老师</button><br>
-        <button class="btn btn-default center">孙老师</button><br>
-        <button class="btn btn-default center">李老师</button><br>
-        <button class="btn btn-default center">周老师</button><br>
-        <button class="btn btn-default center">吴老师</button><br>
-        <button class="btn btn-default center">郑老师</button><br>
-        <button class="btn btn-default center">王老师</button><br>
-    </div>
-    <div id="select-student" class="select">
-        <button class="btn btn-default center">冯同学</button><br>
-        <button class="btn btn-default center">陈同学</button><br>
-        <button class="btn btn-default center">褚同学</button><br>
-        <button class="btn btn-default center">卫同学</button><br>
-        <button class="btn btn-default center">蒋同学</button><br>
-        <button class="btn btn-default center">沈同学</button><br>
-        <button class="btn btn-default center">韩同学</button><br>
-        <button class="btn btn-default center">杨同学</button><br>
-    </div>
+    <%})%>
 </div>
 </body>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-
-    $("#person").text("前台姓名")
     function loginDialog(){
         location.href="joinReceptionDetail"
     }
     $("#navigation-manager").addClass("select-left-button");
-    function add(){
-        $("#fade").show()
-        $("#light").show()
-        $("#add-student").show()
-        $("#post").hide()
+    function courseDetail(id) {
+        location.href = "joinReceptionCourseDetail?seriesId=" + id
     }
-    function post(){
-        $("#fade").show()
-        $("#light").show()
-        $("#add-student").hide()
-        $("#post").show()
-    }
-    function closeDialog(){
-        $("#fade").hide()
-        $("#light").hide()
-        $("#add-student").hide()
-        $("#post").hide()
-        $(".white-content").width("350px")
-        $(".dialog-title").width("330px")
-        $("#chooseTeacher").attr("disabled",false)
-        $("#chooseStudent").attr("disabled",false)
-        $("#select-teacher").hide();
-        $("#select-student").hide();
-    }
-    function selectTime(){
-        var time = $("#time").val();
-        if(time == "每天"){
-            $("#select-day").show();
-            $("#select-course").show();
-        }else if(time == "每周"){
-            $("#select-day").hide();
-            $("#select-course").show();
-        }else{
-            $("#select-day").hide();
-            $("#select-course").hide();
-        }
-    }
-    function chooseTeacher(){
-        $(".white-content").width("500px")
-        $(".white-content").height("300px")
-        $(".dialog-title").width("480px")
-        $("#select-teacher").show();
-        $("#select-student").hide();
-        $("#chooseTeacher").attr("disabled",true)
-        $("#chooseStudent").attr("disabled",false)
-    }
-    function chooseStudent(){
-        $(".white-content").width("500px")
-        $(".white-content").height("300px")
-        $(".dialog-title").width("480px")
-        $("#select-teacher").hide();
-        $("#select-student").show();
-        $("#chooseTeacher").attr("disabled",false)
-        $("#chooseStudent").attr("disabled",true)
+    function courseCalendar(){
+        location.href = "joinReceptionCourseCalendar"
     }
 </script>
 </html>

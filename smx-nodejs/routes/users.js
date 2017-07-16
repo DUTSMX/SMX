@@ -113,6 +113,14 @@ router.post('/login',function(req,res){
         var userId = ret.userId;
         if(ret.status){
             req.session.userId = userId;
+            req.session.username = username;
+
+            // var unInterceptionList = ["/users/forgetPassword","/users/register","/users/getCheckCode","/AppSign"]
+            // //登陆过滤
+            // app.use(function (req,res,next) {
+            //     var url
+            // })
+
             ret.sourceUrl = req.session.sourceUrl;
             console.log("url:"+req.session.sourceUrl)
             console.log("ret:"+JSON.stringify(ret))

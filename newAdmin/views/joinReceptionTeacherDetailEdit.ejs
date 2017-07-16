@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>尚名校</title>
+    <!-- Bootstrap -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/stylesheets/admin.css" rel="stylesheet" type="text/css"/>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .head{width:96px;height:96px;}
+        .head-input{opacity: 0;position:absolute;width:96px;height:96px;z-index: 1000}
+        .head-edit{position:absolute;text-align:center;margin-top:40px;width:100%;;z-index: 900}
+        .image-edit{position:absolute;text-align:center;margin-top:50px;width:100%;;z-index: 900}
+        .base-info{display: inline-block;height: 96px;vertical-align: middle;}
+        .image{width:49%;;display: inline-block;text-align: center;margin-top:20px}
+        .image img{width:80%}
+        .image-input{opacity: 0;position:absolute;width:100%;height:100%;z-index: 1000}
+        .image-edit{position:absolute;text-align:center;margin-top:15%;width:100%;z-index: 900}
+        .width-60{width:60px;}
+    </style>
+</head>
+<body style="height:100%" onload="uploadImage()">
+<%include navigation-index.ejs%>
+<%include navigation-joinReception.ejs%>
+<div class="right-content">
+    <div class="panel-heading title-block">
+        <h3 class="panel-title title-white">基本信息</h3>
+        <h3 class="panel-title right-button" onclick="edit()" id="edit">编辑</h3>
+    </div>
+    <div class="margin-left-30" id="person-info">
+        <img src="<%=user.userHeadUrl%>" class="head img-circle right">
+        <div class="base-info">
+            <h3 class="inline"><%=user.userName%> <%if(user.gender== 0){%>男<%}else{%>女<%}%></h3><br>
+            <h4 class="inline"><%=user.phoneNumber%></h4>
+        </div>
+        <br>
+        <h4 class="inline">教授课程:<%=teacher.teachClass%></h4><br>
+        <h4 class="inline">所在大学:<%=teacher.college%></h4>
+        <h4 class="inline">就读年级:<%=teacher.class%></h4><br>
+        <!--<h4 class="inline">学习情况：中等</h4>-->
+        <h4><%=teacher.province%>省  <%=teacher.city%>市  <%=teacher.highSchool%></h4>
+        <h4> 高考总成绩:<%=teacher.SumScore%> 语文:<%=teacher.Chinese%>数学:<%=teacher.Math%>英语:<%=teacher.English%><%if(teacher.SciOrLiber== 0){%>物理:<%=teacher.Physics%>化学:<%=teacher.Chemistry%>生物:<%=teacher.Biology%><%}else{%>政治:<%=teacher.Politics%>历史:<%=teacher.History%>地理:<%=teacher.Geography%><%}%></h4>
+        <div class="image">
+            <img src="<%=teacher.studentCard%>" class="image-id"/>
+            <p>学生证</p>
+        </div>
+        <div class="image right">
+            <img src="<%=teacher.teacherCard%>" class="image-id"/>
+            <p>家教认证</p>
+        </div>
+    </div>
+    <div class="margin-left-30"   style="display: none" id="person-edit">
+        <div class="carousel-inner right" style="width:auto">
+            <input type="file" class="head-input" id="head-input"/>
+            <p class="head-edit">编辑图片</p>
+            <img src="<%=user.userHeadUrl%>" class="head img-circle" id="head-image">
+        </div><br>
+        <label>老师姓名&nbsp</label><input id="person-name"class="inline margin-top-20" value=<%=user.userName%> placeholder="请输入老师姓名" /><!--disabled="false-->
+        <!--<button id="apply-modify"class="btn btn-defalut padding-4" onclick="applyModify()">申请修改</button><br>-->
+        <label>老师性别&nbsp</label><input id="person-gender"class="inline margin-top-20" value=<%if(user.gender== 0){%>男<%}else{%>女<%}%> placeholder="请输入老师性别" /><br>
+        <label>手机号码&nbsp</label><input id="person-phoneNumber"class="inline margin-top-20" value="<%=user.phoneNumber%>" placeholder="请输入手机号码" /><br>
+        <label>教授科目&nbsp</label><input id="subject" class="inline margin-top-20" value="<%=teacher.teachClass%>" placeholder="请输入教授科目" /><br>
+        <label>学校名称&nbsp</label><input id="college" value="<%=teacher.college%>" class="inline margin-top-20" placeholder="请输入学校名称"/><br>
+        <label>学校年级&nbsp</label><input id="class" value="<%=teacher.class%>" class="inline margin-top-20" placeholder="请输入学校年级"/><br>
+        <!--<input value="学习情况：中等" disabled="false" placeholder="请输入学习情况"></h4><br>-->
+        <input id="province" class="width-60" value="<%=teacher.province%>" placeholder=""><label>省</label><input id="city" class="width-60" value="<%=teacher.city%>" placeholder=""><label>市</label><input id="highschool" value="<%=teacher.highSchool%>" placeholder="">
+        <select id="change-subject"class="padding-4" onchange="changeSubject()">
+            <option grade="science" value="理科">理科</option>
+            <option grade="liberal" value="文科">文科</option>
+        </select><br>
+        <label>高考总分&nbsp</label><input id="sumscore" class="width-60" value="<%=teacher.SumScore%>" placeholder=""/>
+        <label>数学&nbsp</label><input id="math" class="width-60" value="<%=teacher.Math%>" placeholder=""/>
+        <label>语文&nbsp</label><input id="chinese" class="width-60" value="<%=teacher.Chinese%>" placeholder=""/>
+        <label>英语&nbsp</label><input id="english" class="width-60" value="<%=teacher.English%>" placeholder=""/>
+        <div id="science" class="inline">
+            <label>物理&nbsp</label><input id="physics" class="width-60" value="<%=teacher.Physics%>" placeholder=""/>
+            <label>化学&nbsp</label><input id="chemistry" class="width-60" value="<%=teacher.Chemistry%>" placeholder=""/>
+            <label>生物&nbsp</label><input id="biology" class="width-60" value="<%=teacher.Biology%>" placeholder=""/><br>
+        </div>
+        <div id="liberal" class="inline" style="display: none">
+            <label>政治&nbsp</label><input id="politics" class="width-60" value="<%=teacher.Politics%>" placeholder=""/>
+            <label>历史&nbsp</label><input id="history" class="width-60" value="<%=teacher.History%>" placeholder=""/>
+            <label>地理&nbsp</label><input id="geography" class="width-60" value="<%=teacher.Geography%>" placeholder=""/><br>
+        </div>
+        <br>
+        <div class="carousel-inner image">
+            <input type="file" class="image-input" id="image-student-input"/>
+            <p class="image-edit">编辑图片</p>
+            <img src="<%=teacher.studentCard%>" class="image-id" id="image-student"/>
+            <p>学生证</p>
+        </div>
+        <div class="carousel-inner right image">
+            <input type="file" class="image-input" id="image-teacher-input"/>
+            <p class="image-edit">编辑图片</p>
+            <img src="<%=teacher.teacherCard%>" class="image-id" id="image-teacher"/>
+            <p>家教认证</p>
+        </div>
+    </div>
+    <div class="margin-left-30" id="id">
+        <h4>身份证号:<%=user.cardNumber%></h4>
+        <div class="image">
+            <img src="<%=user.userFrontIdHeadUrl%>" class="image-id"/>
+            <p>身份证正面</p>
+        </div>
+        <div class="image right">
+            <img src="<%=user.userBackIdHeadUrl%>" class="image-id"/>
+            <p>身份证背面</p>
+        </div>
+    </div>
+    <div class="margin-left-30" style="display:none" id="id-edit">
+        <div class="margin-10">
+            <label>身份证号&nbsp</label><input value="<%=user.cardNumber%>"placeholder="请输入身份证号" id="card-number"/><br>
+        </div>
+        <div class="carousel-inner image">
+            <input type="file" class="image-input" id="image-front-input"/>
+            <p class="image-edit">编辑图片</p>
+            <img src="<%=user.userFrontIdHeadUrl%>" class="image-id" id="image-front"/>
+            <p>身份证正面</p>
+        </div>
+        <div class="carousel-inner right image">
+            <input type="file" class="image-input" id="image-back-input"/>
+            <p class="image-edit">编辑图片</p>
+            <img src="<%=user.userBackIdHeadUrl%>" class="image-id" id="image-back"/>
+            <p>身份证背面</p>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="/javascripts/sdk/qcloud_sdk.js"></script>
+<script src="/javascripts/sdk/swfobject.js"></script>
+<script>
+    var headUrl = "<%=user.userHeadUrl%>"
+    var frontUrl = "<%=user.userFrontIdHeadUrl%>";
+    var backUrl = "<%=user.userBackIdHeadUrl%>";
+    var teacherUrl = "<%=teacher.teacherCard%>";
+    var studentUrl = "<%=teacher.studentCard%>";
+
+    function uploadImage(){
+        var cos = new CosCloud("10068625","/")
+        document.getElementById("head-input").addEventListener("change",function(){
+            var fileList = this.files;
+            console.log("file:"+JSON.stringify(fileList))
+            if(fileList.length>0){
+                var postfix = fileList[0].name.substr(name.lastIndexOf("."))
+                cos.uploadFile(function(result){
+                    headUrl = JSON.parse(result).data.access_url;
+                    $("#head-image").attr('src',JSON.parse(result).data.access_url)
+                },function(err){
+                    console.log("error")
+                    console.log("err:"+err);
+                },"smxbucket","/head/"+userId+"head"+Math.floor((Math.random()*9000+1000))+postfix,fileList[0],0)
+            }
+        })
+        document.getElementById("image-front-input").addEventListener("change",function(){
+            var fileList = this.files;
+            console.log("file:"+JSON.stringify(fileList))
+            if(fileList.length>0){
+                var postfix = fileList[0].name.substr(name.lastIndexOf("."))
+                cos.uploadFile(function(result){
+                    frontUrl = JSON.parse(result).data.access_url;
+                    $("#image-front").attr('src',JSON.parse(result).data.access_url)
+                },function(err){
+                    console.log("error")
+                    console.log("err:"+err);
+                },"smxbucket","/idcard/"+userId+"card"+Math.floor((Math.random()*9000+1000))+postfix,fileList[0],0)
+            }
+        })
+        document.getElementById("image-back-input").addEventListener("change",function(){
+            var fileList = this.files;
+            console.log("file:"+JSON.stringify(fileList))
+            if(fileList.length>0){
+                var postfix = fileList[0].name.substr(name.lastIndexOf("."))
+                cos.uploadFile(function(result){
+                    backUrl = JSON.parse(result).data.access_url;
+                    $("#image-back").attr('src',JSON.parse(result).data.access_url)
+                },function(err){
+                    console.log("error")
+                    console.log("err:"+err);
+                },"smxbucket","/idcard/"+userId+"card"+Math.floor((Math.random()*9000+1000))+postfix,fileList[0],0)
+            }
+        })
+        document.getElementById("image-student-input").addEventListener("change",function(){
+            var fileList = this.files;
+            console.log("file:"+JSON.stringify(fileList))
+            if(fileList.length>0){
+                var postfix = fileList[0].name.substr(name.lastIndexOf("."))
+                cos.uploadFile(function(result){
+                    studentUrl = JSON.parse(result).data.access_url;
+                    $("#image-student").attr('src',JSON.parse(result).data.access_url)
+                },function(err){
+                    console.log("error")
+                    console.log("err:"+err);
+                },"smxbucket","/idcard/"+userId+"card"+Math.floor((Math.random()*9000+1000))+postfix,fileList[0],0)
+            }
+        })
+        document.getElementById("image-teacher-input").addEventListener("change",function(){
+            var fileList = this.files;
+            console.log("file:"+JSON.stringify(fileList))
+            if(fileList.length>0){
+                var postfix = fileList[0].name.substr(name.lastIndexOf("."))
+                cos.uploadFile(function(result){
+                    teacherUrl = JSON.parse(result).data.access_url;
+                    $("#image-teacher").attr('src',JSON.parse(result).data.access_url)
+                },function(err){
+                    console.log("error")
+                    console.log("err:"+err);
+                },"smxbucket","/idcard/"+userId+"card"+Math.floor((Math.random()*9000+1000))+postfix,fileList[0],0)
+            }
+        })
+    }
+
+
+    function loginDialog(){
+        location.href="teacherDetail"
+    }
+    var editFlag = true;
+    var applyFlag = true;
+    var applyIdFlag = true;
+    var ScienceOrLiberty = 1;
+    function edit(){
+        if(editFlag){
+            editFlag = false;
+            $("#edit").text("完成")
+            $("#person-info").hide();
+            $("#person-edit").show();
+            $("#id").hide();
+            $("#id-edit").show();
+        }else{
+            modifyInfo()
+            editFlag = true;
+            $("#edit").text("编辑")
+            $("#person-info").show();
+            $("#person-edit").hide();
+            $("#id").show();
+            $("#id-edit").hide();
+        }
+    }
+    function changeSubject() {
+        var obj = document.getElementById("change-subject");
+        var index = obj.selectedIndex;
+        if(index == 0){
+            $("#science").show();
+            $("#liberal").hide();
+        }else{
+            $("#science").hide();
+            $("#liberal").show();
+        }
+        ScienceOrLiberty=index;
+    }
+    function logout(){
+        location.href="/"
+    }
+    function modifyInfo(){
+        var teacherName = $("#person-name").val();
+        var phoneNumber = $("#person-phoneNumber").val();
+        var gender = ($("#person-gender").val()=="男")?0:1;
+        var teachClass = $("#subject").val();
+        var college = $("#college").val();
+        var Class = $("#class").val();
+        var province = $("#province").val();
+        var city = $("#city").val();
+        var highSchool = $("#highschool").val();
+        var SciOrLiber = ScienceOrLiberty;
+        var SumScore = $("#sumscore").val();
+        var Chinese = $("#chinese").val();
+        var English = $("#english").val();
+        var Math = $("#math").val();
+        var Physics = $("#physics").val();
+        var Chemistry = $("#chemistry").val();
+        var Biology = $("#biology").val();
+        var Politics = $("#politics").val();
+        var History = $("#history").val();
+        var Geography = $("#geography").val();
+        var cardNumber = $("#card-number").val();
+        var data = {
+            teacherId:"<%=teacher.teacherId%>",
+            userId:"<%=user.userId%>",
+            teacherName:teacherName,
+            phoneNumber:phoneNumber,
+            gender:gender,
+            teachClass:teachClass,
+            college:college,
+            Class:Class,
+            province:province,
+            city:city,
+            highSchool:highSchool,
+            SciOrLiber:SciOrLiber,
+            SumScore:SumScore,
+            Math:Math,
+            Chinese:Chinese,
+            English:English,
+            Physics:Physics,
+            Chemistry:Chemistry,
+            Biology:Biology,
+            Politics:Politics,
+            History:History,
+            Geography:Geography,
+            cardNumber:cardNumber,
+            headUrl:headUrl,
+            frontUrl:frontUrl,
+            backUrl:backUrl,
+            studentUrl:studentUrl,
+            teacherUrl:teacherUrl
+        }
+        console.log(JSON.stringify(data));
+        jQuery.post("./modifyInfo",data,function (ret) {
+            console.log(JSON.stringify(ret));
+            location.reload()
+        })
+    }
+    $("#navigation-teacher").addClass("select-left-button");
+</script>
+</html>

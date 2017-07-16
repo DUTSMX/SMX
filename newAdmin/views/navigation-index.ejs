@@ -18,13 +18,14 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-left margin-40">
+                <li><a href="/">返回首页</a></li>
                 <li><a href="#">关于我们</a></li>
                 <li><a href="#">课程介绍</a></li>
                 <li><a href="#">视频平台</a></li>
                 <li><a href="#">联系我们</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a id="person"onclick="loginDialog()">登录</a></li>
+                <li><a id="person" onclick="loginDialog()">登录</a></li>
             </ul>
             <form class="navbar-form navbar-right" role="search">
                 <div class="form-group">
@@ -36,7 +37,25 @@
     </div>
 </nav>
 <script>
+    userName = '<%=session.userName%>';
+    var userId = '<%=session.userId%>';
+    if(userName.length != 0){
+        document.getElementById("person").innerHTML = userName
+    }
     function home() {
-        location.href="/";
+        if (userName.length == 0) {
+            document.getElementById("person").innerHTML="登录";
+            location.href="/";
+        }
+        else {
+            location.href="/";
+        }
+    }
+    function logout(){
+        $.post('/user/logout',{},function () {
+            userName = '<%=session.userName%>';
+            console.log("userName lenght:" + userName.length);
+            location.href="/";
+        })
     }
 </script>

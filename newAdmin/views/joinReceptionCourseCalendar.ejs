@@ -60,12 +60,10 @@
 
 <script type="text/javascript">
 
-    $("#person").text("前台姓名")
     function loginDialog(){
         location.href="joinReceptionDetail"
     }
-
-    $("#navigation-calendar").addClass("select-left-button");
+    $("#navigation-manager").addClass("select-left-button");
     var type = 0;
     var number=[
         [16,17,16,18,13,16,19,16,17,16,18,13,16,19,16,17,16,18,13,16,19,16,17,16,18,13,16,19,13,16,19],
@@ -73,7 +71,6 @@
         [5,3,4,5,3,4,6,5,3,4,5,3,4,6,5,3,4,5,3,4,6,5,3,4,5,3,4,6,5,3,4],
         [2,6,10,12,7,6,6,2,6,10,12,7,6,6,2,6,10,12,7,6,6,2,6,10,12,7,6,6,2,6,10]
     ];
-
     var slidate=new Date();
     var year = slidate.getFullYear();
     var month = slidate.getMonth()+1;
@@ -93,35 +90,62 @@
         setData(year,month,type)
     }
     function setData(year,month,type){
-        var monthFirst = new Date(year, month-1, 1).getDay();//获取当月的1日等于星期几
-        var d = new Date(year, month, 0); //获取月
-        var conter=d.getDate();//获取当前月的天数
-        var html = '';
-        $("#month").text(year+"年"+month+"月")
-        //遍历日历网格
-        for(var i=1; i<=6;i++){
-            html+="<tr>";
-            for(var j=1; j<=7;j++)
-            {
-                html+='<td onclick="dayDetail()"></td>';
+        var firstDate = new Date(year, month-1, 1);//获取当月的1日等于星期几
+        var lastDate = new Date(year, month, 1)
+        var data={
+            firstDate:firstDate.getFullYear()+"-"+(firstDate.getMonth()+1)+"-"+firstDate.getDate(),
+            lastDate:lastDate.getFullYear()+"-"+(lastDate.getMonth()+1)+"-"+lastDate.getDate()
+        }
+        console.log("data:"+JSON.stringify(data))
+        $.post("courseNumber",data,function (ret) {
+            console.log("courseNumber:"+JSON.stringify(ret))
+            var monthFirst = firstDate.getDay()
+            var d = new Date(year, month, 0); //获取月
+            var conter=d.getDate();//获取当前月的天数
+            var html = '';
+            $("#month").text(year+"年"+month+"月")
+            var startDate = new Date(year,month,1)
+            //遍历日历网格
+            var index = 0;
+            for(var i=1; i<=6;i++){
+                html+="<tr>";
+                for(var j=1; j<=7;j++)
+                {
+                    var count = (i-1)*7+j;
+                    if(count<=monthFirst || count>(monthFirst+conter)){
+                        html+='<td></td>';
+                    }else{
+                        console.log(index+": "+JSON.stringify(ret[index]))
+                        var date = startDate.getFullYear()+"-"+Appendzero(startDate.getMonth())+"-"+Appendzero(startDate.getDate());
+                        console.log("startDate: "+date)
+                        console.log("index:"+index+"  length:"+ret.length)
+                        if(index<ret.length && ret[index].courseDate == date) {
+                            console.log("number:"+ret[index].number)
+                            html+="<td onclick='dayDetail("+startDate.getFullYear()+","+startDate.getMonth()+","+startDate.getDate()+")'><p class='color'>" + parseInt(count - monthFirst) + "</p><br><p class='los'>" + ret[index].number + "</p></td>";
+                            index++;
+                        }else{
+                            html+="<td onclick='dayDetail("+startDate.getFullYear()+","+startDate.getMonth()+","+startDate.getDate()+")'><p class='color'>" + parseInt(count - monthFirst) + "</p><br><p class='los'> 0 </p></td>";
+                        }
+                        startDate.setDate(startDate.getDate()+1)
+                    }
+                }
+                html+="</tr>";
             }
-            html+="</tr>";
-        }
-        $("#tbody").html(html);
+            $("#tbody").html(html);
+        })
 
-        //遍历网格内容
-        var $slitd=$("#tbody").find("td");
-        for(var i=0; i<conter; i++)
-        {
-            $slitd.eq(i+monthFirst).html("<p class='color'>"+parseInt(i+1)+"</p><br><p class='los'>"+number[type][i]+"</p>")
-        }
+    }
+    function Appendzero(obj)
+    {
+        if(obj<10) return "0" +""+ obj;
+        else return obj;
     }
     function choose(type,name) {
         $("#joinName").text(name);
         setData(year,month,type)
     }
-    function dayDetail(){
-        location.href="joinReceptionTodayCourse"
+    function dayDetail(year,month,day){
+        location.href="joinReceptionTodayCourse?date="+year+"-"+month+"-"+day;
     }
     function createCourse() {
         location.href="createCourse"

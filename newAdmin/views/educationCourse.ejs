@@ -34,32 +34,43 @@
         <h3 class="panel-title title-white">课程列表</h3>
         <h3 class="panel-title right-button" onclick="addCourse()">添加课程</h3>
     </div>
+    <%courseSeries.forEach(function (item){%>
     <div class="course-block">
         <div class="inline left">
-            <h3 class="inline course-title">高三数学基础班</h3><br>
-            <h4 class="inline">共10课时</h4><br>
+            <h3 class="inline course-title"><%=item.seriesName%></h3><br>
+            <h4 class="inline">共<%=item.number%>课时</h4><br>
         </div>
-        <button class="btn btn-success right sign-up" onclick="detail()">详情</button>
+        <button class="btn btn-success right sign-up" onclick="detail(<%=item.templateId%>)">详情</button>
     </div>
-    <div class="course-block">
-        <div class="inline left">
-            <h3 class="inline course-title">高三数学提高班</h3><br>
-            <h4 class="inline">共10课时</h4><br>
+    <%})%>
+    <div class="course-list margin-top-20">
+        <div class="panel-heading title-block">
+            <h3 class="panel-title title-white">课程申请</h3>
         </div>
-        <button class="btn btn-success right sign-up" onclick="detail()">详情</button>
-    </div>
-    <div class="course-block">
-        <div class="inline left">
-            <h3 class="inline course-title">高三数学冲刺班</h3><br>
-            <h4 class="inline">共10课时</h4><br>
+        <%post.forEach(function (item) {%>
+        <div class="course-block">
+            <div class="inline left">
+                <h3 class="inline course-title"><%=item.students%></h3><br>
+                <h4 class="inline"><%=item.courseSeriesName%>  <%=item.courseSeriesClassType%> <%=item.time%> <%=item.teacher%></h4>
+            </div>
+            <button class="btn btn-success right sign-up" onclick="add()">添加</button>
+            <button class="btn btn-success right sign-up" onclick="post('<%=item.courseSeriesId%>')">提交</button>
         </div>
-        <button class="btn btn-success right sign-up" onclick="detail()">详情</button>
+        <%})%>
     </div>
 </div>
 </body>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
     $("#person").text("教务姓名")
+    function post(id){
+        var data = {
+            seriesId:id
+        }
+        $.post("createCourse",data,function (data) {
+            console.log(data)
+        })
+    }
     function loginDialog(){
         location.href="educationDetail"
     }
@@ -67,8 +78,8 @@
     function addCourse(){
         location.href = "educationCreateCourse"
     }
-    function detail(){
-        location.href = "educationCourseDetail"
+    function detail(id){
+        location.href = "educationCourseDetail?templateId="+id;
     }
 </script>
 </html>

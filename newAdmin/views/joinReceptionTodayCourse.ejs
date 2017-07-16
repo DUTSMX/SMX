@@ -26,142 +26,37 @@
         .teacher-name{margin-left:10px; display:inline-block}
         .sign-up{margin-top:-5px;margin-right:10px;display: inline-block}
         .hide{display:none}
+        .course-title{color:#4cae4c}
     </style>
 </head>
 <body style="height:100%">
 <%include navigation-index.ejs%>
 <%include navigation-joinReception.ejs%>
 <div class="right-content">
-    <div class="panel-heading title-block">
-        <h3 class="panel-title title-white">本周教师</h3>
-    </div>
-    <div class="teacher-block">
-        <h4 class="teacher-name">齐书强</h4>
-        <button class="btn btn-failed sign-up">已确认</button>
-    </div>
-    <div class="teacher-block">
-        <h4 class="teacher-name">张可爽</h4>
-        <button class="btn btn-failed sign-up">已确认</button>
-    </div>
-    <div class="teacher-block">
-        <h4 class="teacher-name">李金泰</h4>
-        <button class="btn btn-success sign-up" onclick="contact()">联系</button>
-    </div>
-    <div class="teacher-block">
-        <h4 class="teacher-name">李丹丹</h4>
-        <button class="btn btn-failed sign-up">已确认</button>
-    </div>
-    <div class="panel-heading title-block">
-        <h3 class="panel-title title-white">当天课表</h3>
-    </div>
     <button class="btn btn-default inline right" onclick="printSheet()">打印签到表</button>
     <div class="width-700">
-        <p id="month" class="center">2017年6月17日</p>
+        <%var nowDate = date.split("-")%>
+        <p id="month" class="center"><%=nowDate[0]%>年<%=nowDate[1]%>月<%=nowDate[2]%>日</p>
     </div>
     <div style="padding-right: 17px" id="home">
         <table class="table table-hover" style="margin-bottom:0px;">
             <thead>
             <tr>
                 <th></th>
-                <th>7:00</th>
-                <th>8:40</th>
-                <th>10:20</th>
-                <th>13:30</th>
-                <th>15:10</th>
-                <th>16:50</th>
-                <th>19:30</th>
-                <th>21:10</th>
+                <%courseTime.forEach(function (time) {%>
+                    <th><%=time%></th>
+                <%})%>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th class="width-5"><p>教室1</p></th>
-                <td class="width-10">齐书强<br> （高三 数学） <br><p>时广毅</p></td>
-                <td class="width-10">齐书强<br> （高三 数学） <br><p>李苓苓</p></td>
-                <td class="width-10">齐书强<br> （高三 数学） <br><p>王婉月</p></td>
-                <td class="width-10">齐书强<br> （高二 数学） <br><p>李程 常诗涵 王欣淼 张佳伟 乔文韬</p></td>
-                <td class="width-10">齐书强<br> （高三 数学） <br><p>丁佳兴 高城博</p></td>
-                <td class="width-10">齐书强<br> （高三 数学） <br><p>刘跃 王赛 张秋雨</p></td>
-                <td class="width-10"></td>
-                <td class="width-10"></td>
+            <%data.forEach(function (item) {%>
+            <tr id="table">
+                <th class="width-5"><p><%=item.courseRoom%></p></th>
+                <%item.course.forEach(function(course){%>
+                    <td class="width-10"><%=course.courseTeacher%><br> <span class="course-title"><%=course.courseName%></span><br><span><%=course.student%></span></td>
+                <%})%>
             </tr>
-            <tr>
-                <th>教室2</th>
-                <td>张可爽<br> （高一 生物） <br><p>李苓苓 李程 常诗涵 刘跃</p></td>
-                <td></td>
-                <td></td>
-                <td>张可爽<br> （高三 生物） <br><p>庞爱迪</p></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>教室3</th>
-                <td>李金泰<br> （高三 数学） <br><p>王赛 方静 张秋雨 高城博</p></td>
-                <td></td>
-                <td></td>
-                <td>李金泰<br> （高一 语文） <br><p>贾楠</p></td>
-                <td>李金泰<br> （高二 语文） <br><p>李程</p></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>教室4</th>
-                <td>李丹丹<br> （高二 文数） <br><p>韩莹</p></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>教室5</th>
-                <td></td>
-                <td>李丹丹<br> （高三 英语） <br><p>庞爱迪</p></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>教室6</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>教室7</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>教室8</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+            <%})%>
             </tbody>
         </table>
     </div>
@@ -179,13 +74,12 @@
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="/javascripts/divselect.js"></script>
 <script>
-    $("#person").text("前台姓名")
     function loginDialog(){
         location.href="joinReceptionDetail"
     }
     $("#navigation-course").addClass("select-left-button");
     function printSheet(){
-        location.href = "joinReceptionPrint";
+        location.href = "joinReceptionPrint?date=<%=date%>";
     }
     function contact(){
         $("#fade").show()
@@ -195,5 +89,6 @@
         $("#fade").hide()
         $("#light").hide()
     }
+
 </script>
 </html>

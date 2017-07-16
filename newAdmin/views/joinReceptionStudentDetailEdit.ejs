@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>尚名校</title>
+    <!-- Bootstrap -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/stylesheets/admin.css" rel="stylesheet" type="text/css"/>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .head{width:96px;height:96px}
+        .head-input{opacity: 0;position:absolute;width:96px;height:96px;z-index: 1000}
+        .head-edit{position:absolute;text-align:center;margin-top:40px;width:96px;height:96px;z-index: 900}
+        .base-info{display: inline-block;height: 96px;vertical-align: middle;}
+        .image{width:49%;display: inline-block;text-align: center;margin-top:20px}
+        .image img{width:80%}
+        .image-input{opacity: 0;position:absolute;width:100%;height:100%;z-index: 1000}
+        .image-edit{position:absolute;text-align:center;margin-top:15%;width:100%;z-index: 900}
+    </style>
+</head>
+<body style="height:100%" onload="uploadImage()">
+<%include navigation-index.ejs%>
+<%include navigation-joinReception.ejs%>
+<div class="right-content">
+    <div class="panel-heading title-block">
+        <h3 class="panel-title title-white">基本信息</h3>
+        <h3 class="panel-title right-button" onclick="edit()" id="edit">编辑</h3>
+    </div>
+    <div class="margin-left-30" id="person-info">
+        <!--<button class="btn btn-default right" onclick="logout()">退出登录</button>-->
+        <img src="<%=user.userHeadUrl%>" class="head img-circle right">
+        <div class="base-info">
+            <h3 class="inline"><%=user.userName%>&nbsp; <%if(user.gender== 0){%>男<%}else{%>女<%}%></h3><br>
+            <h4 class="inline">电话:<%=user.phoneNumber%></h4>
+        </div>
+        <br>
+        <h4 class="inline">学校:<%=student.school%></h4><br>
+        <h4 class="inline">年级:<%=student.grade%></h4><br>
+            <!--<h4>学习状况:<%=student.learningstatus%></h4><br>-->
+        <!--<h4 class="inline">学习情况：中等</h4>-->
+        <h4 class="inline">家庭地址:<%=user.userAddress%></h4>
+    </div>
+    <div class="margin-left-30"   style="display: none" id="person-edit">
+        <div class="carousel-inner right" style="width:auto">
+            <input type="file" class="head-input" id="head-input"/>
+            <p class="head-edit">编辑图片</p>
+            <img id="head-image" src="<%=user.userHeadUrl%>" class="head img-circle">
+        </div><br>
+        <label>学生姓名&nbsp</label><input id="person-name"class="inline margin-top-20" value=<%=user.userName%> placeholder="请输入学生姓名" /><br>
+        <label>学生性别&nbsp</label><input id="person-gender"class="inline margin-top-20" value="<%if(user.gender== 0){%>男<%}else{%>女<%}%>" placeholder="请输入性别" /><br>
+        <label>手机号码&nbsp</label><input id="person-phoneNumber"class="inline margin-top-20" value="<%=user.phoneNumber%>" placeholder="请输入手机号码" /><br>
+        <label>学校名称&nbsp</label><input id="person-school" value="<%=student.school%>" class="inline margin-top-20" placeholder="请输入学校名称"/><br>
+        <label>学校年级&nbsp</label><input id="person-class" value="<%=student.grade%>" class="inline margin-top-20" placeholder="请输入学校年级"/><br>
+        <label>家庭地址&nbsp</label><input id="person-address" value="<%=user.userAddress%>" class="inline margin-top-20" placeholder="请输入家庭信息">
+    </div>
+    <!--<div class="panel-heading title-block">-->
+        <!--<h3 class="panel-title title-white">隐私信息</h3>-->
+    <!--</div>-->
+    <div class="margin-left-30" id="id">
+        <h4>身份证号:<%=user.cardNumber%></h4>
+        <div class="image">
+            <img src="<%=user.userFrontIdHeadUrl%>"/>
+            <p>身份证正面</p>
+        </div>
+        <div class="image">
+            <img src="<%=user.userBackIdHeadUrl%>"/>
+            <p>身份证背面</p>
+        </div>
+    </div>
+    <div class="margin-left-30" style="display:none" id="id-edit">
+        <div class="margin-top-20">
+            <label>身份证号&nbsp</label><input value="<%=user.cardNumber%>" placeholder="请输入身份证号"/><br>
+        </div>
+        <div class="image carousel-inner">
+            <input type="file" class="image-input" id="image-front-input"/>
+            <p class="image-edit">编辑图片</p>
+            <img src="<%=user.userFrontIdHeadUrl%>" id="image-front"/>
+            <p>身份证正面</p>
+        </div>
+        <div class="image carousel-inner">
+            <input type="file" class="image-input" id="image-back-input"/>
+            <p class="image-edit">编辑图片</p>
+            <img src="<%=user.userBackIdHeadUrl%>" id="image-back"/>
+            <p>身份证背面</p>
+        </div>
+    </div>
+</div>
+</body>
+
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="/javascripts/sdk/qcloud_sdk.js"></script>
+<script src="/javascripts/sdk/swfobject.js"></script>
+<script>
+    var headUrl = "<%=user.userHeadUrl%>"
+    var frontUrl = "<%=user.userFrontIdHeadUrl%>";
+    var backUrl = "<%=user.userBackIdHeadUrl%>";
+
+    function uploadImage(){
+        var cos = new CosCloud("10068625","/")
+        document.getElementById("head-input").addEventListener("change",function(){
+            var fileList = this.files;
+            console.log("file:"+JSON.stringify(fileList))
+            if(fileList.length>0){
+                var postfix = fileList[0].name.substr(name.lastIndexOf("."))
+                cos.uploadFile(function(result){
+                    headUrl = JSON.parse(result).data.access_url;
+                    $("#head-image").attr('src',JSON.parse(result).data.access_url)
+                },function(err){
+                    console.log("error")
+                    console.log("err:"+err);
+                },"smxbucket","/head/"+userId+"head"+Math.floor((Math.random()*9000+1000))+postfix,fileList[0],0)
+            }
+        })
+        document.getElementById("image-front-input").addEventListener("change",function(){
+            var fileList = this.files;
+            console.log("file:"+JSON.stringify(fileList))
+            if(fileList.length>0){
+                var postfix = fileList[0].name.substr(name.lastIndexOf("."))
+                cos.uploadFile(function(result){
+                    frontUrl = JSON.parse(result).data.access_url;
+                    $("#image-front").attr('src',JSON.parse(result).data.access_url)
+                },function(err){
+                    console.log("error")
+                    console.log("err:"+err);
+                },"smxbucket","/idcard/"+userId+"card"+Math.floor((Math.random()*9000+1000))+postfix,fileList[0],0)
+            }
+        })
+        document.getElementById("image-back-input").addEventListener("change",function(){
+            var fileList = this.files;
+            console.log("file:"+JSON.stringify(fileList))
+            if(fileList.length>0){
+                var postfix = fileList[0].name.substr(name.lastIndexOf("."))
+                cos.uploadFile(function(result){
+                    backUrl = JSON.parse(result).data.access_url;
+                    $("#image-back").attr('src',JSON.parse(result).data.access_url)
+                },function(err){
+                    console.log("error")
+                    console.log("err:"+err);
+                },"smxbucket","/idcard/"+userId+"card"+Math.floor((Math.random()*9000+1000))+postfix,fileList[0],0)
+            }
+        })
+    }
+
+    var editFlag = true;
+    var joinshop="<%=student.joinshop%>";
+    function edit(){
+        if(editFlag){
+            editFlag = false;
+            $("#edit").text("完成")
+            $("#person-info").hide();
+            $("#person-edit").show();
+            $("#id").hide();
+            $("#id-edit").show();
+        }else{
+            editFlag = true;
+            changeInfo();
+            $("#edit").text("编辑")
+            $("#person-info").show();
+            $("#person-edit").hide();
+            $("#id").show();
+            $("#id-edit").hide();
+        }
+    }
+    function loginDialog(){
+        location.href="joinReceptionDetail"
+    }
+    function changeShop() {
+        var obj = document.getElementById("change-shop");
+        var index = obj.selectedIndex;
+        if(index == 0){
+            joinshop="台安店";
+        }else if(index==1){
+            joinshop="大连店";
+        }else if(index==2){
+            joinshop="沈阳店";
+        }
+    }
+    function changeInfo(){
+        var userName = $("#person-name").val();
+        var phoneNumber = $("#person-phoneNumber").val();
+        var gender = ($("#person-gender").val()=="男")?0:1;
+        var userAddress = $("#person-address").val();
+        var grade = $("#person-class").val();
+        var school = $("#person-school").val();
+        var join = joinshop;
+        var data = {
+            userId:'<%=user.userId%>',
+            studentId:'<%=student.studentId%>',
+            userName:userName,
+            phoneNumber:phoneNumber,
+            gender:gender,
+            userAddress:userAddress,
+            grade:grade,
+            joinshop:join,
+            school:school,
+            headUrl:headUrl,
+            frontUrl:frontUrl,
+            backUrl:backUrl
+        }
+        console.log(JSON.stringify(data));
+        jQuery.post("./changeInfo",data,function (ret) {
+            console.log(JSON.stringify(ret));
+            location.reload()
+        })
+    }
+    $("#navigation-student").addClass("select-left-button");
+</script>
+</html>

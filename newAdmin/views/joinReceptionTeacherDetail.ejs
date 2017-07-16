@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>尚名校</title>
+    <!-- Bootstrap -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/stylesheets/admin.css" rel="stylesheet" type="text/css"/>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .head{width:96px;height:96px;}
+        .head-input{opacity: 0;position:absolute;width:96px;height:96px;z-index: 1000}
+        .head-edit{position:absolute;text-align:center;margin-top:40px;width:96px;height:96px;z-index: 900}
+        .base-info{display: inline-block;height: 96px;vertical-align: middle;}
+        .image{width:49%;display: inline-block;text-align: center;margin-top:20px}
+        .image img{width:80%}
+        .image-input{opacity: 0;position:absolute;width:40%;height:20%;z-index: 1000}
+        .image-edit{position:absolute;text-align:center;margin-top:5%;width:40%;z-index: 900}
+        .course-block{height:60px;border-radius: 5px;border-style:solid;border-width:1px;border-color:#4cae4c;margin-bottom:10px;margin-top:10px}
+        .course-title{color:#4cae4c}
+        .inline{display: inline-block;margin:2px;}
+        .sign-up{margin-top:10px;margin-right:10px}
+    </style>
+</head>
+<body style="height:100%">
+<%include navigation-index.ejs%>
+<%include navigation-joinReception.ejs%>
+<div class="right-content">
+    <div class="margin-left-30" id="person-edit">
+        <label><%=teacher.userName%>&nbsp</label> <label><%=teacher.phoneNumber%>&nbsp</label><button class="right btn btn-defalut" onclick="teacherDetail()">编辑信息</button>
+    </div>
+    <div class="panel-heading title-block" style="margin-top:20px">
+        <h3 class="panel-title title-white">进行中</h3>
+    </div>
+    <div>
+        <%if(nowCourse.length == 0){%>
+        <h4 style="text-align: center;margin:10px">当前没有课程</h4>
+        <%} nowCourse.forEach(function (item) { %>
+        <div class="course-block">
+            <div class="inline left">
+                <h3 class="inline course-title"><%=item.courseSeriesName%></h3><h4 class="inline"><%=item.userName%></h4><br>
+                <h4 class="inline"><%=item.startDate%>~~<%=item.endDate%> <%=item.time%>  <%=item.room%></h4>
+            </div>
+            <button class="btn btn-success right sign-up" onclick="courseDetail(<%=item.courseSeriesId%>)">详情</button>
+        </div>
+        <%})%>
+    </div>
+    <div class="panel-heading title-block">
+        <h3 class="panel-title title-white">已完成</h3>
+    </div>
+    <div>
+
+        <%if(finishCourse.length == 0){%>
+        <h4 style="text-align: center;margin:10px">没有已完成的课程</h4>
+        <%} finishCourse.forEach(function (item) { %>
+        <div class="course-block">
+            <div class="inline left">
+                <h3 class="inline course-title"><%=item.courseSeriesName%></h3><h4 class="inline"><%=item.userName%></h4><br>
+                <h4 class="inline"><%=item.startDate%>~~<%=item.endDate%> <%=item.time%>  <%=item.room%></h4>
+            </div>
+            <button class="btn btn-success right sign-up" onclick="courseDetail(<%=item.courseSeriesId%>)">详情</button>
+        </div>
+        <%})%>
+    </div>
+</div>
+</body>
+
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+    function teacherDetail(){
+        location.href = "joinReceptionTeacherDetailEdit?teacherId="+'<%=teacher.teacherId%>'
+    }
+    $("#navigation-teacher").addClass("select-left-button");
+</script>
+</html>

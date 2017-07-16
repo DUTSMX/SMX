@@ -29,66 +29,46 @@
 <%include navigation-index.ejs%>
 <%include navigation-student.ejs%>
 <div class="right-content">
-    <div class="panel-heading title-block">
-        <h3 class="panel-title title-white">课程提醒</h3>
-    </div>
-    <div class="course-block">
-        <div class="inline left">
-            <h3 class="inline course-title">圆锥曲线</h3>
-            <h4 class="inline">齐书强</h4><br>
-            <h4 class="inline">高三数学 第6/10课时</h4>
+    <div>
+        <div class="panel-heading title-block">
+            <h3 class="panel-title title-white">申请中</h3>
         </div>
-        <h2 class="inline left center">2017-6-17 8:40</h2>
-        <h4 class="inline left center margin-top-20">教室2</h4>
-        <button class="btn btn-success right sign-up" onclick="courseDetail()">详情</button>
-    </div>
-    <div class="course-block">
-        <div class="inline left">
-            <h3 class="inline course-title">遗传定律</h3>
-            <h4 class="inline">张可爽</h4><br>
-            <h4 class="inline">高三生物 第6/10课时</h4>
+        <%if(postCourse.length == 0){%>
+            <h4 style="text-align: center;padding:10px">当前没有申请中的课程</h4>
+        <%}else{
+        postCourse.forEach(function (item) {%>
+        <div class="course-block">
+            <div class="inline left">
+                <h3 class="inline course-title"><%=item.seriesName%></h3><br>
+                <label class="dialog-label">基本信息</label><br>
+                <label class="dialog-label">课程名称</label><input id="courseName" class="dialog-input" placeholder="请输入课程名称">
+                <label class="dialog-label">上课同学</label><input id="chooseStudent" class="dialog-input" placeholder="请输入同学" onclick="chooseStudent()">
+                <label class="dialog-label">附加信息</label><br>
+                <label class="dialog-label">上课老师</label><input id="chooseTeacher" class="dialog-input" placeholder="请输入期望老师，默认为老师不限">
+                <label class="dialog-label">班    型</label><input id="classType" class="dialog-input" placeholder="请输入期望班型，默认为班型不限">
+                <label class="dialog-label">期望时间</label><input id="time" class="dialog-input" placeholder="请输入期望时间，默认为班型不限">
+                <label class="dialog-label">备    注</label><input id="other" class="dialog-input" placeholder="请输入期望时间，默认为班型不限">
+            </div>
+            <button class="btn btn-warning right sign-up" onclick="deleteHope('<%=item.joinSeriesId%>')">撤销</button>
+        </div>
+        <%})
+        }%>
 
-        </div>
-        <h2 class="inline left center">2017-6-17 13:30</h2>
-        <h4 class="inline left center margin-top-20">教室1</h4>
-        <button class="btn btn-success right sign-up" onclick="courseDetail()">详情</button>
     </div>
     <div class="panel-heading title-block">
-        <h3 class="panel-title title-white">课程推荐</h3>
-        <h3 class="panel-title right-button" onclick="applyCourse()" id="applyCourse">申请课程</h3>
+        <h3 class="panel-title title-white">课程列表</h3>
+        <!--<h3 class="panel-title right-button" onclick="applyCourse()" id="applyCourse">申请课程</h3>-->
     </div>
+    <%allCourse.forEach(function (item) { %>
     <div class="course-block">
         <div class="inline left">
-            <h3 class="inline course-title">高考数学冲刺班</h3><br>
-            <h4 class="inline">高三生物 共10课时</h4>
+            <h3 class="inline course-title"><%=item.seriesName%></h3><br>
+            <h4 class="inline"><%=item.subject%> 共<%=item.number%>课时</h4>
         </div>
-        <button class="btn btn-success right sign-up" onclick="courseDetail()">详情</button>
-        <button class="btn btn-success right sign-up" onclick="enter()">报名</button>
+        <button class="btn btn-success right sign-up" onclick="templateDetail(<%=item.templateId%>)">详情</button>
+        <button class="btn btn-success right sign-up" onclick="enter('<%=item.seriesName%>','<%=item.templateId%>')">报名</button>
     </div>
-    <div class="course-block">
-        <div class="inline left">
-            <h3 class="inline course-title">高考物理冲刺班</h3><br>
-            <h4 class="inline">高三物理 共10课时</h4>
-        </div>
-        <button class="btn btn-success right sign-up" onclick="courseDetail()">详情</button>
-        <button class="btn btn-success right sign-up" onclick="enter()">报名</button>
-    </div>
-    <div class="course-block">
-        <div class="inline left">
-            <h3 class="inline course-title">高考化学冲刺班</h3><br>
-            <h4 class="inline">高三化学 共10课时</h4>
-        </div>
-        <button class="btn btn-success right sign-up" onclick="courseDetail()">详情</button>
-        <button class="btn btn-success right sign-up" onclick="enter()">报名</button>
-    </div>
-    <div class="course-block">
-        <div class="inline left">
-            <h3 class="inline course-title">高考生物冲刺班</h3><br>
-            <h4 class="inline">高三生物 共10课时</h4>
-        </div>
-        <button class="btn btn-success right sign-up" onclick="courseDetail()">详情</button>
-        <button class="btn btn-success right sign-up" onclick="enter()">报名</button>
-    </div>
+    <%})%>
 </div>
 <div id="fade" class="black-overlay"></div>
 <div id="light" class="white-content">
@@ -103,8 +83,16 @@
     </div>
     <div class="dialog" id="enter" display="none">
         <div class="dialog-title"><span class="font-20 title-white">申请课程</span><span class="right title-white" onclick="closeDialog()">X</span></div>
-        <label class="dialog-label">课程名称</label><input class="dialog-input" placeholder="请输入课程名称">
-        <label class="dialog-label">上课同学</label><input class="dialog-input" placeholder="请输入同学">
+        <label class="dialog-label">课程名称</label><input id="courseName" class="dialog-input" placeholder="请输入课程名称">
+        <label class="dialog-label">上课同学</label><input id="courseStudent" class="dialog-input" placeholder="请输入同学">
+        <label class="dialog-label">期望老师</label><input id="courseTeacher" class="dialog-input" placeholder="请输入老师">
+        <label class="dialog-label">期望班型</label>
+        <span id="select-class" class="btn-group dialog-input">
+            <input type="radio">1人&nbsp&nbsp&nbsp&nbsp
+            <input type="radio">2人&nbsp&nbsp&nbsp&nbsp
+            <input type="radio">3-4人&nbsp&nbsp&nbsp&nbsp
+            <input type="radio">5-8人
+        </span><br>
         <label class="dialog-label">期望时间</label>
         <select id="time"class="dialog-input" onchange="selectTime()">
             <option>时间不限</option>
@@ -130,13 +118,15 @@
             <input type="checkbox">19:30
             <input type="checkbox">21:10
         </div>
-        <button class="btn btn-default dialog-button" onclick="closeDialog()">提交申请</button>
+        <button class="btn btn-default dialog-button" onclick="postHope()">提交申请</button>
     </div>
 </div>
 </body>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-    $("#person").text("学生姓名")
+
+
+
     function loginDialog(){
         location.href="studentDetail"
     }
@@ -145,12 +135,41 @@
         $("#light").show()
         $("#apply-course").show();
         $("#enter").hide();
+
     }
-    function enter(){
+    function enter(name,id){
+        selectId = id;
+        $("#courseName").val(name)
+        $("#courseStudent").val("学生姓名")
+        console.log("enter")
         $("#fade").show()
         $("#light").show()
         $("#apply-course").hide();
         $("#enter").show();
+    }
+    function postHope(){
+        var data = {
+            templateId:selectId,
+            studentId:studentId,
+            teacher:$("#chooseTeacher").val(),
+            classType:$("#classType").val(),
+            time:$("#time").val(),
+            other:$("#other").val()
+        }
+        $.post("postHope",data,function (data) {
+            if(data.status){
+                location.reload()
+                closeDialog();
+            }else{
+                alert(data.desc)
+                closeDialog();
+            }
+        })
+    }
+    function deleteHope(id){
+        $.post("deleteHope",{joinSeriesId:id},function(data){
+            location.reload()
+        })
     }
     function closeDialog(){
         $("#fade").hide()
@@ -158,17 +177,20 @@
         $("#apply-course").hide();
         $("#enter").hide();
     }
-    function courseDetail(){
-        location.href="studentCourseDetail"
+    function courseDetail(id){
+        location.href="studentCourseDetail?seriesId="+id;
+    }
+    function templateDetail(id){
+        location.href="studentTemplateDetail?templateId="+id;
     }
     $("#navigation-course").addClass("select-left-button");
     function selectTime(){
         var time = $("#time").val();
         if(time == "每天"){
-            $("#select-day").show();
+            $("#select-day").hide();
             $("#select-course").show();
         }else if(time == "每周"){
-            $("#select-day").hide();
+            $("#select-day").show();
             $("#select-course").show();
         }else{
             $("#select-day").hide();
