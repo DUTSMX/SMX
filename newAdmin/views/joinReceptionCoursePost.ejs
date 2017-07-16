@@ -35,7 +35,7 @@
 <div class="right-content">
     <div class="panel-heading title-block">
         <h3 class="panel-title title-white">课程列表</h3>
-        <!--<h3 class="panel-title right-button" onclick="applyCourse()" id="applyCourse">申请课程</h3>-->
+        <h3 class="panel-title right-button" onclick="addCourse()" id="addCourse">添加课程</h3>
     </div>
     <%allCourse.forEach(function (item) { %>
     <div class="course-block">
@@ -53,7 +53,7 @@
     <div class="dialog" id="post" display="none">
         <div class="dialog-title"><span class="font-20 title-white">申请课程</span><span class="right title-white" onclick="closeDialog()">X</span></div>
         <label class="dialog-label">基本信息</label><br>
-        <label class="dialog-label">课程名称</label><input id="courseName" class="dialog-input" placeholder="请输入课程名称">
+        <label class="dialog-label">课程名称</label><input id="courseName" class="dialog-input" placeholder="请输入课程名称" disabled>
         <label class="dialog-label">上课同学</label><input id="chooseStudent" class="dialog-input" placeholder="请输入同学" onclick="chooseStudent()">
         <label class="dialog-label">附加信息</label><br>
         <label class="dialog-label">上课老师</label><input id="chooseTeacher" class="dialog-input" placeholder="请输入期望老师，默认为老师不限">
@@ -202,6 +202,9 @@
     }
     function templateDetail(id){
         location.href="joinReceptionTemplateDetail?templateId="+id;
+    }
+    function addCourse(){
+        location.href="joinReceptionCreateTemplate"
     }
 </script>
 </html>

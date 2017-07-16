@@ -95,7 +95,7 @@
                 <input type="radio" name="room" value="教室八">教室八
             </div>
             <label class="dialog-label">开课日期</label><input id="startDate" type="date" class="dialog-input" placeholder="请输入开课日期" style="margin:0;padding:0" onchange="setDate()">
-            <label class="dialog-label">结课日期</label><input id="endDate" class="dialog-input" placeholder="请输入开课日期" disabled>
+            <label class="dialog-label">结课日期</label><input id="endDate" type="date" class="dialog-input" placeholder="请输入开课日期" style="margin:0;padding:0" disabled>
             <label class="dialog-label">期望时间</label>
             <div id="select-time" class="dialog-input inline  ">
                 <input type="radio" name="time" value="07:00">07:00
@@ -110,7 +110,7 @@
             <button class="btn btn-default dialog-button" onclick="post()" id="createCourse">创建班级</button>
         </div>
         <div id="course" class="white-content">
-            <div class="dialog-title"><span class="font-20 title-white">选择已有</span><span class="right title-white" onclick="closeDialog()">X</span></div>
+            <div class="dialog-title"><span class="font-20 title-white">添加到已有课程</span><span class="right title-white" onclick="closeDialog()">X</span></div>
             <label class="dialog-label">上课同学</label><input id="courseChooseStudent" class="dialog-input" placeholder="请输入同学" disabled>
             <%if(allCourse.length == 0){%>
             <h4 style="text-align: center;margin:10px">当前没有课程</h4>
@@ -120,7 +120,7 @@
                     <h3 class="inline course-title"><%=item.courseSeriesName%></h3><br>
                     <h4 class="inline"><%=item.userName%></h4><h4 class="inline"><%=item.time%>  <%=item.room%></h4>
                 </div>
-                <button class="btn btn-success right sign-up" onclick="courseDetail(<%=item.courseSeriesId%>)">选择</button>
+                <button class="btn btn-success right sign-up" onclick="selectCourse(<%=item.courseSeriesId%>)">选择</button>
             </div>
             <%})%>
         </div>
@@ -150,6 +150,11 @@
             }
         })
     }
+    function Appendzero(obj)
+    {
+        if(obj<10) return "0" +""+ obj;
+        else return obj;
+    }
     function setDate(){
         var startDate = $("#startDate").val();
         var strDate = startDate.split("-");
@@ -174,10 +179,11 @@
             }
         }
 
-        $("#endDate").val(strDate[0]+"/"+strDate[1]+"/"+strDate[2])
+        $("#endDate").val(strDate[0]+"-"+Appendzero(strDate[1])+"-"+Appendzero(strDate[2]))
     }
     function enter(){
         clear();
+        $("#courseName").val("<%=template.seriesName%>")
         var checkedList = $(".checkStudent");
         var firstFlag = true;
         for(var i=0;i<checkedList.length;i++){
@@ -277,8 +283,6 @@
                                 templateId:templateId,
                                 studentId:studentList,
                                 teacherId:teacherId,
-                                classType:$("#classtype").val(),
-                                time:"8:00",
                                 shopId:1,
                                 startDate:startDate,
                                 endDate:endDate,
@@ -342,7 +346,6 @@
         $(".white-content").width("350px")
         $(".dialog-title").width("330px")
         $("#chooseTeacher").attr("disabled",false)
-        $("#chooseStudent").attr("disabled",false)
         $("#select-teacher").hide();
         $("#select-student").hide();
     }
@@ -366,12 +369,23 @@
         $("#select-teacher").show();
         $("#select-student").hide();
         $("#chooseTeacher").attr("disabled",true)
-        $("#chooseStudent").attr("disabled",false)
     }
     function selectTeacher(id,name){
         console.log(id)
         teacherId = id;
         $("#chooseTeacher").val(name)
+    }
+    function selectCourse(id){
+        var data = {
+            student:studentList,
+            seriesId:id,
+            templateId:"<%=template.templateId%>"
+        }
+        console.log("data:"+JSON.stringify(data))
+        $.post("addCourse",data,function(data){
+            alert(data.desc)
+            location.reload();
+        })
     }
 </script>
 </html>

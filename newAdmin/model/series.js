@@ -9,8 +9,6 @@ var courseSeries= sequelize.define('courseSeries', {
         courseSeriesGrade: {type: Sequelize.STRING(30)}, //课程面向对象年级
         courseSeriesNumber: {type: Sequelize.INTEGER}, //课程系列课程数
         courseSeriesIntro: {type: Sequelize.TEXT}, //课程系列简介
-        nowNumber:{type:Sequelize.INTEGER},
-        status:{type:Sequelize.INTEGER},
         courseSeriesTeacher:{type:Sequelize.STRING(255)},
         courseIds:{type:Sequelize.STRING(255)},
         courseSeriesLevel:{type:Sequelize.STRING(255)},

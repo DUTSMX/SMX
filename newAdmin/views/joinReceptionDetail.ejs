@@ -15,16 +15,16 @@
     <![endif]-->
     <style>
         .head{width:96px;height:96px;}
-        .head-input{opacity: 0;position:absolute;width:96px;height:96px;z-index: 1000}
+        .head-input{opacity: 0;position:absolute;width:100%;height:100%;z-index: 1000}
         .head-edit{position:absolute;text-align:center;margin-top:40px;width:96px;height:96px;z-index: 900}
         .base-info{display: inline-block;height: 96px;vertical-align: middle;}
         .image{width:49%;display: inline-block;text-align: center;margin-top:20px}
         .image img{width:80%}
-        .image-input{opacity: 0;position:absolute;width:40%;height:20%;z-index: 1000}
-        .image-edit{position:absolute;text-align:center;margin-top:5%;width:40%;z-index: 900}
+        .image-input{opacity: 0;position:absolute;width:100%;height:100%;z-index: 1000}
+        .image-edit{position:absolute;text-align:center;margin-top:20%;width:100%;z-index: 900}
     </style>
 </head>
-<body onload="uploadImg()">
+<body onload="uploadImage()">
 <%include navigation-index.ejs%>
 <%include navigation-joinReception.ejs%>
 <div class="right-content"  onload="uploadImg()">
@@ -33,61 +33,60 @@
         <h3 class="panel-title right-button" onclick="edit()" id="edit">编辑</h3>
     </div>
     <div class="margin-left-30" id="person-info">
-        <img src="<%=info.userHeadUrl%>" class="head img-circle">
+        <img src="<%=user.userHeadUrl%>" class="head img-circle right">
         <div class="base-info">
-            <h3 class="inline"><%=info.userName%>&nbsp;<%if(info.gender== 0){%>男<%}else{%>女<%}%>%></h3>   <h4 class="inline">年龄:<%=info.userAge%></h4><br>
-            <h4>电话号码:<%=info.phoneNumber%></h4>
+            <h3 class="inline"><%=user.userName%>&nbsp;<%if(user.gender== 0){%>男<%}else{%>女<%}%>%></h3>   <h4 class="inline">年龄:<%=user.userAge%></h4><br>
+            <h4>电话号码:<%=user.phoneNumber%></h4>
         </div>
         <button class="btn btn-default inline right" onclick="logout()">退出登录</button>
         <br>
-        <h5>家庭地址:<%=info.userAddress%></h5>
+        <h4>家庭地址:<%=user.userAddress%></h4>
     </div>
     <div class="margin-left-30"   style="display: none" id="person-edit">
-        <div class="inline">
-            <input id="head" type="file" class="head-input"/>
-            <img id="head-image" src="<%=info.userHeadUrl%>" class="head img-circle">
+        <div class="carousel-inner right" style="width:auto">
+            <input  type="file" class="head-input" id="head-input"/>
+            <p class="image-edit">编辑图片</p>
+            <img id="head-image" src="<%=user.userHeadUrl%>" class="head img-circle">
         </div>
         <div class="base-info">
-            <label>前台姓名: &nbsp;</label><input id="person-name" class="inline margin-top-20" value="<%=info.userName%>" placeholder="请输入前台姓名" />
-            <select id="location" class="padding-4" >
-                <option>台安店</option>
-                <option selected="selected">大连店</option>
-                <option>沈阳店</option>
-            </select><br>
-            <label>前台手机号: &nbsp</label><input id="person-phoneNumber"class="inline margin-top-20" value="<%=info.phoneNumber%>" placeholder="请输入手机号码" />
+            <label>前台姓名: &nbsp;</label><input id="person-name" class="inline margin-top-20" value="<%=user.userName%>" placeholder="请输入前台姓名" /><br>
+            <!--<select id="location" class="padding-4" >-->
+                <!--<option>台安店</option>-->
+                <!--<option selected="selected">大连店</option>-->
+                <!--<option>沈阳店</option>-->
+            <!--</select><br>-->
+            <label>前台手机号: &nbsp</label><input id="person-phoneNumber"class="inline margin-top-20" value="<%=user.phoneNumber%>" placeholder="请输入手机号码" /><br>
             <!--<button id="apply-modify"class="btn btn-defalut padding-4" onclick="applyModify()">申请修改</button>-->
 
         </div>
         <br>
-        <label>家庭地址 &nbsp;</label><input value="<%=info.userAddress%>" placeholder="请输入家庭信息">
+        <label class="margin-top-20">家庭地址 &nbsp;</label><input id="address" value="<%=user.userAddress%>" placeholder="请输入家庭信息">
     </div>
-    <div class="panel-heading title-block">
-        <h3 class="panel-title title-white">隐私信息</h3>
-        <h3 id="applyId" class="panel-title right-button" onclick="applyId()">申请修改</h3>
-    </div>
-    <div class="margin-left-30" id="id">
-        <h4>身份证号码:<%=info.cardNumber%></h4>
+    <div class="margin-left-30 margin-top-20" id="id">
+        <h4>身份证号码:<%=user.cardNumber%></h4>
         <div class="image">
-            <img src="<%=info.userFrontIdHeadUrl%>"/>
+            <img src="<%=user.userFrontIdHeadUrl%>"/>
             <p>身份证正面</p>
         </div>
         <div class="image">
-            <img src="<%=info.userBackIdHeadUrl%>"/>
+            <img src="<%=user.userBackIdHeadUrl%>"/>
             <p>身份证背面</p>
         </div>
     </div>
     <div class="margin-left-30" style="display:none" id="id-edit">
-        <div class="margin-10">
-            <label>身份证号&nbsp</label><input value="123456789012345678"placeholder="请输入身份证号"/><br>
+        <div class="margin-top-20">
+            <label>身份证号&nbsp</label><input id="cardNumber" value="123456789012345678"placeholder="请输入身份证号"/><br>
         </div>
-        <div class="image">
-            <input id= "head-1" type="file" class="image-input"/>
-            <img id="head-id-1-image" src="<%=info.userFrontIdHeadUrl%>">
+        <div class="image carousel-inner">
+            <input type="file" class="image-input" id="image-front-input"/>
+            <p class="image-edit">编辑图片</p>
+            <img src="<%=user.userFrontIdHeadUrl%>" id="image-front">
             <p>身份证正面</p>
         </div>
-        <div class="image">
-            <input id= "head-2" type="file" class="image-input"/>
-            <img id="head-id-2-image" src="<%=info.userBackIdHeadUrl%>">
+        <div class="image carousel-inner">
+            <input type="file" class="image-input" id="image-back-input"/>
+            <p class="image-edit">编辑图片</p>
+            <img src="<%=user.userBackIdHeadUrl%>" id="image-back">
             <p>身份证背面</p>
         </div>
     </div>
@@ -99,95 +98,55 @@
 <script src="/javascripts/sdk/qcloud_sdk.js"></script>
 <script src="/javascripts/sdk/swfobject.js"></script>
 <script>
+    var headUrl = "<%=user.userHeadUrl%>"
+    var frontUrl = "<%=user.userFrontIdHeadUrl%>";
+    var backUrl = "<%=user.userBackIdHeadUrl%>";
 
-
-    function uploadImg() {
+    function uploadImage(){
         var cos = new CosCloud("10068625","/")
-        var userId = "3"
-        var successCallBack1 = function (result) {
-            console.log("success")
-            console.log("result:"+JSON.stringify(result))
-            console.log("type"+typeof result)
-            console.log("修改图片"+JSON.parse(result).data.access_url)
-            $("#head-image").attr('src',JSON.parse(result).data.access_url)
-        }
-        var errorCallBack1 = function (result) {
-            $("#age").val("error:"+result);
-            console.log("error")
-            console.log("result:"+JSON.stringify(result))
-        }
-
-        var successCallBack2 = function (result) {
-            console.log("success")
-            console.log("result:"+JSON.stringify(result))
-            console.log("type"+typeof result)
-            console.log("修改图片"+JSON.parse(result).data.access_url)
-            $("#head-id-1-image").attr('src',JSON.parse(result).data.access_url)
-        }
-        var errorCallBack2 = function (result) {
-            $("#age").val("error:"+result);
-            console.log("error")
-            console.log("result:"+JSON.stringify(result))
-        }
-
-        var successCallBack3 = function (result) {
-            console.log("success")
-            console.log("result:"+JSON.stringify(result))
-            console.log("type"+typeof result)
-            console.log("修改图片"+JSON.parse(result).data.access_url)
-            $("#head-id-2-image").attr('src',JSON.parse(result).data.access_url)
-        }
-        var errorCallBack3 = function (result) {
-            $("#age").val("error:"+result);
-            console.log("error")
-            console.log("result:"+JSON.stringify(result))
-        }
-
-
-        var inputElements1 = document.getElementById("head");
-        inputElements1.addEventListener("change",handleFiles1,false);
-        function handleFiles1(){
-            console.log("head change")
+        document.getElementById("head-input").addEventListener("change",function(){
             var fileList = this.files;
+            console.log("file:"+JSON.stringify(fileList))
             if(fileList.length>0){
-                selectedFile = fileList[0];
-                var name = selectedFile.name;
-                var postfix = name.substr(name.lastIndexOf("."))
-                console.log("postfix:/head/"+userId+postfix)
-
-                cos.uploadFile(successCallBack1,errorCallBack1,"smxbucket","/head/"+userId+"head"+Math.floor((Math.random()*9000+1000))+postfix,selectedFile,0)
+                var postfix = fileList[0].name.substr(name.lastIndexOf("."))
+                cos.uploadFile(function(result){
+                    headUrl = JSON.parse(result).data.access_url;
+                    $("#head-image").attr('src',JSON.parse(result).data.access_url)
+                },function(err){
+                    console.log("error")
+                    console.log("err:"+err);
+                },"smxbucket","/head/"+userId+"head"+Math.floor((Math.random()*9000+1000))+postfix,fileList[0],0)
             }
-        }
-
-        var inputElements2 = document.getElementById("head-1");
-        inputElements2.addEventListener("change",handleFiles2,false);
-        function handleFiles2(){
+        })
+        document.getElementById("image-front-input").addEventListener("change",function(){
             var fileList = this.files;
+            console.log("file:"+JSON.stringify(fileList))
             if(fileList.length>0){
-                selectedFile = fileList[0];
-                var name = selectedFile.name;
-                var postfix = name.substr(name.lastIndexOf("."))
-                console.log("postfix:/head-1/"+userId+postfix)
-
-                cos.uploadFile(successCallBack2,errorCallBack2,"smxbucket","/head-1/"+userId+"head-1"+Math.floor((Math.random()*9000+1000))+postfix,selectedFile,0)
+                var postfix = fileList[0].name.substr(name.lastIndexOf("."))
+                cos.uploadFile(function(result){
+                    frontUrl = JSON.parse(result).data.access_url;
+                    $("#image-front").attr('src',JSON.parse(result).data.access_url)
+                },function(err){
+                    console.log("error")
+                    console.log("err:"+err);
+                },"smxbucket","/idcard/"+userId+"card"+Math.floor((Math.random()*9000+1000))+postfix,fileList[0],0)
             }
-        }
-
-        var inputElements3 = document.getElementById("head-2");
-        inputElements3.addEventListener("change",handleFiles3,false);
-        function handleFiles3(){
+        })
+        document.getElementById("image-back-input").addEventListener("change",function(){
             var fileList = this.files;
+            console.log("file:"+JSON.stringify(fileList))
             if(fileList.length>0){
-                selectedFile = fileList[0];
-                var name = selectedFile.name;
-                var postfix = name.substr(name.lastIndexOf("."))
-                console.log("postfix:/head-2/"+userId+postfix)
-
-                cos.uploadFile(successCallBack3,errorCallBack3,"smxbucket","/head-2/"+userId+"head-2"+Math.floor((Math.random()*9000+1000))+postfix,selectedFile,0)
+                var postfix = fileList[0].name.substr(name.lastIndexOf("."))
+                cos.uploadFile(function(result){
+                    backUrl = JSON.parse(result).data.access_url;
+                    $("#image-back").attr('src',JSON.parse(result).data.access_url)
+                },function(err){
+                    console.log("error")
+                    console.log("err:"+err);
+                },"smxbucket","/idcard/"+userId+"card"+Math.floor((Math.random()*9000+1000))+postfix,fileList[0],0)
             }
-        }
+        })
     }
-
 
     function loginDialog(){
         location.href="joinReceptionDetail"
@@ -202,38 +161,18 @@
             $("#edit").text("完成")
             $("#person-info").hide();
             $("#person-edit").show();
+            $("#id").hide();
+            $("#id-edit").show();
+
         }else{
             editInfo()
             editFlag = true;
             $("#edit").text("编辑")
             $("#person-info").show();
             $("#person-edit").hide();
-        }
-    }
-    function applyModify() {
-        if(applyFlag){
-            applyFlag = false;
-            $("#apply-modify").text("提交修改")
-            $("#person-name").attr('disabled',false);
-            $("#person-phoneNumber").attr('disabled',false);
-        }else{
-            applyFlag = true;
-            $("#apply-modify").text("申请修改")
-            $("#person-name").attr('disabled',true);
-            $("#person-phoneNumber").attr('disabled',true);
-        }
-    }
-    function applyId(){
-        if(applyIdFlag){
-            applyIdFlag = false;
-            $("#applyId").text("提交申请");
-            $("#id").hide();
-            $("#id-edit").show();
-        }else{
-            applyIdFlag = true;
-            $("#applyId").text("申请修改");
             $("#id").show();
             $("#id-edit").hide();
+
         }
     }
     function logout() {
@@ -244,38 +183,36 @@
     function editInfo(){
         var userName = $("#person-name").val();
         var phoneNumber = $("#person-phoneNumber").val();
-        var obj = document.getElementById("location");
-        var index = obj.selectedIndex;
-        var location;
-
-        var userHeadUrl = $("#head-image")[0].src;
-
-        var userFrontIdHeadUrl = $("#head-id-1-image")[0].src;
-
-        var userBackIdHeadUrl = $("#head-id-2-image")[0].src;
+//        var obj = document.getElementById("location");
+//        var index = obj.selectedIndex;
+        var shopLocation;
 
 
-        if(index==0)
-        {
-            location="台安";
-        }
-        else if(index==1){
-            location="大连";
-        }
-        else if(index==2){
-            location="沈阳";
-        }
+
+//        if(index==0)
+//        {
+//            location="台安";
+//        }
+//        else if(index==1){
+//            location="大连";
+//        }
+//        else if(index==2){
+//            location="沈阳";
+//        }
         var data = {
-            userHeadUrl:userHeadUrl,
-            userFrontIdHeadUrl:userFrontIdHeadUrl,
-            userBackIdHeadUrl:userBackIdHeadUrl,
+            userHeadUrl:headUrl,
+            userFrontIdHeadUrl:frontUrl,
+            userBackIdHeadUrl:backUrl,
             userName:userName,
             phoneNumber:phoneNumber,
-            location:location
+            address:$("#address").val(),
+            location:shopLocation,
+            cardNumber:$("#cardNumber").val()
         }
         console.log("data:"+JSON.stringify(data))
         jQuery.post("./editInfo",data,function (ret) {
             console.log(JSON.stringify(ret));
+            location.reload()
         })
     }
 </script>
