@@ -25,7 +25,7 @@
                 <li><a href="#">联系我们</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a id="person"onclick="loginDialog()">登录</a></li>
+                <li><a id="person" onclick="loginDialog()">登录</a></li>
             </ul>
             <form class="navbar-form navbar-right" role="search">
                 <div class="form-group">
@@ -40,7 +40,7 @@
     userName = '<%=session.userName%>';
     var userId = '<%=session.userId%>';
     if(userName.length != 0){
-        document.getElementById("person").innerHTML=userName
+        document.getElementById("person").innerHTML = userName
     }
     function home() {
         if (userName.length == 0) {

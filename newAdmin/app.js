@@ -12,6 +12,7 @@ var user = require('./routes/user');
 var student = require('./routes/student');
 var joinReception = require('./routes/joinReception');
 var teacher = require("./routes/teacher")
+var joinManager = require("./routes/joinManager")
 var app = express();
 var getRandom128 = function(){
   var length = 128;
@@ -32,7 +33,7 @@ app.use(function (req,res,next) {
   if(ret == null) {
     console.log("url:"+url)
     console.log("userId:"+req.session.userId)
-    if(url == "/" || url == "/user/login"){
+    if(url == "/" || url == "/user/login" || url.startsWith("/appSign")){
       next();
     }else if (!req.session.userId ||!url.startsWith("/joinReception/")) {
         return res.redirect("/")
@@ -67,6 +68,7 @@ app.use('/education',education);
 app.use('/student',student);
 app.use('/joinReception',joinReception)
 app.use('/teacher',teacher)
+app.use('/joinManager',joinManager)
 // app.use('/users', users);
 
 

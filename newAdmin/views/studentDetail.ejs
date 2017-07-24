@@ -24,7 +24,7 @@
         .image-edit{position:absolute;text-align:center;margin-top:5%;width:40%;z-index: 900}
     </style>
 </head>
-<body style="height:100%">
+<body style="height:100%"   onload="uploadImg()">
 <%include navigation-index.ejs%>
 <%include navigation-student.ejs%>
 <div class="right-content">
@@ -33,23 +33,22 @@
         <h3 class="panel-title right-button" onclick="edit()" id="edit">编辑</h3>
     </div>
     <div class="margin-left-30" id="person-info">
-        <img src="/images/icon.png" class="head img-circle">
+        <img src="<%=info.userHeadUrl%>" class="head img-circle">
         <div class="base-info">
             <h3 class="inline"><%=info.userName%>&nbsp;(<%=infos.joinshop%>) <%if(info.gender== 0){%>男<%}else{%>女<%}%></h3><br>
             <h4 class="inline">电话:<%=info.phoneNumber%></h4>
         </div>
         <button class="btn btn-default right" onclick="logout()">退出登录</button>
         <br>
-        <h4 class="inline">所在学校:<%=infos.school%></h4>
+        <h4 class="inline">所在学校:<%=info.school%></h4>
         <h4 class="inline">年级:<%=info.userGrade%> 学习状况:<%=infos.learningstatus%></h4><br>
         <!--<h4 class="inline">学习情况：中等</h4>-->
         <h5>家庭地址:<%=info.userAddress%></h5>
     </div>
     <div class="margin-left-30"   style="display: none" id="person-edit">
         <div class="inline">
-            <input type="file" class="head-input"/>
-            <p class="head-edit">编辑图片</p>
-            <img src="/images/icon.png" class="head img-circle">
+            <input id="head" type="file" class="head-input"/>
+            <img id="head-image" src="<%=info.userHeadUrl%>" class="head img-circle">
         </div><br>
         <label>学生姓名&nbsp</label><input id="person-name"class="inline margin-top-20" value=<%=info.userName%> placeholder="请输入学生姓名" /><!--disabled="false"-->
         <select class="padding-4" id="change-shop" onclick="changeShop()">
@@ -72,11 +71,13 @@
     <div class="margin-left-30" id="id">
         <h4>身份证号:123456789012345678</h4>
         <div class="image">
-            <img src="/images/logo.png"/>
+            <input id= "head-1" type="file" class="image-input"/>
+            <img id="head-id-1-image" src="<%=info.userFrontIdHeadUrl%>" class="head img-circle">
             <p>身份证正面</p>
         </div>
         <div class="image">
-            <img src="/images/logo.png"/>
+            <input id= "head-2" type="file" class="image-input"/>
+            <img id="head-id-2-image" src="<%=info.userBackIdHeadUrl%>" class="head img-circle">
             <p>身份证背面</p>
         </div>
     </div>
@@ -86,14 +87,12 @@
         </div>
         <div class="image">
             <input type="file" class="image-input"/>
-            <p class="image-edit">编辑图片</p>
-            <img src="/images/logo.png"/>
+            <img src="<%=info.userFrontIdHeadUrl%>"/>
             <p>身份证正面</p>
         </div>
         <div class="image">
             <input type="file" class="image-input"/>
-            <p class="image-edit">编辑图片</p>
-            <img src="/images/logo.png"/>
+            <img src="<%=info.userBackIdHeadUrl%>"/>
             <p>身份证背面</p>
         </div>
     </div>
@@ -101,7 +100,95 @@
 </body>
 
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="/javascripts/sdk/qcloud_sdk.js"></script>
+<script src="/javascripts/sdk/swfobject.js"></script>
 <script>
+    function uploadImg() {
+        var cos = new CosCloud("10068625","/")
+        var userId = "1"
+        var successCallBack1 = function (result) {
+            console.log("success")
+            console.log("result:"+JSON.stringify(result))
+            console.log("type"+typeof result)
+            console.log("修改图片"+JSON.parse(result).data.access_url)
+            $("#head-image").attr('src',JSON.parse(result).data.access_url)
+        }
+        var errorCallBack1 = function (result) {
+            $("#age").val("error:"+result);
+            console.log("error")
+            console.log("result:"+JSON.stringify(result))
+        }
+
+        var successCallBack2 = function (result) {
+            console.log("success")
+            console.log("result:"+JSON.stringify(result))
+            console.log("type"+typeof result)
+            console.log("修改图片"+JSON.parse(result).data.access_url)
+            $("#head-id-1-image").attr('src',JSON.parse(result).data.access_url)
+        }
+        var errorCallBack2 = function (result) {
+            $("#age").val("error:"+result);
+            console.log("error")
+            console.log("result:"+JSON.stringify(result))
+        }
+
+        var successCallBack3 = function (result) {
+            console.log("success")
+            console.log("result:"+JSON.stringify(result))
+            console.log("type"+typeof result)
+            console.log("修改图片"+JSON.parse(result).data.access_url)
+            $("#head-id-2-image").attr('src',JSON.parse(result).data.access_url)
+        }
+        var errorCallBack3 = function (result) {
+            $("#age").val("error:"+result);
+            console.log("error")
+            console.log("result:"+JSON.stringify(result))
+        }
+
+
+        var inputElements1 = document.getElementById("head");
+        inputElements1.addEventListener("change",handleFiles1,false);
+        function handleFiles1(){
+            var fileList = this.files;
+            if(fileList.length>0){
+                selectedFile = fileList[0];
+                var name = selectedFile.name;
+                var postfix = name.substr(name.lastIndexOf("."))
+                console.log("postfix:/head/"+userId+postfix)
+
+                cos.uploadFile(successCallBack1,errorCallBack1,"smxbucket","/head/"+userId+"head"+Math.floor((Math.random()*9000+1000))+postfix,selectedFile,0)
+            }
+        }
+
+        var inputElements2 = document.getElementById("head-1");
+        inputElements2.addEventListener("change",handleFiles2,false);
+        function handleFiles2(){
+            var fileList = this.files;
+            if(fileList.length>0){
+                selectedFile = fileList[0];
+                var name = selectedFile.name;
+                var postfix = name.substr(name.lastIndexOf("."))
+                console.log("postfix:/head-1/"+userId+postfix)
+
+                cos.uploadFile(successCallBack2,errorCallBack2,"smxbucket","/head-1/"+userId+"head-1"+Math.floor((Math.random()*9000+1000))+postfix,selectedFile,0)
+            }
+        }
+
+        var inputElements3 = document.getElementById("head-2");
+        inputElements3.addEventListener("change",handleFiles3,false);
+        function handleFiles3(){
+            var fileList = this.files;
+            if(fileList.length>0){
+                selectedFile = fileList[0];
+                var name = selectedFile.name;
+                var postfix = name.substr(name.lastIndexOf("."))
+                console.log("postfix:/head-2/"+userId+postfix)
+
+                cos.uploadFile(successCallBack3,errorCallBack3,"smxbucket","/head-2/"+userId+"head-2"+Math.floor((Math.random()*9000+1000))+postfix,selectedFile,0)
+            }
+        }
+    }
+
     var editFlag = true;
     var applyFlag = true;
     var applyIdFlag = true;
@@ -174,14 +261,29 @@
         var userGrade = $("#person-class").val();
         var join = joinshop;
         var school = $("#person-school").val();
+
+
+        var userHeadUrl = $("#head-image")[0].src;
+
+        var userFrontIdHeadUrl = $("#head-id-1-image")[0].src;
+
+        var userBackIdHeadUrl = $("#head-id-2-image")[0].src;
+
         var data = {
+
+            userHeadUrl:userHeadUrl,
+
+            userFrontIdHeadUrl:userFrontIdHeadUrl,
+
+            userBackIdHeadUrl:userBackIdHeadUrl,
+
             userName:userName,
             phoneNumber:phoneNumber,
             gender:gender,
             userAddress:userAddress,
             userGrade:userGrade,
             join:joinshop,
-            school:school,
+            school:school
         }
         console.log(JSON.stringify(data));
         jQuery.post("./changeInfo",data,function (ret) {
@@ -190,4 +292,6 @@
     }
     $("#navigation-person").addClass("select-left-button");
 </script>
+
+
 </html>

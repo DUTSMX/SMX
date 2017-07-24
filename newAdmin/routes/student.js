@@ -88,16 +88,21 @@ router.get('/studentTemplateDetail',function (req,res,next) {
 router.post("/changeInfo",function (req,res) {
     console.log(JSON.stringify(req.body))
     user.update({
+
+        userBackIdHeadUrl:userBackIdHeadUrl,
+        userFrontIdHeadUrl:userFrontIdHeadUrl,
+        userHeadUrl:userHeadUrl,
+
         userName:req.body.teacherName,
         phoneNumber:req.body.phoneNumber,
         gender:req.body.gender,
         userAddress:req.body.userAddress,
-        userGrade:req.body.userGrade,
-    },{'where':{userId:2}}).then(function (data) {
+        userGrade:req.body.userGrade
+    },{'where':{userId:1}}).then(function (data) {
             student.update({
                 joinshop:req.body.join,
-                school:req.body.school,
-            },{'where':{userId:2}}).then(
+                school:req.body.school
+            },{'where':{userId:1}}).then(
                 res.send("123")
             )
     })
@@ -172,7 +177,6 @@ router.get('/studentCourseDetail',function (req,res,next) {
 //     }).then(function (ret) {
 //         console.log(JSON.stringify(ret))
 //         res.render('educationCourseDetail',{template:ret});
-// >>>>>>> 699ccafcc18bc2bb7461cff24481e9b82fe24849
 //     });
     })
 })

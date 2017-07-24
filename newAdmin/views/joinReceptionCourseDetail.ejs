@@ -28,6 +28,7 @@
         .course{}
         .doBtn{float:right;padding-bottom: 3vh;}
         .clear{clear: both;}
+        .select{width:150px;text-align: left;background-color: white;float:right;display: none;padding-top:30px;height:361px;overflow-y: scroll;overflow-x:hidden}
     </style>
 </head>
 <body>
@@ -35,12 +36,20 @@
 <%include navigation-joinReception.ejs%>
 <div class="right-content">
     <div class="panel-heading title-block">
-        <h2 class="title-white"><%=series.courseSeriesName%>（共<%=series.courseSeriesNumber%>课时）</h2><br>
-        <h3 class="title-white">教师：<%=series.teacher%></h3><br>
-        <h3 class="title-white">教室：<%=series.room%></h3><br>
-        <h3 class="title-white">报名学生：<%=series.student%></h3><br>
-        <h4 class="title-white"><%=series.courseSeriesIntro%></h4><br>
+        <div class="right">
+            <button class="btn btn-default" onclick="enter()">编辑</button>
+            <button class="btn btn-default" onclick="deleteCourse()">删除</button>
+        </div>
+        <div id="info">
+            <h2 class="title-white"><%=series.courseSeriesName%>（共<%=series.courseSeriesNumber%>课时）</h2><br>
+            <h3 class="title-white">教师：<%=series.teacher%></h3><br>
+            <h3 class="title-white">教室：<%=series.room%></h3><br>
+            <h3 class="title-white">班型：<%=series.courseSeriesClassType%></h3><br>
+            <h3 class="title-white">报名学生：<%=series.student%></h3><br>
+            <h4 class="title-white"><%=series.courseSeriesIntro%></h4><br>
+        </div>
     </div>
+
     <%for(var i=0;i<courseList.length;i++){%>
     <div class="course-block">
         <div class="inline left course">
@@ -50,10 +59,66 @@
     </div>
     <%}%>
     <p id="hint"></p>
+    <div id="fade" class="black-overlay"></div>
+    <div id="light" class="white-content">
+        <div class="dialog" id="post" display="none">
+            <div class="dialog-title"><span class="font-20 title-white">申请课程</span><span class="right title-white" onclick="closeDialog()">X</span></div>
+            <label class="dialog-label">课程名称</label><input id="courseName" class="dialog-input" placeholder="请输入课程名称"disabled>
+            <label class="dialog-label">上课老师</label><input id="chooseTeacher" class="dialog-input" placeholder="请输入老师" onclick="chooseTeacher()">
+            <label class="dialog-label">上课同学</label><input id="chooseStudent" class="dialog-input" placeholder="请输入同学" onclick="chooseStudent()">
+            <label class="dialog-label">班    型</label>
+            <div id="select-classType" class="dialog-input inline  ">
+                <input type="radio" name="classType" value="1人">1人
+                <input type="radio" name="classType" value="2人">2人
+                <input type="radio" name="classType" value="3-4人">3-4人
+                <input type="radio" name="classType" value="5-8人">5-8人<br>
+            </div>
+            <label class="dialog-label">教    室</label>
+            <div id="select-room" class="dialog-input inline  ">
+                <input type="radio" name="room" value="教室一">教室一
+                <input type="radio" name="room" value="教室二">教室二
+                <input type="radio" name="room" value="教室三">教室三
+                <input type="radio" name="room" value="教室四">教室四<br>
+                <input type="radio" name="room" value="教室五">教室五
+                <input type="radio" name="room" value="教室六">教室六
+                <input type="radio" name="room" value="教室七">教室七
+                <input type="radio" name="room" value="教室八">教室八
+            </div>
+            <label class="dialog-label">开课日期</label><input id="startDate" type="date" class="dialog-input" placeholder="请输入开课日期" style="margin:0;padding:0" onchange="setDate()">
+            <label class="dialog-label">结课日期</label><input id="endDate" type="date" class="dialog-input" placeholder="请输入开课日期" style="margin:0;padding:0"  disabled>
+            <label class="dialog-label">期望时间</label>
+            <div id="select-time" class="dialog-input inline  ">
+                <input type="radio" name="time" value="07:00">07:00
+                <input type="radio" name="time" value="08:40">08:40
+                <input type="radio" name="time" value="10:20">10:20
+                <input type="radio" name="time" value="13:30">13:30<br>
+                <input type="radio" name="time" value="15:10">15:10
+                <input type="radio" name="time" value="16:50">16:50
+                <input type="radio" name="time" value="19:30">19:30
+                <input type="radio" name="time" value="21:10">21:10
+            </div>
+            <button class="btn btn-default dialog-button" onclick="post()" id="createCourse">修改信息</button>
+        </div>
+        <div id="select-teacher" class="select">
+            <%teacher.forEach(function (item) {%>
+            <button class="btn btn-default center" onclick="selectTeacher('<%=item.userId%>','<%=item.userName%>')"><%=item.userName%></button><br>
+            <%})%>
+        </div>
+        <div id="select-student" class="select">
+            <%student.forEach(function (item) {%>
+                <button class="btn btn-default center" onclick="selectStudent('<%=item.userId%>','<%=item.userName%>')"><%=item.userName%></button><br>
+            <%})%>
+        </div>
+    </div>
 </div>
 </body>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
+    function Appendzero(obj)
+    {
+        if(obj<10) return "0" +""+ obj;
+        else return obj;
+    }
     function loginDialog(){
         location.href="studentDetail"
     }
@@ -67,5 +132,212 @@
             }
         })
     }
+    function setDate(){
+        var startDate = $("#startDate").val();
+        var strDate = startDate.split("-");
+        if(strDate[0]%400 == 0 || (strDate%400!=0 && strDate%4 == 0)){
+            var days = [31,29,31,30,31,30,31,31,30,31,30,31]
+        }else{
+            var days = [31,29,31,30,31,30,31,31,30,31,30,31]
+        }
+        strDate[0] = new Number(strDate[0])
+        strDate[1] = new Number(strDate[1])
+        strDate[2] = new Number(strDate[2])
+        strDate[2] = strDate[2] + (new Number('<%=series.courseSeriesNumber%>')-1);
+        console.log("day:"+strDate[2])
+        while(strDate[2] > days[strDate[1]-1]){
+            strDate[2]= strDate[2]-days[strDate[1]-1];
+            strDate[1]=strDate[1]+1;
+            console.log("month:"+strDate[1]+" day:"+strDate[2])
+            while(strDate[1]>12){
+                strDate[1] = strDate[1]-12;
+                strDate[0] = strDate[0]+1;
+                console.log("year:"+strDate[0]+" month:"+strDate[1]+" day:"+strDate[2])
+            }
+        }
+
+        $("#endDate").val(strDate[0]+"-"+Appendzero(strDate[1])+"-"+Appendzero(strDate[2]))
+    }
+    function enter(){
+        clear();
+        showDialog()
+    }
+    function post(){
+        $("#createCourse").attr('disabled',true);
+        var seriesId = "<%=series.courseSeriesId%>";
+        if(teacherId == null || teacherId.length == 0 || teacherId == 0){
+            alert("请选择老师")
+        }else{
+            var classType;
+            var classTypeList = $("input[name='classType']");
+            for(var i=0;i<classTypeList.length;i++){
+                if(classTypeList[i].checked){
+                    classType = classTypeList[i].value;
+                }
+            }
+            if(classType == null || classType.length == 0){
+                alert("请选择班型")
+            }else{
+                var room;
+                var roomList = $("input[name='room']");
+                for(var i=0;i<roomList.length;i++){
+                    if(roomList[i].checked){
+                        room = roomList[i].value;
+                    }
+                }
+                if(room == null || room.length == 0){
+                    alert("请选择教室")
+                }else{
+                    var startDate = $("#startDate").val();
+                    if(startDate == null || startDate.length == 0){
+                        alert("请输入开始日期")
+                    }else{
+                        var endDate = $("#endDate").val()
+                        console.log("endDate:"+endDate)
+                        console.log($("#startDate"))
+                        var time;
+                        var timeList = $("input[name='time']");
+                        for(var i=0;i<timeList.length;i++){
+                            if(timeList[i].checked){
+                                time = timeList[i].value;
+                            }
+                        }
+                        if(time == null || time.length == 0){
+                            alert("请选择时间")
+                        }else{
+                            console.log()
+                            var data = {
+                                seriesId:"<%=series.courseSeriesId%>",
+                                teacherId:teacherId,
+                                shopId:1,
+                                startDate:startDate,
+                                endDate:endDate,
+                                classType:classType,
+                                room:room,
+                                time:time
+                            }
+                            console.log(JSON.stringify(data))
+                            $.post("updateCourse",data,function (data) {
+                                console.log(JSON.stringify(data))
+                                alert(data)
+                                closeDialog();
+                                location.reload()
+                            })
+                        }
+                    }
+                }
+            }
+        }
+    }
+    function clear(){
+        $("#createCourse").attr('disabled',false);
+        teacherId = "<%=series.teacherId%>";
+        $("#courseName").val("<%=series.courseSeriesName%>");
+        $("#chooseTeacher").val("<%=series.teacher%>");
+        $("#chooseStudent").val("<%=series.student%>");
+        var classTypeList = $("input[name='classType']");
+        for(var i=0;i<classTypeList.length;i++){
+            if(classTypeList[i].value == '<%=series.courseSeriesClassType%>'){
+                classTypeList[i].checked = true;
+            }else{
+                classTypeList[i].checked = false;
+            }
+        }
+        var roomList = $("input[name='room']");
+        for(var i=0;i<roomList.length;i++){
+            if(roomList[i].value == '<%=series.room%>'){
+                roomList[i].checked = true;
+            }else{
+                roomList[i].checked = false;
+            }
+        }
+        $("#startDate").val("<%=series.startDate%>");
+        $("#endDate").val("<%=series.endDate%>");
+        var timeList = $("input[name='time']");
+        for(var i=0;i<timeList.length;i++){
+            if(timeList[i].value == '<%=series.time%>'){
+                timeList[i].checked = true;
+            }else{
+                timeList[i].checked = false;
+            }
+        }
+    }
+    function showDialog(){
+        $("#fade").show()
+        $("#light").show()
+        $("#post").show()
+    }
+    function closeDialog(){
+        $("#fade").hide()
+        $("#light").hide()
+        $("#add-student").hide()
+        $("#post").hide()
+        $(".white-content").width("350px")
+        $(".dialog-title").width("330px")
+        $("#chooseTeacher").attr("disabled",false)
+        $("#chooseStudent").attr("disabled",false)
+        $("#select-teacher").hide();
+        $("#select-student").hide();
+    }
+    function selectTime(){
+        var time = $("#time").val();
+        if(time == "每天"){
+            $("#select-day").hide();
+            $("#select-course").show();
+        }else if(time == "每周"){
+            $("#select-day").show();
+            $("#select-course").show();
+        }else{
+            $("#select-day").hide();
+            $("#select-course").hide();
+        }
+    }
+    function chooseTeacher(){
+        $(".white-content").width("500px")
+        $(".white-content").height("507px")
+        $(".dialog-title").width("480px")
+        $("#select-teacher").show();
+        $("#select-student").hide();
+        $("#chooseTeacher").attr("disabled",true)
+        $("#chooseStudent").attr("disabled",false)
+    }
+    function chooseStudent(){
+        $(".white-content").width("500px")
+        $(".white-content").height("507px")
+        $(".dialog-title").width("480px")
+        $("#select-student").show();
+        $("#select-teacher").hide();
+        $("#chooseStudent").attr("disabled",true)
+        $("#chooseTeacher").attr("disabled",false)
+    }
+    function selectTeacher(id,name){
+        console.log(id)
+        teacherId = id;
+        $("#chooseTeacher").val(name)
+    }
+    function selectStudent(id,name){
+        var studentList = JSON.parse('<%-JSON.stringify(student)%>')
+        if(studentList.length == 1){
+            var last = confirm("只剩最后一个学生，请直接删除课程")
+            if(last){
+                deleteCourse()
+            }
+        }else{
+            var deleteStudent = confirm("是否删除"+name);
+            if(deleteStudent){
+                $.post("deleteStudent",{studentId:id,courseSeries:"<%=series.courseSeriesId%>"},function (data) {
+                    console.log(data)
+                    location.reload()
+                })
+            }
+        }
+    }
+    function deleteCourse(){
+        $.post("deleteCourse",{seriesId:"<%=series.courseSeriesId%>"},function (data) {
+            alert("删除成功")
+            location.href="joinReceptionCourseManager"
+        })
+    }
+
 </script>
 </html>

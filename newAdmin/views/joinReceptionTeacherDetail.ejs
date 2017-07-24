@@ -38,7 +38,7 @@
     <div class="panel-heading title-block" style="margin-top:20px">
         <h3 class="panel-title title-white">进行中</h3>
     </div>
-    <div style="height:20vh">
+    <div>
         <%if(nowCourse.length == 0){%>
         <h4 style="text-align: center;margin:10px">当前没有课程</h4>
         <%} nowCourse.forEach(function (item) { %>
@@ -54,7 +54,7 @@
     <div class="panel-heading title-block">
         <h3 class="panel-title title-white">已完成</h3>
     </div>
-    <div style="height:20vh">
+    <div>
 
         <%if(finishCourse.length == 0){%>
         <h4 style="text-align: center;margin:10px">没有已完成的课程</h4>
@@ -74,7 +74,8 @@
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
     function teacherDetail(){
-        location.href = "joinReceptionStudentDetailEdit?studentId="+'<%=teacher.userId%>'
+        location.href = "joinReceptionTeacherDetailEdit?teacherId="+'<%=teacher.teacherId%>'
     }
+    $("#navigation-teacher").addClass("select-left-button");
 </script>
 </html>

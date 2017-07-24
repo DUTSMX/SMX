@@ -50,13 +50,23 @@ router.get('/teacherDetail',function (req,res,next) {
     })
 })
 router.post("/modifyInfo",function (req,res) {
-    console.log(JSON.stringify(req.body))
+    console.log(JSON.stringify(req.body));
     user.update({
+
         userName:req.body.teacherName,
         phoneNumber:req.body.phoneNumber,
         gender:req.body.gender,
-    },{'where':{userId:2}}).then(
+
+        userHeadUrl : req.body.userHeadUrl,
+        userFrontIdHeadUrl:req.body.userFrontIdHeadUrl,
+        userBackIdHeadUrl:req.body.userBackIdHeadUrl
+
+    }, {'where': {userId: req.session.userId}}).then(
         teacher.update({
+
+            studentCard :req.body.studentCard,
+            teacherCard :req.body.teacherCard,
+
             college:req.body.college,
             teachClass:req.body.teachClass,
             class:req.body.Class,
@@ -73,11 +83,12 @@ router.post("/modifyInfo",function (req,res) {
             Biology:req.body.Biology,
             Politics:req.body.Politics,
             History:req.body.History,
-            Geography:req.body.Geography,
-        },{'where':{userId:2}}).then(
+            Geography:req.body.Geography
+
+        },{'where': {userId: req.session.userId}}).then(
             res.send("123")
         )
-    )})
+    )});
 router.get('/teacherCourseDetail',function (req,res,next) {
     var courseSeriesId=req.query.courseSeriesId;
     course.courseSeries.findOne({where:{courseSeriesId:courseSeriesId}}).then(function (ret) {
@@ -106,9 +117,9 @@ router.get('/teacherCourseDetail',function (req,res,next) {
             })
         })
     });
-})
+});
 router.get('/joinReceptionTeacherList',function (req,res) {
 
-})
+});
 
 module.exports=router;
