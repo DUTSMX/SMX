@@ -33,11 +33,14 @@ app.use(function (req,res,next) {
   if(ret == null) {
     console.log("url:"+url)
     console.log("userId:"+req.session.userId)
-    if(url == "/" || url == "/user/login" || url.startsWith("/appSign")){
+    if(url == "/" || url == "/user/login" || url.startsWith("/appSign") || url.startsWith("/weChatNews")){
+      console.log("1");
       next();
-    }else if (!req.session.userId ||!url.startsWith("/joinReception/")) {
+    }else if (!req.session.userId) {
+        console.log("2");
         return res.redirect("/")
     }else{
+        console.log("3");
       next();
     }
   }else{

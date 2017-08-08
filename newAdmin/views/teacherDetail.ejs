@@ -62,7 +62,7 @@
             <input id="head" type="file" class="head-input"/>
             <img id= "head-image" src="<%=info.userHeadUrl%>" class="head img-circle">
         </div><br>
-        <label>老师姓名&nbsp</label><input id="person-name"class="inline margin-top-20" value=<%=info.userName%> placeholder="请输入老师姓名" /><!--disabled="false-->
+        <label>老师姓名&nbsp</label><input id="person-namse"class="inline margin-top-20" value=<%=info.userName%> placeholder="请输入老师姓名" /><!--disabled="false-->
         <!--<button id="apply-modify"class="btn btn-defalut padding-4" onclick="applyModify()">申请修改</button><br>-->
         <label>老师性别&nbsp</label><input id="person-gender"class="inline margin-top-20" value=<%if(info.gender== 0){%>男<%}else{%>女<%}%> placeholder="请输入老师性别" /><br>
         <label>手机号码&nbsp</label><input id="person-phoneNumber"class="inline margin-top-20" value=<%=info.phoneNumber%> placeholder="请输入手机号码" /><br>
@@ -388,7 +388,7 @@
 
         var data = {
 
-            userHeadUrl : userHeadUrl,
+            userHeadUrl:userHeadUrl,
             userFrontIdHeadUrl:userFrontIdHeadUrl,
             userBackIdHeadUrl:userBackIdHeadUrl,
 
