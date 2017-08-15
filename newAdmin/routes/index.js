@@ -6,6 +6,7 @@ var user =require("../model/user")
 var joinreceptionmanager=require("../model/joinreceptionmanager")
 /* GET home page. */
 router.get('/', function (req, res, next) {
+    //console.log("123")
     res.render('index');
 });
 router.get('/education/joinReceptionTeacherList',function (req,res,next) {
@@ -95,6 +96,13 @@ router.get('/adminUserDetail', function (req, res, next) {
 router.get('/adminDetail', function (req, res, next) {
     res.render('adminDetail');
 });
+
+router.get('/weChatNews',function (req,res,next) {
+    console.log("sadfasdfasfd");
+
+    res.render('weChatNews');
+});
+
 var APPID = "10068625";
 var SECRET_ID = "AKIDGPM8i9uTM4a0FJlqMgoljZ8a0IPLLlGi";
 var SECRET_KEY = "TowscBYpzznPq5B6pLfnjTIwOGUfdbP2";

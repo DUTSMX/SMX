@@ -15,4 +15,4 @@ var sequelize=new Sequelize(
         }
     }
 );
-exports.sequelize =  sequelize
+exports.sequelize =  sequelize;

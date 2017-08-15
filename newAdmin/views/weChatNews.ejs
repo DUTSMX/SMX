@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>尚名校</title>
+    <!-- Bootstrap -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/stylesheets/admin.css" rel="stylesheet" type="text/css"/>
+    <link href="/stylesheets/scroll-table.css" rel="stylesheet" type="text/css"/>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        .table>thead>tr>th{border:1px solid black !important;text-align: center}
+        .table>tbody>tr>td{border:1px solid black !important;text-align: center}
+        .table>tbody>tr>th{border:1px solid black !important;text-align: center}
+        .width-700{width: 700px;margin:auto}
+        .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td{vertical-align: middle;}
+        .width-5{width:5%;}
+        .width-10{width:10%}
+        .teacher-block{height:40px;width:auto;border-radius: 5px;border-style:solid;border-width:1px;border-color:#4cae4c;margin-bottom:10px;margin-top:10px;display:inline-block}
+        .teacher-name{margin-left:10px; display:inline-block}
+        .sign-up{margin-top:-5px;margin-right:10px;display: inline-block}
+        .hide{display:none}
+        .course-title{color:#4cae4c}
+    </style>
+</head>
+<body style="height:100%">
+<%include navigation-index.ejs%>
+<div class="left-content">
+
+    <div style="padding-right: 200px;padding-left: 200px;padding-top: 30px" id="home">
+        <table class="table table-hover" style="margin-bottom:0px; border-radius: 5px">
+
+            <tr>
+                <th>微信推送</th>
+            </tr>
+            <tr>
+                <td>11111</td>
+            </tr>
+
+        </table>
+    </div>
+
+    <div style="padding-right: 200px;padding-left: 200px;padding-top: 30px" class = "row">
+        <div class = "col-xs-9">
+
+        <input id="weChatNewsUrl" placeholder="微信链接" class= "form-control" />
+        </div>
+
+        <div class = "col-xs-3">
+
+        <input type ="button" onclick="modifyWeChatNewsUrl()"  class= "form-control" style="background-color:#5bc0de;color: white" value="编辑微信推送链接">
+        </div>
+
+    </div>
+</div>
+</body>
+
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="/javascripts/divselect.js"></script>
+<script>
+    function loginDialog(){
+        location.href="joinReceptionDetail"
+    }
+    $("#navigation-course").addClass("select-left-button");
+
+    function contact(){
+        $("#fade").show()
+        $("#light").show()
+    }
+    function closeDialog(){
+        $("#fade").hide()
+        $("#light").hide()
+    }
+
+    function modifyWeChatNewsUrl() {
+
+        console.log("1111111111")
+
+        var weChatNewsUrl = $("#weChatNewsUrl").val();
+
+        var data = {
+
+            weChatNewsUrl:weChatNewsUrl
+        }
+
+        console.log(JSON.stringify(data));
+
+        jQuery.post("/weChatNews/modifyWeChatNewsUrl",data,function (ret) {
+            console.log(JSON.stringify(ret));
+        })
+
+
+    }
+
+</script>
+</html>
