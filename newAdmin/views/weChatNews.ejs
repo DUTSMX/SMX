@@ -35,26 +35,42 @@
 
     <div style="padding-right: 200px;padding-left: 200px;padding-top: 30px" id="home">
         <table class="table table-hover" style="margin-bottom:0px; border-radius: 5px">
-
+            <thead>
             <tr>
                 <th>微信推送</th>
             </tr>
+            </thead>
+
+            <tbody>
+            <%print.forEach(function (item) {%>
             <tr>
-                <td>11111</td>
+                <th><a href="<%=item.weChatNewsUrl%>"><%=item.weChatNewsTitle%></a></th>
             </tr>
+            <%})%>
+            </tbody>
 
         </table>
     </div>
 
-    <div style="padding-right: 200px;padding-left: 200px;padding-top: 30px" class = "row">
-        <div class = "col-xs-9">
+    <div style="padding-right: 200px;padding-left: 200px;padding-top: 30px;padding-bottom: 40px" class = "row">
+        <div class = "col-xs-5">
 
-        <input id="weChatNewsUrl" placeholder="微信链接" class= "form-control" />
+            <input id="weChatNewsUrl" placeholder="微信链接" class= "form-control" />
+
         </div>
 
-        <div class = "col-xs-3">
+        <div class = "col-xs-5">
 
-        <input type ="button" onclick="modifyWeChatNewsUrl()"  class= "form-control" style="background-color:#5bc0de;color: white" value="编辑微信推送链接">
+            <input id="weChatNewsTitle" placeholder="微信推送标题" class= "form-control" />
+
+        </div>
+
+        <div class = "col-xs-2">
+            <form >
+
+            <button type="submit" onclick="modifyWeChatNewsUrl()"  class= "form-control" style="background-color:#5bc0de;color: white">
+                编辑微信推送链接</button>
+            </form>
         </div>
 
     </div>
@@ -64,19 +80,6 @@
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="/javascripts/divselect.js"></script>
 <script>
-    function loginDialog(){
-        location.href="joinReceptionDetail"
-    }
-    $("#navigation-course").addClass("select-left-button");
-
-    function contact(){
-        $("#fade").show()
-        $("#light").show()
-    }
-    function closeDialog(){
-        $("#fade").hide()
-        $("#light").hide()
-    }
 
     function modifyWeChatNewsUrl() {
 
@@ -84,19 +87,29 @@
 
         var weChatNewsUrl = $("#weChatNewsUrl").val();
 
+        var weChatNewsTitle = $("#weChatNewsTitle").val();
+
         var data = {
 
-            weChatNewsUrl:weChatNewsUrl
+            weChatNewsUrl:weChatNewsUrl,
+
+            weChatNewsTitle:weChatNewsTitle
+
         }
 
         console.log(JSON.stringify(data));
 
         jQuery.post("/weChatNews/modifyWeChatNewsUrl",data,function (ret) {
             console.log(JSON.stringify(ret));
+        }).then(function () {
+            location.href="weChatNews";
         })
+
+
 
 
     }
 
 </script>
+
 </html>

@@ -3,11 +3,21 @@ var router = express.Router();
 var course=require('../model/course');
 var teacher=require('../model/teacher');
 var user =require("../model/user")
+
+var db = require("../model/db")
 var joinreceptionmanager=require("../model/joinreceptionmanager")
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    //console.log("123")
-    res.render('index');
+    console.log("123");
+
+    var sql = "SELECT weChatNewsUrl,weChatNewsTitle FROM weChatNews";
+
+    console.log("db" +db);
+
+    db.sequelize.query(sql).then(function(print){
+        console.log("微信标题以及链接"+JSON.stringify({print:print[0]}));
+        res.render('index',{print:print[0]});
+    })
 });
 router.get('/education/joinReceptionTeacherList',function (req,res,next) {
     user.findAll({where:{role:1}}).then(function(ret){
