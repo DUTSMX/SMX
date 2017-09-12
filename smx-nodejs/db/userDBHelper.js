@@ -219,8 +219,8 @@ exports.getUserInfo=function (userId,callback) {
         "userName, " +
         "gender, " +
         "userAge," +
-        "userSchool," +
-        "userGrade," +
+        // "userSchool," +
+        // "userGrade," +
         "userAddress " +
         "FROM " +
         "account where userId="+userId;
