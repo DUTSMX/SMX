@@ -92,12 +92,29 @@ router.get('/joinReceptionTodayCourse',function (req,res,next) {
 * */
 router.get('/joinReceptionPrint',function (req,res,next) {
     var sql = "SELECT c.courseId,c.beginTime, c.courseName,a.userName as teacher,co.room,ac.userName as student,j.userId as studentId,j.attend,ac.phoneNumber "+
-        "FROM course c JOIN account a ON c.userId = a.userId JOIN courseSeries co ON c.courseSeriesId = co.courseSeriesId  "+
-        "JOIN joinCourse j ON c.courseId = j.courseId JOIN account ac ON ac.userId = j.userId "+
+        "FROM course c " +
+        "JOIN account a ON c.userId = a.userId " +
+        "JOIN courseSeries co ON c.courseSeriesId = co.courseSeriesId  "+
+        "JOIN joinCourse j ON c.courseId = j.courseId " +
+        "JOIN account ac ON ac.userId = j.userId "+
         "where c.courseDate = '"+req.query.date+"' "
     db.sequelize.query(sql).then(function (print) {
         console.log(JSON.stringify({date:req.query.date,print:print[0]}))
         res.render('joinReceptionPrint',{date:req.query.date,print:print[0]});
+    })
+})
+//新加入内容3
+router.get('/joinReceptionPrint',function (req,res,next) {
+    course.findOne({'where':{courseDate:req.query.date}}).then(function (student) {
+        // ret.getUser().then(function (ret1) {
+        user.findOne({'where':{userId:student.userId}}).then(function(user){
+            JSON.stringify("student:"+JSON.stringify(student)+" user:"+JSON.stringify(user))
+            res.render('joinReceptionStudentDetailEdit',{student:student,user:user});
+        })
+    })
+    user.findAll({where:{role:1}}).then(function(ret){
+        console.log(JSON.stringify(ret))
+        res.render('joinReceptionTeacherList',{teacher:ret});
     })
 })
 /*更新签到信息

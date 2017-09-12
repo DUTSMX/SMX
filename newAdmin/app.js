@@ -11,8 +11,11 @@ var education=require('./routes/education');
 var user = require('./routes/user');
 var student = require('./routes/student');
 var joinReception = require('./routes/joinReception');
-var teacher = require("./routes/teacher")
-var joinManager = require("./routes/joinManager")
+var teacher = require("./routes/teacher");
+var joinManager = require("./routes/joinManager");
+
+var weChatNews = require("./routes/weChatNews");
+
 var app = express();
 var getRandom128 = function(){
   var length = 128;
@@ -33,11 +36,14 @@ app.use(function (req,res,next) {
   if(ret == null) {
     console.log("url:"+url)
     console.log("userId:"+req.session.userId)
-    if(url == "/" || url == "/user/login" || url.startsWith("/appSign")){
+    if(url == "/" || url == "/user/login" || url.startsWith("/appSign") || url.startsWith("/weChatNews")){
+      console.log("1");
       next();
-    }else if (!req.session.userId ||!url.startsWith("/joinReception/")) {
+    }else if (!req.session.userId) {
+        console.log("2");
         return res.redirect("/")
     }else{
+        console.log("3");
       next();
     }
   }else{
@@ -68,7 +74,10 @@ app.use('/education',education);
 app.use('/student',student);
 app.use('/joinReception',joinReception)
 app.use('/teacher',teacher)
-app.use('/joinManager',joinManager)
+app.use('/joinManager',joinManager);
+
+app.use("/weChatNews",weChatNews);
+
 // app.use('/users', users);
 
 

@@ -31,7 +31,9 @@
         .font-20{font-size: 20px}
         .right{float:right}
         .test-login{float:right;margin-right:10px;}
+
         .login-type{height:auto;width:100px;text-align: left;background-color: white;float:right}
+    .font-30{font-size: 30px}
     </style>
 </head>
 <body>
@@ -51,20 +53,50 @@
     </div>
     <div class="bottom-block">
         <div class="left-block">
-            <h3 class="inline">新闻资讯</h3> <h3 class="more">more>></h3>
+            <!--
+            <h3 class="inline">新闻资讯</h3>
+            <h3 class="more" onclick="weChatNews()">more>></h3>
             <ul class="list-group">
                 <li class="list-group-item">台安店推出高考冲刺班</li>
                 <li class="list-group-item">尚名校教师介绍</li>
                 <li class="list-group-item">尚名校正式开始运营</li>
-            </ul>
+            </ul>-->
+            <table class = "table table-hover">
+                <thead>
+                <tr>
+                    <th class="font-20 inline">新闻资讯</th>
+                    <th class="font-20 more" onclick="weChatNews()">more>></th>
+                </tr>
+                </thead>
+
+                <tbody class="list-group">
+                <%for(var i = 0;i < 3;i++){var item1 = print[i];%>
+                <tr class="list-group-item">
+                    <th><a href="<%=item1.weChatNewsUrl%>"><%=item1.weChatNewsTitle%></a></th>
+                </tr>
+                <%}%>
+                </tbody>
+
+            </table>
         </div>
         <div class="right-block">
-            <h3 class="inline">微信推送</h3> <h3 class="more">more>></h3>
-            <ul class="list-group">
-                <li class="list-group-item">大学生创业应有大志向</li>
-                <li class="list-group-item">大学生创业应有大志向</li>
-                <li class="list-group-item">大学生创业应有大志向</li>
-            </ul>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th class="font-20 inline">微信推送</th>
+                    <th class="font-20 more" onclick="weChatNews()">more>></th>
+                </tr>
+                </thead>
+
+                <tbody class="list-group">
+                <%for(var i = 0;i < 3;i++){var item1 = print[i];%>
+                <tr class="list-group-item">
+                    <th><a href="<%=item1.weChatNewsUrl%>"><%=item1.weChatNewsTitle%></a></th>
+                </tr>
+                <%}%>
+                </tbody>
+
+            </table>
         </div>
     </div>
     <div id="fade" class="black-overlay"></div>
@@ -183,5 +215,9 @@
     }
     function education(){
         location.href = "education/educationCourse"
+    }
+
+    function weChatNews(){
+        location.href = "weChatNews/weChatNews"
     }
 </script>
