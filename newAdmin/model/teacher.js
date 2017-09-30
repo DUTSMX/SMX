@@ -4,7 +4,8 @@
 
 var Sequelize = require("sequelize")
 var db = require("./db")
-var sequelize = db.sequelize;var course=require('./course');
+var sequelize = db.sequelize;
+var course=require('./course');
 var user=require('./user');
 var teacher = sequelize.define('teacher', {
         teacherId:{ //自增长课程系列Id,主键,整型

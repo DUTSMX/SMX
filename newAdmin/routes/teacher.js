@@ -43,8 +43,9 @@ router.get('/teacherCourseRecord',function (req,res,next) {
     res.render('teacherCourseRecord');
 })
 router.get('/teacherDetail',function (req,res,next) {
-    teacher.findOne({'where':{teacherId:2}}).then(function (ret) {
+    teacher.findOne({'where':{teacherId:37}}).then(function (ret) {
         ret.getUser().then(function (ret1) {
+            console.log(JSON.stringify({info:ret1,infos:ret}))
             res.render('teacherDetail',{info:ret1,infos:ret});
         })
     })
@@ -60,7 +61,6 @@ router.post("/modifyInfo",function (req,res) {
         userHeadUrl : req.body.userHeadUrl,
         userFrontIdHeadUrl:req.body.userFrontIdHeadUrl,
         userBackIdHeadUrl:req.body.userBackIdHeadUrl
-
     }, {'where': {userId: req.session.userId}}).then(
         teacher.update({
 
