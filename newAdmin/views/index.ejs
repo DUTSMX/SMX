@@ -16,182 +16,303 @@
     <![endif]-->
     <style>
         /*设置轮播图大小*/
-        .ad-Image-style{height: 50vh;width: auto;text-align: center;margin:0 auto ;}
-        .slick{height:50vh;width:100%;}
-        .slick-dotted.slick-slider{margin-bottom:0px;}
-        .slick-dots li button:before{font-size:30px;}
-        .slick-dots{bottom:10px;}
-        .bottom-block{height:auto;width:100%;}
-        .left-block{width:50%;height:40vh;display: inline-block;padding:10px;}
-        .right-block{width:50%;height:40vh;float:right;padding:10px;}
-        .inline{display: inline-block;}
-        .more{display:inline-block;float:right}
-        .login-logo-div{text-align:left;background-color: #f7f7f7;padding:10px}
-        .login-logo{display:inline-block;height:24px;width:24px}
-        .font-20{font-size: 20px}
-        .right{float:right}
-        .test-login{float:right;margin-right:10px;}
+        .ad-Image-style {
+            height: 50vh;
+            width: auto;
+            text-align: center;
+            margin: 0 auto;
+        }
 
-        .login-type{height:auto;width:100px;text-align: left;background-color: white;float:right}
-    .font-30{font-size: 30px}
+        .slick {
+            height: 50vh;
+            width: 100%;
+        }
+
+        .slick-dotted.slick-slider {
+            margin-bottom: 0px;
+        }
+
+        .slick-dots li button:before {
+            font-size: 30px;
+        }
+
+        .slick-dots {
+            bottom: 10px;
+        }
+
+        .bottom-block {
+            height: auto;
+            width: 100%;
+        }
+
+        .left-block {
+            width: 50%;
+            height: 40vh;
+            display: inline-block;
+            padding: 10px;
+        }
+
+        .right-block {
+            width: 50%;
+            height: 40vh;
+            float: right;
+            padding: 10px;
+        }
+
+        .inline {
+            display: inline-block;
+        }
+
+        .more {
+            display: inline-block;
+            float: right
+        }
+
+        .login-logo-div {
+            text-align: left;
+            background-color: #f7f7f7;
+            padding: 10px
+        }
+
+        .login-logo {
+            display: inline-block;
+            height: 24px;
+            width: 24px
+        }
+
+        .font-20 {
+            font-size: 20px
+        }
+
+        .right {
+            float: right
+        }
+
+        .test-login {
+            float: right;
+            margin-right: 10px;
+        }
+
+        .login-type {
+            height: auto;
+            width: 100px;
+            text-align: left;
+            background-color: white;
+            float: right
+        }
+
+        .font-30 {
+            font-size: 30px
+        }
     </style>
 </head>
 <body>
-    <%include navigation-index.ejs%>
-    <div class="slick">
-        <div class="ad-Images">
-            <div>
-                <img class="ad-Image-style" src="/images/图片1.png">
-            </div>
-            <div>
-                <img class="ad-Image-style" src="/images/图片2.png">
-            </div>
-            <div>
-                <img class="ad-Image-style" src="/images/图片3.png">
-            </div>
+<% include navigation-index.ejs %>
+<div class="slick">
+    <div class="ad-Images">
+        <div>
+            <img class="ad-Image-style" src="/images/图片1.png">
+        </div>
+        <div>
+            <img class="ad-Image-style" src="/images/图片2.png">
+        </div>
+        <div>
+            <img class="ad-Image-style" src="/images/图片3.png">
         </div>
     </div>
-    <div class="bottom-block">
-        <div class="left-block">
-            <!--
-            <h3 class="inline">新闻资讯</h3>
-            <h3 class="more" onclick="weChatNews()">more>></h3>
-            <ul class="list-group">
-                <li class="list-group-item">台安店推出高考冲刺班</li>
-                <li class="list-group-item">尚名校教师介绍</li>
-                <li class="list-group-item">尚名校正式开始运营</li>
-            </ul>-->
-            <table class = "table table-hover">
-                <thead>
-                <tr>
-                    <th class="font-20 inline">新闻资讯</th>
-                    <th class="font-20 more" onclick="weChatNews()">more>></th>
-                </tr>
-                </thead>
+</div>
+<div class="bottom-block">
+    <div class="left-block">
+        <!--
+        <h3 class="inline">新闻资讯</h3>
+        <h3 class="more" onclick="weChatNews()">more>></h3>
+        <ul class="list-group">
+            <li class="list-group-item">台安店推出高考冲刺班</li>
+            <li class="list-group-item">尚名校教师介绍</li>
+            <li class="list-group-item">尚名校正式开始运营</li>
+        </ul>-->
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th class="font-20 inline">新闻资讯</th>
+                <th class="font-20 more" onclick="weChatNews()">more>></th>
+            </tr>
+            </thead>
 
-                <tbody class="list-group">
-                <%for(var i = 0;i < 3;i++){var item1 = print[i];%>
-                <tr class="list-group-item">
-                    <th><a href="<%=item1.weChatNewsUrl%>"><%=item1.weChatNewsTitle%></a></th>
-                </tr>
-                <%}%>
-                </tbody>
+            <tbody class="list-group">
+            <% if(print.length < 3){%>
+            <% for(var i = 0;i < print.length;i++){var item1 = print[i]; %>
+            <tr class="list-group-item">
+                <th><a href="<%= item1.weChatNewsUrl %>"><%= item1.weChatNewsTitle %></a></th>
+            </tr>
+            <% }
+            }else{ %>
 
-            </table>
-        </div>
-        <div class="right-block">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th class="font-20 inline">微信推送</th>
-                    <th class="font-20 more" onclick="weChatNews()">more>></th>
-                </tr>
-                </thead>
+            <% for(var i = 0;i < 3;i++){var item1 = print[i]; %>
+            <tr class="list-group-item">
+                    <th><a href="<%= item1.weChatNewsUrl %>"><%= item1.weChatNewsTitle %></a></th>
+            </tr>
+            <% }} %>
 
-                <tbody class="list-group">
-                <%for(var i = 0;i < 3;i++){var item1 = print[i];%>
-                <tr class="list-group-item">
-                    <th><a href="<%=item1.weChatNewsUrl%>"><%=item1.weChatNewsTitle%></a></th>
-                </tr>
-                <%}%>
-                </tbody>
 
-            </table>
-        </div>
+            </tbody>
+
+        </table>
     </div>
-    <div id="fade" class="black-overlay"></div>
-    <div id="light" class="white-content">
-        <div class="dialog">
-            <div class="login-logo-div"><image class="login-logo"src="/images/icon.png"></image><span class="font-20">登录尚名校</span><span class="right" onclick="closeDialog()">x</span></div>
-            <label class="dialog-label">用户名</label><input class="dialog-input" id="phoneNumber" placeholder="用户名/手机号"/>
-            <label class="dialog-label">密码</label><input class="dialog-input" id="password" type="password" placeholder="密码"/>
-            <p id="hint" style="text-align: left;margin-left:20px;"></p>
-            <button class="btn btn-default dialog-button" onclick="login()">登录</button>
-            <!--<label class="test-login" onclick="test()">测试登录</label>-->
-        </div>
-        <div id="type" class="login-type">
-            <button class="btn btn-default" onclick="admin()">管理员</button><br>
-            <button class="btn btn-default" onclick="officeManager()">总公司高管</button><br>
-            <button class="btn btn-default" disabled="true">财务</button><br>
-            <button class="btn btn-default" onclick="education()">教务</button><br>
-            <button class="btn btn-default" disabled="true">培训</button><br>
-            <button class="btn btn-default" onclick="joinManager()">加盟店长</button><br>
-            <button class="btn btn-default" onclick="joinReception()">加盟店前台</button><br>
-            <button class="btn btn-default" onclick="teacher()">教师</button><br>
-            <button class="btn btn-default" onclick="student()">学生</button>
-        </div>
+    <div class="right-block">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th class="font-20 inline">微信推送</th>
+                <th class="font-20 more" onclick="weChatNews()">more>></th>
+            </tr>
+            </thead>
+
+            <tbody class="list-group">
+            <% if(print.length < 3){%>
+            <% for(var i = 0;i < print.length;i++){var item1 = print[i]; %>
+            <tr class="list-group-item">
+                <th><a href="<%= item1.weChatNewsUrl %>"><%= item1.weChatNewsTitle %></a></th>
+            </tr>
+            <% }
+            }else{ %>
+
+            <% for(var i = 0;i < 3;i++){var item1 = print[i]; %>
+            <tr class="list-group-item">
+                <th><a href="<%= item1.weChatNewsUrl %>"><%= item1.weChatNewsTitle %></a></th>
+            </tr>
+            <% }} %>
+            </tbody>
+
+        </table>
     </div>
+</div>
+<div id="fade" class="black-overlay"></div>
+<div id="light" class="white-content">
+    <div class="dialog">
+        <div class="login-logo-div">
+            <image class="login-logo" src="/images/icon.png"></image>
+            <span class="font-20">登录尚名校</span><span class="right" onclick="closeDialog()">x</span></div>
+        <label class="dialog-label">用户名</label><input class="dialog-input" id="phoneNumber" placeholder="用户名/手机号"/>
+        <label class="dialog-label">密码</label><input class="dialog-input" id="password" type="password"
+                                                     placeholder="密码"/>
+        <p id="hint" style="text-align: left;margin-left:20px;"></p>
+        <button class="btn btn-default dialog-button" onclick="login()">登录</button>
+        <!--<label class="test-login" onclick="test()">测试登录</label>-->
+    </div>
+    <div id="type" class="login-type">
+        <button class="btn btn-default" onclick="admin()">管理员</button>
+        <br>
+        <button class="btn btn-default" onclick="officeManager()">总公司高管</button>
+        <br>
+        <button class="btn btn-default" disabled="true">财务</button>
+        <br>
+        <button class="btn btn-default" onclick="education()">教务</button>
+        <br>
+        <button class="btn btn-default" disabled="true">培训</button>
+        <br>
+        <button class="btn btn-default" onclick="joinManager()">加盟店长</button>
+        <br>
+        <button class="btn btn-default" onclick="joinReception()">加盟店前台</button>
+        <br>
+        <button class="btn btn-default" onclick="teacher()">教师</button>
+        <br>
+        <button class="btn btn-default" onclick="student()">学生</button>
+    </div>
+</div>
 </body>
 
 <script>
+    console.log("print:"+"<%=print%>")
     closeDialog()
     $(".ad-Images").slick({
         autoplay: true,
         autoplaySpeed: "4000",
         dots: true
     });
-    function loginDialog(){
+    function loginDialog() {
         console.log("loginDialog")
-        userName = '<%=session.userName%>';
-        console.log("userName login:"+userName)
-        if (userName.length == 0){
+        userName = '<%= session.userName %>';
+        console.log("userName login:" + userName)
+        if (userName.length == 0) {
             $("#light").show();
             $("#fade").show();
             $("#type").hide();
         } else {
-            var identityId = '<%=session.identityId%>';
-            console.log("identityId:"+identityId);
-            if(identityId==0){location.href='student/studentCourse'}
-            else if(identityId==1){location.href='teacherCourse'}
-            else if(identityId==2){location.href='educationCourse'}
-            else if(identityId==3){location.href='admainDetail'}
-            else if(identityId==4){location.href='joinManagerDetail'}
-            else if(identityId==5){
+            var identityId = '<%= session.identityId %>';
+            console.log("identityId:" + identityId);
+            if (identityId == 0) {
+                location.href = 'student/studentCourse'
+            }
+            else if (identityId == 1) {
+                location.href = 'teacherCourse'
+            }
+            else if (identityId == 2) {
+                location.href = 'educationCourse'
+            }
+            else if (identityId == 3) {
+                location.href = 'admainDetail'
+            }
+            else if (identityId == 4) {
+                location.href = 'joinManagerDetail'
+            }
+            else if (identityId == 5) {
                 var date = new Date()
-                location.href="joinReception/joinReceptionTodayCourse?date="+date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();}
+                location.href = "joinReception/joinReceptionTodayCourse?date=" + date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+            }
         }
     }
-    function closeDialog(){
+    function closeDialog() {
         $(".white-content").width("300px")
         $("#light").hide();
         $("#fade").hide();
         $("#type").hide();
     }
-    function login(){
-        var phoneNumber=$("#phoneNumber").val();
-        var password=$('#password').val();
-        if(phoneNumber.length==0){
-            $("#phoneNumber").attr('placeholder',"手机号不能为空");
+    function login() {
+        var phoneNumber = $("#phoneNumber").val();
+        var password = $('#password').val();
+        if (phoneNumber.length == 0) {
+            $("#phoneNumber").attr('placeholder', "手机号不能为空");
         }
-        else if(password.length==0){
-            $("#password").attr('placeholder','密码不能为空');
+        else if (password.length == 0) {
+            $("#password").attr('placeholder', '密码不能为空');
         }
         else {
-            var data={
-                phoneNumber:phoneNumber,
-                password:password
+            var data = {
+                phoneNumber: phoneNumber,
+                password: password
             }
-            console.log("data:"+JSON.stringify(data));
-            $.post('user/login',data,function (ret) {
-                console.log("ret:"+JSON.stringify(ret))
-                if(!ret.status){
+            console.log("data:" + JSON.stringify(data));
+            $.post('user/login', data, function (ret) {
+                console.log("ret:" + JSON.stringify(ret))
+                if (!ret.status) {
                     $("#hint").val(ret.desc)
-                }else{
-                    var ret=ret.role;
-                    if(ret==0){location.href='student/studentCourse'}
-                    else if(ret==1){location.href='teacherCourse'}
-                    else if(ret==2){location.href='educationCourse'}
-                    else if(ret==3){location.href='admainDetail'}
-                    else if(ret==4){location.href='joinManagerDetail'}
-                    else if(ret==5){
+                } else {
+                    var ret = ret.role;
+                    if (ret == 0) {
+                        location.href = 'student/studentCourse'
+                    }
+                    else if (ret == 1) {
+                        location.href = 'teacherCourse'
+                    }
+                    else if (ret == 2) {
+                        location.href = 'educationCourse'
+                    }
+                    else if (ret == 3) {
+                        location.href = 'admainDetail'
+                    }
+                    else if (ret == 4) {
+                        location.href = 'joinManagerDetail'
+                    }
+                    else if (ret == 5) {
                         var date = new Date()
-                        location.href="joinReception/joinReceptionTodayCourse?date="+date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+                        location.href = "joinReception/joinReceptionTodayCourse?date=" + date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
                     }
                 }
             })
         }
     }
-    function test(){
+    function test() {
         $(".white-content").width("450px")
         $("#type").show();
     }
@@ -204,20 +325,20 @@
     function joinReception() {
         location.href = "joinReception/joinReceptionTodayCourse"
     }
-    function joinManager(){
+    function joinManager() {
         location.href = "joinManager/joinManagerReport"
     }
-    function officeManager(){
+    function officeManager() {
         location.href = "officeManagerReport"
     }
-    function admin(){
+    function admin() {
         location.href = "adminJoinList"
     }
-    function education(){
+    function education() {
         location.href = "education/educationCourse"
     }
 
-    function weChatNews(){
+    function weChatNews() {
         location.href = "weChatNews/weChatNews"
     }
 </script>

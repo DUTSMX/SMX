@@ -17,7 +17,9 @@ router.get('/', function (req, res, next) {
     db.sequelize.query(sql).then(function(print){
         console.log("微信标题以及链接"+JSON.stringify({print:print[0]}));
         res.render('index',{print:print[0]});
+        console.log("end1")
     })
+    console.log("end")
 });
 router.get('/education/joinReceptionTeacherList',function (req,res,next) {
     user.findAll({where:{role:1}}).then(function(ret){
