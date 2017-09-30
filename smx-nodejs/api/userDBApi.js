@@ -19,7 +19,7 @@ exports.login = function(phoneNumber, password, callback){
                 status:true,
                 userId:rows[0].userId,
                 desc:"姓名不能为空，请先完善信息",
-                name:true
+                name:rows[0].userName
             })
         }else{
             callback({

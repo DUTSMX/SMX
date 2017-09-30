@@ -23,8 +23,8 @@ exports.getVideoDetail = function (videoId,callback) {
         "v.videoUrl, " +
         "v.videoName, " +
         "a.userName as authorName, " +
-        "a.userSchool as authorSchool, " +
-        "a.userGrade as authorGrade, " +
+        // "a.userSchool as authorSchool, " +
+        // "a.userGrade as authorGrade, " +
         "v.videoTime, " +
         "v.videoWatchCount, " +
         "v.videoAbstract, " +

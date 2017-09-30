@@ -1,7 +1,7 @@
 
 var Sequelize = require('sequelize');
 var sequelize=new Sequelize(
-    'smx',
+    'smx_test',
     'cdb_outerroot',
     'smxsjk123456',
     {
